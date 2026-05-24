@@ -63,11 +63,11 @@ jobs:
           name: apk-release
           path: app/build/outputs/apk/release
 
-      # - name: Get version name
-      #   id: get_version
-      #   run: |
-      #     VERSION_NAME=$(echo ${GITHUB_REF#refs/tags/v})
-      #     echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+      - name: Get version name
+        id: get_version
+        run: |
+          VERSION_NAME=$(echo ${GITHUB_REF#refs/tags/v})
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
       - name: Set TAG env var
         run: |
@@ -81,9 +81,10 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ env.TAG }}
-          draft: false
-          prerelease: false
+          name: Release ${{ env.VERSION_NAME }}
+          tag_name: ${{ env.TAG }}
+          # draft: false
+          # prerelease: false
           files: app/build/outputs/apk/release/app-release.apk
           token: ${{ secrets.GITHUB_TOKEN }}
 
