@@ -13,7 +13,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+            fetch-depth: 0   # must have full history + other branches
 
+      - name: patch
+        run: |
+          git fetch origin ci
+          git checkout origin/ci -- app/build.gradle.kts
+          echo "PATCH DIFF:"
+          git diff -- app/build.gradle.kts
+    
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
