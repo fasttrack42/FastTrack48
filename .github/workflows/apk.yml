@@ -1,7 +1,9 @@
 name: APK
 
 on:
-  workflow_dispatch: 
+  push:
+      tags: ['v*']
+  workflow_dispatch:
 
 jobs:
   build:
@@ -56,7 +58,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          fetch-tags: true
+          ref: apk-build
+        
       - name: Download APK artifact
         uses: actions/download-artifact@v7
         with:
@@ -71,7 +78,7 @@ jobs:
 
       - name: Set TAG env var
         run: |
-          RAW=$(git describe --tags --always 2>/dev/null || echo "${{ github.event.repository.name }}")
+          RAW=$(git describe --tags --always --abbrev=0 2>/dev/null || echo "${{ github.event.repository.name }}")
           # CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
           echo "TAG=$RAW" >> $GITHUB_ENV
           echo "raw=$RAW" >> $GITHUB_OUTPUT
@@ -86,4 +93,6 @@ jobs:
           # prerelease: false
           files: app/build/outputs/apk/release/app-release.apk
           token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: false
+          make_latest: true
 
