@@ -71,17 +71,16 @@ jobs:
 
       - name: Set TAG env var
         run: |
-          RAW=$(git describe --tags --always 2>/dev/null || echo "${{ github.event.repository.name }}")
-          CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
-          echo "TAG=$CLEAN" >> $GITHUB_ENV
+          RAW=$(git describe --tags  --abbrev=0 2>/dev/null || echo "${{ github.event.repository.name }}")
+          # CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
+          echo "TAG=$RAW" >> $GITHUB_ENV
           echo "raw=$RAW" >> $GITHUB_OUTPUT
-          echo "clean=$CLEAN" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ env.VERSION_NAME }}
+          name: ${{ env.TAG }}
           tag_name: ${{ env.TAG }}
           # draft: false
           # prerelease: false
