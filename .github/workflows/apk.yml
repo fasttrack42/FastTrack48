@@ -63,17 +63,25 @@ jobs:
           name: apk-release
           path: app/build/outputs/apk/release
 
-      - name: Get version name
-        id: get_version
+      # - name: Get version name
+      #   id: get_version
+      #   run: |
+      #     VERSION_NAME=$(echo ${GITHUB_REF#refs/tags/v})
+      #     echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+
+      - name: Set TAG env var
         run: |
-          VERSION_NAME=$(echo ${GITHUB_REF#refs/tags/v})
-          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+          RAW=$(git describe --tags --always 2>/dev/null || echo "${{ github.event.repository.name }}")
+          CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
+          echo "TAG=$CLEAN" >> $GITHUB_ENV
+          echo "raw=$RAW" >> $GITHUB_OUTPUT
+          echo "clean=$CLEAN" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ env.VERSION_NAME }}
+          name: Release ${{ env.TAG }}
           draft: false
           prerelease: false
           files: app/build/outputs/apk/release/app-release.apk
