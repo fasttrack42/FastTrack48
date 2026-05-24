@@ -71,7 +71,7 @@ jobs:
 
       - name: Set TAG env var
         run: |
-          RAW=$(git describe --tags  --abbrev=0 2>/dev/null || echo "${{ github.event.repository.name }}")
+          RAW=$(git describe --tags --always 2>/dev/null || echo "${{ github.event.repository.name }}")
           # CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
           echo "TAG=$RAW" >> $GITHUB_ENV
           echo "raw=$RAW" >> $GITHUB_OUTPUT
