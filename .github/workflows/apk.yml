@@ -2,29 +2,30 @@ name: APK
 
 on:
   push:
-      tags: ['v*']
+    tags: ['v*']
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build
+  build-and-release:
+    name: Build and Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed for the release step
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-            ref: revamp-ci
-            fetch-depth: 0   # must have full history + other branches
-            fetch-tags: 1
+          fetch-depth: 0   # needed to fetch the ci branch below
+          fetch-tags: true
 
-      - name: patch
-        run: |
-          git fetch origin ci
-          git checkout origin/ci -- app/build.gradle.kts
-          echo "PATCH DIFF:"
-          git diff -- app/build.gradle.kts
-    
+      # - name: patch
+      #   run: |
+      #     git fetch origin revamp-ci
+      #     git checkout origin/ci -- app/build.gradle.kts
+      #     echo "PATCH DIFF:"
+      #     git diff -- app/build.gradle.kts
+
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
@@ -32,16 +33,14 @@ jobs:
           java-version: '17'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Grant Permission to Execute
         run: chmod +x gradlew
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE }}" \
-            | base64 --decode > $RUNNER_TEMP/release.keystore
-
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > "$RUNNER_TEMP/release.keystore"
 
       - name: Build Release APK
         env:
@@ -50,64 +49,14 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: ./gradlew assembleRelease
-        
-      - name: debug print
-        run: |
-          find . -iname '*.apk'
-          
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: apk-release
-          path: app/build/outputs/apk/release/*.apk
-          if-no-files-found: error
-
-
-  publish-github-release:
-    name: Publish GitHub Release
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          submodules: recursive
-          fetch-tags: true
-          ref: main
-        
-      - name: Download APK artifact
-        uses: actions/download-artifact@v7
-        with:
-          name: apk-release
-          path: app/build/outputs/apk/release
-
-      - name: Get version name
-        id: get_version
-        run: |
-          VERSION_NAME=$(echo ${GITHUB_REF#refs/tags/v})
-          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
-
-      - name: Set TAG env var
-        run: |
-          RAW=$(git describe --tags --always --abbrev=0 2>/dev/null || echo "${{ github.event.repository.name }}")
-          # CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
-          echo "TAG=$RAW" >> $GITHUB_ENV
-          echo "raw=$RAW" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
         with:
-          name: ${{ env.TAG }}
-          tag_name: ${{ env.TAG }}
-          # draft: false
-          # prerelease: false
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
           files: app/build/outputs/apk/release/*.apk
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: false
           make_latest: true
-
