@@ -14,6 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
+            ref: revamp-ci
             fetch-depth: 0   # must have full history + other branches
 
       - name: patch
