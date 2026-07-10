@@ -16,6 +16,7 @@ jobs:
         with:
             ref: revamp-ci
             fetch-depth: 0   # must have full history + other branches
+            fetch-tags: 1
 
       - name: patch
         run: |
@@ -49,12 +50,16 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: ./gradlew assembleRelease
-
+        
+      - name: debug print
+        run: |
+          find . -iname '*.apk'
+          
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: apk-release
-          path: app/build/outputs/apk/release/FastTrack-release.apk
+          path: app/build/outputs/apk/release/*.apk
           if-no-files-found: error
 
 
@@ -101,7 +106,7 @@ jobs:
           tag_name: ${{ env.TAG }}
           # draft: false
           # prerelease: false
-          files: app/build/outputs/apk/release/FastTrack-release.apk
+          files: app/build/outputs/apk/release/*.apk
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: false
           make_latest: true
