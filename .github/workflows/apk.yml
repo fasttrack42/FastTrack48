@@ -52,14 +52,21 @@ jobs:
 
       - name: list artifacts
         run: |
-          find . -iname '*.apk'        
+          find . -iname '*.apk'
+
+      - name: Set TAG env var
+        run: |
+          RAW=$(git describe --tags --always --abbrev=0 2>/dev/null || echo "${{ github.event.repository.name }}")
+          # CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
+          echo "TAG=$RAW" >> $GITHUB_ENV
+          echo "raw=$RAW" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         # if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v3
         with:
-          name: ${{ github.ref_name }}
-          tag_name: ${{ github.ref_name }}
+          name: ${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
           files: app/build/outputs/apk/release/*.apk
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: false
