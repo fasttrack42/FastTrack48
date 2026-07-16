@@ -7,21 +7,46 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DeleteSweep
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.*
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,9 +58,11 @@ import com.darkrockstudios.apps.fasttrack.R
 import com.darkrockstudios.apps.fasttrack.screens.fasting.ExternalRequests
 import com.darkrockstudios.apps.fasttrack.screens.fasting.FastingScreen
 import com.darkrockstudios.apps.fasttrack.screens.log.LogScreen
+import com.darkrockstudios.apps.fasttrack.screens.log.LogViewModel
 import com.darkrockstudios.apps.fasttrack.screens.profile.ProfileScreen
 import com.darkrockstudios.apps.fasttrack.utils.Utils
 import kotlinx.coroutines.launch
+import org.koin.compose.viewmodel.koinViewModel
 import kotlin.time.ExperimentalTime
 
 enum class ScreenPages {
@@ -70,6 +97,11 @@ fun MainScreen(
 			initialPage = ScreenPages.Fasting.ordinal,
 			pageCount = { ScreenPages.entries.size })
 	val coroutineScope = rememberCoroutineScope()
+
+	// Same activity-scoped LogViewModel instance the Log page uses, so the
+	// contextual "Clear logbook" overflow action drives its confirmation state.
+	val logViewModel: LogViewModel = koinViewModel()
+	val logState by logViewModel.uiState.collectAsState()
 
 	val fastingTitle = stringResource(id = R.string.title_fasting)
 	val logTitle = stringResource(id = R.string.title_log)
@@ -218,6 +250,9 @@ fun MainScreen(
 
 			FloatingTopActions(
 				showShare = pagerState.currentPage == ScreenPages.Fasting.ordinal,
+				showClearLog = pagerState.currentPage == ScreenPages.Log.ordinal,
+				clearLogEnabled = logState.totalFasts > 0,
+				onClearLogClick = { logViewModel.requestClearAll() },
 				onShareClick = onShareClick,
 				onInfoClick = onInfoClick,
 				onAboutClick = onAboutClick,
@@ -242,6 +277,9 @@ fun MainScreen(
 @Composable
 private fun FloatingTopActions(
 	showShare: Boolean,
+	showClearLog: Boolean,
+	clearLogEnabled: Boolean,
+	onClearLogClick: () -> Unit,
 	onShareClick: () -> Unit,
 	onInfoClick: () -> Unit,
 	onAboutClick: () -> Unit,
@@ -315,6 +353,33 @@ private fun FloatingTopActions(
 							showMenu = false
 						},
 					)
+
+					// Contextual, destructive: only on the Log page, and only when
+					// there is something to clear. Set apart by a divider and error
+					// tone so it can't be mistaken for the routine actions above.
+					if (showClearLog) {
+						HorizontalDivider()
+						DropdownMenuItem(
+							text = {
+								Text(
+									text = stringResource(id = R.string.menu_clear_logbook),
+									color = MaterialTheme.colorScheme.error,
+								)
+							},
+							leadingIcon = {
+								Icon(
+									imageVector = Icons.Default.DeleteSweep,
+									contentDescription = null,
+									tint = MaterialTheme.colorScheme.error,
+								)
+							},
+							enabled = clearLogEnabled,
+							onClick = {
+								onClearLogClick()
+								showMenu = false
+							},
+						)
+					}
 				}
 			}
 		}

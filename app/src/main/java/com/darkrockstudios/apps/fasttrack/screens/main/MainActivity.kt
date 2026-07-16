@@ -104,9 +104,11 @@ class MainActivity : AppCompatActivity() {
 		}
 	}
 
+	// Only the single-arg override handles the intent: the platform's
+	// (Intent, ComponentCaller) default delegates to it, so handling here too
+	// would process every new intent twice.
 	override fun onNewIntent(intent: Intent, caller: ComponentCaller) {
 		super.onNewIntent(intent, caller)
-		handleStartFastExtra(intent)
 	}
 
 	override fun onNewIntent(intent: Intent) {
@@ -134,7 +136,7 @@ class MainActivity : AppCompatActivity() {
 	private fun rateApp() {
 		try {
 			startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri()))
-		} catch (e: ActivityNotFoundException) {
+		} catch (_: ActivityNotFoundException) {
 			// No Play Store on this device; fall back to the web listing
 			openUrl("https://play.google.com/store/apps/details?id=$packageName")
 		}
