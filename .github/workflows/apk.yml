@@ -44,8 +44,8 @@ jobs:
 
       - name: Patch applicationId suffix to prevent collision with existing installs
         run: |
-          perl -0777 -pi -e '
-            s/(release\s*\{\s*\n\s*isMinifyEnabled = true)/$1\n            applicationIdSuffix = ".revamp_v3"/
+          sed -i '/isMinifyEnabled = true/a\
+                  applicationIdSuffix = ".revamp_v3"
           ' app/build.gradle.kts
       
           echo "--- patched block ---"
