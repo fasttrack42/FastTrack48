@@ -1,0 +1,17 @@
+package com.legbehindneck.fasttrack48.data.log
+
+import com.legbehindneck.fasttrack48.data.database.FastEntry
+import kotlinx.coroutines.flow.Flow
+
+interface FastingLogDatasource {
+	fun getAll(): List<FastEntry>
+	fun loadAll(): Flow<List<FastEntry>>
+	fun insertAll(vararg newEntries: FastEntry)
+	fun update(entry: FastEntry): Boolean
+	fun delete(entry: FastEntry): Boolean
+	fun deleteByStartTime(startTime: Long): Boolean
+	fun deleteByStartRange(fromInclusive: Long, toExclusive: Long): Boolean
+	fun deleteByUid(uid: Int): Boolean
+	/** Delete every entry; returns the number of rows removed. */
+	fun deleteAllEntries(): Int
+}

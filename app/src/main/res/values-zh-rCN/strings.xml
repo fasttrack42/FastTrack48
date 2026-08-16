@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">快车道</string>
+	<string name="app_name">FastTrack48</string>
 	<string name="action_share">分享</string>
 	<string name="action_info">信息</string>
 	<string name="action_about">关于</string>

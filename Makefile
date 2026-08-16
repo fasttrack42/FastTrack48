@@ -1,6 +1,8 @@
 .PHONY: release debug pull tasks find repo one install clean
 
 JAVA_HOME := /Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home
+APK_RELEASE := app/build/outputs/apk/release/FastTrack-release.apk
+APK_DEBUG := app/build/outputs/apk/debug/FastTrack-debug.apk
 
 release:
 	./gradlew --no-daemon assembleRelease
@@ -9,28 +11,22 @@ debug:
 	./gradlew --no-daemon assembleDebug
 
 repo:
-	open https://github.com/Wavesonics/FastTrack
+	open https://github.com/fasttrack48/FastTrack48
+
 tasks:
 	./gradlew --no-daemon -q :tasks
 
-find:
-	find app/build/outputs -iname '*.apk'
-	open -R app/build/outputs/apk/release/*.apk
-
-one:
-	adb -s 321c9dca install app/build/outputs/apk/release/*.apk
-
 install:
-	adb install app/build/outputs/apk/release/*.apk
+	adb install $(APK_RELEASE)
 
 install-debug:
-	adb install app/build/outputs/apk/debug/*.apk
+	adb install $(APK_DEBUG)
 
 clean:
 	./gradlew --no-daemon clean
 
 check-jetifier:
-	 ./gradlew checkJetifier
+	./gradlew checkJetifier
 
 test:
 	./gradlew app:testDebugUnitTest

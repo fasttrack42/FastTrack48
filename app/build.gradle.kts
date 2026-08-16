@@ -8,17 +8,17 @@ plugins {
 }
 
 // make APK filenames follow <archivesName>-<buildType>.apk,
-// i.e. FastTrack-release.apk and FastTrack-dev.apk
+// i.e. FastTrack48-release.apk and FastTrack48-dev.apk
 base {
-	archivesName.set("FastTrack")
+	archivesName.set("FastTrack48")
 }
 
 android {
-	namespace = "com.darkrockstudios.apps.fasttrack"
+	namespace = "com.legbehindneck.fasttrack48"
 	compileSdk = libs.versions.compileSdk.get().toInt()
 
 	defaultConfig {
-		applicationId = "com.darkrockstudios.apps.fasttrack"
+		applicationId = "com.legbehindneck.fasttrack48"
 		minSdk = libs.versions.minSdk.get().toInt()
 		targetSdk = libs.versions.targetSdk.get().toInt()
 		versionCode = libs.versions.versionCode.get().toInt()

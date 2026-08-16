@@ -1,0 +1,67 @@
+package com.legbehindneck.fasttrack48.screens.info
+
+import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.core.view.WindowCompat
+import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
+import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
+import org.koin.android.ext.android.inject
+
+class InfoActivity : AppCompatActivity() {
+	private val settings by inject<SettingsDatasource>()
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		enableEdgeToEdge()
+		WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = false
+
+		setContent {
+			FastTrackTheme(themeMode = settings.getThemeMode()) {
+				Scaffold(
+					topBar = {
+						TopAppBar(
+							colors = TopAppBarDefaults.topAppBarColors(
+								containerColor = MaterialTheme.colorScheme.primaryContainer,
+								titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+								actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+								navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+							),
+							modifier = Modifier
+								.fillMaxWidth(),
+							title = { Text(stringResource(id = R.string.action_info)) },
+							navigationIcon = {
+								IconButton(onClick = { onBackPressed() }) {
+									Icon(
+										imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+										contentDescription = "Back"
+									)
+								}
+							}
+						)
+					}
+				) { paddingValues ->
+					InfoScreen(
+						modifier = Modifier
+							.fillMaxSize(),
+						paddingValues = paddingValues,
+					)
+				}
+			}
+		}
+	}
+
+	override fun onSupportNavigateUp(): Boolean {
+		onBackPressed()
+		return true
+	}
+}
