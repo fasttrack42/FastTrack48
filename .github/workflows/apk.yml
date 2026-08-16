@@ -19,13 +19,6 @@ jobs:
           fetch-depth: 0   # needed to fetch the ci branch below
           fetch-tags: true
 
-      # - name: patch
-      #   run: |
-      #     git fetch origin revamp-ci
-      #     git checkout origin/ci -- app/build.gradle.kts
-      #     echo "PATCH DIFF:"
-      #     git diff -- app/build.gradle.kts
-
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
@@ -41,15 +34,6 @@ jobs:
       - name: Decode keystore
         run: |
           echo "${{ secrets.KEYSTORE }}" | base64 --decode > "$RUNNER_TEMP/release.keystore"
-
-      - name: Patch applicationId suffix to prevent collision with existing installs
-        run: |
-          perl -0777 -pi -e '
-            s/(release\s*\{\s*\n\s*isMinifyEnabled = true)/$1\n            applicationIdSuffix = ".revamp_v3"/
-          ' app/build.gradle.kts
-      
-          echo "--- patched block ---"
-          grep -A5 "release {" app/build.gradle.kts
 
       - name: Build Release APK
         env:
