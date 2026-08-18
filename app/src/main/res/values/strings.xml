@@ -31,7 +31,7 @@
 
     <string name="export_failed">Failed to export logbook</string>
 
-	<string name="intro_00_title">Welcome to Fast Track!</string>
+	<string name="intro_00_title">Welcome to FastTrack48!</string>
 	<string name="intro_00_description">What is this app all about?</string>
 
 	<string name="intro_01_title">Motivational Help</string>
@@ -60,14 +60,27 @@
 	<string name="intro_05_title">That’s it!</string>
 	<string name="intro_05_description">Now go start fasting!</string>
 
-	<string name="about_name">Dark Rock Studios</string>
-	<string name="about_subtitle">Open Source Development</string>
-	<string name="about_brief">Climber, mountaineer, software engineer, and open source advocate.</string>
+	<string name="about_name" translatable="false">FastTrack48</string>
+	<string name="about_subtitle" translatable="false">Your DNA Re-Pair is now in your hands!</string>
+	<string name="about_brief" translatable="false">Restore what was weakened, renew what has aged, re-generate what was lost</string>
 
-	<string name="about_discord">Discord</string>
+	<string name="about_telegram" translatable="false">Telegram</string>
 	<string name="about_github" translatable="false">GitHub</string>
 	<string name="about_website" translatable="false">Website</string>
 	<string name="about_rate" translatable="false">Rate on Google Play</string>
+
+	<!-- Acknowledgements. Deliberately NOT translated: this is an attribution
+	     and licence notice and must read identically in every locale. -->
+	<string name="about_ack_title" translatable="false">Acknowledgements</string>
+	<string name="about_ack_lead" translatable="false">Based on FastTrack by Adam Brown</string>
+	<string name="about_ack_credit" translatable="false">FastTrack48 is a modified derivative work \u2014 a direct fork \u2014 of FastTrack, created by Adam Brown (@Wavesonics) and published by Darkrock Studios. The original software is Copyright \u00A9 2020 Adam Brown and is made available under the MIT License, reproduced in full below, which continues to govern the original portions of this app.</string>
+	<string name="about_ack_disclaimer" translatable="false">Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Darkrock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. The names \u201CFastTrack\u201D, \u201CDarkrock Studios\u201D and \u201CWavesonics\u201D appear here solely to identify the origin of the source code.</string>
+	<string name="about_ack_upstream" translatable="false">Original project</string>
+	<string name="about_ack_author" translatable="false">Adam Brown</string>
+	<string name="about_ack_license_toggle" translatable="false">MIT License \u2014 full text</string>
+	<string name="about_ack_license_expand_description" translatable="false">Show the full MIT License text</string>
+	<string name="about_ack_license_collapse_description" translatable="false">Hide the full MIT License text</string>
+	<string name="about_ack_license" translatable="false">MIT License\n\nCopyright (c) 2020 Adam Brown\nCopyright (c) 2026 FastTrack48 contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
 
 	<string name="title_fasting">Fasting</string>
 	<string name="title_log">Log</string>

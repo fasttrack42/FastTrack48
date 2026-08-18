@@ -34,10 +34,6 @@
 	<string name="intro_04_description">Fast Track 可以显示有用的通知，在禁食期间为你加油打气。\n\n你会看到当前的禁食时间、所处的阶段以及身体正在使用的能量模式。\n\n这样即使不打开应用也能随时掌握进度！</string>
 	<string name="intro_05_title">开始吧！</string>
 	<string name="intro_05_description">现在开始禁食吧！</string>
-	<string name="about_name">亚当·布朗</string>
-	<string name="about_subtitle">移动开发者</string>
-	<string name="about_brief">攀登者、登山者、软件工程师和开源倡导者。</string>
-	<string name="about_discord">Discord</string>
 	<string name="title_fasting">禁食</string>
 	<string name="title_log">日志</string>
 	<string name="title_profile">个人资料</string>

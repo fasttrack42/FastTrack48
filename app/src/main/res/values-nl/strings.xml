@@ -30,10 +30,6 @@
 	<string name="intro_04_description">Fast Track kan handige meldingen tonen om je gemotiveerd te houden tijdens het vasten.\n\nJe ziet je huidige vastentijd, in welke fase je zit en welke energiemodus je lichaam gebruikt.\n\nZo blijf je op koers zonder de app te hoeven openen!</string>
 	<string name="intro_05_title">Dat was het!</string>
 	<string name="intro_05_description">Tijd om te gaan vasten!</string>
-	<string name="about_name">Dark Rock Studios</string>
-	<string name="about_subtitle">Opensource-ontwikkeling</string>
-	<string name="about_brief">Klimmer, bergbeklimmer, software-engineer en voorstander van opensource.</string>
-	<string name="about_discord">Discord</string>
 	<string name="title_fasting">Vasten</string>
 	<string name="title_log">Logboek</string>
 	<string name="title_profile">Profiel</string>

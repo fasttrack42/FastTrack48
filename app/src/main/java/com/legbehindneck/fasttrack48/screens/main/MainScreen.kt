@@ -250,6 +250,7 @@ fun MainScreen(
 
 			FloatingTopActions(
 				showShare = pagerState.currentPage == ScreenPages.Fasting.ordinal,
+				showInfo = pagerState.currentPage == ScreenPages.Fasting.ordinal,
 				showClearLog = pagerState.currentPage == ScreenPages.Log.ordinal,
 				clearLogEnabled = logState.totalFasts > 0,
 				onClearLogClick = { logViewModel.requestClearAll() },
@@ -270,13 +271,15 @@ fun MainScreen(
 
 /**
  * The old top app bar, distilled to a small translucent pill in the
- * top-right corner: Info stays exposed; About and Settings live behind
- * the overflow menu. Share is contextual — it captures the fasting hero,
- * so it only appears (animated) while the Fasting page is active.
+ * top-right corner: About and Settings live behind the overflow menu,
+ * which is the only control present on every page. Share and Info are
+ * contextual — Share captures the fasting hero, Info explains the stage
+ * ring — so both only appear (animated) while the Fasting page is active.
  */
 @Composable
 private fun FloatingTopActions(
 	showShare: Boolean,
+	showInfo: Boolean,
 	showClearLog: Boolean,
 	clearLogEnabled: Boolean,
 	onClearLogClick: () -> Unit,
@@ -307,11 +310,17 @@ private fun FloatingTopActions(
 				}
 			}
 
-			IconButton(onClick = onInfoClick) {
-				Icon(
-					imageVector = Icons.Default.Info,
-					contentDescription = stringResource(id = R.string.action_info),
-				)
+			AnimatedVisibility(
+				visible = showInfo,
+				enter = expandHorizontally() + fadeIn(),
+				exit = shrinkHorizontally() + fadeOut(),
+			) {
+				IconButton(onClick = onInfoClick) {
+					Icon(
+						imageVector = Icons.Default.Info,
+						contentDescription = stringResource(id = R.string.action_info),
+					)
+				}
 			}
 
 			Box {

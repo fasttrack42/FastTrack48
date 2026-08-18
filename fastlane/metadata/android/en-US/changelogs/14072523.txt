@@ -1,0 +1,8 @@
+• Brand new app icon: a five-blade golden-ratio aperture, themed for Android 13+
+• Fasting screen redesign: radial dial with a tappable pill per phase
+• Import/Export now covers CSV, Activity Stream JSON and EasyFast backups
+• Logbook calendar draws consecutive fasting days as one band
+• Date and time format is configurable in Settings
+• The Info button now appears only on the Fasting tab
+• New Acknowledgements section in About, crediting the upstream project
+• Localisation fixes and cleanup
