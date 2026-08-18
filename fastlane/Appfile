@@ -1,2 +1,2 @@
-package_name("com.darkrockstudios.apps.fasttrack")
+package_name("com.legbehindneck.fasttrack48")
 json_key_file("play-store-config.json")

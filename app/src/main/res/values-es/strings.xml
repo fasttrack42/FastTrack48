@@ -40,10 +40,6 @@
 		cuerpo.\n\n¡Esto te ayuda a mantenerte en el camino sin tener que abrir la aplicación!</string>
 	<string name="intro_05_title">¡Eso es todo!</string>
 	<string name="intro_05_description">¡Ahora empieza a ayunar!</string>
-	<string name="about_name">Adam Brown</string>
-	<string name="about_subtitle">Desarrollador móvil</string>
-	<string name="about_brief">Escalador, montañista, ingeniero de software y defensor del código abierto.</string>
-	<string name="about_discord">Discord</string>
 	<string name="title_fasting">Ayuno</string>
 	<string name="title_log">Registro</string>
 	<string name="title_profile">Perfil</string>

@@ -3,3 +3,14 @@ Simplemente, Gratis, Open Source.
 Sin anuncios, sin compras dentro de la aplicación, sin permisos.
 
 Simplemente dígale a la aplicación cuando comience su ayuno, y vuelva a entrar para ver lo que su cuerpo está haciendo durante su ayuno.
+
+ATTRIBUTION
+
+FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
+
+Original project: https://github.com/Darkrock-Studios/FastTrack
+Original author: https://github.com/Wavesonics
+
+Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
+
+The names "FastTrack", "Dark Rock Studios" and "Wavesonics" are used solely to identify the origin of the source code.

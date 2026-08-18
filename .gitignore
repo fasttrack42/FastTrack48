@@ -16,3 +16,10 @@
 .idea
 /.kotlin
 .claude/settings.local.json
+
+# release artifacts and signing material — never commit
+/dist
+*.jks
+*.keystore
+play-store-config.json
+keystore.properties

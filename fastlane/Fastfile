@@ -1,11 +1,53 @@
 default_platform(:android)
 
+AAB = 'app/build/outputs/bundle/release/FastTrack48-release.aab'
+MAPPING = 'app/build/outputs/mapping/release/mapping.txt'
+
 platform :android do
-  desc "Deploy to Play Store"
+  desc "Upload the release bundle and the full listing to the internal track"
+  lane :internal do
+    upload_to_play_store(
+      track: 'internal',
+      aab: AAB,
+      mapping: MAPPING,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false,
+      release_status: 'draft'
+    )
+  end
+
+  desc "Promote whatever is on the internal track to production"
+  lane :promote do
+    upload_to_play_store(
+      track: 'internal',
+      track_promote_to: 'production',
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      release_status: 'completed'
+    )
+  end
+
+  desc "Upload the listing text and graphics only, with no new binary"
+  lane :metadata do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
+
+  desc "Deploy straight to Play Store production"
   lane :deploy do
     upload_to_play_store(
       track: 'production',
-      aab: 'app/build/outputs/bundle/release/app-release.aab',
+      aab: AAB,
+      mapping: MAPPING,
       skip_upload_metadata: false,
       skip_upload_images: false,
       skip_upload_screenshots: false,
