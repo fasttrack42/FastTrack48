@@ -214,6 +214,15 @@ def check_screenshots():
 				'side' % (name, w, h))
 		if os.path.getsize(path) > 8 * 1024 * 1024:
 			err('screenshot %s exceeds Play\'s 8 MB limit' % name)
+		# Play spells this out: screenshots are "JPEG or 24-bit PNG (no alpha)".
+		if name.lower().endswith('.png') and png_info(path)[3] in (4, 6):
+			err('screenshot %s is a 32-bit PNG; Play requires 24-bit PNG with no '
+				'alpha (or JPEG). Run scripts/play/pad_screenshots.py over it.' % name)
+
+	stray = [f for f in os.listdir(phone)
+			 if not f.lower().endswith(('.png', '.jpg', '.jpeg'))] if shots else []
+	for f in stray:
+		warn('%s sits in phoneScreenshots/ and is not an image' % f)
 
 	# Not fatal, but Play surfaces a "not optimised for tablets" badge without these.
 	for folder, label in (('sevenInchScreenshots', '7-inch tablet'),
