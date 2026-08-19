@@ -1,6 +1,6 @@
 # FastTrack48
 
-Free and Open Source app for tracking Intermittent/Prolonged Fasting.
+Free and Open Source Android app for tracking Intermittent/Prolonged Fasting.
 
 > **FastTrack48 is a fork of [FastTrack](https://github.com/Darkrock-Studios/FastTrack) by
 > [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
