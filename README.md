@@ -2,11 +2,6 @@
 
 Free and Open Source app for tracking Intermittent/Prolonged Fasting.
 
-<style>
-.md-typeset img[alt^="Get it on"]{height:80px;width:auto;max-width:none}
-.md-typeset p:has(>a>img[alt^="Get it on"]){display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-</style>
-
 > **FastTrack48 is a fork of [FastTrack](https://github.com/Darkrock-Studios/FastTrack) by
 > [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
 > See [Attribution](#attribution) below.
