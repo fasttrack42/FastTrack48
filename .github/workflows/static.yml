@@ -4,6 +4,8 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ["master"]
+    paths:
+      - "README.md" # only trigger when README.md changes    
   workflow_dispatch:
 
 permissions:
@@ -28,10 +30,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
 
       - name: Convert README.md → site/index.html
         run: |
