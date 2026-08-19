@@ -26,6 +26,22 @@ TOML         := gradle/libs.versions.toml
 VERSION_CODE := $(shell sed -n 's/^versionCode *= *"\(.*\)"/\1/p' $(TOML))
 VERSION_NAME := $(shell sed -n 's/^versionName *= *"\(.*\)"/\1/p' $(TOML))
 
+# Play App Signing keeps the app signing key; what you upload with must be a
+# DIFFERENT, app-specific upload key. This is the single source of truth for
+# which key every signed target uses — override on the command line if needed.
+UPLOAD_KEYSTORE ?= $(HOME)/.android-keystores/fasttrack48-upload.jks
+UPLOAD_ALIAS    ?= fasttrack48-upload
+
+# app/build.gradle.kts reads KEYSTORE / STORE_PASSWORD / KEY_ALIAS / KEY_PASSWORD
+# from the environment. Those names are generic enough to collide with whatever
+# is already exported in a login shell, so every signed target sets them
+# explicitly here instead of inheriting them. Only the passwords come from the
+# environment, and they are dereferenced by the recipe's shell rather than by
+# make, so no secret ever enters a make variable or an echoed command line.
+SIGN_ENV = KEYSTORE="$(UPLOAD_KEYSTORE)" KEY_ALIAS="$(UPLOAD_ALIAS)" \
+	STORE_PASSWORD="$${STORE_PASSWORD:-$$KEYSTORE_PASSWORD}" \
+	KEY_PASSWORD="$${KEY_PASSWORD:-$${STORE_PASSWORD:-$$KEYSTORE_PASSWORD}}"
+
 OUTPUTS      := app/build/outputs
 APK_RELEASE  := $(OUTPUTS)/apk/release/FastTrack48-release.apk
 APK_DEBUG    := $(OUTPUTS)/apk/debug/FastTrack48-debug.apk
@@ -57,10 +73,10 @@ debug: ## Assemble the debug APK
 	$(GRADLE) assembleDebug
 
 release: require-signing ## Assemble the signed release APK (sideloading only)
-	$(GRADLE) assembleRelease
+	$(SIGN_ENV) $(GRADLE) assembleRelease
 
 bundle: require-signing ## Assemble the signed release AAB — the Play upload
-	$(GRADLE) bundleRelease
+	$(SIGN_ENV) $(GRADLE) bundleRelease
 
 test: ## Run the unit tests
 	$(GRADLE) app:testDebugUnitTest
@@ -68,32 +84,32 @@ test: ## Run the unit tests
 lint: ## Run Android lint against the release variant
 	$(GRADLE) app:lintRelease
 
-# The release signing config reads these from the environment; without them
-# Gradle silently produces an unsigned-by-empty-password artifact that Play
-# rejects late, so fail loudly and early instead.
+# Gradle will happily sign with an empty password and produce an artifact Play
+# rejects minutes later, so the keystore, the alias and the password are all
+# proven to work together before the build starts.
 require-signing:
-	@missing=""; \
-	for v in KEYSTORE_FILE KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do \
-		[[ -n "$${!v}" ]] || missing="$$missing $$v"; \
-	done; \
-	if [[ -n "$$missing" ]]; then \
-		echo "release signing is not configured; missing:$$missing" >&2; \
-		exit 1; \
-	fi; \
-	if [[ ! -f "$$KEYSTORE_FILE" ]]; then \
-		echo "KEYSTORE_FILE points at a file that does not exist" >&2; \
+	@if [[ ! -f "$(UPLOAD_KEYSTORE)" ]]; then \
+		echo "upload keystore not found: $(UPLOAD_KEYSTORE)" >&2; \
+		echo "run 'make upload-key', or pass UPLOAD_KEYSTORE=<path>" >&2; \
 		exit 1; \
 	fi
+	@export STOREPASS="$${STORE_PASSWORD:-$$KEYSTORE_PASSWORD}"; \
+	if [[ -z "$$STOREPASS" ]]; then \
+		echo "no keystore password: export STORE_PASSWORD (or KEYSTORE_PASSWORD)" >&2; \
+		exit 1; \
+	fi; \
+	if ! keytool -list -keystore "$(UPLOAD_KEYSTORE)" -storepass:env STOREPASS \
+		-alias "$(UPLOAD_ALIAS)" >/dev/null 2>&1; then \
+		echo "cannot open alias '$(UPLOAD_ALIAS)' in $(UPLOAD_KEYSTORE)" >&2; \
+		echo "wrong password, or the alias does not exist in that keystore" >&2; \
+		exit 1; \
+	fi; \
+	echo "signing with $(UPLOAD_KEYSTORE) (alias $(UPLOAD_ALIAS))"
 
 # ---- signing
 
-# Play App Signing keeps the app signing key; the key you upload with must be a
-# DIFFERENT, app-specific upload key. This generates one — it never touches an
-# existing file, and keytool prompts for the passwords so none of them land in
-# the shell history or in this file.
-UPLOAD_KEYSTORE ?= $(HOME)/.android-keystores/fasttrack48-upload.jks
-UPLOAD_ALIAS    ?= fasttrack48-upload
-
+# Generates the upload key. It never touches an existing file, and keytool
+# prompts for the passwords so none of them land in the shell history.
 upload-key: ## Generate a new Play upload key and export its certificate
 	@if [[ -e "$(UPLOAD_KEYSTORE)" ]]; then \
 		echo "$(UPLOAD_KEYSTORE) already exists; refusing to overwrite it." >&2; \
@@ -117,14 +133,15 @@ upload-key: ## Generate a new Play upload key and export its certificate
 	@echo
 	@echo "Register upload_certificate.pem in Play Console:"
 	@echo "  Test and release > Setup > App integrity > App signing"
-	@echo "Then point the build at the new key:"
-	@echo "  export KEYSTORE_FILE=\"$(UPLOAD_KEYSTORE)\""
-	@echo "  export KEY_ALIAS=\"$(UPLOAD_ALIAS)\""
-	@echo "  export KEYSTORE_PASSWORD=... KEY_PASSWORD=..."
+	@echo "The Makefile already points every signed target at this key;"
+	@echo "only the password has to reach it:"
+	@echo "  export STORE_PASSWORD=...   # KEY_PASSWORD defaults to the same"
 
-key-fingerprints: ## Print the fingerprints of the configured signing key
-	@keytool -list -v -keystore "$$KEYSTORE_FILE" \
-		-storepass:env KEYSTORE_PASSWORD -alias "$$KEY_ALIAS" 2>&1 \
+key-fingerprints: ## Print the fingerprints of the key the build will use
+	@echo "keystore: $(UPLOAD_KEYSTORE)"
+	@export STOREPASS="$${STORE_PASSWORD:-$$KEYSTORE_PASSWORD}"; \
+	keytool -list -v -keystore "$(UPLOAD_KEYSTORE)" \
+		-storepass:env STOREPASS -alias "$(UPLOAD_ALIAS)" 2>&1 \
 		| grep -E "Alias name|Creation date|Owner|Valid from|SHA1:|SHA256:|Signature algorithm"
 
 # ---- play
