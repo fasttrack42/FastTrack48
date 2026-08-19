@@ -23,3 +23,4 @@
 *.keystore
 play-store-config.json
 keystore.properties
+upload_certificate.pem
