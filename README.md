@@ -1,6 +1,6 @@
 [![GitHub](https://img.shields.io/github/v/release/fasttrack42/FastTrack48?include_prereleases&logo=github)](https://github.com/fasttrack42/FastTrack48/releases/latest)
 
-# FastTrack48
+# FastTrack48 
 
 Free and Open Source Android app for tracking Intermittent/Prolonged Fasting.
 
