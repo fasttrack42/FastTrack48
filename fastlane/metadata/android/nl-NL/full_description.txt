@@ -1,8 +1,11 @@
-Simple, Free, Open Source.
+Eenvoudig, gratis, open source.
 
-No ads, no in-app purchases, no permissions.
+Geen advertenties, geen in-app-aankopen, geen permissies.
 
-Just tell the app when you start your fast, and check back in to see what your body is doing during your fast.
+Vertel de app gewoon wanneer je begint met vasten en kom later terug om te zien wat je lichaam tijdens het vasten doet.
+
+FastTrack48 is geen medische app en geeft geen medisch advies.
+
 
 ATTRIBUTION
 
