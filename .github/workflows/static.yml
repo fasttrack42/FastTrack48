@@ -1,0 +1,80 @@
+# Deploy README.md → index.html and publish via gh action
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Convert README.md → site/index.html
+        run: |
+          mkdir -p site
+          # Convert Markdown to HTML body
+          BODY=$(npx --yes marked README.md)
+          # Wrap in minimal standalone HTML
+          cat > site/index.html << EOF
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>README</title>
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 0 1rem;
+                color: #24292f;
+              }
+              pre, code {
+                background: #f6f8fa;
+                border-radius: 6px;
+              }
+              pre { padding: 1rem; overflow: auto; }
+              code { padding: 0.2em 0.4em; }
+              a { color: #0969da; }
+            </style>
+          </head>
+          <body>
+          ${BODY}
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "site"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
