@@ -1,10 +1,39 @@
-Simple, Free, Open Source.
+Free and fully open source. No ads, no in-app purchases, no Internet permissions.
 
-No ads, no in-app purchases, no permissions.
+FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
+about each phase as you progress:
 
-Just tell the app when you start your fast, and check back in to see what your body is doing during your fast.
+8-12 Hours: Gluconeogenesis
+12-18 Hours: Fat Burning
+18-24 Hours: Ketosis
+24-48 Hours: Autophagy
+48-54 Hours: Increased Growth Hormones
+54-72 Hours: Insulin Sensitivity
+72 Hours and Beyond: Immune Cell Regeneration
 
-FastTrack48 is not a medical app and does not provide medical advice.
+WHILE YOU FAST
+• A radial dial showing exactly where you are on the 0 to 72h+ timeline, with a tappable pill for every stage
+• An ongoing notification with live elapsed time, plus optional alerts the moment you cross into a new stage
+• A home screen widget to provide a live progress without having to open the app
+
+YOUR FASTING HISTORY
+• Under the Log tab you'll find a calendar that displays your past fasts and stats
+• Running totals of the time you have spent in ketosis and in autophagy
+• Add, edit or backdate any fast by hand — forget to hit start and nothing is lost
+
+YOUR DATA NEVER LEAVES YOUR PHONE
+• No account, no sign-in, no cloud, no ads, no in-app purchases, no analytics, no tracking
+• The app does not even request the INTERNET permission — it cannot phone home
+• Everything is stored in a local database on your device
+• Export the whole logbook to CSV, calendar (.ics) or Activity Streams JSON at any time
+• Import your fast history from EasyFast backup .zip files
+
+LOCALIZATION
+• Free and open source under the MIT licence, no strings attached
+• Material design throughout, with light, dark and system themes and a configurable date and time format
+• Available in nine languages
+
+FastTrack48 is not a medical app and does not provide medical advice. The stage timings come from a rule-of-thumb model informed by published research and real-world testing, and they are an approximation: what stage you are actually in depends on your metabolism, your last meal, your activity and much else. Talk to a doctor before fasting, especially if you are pregnant, are taking medication, or have a medical condition.
 
 
 ATTRIBUTION

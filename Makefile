@@ -38,7 +38,7 @@ DIST         := dist/$(VERSION_CODE)
 .PHONY: help version release debug bundle install install-debug test lint \
         icons preflight dist clean clean-dist tasks check-jetifier \
         verify-signing play-internal play-production play-metadata \
-        require-signing
+        require-signing upload-key key-fingerprints
 
 help: ## Show this help
 	@printf '\033[1mFastTrack48\033[0m %s (versionCode %s)\n' \
@@ -84,6 +84,48 @@ require-signing:
 		echo "KEYSTORE_FILE points at a file that does not exist" >&2; \
 		exit 1; \
 	fi
+
+# ---- signing
+
+# Play App Signing keeps the app signing key; the key you upload with must be a
+# DIFFERENT, app-specific upload key. This generates one — it never touches an
+# existing file, and keytool prompts for the passwords so none of them land in
+# the shell history or in this file.
+UPLOAD_KEYSTORE ?= $(HOME)/.android-keystores/fasttrack48-upload.jks
+UPLOAD_ALIAS    ?= fasttrack48-upload
+
+upload-key: ## Generate a new Play upload key and export its certificate
+	@if [[ -e "$(UPLOAD_KEYSTORE)" ]]; then \
+		echo "$(UPLOAD_KEYSTORE) already exists; refusing to overwrite it." >&2; \
+		echo "Delete it deliberately, or set UPLOAD_KEYSTORE=<path>." >&2; \
+		exit 1; \
+	fi
+	@mkdir -p "$$(dirname "$(UPLOAD_KEYSTORE)")"
+	keytool -genkeypair \
+		-keystore "$(UPLOAD_KEYSTORE)" -storetype PKCS12 \
+		-alias "$(UPLOAD_ALIAS)" \
+		-keyalg RSA -keysize 4096 -sigalg SHA256withRSA \
+		-validity 14600 \
+		-dname "CN=FastTrack48 Upload Key, O=FastTrack48, C=US"
+	keytool -export -rfc \
+		-keystore "$(UPLOAD_KEYSTORE)" -alias "$(UPLOAD_ALIAS)" \
+		-file upload_certificate.pem
+	@chmod 600 "$(UPLOAD_KEYSTORE)"
+	@echo
+	@echo "upload key:  $(UPLOAD_KEYSTORE)"
+	@echo "certificate: $$PWD/upload_certificate.pem"
+	@echo
+	@echo "Register upload_certificate.pem in Play Console:"
+	@echo "  Test and release > Setup > App integrity > App signing"
+	@echo "Then point the build at the new key:"
+	@echo "  export KEYSTORE_FILE=\"$(UPLOAD_KEYSTORE)\""
+	@echo "  export KEY_ALIAS=\"$(UPLOAD_ALIAS)\""
+	@echo "  export KEYSTORE_PASSWORD=... KEY_PASSWORD=..."
+
+key-fingerprints: ## Print the fingerprints of the configured signing key
+	@keytool -list -v -keystore "$$KEYSTORE_FILE" \
+		-storepass:env KEYSTORE_PASSWORD -alias "$$KEY_ALIAS" 2>&1 \
+		| grep -E "Alias name|Creation date|Owner|Valid from|SHA1:|SHA256:|Signature algorithm"
 
 # ---- play
 
