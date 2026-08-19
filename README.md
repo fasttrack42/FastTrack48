@@ -19,13 +19,24 @@ This is a simple FOSS app intended to help keep you motivated. It is not a medic
 FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
 about each phase as you progress:
 
-8-12 Hours: Gluconeogenesis
-12-18 Hours: Fat Burning
-18-24 Hours: Ketosis
-24-48 Hours: Autophagy
-48-54 Hours: Increased Growth Hormones
-54-72 Hours: Insulin Sensitivity
-72 Hours and Beyond: Immune Cell Regeneration
+**Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (serial muscle biopsies, isotope tracers), hence, the data below is inference plus partially substantiated facts.
+
+| Time Window | Labeled Process | Evidence Class | Basis |
+|---|---|---|---|
+| 0–8h | Post-absorptive, glycogenolysis | [FACT] | Standard glucose/insulin kinetics, directly measured in humans repeatedly |
+| 8–16h | Rising gluconeogenesis, insulin ↓ | [FACT] | Well-established hepatic metabolism |
+| 12–18h | "Fat burning" (lipolysis ↑) | [FACT] | Directly measured (plasma FFA, RQ) |
+| 16–24h | Ketosis onset (BHB rises) | [FACT] | Directly measured; individual variance large — some reach it by 12h (low glycogen), others not till 30h+ |
+| 18–72h+ | "Autophagy" | [INFERENCE, weak] | No live human autophagy assay existed pre-2021. Best current human surrogate data (Bensalem/SAHMRI PBMC flux assay, 2022–2025) shows detectable flux changes at ~16h refeeding contrast and after 3-day water fasts in a randomised controlled crossover trial investigating three-day water-only fasting with or without exercise-induced glycogen depletion on autophagic activation, but a formal RCT running iTRE (20h fasts, 3x/week) for 6 months found flux increased only at the 6-month cohort level, not within-group from baseline in 121 humans with obesity randomized to standard care, calorie restriction, or intermittent fasting plus time-restricted eating, autophagic flux was significantly higher in the iTRE group compared to standard care after 6 months, though there was no significant increase from baseline within the iTRE group itself. The 24–48h figure is [INFERENCE] extrapolated from rodent mTOR-suppression kinetics, not measured onset in living humans. A parallel human RCT registered specifically to nail this kinetic question postulated an increase in autophagy between 12 and 36h of fasting based on theoretical transfer from animal experimental data, and a possible decrease after several days, noting no human studies had yet focused on the size and temporal kinetics of the effect |
+| 24–48h | Autophagy "peak" | [ANECDOTAL / INFERENCE] | No human peak has been located; claims of a 48h peak trace back to rodent studies |
+| 48–54h | GH spike (5x baseline) | [FACT, magnitude confirmed] | GH pulse amplitude increase during fasting is real and repeatedly measured (1988 Ho et al., n=9, confirmed since); the tight 48–54h bracket in pop-science charts is a rounding of a continuous, individually-variable rise, not a threshold |
+| 54–72h | "Insulin sensitivity" ↑ | [FACT] | Insulin sensitivity does rise with fasting duration and fat loss, but as a smooth dose-response curve tracked over days-to-weeks, not a switch flipped at hour 54 |
+| 72h+ | mTOR ↓50%, protein catabolism ↑ | [FACT] | A 72-hour fast in eight healthy male volunteers significantly increased forearm net phenylalanine release and tended to decrease phenylalanine rate of disappearance, with mTOR phosphorylation decreased by approximately 50% following fasting — this is catabolic stress, not unambiguously "beneficial regeneration" |
+| 72h+ | "Immune cell regeneration" | [ANECDOTAL, single-study] | Traces to one 2014 USC paper (Cheng et al., *Cell Stem Cell*) on **prolonged fasting + refeeding cycles in mice and a small human chemo-patient cohort**, showing stem-cell-mediated hematopoietic regeneration on refeeding — not fasting itself, and not independently replicated at scale in healthy humans |
+
+**Notes**
+- the underlying biology is a continuum with wide individual variance with glycogen stores, muscle mass, prior fasting adaptation, sex, age all shifting these windows by 6–24h in either direction.
+- self-reported fasting-community data (r/fasting, Longo's own case reports) consistently claims subjective mental clarity and appetite suppression peaking days 2–3 — this is real pattern-of-report data but confounded by ketone-mediated euphoria and dehydration/electrolyte effect.
 
 The calculations are based on a "rule-of-thumb" quality model for determining what fasting stage you are currently in. It has been to some degree
 validated through real world testing using a ketone breath meter, as well as reading medical studies on the matter, but even still, it is just a rule-of-thumb. There are many things that would affect what stage you are in on a particular fast.
