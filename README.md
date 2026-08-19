@@ -19,7 +19,7 @@ This is a simple FOSS app intended to help keep you motivated. It is not a medic
 FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
 about each phase as you progress:
 
-**Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (serial muscle biopsies, isotope tracers), hence, the data below is inference plus partially substantiated facts.
+**Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (serial muscle biopsies, isotope tracers), hence, the data below is mostly derived from rodent studies 🐁 🐭, anecdotal testimonies 🗣️ and deep inference 🔍 🧩 🧩 🧩 🎯.
 
 | Time Window | Labeled Process | Evidence Class | Basis |
 |---|---|---|---|
