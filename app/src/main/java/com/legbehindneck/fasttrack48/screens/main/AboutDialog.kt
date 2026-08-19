@@ -44,8 +44,8 @@ import androidx.compose.ui.window.Dialog
 import com.legbehindneck.fasttrack48.R
 import kotlinx.coroutines.flow.collectLatest
 
-private const val GITHUB_URL = "https://github.com/fasttrack42/FastTrack48"
-private const val WEBSITE_URL = "https://fasttrack42.github.io/FastTrack48"
+private const val GITHUB_URL = "https://github.com/fasttrack42/FastTrack48/"
+private const val WEBSITE_URL = "https://fasttrack48.legbehindneck.com/"
 private const val TELEGRAM_URL = "https://t.me/FastTrack48"
 
 /** The project this app is a fork of, and its author. See AcknowledgementsSection. */
