@@ -5,20 +5,37 @@ Free and Open Source app for tracking Fasting.
 > **FastTrack48 is a fork of [FastTrack](https://github.com/Darkrock-Studios/FastTrack) by
 > [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
 > See [Attribution](#attribution) below.
+>
+[<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/master/get-it-on-github.png" alt="Get it on GitHub" height="80">](https://github.com/fasttrack42/FastTrack48/releases/latest)
 
-[![Google Play](https://img.shields.io/endpoint?color=green&logo=google-play&logoColor=green&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.legbehindneck.fasttrack48%26l%3DGoogle%2520Play%26m%3D%24version)](https://play.google.com/store/apps/details?id=com.legbehindneck.fasttrack48)
+[<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80">](https://github.com/fasttrack42/FastTrack48)
+
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.legbehindneck.fasttrack48)
+
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.legbehindneck.fasttrack48)
+
+<!--
 [![F-Droid](https://img.shields.io/f-droid/v/com.legbehindneck.fasttrack48?logo=FDROID)](https://f-droid.org/en/packages/com.legbehindneck.fasttrack48/)
+-->
 [![GitHub](https://img.shields.io/github/v/release/fasttrack42/FastTrack48?include_prereleases&logo=github)](https://github.com/fasttrack42/FastTrack48/releases/latest)
 
-Intermittent fasting has many benefits! But it can be very hard to stay motivated during a fast.
+Intermittent fasting has many benefits! But it can be hard to stay motivated during a fast.
 
-This is a simple FOSS app intended to help keep you motivated. It is not a medical app and does not provide medical
-advice.
+This is a simple FOSS app intended to help keep you motivated. It is not a medical app and does not provide medical advice.
 
-This uses a "rule-of-thumb" quality model for determining what fasting stage you are currently in. It has been somewhat
-validated through real world testing using a ketone breath meter, as well as reading medical studies on the matter, but
-even still, it is just a rule-of-thumb. There are many things that would affect what stage you are in on this particular
-fast.
+FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
+about each phase as you progress:
+
+8-12 Hours: Gluconeogenesis
+12-18 Hours: Fat Burning
+18-24 Hours: Ketosis
+24-48 Hours: Autophagy
+48-54 Hours: Increased Growth Hormones
+54-72 Hours: Insulin Sensitivity
+72 Hours and Beyond: Immune Cell Regeneration
+
+The calculations are based on a "rule-of-thumb" quality model for determining what fasting stage you are currently in. It has been to some degree
+validated through real world testing using a ketone breath meter, as well as reading medical studies on the matter, but even still, it is just a rule-of-thumb. There are many things that would affect what stage you are in on a particular fast.
 
 ## Privacy
 
