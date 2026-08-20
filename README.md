@@ -8,16 +8,17 @@ Free and Open Source Android app for tracking Intermittent/Prolonged Fasting.
 > [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
 > See [Attribution](#attribution) below.
 
-
+<div align="center">
+  
 [<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/master/get-it-on-github.png" alt="Get it on GitHub" height="80">](https://github.com/fasttrack42/FastTrack48/releases/latest) [<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{"id":"com.legbehindneck.fasttrack48","url":"https://github.com/fasttrack42/FastTrack48","author":"fasttrack42","name":"FastTrack48"})
 
 <!--  [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.legbehindneck.fasttrack48) [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.legbehindneck.fasttrack48)
 -->
-
-
 <!--
 [![F-Droid](https://img.shields.io/f-droid/v/com.legbehindneck.fasttrack48?logo=FDROID)](https://f-droid.org/en/packages/com.legbehindneck.fasttrack48/)
 -->
+</div>
+
 
 Intermittent fasting has many benefits! But it can be hard to stay motivated during a fast.
 
