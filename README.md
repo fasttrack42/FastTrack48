@@ -9,7 +9,10 @@ Free and Open Source Android app for tracking Intermittent/Prolonged Fasting.
 > See [Attribution](#attribution) below.
 
 
-[<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/master/get-it-on-github.png" alt="Get it on GitHub" height="80">](https://github.com/fasttrack42/FastTrack48/releases/latest) [<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{"id":"com.legbehindneck.fasttrack48","url":"https://github.com/fasttrack42/FastTrack48","author":"fasttrack42","name":"FastTrack48"})<!--  [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.legbehindneck.fasttrack48) [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80">] --> (https://play.google.com/store/apps/details?id=com.legbehindneck.fasttrack48) 
+[<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/master/get-it-on-github.png" alt="Get it on GitHub" height="80">](https://github.com/fasttrack42/FastTrack48/releases/latest) [<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{"id":"com.legbehindneck.fasttrack48","url":"https://github.com/fasttrack42/FastTrack48","author":"fasttrack42","name":"FastTrack48"})
+
+<!--  [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.legbehindneck.fasttrack48) [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.legbehindneck.fasttrack48)
+-->
 
 
 <!--
