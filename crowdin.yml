@@ -1,9 +1,0 @@
-files:
-  - source: /app/src/main/res/values/strings*.xml
-    translation: /app/src/main/res/values-%android_code%/%original_file_name%
-    translate_attributes: 0
-    content_segmentation: 0
-  - source: /app/src/main/res/raw/*.md
-    translation: /app/src/main/res/raw-%android_code%/%original_file_name%
-  - source: /fastlane/metadata/android/en-US/*.txt
-    translation: /fastlane/metadata/android/%locale%/%original_file_name%
