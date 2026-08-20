@@ -27,7 +27,7 @@ FastTrack48 tells you what changes are happening to your body while you fast, an
 about each phase as you progress:
 
 <div align=center>
-<img src="https://github.com/fasttrack42/FastTrack48/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" height=640><img src="https://github.com/fasttrack42/FastTrack48/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" height=640><img src="https://github.com/fasttrack42/FastTrack48/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" height=640>
+<img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" height=640><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" height=640><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" height=640>
 
 
 </div>
