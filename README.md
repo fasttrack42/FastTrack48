@@ -53,8 +53,7 @@ validated through real world testing using a ketone breath meter, as well as rea
 
 ## Privacy
 
-We don't collect any data whatsoever. The app doesn't even have the INTERNET permission. The app operates entirely
-locally.
+We don't collect any data whatsoever. The app doesn't have the INTERNET permission, and operates fully offline.
 
 ## Development
 
