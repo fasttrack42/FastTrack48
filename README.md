@@ -2,7 +2,7 @@
 
 # FastTrack48 
 
-Free and Open Source Android app for tracking Intermittent/Prolonged Fasting.
+Free and Open Source Android app for tracking Intermittent/Prolonged Fasts.
 
 > **FastTrack48 is a fork of [FastTrack](https://github.com/Darkrock-Studios/FastTrack) by
 > [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
@@ -19,19 +19,14 @@ Free and Open Source Android app for tracking Intermittent/Prolonged Fasting.
 -->
 </div>
 
-
-Intermittent fasting has many benefits! But it can be hard to stay motivated during a fast.
-
-This is a simple FOSS app intended to help keep you motivated. It is not a medical app and does not provide medical advice.
-
 FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
-about each phase as you progress:
+about each phase as you progress.  It is not a medical app and does not provide medical advice.
 
 <div align=center class=scrn>
 <img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" height="432"><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" height="432"><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" height="432">
 </div>
 
-**Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (serial muscle biopsies, isotope tracers), hence, the data below is mostly derived from rodent studies 🐁 🐭, anecdotal testimonies 🗣️ and deep inference 🔍 🧩 🧩 🧩 🎯.
+**Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (muscle biopsies, isotope tracers, etc); the data below is derived from rodent studies 🐁 🐭, anecdotal testimonies 🗣️ and personal experiences.
 
 | Time Window | Labeled Process | Evidence Class | Basis |
 |---|---|---|---|
@@ -47,8 +42,7 @@ about each phase as you progress:
 | 72h+ | Immune cell regeneration | [ANECDOTAL, single-study] | Traces to one 2014 USC paper (Cheng et al., *Cell Stem Cell*) on **prolonged fasting + refeeding cycles in mice and a small human chemo-patient cohort**, showing stem-cell-mediated hematopoietic regeneration on refeeding — not fasting itself, and not independently replicated at scale in healthy humans |
 
 **Notes**
-- the underlying biology is a continuum with wide individual variance with glycogen stores, muscle mass, prior fasting adaptation, sex, age all shifting these windows by 6–24h in either direction.
-- self-reported fasting-community data (r/fasting, Longo's own case reports) consistently claims subjective mental clarity and appetite suppression peaking days 2–3 — this is real pattern-of-report data but confounded by ketone-mediated euphoria and dehydration/electrolyte effect.
+- the actual time windows can vary depending on your glycogen stores, muscle mass, prior fasts, sex, age and can drift 6–24h in either direction.
 
 The calculations are based on a "rule-of-thumb" quality model for determining what fasting stage you are currently in. It has been to some degree
 validated through real world testing using a ketone breath meter, as well as reading medical studies on the matter, but even still, it is just a rule-of-thumb. There are many things that would affect what stage you are in on a particular fast.
@@ -62,16 +56,10 @@ We don't collect any data whatsoever. The app doesn't have the INTERNET permissi
 FastTrack48 is in active development; feel free to log bugs, request features, and join us on
 [Telegram](https://t.me/FastTrack48)!
 
-Pull requests are very much welcomed, feel free to open an issue to discuss it first though to make sure it is a
-direction we want to go.
-
-#### Releasing
-
-See [docs](docs/HOW-TO-RELEASE.md) on how to publish a new release.
 
 ## Attribution
 
-FastTrack48 is a **modified derivative work** — a direct fork — of **FastTrack**, created by
+FastTrack48 is a **modified derivative work** — a fork — of **FastTrack**, created by
 **Adam Brown** ([@Wavesonics](https://github.com/Wavesonics)) and published by
 [Dark Rock Studios](https://darkrock.studio/).
 
@@ -83,8 +71,8 @@ FastTrack48 is a **modified derivative work** — a direct fork — of **FastTra
 | Original licence | MIT — Copyright © 2020 Adam Brown |
 
 The original software remains Copyright © 2020 Adam Brown and is made available under the MIT
-License. That licence continues to govern the original portions of this app, and its full text is
-preserved verbatim in [`LICENSE`](LICENSE) and reproduced inside the app itself, under
+License which continues to govern the original portions of this app, its full text
+preserved verbatim in [`LICENSE`](LICENSE) and reproduced inside the app,z under
 **About → Acknowledgements**.
 
 Every modification, addition and design change in FastTrack48 is the sole work and responsibility of
