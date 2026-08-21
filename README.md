@@ -41,7 +41,7 @@ about each phase as you progress.  It is not a medical app and does not provide 
 - Share your current or finished fast as text.
 - Six-screen intro explaining the app on first launch.
 
-## Logbook
+## Fasting History
 - Every fast recorded with start time, total length, hours in ketosis and hours in autophagy.
 - Add text notes for any entry.
 - List and calendar views of your previous fasts.
