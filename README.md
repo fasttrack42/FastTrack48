@@ -26,6 +26,59 @@ about each phase as you progress.  It is not a medical app and does not provide 
 <img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" height="432"><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" height="432"><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" height="432">
 </div>
 
+# Features
+
+## During a fast
+- Radial dial showing elapsed time and the phase you are currently in.
+- Ten stages from the last meal to 72 hours+: blood sugar rise, blood sugar fall, blood sugar stabilises, gluconeogenesis, fat burning, ketosis, autophagy, growth hormone surge, insulin sensitivity, immune cell regeneration.
+- At each stage you get an explaination of what is happening in your body, with references.
+- Tappable bubbles for each phase — glucose burning, fat burning, ketosis, autophagy, optimal autophagy.
+- Phases can appear only once you reach them, or be shown from the start; each is individually toggleable.
+- Ongoing notification display elapsed time and current stage.
+- Notifications when you enter a new stage.
+- Home screen widget .
+- Launcher shortcuts: start a fast, start now, end fast.
+- Share your current or finished fast as text.
+- Six-screen intro explaining the app on first launch.
+
+## Logbook
+- Every fast recorded with start time, total length, hours in ketosis and hours in autophagy.
+- Add text notes for any entry.
+- List and calendar views of your previous fasts.
+- Tap any past day in the calendar to add a fast for it.
+- Manual entry: set start date and time plus a duration, or set an end time and let the app calculate.
+- Edit or delete any entry, including backdating a start you forgot to log.
+- Clear the whole logbook.
+
+## Import and export
+- Export as CSV (Excel-compatible).
+- Export as iCalendar (.ics) to load your fasts into any calendar app.
+- Export as ActivityStreams 2.0 (JSON-LD).
+- Import a previous export back into the app.
+- Import EasyFast .zip backups; overlapping entries are skipped to avoid duplicates.
+
+## Body profile
+- Age, sex, height and weight, in metric or imperial.
+- BMI with its category, and BMR in kcal per day.
+
+## Appearance and settings
+- Light, dark, or follow the system theme.
+- Animated or plain background.
+- Configurable date and time format.
+- Metric / imperial units.
+- Toggles for the ongoing notification and for stage alerts.
+
+## Privacy
+- No internet permission. The app is technically incapable of transmitting anything.
+- No account, no sign-up, no ads, no analytics, no crash reporting, no trackers, no third-party SDKs.
+- All data stays in the app's private storage on the device.
+- Free and open source under the MIT licence; the full source is public and the build is reproducible from it.
+
+## Localisation Languages
+English, German, Spanish, French, Italian, Dutch, Portuguese (Brazil), Ukrainian, Chinese (Simplified).
+
+---
+
 **Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (muscle biopsies, isotope tracers, etc); the data below is derived from rodent studies 🐁 🐭, anecdotal testimonies 🗣️ and personal experiences.
 
 | Time Window | Labeled Process | Evidence Class | Basis |
@@ -46,10 +99,6 @@ about each phase as you progress.  It is not a medical app and does not provide 
 
 The calculations are based on a "rule-of-thumb" quality model for determining what fasting stage you are currently in. It has been to some degree
 validated through real world testing using a ketone breath meter, as well as reading medical studies on the matter, but even still, it is just a rule-of-thumb. There are many things that would affect what stage you are in on a particular fast.
-
-## Privacy
-
-We don't collect any data whatsoever. The app doesn't have the INTERNET permission, and operates fully offline.
 
 ## Development
 
