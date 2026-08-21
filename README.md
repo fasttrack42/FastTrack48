@@ -85,7 +85,6 @@ Evidence for fasting physiology varies considerably by process. Some fasting res
 | 18-72h+           | Autophagy     | Limited/indirect | Low               |
 | 48h+           | Increased GH spike (5x baseline)         | Strong           | Moderate          |
 | 52h+           | Insulin sensitivity      | Strong           | Moderate          |
-
 | 72h+           | mTOR ↓50%, protein catabolism ↑, Immune cell regeneration	  | Human evidence   | Moderate          |
 
 
