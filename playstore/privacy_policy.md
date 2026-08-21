@@ -1,10 +1,10 @@
-# Privacy Policy — FastTrack48
+# Privacy Policy
 
-**Effective date:** 20 August 2026
-**Applies to:** the FastTrack48 Android application, all versions from 14.0725.23 onwards
-**Publisher / data controller:** `FastTrack42` (“we”, “us”)
-**Privacy contact:** `glwnd2030@gmail.com`
-**Source code:** https://github.com/fasttrack42/FastTrack48
+- **Effective date:** 20 August 2026
+- **Applies to:** the FastTrack48 Android application, all versions from 14.0725.23 onwards
+- **Publisher / data controller:** `FastTrack42` (“we”, “us”)
+- **Privacy contact:** `glwnd2030@gmail.com`
+- **Source code:** https://github.com/fasttrack42/FastTrack48
 
 ---
 
