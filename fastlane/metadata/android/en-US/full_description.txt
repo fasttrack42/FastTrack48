@@ -1,34 +1,51 @@
 Free and fully open source. No ads, no in-app purchases, no Internet permissions.
 
-FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
-about each phase as you progress:
+FastTrack48 tells you what is happening to your body while you fast, and you'll learn more
+about each phase as you progress in your fast
 
-8-12 Hours: Gluconeogenesis
-12-18 Hours: Fat Burning
-18-24 Hours: Ketosis
-24-48 Hours: Autophagy
-48-54 Hours: Increased Growth Hormones
-54-72 Hours: Insulin Sensitivity
-72 Hours and Beyond: Immune Cell Regeneration
+<h3>Features</h3>
 
-WHILE YOU FAST
-• A radial dial showing exactly where you are on the 0 to 72h+ timeline, with a tappable pill for every stage
-• An ongoing notification with live elapsed time, plus optional alerts the moment you cross into a new stage
-• A home screen widget to provide a live progress without having to open the app
+<i>During a fast</i>
+• Radial dial showing elapsed time and the phase you are currently in.
+• Ten stages from the last meal to 72 hours+: blood sugar rise, blood sugar fall, blood sugar stabilises, gluconeogenesis, fat burning, ketosis, autophagy, growth hormone surge, insulin sensitivity, immune cell regeneration.
+• At each stage you get an explanation of what is happening in your body, with references.
+• Tappable bubbles for each phase — glucose burning, fat burning, ketosis, autophagy, optimal autophagy.
+• Phases can appear only once you reach them, or be shown from the start; each is individually toggleable.
+• Ongoing notification display elapsed time and current stage.
+• Notifications when you enter a new stage.
+• Home screen widget.
+• Launcher shortcuts: start a fast, start now, end fast.
+• Share your current or finished fast as text.
+• Six-screen intro explaining the app on first launch.
 
-YOUR FASTING HISTORY
-• Under the Log tab you'll find a calendar that displays your past fasts and stats
-• Running totals of the time you have spent in ketosis and in autophagy
-• Add, edit or backdate any fast by hand — forget to hit start and nothing is lost
+<i>Fasting history</i>
+• Every fast recorded with start time, total length, hours in ketosis and hours in autophagy.
+• Add text notes for any entry.
+• List and calendar views of your previous fasts.
+• Tap any past day in the calendar to add a fast for it.
+• Manual entry: set start date and time plus a duration, or set an end time and let the app calculate.
+• Edit or delete any entry, including backdating a start you forgot to log.
+• Clear the whole logbook.
 
-YOUR DATA NEVER LEAVES YOUR PHONE
-• No account, no sign-in, no cloud, no ads, no in-app purchases, no analytics, no tracking
-• The app does not even request the INTERNET permission — it cannot phone home
-• Everything is stored in a local database on your device
-• Export the whole logbook to CSV, calendar (.ics) or Activity Streams JSON at any time
-• Import your fast history from EasyFast backup .zip files
+<i>Import and export</i>
+• Export as CSV (Excel-compatible).
+• Export as iCalendar (.ics) to load your fasts into any calendar app.
+• Export as ActivityStreams 2.0 (JSON-LD).
+• Import a previous export back into the app.
+• Import EasyFast .zip backups; overlapping entries are skipped to avoid duplicates.
 
-LOCALIZATION
+<i>Body profile</i>
+• Age, sex, height and weight, in metric or imperial.
+• BMI with its category, and BMR in kcal per day.
+
+<i>Appearance and settings</i>
+• Light, dark, or follow the system theme.
+• Animated or plain background.
+• Configurable date and time format.
+• Metric / imperial units.
+• Toggles for the ongoing notification and for stage alerts.
+
+<h3>Localization</h3>
 • Free and open source under the MIT licence, no strings attached
 • Material design throughout, with light, dark and system themes and a configurable date and time format
 • Available in nine languages
@@ -36,7 +53,7 @@ LOCALIZATION
 FastTrack48 is not a medical app and does not provide medical advice. The stage timings come from a rule-of-thumb model informed by published research and real-world testing, and they are an approximation: what stage you are actually in depends on your metabolism, your last meal, your activity and much else. Talk to a doctor before fasting, especially if you are pregnant, are taking medication, or have a medical condition.
 
 
-ATTRIBUTION
+<h3>Attribution</h3>
 
 FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
 

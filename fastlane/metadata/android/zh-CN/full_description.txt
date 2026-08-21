@@ -1,19 +1,63 @@
-简单，免费，开放源码。
+完全免费、完全开源。没有广告，没有应用内购买，没有联网权限。
 
-没有广告，没有应用内购，没有权限。
+FastTrack48 告诉你禁食期间身体正在发生什么，随着禁食推进，你会逐步了解每一个阶段。
 
-只需在开始禁食时告诉应用，之后随时回来查看禁食期间您的身体正在发生的变化。
+<h3>功能</h3>
 
-FastTrack48 并非医疗应用，不提供任何医疗建议。
+<i>禁食过程中</i>
+• 环形表盘显示已用时间和当前所处阶段。
+• 从最后一餐到 72 小时以上共十个阶段：血糖上升、血糖下降、血糖趋稳、糖异生、脂肪燃烧、生酮、细胞自噬、生长激素飙升、胰岛素敏感性、免疫细胞再生。
+• 每个阶段都附有身体内部变化的说明，并列出参考文献。
+• 每个阶段都有可点击的气泡：葡萄糖燃烧、脂肪燃烧、生酮、自噬、最佳自噬。
+• 阶段可以在到达时才出现，也可以从一开始就全部显示；每一项均可单独开关。
+• 常驻通知显示已用时间和当前阶段。
+• 进入新阶段时发出提醒。
+• 主屏幕小组件。
+• 启动器快捷方式：开始禁食、立即开始、结束禁食。
+• 以文字分享进行中或已完成的禁食。
+• 首次启动时提供六屏引导介绍。
 
+<i>禁食历史</i>
+• 每次禁食均记录开始时间、总时长、生酮小时数与自噬小时数。
+• 可为任意记录添加文字备注。
+• 支持列表视图与日历视图。
+• 点击日历中的任意过去日期即可补记一次禁食。
+• 手动录入：设定开始日期时间与时长，或填写结束时间由应用自动计算。
+• 可编辑或删除任意记录，包括补录遗漏的开始时间。
+• 可一键清空整个记录本。
 
-ATTRIBUTION
+<i>导入与导出</i>
+• 导出为 CSV（兼容 Excel）。
+• 导出为 iCalendar（.ics），可载入任意日历应用。
+• 导出为 ActivityStreams 2.0（JSON-LD）。
+• 可将此前的导出文件重新导入。
+• 可导入 EasyFast 的 .zip 备份；时间重叠的记录会自动跳过。
 
-FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
+<i>身体档案</i>
+• 年龄、性别、身高、体重，支持公制或英制。
+• 显示 BMI 及其分类，以及每日基础代谢率（千卡）。
 
-Original project: https://github.com/Darkrock-Studios/FastTrack
-Original author: https://github.com/Wavesonics
+<i>外观与设置</i>
+• 浅色、深色或跟随系统主题。
+• 动态或简洁背景。
+• 可自定义日期与时间格式。
+• 公制或英制单位。
+• 常驻通知与阶段提醒均可单独开关。
 
-Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
+<h3>本地化</h3>
+• 基于 MIT 许可证免费开源，没有任何附加条件。
+• 全应用采用 Material Design。
+• 提供九种语言。
 
-The names "FastTrack", "Dark Rock Studios" and "Wavesonics" are used solely to identify the origin of the source code.
+FastTrack48 不是医疗应用，也不提供医疗建议。各阶段的时间来自依据已发表研究和实际测试建立的经验模型，仅为近似值：你实际处于哪个阶段取决于你的代谢、上一餐、活动量以及许多其他因素。开始禁食前请咨询医生，尤其是在怀孕、正在服药或患有疾病的情况下。
+
+<h3>署名</h3>
+
+FastTrack48 是 FastTrack 的修改衍生作品，即直接分支（fork）。原作品由 Adam Brown（@Wavesonics）创作，并由 Dark Rock Studios 发布。原始软件版权归 Adam Brown 所有（Copyright © 2020），依据 MIT 许可证提供，该许可证继续适用于本应用中的原始部分。完整许可证文本可在应用内的「关于 → 致谢」中查看。
+
+原始项目：https://github.com/Darkrock-Studios/FastTrack
+原始作者：https://github.com/Wavesonics
+
+FastTrack48 中的所有修改、新增和设计变更均由本项目独立完成并承担全部责任。Adam Brown 与 Dark Rock Studios 不维护、不认可、不赞助、不支持 FastTrack48，也不对其承担任何责任。有关 FastTrack48 的所有问题与支持请求，请提交至 https://github.com/fasttrack42/FastTrack48/issues ，切勿联系原始项目。
+
+「FastTrack」「Dark Rock Studios」和「Wavesonics」等名称仅用于标明源代码的出处。

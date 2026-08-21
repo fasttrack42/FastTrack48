@@ -1,16 +1,63 @@
-Simple, gratuit, Open Source.
+Gratuite et entièrement open source. Sans publicité, sans achats intégrés, sans permission Internet.
 
-Aucune publicité, aucun achat dans l'application, aucune autorisation.
+FastTrack48 vous montre ce qui se passe dans votre corps pendant le jeûne, et vous en apprenez davantage sur chaque phase à mesure que vous avancez.
 
-Dites simplement à l'application quand vous démarrez votre vitesse, et revenez voir ce que votre corps fait pendant votre vitesse.
+<h3>Fonctionnalités</h3>
 
-ATTRIBUTION
+<i>Pendant le jeûne</i>
+• Cadran radial indiquant le temps écoulé et la phase en cours.
+• Dix étapes, du dernier repas à plus de 72 heures : glycémie qui monte, qui baisse, qui se stabilise, néoglucogenèse, combustion des graisses, cétose, autophagie, pic d'hormone de croissance, sensibilité à l'insuline, régénération immunitaire.
+• À chaque étape, une explication de ce qui se produit dans votre corps, avec des références.
+• Bulles interactives par phase : combustion du glucose, combustion des graisses, cétose, autophagie, autophagie optimale.
+• Les phases apparaissent une fois atteintes, ou dès le début ; chacune s'active séparément.
+• Notification permanente avec le temps écoulé et l'étape en cours.
+• Alerte à l'entrée dans une nouvelle étape.
+• Widget pour l'écran d'accueil.
+• Raccourcis : démarrer un jeûne, démarrer maintenant, terminer.
+• Partagez votre jeûne en cours ou terminé sous forme de texte.
+• Introduction en six écrans au premier lancement.
 
-FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
+<i>Historique des jeûnes</i>
+• Chaque jeûne avec heure de début, durée totale, heures en cétose et heures en autophagie.
+• Notes libres sur n'importe quelle entrée.
+• Vue liste et vue calendrier.
+• Touchez un jour passé dans le calendrier pour y ajouter un jeûne.
+• Saisie manuelle : date et heure de début plus durée, ou heure de fin calculée.
+• Modifiez ou supprimez toute entrée, y compris rétroactivement.
+• Effacez tout l'historique.
 
-Original project: https://github.com/Darkrock-Studios/FastTrack
-Original author: https://github.com/Wavesonics
+<i>Import et export</i>
+• Export en CSV (compatible Excel).
+• Export en iCalendar (.ics) pour n'importe quelle application d'agenda.
+• Export en ActivityStreams 2.0 (JSON-LD).
+• Réimportez un export précédent.
+• Importez les sauvegardes .zip d'EasyFast ; les doublons sont ignorés.
 
-Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
+<i>Profil corporel</i>
+• Âge, sexe, taille et poids, en unités métriques ou impériales.
+• IMC avec sa catégorie et métabolisme de base en kcal par jour.
 
-The names "FastTrack", "Dark Rock Studios" and "Wavesonics" are used solely to identify the origin of the source code.
+<i>Apparence et réglages</i>
+• Thème clair, sombre ou celui du système.
+• Fond animé ou sobre.
+• Format de date et d'heure configurable.
+• Unités métriques ou impériales.
+• Interrupteurs pour la notification permanente et les alertes d'étape.
+
+<h3>Localisation</h3>
+• Gratuite et open source sous licence MIT, sans conditions.
+• Material Design dans toute l'application.
+• Disponible en neuf langues.
+
+FastTrack48 n'est pas une application médicale et ne fournit aucun conseil médical. Les durées des étapes proviennent d'un modèle indicatif fondé sur des recherches publiées et des tests réels ; ce sont des approximations : l'étape réelle dépend de votre métabolisme, de votre dernier repas, de votre activité et d'autres facteurs. Consultez un médecin avant de jeûner, en particulier si vous êtes enceinte, prenez des médicaments ou souffrez d'une pathologie.
+
+<h3>Attribution</h3>
+
+FastTrack48 est une œuvre dérivée modifiée — un fork direct — de FastTrack, créé par Adam Brown (@Wavesonics) et publié par Dark Rock Studios. Le logiciel original est Copyright © 2020 Adam Brown et distribué sous licence MIT, qui continue de régir les parties originales de cette application. Le texte complet de la licence figure dans l'app sous À propos → Remerciements.
+
+Projet original : https://github.com/Darkrock-Studios/FastTrack
+Auteur original : https://github.com/Wavesonics
+
+Toutes les modifications et ajouts de FastTrack48 sont le travail et la responsabilité de ce seul projet. Adam Brown et Dark Rock Studios n'assurent ni maintenance, ni soutien, ni parrainage de FastTrack48 et n'en portent aucune responsabilité. Adressez toute question ou demande d'assistance à https://github.com/fasttrack42/FastTrack48/issues et jamais au projet original.
+
+Les noms « FastTrack », « Dark Rock Studios » et « Wavesonics » servent uniquement à identifier l'origine du code source.

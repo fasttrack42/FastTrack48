@@ -1,19 +1,63 @@
-Eenvoudig, gratis, open source.
+Gratis en volledig open source. Geen advertenties, geen in-app-aankopen, geen internettoestemming.
 
-Geen advertenties, geen in-app-aankopen, geen permissies.
+FastTrack48 laat je zien wat er in je lichaam gebeurt terwijl je vast, en je leert meer over elke fase naarmate je vordert.
 
-Vertel de app gewoon wanneer je begint met vasten en kom later terug om te zien wat je lichaam tijdens het vasten doet.
+<h3>Functies</h3>
 
-FastTrack48 is geen medische app en geeft geen medisch advies.
+<i>Tijdens het vasten</i>
+• Radiale wijzerplaat met de verstreken tijd en de fase waarin je zit.
+• Tien stadia, van de laatste maaltijd tot ruim 72 uur: bloedsuiker stijgt, daalt, stabiliseert, gluconeogenese, vetverbranding, ketose, autofagie, groeihormoonpiek, insulinegevoeligheid, regeneratie van immuuncellen.
+• Bij elk stadium een uitleg van wat er in je lichaam gebeurt, met bronnen.
+• Aantikbare bubbels per fase: glucoseverbranding, vetverbranding, ketose, autofagie, optimale autofagie.
+• Fases verschijnen pas zodra je ze bereikt, of meteen vanaf het begin; elke fase is apart in te stellen.
+• Doorlopende melding met verstreken tijd en huidig stadium.
+• Melding zodra je een nieuw stadium binnengaat.
+• Widget voor het startscherm.
+• Snelkoppelingen: vasten starten, nu starten, vasten beëindigen.
+• Deel je lopende of afgeronde vasten als tekst.
+• Introductie van zes schermen bij de eerste start.
 
+<i>Vastengeschiedenis</i>
+• Elk vasten met begintijd, totale duur, uren in ketose en uren in autofagie.
+• Tekstnotities bij elke vermelding.
+• Lijst- en kalenderweergave.
+• Tik op een dag in het verleden om daar een vasten toe te voegen.
+• Handmatige invoer: begindatum en -tijd plus duur, of geef het einde op en de app rekent het uit.
+• Wijzig of verwijder elke vermelding, ook met terugwerkende kracht.
+• Wis het hele logboek.
 
-ATTRIBUTION
+<i>Importeren en exporteren</i>
+• Exporteer als CSV (geschikt voor Excel).
+• Exporteer als iCalendar (.ics) voor elke agenda-app.
+• Exporteer als ActivityStreams 2.0 (JSON-LD).
+• Importeer een eerdere export terug in de app.
+• Importeer EasyFast-back-ups (.zip); overlappende vermeldingen worden overgeslagen.
 
-FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
+<i>Lichaamsprofiel</i>
+• Leeftijd, geslacht, lengte en gewicht, metrisch of imperiaal.
+• BMI met categorie en basaalmetabolisme in kcal per dag.
 
-Original project: https://github.com/Darkrock-Studios/FastTrack
-Original author: https://github.com/Wavesonics
+<i>Weergave en instellingen</i>
+• Licht, donker of het systeemthema.
+• Geanimeerde of eenvoudige achtergrond.
+• Instelbare datum- en tijdnotatie.
+• Metrische of imperiale eenheden.
+• Schakelaars voor de doorlopende melding en de stadiummeldingen.
 
-Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
+<h3>Lokalisatie</h3>
+• Gratis en open source onder de MIT-licentie, zonder voorwaarden.
+• Material Design in de hele app.
+• Beschikbaar in negen talen.
 
-The names "FastTrack", "Dark Rock Studios" and "Wavesonics" are used solely to identify the origin of the source code.
+FastTrack48 is geen medische app en geeft geen medisch advies. De tijden van de stadia komen uit een vuistregelmodel op basis van gepubliceerd onderzoek en praktijktests en zijn benaderingen: in welk stadium je werkelijk zit hangt af van je stofwisseling, je laatste maaltijd, je activiteit en veel meer. Overleg met een arts voordat je gaat vasten, zeker als je zwanger bent, medicijnen gebruikt of een aandoening hebt.
+
+<h3>Attributie</h3>
+
+FastTrack48 is een gewijzigd afgeleid werk — een directe fork — van FastTrack, gemaakt door Adam Brown (@Wavesonics) en uitgegeven door Dark Rock Studios. De originele software is Copyright © 2020 Adam Brown en wordt beschikbaar gesteld onder de MIT-licentie, die van kracht blijft voor de oorspronkelijke delen van deze app. De volledige licentietekst staat in de app onder Over → Dankbetuigingen.
+
+Origineel project: https://github.com/Darkrock-Studios/FastTrack
+Oorspronkelijke auteur: https://github.com/Wavesonics
+
+Alle wijzigingen en toevoegingen in FastTrack48 zijn uitsluitend het werk en de verantwoordelijkheid van dit project. Adam Brown en Dark Rock Studios onderhouden, steunen of sponsoren FastTrack48 niet en dragen er geen verantwoordelijkheid voor. Richt alle vragen en ondersteuningsverzoeken over FastTrack48 aan https://github.com/fasttrack42/FastTrack48/issues en nooit aan het oorspronkelijke project.
+
+De namen "FastTrack", "Dark Rock Studios" en "Wavesonics" worden uitsluitend gebruikt om de herkomst van de broncode aan te geven.

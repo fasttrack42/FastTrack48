@@ -31,14 +31,23 @@ platform :android do
     )
   end
 
+  # Release notes belong to a release, so supply refuses to upload changelogs
+  # without a version_code telling it which release to attach them to. This lane
+  # ships no binary and creates no release, so changelogs are skipped here; they
+  # go up with the bundle in :internal and :deploy. Pass version_code=<code> to
+  # rewrite the notes of a release that is already live on the given track.
   desc "Upload the listing text and graphics only, with no new binary"
-  lane :metadata do
+  lane :metadata do |options|
+    code = options[:version_code]
     upload_to_play_store(
+      track: options[:track] || 'production',
       skip_upload_apk: true,
       skip_upload_aab: true,
       skip_upload_metadata: false,
       skip_upload_images: false,
-      skip_upload_screenshots: false
+      skip_upload_screenshots: false,
+      skip_upload_changelogs: code.nil?,
+      **(code.nil? ? {} : { version_code: code.to_i })
     )
   end
 

@@ -1,16 +1,63 @@
-Simples, Grátis, Código Aberto.
+Gratuito e totalmente de código aberto. Sem anúncios, sem compras no aplicativo e sem permissões de Internet.
 
-Sem anúncios, sem compras no aplicativo, sem permissões.
+O FastTrack48 mostra o que acontece no seu corpo enquanto você jejua, e você aprende mais sobre cada fase conforme avança.
 
-Basta informar ao app quando iniciar o jejum e voltar depois para acompanhar o que seu corpo está fazendo durante ele.
+<h3>Recursos</h3>
 
-ATTRIBUTION
+<i>Durante o jejum</i>
+• Mostrador radial com o tempo decorrido e a fase atual.
+• Dez estágios, da última refeição até mais de 72 horas: glicemia sobe, cai, estabiliza, gliconeogênese, queima de gordura, cetose, autofagia, pico do hormônio do crescimento, sensibilidade à insulina e regeneração das células imunes.
+• Em cada estágio, uma explicação do que ocorre no seu corpo, com referências.
+• Bolhas tocáveis por fase: queima de glicose, queima de gordura, cetose, autofagia e autofagia ideal.
+• As fases podem aparecer só quando você as alcança ou desde o início; cada uma é ativada separadamente.
+• Notificação contínua com o tempo decorrido e o estágio atual.
+• Aviso ao entrar em um novo estágio.
+• Widget para a tela inicial.
+• Atalhos: iniciar um jejum, iniciar agora, encerrar.
+• Compartilhe seu jejum em andamento ou concluído como texto.
+• Introdução em seis telas na primeira abertura.
 
-FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
+<i>Histórico de jejuns</i>
+• Cada jejum com hora de início, duração total, horas em cetose e horas em autofagia.
+• Notas de texto em qualquer registro.
+• Visualização em lista e em calendário.
+• Toque em um dia passado no calendário para adicionar um jejum nele.
+• Entrada manual: data e hora de início mais duração, ou informe o fim e o app calcula.
+• Edite ou exclua qualquer registro, inclusive retroativamente.
+• Apague todo o histórico.
 
-Original project: https://github.com/Darkrock-Studios/FastTrack
-Original author: https://github.com/Wavesonics
+<i>Importação e exportação</i>
+• Exporte em CSV (compatível com Excel).
+• Exporte em iCalendar (.ics) para qualquer app de calendário.
+• Exporte em ActivityStreams 2.0 (JSON-LD).
+• Importe de volta uma exportação anterior.
+• Importe backups .zip do EasyFast; registros sobrepostos são ignorados.
 
-Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
+<i>Perfil corporal</i>
+• Idade, sexo, altura e peso, em unidades métricas ou imperiais.
+• IMC com sua categoria e taxa metabólica basal em kcal por dia.
 
-The names "FastTrack", "Dark Rock Studios" and "Wavesonics" are used solely to identify the origin of the source code.
+<i>Aparência e configurações</i>
+• Tema claro, escuro ou o do sistema.
+• Fundo animado ou simples.
+• Formato de data e hora configurável.
+• Unidades métricas ou imperiais.
+• Chaves para a notificação contínua e os avisos de estágio.
+
+<h3>Localização</h3>
+• Gratuito e de código aberto sob a licença MIT, sem condições.
+• Material Design em todo o aplicativo.
+• Disponível em nove idiomas.
+
+O FastTrack48 não é um aplicativo médico e não fornece orientação médica. Os tempos dos estágios vêm de um modelo aproximado baseado em pesquisas publicadas e testes reais: o estágio em que você realmente está depende do seu metabolismo, da última refeição, da sua atividade e de muito mais. Consulte um médico antes de jejuar, especialmente se estiver grávida, tomar medicamentos ou tiver alguma condição de saúde.
+
+<h3>Atribuição</h3>
+
+O FastTrack48 é uma obra derivada modificada — um fork direto — do FastTrack, criado por Adam Brown (@Wavesonics) e publicado pela Dark Rock Studios. O software original é Copyright © 2020 Adam Brown e é disponibilizado sob a licença MIT, que continua regendo as partes originais deste app. O texto completo da licença está no app em Sobre → Agradecimentos.
+
+Projeto original: https://github.com/Darkrock-Studios/FastTrack
+Autor original: https://github.com/Wavesonics
+
+Todas as modificações e adições no FastTrack48 são obra e responsabilidade exclusivas deste projeto. Adam Brown e a Dark Rock Studios não mantêm, apoiam nem patrocinam o FastTrack48 e não têm qualquer responsabilidade por ele. Envie perguntas e pedidos de suporte sobre o FastTrack48 para https://github.com/fasttrack42/FastTrack48/issues e nunca ao projeto original.
+
+Os nomes "FastTrack", "Dark Rock Studios" e "Wavesonics" são usados apenas para identificar a origem do código-fonte.

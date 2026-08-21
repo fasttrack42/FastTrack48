@@ -1,16 +1,63 @@
-Semplice, Libero, Open Source.
+Gratuita e completamente open source. Senza pubblicità, senza acquisti in-app, senza permessi Internet.
 
-Nessun annuncio, nessun acquisto in-app, nessun permesso.
+FastTrack48 ti mostra che cosa succede nel tuo corpo mentre digiuni, e impari di più su ogni fase man mano che procedi.
 
-Basta dire all'app quando si avvia il vostro digiuno, e controllare di nuovo per vedere cosa il vostro corpo sta facendo durante il vostro digiuno.
+<h3>Funzioni</h3>
 
-ATTRIBUTION
+<i>Durante il digiuno</i>
+• Quadrante radiale con il tempo trascorso e la fase attuale.
+• Dieci stadi, dall'ultimo pasto a oltre 72 ore: glicemia in salita, in discesa, stabilizzazione, gluconeogenesi, combustione dei grassi, chetosi, autofagia, picco dell'ormone della crescita, sensibilità all'insulina, rigenerazione delle cellule immunitarie.
+• A ogni stadio una spiegazione di ciò che accade nel tuo corpo, con riferimenti.
+• Bolle interattive per ogni fase: consumo di glucosio, combustione dei grassi, chetosi, autofagia, autofagia ottimale.
+• Le fasi possono comparire solo quando le raggiungi oppure fin dall'inizio; ognuna si attiva singolarmente.
+• Notifica persistente con tempo trascorso e stadio attuale.
+• Avviso quando entri in un nuovo stadio.
+• Widget per la schermata iniziale.
+• Scorciatoie: avvia un digiuno, avvia ora, termina.
+• Condividi il digiuno in corso o concluso come testo.
+• Introduzione in sei schermate al primo avvio.
 
-FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
+<i>Cronologia dei digiuni</i>
+• Ogni digiuno con ora di inizio, durata totale, ore in chetosi e ore in autofagia.
+• Note di testo su qualsiasi voce.
+• Vista a elenco e vista calendario.
+• Tocca un giorno passato nel calendario per aggiungervi un digiuno.
+• Inserimento manuale: data e ora di inizio più durata, oppure indica la fine e l'app calcola.
+• Modifica o elimina qualsiasi voce, anche a posteriori.
+• Cancella l'intero registro.
 
-Original project: https://github.com/Darkrock-Studios/FastTrack
-Original author: https://github.com/Wavesonics
+<i>Importazione ed esportazione</i>
+• Esporta in CSV (compatibile con Excel).
+• Esporta in iCalendar (.ics) per qualsiasi app di calendario.
+• Esporta in ActivityStreams 2.0 (JSON-LD).
+• Reimporta un'esportazione precedente.
+• Importa i backup .zip di EasyFast; le voci sovrapposte vengono ignorate.
 
-Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
+<i>Profilo corporeo</i>
+• Età, sesso, altezza e peso, in unità metriche o imperiali.
+• IMC con la sua categoria e metabolismo basale in kcal al giorno.
 
-The names "FastTrack", "Dark Rock Studios" and "Wavesonics" are used solely to identify the origin of the source code.
+<i>Aspetto e impostazioni</i>
+• Tema chiaro, scuro o di sistema.
+• Sfondo animato o semplice.
+• Formato di data e ora configurabile.
+• Unità metriche o imperiali.
+• Interruttori per la notifica persistente e per gli avvisi di stadio.
+
+<h3>Localizzazione</h3>
+• Gratuita e open source con licenza MIT, senza vincoli.
+• Material Design in tutta l'applicazione.
+• Disponibile in nove lingue.
+
+FastTrack48 non è un'applicazione medica e non fornisce consigli medici. I tempi degli stadi derivano da un modello indicativo basato su ricerche pubblicate e prove sul campo e sono approssimazioni: lo stadio in cui ti trovi davvero dipende dal tuo metabolismo, dall'ultimo pasto, dall'attività fisica e da molto altro. Consulta un medico prima di digiunare, soprattutto se sei in gravidanza, assumi farmaci o hai una patologia.
+
+<h3>Attribuzione</h3>
+
+FastTrack48 è un'opera derivata modificata — un fork diretto — di FastTrack, creato da Adam Brown (@Wavesonics) e pubblicato da Dark Rock Studios. Il software originale è Copyright © 2020 Adam Brown ed è distribuito con licenza MIT, che continua a regolare le parti originali di questa app. Il testo completo della licenza è riprodotto nell'app in Informazioni → Ringraziamenti.
+
+Progetto originale: https://github.com/Darkrock-Studios/FastTrack
+Autore originale: https://github.com/Wavesonics
+
+Tutte le modifiche e le aggiunte in FastTrack48 sono opera e responsabilità esclusiva di questo progetto. Adam Brown e Dark Rock Studios non mantengono, sostengono né sponsorizzano FastTrack48 e non ne portano alcuna responsabilità. Invia domande e richieste di assistenza su FastTrack48 a https://github.com/fasttrack42/FastTrack48/issues e mai al progetto originale.
+
+I nomi «FastTrack», «Dark Rock Studios» e «Wavesonics» sono usati solo per identificare l'origine del codice sorgente.
