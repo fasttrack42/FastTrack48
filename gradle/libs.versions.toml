@@ -1,6 +1,6 @@
 [versions]
-versionCode = "14073000"
-versionName = "14.0730.00"
+versionCode = "14073110"
+versionName = "14.0731.10"
 
 kotlin = "2.3.21"
 javaVersion = "17"
