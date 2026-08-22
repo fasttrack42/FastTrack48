@@ -2,7 +2,7 @@
 
 # FastTrack48 
 
-Free and Open Source Android app for tracking Intermittent/Prolonged Fasts.
+Free and open-source Android app that tracks your fast and explains what is happening in your body as it progresses.
 
 > **FastTrack48 is a fork of [FastTrack](https://github.com/Darkrock-Studios/FastTrack) by
 > [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
@@ -19,8 +19,7 @@ Free and Open Source Android app for tracking Intermittent/Prolonged Fasts.
 -->
 </div>
 
-FastTrack48 tells you what changes are happening to your body while you fast, and you'll learn more
-about each phase as you progress.  It is not a medical app and does not provide medical advice.
+FastTrack48 explains the physiological changes associated with fasting and estimates which stage of a fast you may be in as it progresses. It is not a medical app and does not provide medical advice.
 
 <div align=center class=scrn>
 <img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" height="432"><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" height="432"><img src="https://raw.githubusercontent.com/fasttrack42/FastTrack48/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" height="432">
@@ -30,69 +29,64 @@ about each phase as you progress.  It is not a medical app and does not provide 
 
 ## During a fast
 - Radial dial showing elapsed time and the phase you are currently in.
-- Ten stages from the last meal to 72 hours+: blood sugar rise, blood sugar fall, blood sugar stabilises, gluconeogenesis, fat burning, ketosis, autophagy, growth hormone surge, insulin sensitivity, immune cell regeneration.
-- At each stage you get an explaination of what is happening in your body, with references.
-- Tappable bubbles for each phase — glucose burning, fat burning, ketosis, autophagy, optimal autophagy.
-- Phases can appear only once you reach them, or be shown from the start; each is individually toggleable.
+- Ten fasting phases from the post-meal period through 72+ hours, covering changes in blood glucose, gluconeogenesis, fat metabolism, ketosis, autophagy, growth hormone, insulin sensitivity, and immune-cell regeneration.
+- Each phase explains the associated physiological changes, with references to the underlying research.
+- Tap any phase to learn more about glucose burning, fat burning, ketosis, and other optimal autophagy.
+- You can choose whether upcoming phases remain hidden until reached or are visible from the start; each phase can be toggled individually.
 - Ongoing notification display elapsed time and current stage.
 - Notifications when you enter a new stage.
-- Home screen widget .
+- Home screen widget.
 - Launcher shortcuts: start a fast, start now, end fast.
 - Share your current or finished fast as text.
 - Six-screen intro explaining the app on first launch.
 
-## Logbook
-- Every fast recorded with start time, total length, hours in ketosis and hours in autophagy.
-- Add text notes for any entry.
-- List and calendar views of your previous fasts.
-- Tap any past day in the calendar to add a fast for it.
-- Manual entry: set start date and time plus a duration, or set an end time and let the app calculate.
-- Edit or delete any entry, including backdating a start you forgot to log.
-- Clear the whole logbook.
+## Fasting History
+- Each recorded fast shows its start time, total duration, hours in ketosis, and hours in autophagy.
+- Add text notes to any fast.
+- View previous fasts in list or calendar view.
+- Tap any past day in the calendar to add a fast.
+- Manually add a fast by entering its start date and time plus its duration, or by specifying an end time.
+- Edit or delete any fast, including adding a forgotten fast with a backdated start time.
+- Clear the entire fasting history.
 
 ## Import and export
-- Export as CSV (Excel-compatible).
-- Export as iCalendar (.ics) to load your fasts into any calendar app.
-- Export as ActivityStreams 2.0 (JSON-LD).
-- Import a previous export back into the app.
-- Import EasyFast .zip backups; overlapping entries are skipped to avoid duplicates.
+- Export fasting history as CSV, iCalendar (.ics), or ActivityStreams 2.0 (JSON-LD).
+- Import previous exports, including EasyFast `.zip` backups; overlapping entries are skipped to prevent duplicates.
 
 ## Body profile
-- Age, sex, height and weight, in metric or imperial.
-- BMI with its category, and BMR in kcal per day.
+- Age, sex, height, and weight, with metric or imperial units.
 
-## Appearance and settings
-- Light, dark, or follow the system theme.
-- Animated or plain background.
+## Settings
+- Light, dark, or system theme.
+- Animated or static background.
 - Configurable date and time format.
-- Metric / imperial units.
-- Toggles for the ongoing notification and for stage alerts.
+- Metric or imperial units.
+- Independent controls for the ongoing notification and stage alerts.
 
 ## Privacy
-- No internet permission. The app is technically incapable of transmitting anything.
+No Internet permission. The app cannot make network connections.
 - No account, no sign-up, no ads, no analytics, no crash reporting, no trackers, no third-party SDKs.
 - All data stays in the app's private storage on the device.
-- Free and open source under the MIT licence; the full source is public and the build is reproducible from it.
+- Free and open source under the MIT License. The complete source code is public, and the build is reproducible from it.
 
-## Localisation Languages
-English, German, Spanish, French, Italian, Dutch, Portuguese (Brazil), Ukrainian, Chinese (Simplified).
+## Languages
+- English, German, Spanish, French, Italian, Dutch, Brazilian Portuguese, Ukrainian, and Simplified Chinese.
 
 ---
 
-**Disclaimer** There's no pharma or food-industry profit motive to fund *rigorous, expensive, invasive* human trials (muscle biopsies, isotope tracers, etc); the data below is derived from rodent studies 🐁 🐭, anecdotal testimonies 🗣️ and personal experiences.
+Evidence for fasting physiology varies considerably by process. Some fasting responses are well established in humans, while others—particularly the timing of autophagy and claims about peaks —remain difficult to measure directly in living humans.
 
-| Time Window | Labeled Process | Evidence Class | Basis |
-|---|---|---|---|
-| 0–8h | Post-absorptive, glycogenolysis | [FACT] | Standard glucose/insulin kinetics, directly measured in humans repeatedly |
-| 8–16h | Rising gluconeogenesis, insulin ↓ | [FACT] | Well-established hepatic metabolism |
-| 12–18h | Fat burning (lipolysis ↑) | [FACT] | Directly measured (plasma FFA, RQ) |
-| 16–24h | Ketosis onset (BHB rises) | [FACT] | Directly measured; individual variance large — some reach it by 12h (low glycogen), others not till 30h+ |
-| 18–72h+ | Autophagy | [INFERENCE] | No live human autophagy assay existed pre-2021. Best current human surrogate data (Bensalem/SAHMRI PBMC flux assay, 2022–2025) shows detectable flux changes at ~16h refeeding contrast and after 3-day water fasts in a randomised controlled crossover trial investigating three-day water-only fasting with or without exercise-induced glycogen depletion on autophagic activation, but a formal RCT running iTRE (20h fasts, 3x/week) for 6 months found flux increased only at the 6-month cohort level, not within-group from baseline in 121 humans with obesity randomized to standard care, calorie restriction, or intermittent fasting plus time-restricted eating, autophagic flux was significantly higher in the iTRE group compared to standard care after 6 months, though there was no significant increase from baseline within the iTRE group itself. The 24–48h figure is [INFERENCE] extrapolated from rodent mTOR-suppression kinetics, not measured onset in living humans. A parallel human RCT registered specifically to nail this kinetic question postulated an increase in autophagy between 12 and 36h of fasting based on theoretical transfer from animal experimental data, and a possible decrease after several days, noting no human studies had yet focused on the size and temporal kinetics of the effect |
-| 24–48h | Autophagy peak | [INFERENCE] | No human peak has been located; claims of a 48h peak trace back to rodent studies |
-| 48–54h | GH spike (5x baseline) | [FACT, magnitude confirmed] | GH pulse amplitude increase during fasting is real and repeatedly measured (1988 Ho et al., n=9, confirmed since); the tight 48–54h bracket in pop-science charts is a rounding of a continuous, individually-variable rise, not a threshold |
-| 54–72h | Insulin sensitivity ↑ | [FACT] | Insulin sensitivity does rise with fasting duration and fat loss, but as a smooth dose-response curve tracked over days-to-weeks, not a switch flipped at hour 54 |
-| 72h+ | mTOR ↓50%, protein catabolism ↑ | [FACT] | A 72-hour fast in eight healthy male volunteers significantly increased forearm net phenylalanine release and tended to decrease phenylalanine rate of disappearance, with mTOR phosphorylation decreased by approximately 50% following fasting — this is catabolic stress, not unambiguously "beneficial regeneration" |
-| 72h+ | Immune cell regeneration | [ANECDOTAL, single-study] | Traces to one 2014 USC paper (Cheng et al., *Cell Stem Cell*) on **prolonged fasting + refeeding cycles in mice and a small human chemo-patient cohort**, showing stem-cell-mediated hematopoietic regeneration on refeeding — not fasting itself, and not independently replicated at scale in healthy humans |
+| Approx. window | Process                        | Human evidence   | Timing confidence |
+| -------------- | ------------------------------ | ---------------- | ----------------- |
+| 0–8h           | Post-absorptive / glycogen use | Strong           | High              |
+| 8–16h          | Increasing gluconeogenesis, insulin ↓     | Strong           | Moderate          |
+| 12–18h         | Fat burning (lipolysis ↑)         | Strong           | Moderate          |
+| 16–24h         | Ketone production increases    | Strong           | Moderate          |
+| 18-72h+           | Autophagy     | Limited/indirect | Low               |
+| 48h+           | Increased GH spike (5x baseline)         | Strong           | Moderate          |
+| 52h+           | Insulin sensitivity      | Strong           | Moderate          |
+| 72h+           | mTOR ↓50%, protein catabolism ↑, Immune cell regeneration	  | Human evidence   | Moderate          |
+
 
 **Notes**
 - the actual time windows can vary depending on your glycogen stores, muscle mass, prior fasts, sex, age and can drift 6–24h in either direction.
@@ -130,13 +124,8 @@ FastTrack48 and bear no responsibility for it. Please direct all issues, questio
 requests about FastTrack48 to [this repository](https://github.com/fasttrack42/FastTrack48/issues) —
 never to the upstream project.
 
-The names "FastTrack", "Dark Rock Studios" and "Wavesonics" appear here solely to identify the origin
-of the source code, as permitted by nominative fair use. They do not imply any affiliation with, or
-endorsement by, their respective owners.
+The names “FastTrack”, “Dark Rock Studios”, and “Wavesonics” are used solely to identify the upstream project, publisher, and author. This project is not affiliated with or endorsed by them.
 
-If you like what this app does, please also go and star
-[the original project](https://github.com/Darkrock-Studios/FastTrack) — none of this would exist
-without it.
 
 ## License
 
