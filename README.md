@@ -115,7 +115,7 @@ FastTrack48 is a **modified derivative work** — a fork — of **FastTrack**, c
 
 The original software remains Copyright © 2020 Adam Brown and is made available under the MIT
 License which continues to govern the original portions of this app, its full text
-preserved verbatim in [`LICENSE`](LICENSE) and reproduced inside the app under
+preserved verbatim in [`LICENSE`](https://github.com/fasttrack42/FastTrack48/blob/master/LICENSE) and reproduced inside the app under
 **About → Acknowledgements**.
 
 Every modification, addition and design change in FastTrack48 is the sole work and responsibility of
@@ -129,7 +129,7 @@ The names “FastTrack”, “Dark Rock Studios”, and “Wavesonics” are use
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE).
+MIT — see [`LICENSE`](https://github.com/fasttrack42/FastTrack48/blob/master/LICENSE).
 
 ```
 Copyright (c) 2020 Adam Brown
