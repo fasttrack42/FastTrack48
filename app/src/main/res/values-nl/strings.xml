@@ -18,16 +18,16 @@
 	<string name="settings_stage_alerts_title">Fasemeldingen</string>
 	<string name="settings_stage_alerts_subtitle">Krijg een melding wanneer je een nieuwe vastenfase bereikt</string>
 	<string name="export_failed">Exporteren van logboek mislukt</string>
-	<string name="intro_00_title">Welkom bij Fast Track!</string>
+	<string name="intro_00_title">Welkom bij FastTrack48!</string>
 	<string name="intro_00_description">Waar draait deze app om?</string>
 	<string name="intro_01_title">Motiverende hulp</string>
-	<string name="intro_01_description">Het idee achter Fast Track is om je te motiveren tijdens het vasten en je uit te leggen wat je lichaam in de verschillende vastenfasen doet.</string>
+	<string name="intro_01_description">Het idee achter FastTrack48 is om je te motiveren tijdens het vasten en je uit te leggen wat je lichaam in de verschillende vastenfasen doet.</string>
 	<string name="intro_02_title">Een eenvoudige, gratis app</string>
-	<string name="intro_02_description">Fast Track is en blijft gratis en opensource. Geen account nodig, geen in-app-aankopen, geen advertenties. En de app heeft niet eens internettoegang, dus je gegevens gaan nergens heen.</string>
+	<string name="intro_02_description">FastTrack48 is en blijft gratis en opensource. Geen account nodig, geen in-app-aankopen, geen advertenties. En de app heeft niet eens internettoegang, dus je gegevens gaan nergens heen.</string>
 	<string name="intro_03_title">Intermittent fasting</string>
 	<string name="intro_03_description">Dit is een nieuw onderzoeksgebied dat veel voordelen laat zien, meer dan alleen gewichtsverlies.\n\nBenieuwd wat we over vasten weten en wat het onderzoek zegt? Kijk in het Info-gedeelte van deze app!</string>
 	<string name="intro_04_title">Blijf gemotiveerd met meldingen</string>
-	<string name="intro_04_description">Fast Track kan handige meldingen tonen om je gemotiveerd te houden tijdens het vasten.\n\nJe ziet je huidige vastentijd, in welke fase je zit en welke energiemodus je lichaam gebruikt.\n\nZo blijf je op koers zonder de app te hoeven openen!</string>
+	<string name="intro_04_description">FastTrack48 kan handige meldingen tonen om je gemotiveerd te houden tijdens het vasten.\n\nJe ziet je huidige vastentijd, in welke fase je zit en welke energiemodus je lichaam gebruikt.\n\nZo blijf je op koers zonder de app te hoeven openen!</string>
 	<string name="intro_05_title">Dat was het!</string>
 	<string name="intro_05_description">Tijd om te gaan vasten!</string>
 	<string name="title_fasting">Vasten</string>
@@ -269,4 +269,13 @@
 	<string name="dateformat_system_medium">Systeem medium</string>
 	<string name="dateformat_system_long">Systeem lang</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">Start</string>
+	<string name="fast_end_label">Einde</string>
+	<string name="edit_start_time">Begintijd bewerken</string>
+	<string name="edit_start_dialog_title">Vasten begonnen</string>
+	<string name="relative_today">Vandaag</string>
+	<string name="relative_yesterday">Gisteren</string>
+	<string name="start_overlap_title">Overlapt je vorige vasten</string>
+	<string name="start_overlap_message">Je laatst vastgelegde vasten eindigde %1$s. Dit vasten op %2$s laten beginnen zou daarmee overlappen.</string>
+	<string name="start_overlap_confirm">Toch opslaan</string>
 </resources>

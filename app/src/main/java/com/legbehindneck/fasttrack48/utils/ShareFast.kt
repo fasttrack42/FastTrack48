@@ -35,7 +35,7 @@ suspend fun shareFastImage(
 		putExtra(Intent.EXTRA_TEXT, caption)
 		addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 		// clipData ensures the read grant reaches the chosen target reliably
-		clipData = ClipData.newUri(context.contentResolver, "Fast Track", uri)
+		clipData = ClipData.newUri(context.contentResolver, "FastTrack48", uri)
 	}
 
 	withContext(Dispatchers.Main) {

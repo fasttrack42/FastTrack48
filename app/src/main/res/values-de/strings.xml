@@ -21,16 +21,16 @@
 	<string name="settings_stage_alerts_title">Bühnen-Alarme</string>
 	<string name="settings_stage_alerts_subtitle">Benachrichtigt werden, wenn neue Fasten-Stufen erreicht werden</string>
 	<string name="export_failed">Fehler beim Exportieren des Logbuchs</string>
-	<string name="intro_00_title">Willkommen bei Fast Track!</string>
+	<string name="intro_00_title">Willkommen bei FastTrack48!</string>
 	<string name="intro_00_description">Worum geht es in dieser App?</string>
 	<string name="intro_01_title">Motivationshilfe</string>
-	<string name="intro_01_description">Die Hauptidee hinter Fast Track ist es, Sie während Ihrer Fastenperioden zu motivieren und Ihnen zu erklären, was Ihr Körper in den verschiedenen Phasen des Fastens tut</string>
+	<string name="intro_01_description">Die Hauptidee hinter FastTrack48 ist es, Sie während Ihrer Fastenperioden zu motivieren und Ihnen zu erklären, was Ihr Körper in den verschiedenen Phasen des Fastens tut</string>
 	<string name="intro_02_title">Eine einfache kostenlose App</string>
-	<string name="intro_02_description">Fast Track ist und wird immer kostenlos und Open Source sein. Es muss kein Konto erstellt werden, es gibt keine In-App-Käufe und keine Werbung! Die App benötigt nicht einmal Internetzugang und kann somit Ihre Daten nicht weitergeben</string>
+	<string name="intro_02_description">FastTrack48 ist und wird immer kostenlos und Open Source sein. Es muss kein Konto erstellt werden, es gibt keine In-App-Käufe und keine Werbung! Die App benötigt nicht einmal Internetzugang und kann somit Ihre Daten nicht weitergeben</string>
 	<string name="intro_03_title">Intermittierendes Fasten</string>
 	<string name="intro_03_description">Dies ist ein neues Studienfeld, das viele Vorteile über den einfachen Gewichtsverlust hinaus zeigt.\n\nUm zu erkunden, was wir über das Fasten wissen und was die Forschung dazu sagt, schauen Sie sich den Bereich Info dieser App an</string>
 	<string name="intro_04_title">Bleibe durch Benachrichtigungen motiviert</string>
-	<string name="intro_04_description">Fast Track kann dir hilfreiche Benachrichtigungen senden, damit du beim Fasten motiviert bleibst.\n\nDu siehst deine aktuelle Fastenzeit, in welcher Phase du dich befindest und welchen Energiemodus dein Körper gerade nutzt.\n\nSo bleibst du am Ball, ohne die App öffnen zu müssen</string>
+	<string name="intro_04_description">FastTrack48 kann dir hilfreiche Benachrichtigungen senden, damit du beim Fasten motiviert bleibst.\n\nDu siehst deine aktuelle Fastenzeit, in welcher Phase du dich befindest und welchen Energiemodus dein Körper gerade nutzt.\n\nSo bleibst du am Ball, ohne die App öffnen zu müssen</string>
 	<string name="intro_05_title">Das war\'s!</string>
 	<string name="intro_05_description">Jetzt starte das Fasten!</string>
 	<string name="title_fasting">Fasten</string>
@@ -303,4 +303,13 @@
 	<string name="dateformat_system_medium">System mittel</string>
 	<string name="dateformat_system_long">System lang</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">Start</string>
+	<string name="fast_end_label">Ende</string>
+	<string name="edit_start_time">Startzeit bearbeiten</string>
+	<string name="edit_start_dialog_title">Fasten begonnen</string>
+	<string name="relative_today">Heute</string>
+	<string name="relative_yesterday">Gestern</string>
+	<string name="start_overlap_title">Überschneidet dein vorheriges Fasten</string>
+	<string name="start_overlap_message">Dein letztes protokolliertes Fasten endete %1$s. Ein Start um %2$s würde sich damit überschneiden.</string>
+	<string name="start_overlap_confirm">Trotzdem speichern</string>
 </resources>

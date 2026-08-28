@@ -21,13 +21,13 @@
 	<string name="settings_stage_alerts_title">Сповіщення про стадії</string>
 	<string name="settings_stage_alerts_subtitle">Отримувати сповіщення при переході на нові стадії голодування</string>
 	<string name="export_failed">Не вдалося експортувати журнал</string>
-	<string name="intro_00_title">Ласкаво просимо до Fast Track!</string>
+	<string name="intro_00_title">Ласкаво просимо до FastTrack48!</string>
 	<string name="intro_00_description">Що це за програма?</string>
 	<string name="intro_01_title">Мотиваційна допомога</string>
-	<string name="intro_01_description">Головна ідея Fast Track полягає в тому, щоби допомогти мотивувати Вас під час голодувань і
+	<string name="intro_01_description">Головна ідея FastTrack48 полягає в тому, щоби допомогти мотивувати Вас під час голодувань і
 		пояснити, що відбувається з Вашим організмом на різних стадіях голодування.</string>
 	<string name="intro_02_title">Простий безкоштовний додаток</string>
-	<string name="intro_02_description">Fast Track є і завжди буде безкоштовним додатком з відкритим
+	<string name="intro_02_description">FastTrack48 є і завжди буде безкоштовним додатком з відкритим
 		вихідним кодом. Тут не потрібно реєструватися, робити якісь покупки чи тікати від реклами. У нього навіть немає доступу до
 		інтернету, тому Ваші дані нікуди не надсилаються.</string>
 	<string name="intro_03_title">Інтервальне голодування</string>
@@ -35,7 +35,7 @@
 		схуднення. \n\nЩоби дізнатися, що ми знаємо про інтервальне голодування, і що показують дослідження, перегляньте розділ
 		«Інформація» цього застосунку!</string>
 	<string name="intro_04_title">Залишайтеся вмотивованими завдяки сповіщенням</string>
-	<string name="intro_04_description">Fast Track може показувати корисні сповіщення, щоби мотивувати Вас протягом голодування. \n\nВи бачитимете поточний час голодування, на якій Ви стадії, і яке джерело енергії використовується Вашим організмом. \n\nЦе допоможе Вам не зійти з курсу, навіть не відкриваючи додаток!</string>
+	<string name="intro_04_description">FastTrack48 може показувати корисні сповіщення, щоби мотивувати Вас протягом голодування. \n\nВи бачитимете поточний час голодування, на якій Ви стадії, і яке джерело енергії використовується Вашим організмом. \n\nЦе допоможе Вам не зійти з курсу, навіть не відкриваючи додаток!</string>
 	<string name="intro_05_title">От і все!</string>
 	<string name="intro_05_description">А тепер починайте голодувати!</string>
 	<string name="about_name">Адам Браун</string>
@@ -304,4 +304,13 @@
 	<string name="dateformat_system_medium">Середній (системний)</string>
 	<string name="dateformat_system_long">Довгий (системний)</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">Початок</string>
+	<string name="fast_end_label">Кінець</string>
+	<string name="edit_start_time">Змінити час початку</string>
+	<string name="edit_start_dialog_title">Голодування розпочато</string>
+	<string name="relative_today">Сьогодні</string>
+	<string name="relative_yesterday">Учора</string>
+	<string name="start_overlap_title">Перекривається з попереднім голодуванням</string>
+	<string name="start_overlap_message">Ваше останнє записане голодування завершилося %1$s. Початок цього о %2$s перекриє його.</string>
+	<string name="start_overlap_confirm">Усе одно зберегти</string>
 </resources>

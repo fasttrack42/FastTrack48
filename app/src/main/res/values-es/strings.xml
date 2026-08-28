@@ -6,14 +6,14 @@
 	<string name="action_about">Acerca de</string>
 	<string name="action_export">Exportar Registro</string>
 	<string name="action_export_description">Produce un archivo CSV de tu libro de registro para la copia de seguridad</string>
-	<string name="action_import">Importar Logbook</string>
+	<string name="action_import">Importar historial de ayunos</string>
 	<string name="action_import_description">Poblar tu libro de registro desde una exportación anterior</string>
 	<string name="import_success">Registro importado con éxito</string>
 	<string name="import_failed">Error al importar el diario de bitácora</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notificaciones</string>
 	<string name="settings_section_ui">Interfaz</string>
-	<string name="settings_section_logbook">Bitácora</string>
+	<string name="settings_section_logbook">Historial</string>
 	<!-- Settings: Fasting notification -->
 	<string name="settings_fasting_notification_title">Mostrar notificación de limpieza</string>
 	<string name="settings_fasting_notification_subtitle">Muestra información en tiempo real durante el ayuno</string>
@@ -21,13 +21,13 @@
 	<string name="settings_stage_alerts_title">Alertas de etapa</string>
 	<string name="settings_stage_alerts_subtitle">Recibe notificaciones al entrar en nuevas etapas de ayuno</string>
 	<string name="export_failed">Error al exportar el libro de registro</string>
-	<string name="intro_00_title">¡Bienvenido a Fast Track!</string>
+	<string name="intro_00_title">¡Bienvenido a FastTrack48!</string>
 	<string name="intro_00_description">¿De qué se trata esta aplicación?</string>
 	<string name="intro_01_title">Ayuda Motivacional</string>
-	<string name="intro_01_description">La idea principal detrás de Fast Track es ayudarte a mantener la motivación
+	<string name="intro_01_description">La idea principal detrás de FastTrack48 es ayudarte a mantener la motivación
 		durante tus ayunos y explicarte lo que tu cuerpo está haciendo en las diferentes etapas del ayuno.</string>
 	<string name="intro_02_title">Una aplicación gratuita y sencilla</string>
-	<string name="intro_02_description">Fast Track es y siempre será gratuito y de código abierto. No hay cuenta que
+	<string name="intro_02_description">FastTrack48 es y siempre será gratuito y de código abierto. No hay cuenta que
 		crear, no hay compras dentro de la app, ni anuncios que evitar. Y ni siquiera tiene acceso a internet, por lo
 		que no puede enviar tus datos a ninguna parte.</string>
 	<string name="intro_03_title">Ayuno Intermitente</string>
@@ -35,7 +35,7 @@
 		de la simple pérdida de peso.\n\nPara explorar lo que sabemos sobre el ayuno y lo que la investigación está
 		diciendo, ¡consulta la sección de Información de esta aplicación!</string>
 	<string name="intro_04_title">Mantente motivado con notificaciones</string>
-	<string name="intro_04_description">Fast Track puede mostrarte notificaciones útiles para mantenerte motivado durante tu
+	<string name="intro_04_description">FastTrack48 puede mostrarte notificaciones útiles para mantenerte motivado durante tu
 		ayuno.\n\nVerás tu tiempo de ayuno actual, en qué etapa te encuentras y qué modo de energía está usando tu
 		cuerpo.\n\n¡Esto te ayuda a mantenerte en el camino sin tener que abrir la aplicación!</string>
 	<string name="intro_05_title">¡Eso es todo!</string>
@@ -311,4 +311,13 @@
 	<string name="dateformat_system_medium">Sistema medio</string>
 	<string name="dateformat_system_long">Sistema largo</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">Inicio</string>
+	<string name="fast_end_label">Fin</string>
+	<string name="edit_start_time">Editar la hora de inicio</string>
+	<string name="edit_start_dialog_title">Ayuno iniciado</string>
+	<string name="relative_today">Hoy</string>
+	<string name="relative_yesterday">Ayer</string>
+	<string name="start_overlap_title">Se solapa con tu ayuno anterior</string>
+	<string name="start_overlap_message">Tu último ayuno registrado terminó el %1$s. Empezar este el %2$s se solaparía con él.</string>
+	<string name="start_overlap_confirm">Guardar de todos modos</string>
 </resources>

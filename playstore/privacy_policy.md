@@ -136,7 +136,7 @@ Google, are not linked to you by us, and are not something the app itself report
 
 Because your data lives only on your device, retention is entirely in your hands:
 
-- delete individual entries in the logbook at any time
+- delete individual entries in the journal
 - clear the body profile in Settings
 - delete all app data: **Android Settings → Apps → FastTrack48 → Storage → Clear storage**
 - uninstalling the app removes its local data
@@ -161,7 +161,7 @@ we hold no personal data about you and therefore act as a controller for essenti
 processing. Practically, this means your rights are exercised **directly in the app**, and
 immediately:
 
-- **Access** — all your data is visible in the Logbook and Settings screens
+- **Access** — all your data is visible in the Journal and Settings screens
 - **Rectification** — edit or correct any entry or profile field
 - **Erasure** — delete entries, clear storage, or uninstall (section 5)
 - **Portability** — export your complete history as CSV, iCalendar or Activity Streams JSON

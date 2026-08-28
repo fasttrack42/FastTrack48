@@ -55,9 +55,6 @@ FastTrack48 不是医疗应用，也不提供医疗建议。各阶段的时间�
 
 FastTrack48 是 FastTrack 的修改衍生作品，即直接分支（fork）。原作品由 Adam Brown（@Wavesonics）创作，并由 Dark Rock Studios 发布。原始软件版权归 Adam Brown 所有（Copyright © 2020），依据 MIT 许可证提供，该许可证继续适用于本应用中的原始部分。完整许可证文本可在应用内的「关于 → 致谢」中查看。
 
-原始项目：https://github.com/Darkrock-Studios/FastTrack
-原始作者：https://github.com/Wavesonics
-
 FastTrack48 中的所有修改、新增和设计变更均由本项目独立完成并承担全部责任。Adam Brown 与 Dark Rock Studios 不维护、不认可、不赞助、不支持 FastTrack48，也不对其承担任何责任。有关 FastTrack48 的所有问题与支持请求，请提交至 https://github.com/fasttrack42/FastTrack48/issues ，切勿联系原始项目。
 
 「FastTrack」「Dark Rock Studios」和「Wavesonics」等名称仅用于标明源代码的出处。

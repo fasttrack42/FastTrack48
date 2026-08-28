@@ -21,17 +21,17 @@
 	<string name="settings_stage_alerts_title">阶段警报</string>
 	<string name="settings_stage_alerts_subtitle">进入新的快餐阶段时获得通知</string>
 	<string name="export_failed">导出日志簿失败</string>
-	<string name="intro_00_title">欢迎来到 Fast Track！</string>
+	<string name="intro_00_title">欢迎来到 FastTrack48！</string>
 	<string name="intro_00_description">这个应用程序是关于什么的？</string>
 	<string name="intro_01_title">激励帮助</string>
 	<string name="intro_01_description">Fast
 		Track的主要理念是帮助您在禁食期间保持动力，并向您解释在禁食的不同阶段您的身体正在发生什么。</string>
 	<string name="intro_02_title">一个简单的免费应用程序</string>
-	<string name="intro_02_description">Fast Track 是而且将永远免费且开源。无需创建账户，没有内购，没有广告。它甚至无法访问互联网，所以你的数据不会被发送到任何地方。</string>
+	<string name="intro_02_description">FastTrack48 是而且将永远免费且开源。无需创建账户，没有内购，没有广告。它甚至无法访问互联网，所以你的数据不会被发送到任何地方。</string>
 	<string name="intro_03_title">间歇性禁食</string>
 	<string name="intro_03_description">这是一个新的研究领域，展现了超越简单减重的诸多好处。\n\n要探索我们对禁食的了解以及研究结果，请查看本应用的资讯部分！</string>
 	<string name="intro_04_title">通过通知保持动力</string>
-	<string name="intro_04_description">Fast Track 可以显示有用的通知，在禁食期间为你加油打气。\n\n你会看到当前的禁食时间、所处的阶段以及身体正在使用的能量模式。\n\n这样即使不打开应用也能随时掌握进度！</string>
+	<string name="intro_04_description">FastTrack48 可以显示有用的通知，在禁食期间为你加油打气。\n\n你会看到当前的禁食时间、所处的阶段以及身体正在使用的能量模式。\n\n这样即使不打开应用也能随时掌握进度！</string>
 	<string name="intro_05_title">开始吧！</string>
 	<string name="intro_05_description">现在开始禁食吧！</string>
 	<string name="title_fasting">禁食</string>
@@ -273,4 +273,13 @@
 	<string name="dateformat_system_medium">系统－中</string>
 	<string name="dateformat_system_long">系统－长</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">开始</string>
+	<string name="fast_end_label">结束</string>
+	<string name="edit_start_time">修改开始时间</string>
+	<string name="edit_start_dialog_title">禁食开始</string>
+	<string name="relative_today">今天</string>
+	<string name="relative_yesterday">昨天</string>
+	<string name="start_overlap_title">与上一次禁食重叠</string>
+	<string name="start_overlap_message">上一条记录的禁食结束于 %1$s。将本次禁食设为 %2$s 开始会与之重叠。</string>
+	<string name="start_overlap_confirm">仍然保存</string>
 </resources>

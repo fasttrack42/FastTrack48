@@ -9,25 +9,25 @@
 	<string name="action_import">Importer le registre</string>
 	<string name="action_import_description">Remplir votre journal de bord à partir d\'une exportation précédente</string>
 	<string name="import_success">Journal importé avec succès</string>
-	<string name="import_failed">Échec de l\'importation du logbook</string>
+	<string name="import_failed">Échec de l\'importation du journal</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notifications</string>
 	<string name="settings_section_ui">Interface</string>
-	<string name="settings_section_logbook">Carnet de bord</string>
+	<string name="settings_section_logbook">Journal</string>
 	<!-- Settings: Fasting notification -->
 	<string name="settings_fasting_notification_title">Afficher la notification rapide</string>
 	<string name="settings_fasting_notification_subtitle">Fournit des informations en temps réel pendant une période rapide</string>
 	<!-- Settings: Stage alerts -->
 	<string name="settings_stage_alerts_title">Alertes d\'étape</string>
 	<string name="settings_stage_alerts_subtitle">Soyez averti lorsque vous entrez dans de nouvelles étapes de jeûne</string>
-	<string name="export_failed">Échec de l\'exportation du journal de bord</string>
-	<string name="intro_00_title">Bienvenue à Fast Track !</string>
+	<string name="export_failed">Échec de l\'exportation du journal</string>
+	<string name="intro_00_title">Bienvenue à FastTrack48 !</string>
 	<string name="intro_00_description">De quoi s\'agit-il dans cette application ?</string>
 	<string name="intro_01_title">Aide motivationnelle</string>
-	<string name="intro_01_description">L\'idée principale derrière Fast Track est de vous aider à vous motiver pendant
+	<string name="intro_01_description">L\'idée principale derrière FastTrack48 est de vous aider à vous motiver pendant
 		vos jeûnes et de vous expliquer ce que votre corps fait aux différentes étapes du jeûne.</string>
 	<string name="intro_02_title">Une simple application gratuite</string>
-	<string name="intro_02_description">Fast Track est et sera toujours gratuit et open source. Il n\'y a pas de compte
+	<string name="intro_02_description">FastTrack48 est et sera toujours gratuit et open source. Il n\'y a pas de compte
 		à créer, pas d\'achats intégrés, pas de publicités à éviter. Et il n\'a même pas accès à Internet, donc il ne
 		peut pas envoyer vos données nulle part.</string>
 	<string name="intro_03_title">Jeûne intermittent</string>
@@ -35,7 +35,7 @@
 		la simple perte de poids.\n\nPour explorer ce que nous savons sur le jeûne et ce que la recherche dit, consultez
 		la section Infos de cette application !</string>
 	<string name="intro_04_title">Restez motivé avec les notifications</string>
-	<string name="intro_04_description">Fast Track peut afficher des notifications utiles pour vous motiver pendant votre
+	<string name="intro_04_description">FastTrack48 peut afficher des notifications utiles pour vous motiver pendant votre
 		jeûne.\n\nVous verrez votre temps de jeûne actuel, à quelle étape vous en êtes, et quel mode d\'énergie votre
 		corps utilise.\n\nCela vous aide à rester sur la bonne voie sans avoir à ouvrir l\'application !</string>
 	<string name="intro_05_title">Voilà!</string>
@@ -240,7 +240,7 @@
 	<string name="settings_theme_mode_light">Lumière</string>
 	<string name="settings_theme_mode_dark">Sombre</string>
 	<string name="log_no_entries">Pas encore d\'entrées!</string>
-	<string name="log_logbook_label">Carnet de bord</string>
+	<string name="log_logbook_label">Journal</string>
 	<string name="log_stats_label">Statistiques à vie</string>
 	<string name="log_view_mode_list">Liste</string>
 	<string name="log_view_mode_calendar">Calendrier</string>
@@ -314,4 +314,13 @@
 	<string name="dateformat_system_medium">Système moyen</string>
 	<string name="dateformat_system_long">Système long</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">Début</string>
+	<string name="fast_end_label">Fin</string>
+	<string name="edit_start_time">Modifier l\'heure de début</string>
+	<string name="edit_start_dialog_title">Jeûne commencé</string>
+	<string name="relative_today">Aujourd\'hui</string>
+	<string name="relative_yesterday">Hier</string>
+	<string name="start_overlap_title">Chevauche votre jeûne précédent</string>
+	<string name="start_overlap_message">Votre dernier jeûne enregistré s\'est terminé le %1$s. Commencer celui-ci le %2$s le chevaucherait.</string>
+	<string name="start_overlap_confirm">Enregistrer quand même</string>
 </resources>

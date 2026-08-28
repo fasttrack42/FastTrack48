@@ -55,9 +55,6 @@ FastTrack48 is geen medische app en geeft geen medisch advies. De tijden van de 
 
 FastTrack48 is een gewijzigd afgeleid werk — een directe fork — van FastTrack, gemaakt door Adam Brown (@Wavesonics) en uitgegeven door Dark Rock Studios. De originele software is Copyright © 2020 Adam Brown en wordt beschikbaar gesteld onder de MIT-licentie, die van kracht blijft voor de oorspronkelijke delen van deze app. De volledige licentietekst staat in de app onder Over → Dankbetuigingen.
 
-Origineel project: https://github.com/Darkrock-Studios/FastTrack
-Oorspronkelijke auteur: https://github.com/Wavesonics
-
 Alle wijzigingen en toevoegingen in FastTrack48 zijn uitsluitend het werk en de verantwoordelijkheid van dit project. Adam Brown en Dark Rock Studios onderhouden, steunen of sponsoren FastTrack48 niet en dragen er geen verantwoordelijkheid voor. Richt alle vragen en ondersteuningsverzoeken over FastTrack48 aan https://github.com/fasttrack42/FastTrack48/issues en nooit aan het oorspronkelijke project.
 
 De namen "FastTrack", "Dark Rock Studios" en "Wavesonics" worden uitsluitend gebruikt om de herkomst van de broncode aan te geven.

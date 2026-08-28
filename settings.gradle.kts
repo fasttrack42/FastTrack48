@@ -25,5 +25,5 @@ dependencyResolutionManagement {
 	}
 }
 
-rootProject.name = "Fast Track"
+rootProject.name = "FastTrack48"
 include(":app")

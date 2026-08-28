@@ -35,6 +35,10 @@ class FastingLogRepositoryImpl(
 		)
 	}
 
+	override fun latestLoggedEnd(): Instant? = datasource.getAll()
+		.maxOfOrNull { it.start + it.length }
+		?.let { Instant.fromEpochMilliseconds(it) }
+
 	override fun loadAll(): Flow<List<FastingLogEntry>> = datasource.loadAll().map { entries ->
 		entries.map { it.toFastingLogEntry() }
 	}
@@ -171,7 +175,7 @@ class FastingLogRepositoryImpl(
 
 			imported
 		} catch (e: Exception) {
-			Napier.e("Failed to import logbook", e)
+			Napier.e("Failed to import journal", e)
 			false
 		}
 	}
@@ -325,13 +329,13 @@ class FastingLogRepositoryImpl(
 		val lines = ArrayList<String>()
 		lines += "BEGIN:VCALENDAR"
 		lines += "VERSION:2.0"
-		lines += "PRODID:-//Dark Rock Studios//Fast Track//EN"
+		lines += "PRODID:-//legbehindneck.com//FastTrack48//EN"
 		lines += "CALSCALE:GREGORIAN"
 		for (e in entries) {
 			val start = e.start
 			val finish = e.start + e.length
 			lines += "BEGIN:VEVENT"
-			lines += "UID:fasttrack-$start-$finish@darkrockstudios.com"
+			lines += "UID:fasttrack-$start-$finish@legbehindneck.com"
 			lines += "DTSTAMP:$dtStamp"
 			lines += "DTSTART:${icsUtc(start)}"
 			lines += "DTEND:${icsUtc(finish)}"

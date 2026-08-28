@@ -21,18 +21,18 @@
 	<string name="settings_stage_alerts_title">Alertas de estágio</string>
 	<string name="settings_stage_alerts_subtitle">Receba notificações ao entrar em novas fases do jejum</string>
 	<string name="export_failed">Falha ao exportar o registro</string>
-	<string name="intro_00_title">Bem-vindo ao Fast Track!</string>
+	<string name="intro_00_title">Bem-vindo ao FastTrack48!</string>
 	<string name="intro_00_description">Do que trata este aplicativo?</string>
 	<string name="intro_01_title">Ajuda motivacional</string>
-	<string name="intro_01_description">A ideia principal do Fast Track é ajudar a mantê-lo motivado durante seus jejuns e explicar o que seu corpo está fazendo nas diferentes fases do jejum.</string>
+	<string name="intro_01_description">A ideia principal do FastTrack48 é ajudar a mantê-lo motivado durante seus jejuns e explicar o que seu corpo está fazendo nas diferentes fases do jejum.</string>
 	<string name="intro_02_title">Um app simples e gratuito</string>
-	<string name="intro_02_description">Fast Track é e sempre será gratuito e de código aberto. Não há conta para criar, nem compras no app, nem anúncios para evitar. E ele nem sequer tem acesso à internet, então não pode enviar seus dados para lugar nenhum.</string>
+	<string name="intro_02_description">FastTrack48 é e sempre será gratuito e de código aberto. Não há conta para criar, nem compras no app, nem anúncios para evitar. E ele nem sequer tem acesso à internet, então não pode enviar seus dados para lugar nenhum.</string>
 	<string name="intro_03_title">Jejum intermitente</string>
 	<string name="intro_03_description">Esta é uma nova área de estudo que vem mostrando muitos benefícios além da simples perda de peso.
 
 Para explorar o que sabemos sobre o jejum e o que as pesquisas dizem, confira a seção Informações deste app!</string>
 	<string name="intro_04_title">Mantenha-se motivado com notificações</string>
-	<string name="intro_04_description">Fast Track pode mostrar notificações úteis para mantê-lo motivado durante o jejum.
+	<string name="intro_04_description">FastTrack48 pode mostrar notificações úteis para mantê-lo motivado durante o jejum.
 
 Você verá o tempo atual de jejum, em que fase está e qual modo de energia seu corpo está usando.
 
@@ -290,4 +290,13 @@ Esse é um número fundamental para pessoas que fazem dieta restringindo a inges
 	<string name="dateformat_system_medium">Sistema médio</string>
 	<string name="dateformat_system_long">Sistema longo</string>
 	<string name="dateformat_iso">ISO 8601</string>
+	<string name="fast_start_label">Início</string>
+	<string name="fast_end_label">Fim</string>
+	<string name="edit_start_time">Editar o horário de início</string>
+	<string name="edit_start_dialog_title">Jejum iniciado</string>
+	<string name="relative_today">Hoje</string>
+	<string name="relative_yesterday">Ontem</string>
+	<string name="start_overlap_title">Sobrepõe o seu jejum anterior</string>
+	<string name="start_overlap_message">Seu último jejum registrado terminou em %1$s. Começar este em %2$s se sobreporia a ele.</string>
+	<string name="start_overlap_confirm">Salvar mesmo assim</string>
 </resources>

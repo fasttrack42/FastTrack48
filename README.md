@@ -4,8 +4,7 @@
 
 Free and open-source Android app that tracks your fast and explains what is happening in your body as it progresses.
 
-> **FastTrack48 is a fork of [FastTrack](https://github.com/Darkrock-Studios/FastTrack) by
-> [Adam Brown](https://github.com/Wavesonics) (Dark Rock Studios), used under the MIT License.**
+> **FastTrack48 is a fork of FastTrack by Adam Brown (@Wavesonics) (Dark Rock Studios), used under the MIT License.**
 > See [Attribution](#attribution) below.
 
 <div align="center">

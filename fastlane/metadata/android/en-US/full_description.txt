@@ -25,7 +25,7 @@ about each phase as you progress in your fast
 • Tap any past day in the calendar to add a fast for it.
 • Manual entry: set start date and time plus a duration, or set an end time and let the app calculate.
 • Edit or delete any entry, including backdating a start you forgot to log.
-• Clear the whole logbook.
+• Clear the entire fasting history.
 
 <i>Import and export</i>
 • Export as CSV (Excel-compatible).
@@ -56,9 +56,6 @@ FastTrack48 is not a medical app and does not provide medical advice. The stage 
 <h3>Attribution</h3>
 
 FastTrack48 is a modified derivative work — a direct fork — of FastTrack, created by Adam Brown (@Wavesonics) and published by Dark Rock Studios. The original software is Copyright © 2020 Adam Brown and is made available under the MIT License, which continues to govern the original portions of this app. The full licence text is reproduced inside the app under About → Acknowledgements.
-
-Original project: https://github.com/Darkrock-Studios/FastTrack
-Original author: https://github.com/Wavesonics
 
 Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Dark Rock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. Please send all questions and support requests about FastTrack48 to https://github.com/fasttrack42/FastTrack48/issues and never to the original project.
 
