@@ -4,10 +4,13 @@
 	<string name="action_share">Delen</string>
 	<string name="action_info">Info</string>
 	<string name="action_about">Over</string>
-	<string name="action_export">Logboek exporteren</string>
-	<string name="action_export_description">Maak een CSV-bestand van je logboek als back-up</string>
-	<string name="action_import">Logboek importeren</string>
-	<string name="action_import_description">Vul je logboek met een eerdere export</string>
+	<string name="action_export">Vastenperiodes exporteren</string>
+	<string name="action_export_description">Bewaar je vastengeschiedenis als CSV, iCalendar (.ics) of ActivityStreams-JSON</string>
+	<string name="action_import">Vastenperiodes importeren</string>
+	<string name="action_import_description">Importeer vastenperiodes uit een FastTrack48- of oude FastTrack-CSV, een EasyFast-back-up (.zip) of een door deze app geëxporteerd .ics-/ActivityStreams-bestand</string>
+	<string name="import_formats_title">Ondersteunde formaten</string>
+	<string name="import_formats_message">Het bestandstype wordt automatisch herkend. Je kunt importeren:\n\n• FastTrack48-CSV — de eigen export van deze app\n• Oude FastTrack-CSV\n• EasyFast-back-up (.zip)\n• iCalendar (.ics) geëxporteerd door deze app\n• ActivityStreams-JSON geëxporteerd door deze app</string>
+	<string name="import_formats_continue">Bestand kiezen</string>
 	<string name="import_success">Logboek succesvol geïmporteerd</string>
 	<string name="import_failed">Importeren van logboek mislukt</string>
 	<string name="settings_section_notifications">Meldingen</string>
@@ -35,6 +38,7 @@
 	<string name="title_profile">Profiel</string>
 	<string name="fasting_fragment_label">Vasten</string>
 	<string name="start_fast_button">Vasten starten</string>
+	<string name="start_orb_label">Starten</string>
 	<string name="start_fast_now_button">Nu vasten starten</string>
 	<string name="end_fast_button">Vasten beëindigen</string>
 	<string name="fasting_energy_mode">Energiemodus: %1$s</string>
@@ -213,6 +217,8 @@
 	<string name="journey_stage_hours_open">%1$d u+</string>
 	<string name="phase_time_until">over %1$s</string>
 	<string name="time_since_last_fast">Tijd sinds je laatste vasten: %1$s</string>
+	<string name="last_fast_length">Vasten van %1$s</string>
+	<string name="last_fast_ended">beëindigd %1$s</string>
 	<string name="just_finished_fast">Je hebt net je vasten voltooid — goed gedaan!</string>
 	<string name="duration_less_than_minute">Net begonnen</string>
 	<string name="settings_section_phases">Vastenfasen</string>

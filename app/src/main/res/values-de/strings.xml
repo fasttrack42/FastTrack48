@@ -4,10 +4,13 @@
 	<string name="action_share">Teilen</string>
 	<string name="action_info">Info</string>
 	<string name="action_about">Über</string>
-	<string name="action_export">Exportieren Sie das Logbuch</string>
-	<string name="action_export_description">Erstellen Sie eine CSV-Datei Ihres Logbuchs zur Sicherung</string>
-	<string name="action_import">Logbuch importieren</string>
-	<string name="action_import_description">Befüllen Sie Ihr Logbuch aus einem früheren Export</string>
+	<string name="action_export">Fastenzeiten exportieren</string>
+	<string name="action_export_description">Speichern Sie Ihre Fastenhistorie als CSV, iCalendar (.ics) oder ActivityStreams-JSON</string>
+	<string name="action_import">Fastenzeiten importieren</string>
+	<string name="action_import_description">Fastenzeiten aus einer FastTrack48- oder alten FastTrack-CSV, einem EasyFast-Backup (.zip) oder einer von dieser App exportierten .ics-/ActivityStreams-Datei importieren</string>
+	<string name="import_formats_title">Unterstützte Formate</string>
+	<string name="import_formats_message">Der Dateityp wird automatisch erkannt. Importierbar sind:\n\n• FastTrack48-CSV — der eigene Export dieser App\n• Alte FastTrack-CSV\n• EasyFast-Backup (.zip)\n• Von dieser App exportierte iCalendar-Datei (.ics)\n• Von dieser App exportiertes ActivityStreams-JSON</string>
+	<string name="import_formats_continue">Datei wählen</string>
 	<string name="import_success">Logbuch erfolgreich importiert</string>
 	<string name="import_failed">Importieren des Logbuchs fehlgeschlagen</string>
 	<!-- Settings -->
@@ -38,6 +41,7 @@
 	<string name="title_profile">Profil</string>
 	<string name="fasting_fragment_label">Fasten</string>
 	<string name="start_fast_button">Fasten beginnen</string>
+	<string name="start_orb_label">Starten</string>
 	<string name="start_fast_now_button">Jetzt Fasten beginnen</string>
 	<string name="end_fast_button">Fasten beenden</string>
 	<string name="fasting_energy_mode">Energiemodus: %1$s</string>
@@ -241,6 +245,8 @@
 	<string name="notification_fasting_title_duration">Fasten: %1$s</string>
 	<string name="phase_time_until">in %1$s</string>
 	<string name="time_since_last_fast">Zeit seit deinem letzten Fasten: %1$s</string>
+	<string name="last_fast_length">%1$s Fasten</string>
+	<string name="last_fast_ended">beendet %1$s</string>
 	<string name="share_text_fasting">Ich faste seit %1$s! Mein Körper nutzt gerade %2$s als Energiequelle.</string>
 	<string name="share_text_finished">Ich habe %1$s gefastet!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>

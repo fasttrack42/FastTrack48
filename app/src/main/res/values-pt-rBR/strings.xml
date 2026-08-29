@@ -4,10 +4,13 @@
 	<string name="action_share">Compartilhar</string>
 	<string name="action_info">Informações</string>
 	<string name="action_about">Sobre</string>
-	<string name="action_export">Exportar registro</string>
-	<string name="action_export_description">Gere um arquivo CSV do seu registro para backup</string>
-	<string name="action_import">Importar registro</string>
-	<string name="action_import_description">Preencha seu registro a partir de uma exportação anterior</string>
+	<string name="action_export">Exportar jejuns</string>
+	<string name="action_export_description">Salve seu histórico de jejuns como CSV, iCalendar (.ics) ou JSON ActivityStreams</string>
+	<string name="action_import">Importar jejuns</string>
+	<string name="action_import_description">Importe jejuns de um CSV do FastTrack48 ou do FastTrack antigo, de um backup do EasyFast (.zip) ou de um arquivo .ics / ActivityStreams exportado por este app</string>
+	<string name="import_formats_title">Formatos compatíveis</string>
+	<string name="import_formats_message">O tipo de arquivo é detectado automaticamente. Você pode importar:\n\n• CSV do FastTrack48 — a exportação deste app\n• CSV do FastTrack antigo\n• Backup do EasyFast (.zip)\n• iCalendar (.ics) exportado por este app\n• JSON do ActivityStreams exportado por este app</string>
+	<string name="import_formats_continue">Escolher arquivo</string>
 	<string name="import_success">Registro importado com sucesso</string>
 	<string name="import_failed">Falha ao importar o registro</string>
 	<!-- Settings -->
@@ -44,6 +47,7 @@ Isso ajuda você a seguir no caminho certo sem precisar abrir o app!</string>
 	<string name="title_profile">Perfil</string>
 	<string name="fasting_fragment_label">Jejum</string>
 	<string name="start_fast_button">Iniciar jejum</string>
+	<string name="start_orb_label">Iniciar</string>
 	<string name="start_fast_now_button">Iniciar jejum agora</string>
 	<string name="end_fast_button">Encerrar jejum</string>
 	<string name="fasting_energy_mode">Modo de energia: %1$s</string>
@@ -228,6 +232,8 @@ Esse é um número fundamental para pessoas que fazem dieta restringindo a inges
 	<string name="notification_fasting_title_duration">Jejum: %1$s</string>
 	<string name="phase_time_until">em %1$s</string>
 	<string name="time_since_last_fast">Tempo desde o seu último jejum: %1$s</string>
+	<string name="last_fast_length">Jejum de %1$s</string>
+	<string name="last_fast_ended">terminou %1$s</string>
 	<string name="share_text_fasting">Estou jejuando há %1$s! Meu corpo está usando %2$s como fonte de energia.</string>
 	<string name="share_text_finished">Jejuei por %1$s!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>

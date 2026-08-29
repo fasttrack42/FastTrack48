@@ -36,6 +36,15 @@ class SettingsPreferencesDatasource(
 		}
 	}
 
+	override fun getImportFormatsSeen(): Boolean =
+		storage.getBoolean(Data.KEY_IMPORT_FORMATS_SEEN, false)
+
+	override fun setImportFormatsSeen(enabled: Boolean) {
+		storage.edit {
+			putBoolean(Data.KEY_IMPORT_FORMATS_SEEN, enabled)
+		}
+	}
+
 	override fun getShowFancyBackground() = storage.getBoolean(Data.KEY_FANCY_BACKGROUND, true)
 
 	override fun setShowFancyBackground(enabled: Boolean) {

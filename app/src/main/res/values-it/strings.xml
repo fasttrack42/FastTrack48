@@ -4,10 +4,13 @@
 	<string name="action_share">Condividi</string>
 	<string name="action_info">Informazioni</string>
 	<string name="action_about">Informazioni</string>
-	<string name="action_export">Esporta il Giornale</string>
-	<string name="action_export_description">Produci un file CSV del registro per il backup</string>
-	<string name="action_import">Importa Giornale</string>
-	<string name="action_import_description">Popolare il registro da un\'esportazione precedente</string>
+	<string name="action_export">Esporta digiuni</string>
+	<string name="action_export_description">Salva la cronologia dei digiuni come CSV, iCalendar (.ics) o JSON ActivityStreams</string>
+	<string name="action_import">Importa digiuni</string>
+	<string name="action_import_description">Importa digiuni da un CSV di FastTrack48 o del vecchio FastTrack, da un backup EasyFast (.zip) o da un file .ics / ActivityStreams esportato da questa app</string>
+	<string name="import_formats_title">Formati supportati</string>
+	<string name="import_formats_message">Il tipo di file viene rilevato automaticamente. Puoi importare:\n\n• CSV di FastTrack48 — l\'esportazione di questa app\n• CSV del vecchio FastTrack\n• Backup di EasyFast (.zip)\n• iCalendar (.ics) esportato da questa app\n• JSON ActivityStreams esportato da questa app</string>
+	<string name="import_formats_continue">Scegli file</string>
 	<string name="import_success">Registro importato con successo</string>
 	<string name="import_failed">Importazione del giornale non riuscita</string>
 	<!-- Settings -->
@@ -45,6 +48,7 @@
 	<string name="title_profile">Profilo</string>
 	<string name="fasting_fragment_label">Digiuno</string>
 	<string name="start_fast_button">Inizia digiuno</string>
+	<string name="start_orb_label">Inizia</string>
 	<string name="start_fast_now_button">Inizia subito il digiuno</string>
 	<string name="end_fast_button">Fine digiuno</string>
 	<string name="fasting_energy_mode">Modalità Energia: %1$s</string>
@@ -252,6 +256,8 @@
 	<string name="notification_fasting_title_duration">Digiuno: %1$s</string>
 	<string name="phase_time_until">tra %1$s</string>
 	<string name="time_since_last_fast">Tempo dal tuo ultimo digiuno: %1$s</string>
+	<string name="last_fast_length">Digiuno di %1$s</string>
+	<string name="last_fast_ended">terminato %1$s</string>
 	<string name="share_text_fasting">Sto digiunando da %1$s! Il mio corpo sta usando %2$s come fonte di energia.</string>
 	<string name="share_text_finished">Ho digiunato per %1$s!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>

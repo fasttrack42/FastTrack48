@@ -1,5 +1,6 @@
 package com.legbehindneck.fasttrack48.screens.fasting
 
+import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.time.Duration
 import kotlin.time.Instant
@@ -16,6 +17,8 @@ interface IFastingViewModel {
 		val lastFastEndTime: Instant? = null,
 		/** End of the newest logbook entry, used to warn on a backdated start. */
 		val previousLoggedFastEnd: Instant? = null,
+		/** That same entry, whole: what the idle band reports under the dial. */
+		val lastLoggedFast: FastingLogEntry? = null,
 		val stageTitle: String = "",
 		val stageDescription: String = "",
 		val energyMode: String = "",

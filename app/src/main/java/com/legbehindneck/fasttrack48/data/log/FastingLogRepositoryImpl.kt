@@ -39,6 +39,10 @@ class FastingLogRepositoryImpl(
 		.maxOfOrNull { it.start + it.length }
 		?.let { Instant.fromEpochMilliseconds(it) }
 
+	override fun latestLoggedFast(): FastingLogEntry? = datasource.getAll()
+		.maxByOrNull { it.start + it.length }
+		?.toFastingLogEntry()
+
 	override fun loadAll(): Flow<List<FastingLogEntry>> = datasource.loadAll().map { entries ->
 		entries.map { it.toFastingLogEntry() }
 	}

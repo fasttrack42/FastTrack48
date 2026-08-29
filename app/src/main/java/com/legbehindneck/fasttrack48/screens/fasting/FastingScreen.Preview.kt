@@ -6,10 +6,16 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.screens.fasting.IFastingViewModel.StageState
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.hours
 import kotlin.time.Instant
 
 /**
@@ -52,6 +58,15 @@ fun FastingScreenPreview(
 		ketosisStageState = ketosisStageState,
 		autophagyStageState = autophagyStageState,
 		showGradientBackground = showGradientBackground,
+		// The idle band reports the last logged fast, so a preview without one shows an
+		// empty band. Anchored to the clock rather than to a literal date, so it keeps
+		// reading as "3 days, 4 hours fast / ended 8 days ago" whenever it is rendered.
+		lastLoggedFast = FastingLogEntry(
+			id = 1,
+			start = (Clock.System.now() - 11.days)
+				.toLocalDateTime(TimeZone.currentSystemDefault()),
+			length = 76.hours,
+		),
 	)
 
 	val viewModel = FakeFastingViewModel(initialState)

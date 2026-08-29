@@ -18,6 +18,13 @@ interface FastingLogRepository {
 	 * warn when an active fast is backdated into a window that is already recorded.
 	 */
 	fun latestLoggedEnd(): Instant?
+
+	/**
+	 * The most recent logged fast — greatest end, not greatest start — or null when the
+	 * logbook is empty. Read by the idle Fasting screen, which reports what the last fast
+	 * came to in the band under the dial.
+	 */
+	fun latestLoggedFast(): FastingLogEntry?
 	// notes defaults to the entry's current notes so an edit that omits them preserves them
 	fun updateLogEntry(
         entry: FastingLogEntry,

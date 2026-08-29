@@ -1,13 +1,10 @@
 package com.legbehindneck.fasttrack48.screens.settings
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.LocaleList
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
@@ -17,29 +14,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.coroutineScope
 import com.legbehindneck.fasttrack48.FastingNotificationManager
-import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
-import com.legbehindneck.fasttrack48.data.log.ImportResult
-import com.legbehindneck.fasttrack48.data.log.LogExportFormat
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.data.settings.ThemeMode
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
-import kotlinx.datetime.toLocalDateTime
 import org.koin.android.ext.android.inject
-import java.io.File
 import java.util.Locale
-import kotlin.time.Clock
 
 class SettingsActivity : AppCompatActivity() {
 	private val settings by inject<SettingsDatasource>()
@@ -64,7 +48,7 @@ class SettingsActivity : AppCompatActivity() {
 		metricSystemSettingState = settings.getUseMetricSystem(default = isMetricSystemLocale())
 		themeModeState = settings.getThemeMode()
 		registerNotificationPermissionCallback()
-		registerImportCallback()
+		getContent = registerLogImport(logRepository)
 
 		setContent {
 			FastTrackTheme(themeMode = themeModeState) {
@@ -79,8 +63,10 @@ class SettingsActivity : AppCompatActivity() {
 					onMetricSystemSettingChanged = { enabled -> handleMetricSystemSettingChange(enabled) },
 					themeModeState = themeModeState,
 					onThemeModeChanged = { mode -> handleThemeModeChange(mode) },
-					onExportClick = { format -> onExportLogBook(format) },
-					onImportClick = { onImportLogBook() }
+					onExportClick = { format -> exportFasts(logRepository, format) },
+					// "*/*": the file's format is decided by sniffing its bytes, not by
+					// whatever type the picker claims for it.
+					onImportClick = { getContent.launch("*/*") }
 				)
 			}
 		}
@@ -176,109 +162,5 @@ class SettingsActivity : AppCompatActivity() {
 		val locale: Locale = LocaleList.getDefault()[0]
 		val imperialCountries = listOf("US", "LR", "MM")
 		return !imperialCountries.contains(locale.country)
-	}
-
-	private fun registerImportCallback() {
-		getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-			uri?.let {
-				lifecycle.coroutineScope.launch(Dispatchers.Default) {
-					// Auto-detect the file: EasyFast ZIP, iCalendar, ActivityStreams, or CSV
-					val message = try {
-						val bytes = contentResolver.openInputStream(it)?.use { s -> s.readBytes() }
-						if (bytes == null) {
-							getString(R.string.import_failed)
-						} else if (isZip(bytes)) {
-							importResultMessage(logRepository.importEasyFastBackup(bytes))
-						} else {
-							val text = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
-							val head = text.trimStart()
-							when {
-								head.startsWith("BEGIN:VCALENDAR", ignoreCase = true) ->
-									importResultMessage(logRepository.importIcs(text))
-
-								(head.startsWith("{") || head.startsWith("[")) &&
-									text.contains("activitystreams") ->
-									importResultMessage(logRepository.importActivityStreams(text))
-
-								else -> {
-									val ok = logRepository.importLog(text)
-									getString(if (ok) R.string.import_success else R.string.import_failed)
-								}
-							}
-						}
-					} catch (e: Exception) {
-						Napier.w("Failed to import Log", e)
-						getString(R.string.import_failed)
-					}
-
-					withContext(Dispatchers.Main) {
-						Toast.makeText(this@SettingsActivity, message, Toast.LENGTH_LONG).show()
-					}
-				}
-			}
-		}
-	}
-
-	/** ZIP local-file-header magic bytes (PK). */
-	private fun isZip(bytes: ByteArray): Boolean =
-		bytes.size >= 4 &&
-			bytes[0] == 0x50.toByte() && bytes[1] == 0x4B.toByte() &&
-			bytes[2] == 0x03.toByte() && bytes[3] == 0x04.toByte()
-
-	/** Turn an [ImportResult] into a user-facing toast message. */
-	private fun importResultMessage(result: ImportResult): String =
-		if (result.ok) {
-			getString(R.string.import_easyfast_result, result.imported, result.skippedOverlapping)
-		} else {
-			getString(R.string.import_failed)
-		}
-
-	private fun onExportLogBook(format: LogExportFormat) {
-		lifecycle.coroutineScope.launch {
-			val content = when (format) {
-				LogExportFormat.CSV -> logRepository.exportLog()
-				LogExportFormat.ICS -> logRepository.exportIcs()
-				LogExportFormat.ACTIVITY_STREAMS -> logRepository.exportActivityStreams()
-			}
-
-			// Locale-independent timestamp: fastingLogbook-YYYY-MM-DD-HHMM.<ext>
-			val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-			val stamp = String.format(
-				Locale.ROOT, "%04d-%02d-%02d-%02d%02d",
-				now.year, now.month.number, now.day, now.hour, now.minute
-			)
-			val exportFile = File(cacheDir, "fastingLogbook-$stamp.${format.extension}")
-
-			try {
-				exportFile.writeText(content)
-
-				val fileUri = FileProvider.getUriForFile(
-					this@SettingsActivity,
-					"${packageName}.fileprovider",
-					exportFile
-				)
-
-				val sendIntent: Intent = Intent().apply {
-					action = Intent.ACTION_SEND
-					putExtra(Intent.EXTRA_STREAM, fileUri)
-					type = format.mimeType
-					addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-				}
-
-				val shareIntent = Intent.createChooser(sendIntent, getString(R.string.app_name))
-				startActivity(shareIntent)
-			} catch (_: Exception) {
-				Toast.makeText(
-					this@SettingsActivity,
-					getString(R.string.export_failed),
-					Toast.LENGTH_SHORT
-				).show()
-			}
-		}
-	}
-
-	private fun onImportLogBook() {
-		// Allow both FastTrack CSV and EasyFast backup ZIP files
-		getContent.launch("*/*")
 	}
 }

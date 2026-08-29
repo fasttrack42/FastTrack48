@@ -28,6 +28,7 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,10 +42,8 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.screens.preview.getContext
 import com.legbehindneck.fasttrack48.utils.DateRangeSelectableDates
 import com.legbehindneck.fasttrack48.utils.shouldUse24HourFormat
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.number
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toKotlinMonth
@@ -53,6 +52,9 @@ import java.util.Calendar
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
+
+/** Whole days, in milliseconds — the unit DatePicker and SelectableDates both work in. */
+private const val MILLIS_PER_DAY = 24L * 60 * 60 * 1000
 
 /**
  * State for the DateTimePickerDialog
@@ -102,40 +104,44 @@ fun DateTimePickerDialog(
 		}
 	}
 
+	// DatePicker speaks in UTC-midnight milliseconds: it recovers the day with
+	// `epochMillis / 86_400_000`, and DateRangeSelectableDates does the same. Handing it the
+	// *local* midnight of the same calendar day lands in the previous day for every zone east
+	// of UTC, which preselected the day before the fast actually started.
 	val minDateMillis = remember(minDateTime) {
-		minDateTime?.let { dateTime ->
-			LocalDate(
-				year = dateTime.year,
-				month = dateTime.month,
-				day = dateTime.day
-			).atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds()
-		}
+		minDateTime?.date?.toEpochDays()?.times(MILLIS_PER_DAY)
 	}
 
 	val initialDateMillis = remember(initialDateTime) {
-		initialDateTime?.let { dateTime ->
-			LocalDate(
-				year = dateTime.year,
-				month = dateTime.month,
-				day = dateTime.day
-			).atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds()
-		}
+		initialDateTime?.date?.toEpochDays()?.times(MILLIS_PER_DAY)
 	}
 
-	val datePickerState = rememberDatePickerState(
-		initialSelectedDateMillis = initialDateMillis,
-		selectableDates = DateRangeSelectableDates(minDateMillis)
-	)
+	// rememberDatePickerState / rememberTimePickerState read their initial values exactly once
+	// and never again — they are rememberSaveable under the hood, with no keys. Reopening the
+	// editor with a start time that has since been corrected would therefore restore the value
+	// from the first open. key() puts each state in its own composition group, so a changed
+	// initial value builds a new state instead of resurrecting the stale one.
+	val datePickerState = key(initialDateMillis, minDateMillis) {
+		rememberDatePickerState(
+			initialSelectedDateMillis = initialDateMillis,
+			selectableDates = DateRangeSelectableDates(minDateMillis)
+		)
+	}
 
-	// Use initial time if provided, otherwise use current time
-	val initialHour = initialDateTime?.hour ?: Calendar.getInstance()[Calendar.HOUR_OF_DAY]
-	val initialMinute = initialDateTime?.minute ?: Calendar.getInstance()[Calendar.MINUTE]
+	// Use initial time if provided, otherwise the time the dialog opened. Frozen in a remember:
+	// read live it would advance every recomposition and, being a key below, reset the time
+	// picker under the user's finger once a minute.
+	val openedAt = remember { Calendar.getInstance() }
+	val initialHour = initialDateTime?.hour ?: openedAt[Calendar.HOUR_OF_DAY]
+	val initialMinute = initialDateTime?.minute ?: openedAt[Calendar.MINUTE]
 
-	val timePickerState = rememberTimePickerState(
-		initialHour = initialHour,
-		initialMinute = initialMinute,
-		is24Hour = shouldUse24HourFormat(getContext()),
-	)
+	val timePickerState = key(initialHour, initialMinute) {
+		rememberTimePickerState(
+			initialHour = initialHour,
+			initialMinute = initialMinute,
+			is24Hour = shouldUse24HourFormat(getContext()),
+		)
+	}
 
 	val isNextButtonEnabled = remember(
 		datePickerState.selectedDateMillis,

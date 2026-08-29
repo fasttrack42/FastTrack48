@@ -20,6 +20,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteSweep
+import androidx.compose.material.icons.filled.FileDownload
+import androidx.compose.material.icons.filled.FileUpload
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Check
@@ -95,6 +97,8 @@ fun MainScreen(
 	onSettingsClick: () -> Unit,
 	onStartFastClick: () -> Unit = {},
 	onEndFastClick: () -> Unit = {},
+	onExportClick: () -> Unit = {},
+	onImportClick: () -> Unit = {},
 	externalRequests: ExternalRequests = ExternalRequests(),
 ) {
 	val pagerState =
@@ -269,6 +273,8 @@ fun MainScreen(
 				isFasting = fastingState.isFasting,
 				onStartFastClick = onStartFastClick,
 				onEndFastClick = onEndFastClick,
+				onExportClick = onExportClick,
+				onImportClick = onImportClick,
 				onShareClick = onShareClick,
 				onInfoClick = onInfoClick,
 				onAboutClick = onAboutClick,
@@ -302,6 +308,8 @@ private fun FloatingTopActions(
 	isFasting: Boolean,
 	onStartFastClick: () -> Unit,
 	onEndFastClick: () -> Unit,
+	onExportClick: () -> Unit,
+	onImportClick: () -> Unit,
 	onShareClick: () -> Unit,
 	onInfoClick: () -> Unit,
 	onAboutClick: () -> Unit,
@@ -385,16 +393,35 @@ private fun FloatingTopActions(
 						HorizontalDivider()
 					}
 
+					// The logbook's two doors, on every page. They are the app's strongest
+					// claim — data leaves in open formats and arrives from a competitor's
+					// backup — and until now they were buried a screen deep in Settings,
+					// where nobody looking for them would think to look. Both still live
+					// there too; this is a shortcut, not a move.
 					DropdownMenuItem(
-						text = { Text(stringResource(id = R.string.action_about)) },
+						text = { Text(stringResource(id = R.string.action_export)) },
 						leadingIcon = {
 							Icon(
-								imageVector = Icons.Outlined.Info,
+								imageVector = Icons.Default.FileUpload,
 								contentDescription = null,
 							)
 						},
 						onClick = {
-							onAboutClick()
+							onExportClick()
+							showMenu = false
+						},
+					)
+
+					DropdownMenuItem(
+						text = { Text(stringResource(id = R.string.action_import)) },
+						leadingIcon = {
+							Icon(
+								imageVector = Icons.Default.FileDownload,
+								contentDescription = null,
+							)
+						},
+						onClick = {
+							onImportClick()
 							showMenu = false
 						},
 					)
@@ -409,6 +436,20 @@ private fun FloatingTopActions(
 						},
 						onClick = {
 							onSettingsClick()
+							showMenu = false
+						},
+					)
+
+					DropdownMenuItem(
+						text = { Text(stringResource(id = R.string.action_about)) },
+						leadingIcon = {
+							Icon(
+								imageVector = Icons.Outlined.Info,
+								contentDescription = null,
+							)
+						},
+						onClick = {
+							onAboutClick()
 							showMenu = false
 						},
 					)

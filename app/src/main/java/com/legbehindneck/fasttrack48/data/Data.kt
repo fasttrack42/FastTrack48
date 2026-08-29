@@ -18,6 +18,7 @@ object Data
 	const val KEY_SHOW_KETOSIS = "show_ketosis"
 	const val KEY_SHOW_AUTOPHAGY = "show_autophagy"
 	const val KEY_PHASE_AUTO_MODE = "phase_auto_mode"
+	const val KEY_IMPORT_FORMATS_SEEN = "import_formats_seen"
 
 	private const val CM_INCH_RATIO = 2.54
 	fun inchToCm(inches: Int): Double = inches.toDouble() * CM_INCH_RATIO

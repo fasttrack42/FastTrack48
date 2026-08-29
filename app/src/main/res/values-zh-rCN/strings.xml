@@ -4,10 +4,13 @@
 	<string name="action_share">分享</string>
 	<string name="action_info">信息</string>
 	<string name="action_about">关于</string>
-	<string name="action_export">导出日志簿</string>
-	<string name="action_export_description">为备份生成日记中的 CSV 文件</string>
-	<string name="action_import">导入日志簿</string>
-	<string name="action_import_description">从以前的导出中填写日志记录</string>
+	<string name="action_export">导出断食记录</string>
+	<string name="action_export_description">将断食记录保存为 CSV、iCalendar (.ics) 或 ActivityStreams JSON</string>
+	<string name="action_import">导入断食记录</string>
+	<string name="action_import_description">从 FastTrack48 或旧版 FastTrack 的 CSV、EasyFast 备份 (.zip)，或本应用导出的 .ics / ActivityStreams 文件导入断食记录</string>
+	<string name="import_formats_title">支持的格式</string>
+	<string name="import_formats_message">文件类型会自动识别。可导入：\n\n• FastTrack48 CSV — 本应用导出的文件\n• 旧版 FastTrack CSV\n• EasyFast 备份 (.zip)\n• 本应用导出的 iCalendar (.ics)\n• 本应用导出的 ActivityStreams JSON</string>
+	<string name="import_formats_continue">选择文件</string>
 	<string name="import_success">日志成功导入</string>
 	<string name="import_failed">导入日志本失败</string>
 	<!-- Settings -->
@@ -39,6 +42,7 @@
 	<string name="title_profile">个人资料</string>
 	<string name="fasting_fragment_label">禁食</string>
 	<string name="start_fast_button">开始禁食</string>
+	<string name="start_orb_label">开始</string>
 	<string name="start_fast_now_button">立即开始禁食</string>
 	<string name="end_fast_button">结束禁食</string>
 	<string name="fasting_energy_mode">能量模式：%1$s</string>
@@ -211,6 +215,8 @@
 	<string name="notification_fasting_title_duration">断食：%1$s</string>
 	<string name="phase_time_until">还有 %1$s</string>
 	<string name="time_since_last_fast">距上次断食：%1$s</string>
+	<string name="last_fast_length">%1$s断食</string>
+	<string name="last_fast_ended">结束于%1$s</string>
 	<string name="share_text_fasting">我已经断食 %1$s 了！我的身体正在以%2$s作为能量来源。</string>
 	<string name="share_text_finished">我断食了 %1$s！</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d 小时</string>

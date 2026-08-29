@@ -4,10 +4,13 @@
 	<string name="action_share">Compartir</string>
 	<string name="action_info">Información</string>
 	<string name="action_about">Acerca de</string>
-	<string name="action_export">Exportar Registro</string>
-	<string name="action_export_description">Produce un archivo CSV de tu libro de registro para la copia de seguridad</string>
-	<string name="action_import">Importar historial de ayunos</string>
-	<string name="action_import_description">Poblar tu libro de registro desde una exportación anterior</string>
+	<string name="action_export">Exportar ayunos</string>
+	<string name="action_export_description">Guarda tu historial de ayunos como CSV, iCalendar (.ics) o JSON de ActivityStreams</string>
+	<string name="action_import">Importar ayunos</string>
+	<string name="action_import_description">Importa ayunos desde un CSV de FastTrack48 o del antiguo FastTrack, una copia de EasyFast (.zip) o un archivo .ics / ActivityStreams exportado por esta app</string>
+	<string name="import_formats_title">Formatos admitidos</string>
+	<string name="import_formats_message">El tipo de archivo se detecta automáticamente. Puedes importar:\n\n• CSV de FastTrack48 — la exportación de esta app\n• CSV del antiguo FastTrack\n• Copia de seguridad de EasyFast (.zip)\n• iCalendar (.ics) exportado por esta app\n• JSON de ActivityStreams exportado por esta app</string>
+	<string name="import_formats_continue">Elegir archivo</string>
 	<string name="import_success">Registro importado con éxito</string>
 	<string name="import_failed">Error al importar el diario de bitácora</string>
 	<!-- Settings -->
@@ -45,6 +48,7 @@
 	<string name="title_profile">Perfil</string>
 	<string name="fasting_fragment_label">Rápido</string>
 	<string name="start_fast_button">Comenzar Ayuno</string>
+	<string name="start_orb_label">Comenzar</string>
 	<string name="start_fast_now_button">Comienza Ayuno Ahora</string>
 	<string name="end_fast_button">Terminar Ayuno</string>
 	<string name="fasting_energy_mode">Modo de energía: %1$s</string>
@@ -249,6 +253,8 @@
 	<string name="notification_fasting_title_duration">Ayuno: %1$s</string>
 	<string name="phase_time_until">en %1$s</string>
 	<string name="time_since_last_fast">Tiempo desde tu último ayuno: %1$s</string>
+	<string name="last_fast_length">Ayuno de %1$s</string>
+	<string name="last_fast_ended">terminó %1$s</string>
 	<string name="share_text_fasting">¡Llevo ayunando %1$s! Ahora mismo mi cuerpo usa %2$s como fuente de energía.</string>
 	<string name="share_text_finished">¡He ayunado %1$s!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>

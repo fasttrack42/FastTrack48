@@ -22,6 +22,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
@@ -70,14 +72,22 @@ class FastingViewModel(
 	}
 
 	/**
-	 * Newest logbook entry's end, read off the IO dispatcher. Only used to warn when a
-	 * corrected start would reach back into an already-recorded window, so a stale value
-	 * costs a missed warning, never a wrong write.
+	 * Newest logbook entry, read off the IO dispatcher: one scan, two facts. Its end
+	 * warns when a corrected start would reach back into an already-recorded window — a
+	 * stale value there costs a missed warning, never a wrong write — and the entry
+	 * itself is what the idle band reports under the dial.
 	 */
 	private fun refreshPreviousLoggedEnd() {
-		viewModelScope.launch(Dispatchers.IO) {
-			val end = logRepository.latestLoggedEnd()
-			_uiState.update { state -> state.copy(previousLoggedFastEnd = end) }
+		viewModelScope.launch(Dispatchers.IO) { readLatestLoggedFast() }
+	}
+
+	private fun readLatestLoggedFast() {
+		val latest = logRepository.latestLoggedFast()
+		val end = latest?.let {
+			it.start.toInstant(TimeZone.currentSystemDefault()).plus(it.length)
+		}
+		_uiState.update { state ->
+			state.copy(previousLoggedFastEnd = end, lastLoggedFast = latest)
 		}
 	}
 
@@ -202,8 +212,7 @@ class FastingViewModel(
 
 			viewModelScope.launch(Dispatchers.IO) {
 				saveFastToLog(repository.getFastStart(), repository.getFastEnd(), notes)
-				val end = logRepository.latestLoggedEnd()
-				_uiState.update { state -> state.copy(previousLoggedFastEnd = end) }
+				readLatestLoggedFast()
 			}
 
 			Napier.i("Fast ended!")

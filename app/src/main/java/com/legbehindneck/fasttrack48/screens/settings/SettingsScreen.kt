@@ -242,31 +242,9 @@ private fun SettingsList(
 		}
 
 		if (showExportFormatDialog) {
-			AlertDialog(
-				onDismissRequest = { showExportFormatDialog = false },
-				title = { Text(stringResource(id = R.string.export_choose_format)) },
-				text = {
-					Column {
-						LogExportFormat.entries.forEach { format ->
-							Text(
-								text = stringResource(id = format.labelRes),
-								style = MaterialTheme.typography.bodyLarge,
-								modifier = Modifier
-									.fillMaxWidth()
-									.clickable {
-										showExportFormatDialog = false
-										onExportClick(format)
-									}
-									.padding(vertical = 12.dp),
-							)
-						}
-					}
-				},
-				confirmButton = {
-					TextButton(onClick = { showExportFormatDialog = false }) {
-						Text(stringResource(id = R.string.cancel_button))
-					}
-				},
+			ExportFormatDialog(
+				onDismiss = { showExportFormatDialog = false },
+				onSelect = onExportClick,
 			)
 		}
 	}

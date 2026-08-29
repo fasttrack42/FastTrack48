@@ -22,6 +22,10 @@ class DummySettingsDatasource(
 
 	override fun setIntroSeen(enabled: Boolean) {}
 
+	override fun getImportFormatsSeen(): Boolean = true
+
+	override fun setImportFormatsSeen(enabled: Boolean) {}
+
 	override fun getShowFancyBackground(): Boolean = true
 
 	override fun setShowFancyBackground(enabled: Boolean) {}

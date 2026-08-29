@@ -9,6 +9,12 @@ interface SettingsDatasource {
 	fun getIntroSeen(): Boolean
 	fun setIntroSeen(enabled: Boolean)
 
+	// Whether the "supported formats" notice has been shown before the import file
+	// picker. The overflow menu has no room for the subtitle the Settings row carries,
+	// so it explains itself once and then gets out of the way.
+	fun getImportFormatsSeen(): Boolean
+	fun setImportFormatsSeen(enabled: Boolean)
+
 	fun getShowFancyBackground(): Boolean
 	fun setShowFancyBackground(enabled: Boolean)
 

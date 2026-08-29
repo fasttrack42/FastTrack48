@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.CompositionLocalProvider
@@ -18,6 +19,7 @@ import com.legbehindneck.fasttrack48.BuildConfig
 import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
+import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.data.settings.ThemeMode
@@ -26,7 +28,11 @@ import com.legbehindneck.fasttrack48.screens.fasting.ExternalRequests
 import com.legbehindneck.fasttrack48.screens.fasting.StartFastRequest
 import com.legbehindneck.fasttrack48.screens.info.InfoActivity
 import com.legbehindneck.fasttrack48.screens.intro.IntroActivity
+import com.legbehindneck.fasttrack48.screens.settings.ExportFormatDialog
+import com.legbehindneck.fasttrack48.screens.settings.ImportFormatsDialog
 import com.legbehindneck.fasttrack48.screens.settings.SettingsActivity
+import com.legbehindneck.fasttrack48.screens.settings.exportFasts
+import com.legbehindneck.fasttrack48.screens.settings.registerLogImport
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import io.github.aakira.napier.Napier
 import org.koin.android.ext.android.inject
@@ -39,10 +45,18 @@ class MainActivity : AppCompatActivity() {
 	private var stopFastRequestState by mutableStateOf(false)
 	private var shareRequestState by mutableStateOf(false)
 	private var showAboutState by mutableStateOf(false)
+	private var showExportFormatState by mutableStateOf(false)
+	private var showImportNoticeState by mutableStateOf(false)
 	private var themeModeState by mutableStateOf(ThemeMode.SYSTEM)
 	private var dateStyleState by mutableStateOf(DateStyle.OPTIMIZED_COMPACT)
 	private val settings by inject<SettingsDatasource>()
 	private val fastingRepository by inject<ActiveFastRepository>()
+	private val logRepository by inject<FastingLogRepository>()
+
+	// Registered in onCreate, as registerForActivityResult demands: the activity must not
+	// have reached STARTED yet. Launched with "*/*" — the file's format is decided by
+	// sniffing its bytes, not by whatever type the picker claims for it.
+	private lateinit var importLauncher: ActivityResultLauncher<String>
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -54,6 +68,7 @@ class MainActivity : AppCompatActivity() {
 		themeModeState = settings.getThemeMode()
 		dateStyleState = settings.getDateStyle()
 		handleStartFastExtra(intent)
+		importLauncher = registerLogImport(logRepository)
 
 		if (!settings.getIntroSeen()) {
 			startActivity(Intent(this, IntroActivity::class.java))
@@ -72,6 +87,14 @@ class MainActivity : AppCompatActivity() {
 					// start selector / end confirmation with no duplicated logic.
 					onStartFastClick = { startFastRequestState = StartFastRequest(startNow = false) },
 					onEndFastClick = { stopFastRequestState = true },
+					onExportClick = { showExportFormatState = true },
+					// The Settings row spells out the accepted formats in its subtitle;
+					// a menu item has no room for one, so the notice stands in for it —
+					// once, then never again.
+					onImportClick = {
+						if (settings.getImportFormatsSeen()) importLauncher.launch("*/*")
+						else showImportNoticeState = true
+					},
 					externalRequests = ExternalRequests(
 						startFastRequest = startFastRequestState,
 						stopFastRequested = stopFastRequestState,
@@ -89,6 +112,24 @@ class MainActivity : AppCompatActivity() {
 						onRateApp = { rateApp() },
 						onShareApp = { shareApp() },
 						onDismiss = { showAboutState = false },
+					)
+				}
+
+				if (showExportFormatState) {
+					ExportFormatDialog(
+						onDismiss = { showExportFormatState = false },
+						onSelect = { format -> exportFasts(logRepository, format) },
+					)
+				}
+
+				if (showImportNoticeState) {
+					ImportFormatsDialog(
+						onDismiss = { showImportNoticeState = false },
+						onContinue = {
+							showImportNoticeState = false
+							settings.setImportFormatsSeen(true)
+							importLauncher.launch("*/*")
+						},
 					)
 				}
 				}

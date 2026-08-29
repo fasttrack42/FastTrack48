@@ -4,10 +4,13 @@
 	<string name="action_share">Partager</string>
 	<string name="action_info">Info</string>
 	<string name="action_about">À propos</string>
-	<string name="action_export">Exporter le carnet de bord</string>
-	<string name="action_export_description">Produire un fichier CSV de votre carnet de bord pour la sauvegarde</string>
-	<string name="action_import">Importer le registre</string>
-	<string name="action_import_description">Remplir votre journal de bord à partir d\'une exportation précédente</string>
+	<string name="action_export">Exporter les jeûnes</string>
+	<string name="action_export_description">Enregistrez votre historique de jeûne en CSV, iCalendar (.ics) ou JSON ActivityStreams</string>
+	<string name="action_import">Importer les jeûnes</string>
+	<string name="action_import_description">Importez des jeûnes depuis un CSV FastTrack48 ou l\'ancien FastTrack, une sauvegarde EasyFast (.zip) ou un fichier .ics / ActivityStreams exporté par cette application</string>
+	<string name="import_formats_title">Formats pris en charge</string>
+	<string name="import_formats_message">Le type de fichier est détecté automatiquement. Vous pouvez importer :\n\n• CSV FastTrack48 — l\'export de cette application\n• Ancien CSV FastTrack\n• Sauvegarde EasyFast (.zip)\n• iCalendar (.ics) exporté par cette application\n• JSON ActivityStreams exporté par cette application</string>
+	<string name="import_formats_continue">Choisir un fichier</string>
 	<string name="import_success">Journal importé avec succès</string>
 	<string name="import_failed">Échec de l\'importation du journal</string>
 	<!-- Settings -->
@@ -46,6 +49,7 @@
 	<string name="title_profile">Profil</string>
 	<string name="fasting_fragment_label">Rapide</string>
 	<string name="start_fast_button">Démarrer rapidement</string>
+	<string name="start_orb_label">Commencer</string>
 	<string name="start_fast_now_button">Démarrer rapidement maintenant</string>
 	<string name="end_fast_button">Fin du jeûne</string>
 	<string name="fasting_energy_mode">Mode d\'énergie : %1$s</string>
@@ -252,6 +256,8 @@
 	<string name="notification_fasting_title_duration">Jeûne : %1$s</string>
 	<string name="phase_time_until">dans %1$s</string>
 	<string name="time_since_last_fast">Temps depuis ton dernier jeûne : %1$s</string>
+	<string name="last_fast_length">Jeûne de %1$s</string>
+	<string name="last_fast_ended">terminé %1$s</string>
 	<string name="share_text_fasting">Je jeûne depuis %1$s ! Mon corps utilise actuellement %2$s comme source d\'énergie.</string>
 	<string name="share_text_finished">J\'ai jeûné %1$s !</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
