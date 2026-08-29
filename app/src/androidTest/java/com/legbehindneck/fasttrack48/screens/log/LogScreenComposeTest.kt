@@ -13,6 +13,7 @@ import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepositoryImpl
 import com.legbehindneck.fasttrack48.data.settings.FakeSettingsDatasource
+import com.legbehindneck.fasttrack48.widget.FakeActiveFastRepository
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.datetime.LocalDateTime
@@ -43,7 +44,10 @@ class LogScreenComposeTest {
 	@Before
 	fun setup() {
 		fakeDatasource = FakeFastingLogDatasource()
-		repository = FastingLogRepositoryImpl(fakeDatasource)
+		repository = FastingLogRepositoryImpl(
+			fakeDatasource,
+			FakeActiveFastRepository().apply { _isFasting = false },
+		)
 		viewModel = LogViewModel(repository, FakeSettingsDatasource())
 	}
 

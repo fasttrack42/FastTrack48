@@ -419,4 +419,7 @@
 	<string name="start_overlap_title">Overlaps your previous fast</string>
 	<string name="start_overlap_message">Your last logged fast ended %1$s. Starting this one at %2$s would overlap it.</string>
 	<string name="start_overlap_confirm">Save anyway</string>
+	<string name="settings_section_language">Language</string>
+	<string name="settings_language_title">App language</string>
+	<string name="settings_language_system">System default</string>
 </resources>

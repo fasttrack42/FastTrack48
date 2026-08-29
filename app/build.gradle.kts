@@ -58,6 +58,14 @@ android {
 			resValue("string", "app_name", "FastTrackDev")
 		}
 	}
+	// A per-app language picker is pointless if Play only installs the device language's
+	// resources. Language splits stay off so every translation ships in the base module.
+	bundle {
+		language {
+			enableSplit = false
+		}
+	}
+
 	compileOptions {
 		sourceCompatibility = JavaVersion.toVersion(libs.versions.javaVersion.get())
 		targetCompatibility = JavaVersion.toVersion(libs.versions.javaVersion.get())

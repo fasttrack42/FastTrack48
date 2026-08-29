@@ -1,331 +1,501 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name" translatable="false">FastTrack48</string>
 
 	<string name="action_share">Partager</string>
-	<string name="action_info">Info</string>
+	<string name="action_info">Infos</string>
 	<string name="action_about">À propos</string>
 	<string name="action_export">Exporter les jeûnes</string>
-	<string name="action_export_description">Enregistrez votre historique de jeûne en CSV, iCalendar (.ics) ou JSON ActivityStreams</string>
-	<string name="action_import">Importer les jeûnes</string>
-	<string name="action_import_description">Importez des jeûnes depuis un CSV FastTrack48 ou l\'ancien FastTrack, une sauvegarde EasyFast (.zip) ou un fichier .ics / ActivityStreams exporté par cette application</string>
+	<string name="action_export_description">Enregistrer votre historique de jeûne au format CSV, iCalendar (.ics) ou ActivityStreams JSON</string>
+	<string name="action_import">Importer des jeûnes</string>
+	<string name="action_import_description">Importer des jeûnes depuis un fichier CSV FastTrack48 ou un ancien fichier CSV FastTrack, une sauvegarde EasyFast (.zip), ou un fichier .ics / ActivityStreams exporté par cette application</string>
 	<string name="import_formats_title">Formats pris en charge</string>
-	<string name="import_formats_message">Le type de fichier est détecté automatiquement. Vous pouvez importer :\n\n• CSV FastTrack48 — l\'export de cette application\n• Ancien CSV FastTrack\n• Sauvegarde EasyFast (.zip)\n• iCalendar (.ics) exporté par cette application\n• JSON ActivityStreams exporté par cette application</string>
+	<string name="import_formats_message">Le type de fichier est détecté automatiquement. Vous pouvez importer :\n\n• CSV FastTrack48 — export de cette application\n• Ancien CSV FastTrack\n• Sauvegarde EasyFast (.zip)\n• iCalendar (.ics) exporté par cette application\n• JSON ActivityStreams exporté par cette application</string>
 	<string name="import_formats_continue">Choisir un fichier</string>
-	<string name="import_success">Journal importé avec succès</string>
-	<string name="import_failed">Échec de l\'importation du journal</string>
+	<string name="import_success">Historique des jeûnes importé avec succès</string>
+	<string name="import_failed">Échec de l’importation de l’historique des jeûnes</string>
+	<string name="import_easyfast_result">%1$d jeûnes importés.\nEntrées en chevauchement IGNORÉES : %2$d</string>
+	<string name="export_choose_format">Format d’exportation</string>
+	<string name="export_format_csv" translatable="false">CSV (Excel)</string>
+	<string name="export_format_ics" translatable="false">iCalendar (.ics)</string>
+	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
+
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notifications</string>
 	<string name="settings_section_ui">Interface</string>
-	<string name="settings_section_logbook">Journal</string>
+	<string name="settings_section_logbook">Historique</string>
+
 	<!-- Settings: Fasting notification -->
-	<string name="settings_fasting_notification_title">Afficher la notification rapide</string>
-	<string name="settings_fasting_notification_subtitle">Fournit des informations en temps réel pendant une période rapide</string>
+	<string name="settings_fasting_notification_title">Afficher la notification de jeûne</string>
+	<string name="settings_fasting_notification_subtitle">Fournit des informations en temps réel pendant un jeûne</string>
+
 	<!-- Settings: Stage alerts -->
-	<string name="settings_stage_alerts_title">Alertes d\'étape</string>
-	<string name="settings_stage_alerts_subtitle">Soyez averti lorsque vous entrez dans de nouvelles étapes de jeûne</string>
-	<string name="export_failed">Échec de l\'exportation du journal</string>
-	<string name="intro_00_title">Bienvenue à FastTrack48 !</string>
-	<string name="intro_00_description">De quoi s\'agit-il dans cette application ?</string>
-	<string name="intro_01_title">Aide motivationnelle</string>
-	<string name="intro_01_description">L\'idée principale derrière FastTrack48 est de vous aider à vous motiver pendant
-		vos jeûnes et de vous expliquer ce que votre corps fait aux différentes étapes du jeûne.</string>
-	<string name="intro_02_title">Une simple application gratuite</string>
-	<string name="intro_02_description">FastTrack48 est et sera toujours gratuit et open source. Il n\'y a pas de compte
-		à créer, pas d\'achats intégrés, pas de publicités à éviter. Et il n\'a même pas accès à Internet, donc il ne
-		peut pas envoyer vos données nulle part.</string>
+	<string name="settings_stage_alerts_title">Alertes de phase</string>
+	<string name="settings_stage_alerts_subtitle">Recevez une notification lorsque vous entrez dans une nouvelle phase de jeûne</string>
+
+	<string name="export_failed">Échec de l’exportation de l’historique des jeûnes</string>
+
+	<string name="intro_00_title">Bienvenue dans FastTrack48 !</string>
+	<string name="intro_00_description">À quoi sert cette application ?</string>
+
+	<string name="intro_01_title">Aide à la motivation</string>
+	<string name="intro_01_description">L’idée derrière FastTrack48 est de vous motiver pendant vos jeûnes et
+		de vous expliquer ce qui se passe dans votre corps aux différentes phases du jeûne.
+	</string>
+
+	<string name="intro_02_title">Une application simple et gratuite</string>
+	<string name="intro_02_description">FastTrack48 est et restera toujours gratuit et open source. Aucun compte à
+		créer, aucun achat intégré, aucune publicité, aucune télémétrie ni aucun suivi. L’application n’a pas accès à
+		Internet et fonctionne entièrement hors ligne.
+	</string>
+
 	<string name="intro_03_title">Jeûne intermittent</string>
-	<string name="intro_03_description">C\'est un nouveau domaine d\'étude qui montre de nombreux avantages au-delà de
-		la simple perte de poids.\n\nPour explorer ce que nous savons sur le jeûne et ce que la recherche dit, consultez
-		la section Infos de cette application !</string>
-	<string name="intro_04_title">Restez motivé avec les notifications</string>
-	<string name="intro_04_description">FastTrack48 peut afficher des notifications utiles pour vous motiver pendant votre
-		jeûne.\n\nVous verrez votre temps de jeûne actuel, à quelle étape vous en êtes, et quel mode d\'énergie votre
-		corps utilise.\n\nCela vous aide à rester sur la bonne voie sans avoir à ouvrir l\'application !</string>
-	<string name="intro_05_title">Voilà!</string>
-	<string name="intro_05_description">Maintenant, commencez à jeûner!</string>
+	<string name="intro_03_description">Le jeûne intermittent constitue un domaine de recherche récent qui montre de
+		nombreux bénéfices au-delà de la simple perte de poids.\n\nPour découvrir ce que nous savons sur le jeûne et ce
+		que dit la recherche, consultez la section Infos de cette application !
+	</string>
+
+	<string name="intro_04_title">Restez motivé grâce aux notifications</string>
+	<string name="intro_04_description">FastTrack48 peut afficher des notifications utiles pour vous motiver pendant
+		votre jeûne.\n\nVous verrez la durée actuelle de votre jeûne, la phase dans laquelle vous vous trouvez et le mode
+		énergétique utilisé par votre corps.\n\nCela vous aide à garder le cap sans avoir à ouvrir l’application !
+	</string>
+
+	<string name="intro_05_title">C’est tout !</string>
+	<string name="intro_05_description">Bienvenue dans le monde du jeûne !</string>
+
+	<string name="about_name" translatable="false">FastTrack48</string>
+	<string name="about_subtitle" translatable="false">Your DNA Re-Pair is in your hands!</string>
+	<string name="about_brief" translatable="false">Restore what was weakened, renew what has aged, re-generate what was lost</string>
+
+	<string name="about_telegram" translatable="false">Telegram</string>
+	<string name="about_github" translatable="false">GitHub</string>
+	<string name="about_website" translatable="false">Website</string>
+	<string name="about_rate" translatable="false">Rate on Google Play</string>
+
+	<!-- Acknowledgements. Deliberately NOT translated: this is an attribution
+	     and licence notice and must read identically in every locale. -->
+	<string name="about_ack_title" translatable="false">Acknowledgements</string>
+	<string name="about_ack_lead" translatable="false">Based on FastTrack by Adam Brown</string>
+	<string name="about_ack_credit" translatable="false">FastTrack48 is a modified derivative work of FastTrack, created by Adam Brown (@Wavesonics) and published by Darkrock Studios. The original software is Copyright \u00A9 2020 Adam Brown and is made available under the MIT License, reproduced in full below, which continues to govern the original portions of this app.</string>
+	<string name="about_ack_disclaimer" translatable="false">Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Darkrock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. The names \u201CFastTrack\u201D, \u201CDarkrock Studios\u201D and \u201CWavesonics\u201D appear here solely to identify the origin of the source code.</string>
+	<string name="about_ack_upstream" translatable="false">Original project</string>
+	<string name="about_ack_author" translatable="false">Adam Brown</string>
+	<string name="about_ack_license_toggle" translatable="false">MIT License \u2014 full text</string>
+	<string name="about_ack_license_expand_description" translatable="false">Show the full MIT License text</string>
+	<string name="about_ack_license_collapse_description" translatable="false">Hide the full MIT License text</string>
+	<string name="about_ack_license" translatable="false">MIT License\n\nCopyright (c) 2020 Adam Brown\nCopyright (c) 2026 FastTrack48 contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
 
 	<string name="title_fasting">Jeûne</string>
-	<string name="title_log">Journal</string>
+	<string name="title_log">Historique</string>
 	<string name="title_profile">Profil</string>
-	<string name="fasting_fragment_label">Rapide</string>
-	<string name="start_fast_button">Démarrer rapidement</string>
+
+	<string name="fasting_fragment_label">Jeûne</string>
+	<string name="start_fast_button">Commencer un jeûne</string>
 	<string name="start_orb_label">Commencer</string>
-	<string name="start_fast_now_button">Démarrer rapidement maintenant</string>
-	<string name="end_fast_button">Fin du jeûne</string>
-	<string name="fasting_energy_mode">Mode d\'énergie : %1$s</string>
+	<string name="start_fast_now_button">Commencer un jeûne maintenant</string>
+	<string name="end_fast_button">Terminer le jeûne</string>
+
+	<string name="fasting_energy_mode">Mode énergétique : %1$s</string>
 	<string name="fasting_energy_mode_glucose">Glucose</string>
 	<string name="fasting_energy_mode_fat">Corps cétoniques</string>
-	<string name="confirm_start_fast_title">Commencer rapidement ?</string>
+
+	<string name="confirm_start_fast_title">Commencer un jeûne ?</string>
 	<string name="confirm_start_fast_positive">Maintenant</string>
 	<string name="confirm_start_fast_neutral">Déjà commencé</string>
 	<string name="confirm_start_fast_negative">Non</string>
 	<string name="already_started_dialog_title">Déjà commencé</string>
-	<string name="start_picker_title">Quand as-tu commencé ton jeûne ?</string>
+
+	<string name="start_picker_title">Quand avez-vous commencé votre jeûne ?</string>
+
 	<string name="confirm_end_fast_title">Terminer le jeûne ?</string>
 	<string name="confirm_end_fast_positive">Maintenant</string>
-	<string name="confirm_end_fast_neutral">Déjà arrêté?</string>
+	<string name="confirm_end_fast_neutral">Déjà terminé ?</string>
 	<string name="confirm_end_fast_negative">Non</string>
-	<string name="already_stopped_dialog_title">Quand êtes-vous arrêté?</string>
-	<string name="menu_edit">Editer</string>
-	<string name="menu_delete">Supprimez</string>
-	<string name="confirm_delete_fast_title">Supprimer Fast ?</string>
+	<string name="already_stopped_dialog_title">Quand avez-vous arrêté ?</string>
+
+	<string name="menu_edit">Modifier</string>
+	<string name="menu_delete">Supprimer</string>
+	<string name="confirm_delete_fast_title">Supprimer le jeûne ?</string>
 	<string name="confirm_delete_fast_positive">Oui</string>
 	<string name="confirm_delete_fast_negative">Non</string>
-	<string name="fast_status_fasting">Jeûne en cours</string>
-	<string name="fast_status_not_fasting">Vous ne jeûnez pas.</string>
-	<string name="next_stage">Prochaine étape dans : %1$d heures</string>
 
-	<string name="log_entry_started">Démarré : %1$s</string>
+	<string name="fast_status_fasting">Jeûne en cours</string>
+	<string name="fast_status_not_fasting">Vous ne jeûnez pas</string>
+
+	<string name="next_stage">Prochaine phase à : %1$d heures</string>
+
+	<string name="start_fast_button_advanced" translatable="false">*</string>
+
+	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d heures</string>
 	<string name="log_entry_ketosis">Cétose : %1$d heures</string>
 	<string name="log_entry_autophagy">Autophagie : %1$d heures</string>
+	<string name="log_entry_note_prefix" translatable="false">📝</string>
+
 	<string name="profile_age_label">Âge</string>
-	<string name="profile_age_years">Années</string>
+	<string name="profile_age_years">Ans</string>
+
 	<string name="profile_weight_label">Poids</string>
 	<string name="profile_weight_pounds_label">Livres</string>
 	<string name="profile_weight_kg_label">Kilogrammes</string>
+
 	<string name="profile_update_button">Mettre à jour</string>
+
 	<string name="profile_bmi_label">IMC :</string>
 	<string name="profile_bmi_value">%1$.1f - %2$s</string>
 	<string name="profile_bmi_category_underweight">Insuffisance pondérale</string>
 	<string name="profile_bmi_category_normal">Normal</string>
-	<string name="profile_bmi_category_overweight">En surpoids</string>
-	<string name="profile_bmi_category_obese">Obèse</string>
-	<string name="profile_bmi_category_morbidly_obese">Obèse morbide</string>
-	<string name="profile_error">Mauvaise valeur</string>
-	<string name="profile_bmr_label">BMR :</string>
+	<string name="profile_bmi_category_overweight">Surpoids</string>
+	<string name="profile_bmi_category_obese">Obésité</string>
+	<string name="profile_bmi_category_morbidly_obese">Obésité morbide</string>
+
+	<string name="profile_error">Valeur incorrecte</string>
+
+	<string name="profile_bmr_label">MB :</string>
 	<string name="profile_bmr_value">%.0f kcal / jour</string>
-	<string name="profile_height_label">Hauteur</string>
+
+	<string name="profile_height_label">Taille</string>
 	<string name="profile_height_imper_feet_label">Pieds</string>
 	<string name="profile_height_imper_inches_label">Pouces</string>
 	<string name="profile_height_metric_label">Centimètres</string>
 	<string name="profile_gender_male">Homme</string>
 	<string name="profile_gender_female">Femme</string>
+
 	<string name="manual_add_title">Ajout manuel</string>
-	<string name="manual_edit_title">Modifier l\'entrée</string>
-	<string name="manual_add_length_hint">Longueur (Heures)</string>
+	<string name="manual_edit_title">Modifier l’entrée</string>
+	<string name="manual_add_length_hint">Durée (heures)</string>
+	<string name="manual_add_duration_label">Durée</string>
+	<string name="manual_add_hours_hint">Heures</string>
+	<string name="manual_add_minutes_hint">Minutes</string>
 	<string name="manual_add_complete_button">Ajouter</string>
 	<string name="manual_add_save_button">Enregistrer</string>
-	<string name="manual_add_fast_started_on">Démarré rapidement le : %1$s</string>
+	<string name="manual_add_fast_started_on">Jeûne commencé le %1$s</string>
 	<string name="manual_add_start_date_time_label">Date et heure de début</string>
 	<string name="edit_date">Modifier la date</string>
-	<string name="edit_time">Modifier l\'heure</string>
-	<string name="manual_start_title">Démarrage rapide</string>
-	<string name="manual_add_set_end_title">Définir la fin rapide</string>
+	<string name="edit_time">Modifier l’heure</string>
+	<string name="manual_start_title">Jeûne commencé</string>
+	<string name="manual_add_set_end_title">Définir la fin du jeûne</string>
 	<string name="manual_add_set_end_complete">Calculer</string>
+	<string name="add_fast_for_day_title">Ajouter un jeûne pour %1$s ?</string>
+	<string name="add_fast_for_day_confirm">Ajouter le jeûne</string>
+
+	<string name="settings_dateformat_title">Format de date et d’heure</string>
+	<string name="dateformat_optimized_compact">Compact</string>
+	<string name="dateformat_optimized_weekday">Compact + jour de la semaine</string>
+	<string name="dateformat_system_short">Format court du système</string>
+	<string name="dateformat_system_medium">Format moyen du système</string>
+	<string name="dateformat_system_long">Format long du système</string>
+	<string name="dateformat_iso" translatable="false">ISO 8601</string>
+
+	<string name="menu_clear_logbook">Vider l’historique des jeûnes…</string>
+	<string name="clear_logbook_title">Supprimer tout l’historique ?</string>
+	<string name="clear_logbook_message">Cette action supprime définitivement les %1$d jeûnes enregistrés. Elle est irréversible.</string>
+	<string name="clear_logbook_confirm">Tout supprimer (%1$d)</string>
+
 	<string name="fast_autophagy_label">Autophagie</string>
 	<string name="fast_ketosis_label">Cétose</string>
-	<string name="fast_fat_burn_label">Brûlage des graisses</string>
+	<string name="fast_fat_burn_label">Combustion des graisses</string>
+
 	<string name="stage_fasting_title">Jeûne</string>
-	<string name="stage_fasting_description">Votre corps consomme ses réserves de glucose, continuez-en !</string>
-	<string name="stage_fat_burning_title">Brûlage des graisses</string>
-	<string name="stage_fat_burning_description">Vos réserves de glucose sont épuisées ! Votre corps brûle maintenant
-		des graisses pour
-		énergie. Un entraînement dans les prochaines heures serait optimal.</string>
-	<string name="stage_fat_fasting_sweet_spot_title">Point idéal du jeûne</string>
-	<string name="stage_fat_fasting_sweet_spot_description">Vous êtes dans la zone de jeûne idéale, continuez comme ça
-		!</string>
-	<string name="stage_fat_peak_fat_burning_title">Pic maximal de combustion des graisses</string>
-	<string name="stage_fat_peak_fat_burning_description">Votre corps brûle rapidement des graisses maintenant, et la
-		cétose a commencé.</string>
+	<string name="stage_fasting_description">Votre corps utilise ses réserves de glucose. Continuez comme ça !</string>
+
+	<string name="stage_fat_burning_title">Combustion des graisses</string>
+	<string name="stage_fat_burning_description">Vos réserves de glucose sont épuisées ! Votre corps brûle maintenant des
+		graisses pour produire de l’énergie. Une séance d’entraînement dans les prochaines heures serait optimale.
+	</string>
+
+	<string name="stage_fat_fasting_sweet_spot_title">Zone idéale du jeûne</string>
+	<string name="stage_fat_fasting_sweet_spot_description">Vous êtes dans la zone idéale du jeûne. Continuez comme ça !</string>
+
+	<string name="stage_fat_peak_fat_burning_title">Pic de combustion des graisses</string>
+	<string name="stage_fat_peak_fat_burning_description">Votre corps brûle maintenant rapidement les graisses et la cétose
+		a commencé.
+	</string>
+
 	<string name="stage_autophagy_title">Autophagie</string>
-	<string name="stage_autophagy_description">Votre corps a commencé l\'autophagie !</string>
+	<string name="stage_autophagy_description">Votre corps a commencé l’autophagie !</string>
+
 	<string name="stage_optimal_autophagy_title">Autophagie optimale</string>
-	<string name="stage_optimal_autophagy_description">L\'autophagie est en plein essor ! Continuez comme ça, entre
-		maintenant et 72 heures, l\'autophagie sera très efficace.</string>
-	<string name="phase_glucose">Brûlage de glucose</string>
-	<string name="phase_fat_burning">Brûlage des graisses</string>
+	<string name="stage_optimal_autophagy_description">L’autophagie bat son plein ! Continuez comme ça ! Entre maintenant
+		et 72 heures, l’autophagie sera très efficace.
+	</string>
+
+	<string name="phase_glucose">Utilisation du glucose</string>
+	<string name="phase_fat_burning">Combustion des graisses</string>
 	<string name="phase_ketosis">Cétose</string>
 	<string name="phase_autophagy">Autophagie</string>
 	<string name="phase_optimal_autophagy">Autophagie optimale</string>
-	<string name="share_text">Je jeûne depuis %1$d heures et %2$d minutes ! Mon corps consomme actuellement %3$s pour
-		l\'énergie.</string>
-	<string name="share_text_past_tense">J\'ai jeûné pendant %1$d heures et %2$d minutes !</string>
-	<string name="stage_alerts_checkbox">Alertes de scène</string>
+
+	<string name="share_text">Je jeûne depuis %1$d heures et %2$d minutes ! Mon corps utilise actuellement %3$s
+		comme source d’énergie.
+	</string>
+	<string name="share_text_past_tense">J’ai jeûné pendant %1$d heures et %2$d minutes !</string>
+
+	<string name="stage_alerts_checkbox">Alertes de phase</string>
+
 	<string name="notification_channel_name">Alertes de jeûne</string>
-	<string name="notification_channel_description">Alertes qui vous informent lorsque vous entrez dans une nouvelle
-		phase de votre jeûne.</string>
-	<string name="notification_fat_burn_title">Phase rapide : brûlage de graisse</string>
-	<string name="notification_fat_burn_content">Vous avez épuisé vos réserves de glucose et votre corps consomme
-		maintenant des graisses pour obtenir de l\'énergie.</string>
-	<string name="notification_ketosis_title">Phase rapide : cétose</string>
-	<string name="notification_ketosis_content">Votre corps a désormais décomposé suffisamment de réserves de graisse
-		pour que vous soyez entré dans la cétose.</string>
-	<string name="notification_autophagy_title">Étape Rapide : Autophagie</string>
-	<string name="notification_autophagy_content">Votre corps est entré en autophagie. Les vieilles cellules ou les
-		cellules endommagées sont maintenant consommées pour produire de l\'énergie.</string>
-	<string name="notification_optimal_autophagy_title">Phase Rapide : Autophagie Optimale</string>
-	<string name="notification_optimal_autophagy_content">Votre corps est en autophagie depuis longtemps maintenant, et
-		votre santé cellulaire en tire de grands avantages.</string>
-	<string name="notification_fasting_channel_name">Statut de jeûne</string>
-	<string name="notification_fasting_channel_description">Notification en cours montrant votre statut de jeûne actuel et
-		progression.</string>
-	<string name="notification_fasting_title">Le jeûne: %1$s heures</string>
-	<string name="notification_fasting_energy_mode">Mode Energie : %1$s</string>
-	<string name="info_dialog_fat_burn_title">Brûlage de graisses</string>
-	<string name="info_dialog_fat_burn_content">À ce stade, votre corps a épuisé vos réserves de glucose. Le glucose est
-		stocké sous forme de glycogène pour une utilisation ultérieure, à ce stade, la plupart de votre glycogène stocké
-		a été décomposé en glucose et utilisé comme source d\'énergie.\n\n Maintenant, il commence à décomposer le tissu
-		adipeux (gras) en corps cétoniques. En plus de pouvoir consommer du glucose pour l\'énergie, votre corps peut
-		alternativement consommer des corps cétoniques pour obtenir de l\'énergie, et à mesure que les réserves de
-		glucose s\'épuisent, votre corps passera à un mode d\'énergie basé sur les corps cétoniques.</string>
+	<string name="notification_channel_description">Alertes qui vous informent lorsque vous entrez dans une nouvelle phase de
+		votre jeûne.
+	</string>
+
+	<string name="notification_fat_burn_title">Phase du jeûne : combustion des graisses</string>
+	<string name="notification_fat_burn_content">Vous avez épuisé vos réserves de glucose et votre corps consomme maintenant
+		des graisses pour produire de l’énergie.
+	</string>
+
+	<string name="notification_ketosis_title">Phase du jeûne : cétose</string>
+	<string name="notification_ketosis_content">Votre corps a maintenant décomposé suffisamment de réserves de graisse pour
+		entrer en cétose.
+	</string>
+
+	<string name="notification_autophagy_title">Phase du jeûne : autophagie</string>
+	<string name="notification_autophagy_content">Votre corps est entré en autophagie. Les cellules anciennes ou endommagées
+		sont maintenant dégradées pour produire de l’énergie.
+	</string>
+
+	<string name="notification_optimal_autophagy_title">Phase du jeûne : autophagie optimale</string>
+	<string name="notification_optimal_autophagy_content">Votre corps est en autophagie depuis un certain temps maintenant, et
+		votre santé cellulaire en tire de grands bénéfices.
+	</string>
+
+	<string name="notification_fasting_channel_name">Statut du jeûne</string>
+	<string name="notification_fasting_channel_description">Notification persistante indiquant votre statut de jeûne actuel et
+		votre progression.
+	</string>
+	<string name="notification_fasting_title">Jeûne : %1$s heures</string>
+	<string name="notification_fasting_energy_mode">Mode énergétique : %1$s</string>
+
+	<string name="info_dialog_fat_burn_title">Combustion des graisses</string>
+	<string name="info_dialog_fat_burn_content">À ce stade, votre corps a épuisé ses réserves de glucose. Le glucose est
+		stocké sous forme de glycogène pour une utilisation ultérieure ; à ce stade, la majeure partie du glycogène
+		stocké a été décomposée en glucose et utilisée comme source d’énergie.\n\nVotre corps commence alors à décomposer
+		le tissu adipeux (graisse) en corps cétoniques. En plus de pouvoir utiliser le glucose comme source d’énergie,
+		votre corps peut également utiliser les corps cétoniques pour produire de l’énergie et, à mesure que les réserves
+		de glucose diminuent, il passe à un mode énergétique fondé sur les corps cétoniques.
+	</string>
+
 	<string name="info_dialog_ketosis_title">Cétose</string>
-	<string name="info_dialog_ketosis_content">À ce stade, votre corps a suffisamment décomposé les graisses pour que
-		principalement, votre corps soit alimenté par des corps cétoniques plutôt que par du glucose.\n\nEn plus des
-		avantages de la perte de graisse que cela implique, des études ont montré des bénéfices pour les maladies liées
-		à l\'inflammation, bien que le mécanisme d\'action de ceci soit actuellement inconnu.</string>
+	<string name="info_dialog_ketosis_content">À ce stade, votre corps décompose des graisses depuis suffisamment longtemps
+		pour être principalement alimenté par des corps cétoniques plutôt que par du glucose.\n\nEn plus des bénéfices
+		liés à la perte de graisse, des études ont montré des effets bénéfiques dans certaines maladies liées à
+		l’inflammation, bien que le mécanisme d’action soit actuellement inconnu.
+	</string>
+
 	<string name="info_dialog_autophagy_title">Autophagie</string>
-	<string name="info_dialog_autophagy_content">À ce stade, votre corps a commencé à activer d\'autres processus pour
-		récolter de l\'énergie. En plus de décomposer le tissu adipeux en corps cétoniques, il a commencé à rechercher
-		des cellules anciennes ou endommagées et à les consommer pour obtenir plus d\'énergie.\n\nLes recherches sur
-		cette phase en sont à leurs débuts, mais il semble que ce soit un mécanisme important pour le corps afin
-		d\'arrêter les problèmes avant qu\'ils ne commencent. Par exemple, les taux de cancer sont plus faibles chez les
-		personnes qui entrent régulièrement en autophagie. De plus, certaines études ont également montré des taux plus
-		bas de la maladie d\'Alzheimer.</string>
+	<string name="info_dialog_autophagy_content">À ce stade, votre corps a commencé à activer d’autres processus pour
+		produire de l’énergie. En plus de décomposer le tissu adipeux en corps cétoniques, il commence à éliminer des
+		cellules anciennes ou endommagées afin d’en récupérer les constituants.\n\nLes recherches sur cette phase en sont
+		encore à leurs débuts, mais il semble qu’il s’agisse d’un mécanisme important permettant à l’organisme de
+		limiter certains problèmes avant qu’ils ne surviennent. Par exemple, les taux de cancer sont plus faibles chez
+		les personnes qui entrent régulièrement en autophagie. Certaines études ont également montré des taux plus faibles
+		de maladie d’Alzheimer.
+	</string>
+
 	<string name="info_dialog_bmi_title">Indice de masse corporelle</string>
-	<string name="info_dialog_bmi_content">Une estimation approximative du poids santé qu\'un adulte moyen devrait
-		avoir. Il est calculé simplement en divisant le poids par la taille.\n\nSouvent critiqué pour son inexactitude,
-		il est vrai qu\'il existe des facteurs qui peuvent rendre ce calcul trompeur. Par exemple : un culturiste
-		extrêmement musclé, ou une personne très grande ou très petite. Ces cas extrêmes donneront des résultats
-		inexacts à partir du calcul de l\'IMC de base.\n\nMais pour la majorité des gens, c\'est une estimation
-		suffisante pour savoir si vous êtes dans une fourchette de poids saine.</string>
-	<string name="info_dialog_bmr_title">Taux Métabolique de Base</string>
-	<string name="info_dialog_bmr_content">Ceci est une estimation du nombre de calories que votre corps va brûler en
-		une journée, lorsque vous êtes complètement au repos. Si vous ne faisiez que rester allongé au lit toute la
-		journée, c\'est le nombre de calories que vous pourriez manger sans prendre de poids.\n\nC\'est un chiffre
-		critique pour les personnes qui suivent un régime en restreignant leur apport calorique quotidien.</string>
-	<string name="info_dialog_positive">Génial !</string>
-	<string name="info_page_title_info">Informations</string>
-	<string name="info_page_title_tips">Astuces</string>
+	<string name="info_dialog_bmi_content">Une estimation approximative de la corpulence d’un adulte. L’IMC est calculé en
+		divisant le poids en kilogrammes par la taille en mètres au carré.\n\nSouvent critiqué pour son manque de précision,
+		l’IMC peut effectivement être trompeur dans certains cas. Par exemple : un culturiste extrêmement musclé, ou une
+		personne très grande ou très petite. Dans ces cas particuliers, le calcul de l’IMC peut donner une indication
+		inexacte.\n\nMais pour la majorité des personnes, il constitue une estimation suffisamment utile pour situer la
+		corpulence dans une plage considérée comme saine.
+	</string>
+
+	<string name="info_dialog_bmr_title">Métabolisme de base</string>
+	<string name="info_dialog_bmr_content">Il s’agit d’une estimation du nombre de calories que votre corps consommerait en
+		une journée au repos complet. Si vous restiez allongé au lit toute la journée sans aucune autre activité, ce serait
+		une estimation de votre dépense énergétique minimale.\n\nC’est une donnée importante pour les personnes qui
+		suivent un régime en réduisant leur apport calorique quotidien.
+	</string>
+
+	<string name="info_dialog_positive">Cool !</string>
+
+	<string name="info_page_title_info">Infos</string>
+	<string name="info_page_title_tips">Conseils</string>
+
 	<string name="title_activity_info">Infos sur le jeûne</string>
-	<string name="log_total_autophagy">🧬 Autophagie totale :</string>
-	<string name="log_total_ketosis">🔥 Cétose totale :</string>
+	<string name="log_total_autophagy">🧬 Autophagie :</string>
+	<string name="log_total_ketosis">🔥 Cétose :</string>
+	<string name="stat_total_fasts">Nombre total de jeûnes</string>
+	<string name="stat_total_fasted">Durée totale de jeûne</string>
+	<string name="stat_longest_fast">Jeûne le plus long</string>
 	<string name="log_total_hours">%1$d heures</string>
 	<string name="profile_metric_switch">Métrique</string>
 	<string name="title_activity_intro">Introduction</string>
-	<string name="app_widget_description">Suivez vos progrès de jeûne depuis votre écran d\'accueil.</string>
-	<string name="app_widget_not_fasting">Ne pas jeûner</string>
+	<string name="app_widget_description">Suivez votre progression de jeûne depuis l’écran d’accueil</string>
+	<string name="app_widget_not_fasting">Aucun jeûne en cours</string>
 	<string name="app_widget_fast_in_progress">Jeûne en cours</string>
 	<string name="app_widget_time">%1$d heures</string>
 	<string name="app_widget_time_compact">%1$d h</string>
-	<string name="app_widget_start_fast_button">Démarrer rapidement</string>
-	<string name="app_widget_stop_fast_button">Arrêter rapidement</string>
-	<string name="app_widget_start_compact">Début</string>
-	<string name="app_widget_start">Appuyez pour démarrer</string>
+	<string name="app_widget_start_fast_button">Commencer un jeûne</string>
+	<string name="app_widget_stop_fast_button">Arrêter le jeûne</string>
+	<string name="app_widget_start_compact">Commencer</string>
+	<string name="app_widget_start">Appuyez pour commencer</string>
 	<string name="close_button_content_description">Fermer</string>
 	<string name="cancel_button">Annuler</string>
 	<string name="next_button">Suivant</string>
 	<string name="previous_button">Précédent</string>
-	<string name="skip_button">Passer</string>
-	<string name="done_button">Fait</string>
-	<string name="debug_add_hour_button">Débogage : Ajouter 1 heure</string>
-	<string name="stop_fast_button_description">Arrêter rapidement</string>
-	<string name="start_fast_button_description">Commencer rapidement</string>
-	<string name="bmi_info_button_description">Informations sur l\'IMC</string>
-	<string name="bmr_info_button_description">Informations BMR</string>
-	<string name="profile_gender_label">Genre</string>
-	<string name="more_options_button_description">Plus d\'options</string>
+	<string name="skip_button">Ignorer</string>
+	<string name="done_button">Terminé</string>
+	<string name="debug_add_hour_button">Débogage : ajouter 1 heure</string>
+	<string name="stop_fast_button_description">Arrêter le jeûne</string>
+	<string name="start_fast_button_description">Commencer un jeûne</string>
+	<string name="bmi_info_button_description">Infos sur l’IMC</string>
+	<string name="bmr_info_button_description">Infos sur le métabolisme de base</string>
+	<string name="profile_gender_label">Sexe</string>
+	<string name="more_options_button_description">Plus d’options</string>
 	<string name="manual_add_close_button_description">Fermer</string>
 	<string name="manual_add_selected_start">Commencé : %1$s</string>
 	<string name="manual_add_cancel_button">Annuler</string>
 	<string name="manual_add_next_button">Suivant</string>
 	<string name="manual_add_calculate_from_end">Calculer à partir de la fin</string>
-	<string name="action_settings">Réglages</string>
-	<string name="title_activity_settings">Réglages</string>
-	<string name="settings_placeholder">Paramètres à venir bientôt</string>
-	<string name="back">Précédent</string>
-	<string name="settings_fancy_background_title">Afficher l\'arrière-plan fantaisie</string>
-	<string name="settings_fancy_background_subtitle">Désactiver pour un arrière-plan rapide plus simple</string>
+	<string name="action_settings">Paramètres</string>
+	<string name="title_activity_settings">Paramètres</string>
+	<string name="settings_placeholder">Paramètres à venir</string>
+	<string name="back">Retour</string>
+	<string name="settings_fancy_background_title">Afficher l’arrière-plan stylisé</string>
+	<string name="settings_fancy_background_subtitle">Désactivez-le pour un arrière-plan de jeûne plus sobre</string>
 	<string name="settings_metric_system_title">Système métrique</string>
 	<string name="settings_metric_system_subtitle">Afficher la taille et le poids en unités métriques</string>
 	<string name="settings_theme_mode_title">Thème</string>
-	<string name="settings_theme_mode_subtitle">Choisissez la lumière, la noirceur ou suivez le système</string>
+	<string name="settings_theme_mode_subtitle">Choisissez le mode clair, le mode sombre ou suivez le système</string>
 	<string name="settings_theme_mode_system">Système</string>
-	<string name="settings_theme_mode_light">Lumière</string>
+	<string name="settings_theme_mode_light">Clair</string>
 	<string name="settings_theme_mode_dark">Sombre</string>
-	<string name="log_no_entries">Pas encore d\'entrées!</string>
-	<string name="log_logbook_label">Journal</string>
-	<string name="log_stats_label">Statistiques à vie</string>
+	<string name="log_no_entries">Aucune entrée pour l’instant !</string>
+	<string name="log_logbook_label">Historique</string>
+	<string name="log_stats_label">Statistiques cumulées</string>
 	<string name="log_view_mode_list">Liste</string>
 	<string name="log_view_mode_calendar">Calendrier</string>
-	<string name="duration_less_than_minute">Tout juste commencé</string>
-	<string name="fast_notes_label">Notes (facultatif)</string>
-	<string name="fast_notes_placeholder">Comment ça s\'est passé ? Quelque chose à retenir de ce jeûne ?</string>
-	<string name="just_finished_fast">Tu viens de terminer un jeûne — bravo !</string>
 
-	<string name="notification_fasting_title_duration">Jeûne : %1$s</string>
-	<string name="phase_time_until">dans %1$s</string>
-	<string name="time_since_last_fast">Temps depuis ton dernier jeûne : %1$s</string>
-	<string name="last_fast_length">Jeûne de %1$s</string>
-	<string name="last_fast_ended">terminé %1$s</string>
-	<string name="share_text_fasting">Je jeûne depuis %1$s ! Mon corps utilise actuellement %2$s comme source d\'énergie.</string>
-	<string name="share_text_finished">J\'ai jeûné %1$s !</string>
+	<!-- Fasting journey stages (dial milestones) -->
+	<string name="journey_stage_0_title">La glycémie augmente</string>
+	<string name="journey_stage_0_body">Vous venez de manger et votre sang le sait. La glycémie augmente — chez les personnes
+		en bonne santé, elle atteint un pic inférieur à ~140 mg/dL en 30–60 min — et votre pancréas libère de l’insuline,
+		l’hormone qui fait entrer le glucose dans les cellules et stocke l’excédent sous forme de glycogène.\n\nC’est
+		l’état nourri : l’énergie abonde, le stockage est prioritaire et le mode de combustion des graisses est à l’arrêt.
+		\n\nIl ne reste plus qu’à digérer. Le chrono est lancé.
+	</string>
+
+	<string name="journey_stage_1_title">La glycémie diminue</string>
+	<string name="journey_stage_1_body">L’absorption ralentit et la tendance s’inverse. L’insuline baisse, le glucagon augmente
+		et votre foie commence à libérer le glycogène stocké pour maintenir la glycémie autour de ~70–100 mg/dL.\n\nVous
+		passez de l’état nourri à l’état post-absorptif — le relais silencieux où le corps cesse de stocker et commence à
+		dépenser.\n\nCette première pointe de faim est surtout liée à la baisse de l’insuline. Elle disparaît en une ou deux
+		minutes.
+	</string>
+
+	<string name="journey_stage_2_title">La glycémie se stabilise</string>
+	<string name="journey_stage_2_body">Votre foie est désormais le seul fournisseur : il libère progressivement du glucose à
+		partir du glycogène (~100 g de réserve) pour maintenir votre glycémie stable. Votre cerveau consomme à lui seul
+		~120 g de glucose par jour, cette stabilité est donc loin d’être anodine.\n\nNi creux ni pic : la glycogénolyse
+		maintient le niveau et éloigne l’hypoglycémie.\n\nDe nombreuses personnes signalent une concentration étonnamment
+		nette à ce stade. Ce n’est pas forcément une impression : le carburant est régulier.
+	</string>
+
+	<string name="journey_stage_3_title">Néoglucogenèse</string>
+	<string name="journey_stage_3_body">Le glycogène diminue, alors le foie se met à fabriquer du glucose à partir de lactate,
+		de glycérol et d’acides aminés — un processus appelé néoglucogenèse. Vers ~16 h, il fournit déjà près de la moitié
+		de votre production de glucose (Cahill, Annu Rev Nutr 2006).\n\nC’est l’intelligence biologique de votre organisme :
+		votre corps ne laisse pas votre cerveau manquer de glucose.\n\nLa faim et le léger creux que vous pouvez ressentir
+		sont liés au changement de phase.
+	</string>
+
+	<string name="journey_stage_4_title">Combustion des graisses</string>
+	<string name="journey_stage_4_body">L’insuline est enfin suffisamment basse pour permettre l’accès aux réserves de graisse.
+		La lipolyse libère des acides gras, le foie commence à les transformer en corps cétoniques et vous passez de
+		l’utilisation du glucose à la combustion des graisses.\n\nLa sensibilité à l’insuline augmente et les réserves de
+		graisse commencent à être consommées — c’est le cœur métabolique de l’efficacité du jeûne.\n\nUn goût métallique
+		ou un léger mal de tête peut accompagner l’apparition des premières cétones. Le feu est allumé 🔥.
+	</string>
+
+	<string name="journey_stage_5_title">Cétose</string>
+	<string name="journey_stage_5_body">Le taux de corps cétoniques dans le sang franchit ~0,5 mmol/L — la cétose
+		nutritionnelle — et continue d’augmenter. Votre cerveau ne peut pas oxyder directement les acides gras, mais il
+		fonctionne très bien grâce à cet afflux de corps cétoniques, ce qui évite d’avoir à sacrifier du muscle pour
+		fabriquer du glucose.\n\nBeaucoup de personnes signalent une clarté mentale inhabituelle et une faim qui s’atténue
+		d’elle-même — les corps cétoniques contribuent à réduire l’appétit.\n\nVingt-quatre heures. Votre corps privilégie
+		désormais le carburant qu’il fabrique lui-même.
+	</string>
+
+	<string name="journey_stage_6_title">Autophagie</string>
+	<string name="journey_stage_6_body">Une journée entière s’est écoulée et l’auto-nettoyage s’intensifie : l’autophagie —
+		le processus par lequel les cellules démontent les protéines et les organites endommagés et en recyclent les
+		composants (le mécanisme qui a valu à Ohsumi le prix Nobel 2016).\n\nVoyez-la comme une maintenance que vous ne
+		pouvez pas acheter — un nettoyage associé à la longévité et à un risque de maladie plus faible.\n\nFatigue ou mal
+		de tête ? Sel et eau. Un travail en profondeur est en cours.
+	</string>
+
+	<string name="journey_stage_7_title">Pic d’hormone de croissance</string>
+	<string name="journey_stage_7_body">Deux jours, et l’hormone de croissance augmente fortement — un jeûne d’environ 2 jours
+		peut multiplier sa sécrétion par environ 5 (Ho, J Clin Invest 1988). Son rôle, à ce stade : protéger la masse
+		maigre et stimuler davantage le métabolisme des graisses.\n\nVous continuez donc à brûler des graisses tout en
+		préservant le muscle que vous vous attendriez à perdre — une adaptation remarquablement élégante.\n\nCe regain
+		d’énergie inattendu que beaucoup décrivent ici ? C’est l’hormone qui parle.
+	</string>
+
+	<string name="journey_stage_8_title">Sensibilité à l’insuline</string>
+	<string name="journey_stage_8_body">Avec une insuline maintenue basse pendant plusieurs jours, vos cellules redeviennent
+		plus sensibles à cette hormone — la sensibilité à l’insuline revient vers un niveau plus sain, à l’inverse de
+		la résistance qui précède le diabète de type 2.\n\nLa glycémie reste dans une plage stable et étroite ; la
+		satiété vient facilement.\n\nVous réglez ainsi un système que la plupart des gens ne modifient jamais
+		délibérément.
+	</string>
+
+	<string name="journey_stage_9_title">Régénération des cellules immunitaires</string>
+	<string name="journey_stage_9_body">Trois jours. Une étape rare. Le jeûne prolongé peut amener l’organisme à éliminer
+		des cellules immunitaires sénescentes et à en régénérer de nouvelles à partir de cellules souches
+		hématopoïétiques, à mesure que la signalisation de l’IGF-1 et de la PKA diminue (Cheng, Cell Stem Cell 2014).\n\n
+		L’inflammation continue de diminuer ; certaines personnes décrivent un sentiment de bien-être calme et lucide.
+		\n\nAussi loin que vous alliez à partir d’ici, vous en ressortirez renouvelé — et rompez votre jeûne en douceur.
+		Soyez fier de vous.
+	</string>
+
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
 	<string name="journey_stage_hours_open">%1$d h+</string>
-	<string name="sheet_start_now">Commencer maintenant</string>
-	<string name="sheet_start_earlier">J\'ai commencé plus tôt…</string>
-	<string name="sheet_end_now">Terminer maintenant</string>
-	<string name="sheet_end_earlier">J\'ai arrêté plus tôt…</string>
+	<string name="phase_time_until">dans %1$s</string>
+	<string name="time_since_last_fast">Temps écoulé depuis votre dernier jeûne : %1$s</string>
+	<string name="last_fast_length">Jeûne de %1$s</string>
+	<string name="last_fast_ended">terminé %1$s</string>
+	<string name="just_finished_fast">Vous venez de terminer un jeûne — bravo !</string>
+	<string name="duration_less_than_minute">À peine commencé</string>
+
 	<string name="settings_section_phases">Phases du jeûne</string>
-	<string name="settings_phase_auto_title">Auto : n\'afficher que les phases actives</string>
-	<string name="settings_phase_auto_subtitle">Affiche chaque phase dès qu\'elle commence. Remplace les réglages individuels ci-dessous.</string>
-	<string name="settings_phase_fatburn_title">Afficher Combustion des graisses</string>
-	<string name="settings_phase_fatburn_subtitle">Affiche le compte à rebours de la combustion des graisses sur l\'écran de jeûne.</string>
-	<string name="settings_phase_ketosis_title">Afficher Cétose</string>
-	<string name="settings_phase_ketosis_subtitle">Affiche le compte à rebours de la cétose sur l\'écran de jeûne.</string>
-	<string name="settings_phase_autophagy_title">Afficher Autophagie</string>
-	<string name="settings_phase_autophagy_subtitle">Affiche le compte à rebours de l\'autophagie sur l\'écran de jeûne.</string>
-	<string name="journey_stage_0_title">La glycémie monte</string>
-	<string name="journey_stage_1_title">La glycémie baisse</string>
-	<string name="journey_stage_2_title">La glycémie se stabilise</string>
-	<string name="journey_stage_3_title">Néoglucogenèse</string>
-	<string name="journey_stage_4_title">Combustion des graisses</string>
-	<string name="journey_stage_5_title">Cétose</string>
-	<string name="journey_stage_6_title">Autophagie</string>
-	<string name="journey_stage_7_title">Pic d\'hormone de croissance</string>
-	<string name="journey_stage_8_title">Sensibilité à l\'insuline</string>
-	<string name="journey_stage_9_title">Régénération des cellules immunitaires</string>
-	<string name="journey_stage_0_body">Tu viens de manger, et ton sang le sait. La glycémie grimpe — chez les personnes en bonne santé, elle culmine sous ~140 mg/dl en 30–60 min — et ton pancréas répond par l\'insuline, l\'hormone qui fait entrer ce sucre dans les cellules et met le surplus de côté sous forme de glycogène.\n\nC\'est l\'état nourri : l\'énergie abonde, le stockage est prioritaire, la combustion des graisses est à l\'arrêt.\n\nIl n\'y a plus qu\'à digérer. Le chrono est lancé.</string>
-	<string name="journey_stage_1_body">L\'absorption s\'essouffle, et la tendance s\'inverse. L\'insuline reflue, le glucagon monte, et ton foie commence à libérer le glycogène stocké pour maintenir la glycémie autour de ~70–100 mg/dl.\n\nTu es passé de l\'état nourri à l\'état post-absorptif — le relais silencieux où le corps cesse de stocker et se met à dépenser.\n\nCette première pointe de faim, c\'est surtout l\'insuline qui baisse. Ça passe.</string>
-	<string name="journey_stage_2_body">Ton foie est désormais le seul fournisseur : il distille du glucose à partir du glycogène (~100 g en réserve) pour te garder stable. Ton cerveau à lui seul brûle ~120 g de glucose par jour, alors cette stabilité n\'a rien d\'anodin.\n\nNi chute ni pic — la glycogénolyse tient la ligne et éloigne l\'hypoglycémie.\n\nIci, la concentration paraît souvent étonnamment nette. Ce n\'est pas ton imagination ; c\'est un carburant régulier.</string>
-	<string name="journey_stage_3_body">Le glycogène s\'amenuise, alors le foie se lance dans un second métier : fabriquer du glucose de toutes pièces — lactate, glycérol, acides aminés — un processus appelé néoglucogenèse. Vers ~16 h, il fournit déjà près de la moitié de ton glucose (Cahill, Annu Rev Nutr 2006).\n\nC\'est la flexibilité métabolique rendue visible : ton corps ne laissera pas le cerveau manquer.\n\nLa faim et le léger creux que tu ressens, c\'est l\'interrupteur qu\'on bascule. Ensuite, place aux graisses.</string>
-	<string name="journey_stage_4_body">L\'insuline est enfin assez basse pour ouvrir tes réserves de graisse. La lipolyse libère des acides gras, le foie commence à les transformer en cétones, et tu passes de brûleur de sucre à brûleur de graisse.\n\nChaque heure ici améliore un peu ta sensibilité à l\'insuline et puise dans tes réserves de graisse — le cœur métabolique de l\'efficacité du jeûne.\n\nUn goût métallique ou un léger mal de tête, ce sont les premières cétones. Le feu est allumé.</string>
-	<string name="journey_stage_5_body">Les cétones sanguines franchissent ~0,5 mmol/l — la cétose nutritionnelle — et continuent de grimper. Ton cerveau ne peut pas oxyder directement les acides gras, mais il fonctionne à merveille avec ce flux de cétones, qui évite de sacrifier du muscle pour fabriquer du glucose.\n\nBeaucoup rapportent une clarté mentale inhabituelle et une faim qui s\'éteint d\'elle-même — les cétones émoussent l\'appétit.\n\nVingt-quatre heures. Ton corps préfère désormais le carburant qu\'il fabrique lui-même.</string>
-	<string name="journey_stage_6_body">Une journée entière, et l\'auto-nettoyage s\'intensifie : l\'autophagie — les cellules démontent protéines et organites endommagés et en recyclent les pièces (le mécanisme qui a valu à Ohsumi le prix Nobel 2016). Chez l\'humain, la chronologie s\'étudie encore, mais le jeûne active clairement cette voie.\n\nVois-la comme un entretien qui ne s\'achète pas — un nettoyage associé à la longévité et à un risque de maladie plus faible.\n\nFatigue ou mal de tête ? Sel et eau. Un travail profond est en cours.</string>
-	<string name="journey_stage_7_body">Deux jours, et l\'hormone de croissance s\'envole — un jeûne de ~2 jours peut multiplier sa sécrétion par environ 5 (Ho, J Clin Invest 1988). Sa mission maintenant : protéger le muscle maigre et pousser plus fort le métabolisme des graisses.\n\nTu continues donc à brûler de la graisse tout en préservant le muscle que tu croyais perdre — une adaptation vraiment élégante.\n\nCe regain d\'énergie inattendu que beaucoup décrivent ici ? C\'est l\'hormone qui parle.</string>
-	<string name="journey_stage_8_body">Avec une insuline maintenue basse pendant des jours, tes cellules y redeviennent sensibles — la sensibilité à l\'insuline se réajuste vers un niveau plus sain, l\'inverse de la résistance qui précède le diabète de type 2.\n\nLa glycémie reste dans une plage calme et étroite ; la satiété vient facilement.\n\nTu règles un système que la plupart des gens n\'ajustent jamais volontairement.</string>
-	<string name="journey_stage_9_body">Trois jours : un air rare. Le jeûne prolongé peut amener le corps à éliminer des cellules immunitaires vieillissantes et à en régénérer de nouvelles à partir de cellules souches hématopoïétiques, à mesure que la signalisation d\'IGF-1 et de PKA diminue (Cheng, Cell Stem Cell 2014).\n\nL\'inflammation continue de s\'apaiser ; certains décrivent un bien-être calme et lucide.\n\nAussi loin que tu ailles à partir d\'ici, tu en ressors renouvelé — et romps ton jeûne en douceur. Sois fier.</string>
-	<string name="import_easyfast_result">%1$d jeûnes importés.\nEntrées en chevauchement IGNORÉES : %2$d</string>
-	<string name="export_choose_format">Format d\'exportation</string>
+	<string name="settings_phase_auto_title">Auto : afficher uniquement les phases actives</string>
+	<string name="settings_phase_auto_subtitle">Affiche chaque phase dès qu’elle commence. Remplace les réglages individuels ci-dessous.</string>
+	<string name="settings_phase_fatburn_title">Afficher la combustion des graisses</string>
+	<string name="settings_phase_fatburn_subtitle">Affiche le compte à rebours de la combustion des graisses sur l’écran de jeûne</string>
+	<string name="settings_phase_ketosis_title">Afficher la cétose</string>
+	<string name="settings_phase_ketosis_subtitle">Affiche le compte à rebours de la cétose sur l’écran de jeûne</string>
+	<string name="settings_phase_autophagy_title">Afficher l’autophagie</string>
+	<string name="settings_phase_autophagy_subtitle">Affiche le compte à rebours de l’autophagie sur l’écran de jeûne</string>
 
+	<string name="share_text_fasting">Je jeûne depuis %1$s ! Mon corps utilise actuellement %2$s comme source d’énergie.</string>
+	<string name="share_text_finished">J’ai jeûné pendant %1$s !</string>
 
-	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
-	<string name="stat_total_fasts">Total des jeûnes</string>
-	<string name="stat_total_fasted">Durée totale de jeûne</string>
-	<string name="stat_longest_fast">Jeûne le plus long</string>
-	<string name="manual_add_duration_label">Durée</string>
-	<string name="manual_add_hours_hint">Heures</string>
-	<string name="manual_add_minutes_hint">Minutes</string>
-	<string name="add_fast_for_day_title">Ajouter un jeûne pour %1$s ?</string>
-	<string name="add_fast_for_day_confirm">Ajouter le jeûne</string>
-	<string name="menu_clear_logbook">Vider le journal…</string>
-	<string name="clear_logbook_title">Supprimer tout le journal ?</string>
-	<string name="clear_logbook_message">Ceci supprime définitivement les %1$d jeûnes enregistrés. Cette action est irréversible.</string>
-	<string name="clear_logbook_confirm">Tout supprimer (%1$d)</string>
-	<string name="stage_optimal_autophagy_description_past72">L\'autophagie est en plein essor ! Continuez comme ça !</string>
-	<string name="settings_dateformat_title">Format date &amp; heure</string>
-	<string name="dateformat_optimized_compact">Compact</string>
-	<string name="dateformat_optimized_weekday">Compact + jour de semaine</string>
-	<string name="dateformat_system_short">Système court</string>
-	<string name="dateformat_system_medium">Système moyen</string>
-	<string name="dateformat_system_long">Système long</string>
+	<string name="notification_fasting_title_duration">Jeûne : %1$s</string>
+	<string name="sheet_start_now">Commencer maintenant</string>
+	<string name="sheet_start_earlier">J’ai commencé plus tôt…</string>
+	<string name="sheet_end_now">Terminer maintenant</string>
+	<string name="sheet_end_earlier">J’ai arrêté plus tôt…</string>
+
+	<string name="fast_notes_label">Notes (facultatif)</string>
+	<string name="fast_notes_placeholder">Comment s’est passé votre jeûne ? Quelque chose à retenir ?</string>
+
+	<string name="stage_optimal_autophagy_description_past72">L’autophagie bat son plein ! Continuez comme ça !</string>
 
 	<string name="fast_start_label">Début</string>
-	<string name="edit_start_time">Modifier l\'heure de début</string>
+	<string name="edit_start_time">Modifier l’heure de début</string>
 	<string name="edit_start_dialog_title">Jeûne commencé</string>
-	<string name="relative_today">Aujourd\'hui</string>
+	<string name="relative_today">Aujourd’hui</string>
 	<string name="relative_yesterday">Hier</string>
+
 	<string name="start_overlap_title">Chevauche votre jeûne précédent</string>
-	<string name="start_overlap_message">Votre dernier jeûne enregistré s\'est terminé le %1$s. Commencer celui-ci le %2$s le chevaucherait.</string>
+	<string name="start_overlap_message">Votre dernier jeûne enregistré s’est terminé %1$s. Le commencer à %2$s chevaucherait le précédent.</string>
 	<string name="start_overlap_confirm">Enregistrer quand même</string>
+
+	<string name="settings_section_language">Langue</string>
+	<string name="settings_language_title">Langue de l’application</string>
+	<string name="settings_language_system">Par défaut du système</string>
 </resources>
+

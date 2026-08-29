@@ -325,4 +325,7 @@
 	<string name="start_overlap_title">Se solapa con tu ayuno anterior</string>
 	<string name="start_overlap_message">Tu último ayuno registrado terminó el %1$s. Empezar este el %2$s se solaparía con él.</string>
 	<string name="start_overlap_confirm">Guardar de todos modos</string>
+	<string name="settings_section_language">Idioma</string>
+	<string name="settings_language_title">Idioma de la aplicación</string>
+	<string name="settings_language_system">Predeterminado del sistema</string>
 </resources>

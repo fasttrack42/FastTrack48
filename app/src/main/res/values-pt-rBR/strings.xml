@@ -304,4 +304,7 @@ Esse é um número fundamental para pessoas que fazem dieta restringindo a inges
 	<string name="start_overlap_title">Sobrepõe o seu jejum anterior</string>
 	<string name="start_overlap_message">Seu último jejum registrado terminou em %1$s. Começar este em %2$s se sobreporia a ele.</string>
 	<string name="start_overlap_confirm">Salvar mesmo assim</string>
+	<string name="settings_section_language">Idioma</string>
+	<string name="settings_language_title">Idioma do aplicativo</string>
+	<string name="settings_language_system">Padrão do sistema</string>
 </resources>

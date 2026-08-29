@@ -1,5 +1,6 @@
 package com.legbehindneck.fasttrack48.data.log
 
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.database.FastEntry
 import com.legbehindneck.fasttrack48.utils.csvEscape
 import com.legbehindneck.fasttrack48.utils.formatDurationFull
@@ -20,8 +21,18 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Instant
 
 
+/**
+ * The logbook, plus the one fast that is not in it.
+ *
+ * A finished fast is a [FastEntry] row: a start and a non-null length, with no way to say
+ * "not over yet". The fast currently running lives in a different store entirely
+ * ([ActiveFastRepository]), which is why transferring the logbook used to lose it. The
+ * repository holds both so that an export can state what was true at the moment it was
+ * written, and an import can put it back.
+ */
 class FastingLogRepositoryImpl(
-	private val datasource: FastingLogDatasource
+	private val datasource: FastingLogDatasource,
+	private val activeFast: ActiveFastRepository,
 ) : FastingLogRepository {
 
 	override fun logFast(startTime: Instant, endTime: Instant, notes: String) {
@@ -105,7 +116,18 @@ class FastingLogRepositoryImpl(
 			).joinToString(",")
 		}
 
-		(listOf(header) + rows).joinToString("\n")
+		// A fast still running when the file is written leaves its three end columns
+		// blank. CSV is this app's own format, so it can carry the one thing the calendar
+		// formats cannot — a fast with no end yet — and reading the file back restores it
+		// as in progress rather than inventing a length for it.
+		val ongoing = activeFast.getFastStart()
+			?.takeIf { activeFast.isFasting() }
+			?.let { start ->
+				listOf("", formatDateTime(start.toLocalDateTime(tz)), "", "", "", "")
+					.joinToString(",")
+			}
+
+		(listOf(header) + rows + listOfNotNull(ongoing)).joinToString("\n")
 	}
 
 	// endregion
@@ -120,6 +142,12 @@ class FastingLogRepositoryImpl(
 	 *
 	 * Entries are de-duplicated by start-second, so re-importing the same file
 	 * updates rather than duplicates.
+	 *
+	 * A row whose End *and* Duration (s) cells are both blank is a fast that was still
+	 * running when the file was written. It is restored as the fast in progress — but only
+	 * when nothing is running now: a live fast is state the user is currently in, and an
+	 * import must not silently replace it. A row with a malformed end is still discarded;
+	 * only genuinely empty cells mean "open".
 	 */
 	override suspend fun importLog(cvsExport: String): Boolean = withContext(Dispatchers.IO) {
 		try {
@@ -170,6 +198,12 @@ class FastingLogRepositoryImpl(
 				} ?: continue
 
 				val (startEpoch, lengthMs, notes) = parsed
+				if (lengthMs == null) {
+					// An open row belongs in the active-fast store, not the logbook, so it
+					// skips the de-dupe below — there is no row to replace.
+					if (restoreOngoing(startEpoch)) imported = true
+					continue
+				}
 				// De-dupe within the whole second the start falls in
 				val secondFloor = startEpoch - (startEpoch % 1000)
 				datasource.deleteByStartRange(secondFloor, secondFloor + 1000)
@@ -184,7 +218,8 @@ class FastingLogRepositoryImpl(
 		}
 	}
 
-	private data class ParsedRow(val startEpoch: Long, val lengthMs: Long, val notes: String)
+	/** A parsed CSV row. A null [lengthMs] means the fast had not ended yet. */
+	private data class ParsedRow(val startEpoch: Long, val lengthMs: Long?, val notes: String)
 
 	private fun parseCurrentRow(
 		row: List<String>,
@@ -196,19 +231,29 @@ class FastingLogRepositoryImpl(
 	): ParsedRow? {
 		val start = parseLocalDateTime(row.getOrNull(startIdx)) ?: return null
 		val startInstant = start.toInstant(tz)
+		val notes = row.getOrNull(notesIdx)?.trim().orEmpty()
 
-		val end = parseLocalDateTime(row.getOrNull(endIdx))
+		val endCell = row.getOrNull(endIdx)?.trim().orEmpty()
+		val secondsCell = row.getOrNull(secondsIdx)?.trim().orEmpty()
+
+		// Both endpoints empty — not unparseable, empty — is how this app writes a fast that
+		// had not ended when the file was exported. Garbage in either cell still falls
+		// through to the checks below and is rejected.
+		if (endCell.isEmpty() && secondsCell.isEmpty()) {
+			return ParsedRow(startInstant.toEpochMilliseconds(), null, notes)
+		}
+
+		val end = parseLocalDateTime(endCell)
 		val lengthMs: Long = when {
 			end != null -> {
 				val d = end.toInstant(tz).minus(startInstant)
 				if (d > Duration.ZERO) d.inWholeMilliseconds
-				else row.getOrNull(secondsIdx)?.trim()?.toLongOrNull()?.times(1000) ?: return null
+				else secondsCell.toLongOrNull()?.times(1000) ?: return null
 			}
 
-			else -> row.getOrNull(secondsIdx)?.trim()?.toLongOrNull()?.times(1000) ?: return null
+			else -> secondsCell.toLongOrNull()?.times(1000) ?: return null
 		}
 
-		val notes = row.getOrNull(notesIdx)?.trim().orEmpty()
 		return ParsedRow(startInstant.toEpochMilliseconds(), lengthMs, notes)
 	}
 
@@ -275,6 +320,21 @@ class FastingLogRepositoryImpl(
 		return ImportResult(imported, skippedOverlapping, ok = true)
 	}
 
+	/**
+	 * Put an exported fast-in-progress back as the running one, reporting whether it took.
+	 *
+	 * Declined when a fast is already running. That fast is state the user is living in
+	 * right now — a timer on their screen and a notification in their shade — and no file
+	 * they open should be able to overwrite it without their say-so. Everything else in the
+	 * row is trusted as written: the start is not clamped or overlap-checked, because the
+	 * file is the user's own export and second-guessing it would lose data they asked for.
+	 */
+	private fun restoreOngoing(startEpochMs: Long): Boolean {
+		if (activeFast.isFasting()) return false
+		activeFast.startFast(Instant.fromEpochMilliseconds(startEpochMs))
+		return true
+	}
+
 	// endregion
 
 	// region EasyFast backup import
@@ -328,7 +388,8 @@ class FastingLogRepositoryImpl(
 
 	override suspend fun exportIcs(): String = withContext(Dispatchers.IO) {
 		val entries = datasource.getAll()
-		val dtStamp = icsUtc(System.currentTimeMillis())
+		val nowMs = System.currentTimeMillis()
+		val dtStamp = icsUtc(nowMs)
 
 		val lines = ArrayList<String>()
 		lines += "BEGIN:VCALENDAR"
@@ -336,21 +397,37 @@ class FastingLogRepositoryImpl(
 		lines += "PRODID:-//legbehindneck.com//FastTrack48//EN"
 		lines += "CALSCALE:GREGORIAN"
 		for (e in entries) {
-			val start = e.start
-			val finish = e.start + e.length
-			lines += "BEGIN:VEVENT"
-			lines += "UID:fasttrack-$start-$finish@legbehindneck.com"
-			lines += "DTSTAMP:$dtStamp"
-			lines += "DTSTART:${icsUtc(start)}"
-			lines += "DTEND:${icsUtc(finish)}"
-			lines += "SUMMARY:${icsEscape("Fast — " + formatDurationFull(e.length.milliseconds))}"
-			if (e.notes.isNotBlank()) lines += "DESCRIPTION:${icsEscape(e.notes)}"
-			lines += "END:VEVENT"
+			lines += icsEvent(e.start, e.start + e.length, dtStamp, e.notes)
 		}
+
+		// RFC 5545 has no open-ended VEVENT. Omitting DTEND does not mean "still going": a
+		// DATE-TIME DTSTART with no DTEND is an event that ends at the same instant (§3.6.1),
+		// i.e. zero length. So a running fast is closed at the moment of export — the only
+		// thing this format can say about it truthfully — and comes back as a finished fast.
+		val ongoingStart = activeFast.getFastStart()?.toEpochMilliseconds()
+		if (activeFast.isFasting() && ongoingStart != null && nowMs > ongoingStart) {
+			// DTEND must be later than DTSTART; a start in the future has no valid event.
+			lines += icsEvent(ongoingStart, nowMs, dtStamp, notes = "")
+		}
+
 		lines += "END:VCALENDAR"
 
 		// RFC 5545 uses CRLF line breaks and folds content lines over 75 octets.
 		lines.joinToString("\r\n") { foldIcsLine(it) } + "\r\n"
+	}
+
+	/** One VEVENT over the half-open range [start, finish), both epoch millis. */
+	private fun icsEvent(start: Long, finish: Long, dtStamp: String, notes: String): List<String> {
+		val lines = ArrayList<String>(7)
+		lines += "BEGIN:VEVENT"
+		lines += "UID:fasttrack-$start-$finish@legbehindneck.com"
+		lines += "DTSTAMP:$dtStamp"
+		lines += "DTSTART:${icsUtc(start)}"
+		lines += "DTEND:${icsUtc(finish)}"
+		lines += "SUMMARY:${icsEscape("Fast — " + formatDurationFull((finish - start).milliseconds))}"
+		if (notes.isNotBlank()) lines += "DESCRIPTION:${icsEscape(notes)}"
+		lines += "END:VEVENT"
+		return lines
 	}
 
 	override suspend fun importIcs(icsText: String): ImportResult = withContext(Dispatchers.IO) {
@@ -588,24 +665,51 @@ class FastingLogRepositoryImpl(
 			if (e.notes.isNotBlank()) obj.put("content", e.notes)
 			items.put(obj)
 		}
+		// Unlike iCalendar, ActivityStreams makes `endTime` optional, so an Event carrying
+		// only a `startTime` is a legal way to say "started, not finished". A fast in
+		// progress is exported exactly that way — no endTime, no duration — which makes this
+		// format lossless for it rather than closing it at an instant that never happened.
+		val ongoingStart = activeFast.getFastStart()
+		if (activeFast.isFasting() && ongoingStart != null) {
+			val obj = org.json.JSONObject()
+			obj.put("type", "Event")
+			obj.put("name", "Fast")
+			obj.put("startTime", isoUtc(ongoingStart.toEpochMilliseconds()))
+			items.put(obj)
+		}
+
 		val root = org.json.JSONObject()
 		root.put("@context", "https://www.w3.org/ns/activitystreams")
 		root.put("type", "OrderedCollection")
-		root.put("totalItems", entries.size)
+		// items, not entries: the running fast is one of them.
+		root.put("totalItems", items.length())
 		root.put("orderedItems", items)
 		root.toString(2)
 	}
 
 	override suspend fun importActivityStreams(jsonText: String): ImportResult = withContext(Dispatchers.IO) {
 		try {
-			importFasts(parseActivityStreams(jsonText))
+			val parsed = parseActivityStreams(jsonText)
+			val result = importFasts(parsed.finished)
+			// An unfinished Event is counted like any other item in the file, so the totals
+			// the user is shown still account for everything that was in it.
+			when {
+				parsed.ongoingStart == null -> result
+				restoreOngoing(parsed.ongoingStart) ->
+					result.copy(imported = result.imported + 1)
+
+				else -> result.copy(skippedOverlapping = result.skippedOverlapping + 1)
+			}
 		} catch (e: Exception) {
 			Napier.e("Failed to import ActivityStreams", e)
 			ImportResult(0, 0, ok = false)
 		}
 	}
 
-	private fun parseActivityStreams(jsonText: String): List<ImportedFast> {
+	/** Finished fasts from an AS2 document, plus the start of an unfinished one if present. */
+	private data class ParsedStreams(val finished: List<ImportedFast>, val ongoingStart: Long?)
+
+	private fun parseActivityStreams(jsonText: String): ParsedStreams {
 		val trimmed = jsonText.trim()
 		val items = org.json.JSONArray()
 		if (trimmed.startsWith("[")) {
@@ -622,12 +726,19 @@ class FastingLogRepositoryImpl(
 		}
 
 		val out = ArrayList<ImportedFast>(items.length())
+		var ongoingStart: Long? = null
 		for (i in 0 until items.length()) {
 			val o = items.optJSONObject(i) ?: continue
 			val start = parseIso8601(o.optString("startTime", "")) ?: continue
 			val end = parseIso8601(o.optString("endTime", ""))
 				?: parseIsoDurationMs(o.optString("duration", ""))?.let { start + it }
-				?: continue
+			if (end == null) {
+				// No end and no duration: an unfinished Event, which is how a fast in
+				// progress is written. Only one fast can be running, so a hand-edited file
+				// with several resolves to the latest start.
+				ongoingStart = maxOf(ongoingStart ?: start, start)
+				continue
+			}
 			val notes = when {
 				o.has("content") -> o.optString("content", "")
 				o.has("summary") -> o.optString("summary", "")
@@ -635,7 +746,7 @@ class FastingLogRepositoryImpl(
 			}.trim()
 			out += ImportedFast(start, end, notes)
 		}
-		return out
+		return ParsedStreams(out, ongoingStart)
 	}
 
 	private fun isoUtc(epochMs: Long): String {

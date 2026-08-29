@@ -328,4 +328,7 @@
 	<string name="start_overlap_title">Si sovrappone al digiuno precedente</string>
 	<string name="start_overlap_message">Il tuo ultimo digiuno registrato è terminato il %1$s. Iniziare questo il %2$s lo sovrapporrebbe.</string>
 	<string name="start_overlap_confirm">Salva comunque</string>
+	<string name="settings_section_language">Lingua</string>
+	<string name="settings_language_title">Lingua dell\'app</string>
+	<string name="settings_language_system">Predefinita di sistema</string>
 </resources>

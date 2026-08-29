@@ -32,13 +32,31 @@ interface FastingLogRepository {
         length: Duration,
         notes: String = entry.notes
 	): Boolean
+	/**
+	 * Export as CSV. A fast in progress is written as a row with its End, Duration (s) and
+	 * Duration cells blank — this app's own format is the only one of the three that can
+	 * carry an unfinished fast without distorting it.
+	 */
 	suspend fun exportLog(): String
+
+	/**
+	 * Import a logbook CSV. A row with blank End *and* blank Duration (s) is a fast that
+	 * was still running at export and is restored as the fast in progress — unless one is
+	 * already running, in which case the row is dropped and the live fast is left alone.
+	 */
 	suspend fun importLog(cvsExport: String): Boolean
 
-	/** Export the logbook as an iCalendar (RFC 5545) document. */
+	/**
+	 * Export the logbook as an iCalendar (RFC 5545) document. iCalendar cannot express an
+	 * unfinished event — a DTSTART with no DTEND is zero-length, not open — so a fast in
+	 * progress is exported closed at the moment of export.
+	 */
 	suspend fun exportIcs(): String
 
-	/** Export the logbook as an ActivityStreams 2.0 (JSON-LD) document. */
+	/**
+	 * Export the logbook as an ActivityStreams 2.0 (JSON-LD) document. AS2 makes `endTime`
+	 * optional, so a fast in progress is exported as an Event with a `startTime` only.
+	 */
 	suspend fun exportActivityStreams(): String
 
 	/**
@@ -51,7 +69,11 @@ interface FastingLogRepository {
 	/** Import fasts from an iCalendar (RFC 5545) document, skipping overlaps. */
 	suspend fun importIcs(icsText: String): ImportResult
 
-	/** Import fasts from an ActivityStreams 2.0 (JSON-LD) document, skipping overlaps. */
+	/**
+	 * Import fasts from an ActivityStreams 2.0 (JSON-LD) document, skipping overlaps. An
+	 * Event with no `endTime` and no `duration` is restored as the fast in progress, on the
+	 * same terms as the CSV importer: only when no fast is already running.
+	 */
 	suspend fun importActivityStreams(jsonText: String): ImportResult
 }
 

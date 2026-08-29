@@ -1,6 +1,8 @@
-• redesign main fasting screen
+• redesign main fasting screen: central start button
 • add option to modify Start time of ongoing fast
+• change UI language in settings
+• include ongoing fasts in import/export
 • Options menu: Export to CSV (Excel), iCalendar (.ics), ActivityStreams 2.0 (JSON-LD).
- + Import .csv and EasyFast .zip backup
+• Import .csv and EasyFast .zip backup
 • remove unjustified heavy dependencies: glide, markdown-compose, etc
 • review, improve and cleanup translations

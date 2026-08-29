@@ -283,4 +283,7 @@
 	<string name="start_overlap_title">Overlapt je vorige vasten</string>
 	<string name="start_overlap_message">Je laatst vastgelegde vasten eindigde %1$s. Dit vasten op %2$s laten beginnen zou daarmee overlappen.</string>
 	<string name="start_overlap_confirm">Toch opslaan</string>
+	<string name="settings_section_language">Taal</string>
+	<string name="settings_language_title">App-taal</string>
+	<string name="settings_language_system">Systeemstandaard</string>
 </resources>

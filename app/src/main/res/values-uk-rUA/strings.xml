@@ -318,4 +318,7 @@
 	<string name="start_overlap_title">Перекривається з попереднім голодуванням</string>
 	<string name="start_overlap_message">Ваше останнє записане голодування завершилося %1$s. Початок цього о %2$s перекриє його.</string>
 	<string name="start_overlap_confirm">Усе одно зберегти</string>
+	<string name="settings_section_language">Мова</string>
+	<string name="settings_language_title">Мова застосунку</string>
+	<string name="settings_language_system">Системна</string>
 </resources>

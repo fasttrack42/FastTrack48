@@ -317,4 +317,7 @@
 	<string name="start_overlap_title">Überschneidet dein vorheriges Fasten</string>
 	<string name="start_overlap_message">Dein letztes protokolliertes Fasten endete %1$s. Ein Start um %2$s würde sich damit überschneiden.</string>
 	<string name="start_overlap_confirm">Trotzdem speichern</string>
+	<string name="settings_section_language">Sprache</string>
+	<string name="settings_language_title">App-Sprache</string>
+	<string name="settings_language_system">Systemstandard</string>
 </resources>

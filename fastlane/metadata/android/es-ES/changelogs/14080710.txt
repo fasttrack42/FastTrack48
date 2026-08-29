@@ -1,0 +1,11 @@
+• UI: rediseñada la pantalla principal de ayuno con un botón de inicio central.
+• Ayunos en curso: añadida la posibilidad de modificar la hora de inicio de un ayuno activo.
+• Localización: añadido el cambio de idioma de la interfaz desde los ajustes.
+• Importación/exportación: incluidos los ayunos en curso en los procesos de importación y exportación.
+• Exportación: añadido soporte para exportar datos a:
+  • CSV (compatible con Excel)
+  • iCalendar (.ics)
+  • ActivityStreams 2.0 (JSON-LD)
+• Importación: añadido soporte para archivos CSV y copias de seguridad de EasyFast (.zip).
+• Dependencias: eliminadas dependencias pesadas e innecesarias
+• Traducciones: revisiones, mejoras

@@ -112,6 +112,12 @@ private fun SettingsList(
 				.align(Alignment.Center),
 			contentPadding = paddingValues
 		) {
+			item(key = "language_header") {
+				SettingsSectionHeader(title = R.string.settings_section_language)
+			}
+			item(key = "app_language") {
+				LanguageSettingsItem()
+			}
 			item(key = "notifications_header") {
 				SettingsSectionHeader(title = R.string.settings_section_notifications)
 			}
@@ -300,6 +306,78 @@ private fun SettingsItem(
 			)
 		}
 	)
+}
+
+@Composable
+private fun LanguageSettingsItem() {
+	// The platform holds the selection, so this is a mirror of it rather than a second copy:
+	// re-read on every composition of a fresh activity, and only ever written alongside the
+	// real change. It exists so the row is correct in the instant between the tap and the
+	// activity being recreated in the new language.
+	var selected by remember { mutableStateOf(selectedLanguageTag()) }
+	var showDialog by remember { mutableStateOf(false) }
+	// "System" is the one entry with no autonym — there is no language to write it in, so it
+	// is the sole translated string here and reads in whatever language is currently showing.
+	val systemLabel = stringResource(id = R.string.settings_language_system)
+
+	ListItem(
+		headlineContent = {
+			Text(
+				text = stringResource(id = R.string.settings_language_title),
+				style = MaterialTheme.typography.labelLarge,
+				fontWeight = FontWeight.Bold,
+			)
+		},
+		supportingContent = {
+			Text(
+				text = selected?.let { languageAutonym(it) } ?: systemLabel,
+				style = MaterialTheme.typography.bodySmall,
+			)
+		},
+		modifier = Modifier.clickable { showDialog = true },
+	)
+
+	if (showDialog) {
+		AlertDialog(
+			onDismissRequest = { showDialog = false },
+			title = { Text(stringResource(id = R.string.settings_language_title)) },
+			text = {
+				Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+					// null is "follow the device", and it leads because it is the default state
+					// and the way back out of a language the user cannot read.
+					(listOf<String?>(null) + SupportedLanguageTags).forEach { tag ->
+						val pick = {
+							showDialog = false
+							// Re-picking the current language would restart the app for nothing.
+							if (tag != selected) {
+								selected = tag
+								applyAppLanguage(tag)
+							}
+						}
+						Row(
+							modifier = Modifier
+								.fillMaxWidth()
+								.clickable(onClick = pick)
+								.padding(vertical = 8.dp),
+							verticalAlignment = Alignment.CenterVertically,
+						) {
+							RadioButton(selected = tag == selected, onClick = pick)
+							Text(
+								text = tag?.let { languageAutonym(it) } ?: systemLabel,
+								style = MaterialTheme.typography.bodyLarge,
+								modifier = Modifier.padding(start = 8.dp),
+							)
+						}
+					}
+				}
+			},
+			confirmButton = {
+				TextButton(onClick = { showDialog = false }) {
+					Text(stringResource(id = R.string.cancel_button))
+				}
+			},
+		)
+	}
 }
 
 @Composable

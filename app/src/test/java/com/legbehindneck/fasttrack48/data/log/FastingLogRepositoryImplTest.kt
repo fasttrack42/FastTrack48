@@ -1,6 +1,9 @@
 package com.legbehindneck.fasttrack48.data.log
 
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepositoryImpl
+import com.legbehindneck.fasttrack48.data.activefast.FakeActiveFastDataSource
 import com.legbehindneck.fasttrack48.data.database.FastEntry
+import com.legbehindneck.fasttrack48.data.utils.TestClock
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDateTime
@@ -21,12 +24,19 @@ import kotlin.time.Instant
 class FastingLogRepositoryImplTest {
 
 	private lateinit var fakeDatasource: FakeFastingLogDatasource
+	private lateinit var fakeActiveFastDataSource: FakeActiveFastDataSource
+	private lateinit var testClock: TestClock
 	private lateinit var repository: FastingLogRepositoryImpl
 
 	@Before
 	fun setUp() {
 		fakeDatasource = FakeFastingLogDatasource()
-		repository = FastingLogRepositoryImpl(fakeDatasource)
+		fakeActiveFastDataSource = FakeActiveFastDataSource()
+		testClock = TestClock()
+		repository = FastingLogRepositoryImpl(
+			fakeDatasource,
+			ActiveFastRepositoryImpl(fakeActiveFastDataSource, testClock),
+		)
 	}
 
 	@Test

@@ -287,4 +287,7 @@
 	<string name="start_overlap_title">与上一次禁食重叠</string>
 	<string name="start_overlap_message">上一条记录的禁食结束于 %1$s。将本次禁食设为 %2$s 开始会与之重叠。</string>
 	<string name="start_overlap_confirm">仍然保存</string>
+	<string name="settings_section_language">语言</string>
+	<string name="settings_language_title">应用语言</string>
+	<string name="settings_language_system">跟随系统</string>
 </resources>
