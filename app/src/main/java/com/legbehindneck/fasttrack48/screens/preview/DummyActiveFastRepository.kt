@@ -26,5 +26,5 @@ class DummyActiveFastRepository(
 
 	override fun endFast(timeEnded: Instant?) {}
 
-	override fun debugOverrideFastStart(newStart: Instant) {}
+	override fun setFastStart(newStart: Instant) {}
 }

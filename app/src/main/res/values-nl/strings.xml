@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">FastTrack48</string>
+
 	<string name="action_share">Delen</string>
 	<string name="action_info">Info</string>
 	<string name="action_about">Over</string>
@@ -59,7 +59,7 @@
 	<string name="fast_status_fasting">Vasten bezig</string>
 	<string name="fast_status_not_fasting">Je bent niet aan het vasten</string>
 	<string name="next_stage">Volgende fase over: %1$d uur</string>
-	<string name="start_fast_button_advanced">*</string>
+
 	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d uur</string>
 	<string name="log_entry_ketosis">Ketose: %1$d uur</string>
@@ -98,9 +98,9 @@
 	<string name="manual_start_title">Vasten begonnen</string>
 	<string name="manual_add_set_end_title">Einde vasten instellen</string>
 	<string name="manual_add_set_end_complete">Berekenen</string>
-	<string name="fast_autophagy_label">Autofagie:</string>
-	<string name="fast_ketosis_label">Ketose:</string>
-	<string name="fast_fat_burn_label">Vetverbranding:</string>
+	<string name="fast_autophagy_label">Autofagie</string>
+	<string name="fast_ketosis_label">Ketose</string>
+	<string name="fast_fat_burn_label">Vetverbranding</string>
 	<string name="stage_fasting_title">Vasten</string>
 	<string name="stage_fasting_description">Je lichaam verbruikt zijn glucosevoorraad, ga zo door!</string>
 	<string name="stage_fat_burning_title">Vetverbranding</string>
@@ -233,7 +233,7 @@
 	<string name="sheet_end_earlier">Ik ben eerder gestopt…</string>
 	<string name="fast_notes_label">Notities (optioneel)</string>
 	<string name="fast_notes_placeholder">Hoe ging het? Iets om te onthouden over dit vasten?</string>
-	<string name="log_entry_note_prefix">📝</string>
+
 	<string name="journey_stage_0_body">Je hebt net gegeten, en je bloedbaan merkt het. De glucose stijgt — bij gezonde mensen tot een piek onder ~140 mg/dl binnen 30–60 min — en je alvleesklier reageert met insuline, het hormoon dat die suiker de cellen in loodst en het overschot als glycogeen opslaat.\n\nDit is de verzadigde toestand: energie in overvloed, opslaan heeft voorrang, de vetverbranding staat uit.\n\nEr valt nu niets te doen behalve verteren. De klok loopt.</string>
 	<string name="journey_stage_1_body">De opname neemt af, en het tij keert. Insuline zakt, glucagon stijgt, en je lever begint opgeslagen glycogeen vrij te geven om de bloedsuiker rond ~70–100 mg/dl te houden.\n\nJe bent van de verzadigde toestand overgegaan naar de postabsorptieve toestand — de stille wissel waarbij het lichaam stopt met opslaan en begint met verbruiken.\n\nDat eerste vleugje honger is vooral de dalende insuline. Het gaat voorbij.</string>
 	<string name="journey_stage_2_body">Nu is je lever de enige leverancier: hij geeft druppelsgewijs glucose uit glycogeen af (~100 g in reserve) om je stabiel te houden. Alleen je hersenen al verbranden ~120 g glucose per dag, dus deze stabiliteit is geen kleinigheid.\n\nGeen dip, geen piek — de glycogenolyse houdt de lijn vast en houdt een hypo op afstand.\n\nDe concentratie voelt hier vaak ongewoon helder. Dat is geen verbeelding; het is gelijkmatige brandstof.</string>
@@ -246,8 +246,8 @@
 	<string name="journey_stage_9_body">Drie dagen: zeldzame hoogten. Langdurig vasten kan het lichaam ertoe aanzetten verouderde immuuncellen op te ruimen en nieuwe aan te maken uit hematopoëtische stamcellen, terwijl de IGF-1- en PKA-signalen dalen (Cheng, Cell Stem Cell 2014).\n\nDe ontsteking blijft afnemen; sommigen beschrijven een rustig, helder gevoel van welzijn.\n\nHoe ver je van hier ook gaat, je gaat vernieuwd verder — en verbreek je vasten rustig. Wees trots.</string>
 	<string name="import_easyfast_result">%1$d vastenperiodes geïmporteerd.\nOverlappende items OVERGESLAGEN: %2$d</string>
 	<string name="export_choose_format">Exportformaat</string>
-	<string name="export_format_csv">CSV (spreadsheet)</string>
-	<string name="export_format_ics">iCalendar (.ics)</string>
+
+
 	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
 	<string name="stat_total_fasts">Totaal aantal vastenperiodes</string>
 	<string name="stat_total_fasted">Totale vastentijd</string>
@@ -268,9 +268,8 @@
 	<string name="dateformat_system_short">Systeem kort</string>
 	<string name="dateformat_system_medium">Systeem medium</string>
 	<string name="dateformat_system_long">Systeem lang</string>
-	<string name="dateformat_iso">ISO 8601</string>
+
 	<string name="fast_start_label">Start</string>
-	<string name="fast_end_label">Einde</string>
 	<string name="edit_start_time">Begintijd bewerken</string>
 	<string name="edit_start_dialog_title">Vasten begonnen</string>
 	<string name="relative_today">Vandaag</string>

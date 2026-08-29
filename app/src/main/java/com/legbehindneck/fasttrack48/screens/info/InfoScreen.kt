@@ -3,8 +3,6 @@ package com.legbehindneck.fasttrack48.screens.info
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -17,7 +15,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.utils.getRawTextFile
-import dev.jeziellago.compose.markdowntext.MarkdownText
 import kotlinx.coroutines.launch
 
 @Composable
@@ -71,17 +68,14 @@ fun InfoContent(resourceId: Int, paddingValues: PaddingValues) {
 		context.resources.getRawTextFile(resourceId)
 	}
 
-	Box(
-		modifier = Modifier
-			.fillMaxWidth()
-			.verticalScroll(state = rememberScrollState())
-	) {
-		MarkdownText(
-			modifier = Modifier
-				.fillMaxWidth()
-				.padding(horizontal = 16.dp)
-				.padding(top = 8.dp, bottom = paddingValues.calculateBottomPadding()),
-			markdown = markdown,
-		)
-	}
+	MarkdownDocument(
+		source = markdown,
+		modifier = Modifier.fillMaxWidth(),
+		contentPadding = PaddingValues(
+			start = 16.dp,
+			end = 16.dp,
+			top = 8.dp,
+			bottom = paddingValues.calculateBottomPadding(),
+		),
+	)
 }

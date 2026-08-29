@@ -101,7 +101,7 @@ private const val START_ANGLE = 135f
 private const val TOTAL_SWEEP = 270f
 
 // Golden-ratio derived proportions (phi = 1.618...)
-private const val PHI = 1.618034f
+internal const val PHI = 1.618034f
 private const val STROKE_FRACTION = 1f / (PHI * PHI * PHI * PHI) / 2.4f // of min dimension
 private const val TRACK_ALPHA_DARK = 0.16f
 private const val TRACK_ALPHA_LIGHT = 0.24f

@@ -21,6 +21,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteSweep
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
@@ -57,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.screens.fasting.ExternalRequests
 import com.legbehindneck.fasttrack48.screens.fasting.FastingScreen
+import com.legbehindneck.fasttrack48.screens.fasting.FastingViewModel
 import com.legbehindneck.fasttrack48.screens.log.LogScreen
 import com.legbehindneck.fasttrack48.screens.log.LogViewModel
 import com.legbehindneck.fasttrack48.screens.profile.ProfileScreen
@@ -90,6 +93,8 @@ fun MainScreen(
 	onInfoClick: () -> Unit,
 	onAboutClick: () -> Unit,
 	onSettingsClick: () -> Unit,
+	onStartFastClick: () -> Unit = {},
+	onEndFastClick: () -> Unit = {},
 	externalRequests: ExternalRequests = ExternalRequests(),
 ) {
 	val pagerState =
@@ -102,6 +107,12 @@ fun MainScreen(
 	// contextual "Clear logbook" overflow action drives its confirmation state.
 	val logViewModel: LogViewModel = koinViewModel()
 	val logState by logViewModel.uiState.collectAsState()
+
+	// Same activity-scoped FastingViewModel the Fasting page holds, so the overflow
+	// menu offers exactly the one fasting action that is legal right now rather than
+	// both. Reading it here costs nothing: the page below already created it.
+	val fastingViewModel: FastingViewModel = koinViewModel()
+	val fastingState by fastingViewModel.uiState.collectAsState()
 
 	val fastingTitle = stringResource(id = R.string.title_fasting)
 	val logTitle = stringResource(id = R.string.title_log)
@@ -254,6 +265,10 @@ fun MainScreen(
 				showClearLog = pagerState.currentPage == ScreenPages.Log.ordinal,
 				clearLogEnabled = logState.totalFasts > 0,
 				onClearLogClick = { logViewModel.requestClearAll() },
+				showFastingAction = pagerState.currentPage == ScreenPages.Fasting.ordinal,
+				isFasting = fastingState.isFasting,
+				onStartFastClick = onStartFastClick,
+				onEndFastClick = onEndFastClick,
 				onShareClick = onShareClick,
 				onInfoClick = onInfoClick,
 				onAboutClick = onAboutClick,
@@ -283,6 +298,10 @@ private fun FloatingTopActions(
 	showClearLog: Boolean,
 	clearLogEnabled: Boolean,
 	onClearLogClick: () -> Unit,
+	showFastingAction: Boolean,
+	isFasting: Boolean,
+	onStartFastClick: () -> Unit,
+	onEndFastClick: () -> Unit,
 	onShareClick: () -> Unit,
 	onInfoClick: () -> Unit,
 	onAboutClick: () -> Unit,
@@ -335,6 +354,37 @@ private fun FloatingTopActions(
 					expanded = showMenu,
 					onDismissRequest = { showMenu = false }
 				) {
+					// The primary action already sits on the dial, but a menu is where
+					// users go looking when they cannot find a control, so the same act
+					// is mirrored here. Only ever one item: starting a fast while one is
+					// running is not a thing the app can do, and offering both would ask
+					// the reader to work out which applies. It routes through the same
+					// dialogs the dial's own button opens — no second code path.
+					if (showFastingAction) {
+						DropdownMenuItem(
+							text = {
+								Text(
+									stringResource(
+										id = if (isFasting) R.string.end_fast_button
+										else R.string.start_fast_button
+									)
+								)
+							},
+							leadingIcon = {
+								Icon(
+									imageVector = if (isFasting) Icons.Default.Check
+									else Icons.Default.PlayArrow,
+									contentDescription = null,
+								)
+							},
+							onClick = {
+								if (isFasting) onEndFastClick() else onStartFastClick()
+								showMenu = false
+							},
+						)
+						HorizontalDivider()
+					}
+
 					DropdownMenuItem(
 						text = { Text(stringResource(id = R.string.action_about)) },
 						leadingIcon = {

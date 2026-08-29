@@ -137,12 +137,6 @@ dependencies {
 
 	implementation(libs.napier)
 
-	implementation(libs.fastadapter)
-	implementation(libs.fastadapter.extensions.binding)
-
-	implementation(libs.glide)
-	ksp(libs.compiler)
-
 	implementation(project.dependencies.platform(libs.koin.bom))
 	implementation(libs.koin.core)
 	implementation(libs.koin.android)
@@ -153,16 +147,6 @@ dependencies {
 	implementation(libs.satchel.core)
 	implementation(libs.satchel.storer.encrypted.file)
 	implementation(libs.satchel.serializer.base64.android)
-
-	implementation(libs.compose.markdown)
-
-	implementation(libs.core)
-	implementation(libs.ext.latex)
-	implementation(libs.ext.strikethrough)
-	implementation(libs.ext.tables)
-	implementation(libs.image)
-	implementation(libs.image.glide)
-	implementation(libs.linkify)
 
 	implementation(libs.compose.ui)
 	implementation(libs.compose.ui.tooling.preview)

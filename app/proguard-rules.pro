@@ -18,5 +18,3 @@
     public static android.content.SharedPreferences getDefaultSharedPreferences(android.content.Context);
 }
 
-# Glide
--keep class * extends com.bumptech.glide.module.AppGlideModule

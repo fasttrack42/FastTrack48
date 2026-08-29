@@ -14,6 +14,8 @@ interface IFastingViewModel {
 		val elapsedTime: Duration? = null,
 		val fastStartTime: Instant? = null,
 		val lastFastEndTime: Instant? = null,
+		/** End of the newest logbook entry, used to warn on a backdated start. */
+		val previousLoggedFastEnd: Instant? = null,
 		val stageTitle: String = "",
 		val stageDescription: String = "",
 		val energyMode: String = "",
@@ -39,6 +41,9 @@ interface IFastingViewModel {
 	fun updateUi()
 	fun startFast(timeStartedMills: Instant? = null)
 	fun endFast(timeEnded: Instant? = null, notes: String = "")
+
+	/** Correct the start time of the fast that is currently running. */
+	fun adjustFastStart(newStart: Instant)
 	fun setupAlerts()
 	fun debugIncreaseFastingTimeByOneHour()
 }

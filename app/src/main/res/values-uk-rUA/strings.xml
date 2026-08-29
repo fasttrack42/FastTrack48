@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">FastTrack48</string>
+
 	<string name="action_share">Поділитися</string>
 	<string name="action_info">Інформація</string>
 	<string name="action_about">Про нас</string>
@@ -38,9 +38,9 @@
 	<string name="intro_04_description">FastTrack48 може показувати корисні сповіщення, щоби мотивувати Вас протягом голодування. \n\nВи бачитимете поточний час голодування, на якій Ви стадії, і яке джерело енергії використовується Вашим організмом. \n\nЦе допоможе Вам не зійти з курсу, навіть не відкриваючи додаток!</string>
 	<string name="intro_05_title">От і все!</string>
 	<string name="intro_05_description">А тепер починайте голодувати!</string>
-	<string name="about_name">Адам Браун</string>
-	<string name="about_subtitle">Розробник мобільних додатків</string>
-	<string name="about_brief">Скелелаз, альпініст, програміст і прибічник відкритого програмного забезпечення.</string>
+
+
+
 	<string name="title_fasting">Голодування</string>
 	<string name="title_log">Журнал</string>
 	<string name="title_profile">Профіль</string>
@@ -70,7 +70,7 @@
 	<string name="fast_status_fasting">Голодування триває</string>
 	<string name="fast_status_not_fasting">Ви не голодуєте</string>
 	<string name="next_stage">Наступна стадія у: %1$d годин</string>
-	<string name="start_fast_button_advanced">*</string>
+
 	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d годин</string>
 	<string name="log_entry_ketosis">Кетоз: %1$d годин</string>
@@ -109,9 +109,9 @@
 	<string name="manual_start_title">Голодування розпочалося</string>
 	<string name="manual_add_set_end_title">Установити кінець голодування</string>
 	<string name="manual_add_set_end_complete">Розрахувати</string>
-	<string name="fast_autophagy_label">Автофагія:</string>
-	<string name="fast_ketosis_label">Кетоз:</string>
-	<string name="fast_fat_burn_label">Спалювання жиру:</string>
+	<string name="fast_autophagy_label">Автофагія</string>
+	<string name="fast_ketosis_label">Кетоз</string>
+	<string name="fast_fat_burn_label">Спалювання жиру</string>
 	<string name="stage_fasting_title">Голодування</string>
 	<string name="stage_fasting_description">Ваш організм споживає свої запаси глюкози, тримайтеся!</string>
 	<string name="stage_fat_burning_title">Спалювання жиру</string>
@@ -238,7 +238,7 @@
 	<string name="fast_notes_label">Нотатки (необов\'язково)</string>
 	<string name="fast_notes_placeholder">Як усе пройшло? Щось, що варто запам\'ятати про це голодування?</string>
 	<string name="just_finished_fast">Ти щойно завершив голодування — молодець!</string>
-	<string name="log_entry_note_prefix">📝</string>
+
 	<string name="notification_fasting_title_duration">Голодування: %1$s</string>
 	<string name="phase_time_until">через %1$s</string>
 	<string name="time_since_last_fast">Час від останнього голодування: %1$s</string>
@@ -281,8 +281,8 @@
 	<string name="journey_stage_9_body">Три дні: рідкісні висоти. Тривале голодування може спонукати тіло позбуватися старіючих імунних клітин і відновлювати нові з гемопоетичних стовбурових клітин, поки знижується сигналізація IGF-1 і PKA (Cheng, Cell Stem Cell 2014).\n\nЗапалення й далі вщухає; дехто описує тихе, ясне відчуття добробуту.\n\nХоч як далеко ти зайдеш звідси, ти виходиш оновленим — і виходь із голодування лагідно. Пишайся собою.</string>
 	<string name="import_easyfast_result">Імпортовано голодувань: %1$d.\nПропущено записів, що перекриваються: %2$d</string>
 	<string name="export_choose_format">Формат експорту</string>
-	<string name="export_format_csv">CSV (таблиця)</string>
-	<string name="export_format_ics">iCalendar (.ics)</string>
+
+
 	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
 	<string name="stat_total_fasts">Усього голодувань</string>
 	<string name="stat_total_fasted">Загальний час голодування</string>
@@ -303,9 +303,8 @@
 	<string name="dateformat_system_short">Короткий (системний)</string>
 	<string name="dateformat_system_medium">Середній (системний)</string>
 	<string name="dateformat_system_long">Довгий (системний)</string>
-	<string name="dateformat_iso">ISO 8601</string>
+
 	<string name="fast_start_label">Початок</string>
-	<string name="fast_end_label">Кінець</string>
 	<string name="edit_start_time">Змінити час початку</string>
 	<string name="edit_start_dialog_title">Голодування розпочато</string>
 	<string name="relative_today">Сьогодні</string>

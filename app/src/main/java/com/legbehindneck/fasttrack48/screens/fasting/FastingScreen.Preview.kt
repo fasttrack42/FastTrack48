@@ -568,6 +568,7 @@ class FakeFastingViewModel(state: IFastingViewModel.FastingUiState) : IFastingVi
 	override fun updateUi() {}
 	override fun startFast(timeStartedMills: Instant?) {}
 	override fun endFast(timeEnded: Instant?, notes: String) {}
+	override fun adjustFastStart(newStart: Instant) {}
 	override fun setupAlerts() {}
 	override fun debugIncreaseFastingTimeByOneHour() {}
 }

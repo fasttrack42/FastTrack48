@@ -15,14 +15,18 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -32,7 +36,10 @@ import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -52,10 +59,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
@@ -81,12 +91,19 @@ import com.legbehindneck.fasttrack48.data.JourneyStage
 import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.screens.confetti.ConfettiState
 import com.legbehindneck.fasttrack48.screens.confetti.confettiEffect
+import com.legbehindneck.fasttrack48.ui.theme.Black900
+import com.legbehindneck.fasttrack48.ui.theme.White50
 import com.legbehindneck.fasttrack48.ui.theme.fastBackgroundGradient
+import com.legbehindneck.fasttrack48.utils.AppDateTime
+import com.legbehindneck.fasttrack48.utils.LocalDateStyle
 import com.legbehindneck.fasttrack48.utils.formatDuration
 import com.legbehindneck.fasttrack48.utils.shareFastImage
+import com.legbehindneck.fasttrack48.utils.shouldUse24HourFormat
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.coroutines.resume
 import kotlin.math.roundToInt
@@ -96,6 +113,7 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
+import kotlin.time.Instant
 
 @Composable
 fun FastingScreen(
@@ -113,6 +131,10 @@ fun FastingScreen(
 
 	var showStartDateTimePicker by remember { mutableStateOf(false) }
 	var showEndDateTimePicker by remember { mutableStateOf(false) }
+	var showEditStartPicker by remember { mutableStateOf(false) }
+	// A corrected start that reaches back into the last logged fast; held here while
+	// the overlap warning is up, committed only if the user confirms.
+	var pendingStart by remember { mutableStateOf<Instant?>(null) }
 	var showStartSheet by remember { mutableStateOf(false) }
 	var showEndSheet by remember { mutableStateOf(false) }
 	// Note captured while ending a fast; carried across the "stopped earlier" picker
@@ -147,6 +169,9 @@ fun FastingScreen(
 			title = stringResource(R.string.already_started_dialog_title),
 			finishButton = stringResource(id = R.string.start_fast_button),
 			state = dateTimePickerState,
+			// A start in the future yields a negative elapsed time; the picker's day
+			// filter cannot catch a later hour *today* on its own.
+			maxInstant = remember { Clock.System.now() },
 		)
 	}
 
@@ -193,6 +218,64 @@ fun FastingScreen(
 		)
 	}
 
+	if (showEditStartPicker) {
+		val dateTimePickerState = rememberDateTimePickerDialogState()
+		DateTimePickerDialog(
+			onDismiss = { showEditStartPicker = false },
+			onDateTimeSelected = { selectedDateTime ->
+				showEditStartPicker = false
+				val previousEnd = uiState.previousLoggedFastEnd
+				if (previousEnd != null && selectedDateTime < previousEnd) {
+					pendingStart = selectedDateTime
+				} else {
+					viewModel.adjustFastStart(selectedDateTime)
+				}
+			},
+			title = stringResource(R.string.edit_start_dialog_title),
+			finishButton = stringResource(id = R.string.manual_add_save_button),
+			state = dateTimePickerState,
+			initialInstant = uiState.fastStartTime,
+			maxInstant = remember { Clock.System.now() },
+		)
+	}
+
+	// Soft warning, not a block: the logbook is the user's own record and they may well
+	// be correcting it next. Nothing is written until they confirm.
+	pendingStart?.let { candidate ->
+		val previousEnd = uiState.previousLoggedFastEnd
+		val dateStyle = LocalDateStyle.current
+		val use24Hour = shouldUse24HourFormat(LocalContext.current)
+		val tz = remember { TimeZone.currentSystemDefault() }
+		AlertDialog(
+			onDismissRequest = { pendingStart = null },
+			title = { Text(text = stringResource(R.string.start_overlap_title)) },
+			text = {
+				Text(
+					text = stringResource(
+						R.string.start_overlap_message,
+						previousEnd?.let {
+							AppDateTime.formatDateTime(it.toLocalDateTime(tz), dateStyle, use24Hour)
+						} ?: "",
+						AppDateTime.formatDateTime(candidate.toLocalDateTime(tz), dateStyle, use24Hour),
+					)
+				)
+			},
+			confirmButton = {
+				TextButton(onClick = {
+					pendingStart = null
+					viewModel.adjustFastStart(candidate)
+				}) {
+					Text(text = stringResource(R.string.start_overlap_confirm))
+				}
+			},
+			dismissButton = {
+				TextButton(onClick = { pendingStart = null }) {
+					Text(text = stringResource(R.string.cancel_button))
+				}
+			},
+		)
+	}
+
 	// Journey stage overlay, opened from the dial or the phase rows
 	var selectedStage by remember { mutableStateOf<JourneyStage?>(null) }
 
@@ -203,6 +286,12 @@ fun FastingScreen(
 	val context = LocalContext.current
 	// Window-space bounds of the shareable hero (dial + rows), tracked for capture
 	var heroBounds by remember { mutableStateOf<Rect?>(null) }
+
+	// The action pill lives inside the captured hero, and a screenshot of someone's fast
+	// has no business showing them a button. Hidden by alpha rather than removed: taking
+	// it out of the layout would collapse the band and shift the geometry the bounds were
+	// measured against, so the capture would land on a frame that no longer matches.
+	var capturing by remember { mutableStateOf(false) }
 
 	// Share request: PixelCopy the hero region straight off the window surface
 	// (so it's the screen as-is, minus the status bar and other windows), then
@@ -215,12 +304,22 @@ fun FastingScreen(
 				val window = (context as? Activity)?.window
 				if (bounds != null && window != null && bounds.width() > 0 && bounds.height() > 0) {
 					val bitmap = createBitmap(bounds.width(), bounds.height())
-					val ok = suspendCancellableCoroutine { cont ->
-						PixelCopy.request(
-							window, bounds, bitmap,
-							{ result -> cont.resume(result == PixelCopy.SUCCESS) },
-							Handler(Looper.getMainLooper())
-						)
+					val ok = try {
+						capturing = true
+						// One frame to recompose with the pill hidden, a second to be sure
+						// that frame has actually been drawn to the window surface that
+						// PixelCopy reads from.
+						withFrameNanos { }
+						withFrameNanos { }
+						suspendCancellableCoroutine { cont ->
+							PixelCopy.request(
+								window, bounds, bitmap,
+								{ result -> cont.resume(result == PixelCopy.SUCCESS) },
+								Handler(Looper.getMainLooper())
+							)
+						}
+					} finally {
+						capturing = false
 					}
 					if (ok) {
 						shareFastImage(context, bitmap, buildShareCaption(context, uiState))
@@ -286,15 +385,39 @@ fun FastingScreen(
 		val spacing = rememberFastingSpacing(isCompact)
 		val typography = rememberFastingTypography(isCompact)
 
-		// The dial must never starve the controls below it: cap it against the
-		// viewport height, not just the width. In portrait the cap is 1/phi^2
-		// (~0.382) of the height — the golden section between the dial zone
-		// and everything below it.
+		// Cap the dial against the viewport height, not just the width. The portrait cap
+		// used to be 1/phi^2 (~0.382), a number chosen to stop the dial starving a
+		// full-width action button seated below it. That button now sits on the arc's own
+		// terminus, so the constraint the number encoded is gone and the dial takes the
+		// room back.
 		val dialMaxSize = if (isLandscape) {
-			maxHeight * 0.8f
+			// Landscape has no vertical slack to give away: the left column carries the
+			// title and the dial, and the dial's own square is what the band now sits
+			// inside. LandscapeChrome is the honest cost of everything that is not the
+			// dial — column padding (2 x large), the stage title, and a margin so a title
+			// that wraps to two lines cannot push the arc off the bottom of the screen. A
+			// ratio cannot express that, because it does not shrink as the screen does.
+			//
+			// The rest solves for the dial rather than guessing at it. The block below the
+			// title is not the dial's square but the square plus its overhang, and on any
+			// phone-sized dial (0.167 * D < BandHeight + gap, i.e. D < ~455dp) that block
+			// measures (1 - ARC_NOTCH_FRACTION) * D + BandHeight + gap. Inverting it gives
+			// the largest dial whose band still lands inside the column, by construction.
+			min(
+				maxWidth * 0.46f,
+				(maxHeight - LandscapeChrome - BandHeight - spacing.xlarge) /
+					(1f - ARC_NOTCH_FRACTION),
+			)
 		} else {
-			min(maxWidth, maxHeight * 0.382f)
+			min(maxWidth, maxHeight * 0.44f)
 		}
+
+		// A presence floor for the idle Start Fast pill, which stands alone in the band
+		// with nothing to balance against: the golden minor of the golden minor of the
+		// dial (~0.382 of it). End Fast gets no floor — once it is an outline it is
+		// carried by its border, and every dp of width it does not take is a dp closer
+		// it sits to the arc's terminus.
+		val actionMinWidth = dialMaxSize / (PHI * PHI)
 
 		CompositionLocalProvider(
 			LocalFastingSpacing provides spacing,
@@ -310,9 +433,15 @@ fun FastingScreen(
 					FastHeadingContent(
 						uiState = uiState,
 						dialMaxSize = dialMaxSize,
+						actionMinWidth = actionMinWidth,
 						showTotalHours = showTotalHours,
 						onToggleTimeFormat = { showTotalHours = !showTotalHours },
 						onStageSelected = { selectedStage = it },
+						onEditStart = { showEditStartPicker = true },
+						onShowEndFastConfirmation = ::onShowEndFastConfirmation,
+						onShowStartFastSelector = ::onShowStartFastSelector,
+						viewModel = viewModel,
+						capturing = capturing,
 						modifier = Modifier
 							.weight(1f)
 							.fillMaxHeight()
@@ -327,13 +456,10 @@ fun FastingScreen(
 						showTotalHours = showTotalHours,
 						onToggleTimeFormat = { showTotalHours = !showTotalHours },
 						onStageSelected = { selectedStage = it },
-						viewModel = viewModel,
-						onShowEndFastConfirmation = ::onShowEndFastConfirmation,
-						onShowStartFastSelector = ::onShowStartFastSelector,
 						modifier = Modifier
 							.weight(1f)
 							.fillMaxHeight()
-							.padding(start = spacing.medium)
+							.padding(start = spacing.medium, top = TopActionsClearance)
 					)
 				}
 			} else {
@@ -352,22 +478,21 @@ fun FastingScreen(
 					FastHero(
 						uiState = uiState,
 						dialMaxSize = dialMaxSize,
+						actionMinWidth = actionMinWidth,
 						showTotalHours = showTotalHours,
 						onToggleTimeFormat = { showTotalHours = !showTotalHours },
 						onStageSelected = { selectedStage = it },
+						onEditStart = { showEditStartPicker = true },
+						onShowEndFastConfirmation = ::onShowEndFastConfirmation,
+						onShowStartFastSelector = ::onShowStartFastSelector,
+						viewModel = viewModel,
+						capturing = capturing,
 						modifier = Modifier
 							.fillMaxWidth()
 							.onGloballyPositioned { heroBounds = it.boundsInWindow().toAndroidRect() }
 					)
 
 					Spacer(modifier = Modifier.weight(GOLDEN_MAJOR))
-
-					FastActionRow(
-						uiState = uiState,
-						viewModel = viewModel,
-						onShowEndFastConfirmation = ::onShowEndFastConfirmation,
-						onShowStartFastSelector = ::onShowStartFastSelector,
-					)
 				}
 			}
 		}
@@ -385,9 +510,15 @@ fun FastingScreen(
 private fun FastHeadingContent(
 	uiState: IFastingViewModel.FastingUiState,
 	dialMaxSize: Dp,
+	actionMinWidth: Dp,
 	showTotalHours: Boolean,
 	onToggleTimeFormat: () -> Unit,
 	onStageSelected: (JourneyStage) -> Unit,
+	onEditStart: () -> Unit,
+	onShowEndFastConfirmation: () -> Unit,
+	onShowStartFastSelector: () -> Unit,
+	viewModel: IFastingViewModel,
+	capturing: Boolean,
 	modifier: Modifier = Modifier
 ) {
 	val spacing = fastingSpacing()
@@ -416,91 +547,193 @@ private fun FastHeadingContent(
 			modifier = Modifier.padding(bottom = spacing.small)
 		)
 
-		TimeLine(
-			elapsedHours = elapsedHoursPrecise,
+		// Dial and band share one square. The arc's 270 degrees leave a notch facing
+		// down, and the notch is real estate: the two blocks drop into it instead of
+		// queueing below it. Nothing about the geometry is guessed — see the constants.
+		BoxWithConstraints(
 			modifier = Modifier
 				.widthIn(max = dialMaxSize)
 				.fillMaxWidth()
-				.padding(vertical = spacing.medium),
-			onStageClick = onStageSelected
+				.padding(top = spacing.medium),
 		) {
-			// Timer + Energy Mode, centered inside the ring — only while a fast
-			// is running. Tapping the timer toggles days+hours vs total hours.
-			if (uiState.isFasting) {
-				Column(
-					horizontalAlignment = Alignment.CenterHorizontally,
-					modifier = Modifier.clickable(
-						interactionSource = remember { MutableInteractionSource() },
-						indication = null
-					) { onToggleTimeFormat() }
+			val dialSize = maxWidth
+			// Clear height under the arc's rounded caps, and whatever the band still needs
+			// beyond it. On a full-size dial the notch swallows the band whole and the
+			// overhang is zero; on a small one the box grows by just the difference.
+			// Clearance floor between the arc's rounded caps and the band's top edge. On the
+			// portrait dial the notch runs only ~6dp deeper than the band is tall, which put
+			// the Start label within a millimetre of the stroke. spacing.xlarge (21dp =
+			// 3.33mm; 13dp when compact) is the rung that reads as deliberate separation.
+			// A floor, not a fixed value: a dial whose notch swallows band + gap outright
+			// simply gets a deeper one.
+			val overhang = (BandHeight + spacing.xlarge - dialSize * ARC_NOTCH_FRACTION)
+				.coerceAtLeast(0.dp)
+			// Reserves the box's height so the band is inside the layout, not floating over it.
+			Spacer(modifier = Modifier.fillMaxWidth().height(dialSize + overhang))
+
+			TimeLine(
+				elapsedHours = elapsedHoursPrecise,
+				modifier = Modifier
+					.align(Alignment.TopCenter)
+					.fillMaxWidth(),
+				onStageClick = onStageSelected
+			) {
+				// Timer + Energy Mode, centered inside the ring — only while a fast
+				// is running. Tapping the timer toggles days+hours vs total hours.
+				if (uiState.isFasting) {
+					Column(
+						horizontalAlignment = Alignment.CenterHorizontally,
+						modifier = Modifier.clickable(
+							interactionSource = remember { MutableInteractionSource() },
+							indication = null
+						) { onToggleTimeFormat() }
+					) {
+						val timerText = formatDuration(
+							uiState.elapsedTime ?: uiState.elapsedHours.hours,
+							showTotalHours
+						)
+						// Auto-size so the value always fits inside the ring — the
+						// Compose-native answer (the View-system autoSizeTextType
+						// APIs don't apply to Compose). One line, shrinks to fit.
+						BasicText(
+							text = timerText,
+							maxLines = 1,
+							softWrap = false,
+							autoSize = TextAutoSize.StepBased(
+								minFontSize = 20.sp,
+								maxFontSize = 60.sp,
+								stepSize = 1.sp,
+							),
+							style = typography.timerText().merge(
+								TextStyle(
+									color = MaterialTheme.colorScheme.onBackground,
+									fontWeight = FontWeight.Bold,
+									textAlign = TextAlign.Center,
+								)
+							),
+							modifier = Modifier.fillMaxWidth(),
+						)
+						BasicText(
+							text = uiState.energyMode,
+							maxLines = 2,
+							autoSize = TextAutoSize.StepBased(
+								minFontSize = 9.sp,
+								maxFontSize = 15.sp,
+								stepSize = 1.sp,
+							),
+							style = typography.energyMode().merge(
+								TextStyle(
+									color = MaterialTheme.colorScheme.onBackground,
+									textAlign = TextAlign.Center,
+								)
+							),
+							modifier = Modifier
+								.fillMaxWidth()
+								.padding(top = spacing.small)
+						)
+					}
+				}
+			}
+
+			FastArcBand(
+				uiState = uiState,
+				// The notch-aligned inset, but never so deep that the two blocks are
+				// squeezed below the width they actually need: on a landscape dial
+				// (~315dp) the pure fraction leaves End Fast ~88dp and it wraps to
+				// "End / Fast", which breaks the equal-mass balance with the start
+				// datum. Below MinBandWidth the arms step outboard instead of the
+				// content folding — a few dp off the cap costs less than a wrap.
+				armInset = (dialSize * ARC_ARM_INSET)
+					.coerceAtMost((dialSize - MinBandWidth) / 2)
+					.coerceAtLeast(0.dp),
+				actionMinWidth = actionMinWidth,
+				onEditStart = onEditStart,
+				onShowEndFastConfirmation = onShowEndFastConfirmation,
+				onShowStartFastSelector = onShowStartFastSelector,
+				capturing = capturing,
+				modifier = Modifier.align(Alignment.BottomCenter),
+			)
+
+			if (BuildConfig.DEBUG && uiState.isFasting) {
+				// Inside the ring, below the energy line: the dial's interior is the only
+				// spot in the composition that no shipped element occupies. Gated on
+				// isFasting — it advances a clock that is not running otherwise, and while
+				// idle the lone Start Fast pill spans the band's centre.
+				FilledTonalIconButton(
+					onClick = { viewModel.debugIncreaseFastingTimeByOneHour() },
+					modifier = Modifier
+						.align(Alignment.Center)
+						.offset(y = dialSize * 0.22f)
+						.alpha(if (capturing) 0f else 1f)
 				) {
-					val timerText = formatDuration(
-						uiState.elapsedTime ?: uiState.elapsedHours.hours,
-						showTotalHours
-					)
-					// Auto-size so the value always fits inside the ring — the
-					// Compose-native answer (the View-system autoSizeTextType
-					// APIs don't apply to Compose). One line, shrinks to fit.
-					BasicText(
-						text = timerText,
-						maxLines = 1,
-						softWrap = false,
-						autoSize = TextAutoSize.StepBased(
-							minFontSize = 20.sp,
-							maxFontSize = 60.sp,
-							stepSize = 1.sp,
-						),
-						style = typography.timerText().merge(
-							TextStyle(
-								color = MaterialTheme.colorScheme.onBackground,
-								fontWeight = FontWeight.Bold,
-								textAlign = TextAlign.Center,
-							)
-						),
-						modifier = Modifier.fillMaxWidth(),
-					)
-					BasicText(
-						text = uiState.energyMode,
-						maxLines = 2,
-						autoSize = TextAutoSize.StepBased(
-							minFontSize = 9.sp,
-							maxFontSize = 15.sp,
-							stepSize = 1.sp,
-						),
-						style = typography.energyMode().merge(
-							TextStyle(
-								color = MaterialTheme.colorScheme.onBackground,
-								textAlign = TextAlign.Center,
-							)
-						),
-						modifier = Modifier
-							.fillMaxWidth()
-							.padding(top = spacing.small)
+					Icon(
+						imageVector = Icons.Default.Add,
+						contentDescription = stringResource(id = R.string.debug_add_hour_button)
 					)
 				}
 			}
-		}
+			}
 	}
 }
 
 // Golden section of the free vertical space: the hero cluster is seated with
 // ~38.2% of the slack above it and ~61.8% below, so it rises toward the upper
 // golden line and the primary action keeps a larger, deliberate breathing zone.
-private const val GOLDEN_MINOR = 0.382f
-private const val GOLDEN_MAJOR = 0.618f
+internal const val GOLDEN_MINOR = 0.382f
+internal const val GOLDEN_MAJOR = 0.618f
+
+// Shared height of the two blocks that flank the arc's notch — the start datum and the
+// action pill. A Fibonacci rung, comfortably over the 48dp touch minimum, and where the
+// two-line datum lands on its own. Equal footprint is the point: they balance each other.
+internal val BandHeight = 55.dp
+
+// Where the arc actually ends, as fractions of the dial's side. Both fall out of
+// TimeLine's own numbers: radius r = 0.5 - 1.18 * STROKE_FRACTION = 0.4283, endpoints at
+// 135 and 45 degrees, round caps adding STROKE_FRACTION / 2 beyond them.
+//   endpoint y = 0.5 + r * sin(45) + cap = 0.833  ->  0.167 of the side is clear below it
+//   endpoint x = 0.5 - r * cos(45) - cap = 0.167  ->  the arms are that far in from the edge
+internal const val ARC_NOTCH_FRACTION = 0.167f
+// The arms sit a hair outboard of 0.167: at the true inset the two blocks would need more
+// width than the notch has, and Ukrainian would wrap up into the arc. 1/phi^4 is the same
+// constant TimeLine derives its stroke from, and it is the largest inset that still fits
+// the longest locale.
+internal const val ARC_ARM_INSET = 0.146f
+// Floor for the band's inner width: the start datum at its longest ("Today, 10:48 AM",
+// ~111dp with padding) plus the End Fast outline at its natural width (~105dp) plus a
+// gutter. 233 is the Fibonacci rung that clears it.
+internal val MinBandWidth = 233.dp
+// MainScreen's floating action pill is an overlay pinned to the window's top end corner,
+// and in landscape MainScreen deliberately drops the top inset from contentPaddingValues
+// to buy the left column its height back. That leaves the right column running underneath
+// the pill: the Fat Burn row and the share icon land on the same pixels. This is the pill's
+// own extent — a 48dp IconButton plus the 4dp it is offset by, rounded to the next
+// Fibonacci rung — reserved on the only column that sits beneath it. The left column keeps
+// every dp, which is the trade MainScreen made in the first place.
+internal val TopActionsClearance = 55.dp
+
+// Everything the landscape left column spends above and around the dial: the column's own
+// 2 x large padding, one line of stage title, and enough margin that a title wrapping to
+// two lines cannot push the arc off the bottom.
+internal val LandscapeChrome = 96.dp
 
 /**
- * Portrait hero: stage title, dial (with center timer + energy), phase rows,
- * the status line, and a small brand footer — one cohesive cluster that also
- * doubles as the shareable image (the action button lives outside it).
+ * Portrait hero: stage title, dial (with center timer + energy), the arc band, phase rows
+ * and the status line — one cohesive cluster that also doubles as the shareable image.
+ * The action pill sits inside it now, and is hidden by [capturing] while a share is taken.
  */
 @Composable
 private fun FastHero(
 	uiState: IFastingViewModel.FastingUiState,
 	dialMaxSize: Dp,
+	actionMinWidth: Dp,
 	showTotalHours: Boolean,
 	onToggleTimeFormat: () -> Unit,
 	onStageSelected: (JourneyStage) -> Unit,
+	onEditStart: () -> Unit,
+	onShowEndFastConfirmation: () -> Unit,
+	onShowStartFastSelector: () -> Unit,
+	viewModel: IFastingViewModel,
+	capturing: Boolean,
 	modifier: Modifier = Modifier,
 ) {
 	val spacing = fastingSpacing()
@@ -514,11 +747,24 @@ private fun FastHero(
 		FastHeadingContent(
 			uiState = uiState,
 			dialMaxSize = dialMaxSize,
+			actionMinWidth = actionMinWidth,
 			showTotalHours = showTotalHours,
 			onToggleTimeFormat = onToggleTimeFormat,
 			onStageSelected = onStageSelected,
+			onEditStart = onEditStart,
+			onShowEndFastConfirmation = onShowEndFastConfirmation,
+			onShowStartFastSelector = onShowStartFastSelector,
+			viewModel = viewModel,
+			capturing = capturing,
 			modifier = Modifier.fillMaxWidth()
 		)
+
+		// Group separation, one rung above the 2 x small (10dp) that sits between two phase
+		// rows. Without it the band-to-rows gap was *smaller* than the row-to-row gap and
+		// the rows read as part of the band. It lives here rather than in PhaseRows because
+		// in landscape the rows sit in the opposite column with no band above them and
+		// their own TopActionsClearance already.
+		Spacer(modifier = Modifier.height(spacing.xlarge))
 
 		PhaseRows(uiState, showTotalHours, onToggleTimeFormat, onStageSelected, elapsed)
 
@@ -529,7 +775,10 @@ private fun FastHero(
 			textAlign = TextAlign.Center,
 			modifier = Modifier
 				.fillMaxWidth()
-				.padding(top = spacing.large, start = spacing.medium, end = spacing.medium)
+				// The same rung as above: prose in a smaller, lighter face needs at least as
+				// much air as the data rows to read as its own block, and 13dp left it only
+				// 3dp clear of the intra-row gap.
+				.padding(top = spacing.xlarge, start = spacing.medium, end = spacing.medium)
 		)
 	}
 }
@@ -576,16 +825,16 @@ private fun buildShareCaption(
 	return (listOf(lead) + lines).joinToString("\n")
 }
 
-/** Landscape body: rows + a scroll-safe description that fills the column, action pinned. */
+/**
+ * Landscape body: phase rows plus a scroll-safe description that fills the column.
+ * The start datum and the action live with the dial in the other column, on the arc.
+ */
 @Composable
 private fun FastDetailsContent(
 	uiState: IFastingViewModel.FastingUiState,
 	showTotalHours: Boolean,
 	onToggleTimeFormat: () -> Unit,
 	onStageSelected: (JourneyStage) -> Unit,
-	viewModel: IFastingViewModel,
-	onShowEndFastConfirmation: () -> Unit,
-	onShowStartFastSelector: () -> Unit,
 	modifier: Modifier = Modifier
 ) {
 	val spacing = fastingSpacing()
@@ -615,13 +864,6 @@ private fun FastDetailsContent(
 					.padding(vertical = spacing.medium)
 			)
 		}
-
-		FastActionRow(
-			uiState = uiState,
-			viewModel = viewModel,
-			onShowEndFastConfirmation = onShowEndFastConfirmation,
-			onShowStartFastSelector = onShowStartFastSelector,
-		)
 	}
 }
 
@@ -715,56 +957,173 @@ private fun rememberFastStatusText(
 	} ?: ""
 }
 
-/** Debug +1h (debug builds) plus the full-width Start/End action, pinned. */
+/**
+ * The shoulders of the arc: what opened the journey on the left, what closes it on the
+ * right, in the band directly beneath the dial.
+ *
+ * [TimeLine] opens its arc at 135 degrees and closes it at 45 — the lower left and the
+ * lower right — leaving a 90 degree notch facing down. Those are real screen positions,
+ * and this row seats content on both of them. Proximity is the only Gestalt cue that
+ * binds a label to its referent, so the start datum sits under the origin it names; and
+ * an open figure holds attention until something resolves it, so the terminal action sits
+ * on the terminus and closes the circuit.
+ *
+ * The action walks the arc across the cycle. Idle, the gold pill sits at the **origin**,
+ * where the journey is entered. Once fasting, that slot holds the start datum the action
+ * left behind, and the violet pill appears at the **terminus**. One rule, both states.
+ *
+ * Datum and action get equal mass but deliberately unequal weight: identical footprint,
+ * but the pill is a saturated fill and the datum is unfilled text on the gradient. Their
+ * colours are the arc's own two ends — stage 0's dawn gold and stage 9's deep violet. The
+ * screen's inherited [Purple500] is stock Material baseline and belongs to no palette
+ * this app designed.
+ */
 @Composable
-private fun FastActionRow(
+private fun FastArcBand(
 	uiState: IFastingViewModel.FastingUiState,
-	viewModel: IFastingViewModel,
+	armInset: Dp,
+	actionMinWidth: Dp,
+	onEditStart: () -> Unit,
 	onShowEndFastConfirmation: () -> Unit,
 	onShowStartFastSelector: () -> Unit,
+	capturing: Boolean,
+	modifier: Modifier = Modifier,
 ) {
-	val spacing = fastingSpacing()
-	Row(
-		modifier = Modifier
+	Box(
+		// [armInset] pulls both blocks in to where the arc's caps actually are, so each
+		// one sits under its own endpoint rather than under the corner of the dial's
+		// bounding square. The parent seats this at the bottom of that square, inside
+		// the notch — which is why there is no top padding here any more.
+		modifier = modifier
 			.fillMaxWidth()
-			.padding(top = spacing.medium),
-		verticalAlignment = Alignment.CenterVertically
+			.padding(horizontal = armInset),
 	) {
-		if (BuildConfig.DEBUG) {
-			FilledTonalIconButton(
-				onClick = { viewModel.debugIncreaseFastingTimeByOneHour() },
-				modifier = Modifier.padding(end = spacing.medium)
-			) {
-				Icon(
-					imageVector = Icons.Default.Add,
-					contentDescription = stringResource(id = R.string.debug_add_hour_button)
+		Row(
+			modifier = Modifier.fillMaxWidth(),
+			horizontalArrangement = Arrangement.SpaceBetween,
+			verticalAlignment = Alignment.CenterVertically,
+		) {
+			// Origin. While fasting this is the datum; before it, the entrance itself.
+			if (uiState.isFasting) {
+				FastStartBlock(
+					startTime = uiState.fastStartTime,
+					onEditStart = onEditStart,
+				)
+			} else {
+				FastActionPill(
+					isFasting = false,
+					minWidth = actionMinWidth,
+					onClick = onShowStartFastSelector,
+					capturing = capturing,
+				)
+			}
+
+			// Terminus. Nothing closes a journey that has not begun.
+			if (uiState.isFasting) {
+				FastActionPill(
+					isFasting = true,
+					minWidth = Dp.Unspecified,
+					onClick = onShowEndFastConfirmation,
+					capturing = capturing,
 				)
 			}
 		}
-
-		val (onClick, iconRes, labelRes) = if (uiState.isFasting) {
-			Triple(onShowEndFastConfirmation, R.drawable.ic_fast_stop, R.string.end_fast_button)
-		} else {
-			Triple(onShowStartFastSelector, R.drawable.ic_start_fast, R.string.start_fast_button)
-		}
-		Button(
-			onClick = onClick,
-			modifier = Modifier
-				.weight(1f)
-				.heightIn(min = 55.dp)
-		) {
-			Icon(
-				painter = painterResource(id = iconRes),
-				contentDescription = null,
-				modifier = Modifier.padding(end = spacing.medium)
-			)
-			Text(
-				text = stringResource(id = labelRes),
-				style = MaterialTheme.typography.titleMedium,
-			)
-		}
 	}
 }
+
+/**
+ * The journey's action, wearing the colour of whichever end of the arc it stands on.
+ *
+ * The two ends are deliberately not the same button. Entering a fast should be the easiest
+ * thing on the screen, so Start Fast is a filled gold pill with a width floor. Ending one
+ * is the single destructive act the app permits — a mis-tap costs a 48-hour fast — so End
+ * Fast is bare text in the arc's closing violet: no fill, no border, nothing but the icon
+ * and the label. A border drawn around only one of the band's two blocks gave that side
+ * visual mass the start datum facing it does not have, and the asymmetry read as an error
+ * rather than as emphasis. Removing it makes the two blocks equal ground and leaves the
+ * violet — against a neutral background, at full chroma, beside a check glyph — as the
+ * only signal. That is a weaker affordance, accepted deliberately: the control is found
+ * once per fast, it is also reachable from the overflow menu, and the quiet is worth more
+ * than the half-second.
+ *
+ * [capturing] hides it for a shared image: a screenshot of someone's fast has no business
+ * showing them a button. Alpha rather than removal, so the layout the share bounds were
+ * measured against does not move underneath the capture.
+ */
+@Composable
+private fun FastActionPill(
+	isFasting: Boolean,
+	minWidth: Dp,
+	onClick: () -> Unit,
+	capturing: Boolean,
+) {
+	val spacing = fastingSpacing()
+	val accent = journeyStageColor(if (isFasting) 9 else 0)
+
+	val shared = Modifier
+		.widthIn(min = minWidth)
+		.heightIn(min = BandHeight)
+		.alpha(if (capturing) 0f else 1f)
+	val padding = PaddingValues(horizontal = spacing.medium, vertical = spacing.small)
+
+	val label: @Composable RowScope.() -> Unit = {
+		val iconModifier = Modifier.size(spacing.iconSize)
+		if (isFasting) {
+			Icon(Icons.Default.Check, contentDescription = null, modifier = iconModifier)
+		} else {
+			Icon(
+				painter = painterResource(id = R.drawable.ic_start_fast),
+				contentDescription = null,
+				modifier = iconModifier
+			)
+		}
+		Spacer(modifier = Modifier.width(spacing.small))
+		Text(
+			text = stringResource(id = if (isFasting) R.string.end_fast_button else R.string.start_fast_button),
+			style = MaterialTheme.typography.titleSmall,
+			// The escape valve for long locales: Ukrainian and Dutch wrap rather than
+			// pushing the band past the dial's width or ellipsizing the action.
+			maxLines = 2,
+			textAlign = TextAlign.Center,
+		)
+	}
+
+	if (isFasting) {
+		TextButton(
+			onClick = onClick,
+			shape = CircleShape,
+			colors = ButtonDefaults.textButtonColors(
+				containerColor = Color.Transparent,
+				contentColor = accent,
+			),
+			contentPadding = padding,
+			modifier = shared,
+			content = label,
+		)
+	} else {
+		Button(
+			onClick = onClick,
+			shape = CircleShape,
+			colors = ButtonDefaults.buttonColors(
+				containerColor = accent,
+				contentColor = contentColorOn(accent),
+			),
+			contentPadding = padding,
+			modifier = shared,
+			content = label,
+		)
+	}
+}
+
+/**
+ * Black or white label for [container], whichever wins on contrast.
+ *
+ * 0.179 is the W3C relative luminance at which black and white text tie; the naive 0.5
+ * midpoint picks white on the dark theme's #A98BFF and lands at 2.8:1, well under AA.
+ */
+@Composable
+private fun contentColorOn(container: Color): Color =
+	if (container.luminance() > 0.179f) Black900 else White50
 
 @Composable
 private fun StageInfo(
@@ -801,35 +1160,54 @@ private fun StageInfo(
 		}
 	}
 
+	// Label right-aligned into the left half, value left-aligned into the right half, with
+	// one small gutter between them. The old row was SpaceBetween across the full width,
+	// which parked "Fat Burn" and "1d 15h" ~185dp apart: proximity is the only thing that
+	// binds a label to its value, and at that distance the binding was gone — the eye had
+	// to traverse, and on three rows it traversed three times.
+	//
+	// The gutter sits on the screen's centre line on purpose, not on a golden line. Title,
+	// dial, timer and description are all centred here; that axis is the composition's
+	// spine. A phi-split gutter would be a second vertical axis competing with it, and two
+	// axes read as a mistake however well-derived the second one is. Mirrored about the
+	// spine, the three rows also line up as a block: every label ends on the same x, every
+	// value begins on the same x.
+	//
+	// The colon is gone. It existed to carry a relationship across that 185dp gap; the
+	// alignment now carries it, and punctuation that duplicates alignment is noise.
 	Row(
 		modifier = Modifier
 			.fillMaxWidth()
 			.clip(RoundedCornerShape(12.dp))
 			.clickable(onClick = onClick)
 			.padding(horizontal = spacing.medium, vertical = spacing.small),
-		horizontalArrangement = Arrangement.SpaceBetween,
 		verticalAlignment = Alignment.CenterVertically
 	) {
 		Text(
 			text = stringResource(id = labelRes),
 			style = typography.phaseLabel(),
 			color = phaseTextColor(),
+			textAlign = TextAlign.End,
 			maxLines = 1,
 			softWrap = false,
 			overflow = TextOverflow.Ellipsis,
 			modifier = Modifier.weight(1f)
 		)
+		Spacer(modifier = Modifier.width(spacing.medium))
 		Text(
 			text = timeText,
 			style = typography.phaseTime(),
 			color = timeColor,
+			textAlign = TextAlign.Start,
 			maxLines = 1,
 			softWrap = false,
 			overflow = TextOverflow.Visible,
-			modifier = Modifier.clickable(
-				interactionSource = remember { MutableInteractionSource() },
-				indication = null
-			) { onToggleFormat() }
+			modifier = Modifier
+				.weight(1f)
+				.clickable(
+					interactionSource = remember { MutableInteractionSource() },
+					indication = null
+				) { onToggleFormat() }
 		)
 	}
 }
@@ -925,14 +1303,21 @@ private fun EndFastSheet(
 				maxLines = 5,
 			)
 			Spacer(modifier = Modifier.size(21.dp))
+			// Same action one step on, so the same terminus hue and the same glyph.
+			val endContainer = journeyStageColor(9)
 			Button(
 				onClick = onEndNow,
+				shape = CircleShape,
+				colors = ButtonDefaults.buttonColors(
+					containerColor = endContainer,
+					contentColor = contentColorOn(endContainer),
+				),
 				modifier = Modifier
 					.fillMaxWidth()
 					.heightIn(min = 55.dp),
 			) {
 				Icon(
-					painter = painterResource(id = R.drawable.ic_fast_stop),
+					imageVector = Icons.Default.Check,
 					contentDescription = null,
 					modifier = Modifier.padding(end = 8.dp),
 				)

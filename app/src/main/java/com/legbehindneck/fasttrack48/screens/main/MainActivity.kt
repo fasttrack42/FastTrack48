@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
 					onInfoClick = { startActivity(Intent(this, InfoActivity::class.java)) },
 					onAboutClick = { showAboutState = true },
 					onSettingsClick = { startActivity(Intent(this, SettingsActivity::class.java)) },
+					// The overflow menu's fasting actions ride the same channel the
+					// widget and deep links use, so they land in FastingScreen's own
+					// start selector / end confirmation with no duplicated logic.
+					onStartFastClick = { startFastRequestState = StartFastRequest(startNow = false) },
+					onEndFastClick = { stopFastRequestState = true },
 					externalRequests = ExternalRequests(
 						startFastRequest = startFastRequestState,
 						stopFastRequested = stopFastRequestState,

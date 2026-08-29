@@ -64,8 +64,21 @@ class FastingViewModel(
 			}
 		}
 
+		refreshPreviousLoggedEnd()
 		updateUi()
 		setupFastingNotification()
+	}
+
+	/**
+	 * Newest logbook entry's end, read off the IO dispatcher. Only used to warn when a
+	 * corrected start would reach back into an already-recorded window, so a stale value
+	 * costs a missed warning, never a wrong write.
+	 */
+	private fun refreshPreviousLoggedEnd() {
+		viewModelScope.launch(Dispatchers.IO) {
+			val end = logRepository.latestLoggedEnd()
+			_uiState.update { state -> state.copy(previousLoggedFastEnd = end) }
+		}
 	}
 
 	override fun updateUi() {
@@ -189,6 +202,8 @@ class FastingViewModel(
 
 			viewModelScope.launch(Dispatchers.IO) {
 				saveFastToLog(repository.getFastStart(), repository.getFastEnd(), notes)
+				val end = logRepository.latestLoggedEnd()
+				_uiState.update { state -> state.copy(previousLoggedFastEnd = end) }
 			}
 
 			Napier.i("Fast ended!")
@@ -200,6 +215,35 @@ class FastingViewModel(
 		} else {
 			Napier.w("Cannot end fast, there is none started")
 		}
+	}
+
+	/**
+	 * Correct the start of a running fast. Everything downstream — the dial, the phase
+	 * rows, the ongoing notification, the widget — is derived from this one instant, so
+	 * the write is the whole change; the rest is re-deriving what was already stale.
+	 */
+	override fun adjustFastStart(newStart: Instant) {
+		if (!repository.isFasting()) {
+			Napier.w("Cannot adjust the start time, no fast is running")
+			return
+		}
+
+		// Authoritative clamp. The picker guards the upper bound too, but it can sit
+		// open for minutes, and a start in the future yields a negative elapsed time.
+		repository.setFastStart(minOf(newStart, clock.now()))
+
+		// Phase alerts are JobScheduler jobs armed at absolute wall-clock moments, and
+		// AlertService.scheduleAlert deliberately skips any job that is already pending.
+		// Without this cancel the old, now-wrong alerts survive the reschedule.
+		AlertService.cancelAlerts(appContext)
+		setupAlerts()
+		// Re-arms the hourly update that cancelAlerts tore down, so it must follow.
+		setupFastingNotification()
+
+		updateUi()
+		updateWidgets()
+
+		Napier.i("Adjusted fast start time")
 	}
 
 	override fun setupAlerts() {
@@ -235,20 +279,10 @@ class FastingViewModel(
 	}
 
 	override fun debugIncreaseFastingTimeByOneHour() {
-		if (repository.isFasting()) {
-
-			val currentStartTime = repository.getFastStart()
-			if (currentStartTime != null) {
-				val newStartTime = currentStartTime - 1.hours
-
-				repository.debugOverrideFastStart(newStartTime)
-
-				updateUi()
-				updateWidgets()
-				setupFastingNotification()
-
-				Napier.d("Debug: Increased fasting time by 1 hour")
-			}
+		val currentStartTime = repository.getFastStart()
+		if (repository.isFasting() && currentStartTime != null) {
+			adjustFastStart(currentStartTime - 1.hours)
+			Napier.d("Debug: Increased fasting time by 1 hour")
 		} else {
 			Napier.d("Debug: Cannot increase fasting time when not fasting")
 		}

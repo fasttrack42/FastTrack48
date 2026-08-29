@@ -88,9 +88,9 @@ class ActiveFastRepositoryImplTest {
 	}
 
 	@Test
-	fun `debugOverrideFastStart updates start time`() {
+	fun `setFastStart updates start time`() {
 		val newStartTime = Instant.fromEpochMilliseconds(5000)
-		repository.debugOverrideFastStart(newStartTime)
+		repository.setFastStart(newStartTime)
 
 		assertEquals(newStartTime, fakeDataSource.getFastStart())
 	}

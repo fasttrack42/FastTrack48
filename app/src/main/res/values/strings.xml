@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">FastTrack48</string>
+	<string name="app_name" translatable="false">FastTrack48</string>
 	<string name="action_share">Share</string>
 	<string name="action_info">Info</string>
 	<string name="action_about">About</string>
-	<string name="action_export">Export Journal</string>
-    <string name="action_export_description">Produce a CSV file of your log book for backup</string>
-	<string name="action_import">Import Journal</string>
-    <string name="action_import_description">Populate your log book from a previous export</string>
-	<string name="import_success">Journal imported successfully</string>
-	<string name="import_failed">Failed to import journal</string>
+	<string name="action_export">Export Fast History</string>
+    <string name="action_export_description">Export all fasting history to a CSV file</string>
+	<string name="action_import">Import Fast History</string>
+    <string name="action_import_description">Import fasting history from FastTrack48 (.csv), EasyFast backup (.zip)</string>
+	<string name="import_success">Fast history imported successfully</string>
+	<string name="import_failed">Failed to import fasting history</string>
 	<string name="import_easyfast_result">Imported %1$d fasts.\nOverlapping entries SKIPPED: %2$d</string>
 	<string name="export_choose_format">Export format</string>
-	<string name="export_format_csv">CSV (spreadsheet)</string>
-	<string name="export_format_ics">iCalendar (.ics)</string>
+	<string name="export_format_csv" translatable="false">CSV (Excel)</string>
+	<string name="export_format_ics" translatable="false">iCalendar (.ics)</string>
 	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
 
     <!-- Settings -->
     <string name="settings_section_notifications">Notifications</string>
     <string name="settings_section_ui">Interface</string>
-    <string name="settings_section_logbook">Journal</string>
+    <string name="settings_section_logbook">History</string>
 
     <!-- Settings: Fasting notification -->
 	<string name="settings_fasting_notification_title">Show Fasting Notification</string>
@@ -29,20 +29,19 @@
     <string name="settings_stage_alerts_title">Stage Alerts</string>
     <string name="settings_stage_alerts_subtitle">Get notified when entering new fasting stages</string>
 
-    <string name="export_failed">Failed to export journal</string>
+    <string name="export_failed">Failed to export fasting history</string>
 
 	<string name="intro_00_title">Welcome to FastTrack48!</string>
 	<string name="intro_00_description">What is this app all about?</string>
 
 	<string name="intro_01_title">Motivational Help</string>
-	<string name="intro_01_description">The main idea behind FastTrack48 is to help motivate you during your fasts and
+	<string name="intro_01_description">The idea behind FastTrack48 is to motivate you during your fasts and
 		explain to you what your body is doing at the different stages of fasting.
 	</string>
 
 	<string name="intro_02_title">A simple free app</string>
 	<string name="intro_02_description">FastTrack48 is and will always be free and open source. There is no account to
-		create, no in-app purchases, no ads to avoid. And it doesn’t even have internet access, so it can’t send your
-		data anywhere.
+		create, no in-app purchases, no ads, no telemetry and no tracking. The app has no internet access, and works fully offline.
 	</string>
 
 	<string name="intro_03_title">Intermittent Fasting</string>
@@ -58,10 +57,10 @@
 	</string>
 
 	<string name="intro_05_title">That’s it!</string>
-	<string name="intro_05_description">Now go start fasting!</string>
+	<string name="intro_05_description">Welcome to the world of fasting!</string>
 
 	<string name="about_name" translatable="false">FastTrack48</string>
-	<string name="about_subtitle" translatable="false">Your DNA Re-Pair is now in your hands!</string>
+	<string name="about_subtitle" translatable="false">Your DNA Re-Pair is in your hands!</string>
 	<string name="about_brief" translatable="false">Restore what was weakened, renew what has aged, re-generate what was lost</string>
 
 	<string name="about_telegram" translatable="false">Telegram</string>
@@ -73,7 +72,7 @@
 	     and licence notice and must read identically in every locale. -->
 	<string name="about_ack_title" translatable="false">Acknowledgements</string>
 	<string name="about_ack_lead" translatable="false">Based on FastTrack by Adam Brown</string>
-	<string name="about_ack_credit" translatable="false">FastTrack48 is a modified derivative work \u2014 a direct fork \u2014 of FastTrack, created by Adam Brown (@Wavesonics) and published by Darkrock Studios. The original software is Copyright \u00A9 2020 Adam Brown and is made available under the MIT License, reproduced in full below, which continues to govern the original portions of this app.</string>
+	<string name="about_ack_credit" translatable="false">FastTrack48 is a modified derivative work of FastTrack, created by Adam Brown (@Wavesonics) and published by Darkrock Studios. The original software is Copyright \u00A9 2020 Adam Brown and is made available under the MIT License, reproduced in full below, which continues to govern the original portions of this app.</string>
 	<string name="about_ack_disclaimer" translatable="false">Every modification, addition and design change in FastTrack48 is the sole work and responsibility of this project. Adam Brown and Darkrock Studios do not maintain, endorse, sponsor or support FastTrack48 and bear no responsibility for it. The names \u201CFastTrack\u201D, \u201CDarkrock Studios\u201D and \u201CWavesonics\u201D appear here solely to identify the origin of the source code.</string>
 	<string name="about_ack_upstream" translatable="false">Original project</string>
 	<string name="about_ack_author" translatable="false">Adam Brown</string>
@@ -120,7 +119,7 @@
 
 	<string name="next_stage">Next stage at: %1$d hours</string>
 
-	<string name="start_fast_button_advanced">*</string>
+	<string name="start_fast_button_advanced" translatable="false">*</string>
 
 	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d hours</string>
@@ -178,21 +177,21 @@
 	<string name="dateformat_system_short">System short</string>
 	<string name="dateformat_system_medium">System medium</string>
 	<string name="dateformat_system_long">System long</string>
-	<string name="dateformat_iso">ISO 8601</string>
+	<string name="dateformat_iso" translatable="false">ISO 8601</string>
 	<string name="menu_clear_logbook">Clear fasting history…</string>
 	<string name="clear_logbook_title">Delete entire history?</string>
 	<string name="clear_logbook_message">This permanently deletes all %1$d logged fasts. This cannot be undone.</string>
 	<string name="clear_logbook_confirm">Delete all %1$d</string>
-	<string name="fast_autophagy_label">Autophagy:</string>
-	<string name="fast_ketosis_label">Ketosis:</string>
-	<string name="fast_fat_burn_label">Fat Burn:</string>
+	<string name="fast_autophagy_label">Autophagy</string>
+	<string name="fast_ketosis_label">Ketosis</string>
+	<string name="fast_fat_burn_label">Fat Burn</string>
 
 	<string name="stage_fasting_title">Fasting</string>
 	<string name="stage_fasting_description">Your body is consuming its stores of glucose, keep it up!</string>
 
 	<string name="stage_fat_burning_title">Fat Burning</string>
 	<string name="stage_fat_burning_description">Your glucose stores are depleted! Your body is now burning fat for
-		energy. A workout in the next couple hours would be optimal.
+		energy. A workout in the next couple of hours would be optimal.
 	</string>
 
 	<string name="stage_fat_fasting_sweet_spot_title">Fasting Sweet Spot</string>
@@ -355,25 +354,25 @@
 
 	<!-- Fasting journey stages (dial milestones) -->
 	<string name="journey_stage_0_title">Blood Sugar Rises</string>
-	<string name="journey_stage_0_body">You just ate, and your bloodstream knows it. Glucose climbs — in healthy people peaking under ~140 mg/dL within 30–60 min — and your pancreas answers with insulin, the hormone that ushers that sugar into cells and banks the surplus as glycogen.\n\nThis is the fed state: energy is abundant, storage is the priority, fat-burning is switched off.\n\nNothing to do but digest. The clock has started.</string>
+	<string name="journey_stage_0_body">You just ate, and your bloodstream knows it. Glucose climbs — in healthy people peaking under ~140 mg/dL within 30–60 min — your pancreas shoots insulin into the blood, the hormone that ushers the sugar into cells and stashes the surplus as glycogen.\n\nThis is the fed state: energy is abundant, storage is the priority, fat-burning mode is off.\n\nNothing to do but digest. The clock has started.</string>
 	<string name="journey_stage_1_title">Blood Sugar Falls</string>
-	<string name="journey_stage_1_body">Absorption tapers and the tide turns. Insulin recedes, glucagon rises, and your liver starts releasing stored glycogen to hold blood glucose steady near ~70–100 mg/dL.\n\nYou\'ve crossed from the fed state into the post-absorptive state — the quiet handoff where the body stops storing and starts spending.\n\nThat first flicker of hunger is mostly insulin falling. It passes.</string>
+	<string name="journey_stage_1_body">Insulin drops, glucagon rises, and your liver starts releasing stored glycogen to hold blood glucose steady near ~70–100 mg/dL.\n\nYou\'ve crossed from the fed state into the post-absorptive state — the quiet handoff where the body stops storing and starts spending.\n\nThat first flicker of hunger is mostly insulin falling. It passes within a minute or two.</string>
 	<string name="journey_stage_2_title">Blood Sugar Stabilizes</string>
-	<string name="journey_stage_2_body">Your liver is now the sole supplier, drip-feeding glucose from glycogen (~100 g in reserve) to keep you level. Your brain alone burns ~120 g of glucose a day, so this stability is not trivial.\n\nNo dip, no spike — glycogenolysis holds the line and keeps hypoglycemia away.\n\nFocus often feels unusually clean here. That\'s not imagination; it\'s steady fuel.</string>
+	<string name="journey_stage_2_body">Your liver is now the sole supplier, drip-feeding glucose from glycogen (~100 g in reserve) to keep you level. Your brain alone burns ~120 g of glucose a day, so this stability is not trivial.\n\nNo dip, no spike — glycogenolysis holds the line and keeps hypoglycemia away.\n\nMany people report unusually sharp focus at this stage. That\'s not imagination; it\'s steady fuel.</string>
 	<string name="journey_stage_3_title">Gluconeogenesis</string>
-	<string name="journey_stage_3_body">Glycogen is running thin, so the liver takes up a second trade: building glucose from scratch — lactate, glycerol, amino acids — a process called gluconeogenesis. By ~16 h it already supplies roughly half of your glucose output (Cahill, Annu Rev Nutr 2006).\n\nThis is metabolic flexibility made visible: your body will not let the brain go hungry.\n\nThe hunger and mild dip you feel are the switch being thrown. Fat is next.</string>
+	<string name="journey_stage_3_body">Glycogen is running thin, so the liver starts manufacturing its own glucose from lactate, glycerol, and amino acids — a process called gluconeogenesis. By ~16 h it already supplies roughly half of your glucose output (Cahill, Annu Rev Nutr 2006).\n\nThis is your body\'s biological intelligence which never lets your brain go hungry.\n\nThe hunger and mild dip you might feel are related to the phase switch.</string>
 	<string name="journey_stage_4_title">Fat Burning</string>
-	<string name="journey_stage_4_body">Insulin is finally low enough to unlock your fat stores. Lipolysis frees fatty acids, the liver begins spinning them into ketones, and you pivot from sugar-burner to fat-burner.\n\nEvery hour here nudges insulin sensitivity upward and draws down fat reserves — the metabolic core of why fasting works.\n\nA metallic taste or faint headache is early ketones. The fire is lit.</string>
+	<string name="journey_stage_4_body">Insulin is finally low enough to unlock the fat reserves. Lipolysis frees fatty acids, the liver begins spinning them into ketones, and you transition from sugar-burning to fat-burning.\n\nInsulin sensitivity increases, and fat reserves are now being consumed — the metabolic core of why fasting works.\n\nA metallic taste or faint headache is a sign early first ketones being generated. The fire is burning 🔥.</string>
 	<string name="journey_stage_5_title">Ketosis</string>
-	<string name="journey_stage_5_body">Blood ketones cross ~0.5 mmol/L — nutritional ketosis — and keep climbing. Your brain can\'t oxidize fatty acids directly, but it runs beautifully on this ketone stream, which spares muscle from being cannibalized for glucose.\n\nMany report an unusual mental clarity, and a hunger that quietly switches off — ketones themselves blunt appetite.\n\nTwenty-four hours. Your body now prefers the fuel it\'s making.</string>
+	<string name="journey_stage_5_body">Blood ketones level crosses ~0.5 mmol/L — nutritional ketosis — and keep climbing. Your brain can\'t oxidize fatty acids directly, but it runs beautifully on this ketone stream, which spares muscle from being cannibalized for glucose.\n\nMany report an unusual mental clarity, and a hunger that quietly switches off — ketones themselves blunt appetite.\n\nTwenty-four hours. Your body now prefers its own home-made fuel.</string>
 	<string name="journey_stage_6_title">Autophagy</string>
-	<string name="journey_stage_6_body">A full day in, and self-cleaning intensifies: autophagy — cells disassembling damaged proteins and organelles and recycling the parts (the mechanism that earned Ohsumi the 2016 Nobel). Human timing is still being mapped, but the pathway is clearly upregulated by fasting.\n\nThink of it as maintenance you can\'t buy — clearance associated with longevity and lower disease risk.\n\nTiredness or a headache? Salt and water. Deep work is underway.</string>
+	<string name="journey_stage_6_body">A full day in, and self-cleaning intensifies: autophagy — cells disassembling damaged proteins and organelles and recycling the parts (the mechanism that earned Ohsumi the 2016 Nobel Prize). \n\nThink of it as maintenance you can\'t buy — clearance associated with longevity and lower disease risk.\n\nTiredness or a headache? Salt and water. Deep work is underway.</string>
 	<string name="journey_stage_7_title">Growth Hormone Surge</string>
 	<string name="journey_stage_7_body">Two days, and growth hormone spikes — a ~2-day fast can raise GH secretion roughly 5-fold (Ho, J Clin Invest 1988). Its brief right now: defend lean muscle and push fat metabolism harder.\n\nSo you keep burning fat while sparing the muscle you\'d expect to lose — a genuinely elegant adaptation.\n\nThat unexpected lift in energy people describe here? That\'s the hormone talking.</string>
 	<string name="journey_stage_8_title">Insulin Sensitivity</string>
-	<string name="journey_stage_8_body">With insulin held low for days, your cells turn newly responsive to it — insulin sensitivity resets toward a healthier baseline, the opposite of the resistance that precedes type 2 diabetes.\n\nBlood glucose sits in a calm, narrow band; satiety comes easily.\n\nYou\'re tuning a system most people never deliberately touch.</string>
+	<string name="journey_stage_8_body">With insulin held low for days, your cells turn newly responsive to it — insulin sensitivity resets toward a healthier baseline, the opposite of the resistance that precedes type 2 diabetes.\n\nBlood glucose sits in a calm, narrowband; satiety comes easily.\n\nYou\'re tuning a system most people never deliberately touch.</string>
 	<string name="journey_stage_9_title">Immune Cell Regeneration</string>
-	<string name="journey_stage_9_body">Three days: rare air. Prolonged fasting can prompt the body to clear senescent immune cells and regenerate new ones from hematopoietic stem cells, as IGF-1 and PKA signaling drop (Cheng, Cell Stem Cell 2014).\n\nInflammation keeps easing; some describe a quiet, lucid sense of well-being.\n\nHowever far you go from here, you go renewed — and break your fast gently. Be proud.</string>
+	<string name="journey_stage_9_body">Three days. Prolonged fasting can prompt the body to clear senescent immune cells and regenerate new ones from hematopoietic stem cells, as IGF-1 and PKA signaling drop (Cheng, Cell Stem Cell 2014).\n\nInflammation keeps easing; some describe a quiet, lucid sense of well-being.\n\nHowever far you go from here, you go renewed — and break your fast gently. Be proud.</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
 	<string name="journey_stage_hours_open">%1$d h+</string>
 	<string name="phase_time_until">in %1$s</string>
@@ -398,10 +397,9 @@
 	<string name="sheet_end_earlier">I stopped earlier…</string>
 	<string name="fast_notes_label">Notes (optional)</string>
 	<string name="fast_notes_placeholder">How did it go? Anything to remember about this fast?</string>
-	<string name="log_entry_note_prefix">📝</string>
+	<string name="log_entry_note_prefix" translatable="false">📝</string>
 	<string name="stage_optimal_autophagy_description_past72">Autophagy is in full swing! Keep it up!</string>
 	<string name="fast_start_label">Start</string>
-	<string name="fast_end_label">End</string>
 	<string name="edit_start_time">Edit start time</string>
 	<string name="edit_start_dialog_title">Fast Started</string>
 	<string name="relative_today">Today</string>

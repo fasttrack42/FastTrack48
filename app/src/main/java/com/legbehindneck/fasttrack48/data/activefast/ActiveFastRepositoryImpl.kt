@@ -42,5 +42,5 @@ class ActiveFastRepositoryImpl(
 		datasource.setFastEnd(endedMills)
 	}
 
-	override fun debugOverrideFastStart(newStart: Instant) = datasource.setFastStart(newStart)
+	override fun setFastStart(newStart: Instant) = datasource.setFastStart(newStart)
 }

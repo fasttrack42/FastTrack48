@@ -78,7 +78,8 @@ fun DateTimePickerDialog(
 	finishButton: String,
 	state: DateTimePickerDialogState = rememberDateTimePickerDialogState(),
 	initialInstant: Instant? = null,
-	minInstant: Instant? = null
+	minInstant: Instant? = null,
+	maxInstant: Instant? = null,
 ) {
 	val initialDateTime = remember(initialInstant) {
 		initialInstant?.let { instant ->
@@ -89,6 +90,13 @@ fun DateTimePickerDialog(
 
 	val minDateTime = remember(minInstant) {
 		minInstant?.let { instant ->
+			val kotlinxInstant = Instant.fromEpochMilliseconds(instant.toEpochMilliseconds())
+			kotlinxInstant.toLocalDateTime(TimeZone.currentSystemDefault())
+		}
+	}
+
+	val maxDateTime = remember(maxInstant) {
+		maxInstant?.let { instant ->
 			val kotlinxInstant = Instant.fromEpochMilliseconds(instant.toEpochMilliseconds())
 			kotlinxInstant.toLocalDateTime(TimeZone.currentSystemDefault())
 		}
@@ -134,30 +142,35 @@ fun DateTimePickerDialog(
 		timePickerState.hour,
 		timePickerState.minute,
 		state.currentStep,
-		minDateTime
+		minDateTime,
+		maxDateTime
 	) {
 		when (state.currentStep) {
 			0 -> datePickerState.selectedDateMillis != null
 			1 -> {
-				// Check if selected datetime is valid (not before minDateTime)
 				val selectedDate = datePickerState.getSelectedDate()
-				if (selectedDate != null && minDateTime != null) {
-					// Check if we're on the same day as minDateTime
-					val isSameDay = selectedDate.year == minDateTime.year &&
-							selectedDate.monthValue == minDateTime.month.number &&
-                            selectedDate.dayOfMonth == minDateTime.day
-
-					if (isSameDay) {
-						// Validate time is not before minDateTime's time
-						val selectedMinutes = timePickerState.hour * 60 + timePickerState.minute
-						val minMinutes = minDateTime.hour * 60 + minDateTime.minute
-						selectedMinutes >= minMinutes
-					} else {
-						// Different day, already validated by date picker
-						true
-					}
+				if (selectedDate == null) {
+					false
 				} else {
-					true
+					// The date picker enforces both bounds, but only at day granularity.
+					// The one case it cannot catch is a time-of-day out of range on a day
+					// that is itself in range — i.e. the day a bound falls on.
+					val isSameDayAs: (LocalDateTime) -> Boolean = { bound ->
+						selectedDate.year == bound.year &&
+								selectedDate.monthValue == bound.month.number &&
+								selectedDate.dayOfMonth == bound.day
+					}
+					val selectedMinutes = timePickerState.hour * 60 + timePickerState.minute
+
+					val notBeforeMin = minDateTime?.let { min ->
+						!isSameDayAs(min) || selectedMinutes >= min.hour * 60 + min.minute
+					} ?: true
+
+					val notAfterMax = maxDateTime?.let { max ->
+						!isSameDayAs(max) || selectedMinutes <= max.hour * 60 + max.minute
+					} ?: true
+
+					notBeforeMin && notAfterMax
 				}
 			}
 			else -> false

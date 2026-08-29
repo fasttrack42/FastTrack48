@@ -19,6 +19,8 @@ class DummyFastingLogRepository(private val entries: List<FastingLogEntry> = emp
 	override fun deleteAllEntries() = entries.size
 	override fun addLogEntry(start: LocalDateTime, length: Duration, notes: String) {}
 	override fun updateLogEntry(entry: FastingLogEntry, start: LocalDateTime, length: Duration, notes: String) = true
+	// Previews never raise the backdate-overlap warning, so no entry is "most recent".
+	override fun latestLoggedEnd(): Instant? = null
 	override suspend fun exportLog(): String = ""
 	override suspend fun importLog(cvsExport: String) = true
 	override suspend fun importEasyFastBackup(zipBytes: ByteArray) = ImportResult(0, 0, ok = true)

@@ -10,7 +10,7 @@ Acquiring carbs in large quantities would have been difficult. For instance: for
 
 ### Thus our bodies developed two primary energy pathways:
 
-1. **Glucose:** Carbohydrates all break down into glucose when consumed. Glucose can be consumed directly by cells for energy. Excess glucose is then be stored as glycogen in various places around the body such as the liver and skeletal muscle. Once your glycogen reserves are full, the remaining glucose will be turned into adipose tissue. When needed, the stored glycogen can be broken back down into glucose in order to be consumed by your cells.
+1. **Glucose:** Carbohydrates all break down into glucose when consumed. Glucose can be consumed directly by cells for energy. Excess glucose is then stored as glycogen in various places around the body such as the liver and skeletal muscle. Once your glycogen reserves are full, the remaining glucose will be turned into adipose tissue. When needed, the stored glycogen can be broken back down into glucose in order to be consumed by your cells.
 2. **Ketone Bodies:** These are derived by metabolizing fat, and cells can consume them instead of glucose for energy. Excess calories from carbohydrates or protein (_which break down into glucose and amino acids respectively_)  will be stored as adipose tissue (_fat_), and when needed, can be broken down into ketone bodies which will be used for energy by your cells.
 
 In our hunter gatherer days we would have often been deriving our energy from ketone bodies as well as glucose.

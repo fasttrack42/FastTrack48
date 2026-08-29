@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">FastTrack48</string>
+
 	<string name="action_share">Condividi</string>
 	<string name="action_info">Informazioni</string>
 	<string name="action_about">Informazioni</string>
@@ -69,7 +69,7 @@
 	<string name="fast_status_fasting">Digiuno in corso</string>
 	<string name="fast_status_not_fasting">Non stai digiunando</string>
 	<string name="next_stage">Prossima fase tra: %1$d ore</string>
-	<string name="start_fast_button_advanced">*</string>
+
 	<string name="log_entry_started">Iniziato: %1$s</string>
 	<string name="log_entry_length">%1$d ore</string>
 	<string name="log_entry_ketosis">%1$d ore</string>
@@ -108,9 +108,9 @@
 	<string name="manual_start_title">Inizio digiuno</string>
 	<string name="manual_add_set_end_title">Imposta Fine digiuno</string>
 	<string name="manual_add_set_end_complete">Calcola</string>
-	<string name="fast_autophagy_label">Autofagia:</string>
-	<string name="fast_ketosis_label">Chetosi:</string>
-	<string name="fast_fat_burn_label">Brucia Grassi:</string>
+	<string name="fast_autophagy_label">Autofagia</string>
+	<string name="fast_ketosis_label">Chetosi</string>
+	<string name="fast_fat_burn_label">Brucia Grassi</string>
 	<string name="stage_fasting_title">Digiuno</string>
 	<string name="stage_fasting_description">Il tuo corpo sta consumando le sue riserve di glucosio, continua così!</string>
 	<string name="stage_fat_burning_title">Brucia Grassi</string>
@@ -194,8 +194,8 @@
 	<string name="info_page_title_info">Informazioni</string>
 	<string name="info_page_title_tips">Suggerimenti</string>
 	<string name="title_activity_info">Informazioni sul Digiuno</string>
-	<string name="log_total_autophagy">Autofagia Totale:</string>
-	<string name="log_total_ketosis">Chetosi Totale:</string>
+	<string name="log_total_autophagy">🧬 Autofagia Totale:</string>
+	<string name="log_total_ketosis">🔥 Chetosi Totale:</string>
 	<string name="log_total_hours">%1$d ore</string>
 	<string name="profile_metric_switch">Metrico</string>
 	<string name="title_activity_intro">Introduzione</string>
@@ -248,7 +248,7 @@
 	<string name="fast_notes_label">Note (facoltativo)</string>
 	<string name="fast_notes_placeholder">Com\'è andata? Qualcosa da ricordare di questo digiuno?</string>
 	<string name="just_finished_fast">Hai appena finito un digiuno — bravo!</string>
-	<string name="log_entry_note_prefix">📝</string>
+
 	<string name="notification_fasting_title_duration">Digiuno: %1$s</string>
 	<string name="phase_time_until">tra %1$s</string>
 	<string name="time_since_last_fast">Tempo dal tuo ultimo digiuno: %1$s</string>
@@ -291,8 +291,8 @@
 	<string name="journey_stage_9_body">Tre giorni: aria rara. Il digiuno prolungato può spingere il corpo a eliminare cellule immunitarie invecchiate e a rigenerarne di nuove dalle cellule staminali ematopoietiche, mentre calano i segnali di IGF-1 e PKA (Cheng, Cell Stem Cell 2014).\n\nL\'infiammazione continua a placarsi; alcuni descrivono un benessere calmo e lucido.\n\nPer quanto lontano tu vada da qui, ne esci rinnovato — e rompi il digiuno con dolcezza. Sii fiero.</string>
 	<string name="import_easyfast_result">%1$d digiuni importati.\nVoci sovrapposte SALTATE: %2$d</string>
 	<string name="export_choose_format">Formato di esportazione</string>
-	<string name="export_format_csv">CSV (foglio di calcolo)</string>
-	<string name="export_format_ics">iCalendar (.ics)</string>
+
+
 	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
 	<string name="stat_total_fasts">Digiuni totali</string>
 	<string name="stat_total_fasted">Tempo totale di digiuno</string>
@@ -313,9 +313,8 @@
 	<string name="dateformat_system_short">Sistema breve</string>
 	<string name="dateformat_system_medium">Sistema medio</string>
 	<string name="dateformat_system_long">Sistema lungo</string>
-	<string name="dateformat_iso">ISO 8601</string>
+
 	<string name="fast_start_label">Inizio</string>
-	<string name="fast_end_label">Fine</string>
 	<string name="edit_start_time">Modifica l\'ora di inizio</string>
 	<string name="edit_start_dialog_title">Digiuno iniziato</string>
 	<string name="relative_today">Oggi</string>

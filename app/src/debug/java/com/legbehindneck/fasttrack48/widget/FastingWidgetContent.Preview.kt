@@ -20,7 +20,7 @@ fun FastingWidget_NotFasting_Preview() {
 		override fun getFastEnd(): Instant? = null
 		override fun startFast(timeStarted: Instant?) {}
 		override fun endFast(timeEnded: Instant?) {}
-		override fun debugOverrideFastStart(newStart: Instant) {}
+		override fun setFastStart(newStart: Instant) {}
 	}
 
 	FastingWidgetContent(fakeRepo)
@@ -40,7 +40,7 @@ fun FastingWidget_Fasting16h_Preview() {
 		override fun getFastEnd(): Instant? = null
 		override fun startFast(timeStarted: Instant?) {}
 		override fun endFast(timeEnded: Instant?) {}
-		override fun debugOverrideFastStart(newStart: Instant) {}
+		override fun setFastStart(newStart: Instant) {}
 	}
 
 	FastingWidgetContent(fakeRepo)

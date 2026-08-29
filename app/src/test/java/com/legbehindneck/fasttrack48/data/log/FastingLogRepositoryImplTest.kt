@@ -10,6 +10,7 @@ import kotlinx.datetime.toLocalDateTime
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -43,6 +44,23 @@ class FastingLogRepositoryImplTest {
 		assertEquals(1, entries.size)
 		assertEquals(startTime.toEpochMilliseconds(), entries[0].start)
 		assertEquals(expectedDuration, entries[0].length)
+	}
+
+	@Test
+	fun `latestLoggedEnd is null when the logbook is empty`() {
+		assertNull(repository.latestLoggedEnd())
+	}
+
+	@Test
+	fun `latestLoggedEnd is the greatest end, not the greatest start`() {
+		// The long fast starts first but ends last; a max over `start` alone would
+		// pick the wrong row, which is exactly the bug this guards.
+		fakeDatasource.insertAll(
+			FastEntry(uid = 1, start = 1_000, length = 90_000),
+			FastEntry(uid = 2, start = 50_000, length = 10_000),
+		)
+
+		assertEquals(Instant.fromEpochMilliseconds(91_000), repository.latestLoggedEnd())
 	}
 
 	@Test

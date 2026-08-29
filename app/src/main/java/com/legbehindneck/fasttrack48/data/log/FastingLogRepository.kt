@@ -12,6 +12,12 @@ interface FastingLogRepository {
 	/** Delete the entire logbook; returns the number of entries removed. */
 	fun deleteAllEntries(): Int
 	fun addLogEntry(start: LocalDateTime, length: Duration, notes: String = "")
+
+	/**
+	 * End of the most recent logged fast, or null when the logbook is empty. Used to
+	 * warn when an active fast is backdated into a window that is already recorded.
+	 */
+	fun latestLoggedEnd(): Instant?
 	// notes defaults to the entry's current notes so an edit that omits them preserves them
 	fun updateLogEntry(
         entry: FastingLogEntry,

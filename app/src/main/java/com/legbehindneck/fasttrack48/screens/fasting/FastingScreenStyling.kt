@@ -29,6 +29,10 @@ data class FastingSpacing(
 	val small: Dp,
 	val medium: Dp,
 	val large: Dp,
+	// The ladder's top rung, and the only one that separates *groups* rather than
+	// elements: 21 / 10 (the gap between two phase rows) is 2.1x, which is the smallest
+	// ratio that reads as a group boundary rather than as slightly loose spacing.
+	val xlarge: Dp,
 	val iconSize: Dp,
 	val buttonPaddingHorizontal: Dp,
 	val buttonPaddingVertical: Dp,
@@ -41,6 +45,7 @@ val LocalFastingSpacing = staticCompositionLocalOf {
 		small = 5.dp,
 		medium = 8.dp,
 		large = 13.dp,
+		xlarge = 21.dp,
 		iconSize = 21.dp,
 		buttonPaddingHorizontal = 13.dp,
 		buttonPaddingVertical = 8.dp,
@@ -85,6 +90,7 @@ fun rememberFastingSpacing(isCompact: Boolean): FastingSpacing {
 				small = 3.dp,
 				medium = 5.dp,
 				large = 8.dp,
+				xlarge = 13.dp,
 				iconSize = 13.dp,
 				buttonPaddingHorizontal = 8.dp,
 				buttonPaddingVertical = 5.dp,
@@ -94,6 +100,7 @@ fun rememberFastingSpacing(isCompact: Boolean): FastingSpacing {
 				small = 5.dp,
 				medium = 8.dp,
 				large = 13.dp,
+				xlarge = 21.dp,
 				iconSize = 21.dp,
 				buttonPaddingHorizontal = 13.dp,
 				buttonPaddingVertical = 8.dp,

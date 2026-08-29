@@ -3,8 +3,10 @@
 
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove"/>
 	<uses-permission android:name="android.permission.VIBRATE"/>
+
+	<!-- Injected by androidx.work for its NetworkType constraints, which this app never uses. -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove"/>
 
 	<application
 			android:name=".FastTrackApp"
