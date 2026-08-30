@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
@@ -21,7 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.screens.preview.getContext
@@ -87,12 +91,21 @@ fun FastStartBlock(
 				tint = journeyStageColor(0),
 			)
 		}
-		Text(
+		// The datum itself, and the one line on this screen that must stay legible in full:
+		// an ellipsized start time is worse than no start time. It is also the widest thing
+		// here in locales that spell the weekday out, so it shrinks rather than truncates.
+		BasicText(
 			text = label,
-			style = MaterialTheme.typography.bodyMedium,
-			color = MaterialTheme.colorScheme.onBackground,
 			maxLines = 1,
-			overflow = TextOverflow.Ellipsis,
+			autoSize = TextAutoSize.StepBased(
+				minFontSize = 10.sp,
+				maxFontSize = 14.sp,
+				stepSize = 1.sp,
+			),
+			style = MaterialTheme.typography.bodyMedium.merge(
+				TextStyle(color = MaterialTheme.colorScheme.onBackground)
+			),
+			modifier = Modifier.fillMaxWidth(),
 		)
 	}
 }

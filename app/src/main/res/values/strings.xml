@@ -54,9 +54,9 @@
 	</string>
 
 	<string name="intro_04_title">Stay Motivated with Notifications</string>
-	<string name="intro_04_description">FastTrack48 can show you helpful notifications to keep you motivated during your
-		fast.\n\nYou’ll see your current fasting time, what stage you’re in, and what energy mode your body is
-		using.\n\nThis helps you stay on track without having to open the app!
+	<string name="intro_04_description">FastTrack48 can show notifications to keep you motivated during a
+		fast.\n\nYou’ll see what phase you’re in, and the energy mode your body is
+		using.
 	</string>
 
 	<string name="intro_05_title">That’s it!</string>

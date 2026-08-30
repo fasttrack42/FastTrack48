@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -74,6 +73,7 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -81,6 +81,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
@@ -102,6 +103,7 @@ import com.legbehindneck.fasttrack48.ui.theme.fastBackgroundGradient
 import com.legbehindneck.fasttrack48.utils.AppDateTime
 import com.legbehindneck.fasttrack48.utils.LocalDateStyle
 import com.legbehindneck.fasttrack48.utils.formatDuration
+import com.legbehindneck.fasttrack48.utils.rememberFitToViewportDensity
 import com.legbehindneck.fasttrack48.utils.shareFastImage
 import com.legbehindneck.fasttrack48.utils.shouldUse24HourFormat
 import io.github.aakira.napier.Napier
@@ -307,8 +309,16 @@ fun FastingScreen(
 		if (externalRequests.shareRequested) {
 			@Suppress("TooGenericExceptionCaught")
 			try {
-				val bounds = heroBounds
 				val window = (context as? Activity)?.window
+				// Clamped to the window: the hero scrolls now, so its bounds can extend past
+				// the surface PixelCopy reads from, and a source rect outside that surface is
+				// rejected outright. Intersecting keeps the share working — it captures what
+				// is actually on screen — instead of failing whenever the reader has scrolled
+				// or turned their font up.
+				val bounds = heroBounds?.let { hero ->
+					val decor = window?.decorView ?: return@let null
+					Rect(hero).takeIf { it.intersect(0, 0, decor.width, decor.height) }
+				}
 				if (bounds != null && window != null && bounds.width() > 0 && bounds.height() > 0) {
 					val bitmap = createBitmap(bounds.width(), bounds.height())
 					val ok = try {
@@ -379,6 +389,7 @@ fun FastingScreen(
 
 	val configuration = LocalConfiguration.current
 	val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+	val fontScale = LocalDensity.current.fontScale
 
 	BoxWithConstraints(
 		modifier = Modifier
@@ -416,7 +427,14 @@ fun FastingScreen(
 					(1f - ARC_NOTCH_FRACTION),
 			)
 		} else {
-			min(maxWidth, maxHeight * 0.44f)
+			// The dial is the only elastic thing in this column — everything else is text,
+			// and text grows with the reader's font scale. 0.44 of the viewport is what the
+			// dial may have at scale 1.0; at 1.3 the surrounding text needs a third more
+			// room and the dial hands it back rather than pushing the description off the
+			// bottom. Floored at the band's own minimum width, below which the arc has
+			// nothing left to hold: past that the column scrolls instead of shrinking
+			// further, because the reader asked for large text and should get it.
+			min(maxWidth, (maxHeight * 0.44f / fontScale).coerceAtLeast(MinBandWidth))
 		}
 
 		CompositionLocalProvider(
@@ -430,23 +448,33 @@ fun FastingScreen(
 						.padding(spacing.large),
 					verticalAlignment = Alignment.Top
 				) {
-					FastHeadingContent(
-						uiState = uiState,
-						dialMaxSize = dialMaxSize,
-						showTotalHours = showTotalHours,
-						onToggleTimeFormat = { showTotalHours = !showTotalHours },
-						onStageSelected = { selectedStage = it },
-						onEditStart = { showEditStartPicker = true },
-						onShowEndFastConfirmation = ::onShowEndFastConfirmation,
-						onShowStartFastSelector = ::onShowStartFastSelector,
-						viewModel = viewModel,
-						capturing = capturing,
-						modifier = Modifier
-							.weight(1f)
-							.fillMaxHeight()
-							.padding(end = spacing.medium)
-							.onGloballyPositioned { heroBounds = it.boundsInWindow().toAndroidRect() }
-					)
+					val headingScroll = rememberScrollState()
+					CompositionLocalProvider(
+						LocalDensity provides rememberFitToViewportDensity(headingScroll)
+					) {
+						FastHeadingContent(
+							uiState = uiState,
+							dialMaxSize = dialMaxSize,
+							showTotalHours = showTotalHours,
+							onToggleTimeFormat = { showTotalHours = !showTotalHours },
+							onStageSelected = { selectedStage = it },
+							onEditStart = { showEditStartPicker = true },
+							onShowEndFastConfirmation = ::onShowEndFastConfirmation,
+							onShowStartFastSelector = ::onShowStartFastSelector,
+							viewModel = viewModel,
+							capturing = capturing,
+							modifier = Modifier
+								.weight(1f)
+								.fillMaxHeight()
+								// Same escape hatch as portrait: LandscapeChrome budgets one line
+								// of stage title at scale 1.0, and a reader at 2.0 has two. The
+								// column gives type back first and scrolls only past the floor,
+								// rather than clipping the arc.
+								.verticalScroll(headingScroll)
+								.padding(end = spacing.medium)
+								.onGloballyPositioned { heroBounds = it.boundsInWindow().toAndroidRect() }
+						)
+					}
 
 					Spacer(modifier = Modifier.size(height = spacing.large, width = 1.dp))
 
@@ -458,39 +486,56 @@ fun FastingScreen(
 						modifier = Modifier
 							.weight(1f)
 							.fillMaxHeight()
-							.padding(start = spacing.medium, top = TopActionsClearance)
+							.padding(start = spacing.medium)
 					)
 				}
 			} else {
-				Column(
-					modifier = Modifier
-						.fillMaxSize()
-						.padding(spacing.large),
-					horizontalAlignment = Alignment.CenterHorizontally
+				// Scrolls, and centres itself while it still fits.
+				//
+				// It used to be an unweighted child between two weighted spacers, which in a
+				// Column means it measures against the *whole* viewport and anything past
+				// the bottom is simply cut — which is what the bottom of the status line
+				// was, for every reader whose font scale is above 1.0. A cluster of text
+				// cannot be seated by ratio against a height it may exceed.
+				//
+				// heightIn(min) inside the scroll is what keeps both behaviours in one
+				// layout: shorter than the viewport, the column is still viewport-tall and
+				// Arrangement.Center seats it; taller, the column grows and the reader
+				// scrolls. Nothing is ever clipped, at any font scale, in any locale. The
+				// golden seating is the one casualty — slack can only be split by ratio if
+				// there is slack, and under an accessibility font size there is none.
+				//
+				// Scrolling is the last resort, not the first: the block gives type back
+				// until it fits, and only scrolls once it has nothing left to give.
+				val heroScroll = rememberScrollState()
+				CompositionLocalProvider(
+					LocalDensity provides rememberFitToViewportDensity(heroScroll)
 				) {
-					// Golden-seat the whole hero cluster: a smaller minor share of
-					// slack above, a larger major share below (before the pinned
-					// action). Title + dial + rows + description read as one unit,
-					// and this whole block is what gets captured for image sharing.
-					Spacer(modifier = Modifier.weight(GOLDEN_MINOR))
-
-					FastHero(
-						uiState = uiState,
-						dialMaxSize = dialMaxSize,
-						showTotalHours = showTotalHours,
-						onToggleTimeFormat = { showTotalHours = !showTotalHours },
-						onStageSelected = { selectedStage = it },
-						onEditStart = { showEditStartPicker = true },
-						onShowEndFastConfirmation = ::onShowEndFastConfirmation,
-						onShowStartFastSelector = ::onShowStartFastSelector,
-						viewModel = viewModel,
-						capturing = capturing,
+					Column(
 						modifier = Modifier
 							.fillMaxWidth()
-							.onGloballyPositioned { heroBounds = it.boundsInWindow().toAndroidRect() }
-					)
-
-					Spacer(modifier = Modifier.weight(GOLDEN_MAJOR))
+							.verticalScroll(heroScroll)
+							.padding(spacing.large)
+							.heightIn(min = maxHeight - spacing.large * 2),
+						horizontalAlignment = Alignment.CenterHorizontally,
+						verticalArrangement = Arrangement.Center,
+					) {
+						FastHero(
+							uiState = uiState,
+							dialMaxSize = dialMaxSize,
+							showTotalHours = showTotalHours,
+							onToggleTimeFormat = { showTotalHours = !showTotalHours },
+							onStageSelected = { selectedStage = it },
+							onEditStart = { showEditStartPicker = true },
+							onShowEndFastConfirmation = ::onShowEndFastConfirmation,
+							onShowStartFastSelector = ::onShowStartFastSelector,
+							viewModel = viewModel,
+							capturing = capturing,
+							modifier = Modifier
+								.fillMaxWidth()
+								.onGloballyPositioned { heroBounds = it.boundsInWindow().toAndroidRect() }
+						)
+					}
 				}
 			}
 		}
@@ -534,14 +579,29 @@ private fun FastHeadingContent(
 		modifier = modifier,
 		horizontalAlignment = Alignment.CenterHorizontally
 	) {
-		// Stage Title
-		Text(
+		// Stage Title. Auto-sized because the corridor is fixed — the column's own width —
+		// while the string is not: "Optimal Autophagy" is 17 characters and
+		// "Оптимальна автофагія" is 20. This is the width-bound case, where the only
+		// alternative to shrinking a point or two is an ellipsis, so shrinking wins.
+		val titleStyle = typography.stageTitle()
+		BasicText(
 			text = uiState.stageTitle,
-			style = typography.stageTitle(),
-			color = MaterialTheme.colorScheme.onBackground,
-			fontWeight = FontWeight.Bold,
-			textAlign = TextAlign.Center,
-			modifier = Modifier.padding(bottom = spacing.small)
+			maxLines = 2,
+			autoSize = TextAutoSize.StepBased(
+				minFontSize = 16.sp,
+				maxFontSize = titleStyle.fontSize.takeIf { it != TextUnit.Unspecified } ?: 28.sp,
+				stepSize = 1.sp,
+			),
+			style = titleStyle.merge(
+				TextStyle(
+					color = MaterialTheme.colorScheme.onBackground,
+					fontWeight = FontWeight.Bold,
+					textAlign = TextAlign.Center,
+				)
+			),
+			modifier = Modifier
+				.fillMaxWidth()
+				.padding(bottom = spacing.small)
 		)
 
 		// Dial and band share one square. The arc's 270 degrees leave a notch facing
@@ -683,12 +743,6 @@ private fun FastHeadingContent(
 	}
 }
 
-// Golden section of the free vertical space: the hero cluster is seated with
-// ~38.2% of the slack above it and ~61.8% below, so it rises toward the upper
-// golden line and the primary action keeps a larger, deliberate breathing zone.
-internal const val GOLDEN_MINOR = 0.382f
-internal const val GOLDEN_MAJOR = 0.618f
-
 // Shared height of the two blocks that flank the arc's notch — the start datum and the
 // action pill. A Fibonacci rung, comfortably over the 48dp touch minimum, and where the
 // two-line datum lands on its own. Equal footprint is the point: they balance each other.
@@ -709,15 +763,6 @@ internal const val ARC_ARM_INSET = 0.146f
 // ~111dp with padding) plus the End Fast outline at its natural width (~105dp) plus a
 // gutter. 233 is the Fibonacci rung that clears it.
 internal val MinBandWidth = 233.dp
-// MainScreen's floating action pill is an overlay pinned to the window's top end corner,
-// and in landscape MainScreen deliberately drops the top inset from contentPaddingValues
-// to buy the left column its height back. That leaves the right column running underneath
-// the pill: the Fat Burn row and the share icon land on the same pixels. This is the pill's
-// own extent — a 48dp IconButton plus the 4dp it is offset by, rounded to the next
-// Fibonacci rung — reserved on the only column that sits beneath it. The left column keeps
-// every dp, which is the trade MainScreen made in the first place.
-internal val TopActionsClearance = 55.dp
-
 // Everything the landscape left column spends above and around the dial: the column's own
 // 2 x large padding, one line of stage title, and enough margin that a title wrapping to
 // two lines cannot push the arc off the bottom.
@@ -767,12 +812,15 @@ private fun FastHero(
 		// Group separation, one rung above the 2 x small (10dp) that sits between two phase
 		// rows. Without it the band-to-rows gap was *smaller* than the row-to-row gap and
 		// the rows read as part of the band. It lives here rather than in PhaseRows because
-		// in landscape the rows sit in the opposite column with no band above them and
-		// their own TopActionsClearance already.
+		// in landscape the rows sit in the opposite column with no band above them.
 		Spacer(modifier = Modifier.height(spacing.xlarge))
 
 		PhaseRows(uiState, showTotalHours, onToggleTimeFormat, onStageSelected, elapsed)
 
+		// Prose, and the one block here that is bound by height rather than width. It is
+		// deliberately *not* auto-sized: shrinking body text is how you take back the font
+		// size a reader went into system settings to ask for. The column scrolls instead,
+		// so the whole sentence survives at whatever size they chose.
 		Text(
 			text = rememberFastStatusText(uiState, showTotalHours),
 			style = typography.stageDescription(),
@@ -852,22 +900,31 @@ private fun FastDetailsContent(
 	) {
 		PhaseRows(uiState, showTotalHours, onToggleTimeFormat, onStageSelected, elapsed)
 
+		val description = rememberFastStatusText(uiState, showTotalHours)
+		val descriptionScroll = rememberScrollState()
+
 		Box(
 			modifier = Modifier
 				.fillMaxWidth()
 				.weight(1f)
-				.verticalScroll(rememberScrollState()),
+				.verticalScroll(descriptionScroll),
 			contentAlignment = Alignment.Center
 		) {
-			Text(
-				text = rememberFastStatusText(uiState, showTotalHours),
-				style = typography.stageDescription(),
-				color = MaterialTheme.colorScheme.onBackground,
-				textAlign = TextAlign.Center,
-				modifier = Modifier
-					.fillMaxWidth()
-					.padding(vertical = spacing.medium)
-			)
+			// Keyed on the text itself, so a shorter stage description undoes the shrink a
+			// longer one earned instead of inheriting it.
+			CompositionLocalProvider(
+				LocalDensity provides rememberFitToViewportDensity(descriptionScroll, description)
+			) {
+				Text(
+					text = description,
+					style = typography.stageDescription(),
+					color = MaterialTheme.colorScheme.onBackground,
+					textAlign = TextAlign.Center,
+					modifier = Modifier
+						.fillMaxWidth()
+						.padding(vertical = spacing.medium)
+				)
+			}
 		}
 	}
 }
@@ -888,6 +945,9 @@ private fun PhaseRows(
 ) {
 	if (!uiState.isFasting) return
 
+	val spacing = fastingSpacing()
+	val typography = fastingTypography()
+
 	fun visible(show: Boolean, startHours: Int): Boolean =
 		if (uiState.phaseAutoMode) {
 			elapsed != null && elapsed >= startHours.hours
@@ -895,36 +955,52 @@ private fun PhaseRows(
 			show
 		}
 
-	Column(modifier = Modifier.fillMaxWidth()) {
+	// label, phase start, index into the journey. Built as data rather than three copies of
+	// the same call because the block is now sized as a block: the type size depends on
+	// every row that is actually showing, so the set has to exist before any row composes.
+	val rows = buildList {
 		if (visible(uiState.showFatBurn, Stages.PHASE_FAT_BURN.hours)) {
-			StageInfo(
-				labelRes = R.string.fast_fat_burn_label,
-				phaseStartHours = Stages.PHASE_FAT_BURN.hours,
-				elapsed = elapsed,
-				showTotalHours = showTotalHours,
-				onToggleFormat = onToggleTimeFormat,
-				onClick = { onStageSelected(FastingJourney.stages[4]) }
-			)
+			add(Triple(R.string.fast_fat_burn_label, Stages.PHASE_FAT_BURN.hours, 4))
 		}
 		if (visible(uiState.showKetosis, Stages.PHASE_KETOSIS.hours)) {
-			StageInfo(
-				labelRes = R.string.fast_ketosis_label,
-				phaseStartHours = Stages.PHASE_KETOSIS.hours,
-				elapsed = elapsed,
-				showTotalHours = showTotalHours,
-				onToggleFormat = onToggleTimeFormat,
-				onClick = { onStageSelected(FastingJourney.stages[5]) }
-			)
+			add(Triple(R.string.fast_ketosis_label, Stages.PHASE_KETOSIS.hours, 5))
 		}
 		if (visible(uiState.showAutophagy, Stages.PHASE_AUTOPHAGY.hours)) {
-			StageInfo(
-				labelRes = R.string.fast_autophagy_label,
-				phaseStartHours = Stages.PHASE_AUTOPHAGY.hours,
-				elapsed = elapsed,
-				showTotalHours = showTotalHours,
-				onToggleFormat = onToggleTimeFormat,
-				onClick = { onStageSelected(FastingJourney.stages[6]) }
-			)
+			add(Triple(R.string.fast_autophagy_label, Stages.PHASE_AUTOPHAGY.hours, 6))
+		}
+	}
+	if (rows.isEmpty()) return
+
+	BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+		// What one side of the mirror actually gets: the row's own horizontal padding at
+		// both edges, plus the centre gutter, removed before the halving.
+		val columnWidth = (maxWidth - spacing.medium * 3) / 2
+
+		val labelStyle = typography.phaseLabel()
+		val labels = rows.map { stringResource(id = it.first) }
+		val values = rows.map { phaseTimeText(elapsed, it.second, showTotalHours) }
+		// Labels and values measured together: they are one typographic pair, and a value
+		// set a size larger than its own label would read as the emphasis it is not.
+		val fontSize = rememberSharedAutoSize(
+			texts = labels + values,
+			style = labelStyle,
+			maxWidth = columnWidth,
+			min = 11.sp,
+			max = labelStyle.fontSize.takeIf { it != TextUnit.Unspecified } ?: 16.sp,
+		)
+
+		Column(modifier = Modifier.fillMaxWidth()) {
+			rows.forEach { (labelRes, phaseStartHours, stageIndex) ->
+				StageInfo(
+					labelRes = labelRes,
+					phaseStartHours = phaseStartHours,
+					elapsed = elapsed,
+					showTotalHours = showTotalHours,
+					fontSize = fontSize,
+					onToggleFormat = onToggleTimeFormat,
+					onClick = { onStageSelected(FastingJourney.stages[stageIndex]) }
+				)
+			}
 		}
 	}
 }
@@ -1021,22 +1097,33 @@ private fun FastArcBand(
 			.padding(horizontal = armInset),
 	) {
 		if (uiState.isFasting) {
+			// Two halves, not SpaceBetween. Unconstrained children measure in order and the
+			// datum measures first, so it took whatever "Yesterday, 22:15" wanted and left
+			// the action the remainder — which in Spanish is narrower than the single word
+			// "Terminar", so Compose broke the word itself. Weighted halves give the
+			// terminal action a guaranteed 50% of the band, and mirror the same spine the
+			// phase rows below are built on.
 			Row(
 				modifier = Modifier.fillMaxWidth(),
-				horizontalArrangement = Arrangement.SpaceBetween,
 				verticalAlignment = Alignment.CenterVertically,
 			) {
 				// Origin: the datum the action left behind when it moved to the centre.
 				FastStartBlock(
 					startTime = uiState.fastStartTime,
 					onEditStart = onEditStart,
+					modifier = Modifier.weight(1f),
 				)
 
 				// Terminus. Nothing closes a journey that has not begun.
-				EndFastAction(
-					onClick = onShowEndFastConfirmation,
-					capturing = capturing,
-				)
+				Box(
+					modifier = Modifier.weight(1f),
+					contentAlignment = Alignment.CenterEnd,
+				) {
+					EndFastAction(
+						onClick = onShowEndFastConfirmation,
+						capturing = capturing,
+					)
+				}
 			}
 		} else {
 			// The band's whole width, centred: this is a summary of the cycle, not a
@@ -1173,13 +1260,24 @@ private fun EndFastAction(
 			modifier = Modifier.size(spacing.iconSize),
 		)
 		Spacer(modifier = Modifier.width(spacing.small))
-		Text(
+		BasicText(
 			text = stringResource(id = R.string.end_fast_button),
-			style = MaterialTheme.typography.titleSmall,
 			// The escape valve for long locales: Ukrainian and Dutch wrap rather than
-			// pushing the band past the dial's width or ellipsizing the action.
+			// pushing the band past the dial's width or ellipsizing the action. Auto-sizing
+			// is the second valve — with half the band guaranteed, two lines at 10sp hold
+			// every translation of two words, so the break lands between them.
 			maxLines = 2,
-			textAlign = TextAlign.Center,
+			autoSize = TextAutoSize.StepBased(
+				minFontSize = 10.sp,
+				maxFontSize = 14.sp,
+				stepSize = 1.sp,
+			),
+			style = MaterialTheme.typography.titleSmall.merge(
+				TextStyle(
+					color = accent,
+					textAlign = TextAlign.Center,
+				)
+			),
 		)
 	}
 }
@@ -1194,12 +1292,38 @@ private fun EndFastAction(
 internal fun contentColorOn(container: Color): Color =
 	if (container.luminance() > 0.179f) Black900 else White50
 
+/**
+ * The right-hand half of a phase row: time since the phase opened, or time until it does.
+ *
+ * Lives outside [StageInfo] because [PhaseRows] has to know these strings *before* the rows
+ * compose — they are half of what the shared type size is measured against — and a second
+ * copy of the sign rule would be a second thing to keep correct.
+ */
+@Composable
+private fun phaseTimeText(
+	elapsed: Duration?,
+	phaseStartHours: Int,
+	showTotalHours: Boolean,
+): String {
+	val delta = elapsed?.minus(phaseStartHours.hours) ?: return "—"
+	return if (delta >= Duration.ZERO) {
+		formatDuration(delta, showTotalHours)
+	} else {
+		stringResource(R.string.phase_time_until, formatDuration(-delta, showTotalHours))
+	}
+}
+
 @Composable
 private fun StageInfo(
 	labelRes: Int,
 	phaseStartHours: Int,
 	elapsed: Duration?,
 	showTotalHours: Boolean,
+	// One size for every label and every value in the block, measured by [PhaseRows] against
+	// the longest of them. Per-composable auto-sizing would settle each row independently
+	// and leave "Cetosis" a third larger than "Quema de Grasa" beside it, spending the
+	// mirrored alignment that is the whole point of the block to save a point of type.
+	fontSize: TextUnit,
 	onToggleFormat: () -> Unit,
 	onClick: () -> Unit,
 ) {
@@ -1207,26 +1331,14 @@ private fun StageInfo(
 	val typography = fastingTypography()
 
 	val delta = elapsed?.minus(phaseStartHours.hours)
-	val timeText: String
-	val timeColor: Color
-	when {
-		delta == null -> {
-			timeText = "—"
-			timeColor = MaterialTheme.colorScheme.onBackground
-		}
-
-		delta >= Duration.ZERO -> {
-			// Underway: alive, affirming green — the dial's own "burn begins" hue,
-			// so it tracks the theme (light/dark) instead of a fixed color.
-			timeText = formatDuration(delta, showTotalHours)
-			timeColor = journeyStageColor(4)
-		}
-
-		else -> {
-			// Ahead: calm anticipation, never red — an upcoming phase is not a failure
-			timeText = stringResource(R.string.phase_time_until, formatDuration(-delta, showTotalHours))
-			timeColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f)
-		}
+	val timeText = phaseTimeText(elapsed, phaseStartHours, showTotalHours)
+	val timeColor: Color = when {
+		// Underway: alive, affirming green — the dial's own "burn begins" hue,
+		// so it tracks the theme (light/dark) instead of a fixed color.
+		delta == null -> MaterialTheme.colorScheme.onBackground
+		delta >= Duration.ZERO -> journeyStageColor(4)
+		// Ahead: calm anticipation, never red — an upcoming phase is not a failure
+		else -> MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f)
 	}
 
 	// Label right-aligned into the left half, value left-aligned into the right half, with
@@ -1255,17 +1367,19 @@ private fun StageInfo(
 		Text(
 			text = stringResource(id = labelRes),
 			style = typography.phaseLabel(),
+			fontSize = fontSize,
 			color = phaseTextColor(),
 			textAlign = TextAlign.End,
+			// No ellipsis: the size was chosen so every label in the block fits this half.
 			maxLines = 1,
 			softWrap = false,
-			overflow = TextOverflow.Ellipsis,
 			modifier = Modifier.weight(1f)
 		)
 		Spacer(modifier = Modifier.width(spacing.medium))
 		Text(
 			text = timeText,
 			style = typography.phaseTime(),
+			fontSize = fontSize,
 			color = timeColor,
 			textAlign = TextAlign.Start,
 			maxLines = 1,

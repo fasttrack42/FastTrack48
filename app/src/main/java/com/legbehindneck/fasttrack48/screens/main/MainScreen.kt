@@ -1,16 +1,12 @@
 package com.legbehindneck.fasttrack48.screens.main
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -186,6 +182,37 @@ fun MainScreen(
 			}
 		}
 	) { paddingValues ->
+		val layoutDirection = LocalLayoutDirection.current
+
+		// Where the floating overflow button sits, expressed once, here, where the button
+		// is actually placed — and folded into the padding every page already receives.
+		//
+		// It used to be the pages' problem: the button is a Box-aligned overlay and
+		// reserves nothing, so each screen that happened to put something under the
+		// top-end corner carved out its own clearance by hand. That is one constant per
+		// consumer and a silent collision for every consumer that forgets, which is how
+		// the stage title ended up underneath it. Chrome that floats declares its own
+		// extent; content is told about it. No screen needs to know this button exists.
+		//
+		// Which axis it costs depends on where the button is relative to the content. In
+		// portrait it is directly above the content, so it costs height. In landscape the
+		// content is two columns and the button is over the end one's top corner, so it
+		// costs width — and the dial column, which is starved for height and has nothing
+		// under the corner, pays nothing.
+		val contentPadding = if (compactHeight) {
+			PaddingValues(
+				end = paddingValues.calculateEndPadding(layoutDirection) + TopActionsExtent,
+				bottom = paddingValues.calculateBottomPadding(),
+			)
+		} else {
+			PaddingValues(
+				start = paddingValues.calculateStartPadding(layoutDirection),
+				top = paddingValues.calculateTopPadding() + TopActionsExtent,
+				end = paddingValues.calculateEndPadding(layoutDirection),
+				bottom = paddingValues.calculateBottomPadding(),
+			)
+		}
+
 		Box(modifier = Modifier.fillMaxSize()) {
 			if (compactHeight) {
 
@@ -246,10 +273,7 @@ fun MainScreen(
 
 				Content(
 					Modifier.weight(1f),
-					contentPaddingValues = PaddingValues(
-						end = paddingValues.calculateEndPadding(LocalLayoutDirection.current),
-						bottom = paddingValues.calculateBottomPadding(),
-					),
+					contentPaddingValues = contentPadding,
 					pagerState,
 					externalRequests,
 				)
@@ -257,7 +281,7 @@ fun MainScreen(
 			} else {
 				Content(
 					Modifier.fillMaxSize(),
-					contentPaddingValues = paddingValues,
+					contentPaddingValues = contentPadding,
 					pagerState,
 					externalRequests,
 				)
@@ -290,12 +314,14 @@ fun MainScreen(
 	}
 }
 
+// The vertical room the floating overflow button occupies below the window's top inset: a
+// 48dp IconButton plus the 4dp it is offset by, rounded to the next Fibonacci rung. Read by
+// MainScreen alone, which is the only place that knows where the button is put.
+private val TopActionsExtent = 55.dp
+
 /**
- * The old top app bar, distilled to a small translucent pill in the
- * top-right corner: About and Settings live behind the overflow menu,
- * which is the only control present on every page. Share and Info are
- * contextual — Share captures the fasting hero, Info explains the stage
- * ring — so both only appear (animated) while the Fasting page is active.
+ * The old top app bar, distilled to a single translucent overflow button in the top-right
+ * corner. Everything lives behind it now.
  */
 @Composable
 private fun FloatingTopActions(
@@ -324,32 +350,6 @@ private fun FloatingTopActions(
 		color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f),
 	) {
 		Row(verticalAlignment = Alignment.CenterVertically) {
-			AnimatedVisibility(
-				visible = showShare,
-				enter = expandHorizontally() + fadeIn(),
-				exit = shrinkHorizontally() + fadeOut(),
-			) {
-				IconButton(onClick = onShareClick) {
-					Icon(
-						imageVector = Icons.Default.Share,
-						contentDescription = stringResource(id = R.string.action_share),
-					)
-				}
-			}
-
-			AnimatedVisibility(
-				visible = showInfo,
-				enter = expandHorizontally() + fadeIn(),
-				exit = shrinkHorizontally() + fadeOut(),
-			) {
-				IconButton(onClick = onInfoClick) {
-					Icon(
-						imageVector = Icons.Default.Info,
-						contentDescription = stringResource(id = R.string.action_info),
-					)
-				}
-			}
-
 			Box {
 				IconButton(onClick = { showMenu = !showMenu }) {
 					Icon(
@@ -362,6 +362,50 @@ private fun FloatingTopActions(
 					expanded = showMenu,
 					onDismissRequest = { showMenu = false }
 				) {
+					// Share and Info used to be permanent pills beside this one, and three
+					// icons wide the overlay reached far enough across the top of the screen
+					// to sit on the stage title beneath it in any locale whose title is
+					// longer than English's. Neither is used often enough to be worth a
+					// heading: Share is a once-a-fast flourish and Info is read once. They
+					// are still contextual — the Fasting page is the only one either
+					// describes — so the same two flags that used to animate the pills in
+					// and out now decide whether the items exist at all.
+					if (showShare) {
+						DropdownMenuItem(
+							text = { Text(stringResource(id = R.string.action_share)) },
+							leadingIcon = {
+								Icon(
+									imageVector = Icons.Default.Share,
+									contentDescription = null,
+								)
+							},
+							onClick = {
+								onShareClick()
+								showMenu = false
+							},
+						)
+					}
+
+					if (showInfo) {
+						DropdownMenuItem(
+							text = { Text(stringResource(id = R.string.action_info)) },
+							leadingIcon = {
+								Icon(
+									imageVector = Icons.Default.Info,
+									contentDescription = null,
+								)
+							},
+							onClick = {
+								onInfoClick()
+								showMenu = false
+							},
+						)
+					}
+
+					if (showShare || showInfo) {
+						HorizontalDivider()
+					}
+
 					// The primary action already sits on the dial, but a menu is where
 					// users go looking when they cannot find a control, so the same act
 					// is mirrored here. Only ever one item: starting a fast while one is

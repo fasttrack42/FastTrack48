@@ -16,23 +16,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.min
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
+import com.legbehindneck.fasttrack48.utils.rememberFitToViewportDensity
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -125,12 +129,21 @@ fun IntroScreen(
         }
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize()
+    // A Column, not a Box with the controls aligned over it. The controls were an overlay
+    // and reserved no space, so on the last slide in a long locale — or for any reader with
+    // a larger system font — the description ran underneath the Next button. Siblings in a
+    // Column cannot overlap by construction: the controls take the height they need and the
+    // pager is told what is left.
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .safeDrawingPadding()
     ) {
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
         ) { page ->
             when (page) {
                 0 -> IntroSlide(
@@ -180,8 +193,6 @@ fun IntroScreen(
         // Navigation controls at the bottom
         Column(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .safeDrawingPadding()
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
@@ -212,11 +223,12 @@ fun IntroScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 // Previous button or Skip button
                 if (pagerState.currentPage > 0) {
                     Button(
+                        modifier = Modifier.weight(1f),
                         onClick = {
                             coroutineScope.launch {
                                 pagerState.animateScrollToPage(pagerState.currentPage - 1)
@@ -228,6 +240,7 @@ fun IntroScreen(
                 } else {
                     // Skip button
                     Button(
+                        modifier = Modifier.weight(1f),
                         onClick = { onComplete() }
                     ) {
                         Text(stringResource(id = R.string.skip_button))
@@ -237,6 +250,7 @@ fun IntroScreen(
                 // Next button or Done button
                 if (pagerState.currentPage < 5) {
                     Button(
+                        modifier = Modifier.weight(1f),
                         onClick = {
                             coroutineScope.launch {
                                 pagerState.animateScrollToPage(pagerState.currentPage + 1)
@@ -248,6 +262,7 @@ fun IntroScreen(
                 } else {
                     // Done button
                     Button(
+                        modifier = Modifier.weight(1f),
                         onClick = { onComplete() }
                     ) {
                         Text(stringResource(id = R.string.done_button))
@@ -266,47 +281,69 @@ fun IntroSlide(
     imageDrawable: Int,
     backgroundColor: Int
 ) {
-    Box(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
             .background(color = androidx.compose.ui.graphics.Color(backgroundColor))
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .safeDrawingPadding()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        val slideHeight = maxHeight
+        val slideScroll = rememberScrollState()
+
+        // Centred while the slide fits, scrolled when it does not — the same rule the
+        // fasting screen uses. heightIn(min) is what holds both: under the scroll the
+        // column's own height would otherwise collapse to its content and leave
+        // Arrangement.Center with nothing to centre within.
+        //
+        // And scrolling is the last resort: the slide gives type back until it fits, keyed
+        // on the description so each slide is fitted on its own terms rather than every
+        // slide inheriting the longest one's shrink. Six slides in nine locales is exactly
+        // the case where one hardcoded size cannot be right for all of them.
+        CompositionLocalProvider(
+            LocalDensity provides rememberFitToViewportDensity(slideScroll, description)
         ) {
-            Image(
-                painter = painterResource(id = imageDrawable),
-                contentDescription = null,
+            Column(
                 modifier = Modifier
-                    .size(200.dp)
+                    .fillMaxWidth()
+                    .verticalScroll(slideScroll)
                     .padding(16.dp)
-            )
+                    .heightIn(min = slideHeight - 32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                // The illustration is the elastic part of this slide: it carries no information
+                // the text does not, so it gives up room before the words do.
+                Image(
+                    painter = painterResource(id = imageDrawable),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(min(200.dp, slideHeight * 0.3f))
+                        .padding(16.dp)
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = title,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = androidx.compose.ui.graphics.Color.White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+                // Typography rather than a hardcoded size: these two lines were 24sp and 16sp
+                // literals with no line height of their own, which at a large font scale set
+                // ascender against descender.
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = androidx.compose.ui.graphics.Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
-            Text(
-                text = description,
-                fontSize = 16.sp,
-                color = androidx.compose.ui.graphics.Color.White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = androidx.compose.ui.graphics.Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }
