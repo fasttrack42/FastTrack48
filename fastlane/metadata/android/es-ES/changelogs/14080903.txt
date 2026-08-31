@@ -1,0 +1,8 @@
+* Añadida vista anual
+* Corregidos problemas de recorte y solapamiento de texto
+* Corregido el estado desactualizado de la pantalla principal
+* Corregidas traducciones
+* Los ayunos en curso ahora se muestran en Historial > Mes
+* Nuevo botón central para iniciar ayuno
+* Opción de modificar la hora de inicio de un ayuno en curso
+* Los ayunos en curso se incluyen en la importación y exportación

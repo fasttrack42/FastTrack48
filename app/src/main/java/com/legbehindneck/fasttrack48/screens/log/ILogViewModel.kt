@@ -24,6 +24,11 @@ interface ILogViewModel {
 		 * told about it separately or it draws the last three days as empty.
 		 */
 		val activeFastStart: Instant? = null,
+		/**
+		 * Month the calendar should open on, set when the year strip drills into one.
+		 * Null means "this month" -- the plain entry point into the calendar.
+		 */
+		val focusedMonth: LocalDate? = null,
 		val selectedDate: LocalDate? = null,
 		val showClearAllConfirmation: Boolean = false,
 		// An empty (past/today) calendar day awaiting "add a fast here?" confirmation.
@@ -39,6 +44,9 @@ interface ILogViewModel {
 	fun showEditDialog(entry: FastingLogEntry)
 	fun hideManualAddDialog()
 	fun setViewMode(mode: LogViewMode)
+
+	/** Open the calendar on the month containing [monthStart] (the year strip's drill-down). */
+	fun focusMonth(monthStart: LocalDate)
 	fun selectDate(date: LocalDate?)
 	fun requestClearAll()
 	fun dismissClearAll()

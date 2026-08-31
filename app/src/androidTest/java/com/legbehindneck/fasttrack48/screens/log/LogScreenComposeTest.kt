@@ -48,7 +48,11 @@ class LogScreenComposeTest {
 			fakeDatasource,
 			FakeActiveFastRepository().apply { _isFasting = false },
 		)
-		viewModel = LogViewModel(repository, FakeSettingsDatasource())
+		viewModel = LogViewModel(
+			repository,
+			FakeActiveFastRepository().apply { _isFasting = false },
+			FakeSettingsDatasource(),
+		)
 	}
 
 	@Test

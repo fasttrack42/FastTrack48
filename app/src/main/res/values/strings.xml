@@ -173,7 +173,7 @@
 	<string name="manual_add_start_date_time_label">Start Date and Time</string>
 	<string name="edit_date">Edit date</string>
 	<string name="edit_time">Edit time</string>
-	<string name="manual_start_title">Fasted Started</string>
+	<string name="manual_start_title">Fast Started</string>
 	<string name="manual_add_set_end_title">Set Fast End</string>
 	<string name="manual_add_set_end_complete">Calculate</string>
 	<string name="add_fast_for_day_title">Add a fast for %1$s?</string>
@@ -357,7 +357,10 @@
 	<string name="log_logbook_label">Logbook</string>
 	<string name="log_stats_label">Lifetime stats</string>
 	<string name="log_view_mode_list">List</string>
-	<string name="log_view_mode_calendar">Calendar</string>
+	<string name="log_view_mode_calendar">Month</string>
+	<string name="log_view_mode_year">Year</string>
+	<string name="log_year_chart_description">Fasting hours per day, %1$s, %2$d days fasted.</string>
+	<string name="log_year_axis_hours">%1$dh</string>
 
 	<!-- Fasting journey stages (dial milestones) -->
 	<string name="journey_stage_0_title">Blood Sugar Rises</string>

@@ -30,7 +30,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.utils.AppDateTime
 import com.kizitonwose.calendar.compose.HorizontalCalendar
@@ -40,18 +39,12 @@ import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
-import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.plus
-import kotlinx.datetime.toInstant
 import kotlinx.datetime.toKotlinLocalDate
 import kotlinx.datetime.toLocalDateTime
 import java.time.YearMonth
 import java.time.format.TextStyle
 import kotlin.time.Clock
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDate as KxLocalDate
@@ -61,6 +54,8 @@ import kotlinx.datetime.LocalDate as KxLocalDate
 fun LogCalendarContent(
     entries: List<FastingLogEntry>,
 	activeFastStart: Instant?,
+	/** Month to open on, set when the year strip drills into one. Null means "this month". */
+	focusedMonth: KxLocalDate?,
 	selectedDate: KxLocalDate?,
 	onDateSelected: (KxLocalDate?) -> Unit,
 	onAddForEmptyDay: (KxLocalDate) -> Unit,
@@ -69,27 +64,8 @@ fun LogCalendarContent(
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
-	// A fast spans every calendar day from its start day through the last day it
-	// was still active, so a multi-day fast highlights the whole range (not just
-	// its start day). This maps each covered day to the fasts active that day.
 	val coverage = remember(entries) {
-		val tz = TimeZone.currentSystemDefault()
-		val byDay = HashMap<KxLocalDate, MutableList<FastingLogEntry>>()
-		val endDateById = HashMap<Int, KxLocalDate>()
-		for (e in entries) {
-			val startDate = e.start.date
-			val endInstant = e.start.toInstant(tz).plus(e.length)
-			// Last day the fast was actually active (a fast ending at 00:00 does
-			// not claim that day), never earlier than the start day.
-			val endDate = maxOf(startDate, (endInstant - 1.milliseconds).toLocalDateTime(tz).date)
-			endDateById[e.id] = endDate
-			var d = startDate
-			while (d <= endDate) {
-				byDay.getOrPut(d) { mutableListOf() }.add(e)
-				d = d.plus(1, DateTimeUnit.DAY)
-			}
-		}
-		CalendarCoverage(byDay, endDateById)
+		coverageByDay(entries, TimeZone.currentSystemDefault())
 	}
 
 	val today = remember { java.time.LocalDate.now() }
@@ -108,13 +84,19 @@ fun LogCalendarContent(
 		}
 	}
 	val currentMonth = remember { YearMonth.now() }
+	// The month to land on: the drill-down target from the year strip, else this month.
+	// Switching view mode recreates this composable, so first composition is enough --
+	// no scrollToMonth call is needed.
+	val initialMonth = remember(focusedMonth) {
+		focusedMonth?.let { YearMonth.of(it.year, it.monthNumber) } ?: currentMonth
+	}
 	val firstDayOfWeek = remember { firstDayOfWeekFromLocale() }
 	val daysOfWeek = remember(firstDayOfWeek) { daysOfWeek(firstDayOfWeek = firstDayOfWeek) }
 
 	val calendarState = rememberCalendarState(
 		startMonth = currentMonth.minusMonths(24),
 		endMonth = currentMonth,
-		firstVisibleMonth = currentMonth,
+		firstVisibleMonth = initialMonth,
 		firstDayOfWeek = firstDayOfWeek,
 	)
 
@@ -137,7 +119,7 @@ fun LogCalendarContent(
 						val startDate = chosen.start.date
 						val endDate = coverage.endDateById[chosen.id] ?: startDate
 						DayBand(
-							color = stageColorFor(listOf(chosen)),
+							color = stageColorForLength(chosen.length),
 							isStart = kxDate == startDate,
 							isEnd = kxDate == endDate,
 							isSingle = startDate == endDate,
@@ -354,12 +336,6 @@ private fun DayCell(
 // endpoints and connector share one diameter (a clean stadium).
 private const val DAY_TOKEN_FRACTION = 0.80f
 
-/** Per-day coverage precomputed for the visible entries. */
-private class CalendarCoverage(
-	val byDay: Map<KxLocalDate, List<FastingLogEntry>>,
-	val endDateById: Map<Int, KxLocalDate>,
-)
-
 /** The fast currently running, as the range of days it covers. */
 private data class OngoingSpan(
 	val startDate: KxLocalDate,
@@ -374,28 +350,3 @@ private data class DayBand(
 	val isEnd: Boolean,
 	val isSingle: Boolean,
 )
-
-// Calm, desaturated calendar tones per phase — warmth/renewal rather than alarm
-// (glucose → fat burn → ketosis → autophagy → optimal). Applied at low opacity, so
-// they read as an accomplished wash, not a warning. One hue per fast.
-private val calendarStageColors = listOf(
-	Color(0xFF9AA7B3), // Glucose — quiet slate
-	Color(0xFF6FBF8B), // Fat burn — soft green
-	Color(0xFFE0A94E), // Ketosis — warm amber
-	Color(0xFFE08A6B), // Autophagy — soft coral
-	Color(0xFFB98AD8), // Optimal autophagy — soft violet
-)
-
-@ExperimentalTime
-private fun stageColorFor(entries: List<FastingLogEntry>): Color {
-	val longest = entries.maxByOrNull { it.length } ?: return Color.Transparent
-	return stageColorForLength(longest.length)
-}
-
-/** The wash for a fast of this length — the same scale whether it has ended or not. */
-private fun stageColorForLength(length: Duration): Color {
-	val lenHours = length.toDouble(DurationUnit.HOURS)
-	val stage = Stages.phases.lastOrNull { lenHours >= it.hours } ?: Stages.phases.first()
-	val stageIndex = Stages.phases.indexOf(stage).coerceAtLeast(0)
-	return calendarStageColors.getOrElse(stageIndex) { calendarStageColors.last() }
-}

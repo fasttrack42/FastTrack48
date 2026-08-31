@@ -15,20 +15,19 @@
 	<string name="import_failed">导入日志本失败</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">通知</string>
-	<string name="settings_section_ui">接口</string>
+	<string name="settings_section_ui">界面</string>
 	<string name="settings_section_logbook">日志记录</string>
 	<!-- Settings: Fasting notification -->
-	<string name="settings_fasting_notification_title">显示退货通知</string>
-	<string name="settings_fasting_notification_subtitle">快速提供实时信息</string>
+	<string name="settings_fasting_notification_title">显示禁食通知</string>
+	<string name="settings_fasting_notification_subtitle">在禁食期间提供实时信息</string>
 	<!-- Settings: Stage alerts -->
 	<string name="settings_stage_alerts_title">阶段警报</string>
-	<string name="settings_stage_alerts_subtitle">进入新的快餐阶段时获得通知</string>
+	<string name="settings_stage_alerts_subtitle">进入新的禁食阶段时获得通知</string>
 	<string name="export_failed">导出日志簿失败</string>
 	<string name="intro_00_title">欢迎来到 FastTrack48！</string>
 	<string name="intro_00_description">这个应用程序是关于什么的？</string>
 	<string name="intro_01_title">激励帮助</string>
-	<string name="intro_01_description">Fast
-		Track的主要理念是帮助您在禁食期间保持动力，并向您解释在禁食的不同阶段您的身体正在发生什么。</string>
+	<string name="intro_01_description">FastTrack48 的主要理念是在禁食期间帮你保持动力，并向你解释在禁食的不同阶段你的身体正在发生什么。</string>
 	<string name="intro_02_title">一个简单的免费应用程序</string>
 	<string name="intro_02_description">FastTrack48 是而且将永远免费且开源。无需创建账户，没有内购，没有广告。它甚至无法访问互联网，所以你的数据不会被发送到任何地方。</string>
 	<string name="intro_03_title">间歇性禁食</string>
@@ -68,12 +67,12 @@
 	<string name="fast_status_not_fasting">你没有禁食。</string>
 	<string name="next_stage">下一个阶段在：%1$d 小时后</string>
 
-	<string name="log_entry_started">已启动：%1$s</string>
+	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d 小时</string>
-	<string name="log_entry_ketosis">%1$d 小时</string>
+	<string name="log_entry_ketosis">酮症：%1$d 小时</string>
 	<string name="log_entry_autophagy">自噬：%1$d 小时</string>
 	<string name="profile_age_label">年龄</string>
-	<string name="profile_age_years">年</string>
+	<string name="profile_age_years">岁</string>
 	<string name="profile_weight_label">体重</string>
 	<string name="profile_weight_pounds_label">磅</string>
 	<string name="profile_weight_kg_label">千克</string>
@@ -163,7 +162,7 @@
 	<string name="profile_metric_switch">公制</string>
 	<string name="title_activity_intro">介绍</string>
 	<string name="app_widget_description">从您的主屏幕跟踪您的禁食进度</string>
-	<string name="app_widget_not_fasting">不禁食</string>
+	<string name="app_widget_not_fasting">未在禁食</string>
 	<string name="app_widget_fast_in_progress">禁食进行中</string>
 	<string name="app_widget_time">%1$d 小时</string>
 	<string name="app_widget_time_compact">%1$d 小时</string>
@@ -191,7 +190,7 @@
 	<string name="manual_add_calculate_from_end">从末尾计算</string>
 	<string name="action_settings">设置</string>
 	<string name="title_activity_settings">设置</string>
-	<string name="settings_placeholder">设置即将开始</string>
+	<string name="settings_placeholder">设置即将推出</string>
 	<string name="back">后退</string>
 	<string name="settings_fancy_background_title">显示精美背景</string>
 	<string name="settings_fancy_background_subtitle">关闭以获得更简洁的禁食背景</string>
@@ -206,7 +205,10 @@
 	<string name="log_logbook_label">日志记录</string>
 	<string name="log_stats_label">终生统计</string>
 	<string name="log_view_mode_list">列表</string>
-	<string name="log_view_mode_calendar">日历</string>
+	<string name="log_view_mode_calendar">月</string>
+	<string name="log_view_mode_year">年</string>
+	<string name="log_year_chart_description">每日断食小时数，%1$s，断食 %2$d 天。</string>
+	<string name="log_year_axis_hours">%1$d时</string>
 	<string name="duration_less_than_minute">刚刚开始</string>
 	<string name="fast_notes_label">备注（可选）</string>
 	<string name="fast_notes_placeholder">感觉如何？这次断食有什么想记下的吗？</string>

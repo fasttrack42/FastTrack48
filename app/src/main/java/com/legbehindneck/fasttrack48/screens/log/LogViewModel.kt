@@ -97,7 +97,16 @@ class LogViewModel(
 
 	override fun setViewMode(mode: LogViewMode) {
 		settings.setLogViewMode(mode)
-		_uiState.update { it.copy(viewMode = mode) }
+		// Choosing a mode from the switcher is a fresh start: drop any drill-down target,
+		// or tapping "Month" would keep re-opening the month the year strip last chose.
+		_uiState.update { it.copy(viewMode = mode, focusedMonth = null) }
+	}
+
+	override fun focusMonth(monthStart: LocalDate) {
+		settings.setLogViewMode(LogViewMode.CALENDAR)
+		_uiState.update {
+			it.copy(viewMode = LogViewMode.CALENDAR, focusedMonth = monthStart)
+		}
 	}
 
 	override fun selectDate(date: LocalDate?) {

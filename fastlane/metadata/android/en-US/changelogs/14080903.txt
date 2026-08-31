@@ -1,0 +1,8 @@
+- add year view
+- fix text clipping and overlap: use LocalDensity.current.fontScale, TextAutoSize and adjust typography
+- fix stale main screen state
+- fix translations (wip)
+- display ongoing fasts in calendar view
+- main fasting screen: central start button
+- add option to modify Start time of ongoing fast
+- include ongoing fasts in import/export

@@ -109,6 +109,10 @@ object AppDateTime {
 	fun formatMonthYear(yearMonth: YearMonth, locale: Locale = Locale.getDefault()): String =
 		yearMonth.format(skeletonFormatter(locale, "yMMMM"))
 
+	/** Month + year, abbreviated ("Sep 2025") — for axis headings where width is scarce. */
+	fun formatMonthYearShort(yearMonth: YearMonth, locale: Locale = Locale.getDefault()): String =
+		yearMonth.format(skeletonFormatter(locale, "yMMM"))
+
 	/**
 	 * A fast's window as one heading. Same-day fasts show the date once and the times
 	 * as a range; multi-day fasts date both ends. ISO stays fully explicit on each end.

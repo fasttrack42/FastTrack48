@@ -15,13 +15,13 @@
 	<string name="import_failed">Importieren des Logbuchs fehlgeschlagen</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Benachrichtigungen</string>
-	<string name="settings_section_ui">Schnittstelle</string>
+	<string name="settings_section_ui">Oberfläche</string>
 	<string name="settings_section_logbook">Logbuch</string>
 	<!-- Settings: Fasting notification -->
 	<string name="settings_fasting_notification_title">Fasten-Benachrichtigung anzeigen</string>
 	<string name="settings_fasting_notification_subtitle">Stellt Echtzeit-Informationen während des Fastens bereit</string>
 	<!-- Settings: Stage alerts -->
-	<string name="settings_stage_alerts_title">Bühnen-Alarme</string>
+	<string name="settings_stage_alerts_title">Phasen-Benachrichtigungen</string>
 	<string name="settings_stage_alerts_subtitle">Benachrichtigt werden, wenn neue Fasten-Stufen erreicht werden</string>
 	<string name="export_failed">Fehler beim Exportieren des Logbuchs</string>
 	<string name="intro_00_title">Willkommen bei FastTrack48!</string>
@@ -83,11 +83,11 @@
 	<string name="profile_bmi_category_normal">Normal</string>
 	<string name="profile_bmi_category_overweight">Übergewicht</string>
 	<string name="profile_bmi_category_obese">Fettleibigkeit</string>
-	<string name="profile_bmi_category_morbidly_obese">Fettleibigkeit</string>
+	<string name="profile_bmi_category_morbidly_obese">Krankhafte Fettleibigkeit</string>
 	<string name="profile_error">Ungültiger Wert</string>
 	<string name="profile_bmr_label">BMR:</string>
 	<string name="profile_bmr_value">%.0f kcal / Tag</string>
-	<string name="profile_height_label">Höhe</string>
+	<string name="profile_height_label">Größe</string>
 	<string name="profile_height_imper_feet_label">Fuß</string>
 	<string name="profile_height_imper_inches_label">Zoll</string>
 	<string name="profile_height_metric_label">Zentimeter</string>
@@ -101,7 +101,7 @@
 	<string name="manual_add_fast_started_on">Fasten gestartet am: %1$s</string>
 	<string name="manual_add_start_date_time_label">Startdatum und Uhrzeit</string>
 	<string name="edit_date">Datum bearbeiten</string>
-	<string name="edit_time">Bearbeitungszeit</string>
+	<string name="edit_time">Uhrzeit bearbeiten</string>
 	<string name="manual_start_title">Fasten begonnen</string>
 	<string name="manual_add_set_end_title">Fasten-Ende festlegen</string>
 	<string name="manual_add_set_end_complete">Berechnen</string>
@@ -147,10 +147,10 @@
 	<string name="notification_optimal_autophagy_title">Fasten-Phase: Optimale Autophagie</string>
 	<string name="notification_optimal_autophagy_content">Ihr Körper befindet sich schon lange im Autophagie-Zustand,
 		und Ihre zelluläre Gesundheit profitiert enorm davon.</string>
-	<string name="notification_fasting_channel_name">Füllstatus</string>
-	<string name="notification_fasting_channel_description">Laufende Benachrichtigung, die deinen aktuellen Fast-Status und
+	<string name="notification_fasting_channel_name">Fastenstatus</string>
+	<string name="notification_fasting_channel_description">Laufende Benachrichtigung, die deinen aktuellen Fastenstatus und
 		Fortschritt anzeigt.</string>
-	<string name="notification_fasting_title">Schnell: %1$s Stunden</string>
+	<string name="notification_fasting_title">Fasten: %1$s Stunden</string>
 	<string name="notification_fasting_energy_mode">Energiemodus: %1$s</string>
 	<string name="info_dialog_fat_burn_title">Fettverbrennung</string>
 	<string name="info_dialog_fat_burn_content">In diesem Stadium hat Ihr Körper Ihre Glukosevorräte erschöpft. Glukose
@@ -171,9 +171,9 @@
 		steht noch am Anfang, aber es scheint, dass dies ein wichtiger Mechanismus für den Körper ist, um Probleme zu
 		stoppen, bevor sie auftreten. Zum Beispiel sind die Krebsraten bei Menschen, die regelmäßig in die Autophagie
 		eintreten, niedriger. Darüber hinaus haben einige Studien auch niedrigere Raten von Alzheimer gezeigt.</string>
-	<string name="info_dialog_bmi_title">Body-Maß-Index</string>
+	<string name="info_dialog_bmi_title">Body-Mass-Index</string>
 	<string name="info_dialog_bmi_content">Eine grobe Schätzung des gesunden Gewichts, das ein durchschnittlicher
-		Erwachsener haben sollte. Es wird einfach berechnet, indem das Gewicht durch die Höhe geteilt wird.\n\nOft als
+		Erwachsener haben sollte. Es wird einfach berechnet, indem das Gewicht durch die Körpergröße geteilt wird.\n\nOft als
 		ungenau kritisiert, ist es wahr, dass es Faktoren gibt, die dazu führen können, dass es irreführend ist. Zum
 		Beispiel: ein extrem muskulöser Bodybuilder oder eine sehr große oder sehr kleine Person. Diese Grenzfälle
 		erhalten ungenaue Ergebnisse aus der grundlegenden BMI-Berechnung.\n\nAber für die Mehrheit der Menschen ist
@@ -224,9 +224,9 @@
 	<string name="settings_placeholder">Einstellungen kommen bald</string>
 	<string name="back">Zurück</string>
 	<string name="settings_fancy_background_title">Schicken Hintergrund anzeigen</string>
-	<string name="settings_fancy_background_subtitle">Für einen einfacheren Fast-Hintergrund deaktivieren</string>
+	<string name="settings_fancy_background_subtitle">Für einen einfacheren Fasten-Hintergrund deaktivieren</string>
 	<string name="settings_metric_system_title">Metrisches System</string>
-	<string name="settings_metric_system_subtitle">Höhe und Gewicht in metrischen Einheiten anzeigen</string>
+	<string name="settings_metric_system_subtitle">Größe und Gewicht in metrischen Einheiten anzeigen</string>
 	<string name="settings_theme_mode_title">Thema</string>
 	<string name="settings_theme_mode_subtitle">Wähle hell, dunkel oder folge System</string>
 	<string name="settings_theme_mode_system">System</string>
@@ -236,7 +236,10 @@
 	<string name="log_logbook_label">Logbuch</string>
 	<string name="log_stats_label">Lebenslange Statistiken</string>
 	<string name="log_view_mode_list">Liste</string>
-	<string name="log_view_mode_calendar">Kalender</string>
+	<string name="log_view_mode_calendar">Monat</string>
+	<string name="log_view_mode_year">Jahr</string>
+	<string name="log_year_chart_description">Fastenstunden pro Tag, %1$s, %2$d Tage gefastet.</string>
+	<string name="log_year_axis_hours">%1$d h</string>
 	<string name="duration_less_than_minute">Gerade gestartet</string>
 	<string name="fast_notes_label">Notizen (optional)</string>
 	<string name="fast_notes_placeholder">Wie ist es gelaufen? Etwas, das du dir zu diesem Fasten merken möchtest?</string>

@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ViewList
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.WarningAmber
@@ -96,11 +97,19 @@ fun LogScreen(
 				LogViewMode.CALENDAR -> LogCalendarContent(
 					entries = uiState.entries,
 					activeFastStart = uiState.activeFastStart,
+					focusedMonth = uiState.focusedMonth,
 					selectedDate = uiState.selectedDate,
 					onDateSelected = viewModel::selectDate,
 					onAddForEmptyDay = viewModel::requestAddForDate,
 					onEdit = viewModel::showEditDialog,
 					onDelete = { entryToDelete = it },
+					contentPadding = bodyContentPadding,
+				)
+
+				LogViewMode.YEAR -> LogYearContent(
+					entries = uiState.entries,
+					activeFastStart = uiState.activeFastStart,
+					onMonthSelected = viewModel::focusMonth,
 					contentPadding = bodyContentPadding,
 				)
 			}
@@ -340,9 +349,10 @@ private fun LogStatsHeader(
 }
 
 /**
- * Two-option segmented control for the Log view mode. Both modes are always
- * visible with the active one highlighted, so switching back and forth is
- * obvious (the old single icon-only toggle was too easy to overlook).
+ * Segmented control for the Log view mode: List, Month, Year -- left to right in
+ * order of widening span. All three are always visible with the active one
+ * highlighted, so switching is obvious (the old single icon-only toggle was too
+ * easy to overlook).
  */
 @Composable
 private fun LogViewModeSwitch(
@@ -354,7 +364,7 @@ private fun LogViewModeSwitch(
 		SegmentedButton(
 			selected = viewMode == LogViewMode.LIST,
 			onClick = { onViewModeChanged(LogViewMode.LIST) },
-			shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
+			shape = SegmentedButtonDefaults.itemShape(index = 0, count = 3),
 			icon = {
 				Icon(
 					imageVector = Icons.AutoMirrored.Filled.ViewList,
@@ -367,7 +377,7 @@ private fun LogViewModeSwitch(
 		SegmentedButton(
 			selected = viewMode == LogViewMode.CALENDAR,
 			onClick = { onViewModeChanged(LogViewMode.CALENDAR) },
-			shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
+			shape = SegmentedButtonDefaults.itemShape(index = 1, count = 3),
 			icon = {
 				Icon(
 					imageVector = Icons.Default.CalendarMonth,
@@ -376,6 +386,19 @@ private fun LogViewModeSwitch(
 				)
 			},
 			label = { Text(stringResource(id = R.string.log_view_mode_calendar)) },
+		)
+		SegmentedButton(
+			selected = viewMode == LogViewMode.YEAR,
+			onClick = { onViewModeChanged(LogViewMode.YEAR) },
+			shape = SegmentedButtonDefaults.itemShape(index = 2, count = 3),
+			icon = {
+				Icon(
+					imageVector = Icons.Default.BarChart,
+					contentDescription = null,
+					modifier = Modifier.size(SegmentedButtonDefaults.IconSize),
+				)
+			},
+			label = { Text(stringResource(id = R.string.log_view_mode_year)) },
 		)
 	}
 }

@@ -2,7 +2,8 @@ package com.legbehindneck.fasttrack48.data.settings
 
 enum class LogViewMode {
 	LIST,
-	CALENDAR;
+	CALENDAR,
+	YEAR;
 
 	companion object {
 		fun fromName(name: String?): LogViewMode =

@@ -31,18 +31,12 @@
 	<string name="intro_02_title">Um app simples e gratuito</string>
 	<string name="intro_02_description">FastTrack48 é e sempre será gratuito e de código aberto. Não há conta para criar, nem compras no app, nem anúncios para evitar. E ele nem sequer tem acesso à internet, então não pode enviar seus dados para lugar nenhum.</string>
 	<string name="intro_03_title">Jejum intermitente</string>
-	<string name="intro_03_description">Esta é uma nova área de estudo que vem mostrando muitos benefícios além da simples perda de peso.
-
-Para explorar o que sabemos sobre o jejum e o que as pesquisas dizem, confira a seção Informações deste app!</string>
+	<string name="intro_03_description">Esta é uma nova área de estudo que vem mostrando muitos benefícios além da simples perda de peso.\n\nPara explorar o que sabemos sobre o jejum e o que as pesquisas dizem, confira a seção Informações deste app!</string>
 	<string name="intro_04_title">Mantenha-se motivado com notificações</string>
-	<string name="intro_04_description">FastTrack48 pode mostrar notificações úteis para mantê-lo motivado durante o jejum.
-
-Você verá o tempo atual de jejum, em que fase está e qual modo de energia seu corpo está usando.
-
-Isso ajuda você a seguir no caminho certo sem precisar abrir o app!</string>
+	<string name="intro_04_description">FastTrack48 pode mostrar notificações úteis para mantê-lo motivado durante o jejum.\n\nVocê verá o tempo atual de jejum, em que fase está e qual modo de energia seu corpo está usando.\n\nIsso ajuda você a seguir no caminho certo sem precisar abrir o app!</string>
 	<string name="intro_05_title">É isso!</string>
 	<string name="intro_05_description">Agora comece a jejuar!</string>
-	<string name="title_fasting">Jejuando</string>
+	<string name="title_fasting">Jejum</string>
 	<string name="title_log">Registro</string>
 	<string name="title_profile">Perfil</string>
 	<string name="fasting_fragment_label">Jejum</string>
@@ -149,27 +143,15 @@ Isso ajuda você a seguir no caminho certo sem precisar abrir o app!</string>
 	<string name="notification_fasting_title">Jejum: %1$s horas</string>
 	<string name="notification_fasting_energy_mode">Modo de energia: %1$s</string>
 	<string name="info_dialog_fat_burn_title">Queima de gordura</string>
-	<string name="info_dialog_fat_burn_content">Nesta fase, seu corpo esgotou suas reservas de glicose. A glicose é armazenada como glicogênio para uso posterior; nesta fase, a maior parte do glicogênio armazenado já foi quebrada em glicose e consumida como energia.
-
-Agora ele começa a quebrar o tecido adiposo (gordura) em corpos cetônicos. Além de poder consumir glicose como energia, seu corpo também pode consumir corpos cetônicos como energia e, à medida que as reservas de glicose diminuem, ele muda seu modo de energia para corpos cetônicos.</string>
+	<string name="info_dialog_fat_burn_content">Nesta fase, seu corpo esgotou suas reservas de glicose. A glicose é armazenada como glicogênio para uso posterior; nesta fase, a maior parte do glicogênio armazenado já foi quebrada em glicose e consumida como energia.\n\nAgora ele começa a quebrar o tecido adiposo (gordura) em corpos cetônicos. Além de poder consumir glicose como energia, seu corpo também pode consumir corpos cetônicos como energia e, à medida que as reservas de glicose diminuem, ele muda seu modo de energia para corpos cetônicos.</string>
 	<string name="info_dialog_ketosis_title">Cetose</string>
-	<string name="info_dialog_ketosis_content">Nesta fase, seu corpo já vem quebrando gordura há tempo suficiente para que ele esteja sendo alimentado principalmente por corpos cetônicos, e não por glicose.
-
-Além dos benefícios de perda de gordura que isso implica, estudos mostraram benefícios para doenças relacionadas à inflamação, embora o mecanismo de ação disso ainda seja desconhecido.</string>
+	<string name="info_dialog_ketosis_content">Nesta fase, seu corpo já vem quebrando gordura há tempo suficiente para que ele esteja sendo alimentado principalmente por corpos cetônicos, e não por glicose.\n\nAlém dos benefícios de perda de gordura que isso implica, estudos mostraram benefícios para doenças relacionadas à inflamação, embora o mecanismo de ação disso ainda seja desconhecido.</string>
 	<string name="info_dialog_autophagy_title">Autofagia</string>
-	<string name="info_dialog_autophagy_content">Nesta fase, seu corpo começou a ativar outros processos para obter energia. Além de quebrar o tecido adiposo em corpos cetônicos, ele começou a localizar células antigas ou danificadas e consumi-las para obter mais energia.
-
-A pesquisa sobre esta fase ainda está em estágio inicial, mas parece ser um mecanismo importante para o corpo evitar problemas antes que eles comecem. Por exemplo, as taxas de câncer são menores em pessoas que entram regularmente em autofagia. Além disso, alguns estudos também mostraram taxas menores de Alzheimer.</string>
+	<string name="info_dialog_autophagy_content">Nesta fase, seu corpo começou a ativar outros processos para obter energia. Além de quebrar o tecido adiposo em corpos cetônicos, ele começou a localizar células antigas ou danificadas e consumi-las para obter mais energia.\n\nA pesquisa sobre esta fase ainda está em estágio inicial, mas parece ser um mecanismo importante para o corpo evitar problemas antes que eles comecem. Por exemplo, as taxas de câncer são menores em pessoas que entram regularmente em autofagia. Além disso, alguns estudos também mostraram taxas menores de Alzheimer.</string>
 	<string name="info_dialog_bmi_title">Índice de massa corporal</string>
-	<string name="info_dialog_bmi_content">Uma estimativa aproximada do peso saudável que um adulto médio deveria ter. É calculada simplesmente dividindo o peso pela altura.
-
-Frequentemente criticado por ser impreciso, é verdade que há fatores que podem torná-lo enganoso. Por exemplo: um fisiculturista extremamente musculoso ou uma pessoa muito alta ou muito baixa. Esses casos extremos terão resultados imprecisos no cálculo básico do IMC.
-
-Mas, para a maioria das pessoas, essa é uma estimativa suficiente para saber se você está em uma faixa de peso saudável.</string>
+	<string name="info_dialog_bmi_content">Uma estimativa aproximada do peso saudável que um adulto médio deveria ter. É calculada simplesmente dividindo o peso pela altura.\n\nFrequentemente criticado por ser impreciso, é verdade que há fatores que podem torná-lo enganoso. Por exemplo: um fisiculturista extremamente musculoso ou uma pessoa muito alta ou muito baixa. Esses casos extremos terão resultados imprecisos no cálculo básico do IMC.\n\nMas, para a maioria das pessoas, essa é uma estimativa suficiente para saber se você está em uma faixa de peso saudável.</string>
 	<string name="info_dialog_bmr_title">Taxa metabólica basal</string>
-	<string name="info_dialog_bmr_content">Esta é uma estimativa da quantidade de calorias que seu corpo queimará em um dia enquanto estiver completamente em repouso. Se você ficasse apenas deitado na cama o dia todo, essa seria a quantidade de calorias que poderia consumir sem ganhar peso.
-
-Esse é um número fundamental para pessoas que fazem dieta restringindo a ingestão diária de calorias.</string>
+	<string name="info_dialog_bmr_content">Esta é uma estimativa da quantidade de calorias que seu corpo queimará em um dia enquanto estiver completamente em repouso. Se você ficasse apenas deitado na cama o dia todo, essa seria a quantidade de calorias que poderia consumir sem ganhar peso.\n\nEsse é um número fundamental para pessoas que fazem dieta restringindo a ingestão diária de calorias.</string>
 	<string name="info_dialog_positive">Legal!</string>
 	<string name="info_page_title_info">Informações</string>
 	<string name="info_page_title_tips">Dicas</string>
@@ -223,7 +205,10 @@ Esse é um número fundamental para pessoas que fazem dieta restringindo a inges
 	<string name="log_logbook_label">Registro</string>
 	<string name="log_stats_label">Estatísticas totais</string>
 	<string name="log_view_mode_list">Lista</string>
-	<string name="log_view_mode_calendar">Calendário</string>
+	<string name="log_view_mode_calendar">Mês</string>
+	<string name="log_view_mode_year">Ano</string>
+	<string name="log_year_chart_description">Horas de jejum por dia, %1$s, %2$d dias em jejum.</string>
+	<string name="log_year_axis_hours">%1$dh</string>
 	<string name="duration_less_than_minute">Recém começado</string>
 	<string name="fast_notes_label">Notas (opcional)</string>
 	<string name="fast_notes_placeholder">Como foi? Algo para lembrar sobre este jejum?</string>

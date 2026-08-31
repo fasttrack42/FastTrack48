@@ -3,7 +3,7 @@
 
 	<string name="action_share">Condividi</string>
 	<string name="action_info">Informazioni</string>
-	<string name="action_about">Informazioni</string>
+	<string name="action_about">Informazioni sull\'app</string>
 	<string name="action_export">Esporta digiuni</string>
 	<string name="action_export_description">Salva la cronologia dei digiuni come CSV, iCalendar (.ics) o JSON ActivityStreams</string>
 	<string name="action_import">Importa digiuni</string>
@@ -12,18 +12,18 @@
 	<string name="import_formats_message">Il tipo di file viene rilevato automaticamente. Puoi importare:\n\n• CSV di FastTrack48 — l\'esportazione di questa app\n• CSV del vecchio FastTrack\n• Backup di EasyFast (.zip)\n• iCalendar (.ics) esportato da questa app\n• JSON ActivityStreams esportato da questa app</string>
 	<string name="import_formats_continue">Scegli file</string>
 	<string name="import_success">Registro importato con successo</string>
-	<string name="import_failed">Importazione del giornale non riuscita</string>
+	<string name="import_failed">Importazione del registro non riuscita</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notifiche</string>
 	<string name="settings_section_ui">Interfaccia</string>
 	<string name="settings_section_logbook">Registro</string>
 	<!-- Settings: Fasting notification -->
-	<string name="settings_fasting_notification_title">Mostra Notifiche Di digiuno</string>
-	<string name="settings_fasting_notification_subtitle">Fornisce informazioni in tempo reale durante un veloce</string>
+	<string name="settings_fasting_notification_title">Mostra notifiche di digiuno</string>
+	<string name="settings_fasting_notification_subtitle">Fornisce informazioni in tempo reale durante un digiuno</string>
 	<!-- Settings: Stage alerts -->
-	<string name="settings_stage_alerts_title">Avvisi Stage</string>
+	<string name="settings_stage_alerts_title">Avvisi di fase</string>
 	<string name="settings_stage_alerts_subtitle">Ricevi una notifica quando entri in nuovi stadi di digiuno</string>
-	<string name="export_failed">Esportazione del diario fallita</string>
+	<string name="export_failed">Esportazione del registro non riuscita</string>
 	<string name="intro_00_title">Benvenuto in FastTrack48!</string>
 	<string name="intro_00_description">Di cosa si tratta in quest\'app?</string>
 	<string name="intro_01_title">Aiuto motivazionale</string>
@@ -60,11 +60,11 @@
 	<string name="confirm_start_fast_negative">No</string>
 	<string name="already_started_dialog_title">Già iniziato</string>
 	<string name="start_picker_title">Quando hai iniziato il tuo Digiuno?</string>
-	<string name="confirm_end_fast_title">Fine il digiuno?</string>
+	<string name="confirm_end_fast_title">Terminare il digiuno?</string>
 	<string name="confirm_end_fast_positive">Ora</string>
-	<string name="confirm_end_fast_neutral">Sei Già Interrotto?</string>
+	<string name="confirm_end_fast_neutral">Già interrotto?</string>
 	<string name="confirm_end_fast_negative">No</string>
-	<string name="already_stopped_dialog_title">Quando vi siete fermate?</string>
+	<string name="already_stopped_dialog_title">Quando hai smesso?</string>
 	<string name="menu_edit">Modifica</string>
 	<string name="menu_delete">Elimina</string>
 	<string name="confirm_delete_fast_title">Eliminare Digiuno?</string>
@@ -76,7 +76,7 @@
 
 	<string name="log_entry_started">Iniziato: %1$s</string>
 	<string name="log_entry_length">%1$d ore</string>
-	<string name="log_entry_ketosis">%1$d ore</string>
+	<string name="log_entry_ketosis">Chetosi: %1$d ore</string>
 	<string name="log_entry_autophagy">Autofagia: %1$d ore</string>
 	<string name="profile_age_label">Età</string>
 	<string name="profile_age_years">Anni</string>
@@ -136,7 +136,7 @@
 	<string name="phase_ketosis">Chetosi</string>
 	<string name="phase_autophagy">Autofagia</string>
 	<string name="phase_optimal_autophagy">Autofagia Ottimale</string>
-	<string name="share_text">Ho digiunato per %1$d ore e %2$d minuti! Il mio corpo sta attualmente consumando %3$s per
+	<string name="share_text">Sto digiunando da %1$d ore e %2$d minuti! Il mio corpo sta attualmente consumando %3$s per
 		energia.</string>
 	<string name="share_text_past_tense">Ho digiunato per %1$d ore e %2$d minuti!</string>
 	<string name="stage_alerts_checkbox">Avvisi di Fase</string>
@@ -181,7 +181,7 @@
 		vecchie o danneggiate e a consumarle per ottenere più energia.\n\nLa ricerca su questa fase è nelle sue fasi
 		iniziali, ma sembra che questo sia un meccanismo importante per il corpo per fermare i problemi prima che
 		inizino. Ad esempio, le percentuali di cancro sono più basse nelle persone che entrano regolarmente in
-		Autophagy. Inoltre, alcuni studi hanno anche mostrato tassi più bassi di Alzheimer.</string>
+		Autofagia. Inoltre, alcuni studi hanno anche mostrato tassi più bassi di Alzheimer.</string>
 	<string name="info_dialog_bmi_title">Indice di massa corporea</string>
 	<string name="info_dialog_bmi_content">Una stima approssimativa del peso sano che un adulto medio dovrebbe avere.
 		Viene calcolato semplicemente dividendo il peso per l\'altezza.\n\nSpesso criticato per essere impreciso, è vero
@@ -247,7 +247,10 @@
 	<string name="log_logbook_label">Registro</string>
 	<string name="log_stats_label">Statistiche a vita</string>
 	<string name="log_view_mode_list">Elenco</string>
-	<string name="log_view_mode_calendar">Calendario</string>
+	<string name="log_view_mode_calendar">Mese</string>
+	<string name="log_view_mode_year">Anno</string>
+	<string name="log_year_chart_description">Ore di digiuno al giorno, %1$s, %2$d giorni di digiuno.</string>
+	<string name="log_year_axis_hours">%1$dh</string>
 	<string name="duration_less_than_minute">Appena iniziato</string>
 	<string name="fast_notes_label">Note (facoltativo)</string>
 	<string name="fast_notes_placeholder">Com\'è andata? Qualcosa da ricordare di questo digiuno?</string>

@@ -30,6 +30,7 @@ fun LogScreenPreview(
 	totalKetosisHours: Int = 0,
 	totalAutophagyHours: Int = 0,
 	showManualAddDialog: Boolean = false,
+	viewMode: LogViewMode = LogViewMode.LIST,
 	darkTheme: Boolean = false
 ) {
 	val viewModel = FakeLogViewModel(
@@ -37,7 +38,8 @@ fun LogScreenPreview(
 			entries = entries,
 			totalKetosisHours = totalKetosisHours,
 			totalAutophagyHours = totalAutophagyHours,
-			showManualAddDialog = showManualAddDialog
+			showManualAddDialog = showManualAddDialog,
+			viewMode = viewMode
 		)
 	)
 
@@ -234,6 +236,42 @@ private fun LogScreenPreviewLandscapePhoneDark() {
 	)
 }
 
+@ExperimentalTime
+@Preview(
+	name = "Log Screen - Year",
+	showBackground = true,
+	widthDp = 360,
+	heightDp = 640
+)
+@Composable
+private fun LogScreenPreviewYear() {
+	LogScreenPreview(
+		entries = yearEntries,
+		totalKetosisHours = 320,
+		totalAutophagyHours = 180,
+		viewMode = LogViewMode.YEAR,
+	)
+}
+
+@ExperimentalTime
+@Preview(
+	name = "Log Screen - Year (Dark)",
+	showBackground = true,
+	widthDp = 360,
+	heightDp = 640,
+	uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun LogScreenPreviewYearDark() {
+	LogScreenPreview(
+		entries = yearEntries,
+		totalKetosisHours = 320,
+		totalAutophagyHours = 180,
+		viewMode = LogViewMode.YEAR,
+		darkTheme = true,
+	)
+}
+
 private fun createFastingLogEntry(startMillis: Long, lengthMillis: Long): FastingLogEntry {
 	val localDateTime = Instant.fromEpochMilliseconds(startMillis)
 		.toLocalDateTime(TimeZone.currentSystemDefault())
@@ -267,6 +305,7 @@ class FakeLogViewModel(state: ILogViewModel.LogUiState) : ILogViewModel {
 	override fun showEditDialog(entry: FastingLogEntry) {}
 	override fun hideManualAddDialog() {}
 	override fun setViewMode(mode: LogViewMode) {}
+	override fun focusMonth(monthStart: LocalDate) {}
 	override fun selectDate(date: LocalDate?) {}
 	override fun requestClearAll() {}
 	override fun dismissClearAll() {}
@@ -274,4 +313,21 @@ class FakeLogViewModel(state: ILogViewModel.LogUiState) : ILogViewModel {
 	override fun requestAddForDate(date: LocalDate) {}
 	override fun dismissAddForDate() {}
 	override fun confirmAddForDate() {}
+}
+
+private const val DAY_MILLIS = 24L * 60 * 60 * 1000
+
+/**
+ * Roughly fourteen months of fasts at a mixture of lengths, so the year strip has both
+ * isolated single days and multi-day runs to draw -- and enough history to page back.
+ */
+private val yearEntries = run {
+	val now = System.currentTimeMillis()
+	val lengths = longArrayOf(18, 24, 41, 62, 20, 36)
+	(0 until 46).map { i ->
+		createFastingLogEntry(
+			startMillis = now - (i + 1) * 9L * DAY_MILLIS,
+			lengthMillis = lengths[i % lengths.size] * 60 * 60 * 1000,
+		)
+	}
 }

@@ -202,7 +202,10 @@
 	<string name="log_logbook_label">Logboek</string>
 	<string name="log_stats_label">Statistieken aller tijden</string>
 	<string name="log_view_mode_list">Lijst</string>
-	<string name="log_view_mode_calendar">Kalender</string>
+	<string name="log_view_mode_calendar">Maand</string>
+	<string name="log_view_mode_year">Jaar</string>
+	<string name="log_year_chart_description">Vastenuren per dag, %1$s, %2$d dagen gevast.</string>
+	<string name="log_year_axis_hours">%1$dh</string>
 	<string name="journey_stage_0_title">Bloedsuiker stijgt</string>
 	<string name="journey_stage_1_title">Bloedsuiker daalt</string>
 	<string name="journey_stage_2_title">Bloedsuiker stabiliseert</string>

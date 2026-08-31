@@ -250,7 +250,10 @@
 	<string name="log_logbook_label">Bitácora</string>
 	<string name="log_stats_label">Estadísticas acumuladas</string>
 	<string name="log_view_mode_list">Lista</string>
-	<string name="log_view_mode_calendar">Calendario</string>
+	<string name="log_view_mode_calendar">Mes</string>
+	<string name="log_view_mode_year">Año</string>
+	<string name="log_year_chart_description">Horas de ayuno por día, %1$s, %2$d días en ayuno.</string>
+	<string name="log_year_axis_hours">%1$dh</string>
 	<string name="duration_less_than_minute">Recién empezado</string>
 	<string name="fast_notes_label">Notas (opcional)</string>
 	<string name="fast_notes_placeholder">¿Qué tal ha ido? ¿Hay algo que quieras recordar de este ayuno?</string>

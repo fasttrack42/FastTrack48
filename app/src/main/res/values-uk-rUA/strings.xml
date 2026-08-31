@@ -3,7 +3,7 @@
 
 	<string name="action_share">Поділитися</string>
 	<string name="action_info">Інформація</string>
-	<string name="action_about">Про нас</string>
+	<string name="action_about">Про застосунок</string>
 	<string name="action_export">Експортувати голодування</string>
 	<string name="action_export_description">Збережіть історію голодувань у форматі CSV, iCalendar (.ics) або ActivityStreams JSON</string>
 	<string name="action_import">Імпортувати голодування</string>
@@ -62,7 +62,7 @@
 	<string name="already_started_dialog_title">Уже розпочато</string>
 	<string name="start_picker_title">Коли Ви розпочали голодування</string>
 	<string name="confirm_end_fast_title">Закінчити голодування?</string>
-	<string name="confirm_end_fast_positive">Так</string>
+	<string name="confirm_end_fast_positive">Зараз</string>
 	<string name="confirm_end_fast_neutral">Уже закінчили?</string>
 	<string name="confirm_end_fast_negative">Ні</string>
 	<string name="already_stopped_dialog_title">Коли Ви закінчили?</string>
@@ -73,7 +73,7 @@
 	<string name="confirm_delete_fast_negative">Ні</string>
 	<string name="fast_status_fasting">Голодування триває</string>
 	<string name="fast_status_not_fasting">Ви не голодуєте</string>
-	<string name="next_stage">Наступна стадія у: %1$d годин</string>
+	<string name="next_stage">Наступна стадія через: %1$d годин</string>
 
 	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d годин</string>
@@ -95,7 +95,7 @@
 	<string name="profile_error">Недопустиме значення</string>
 	<string name="profile_bmr_label">Основний обмін:</string>
 	<string name="profile_bmr_value">%.0f ккал / день</string>
-	<string name="profile_height_label">Висота</string>
+	<string name="profile_height_label">Зріст</string>
 	<string name="profile_height_imper_feet_label">футів</string>
 	<string name="profile_height_imper_inches_label">дюймів</string>
 	<string name="profile_height_metric_label">Сантиметрів</string>
@@ -103,7 +103,7 @@
 	<string name="profile_gender_female">Жінка</string>
 	<string name="manual_add_title">Додавання вручну</string>
 	<string name="manual_edit_title">Редагувати запис</string>
-	<string name="manual_add_length_hint">Довжина (годин)</string>
+	<string name="manual_add_length_hint">Тривалість (годин)</string>
 	<string name="manual_add_complete_button">Додати</string>
 	<string name="manual_add_save_button">Зберегти</string>
 	<string name="manual_add_fast_started_on">Голодування розпочато: %1$s</string>
@@ -227,7 +227,7 @@
 	<string name="settings_fancy_background_title">Показати красивий фон</string>
 	<string name="settings_fancy_background_subtitle">Вимкніть для простішого фону</string>
 	<string name="settings_metric_system_title">Метрична система</string>
-	<string name="settings_metric_system_subtitle">Показувати висоту та вагу в метричних одиницях</string>
+	<string name="settings_metric_system_subtitle">Показувати зріст та вагу в метричних одиницях</string>
 	<string name="settings_theme_mode_title">Тема</string>
 	<string name="settings_theme_mode_subtitle">Оберіть світлу, темну чи системну</string>
 	<string name="settings_theme_mode_system">Системна</string>
@@ -237,7 +237,10 @@
 	<string name="log_logbook_label">Журнал</string>
 	<string name="log_stats_label">Статистика за весь час</string>
 	<string name="log_view_mode_list">Список</string>
-	<string name="log_view_mode_calendar">Календар</string>
+	<string name="log_view_mode_calendar">Місяць</string>
+	<string name="log_view_mode_year">Рік</string>
+	<string name="log_year_chart_description">Години голодування за день, %1$s, днів голодування: %2$d.</string>
+	<string name="log_year_axis_hours">%1$d год</string>
 	<string name="duration_less_than_minute">Щойно почато</string>
 	<string name="fast_notes_label">Нотатки (необов\'язково)</string>
 	<string name="fast_notes_placeholder">Як усе пройшло? Щось, що варто запам\'ятати про це голодування?</string>

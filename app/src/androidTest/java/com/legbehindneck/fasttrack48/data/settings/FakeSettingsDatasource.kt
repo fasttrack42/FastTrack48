@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.flowOf
 class FakeSettingsDatasource : SettingsDatasource {
 	private var fastingAlerts: Boolean = true
 	private var introSeen: Boolean = false
+	private var importFormatsSeen: Boolean = false
 	private var showFancyBackground: Boolean = false
 	private var showFastingNotification: Boolean = true
 	private var useMetricSystem: Boolean? = null
@@ -21,6 +22,11 @@ class FakeSettingsDatasource : SettingsDatasource {
 	override fun getIntroSeen(): Boolean = introSeen
 	override fun setIntroSeen(enabled: Boolean) {
 		introSeen = enabled
+	}
+
+	override fun getImportFormatsSeen(): Boolean = importFormatsSeen
+	override fun setImportFormatsSeen(enabled: Boolean) {
+		importFormatsSeen = enabled
 	}
 
 	override fun getShowFancyBackground(): Boolean = showFancyBackground
