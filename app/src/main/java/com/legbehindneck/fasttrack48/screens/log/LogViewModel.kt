@@ -3,6 +3,7 @@ package com.legbehindneck.fasttrack48.screens.log
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.autophagyHours
 import com.legbehindneck.fasttrack48.data.ketosisHours
 import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
@@ -23,6 +24,7 @@ import kotlin.time.ExperimentalTime
 @ExperimentalTime
 class LogViewModel(
 	private val repository: FastingLogRepository,
+	private val activeFast: ActiveFastRepository,
 	private val settings: SettingsDatasource,
 ) : ViewModel(), ILogViewModel {
 
@@ -31,10 +33,22 @@ class LogViewModel(
 	)
 	override val uiState: StateFlow<ILogViewModel.LogUiState> = _uiState.asStateFlow()
 
-	override fun loadEntries() {
+	/**
+	 * Both inputs, subscribed once for the life of the view model.
+	 *
+	 * Not in a method the screen calls: that call sat inside a `repeatOnLifecycle(STARTED)`
+	 * block, which re-runs every time the screen comes back to the foreground and so stacked
+	 * another copy of the collector on top of the one already running.
+	 */
+	init {
 		viewModelScope.launch {
-			repository.loadAll().collect { entries ->
-				updateEntries(entries)
+			repository.loadAll().collect { entries -> updateEntries(entries) }
+		}
+		// The running fast, which no logbook row describes yet.
+		viewModelScope.launch {
+			activeFast.observe().collect { window ->
+				val start = if (window.isRunning) window.start else null
+				_uiState.update { state -> state.copy(activeFastStart = start) }
 			}
 		}
 	}

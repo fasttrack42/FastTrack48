@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.glance.preview.ExperimentalGlancePreviewApi
 import androidx.glance.preview.Preview
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastWindow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
@@ -18,6 +21,7 @@ fun FastingWidget_NotFasting_Preview() {
 		override fun getElapsedFastTime(): Duration = Duration.ZERO
 		override fun getFastStart(): Instant? = null
 		override fun getFastEnd(): Instant? = null
+		override fun observe(): Flow<ActiveFastWindow> = flowOf(ActiveFastWindow())
 		override fun startFast(timeStarted: Instant?) {}
 		override fun endFast(timeEnded: Instant?) {}
 		override fun setFastStart(newStart: Instant) {}
@@ -38,6 +42,7 @@ fun FastingWidget_Fasting16h_Preview() {
 		override fun getElapsedFastTime(): Duration = 16.hours
 		override fun getFastStart(): Instant? = start
 		override fun getFastEnd(): Instant? = null
+		override fun observe(): Flow<ActiveFastWindow> = flowOf(ActiveFastWindow(start, null))
 		override fun startFast(timeStarted: Instant?) {}
 		override fun endFast(timeEnded: Instant?) {}
 		override fun setFastStart(newStart: Instant) {}

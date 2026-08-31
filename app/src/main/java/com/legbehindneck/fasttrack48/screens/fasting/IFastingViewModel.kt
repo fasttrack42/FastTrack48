@@ -14,8 +14,11 @@ interface IFastingViewModel {
 		val isFasting: Boolean = false,
 		val elapsedTime: Duration? = null,
 		val fastStartTime: Instant? = null,
-		val lastFastEndTime: Instant? = null,
-		/** End of the newest logbook entry, used to warn on a backdated start. */
+		/**
+		 * End of the newest logbook entry — the logbook, not the active-fast slot, is the
+		 * record of what happened, so a fast the reader deleted stops being reported here.
+		 * Used to warn on a backdated start and to date the idle status line.
+		 */
 		val previousLoggedFastEnd: Instant? = null,
 		/** That same entry, whole: what the idle band reports under the dial. */
 		val lastLoggedFast: FastingLogEntry? = null,

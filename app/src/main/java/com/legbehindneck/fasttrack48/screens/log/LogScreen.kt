@@ -47,13 +47,6 @@ fun LogScreen(
 ) {
 	val uiState by viewModel.uiState.collectAsState()
 
-	val lifecycleOwner = LocalLifecycleOwner.current
-	LaunchedEffect(Unit) {
-		lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-			viewModel.loadEntries()
-		}
-	}
-
 	var entryToDelete by remember { mutableStateOf<FastingLogEntry?>(null) }
 	if (entryToDelete != null) {
 		ConfirmDelete(entryToDelete, viewModel) {
@@ -102,6 +95,7 @@ fun LogScreen(
 
 				LogViewMode.CALENDAR -> LogCalendarContent(
 					entries = uiState.entries,
+					activeFastStart = uiState.activeFastStart,
 					selectedDate = uiState.selectedDate,
 					onDateSelected = viewModel::selectDate,
 					onAddForEmptyDay = viewModel::requestAddForDate,

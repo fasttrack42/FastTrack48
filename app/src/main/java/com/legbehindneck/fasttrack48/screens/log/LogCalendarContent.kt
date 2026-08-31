@@ -48,15 +48,19 @@ import kotlinx.datetime.toKotlinLocalDate
 import kotlinx.datetime.toLocalDateTime
 import java.time.YearMonth
 import java.time.format.TextStyle
+import kotlin.time.Clock
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.datetime.LocalDate as KxLocalDate
 
 @ExperimentalTime
 @Composable
 fun LogCalendarContent(
     entries: List<FastingLogEntry>,
+	activeFastStart: Instant?,
 	selectedDate: KxLocalDate?,
 	onDateSelected: (KxLocalDate?) -> Unit,
 	onAddForEmptyDay: (KxLocalDate) -> Unit,
@@ -89,6 +93,20 @@ fun LogCalendarContent(
 	}
 
 	val today = remember { java.time.LocalDate.now() }
+
+	// The fast currently running, drawn as an open-ended span from its start day through
+	// today. It gets no end cap: the capsule runs flush off today's cell because the fast
+	// has not ended, and there is no logbook row to open, edit or delete for it yet.
+	val ongoing = remember(activeFastStart, today) {
+		activeFastStart?.let { start ->
+			val tz = TimeZone.currentSystemDefault()
+			OngoingSpan(
+				startDate = start.toLocalDateTime(tz).date,
+				endDate = today.toKotlinLocalDate(),
+				color = stageColorForLength(Clock.System.now() - start),
+			)
+		}
+	}
 	val currentMonth = remember { YearMonth.now() }
 	val firstDayOfWeek = remember { firstDayOfWeekFromLocale() }
 	val daysOfWeek = remember(firstDayOfWeek) { daysOfWeek(firstDayOfWeek = firstDayOfWeek) }
@@ -124,7 +142,16 @@ fun LogCalendarContent(
 							isEnd = kxDate == endDate,
 							isSingle = startDate == endDate,
 						)
-					}
+					} ?: ongoing
+						?.takeIf { kxDate >= it.startDate && kxDate <= it.endDate }
+						?.let { span ->
+							DayBand(
+								color = span.color,
+								isStart = kxDate == span.startDate,
+								isEnd = false,
+								isSingle = false,
+							)
+						}
 					DayCell(
 						day = day,
 						isToday = day.date == today,
@@ -132,13 +159,15 @@ fun LogCalendarContent(
 						band = band,
 						isSelected = selectedDate == kxDate,
 						onClick = {
-							if (covering.isNotEmpty()) {
-								// A day within a fast opens its detail dialog.
-								onDateSelected(kxDate)
-							} else {
+							when {
+								// A day within a logged fast opens its detail dialog.
+								covering.isNotEmpty() -> onDateSelected(kxDate)
+								// A day inside the running fast: nothing to open, and it
+								// must not offer to log a second fast over the top of it.
+								band != null -> Unit
 								// An empty past/today day offers to log a fast there
 								// (future days are disabled, so this never fires for them).
-								onAddForEmptyDay(kxDate)
+								else -> onAddForEmptyDay(kxDate)
 							}
 						},
 					)
@@ -331,6 +360,13 @@ private class CalendarCoverage(
 	val endDateById: Map<Int, KxLocalDate>,
 )
 
+/** The fast currently running, as the range of days it covers. */
+private data class OngoingSpan(
+	val startDate: KxLocalDate,
+	val endDate: KxLocalDate,
+	val color: Color,
+)
+
 /** Where a given day sits within the fast that covers it. */
 private data class DayBand(
 	val color: Color,
@@ -353,7 +389,12 @@ private val calendarStageColors = listOf(
 @ExperimentalTime
 private fun stageColorFor(entries: List<FastingLogEntry>): Color {
 	val longest = entries.maxByOrNull { it.length } ?: return Color.Transparent
-	val lenHours = longest.length.toDouble(DurationUnit.HOURS)
+	return stageColorForLength(longest.length)
+}
+
+/** The wash for a fast of this length — the same scale whether it has ended or not. */
+private fun stageColorForLength(length: Duration): Color {
+	val lenHours = length.toDouble(DurationUnit.HOURS)
 	val stage = Stages.phases.lastOrNull { lenHours >= it.hours } ?: Stages.phases.first()
 	val stageIndex = Stages.phases.indexOf(stage).coerceAtLeast(0)
 	return calendarStageColors.getOrElse(stageIndex) { calendarStageColors.last() }

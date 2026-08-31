@@ -266,7 +266,6 @@ class FakeLogViewModel(state: ILogViewModel.LogUiState) : ILogViewModel {
 	override fun showManualAddDialog() {}
 	override fun showEditDialog(entry: FastingLogEntry) {}
 	override fun hideManualAddDialog() {}
-	override fun loadEntries() {}
 	override fun setViewMode(mode: LogViewMode) {}
 	override fun selectDate(date: LocalDate?) {}
 	override fun requestClearAll() {}

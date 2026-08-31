@@ -1,5 +1,6 @@
 package com.legbehindneck.fasttrack48.data.activefast
 
+import kotlinx.coroutines.flow.Flow
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Instant
@@ -26,6 +27,8 @@ class ActiveFastRepositoryImpl(
 
 	override fun getFastStart(): Instant? = datasource.getFastStart()
 	override fun getFastEnd(): Instant? = datasource.getFastEnd()
+
+	override fun observe(): Flow<ActiveFastWindow> = datasource.observe()
 
 	override fun startFast(timeStarted: Instant?) {
 		if (isFasting()) error("Cannot start a fast, one is already running")

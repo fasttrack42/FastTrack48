@@ -1,40 +1,46 @@
 package com.legbehindneck.fasttrack48.data.activefast
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlin.time.Instant
 
 /**
  * A fake implementation of ActiveFastDataSource for testing purposes.
- * Uses an in-memory data store to simulate storage operations.
+ *
+ * Backed by a StateFlow rather than two plain fields so that the fake publishes writes the
+ * way the preferences datasource does; a fake that only stored them would let a regression
+ * in the observable path pass its tests.
  */
 class FakeActiveFastDataSource : ActiveFastDataSource {
-	private var fastStart: Instant? = null
-	private var fastEnd: Instant? = null
+	private val state = MutableStateFlow(ActiveFastWindow())
 
-	override fun getFastStart(): Instant? = fastStart
+	override fun getFastStart(): Instant? = state.value.start
 
-	override fun getFastEnd(): Instant? = fastEnd
+	override fun getFastEnd(): Instant? = state.value.end
+
+	override fun observe(): Flow<ActiveFastWindow> = state.asStateFlow()
 
 	override fun setFastStart(time: Instant) {
-		fastStart = time
+		state.value = state.value.copy(start = time)
 	}
 
 	override fun setFastEnd(time: Instant) {
-		fastEnd = time
+		state.value = state.value.copy(end = time)
 	}
 
 	override fun clearFastStart() {
-		fastStart = null
+		state.value = state.value.copy(start = null)
 	}
 
 	override fun clearFastEnd() {
-		fastEnd = null
+		state.value = state.value.copy(end = null)
 	}
 
 	/**
 	 * Clears all data - useful for test setup/teardown
 	 */
 	fun clear() {
-		fastStart = null
-		fastEnd = null
+		state.value = ActiveFastWindow()
 	}
 }

@@ -5,6 +5,7 @@ import com.legbehindneck.fasttrack48.data.settings.LogViewMode
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDate
 import kotlin.time.Duration
+import kotlin.time.Instant
 
 interface ILogViewModel {
 	data class LogUiState(
@@ -17,6 +18,12 @@ interface ILogViewModel {
 		val showManualAddDialog: Boolean = false,
 		val entryToEdit: FastingLogEntry? = null,
 		val viewMode: LogViewMode = LogViewMode.LIST,
+		/**
+		 * Start of the fast currently running, or null when none is. It is not a logbook
+		 * entry yet — the row is only written when the fast ends — so the calendar has to be
+		 * told about it separately or it draws the last three days as empty.
+		 */
+		val activeFastStart: Instant? = null,
 		val selectedDate: LocalDate? = null,
 		val showClearAllConfirmation: Boolean = false,
 		// An empty (past/today) calendar day awaiting "add a fast here?" confirmation.
@@ -31,7 +38,6 @@ interface ILogViewModel {
 	fun showManualAddDialog()
 	fun showEditDialog(entry: FastingLogEntry)
 	fun hideManualAddDialog()
-	fun loadEntries()
 	fun setViewMode(mode: LogViewMode)
 	fun selectDate(date: LocalDate?)
 	fun requestClearAll()

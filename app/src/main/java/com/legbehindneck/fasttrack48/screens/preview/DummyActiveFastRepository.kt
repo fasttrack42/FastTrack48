@@ -1,6 +1,9 @@
 package com.legbehindneck.fasttrack48.screens.preview
 
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastWindow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Instant
@@ -21,6 +24,9 @@ class DummyActiveFastRepository(
 		else null
 
 	override fun getFastEnd(): Instant? = null
+
+	override fun observe(): Flow<ActiveFastWindow> =
+		flowOf(ActiveFastWindow(getFastStart(), getFastEnd()))
 
 	override fun startFast(timeStarted: Instant?) {}
 

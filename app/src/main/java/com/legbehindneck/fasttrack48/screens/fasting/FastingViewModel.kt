@@ -10,6 +10,8 @@ import com.legbehindneck.fasttrack48.data.Phase
 import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.data.descriptionFor
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastWindow
+import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.utils.formatDuration
@@ -46,7 +48,25 @@ class FastingViewModel(
 	)
 	override val uiState: StateFlow<IFastingViewModel.FastingUiState> = _uiState.asStateFlow()
 
-	override fun onCreate() {
+	private data class StageStrings(val title: String, val description: String, val energyMode: String)
+
+	// Declared ahead of init: viewModelScope runs on Dispatchers.Main.immediate, so a
+	// collector started there can deliver its first value before construction finishes,
+	// and render() reads this.
+	private val EMPTY_STAGE = StageStrings("", "", "")
+
+	/**
+	 * Every input this screen has, subscribed once for the life of the view model.
+	 *
+	 * The state used to be a snapshot recomputed only when *this* view model performed a
+	 * mutation, which made it wrong whenever anyone else touched the data: a fast deleted
+	 * on the log screen was still reported under the dial, and only a process restart put
+	 * the two back in agreement. Wiring is in `init` rather than in [onCreate] for the same
+	 * class of reason — [onCreate] is driven from a `LaunchedEffect` that re-runs whenever
+	 * the screen re-enters composition, which would stack a second copy of every collector
+	 * on top of the first.
+	 */
+	init {
 		viewModelScope.launch {
 			settingsDatasource.showFancyBackgroundFlow().collect { enabled ->
 				_uiState.update { state -> state.copy(showGradientBackground = enabled) }
@@ -66,37 +86,57 @@ class FastingViewModel(
 			}
 		}
 
-		refreshPreviousLoggedEnd()
+		// The active fast, from the store rather than from whatever this view model last
+		// wrote. Backdating a start, the importer restoring an unfinished fast and a widget
+		// action all arrive here by the same path.
+		viewModelScope.launch {
+			repository.observe().collect { window -> render(window) }
+		}
+
+		// The logbook, from Room's own invalidation. A delete, an edit, a manual add or a
+		// cleared logbook reaches the band under the dial without this screen being asked.
+		viewModelScope.launch {
+			logRepository.loadAll().collect { entries -> renderLatestLogged(entries) }
+		}
+	}
+
+	override fun onCreate() {
+		// Idempotent by construction: the collectors are in init, and both calls below are
+		// pure re-derivations of state that is already current.
 		updateUi()
 		setupFastingNotification()
 	}
 
 	/**
-	 * Newest logbook entry, read off the IO dispatcher: one scan, two facts. Its end
-	 * warns when a corrected start would reach back into an already-recorded window — a
-	 * stale value there costs a missed warning, never a wrong write — and the entry
-	 * itself is what the idle band reports under the dial.
+	 * Newest logbook entry: one scan, two facts. Its end warns when a corrected start would
+	 * reach back into an already-recorded window, and the entry itself is what the idle band
+	 * reports under the dial. Newest by *end*, not by start, which is what makes it the fast
+	 * the reader just finished.
 	 */
-	private fun refreshPreviousLoggedEnd() {
-		viewModelScope.launch(Dispatchers.IO) { readLatestLoggedFast() }
-	}
-
-	private fun readLatestLoggedFast() {
-		val latest = logRepository.latestLoggedFast()
-		val end = latest?.let {
-			it.start.toInstant(TimeZone.currentSystemDefault()).plus(it.length)
-		}
+	private fun renderLatestLogged(entries: List<FastingLogEntry>) {
+		val tz = TimeZone.currentSystemDefault()
+		val latest = entries.maxByOrNull { it.start.toInstant(tz).plus(it.length) }
+		val end = latest?.let { it.start.toInstant(tz).plus(it.length) }
 		_uiState.update { state ->
 			state.copy(previousLoggedFastEnd = end, lastLoggedFast = latest)
 		}
 	}
 
+	/**
+	 * Re-derive the dial from the clock. The window itself is pushed by [init]'s collector;
+	 * this exists for the minute tick, where nothing in the data changed and only the
+	 * elapsed time did.
+	 */
 	override fun updateUi() {
-		// One read of the repository and one state emission per tick: separate
-		// emissions here each trigger their own recomposition of the dial + rows.
-		val isFasting = repository.isFasting()
-		val fastStart = repository.getFastStart()
-		val fastEnd = repository.getFastEnd()
+		render(ActiveFastWindow(repository.getFastStart(), repository.getFastEnd()))
+	}
+
+	private fun render(window: ActiveFastWindow) {
+		// One read and one state emission: separate emissions here would each trigger
+		// their own recomposition of the dial + rows.
+		val isFasting = window.isRunning
+		val fastStart = window.start
+		val fastEnd = window.end
 
 		_uiState.update { state ->
 			if (fastStart != null) {
@@ -114,7 +154,6 @@ class FastingViewModel(
 					elapsedTime = elapsedTime,
 					elapsedHours = elapsedTime.inWholeHours.toDouble(),
 					fastStartTime = fastStart,
-					lastFastEndTime = fastEnd,
 					timerText = formatDuration(appContext, elapsedTime),
 					milliseconds = "",
 					stageTitle = stage.title,
@@ -133,7 +172,6 @@ class FastingViewModel(
 					elapsedTime = null,
 					elapsedHours = 0.0,
 					fastStartTime = null,
-					lastFastEndTime = fastEnd,
 					stageTitle = "",
 					stageDescription = "",
 					energyMode = "",
@@ -141,10 +179,6 @@ class FastingViewModel(
 			}
 		}
 	}
-
-	private data class StageStrings(val title: String, val description: String, val energyMode: String)
-
-	private val EMPTY_STAGE = StageStrings("", "", "")
 
 	private fun computeStage(elapsedTime: Duration): StageStrings {
 		val elapsedHours = elapsedTime.inWholeHours.toInt()
@@ -210,9 +244,9 @@ class FastingViewModel(
 		if (repository.isFasting()) {
 			repository.endFast(timeEnded)
 
+			// The written row comes back through loadAll(); nothing to refresh by hand.
 			viewModelScope.launch(Dispatchers.IO) {
 				saveFastToLog(repository.getFastStart(), repository.getFastEnd(), notes)
-				readLatestLoggedFast()
 			}
 
 			Napier.i("Fast ended!")

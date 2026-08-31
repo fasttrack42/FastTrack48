@@ -1043,16 +1043,9 @@ private fun rememberFastStatusText(
 
 	val now = rememberMinuteTick()
 
-	return uiState.lastFastEndTime?.let { lastEnd ->
+	return uiState.previousLoggedFastEnd?.let { lastEnd ->
 		val since = (now - lastEnd).coerceAtLeast(Duration.ZERO)
-		when {
-			since < 1.hours -> stringResource(R.string.just_finished_fast)
-			uiState.lastLoggedFast != null -> ""
-			else -> stringResource(
-				R.string.time_since_last_fast,
-				formatDuration(since, showTotalHours)
-			)
-		}
+		if (since < 1.hours) stringResource(R.string.just_finished_fast) else ""
 	} ?: ""
 }
 
