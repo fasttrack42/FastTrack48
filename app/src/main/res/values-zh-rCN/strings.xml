@@ -29,13 +29,13 @@
 	<string name="intro_01_title">激励帮助</string>
 	<string name="intro_01_description">FastTrack48 的主要理念是在禁食期间帮你保持动力，并向你解释在禁食的不同阶段你的身体正在发生什么。</string>
 	<string name="intro_02_title">一个简单的免费应用程序</string>
-	<string name="intro_02_description">FastTrack48 是而且将永远免费且开源。无需创建账户，没有内购，没有广告。它甚至无法访问互联网，所以你的数据不会被发送到任何地方。</string>
+	<string name="intro_02_description">FastTrack48 是而且将永远免费且开源。无需创建账户，没有内购，没有广告，没有遥测，也没有跟踪。应用没有网络访问权限，完全离线运行。</string>
 	<string name="intro_03_title">间歇性禁食</string>
 	<string name="intro_03_description">这是一个新的研究领域，展现了超越简单减重的诸多好处。\n\n要探索我们对禁食的了解以及研究结果，请查看本应用的资讯部分！</string>
 	<string name="intro_04_title">通过通知保持动力</string>
 	<string name="intro_04_description">FastTrack48 可以显示有用的通知，在禁食期间为你加油打气。\n\n你会看到当前的禁食时间、所处的阶段以及身体正在使用的能量模式。\n\n这样即使不打开应用也能随时掌握进度！</string>
 	<string name="intro_05_title">开始吧！</string>
-	<string name="intro_05_description">现在开始禁食吧！</string>
+	<string name="intro_05_description">欢迎来到禁食的世界！</string>
 	<string name="title_fasting">禁食</string>
 	<string name="title_log">日志</string>
 	<string name="title_profile">个人资料</string>
@@ -247,15 +247,15 @@
 	<string name="journey_stage_8_title">胰岛素敏感性</string>
 	<string name="journey_stage_9_title">免疫细胞再生</string>
 	<string name="journey_stage_0_body">你刚刚进食，血液能感觉到。血糖上升——健康人会在 30–60 分钟内达到峰值，通常低于 ~140 mg/dL——胰腺随即分泌胰岛素，这种激素把糖送进细胞，并把多余的储存为糖原。\n\n这是进食后状态：能量充足，优先储存，脂肪燃烧关闭。\n\n现在只需消化。计时开始了。</string>
-	<string name="journey_stage_1_body">吸收逐渐减弱，潮水开始退去。胰岛素回落，胰高血糖素上升，肝脏开始释放储存的糖原，把血糖维持在 ~70–100 mg/dL 左右。\n\n你已从进食后状态进入吸收后状态——身体停止储存、开始消耗的安静交接。\n\n那第一丝饥饿感，多半只是胰岛素在下降。它会过去。</string>
-	<string name="journey_stage_2_body">现在肝脏是唯一的供给者：一点点从糖原（约 100 g 储备）释放葡萄糖，让你保持平稳。仅大脑每天就消耗约 120 g 葡萄糖，所以这份稳定并不简单。\n\n不骤降也不飙升——糖原分解稳住阵线，把低血糖挡在门外。\n\n这里的专注常常清晰得出奇。这不是错觉，而是稳定的燃料。</string>
-	<string name="journey_stage_3_body">糖原渐少，于是肝脏又干起第二门手艺：从头合成葡萄糖——乳酸、甘油、氨基酸——这个过程叫糖异生。到约 16 小时，它已提供你大约一半的葡萄糖（Cahill, Annu Rev Nutr 2006）。\n\n这是代谢灵活性的显现：你的身体不会让大脑挨饿。\n\n你感到的饥饿和轻微低落，是开关正在切换。接下来轮到脂肪。</string>
-	<string name="journey_stage_4_body">胰岛素终于低到足以打开你的脂肪储备。脂解释放脂肪酸，肝脏开始把它们转化为酮体，你从燃烧糖转为燃烧脂肪。\n\n这里的每一小时都会略微提升你的胰岛素敏感性，并动用脂肪储备——这正是断食有效的代谢核心。\n\n口中的金属味或轻微头痛，是最初的酮体。火已点燃。</string>
+	<string name="journey_stage_1_body">胰岛素回落，胰高血糖素上升，肝脏开始释放储存的糖原，把血糖维持在 ~70–100 mg/dL 左右。\n\n你已从进食后状态进入吸收后状态——身体停止储存、开始消耗的安静交接。\n\n那第一丝饥饿感，多半只是胰岛素在下降。一两分钟就会过去。</string>
+	<string name="journey_stage_2_body">现在肝脏是唯一的供给者：一点点从糖原（约 100 g 储备）释放葡萄糖，让你保持平稳。仅大脑每天就消耗约 120 g 葡萄糖，所以这份稳定并不简单。\n\n不骤降也不飙升——糖原分解稳住阵线，把低血糖挡在门外。\n\n许多人在这个阶段都报告注意力异常敏锐。这不是错觉，而是稳定的燃料。</string>
+	<string name="journey_stage_3_body">糖原渐少，于是肝脏开始用乳酸、甘油和氨基酸自行合成葡萄糖——这个过程叫糖异生。到约 16 小时，它已提供你大约一半的葡萄糖（Cahill, Annu Rev Nutr 2006）。\n\n这是你身体的生物智慧，它绝不会让大脑挨饿。\n\n你可能感到的饥饿和轻微低落，与阶段切换有关。</string>
+	<string name="journey_stage_4_body">胰岛素终于低到足以打开你的脂肪储备。脂解释放脂肪酸，肝脏开始把它们转化为酮体，你从燃烧糖转为燃烧脂肪。\n\n胰岛素敏感性提高，脂肪储备正在被消耗——这正是断食有效的代谢核心。\n\n口中的金属味或轻微头痛，是最初的酮体正在生成的信号。火已点燃 🔥。</string>
 	<string name="journey_stage_5_body">血液中的酮体越过 ~0.5 mmol/L——营养性生酮——并持续升高。你的大脑无法直接氧化脂肪酸，却能靠这股酮体流运转得很好，从而免去为制造葡萄糖而分解肌肉。\n\n许多人报告一种少有的头脑清晰，以及自行消退的饥饿——酮体本身会抑制食欲。\n\n二十四小时。你的身体如今更偏爱自己制造的燃料。</string>
-	<string name="journey_stage_6_body">整整一天，自我清理加强了：细胞自噬——细胞拆解受损的蛋白质和细胞器，并回收零件（正是这一机制让大隅良典获得 2016 年诺贝尔奖）。人体的时间线仍在研究，但断食显然会上调这条通路。\n\n把它想成一种买不到的保养——一种与长寿和更低患病风险相关的清理。\n\n疲惫或头痛？盐和水。深层的工作正在进行。</string>
+	<string name="journey_stage_6_body">整整一天，自我清理加强了：细胞自噬——细胞拆解受损的蛋白质和细胞器，并回收零件（正是这一机制让大隅良典获得 2016 年诺贝尔奖）。\n\n把它想成一种买不到的保养——一种与长寿和更低患病风险相关的清理。\n\n疲惫或头痛？盐和水。深层的工作正在进行。</string>
 	<string name="journey_stage_7_body">两天，生长激素飙升——约 2 天的断食可使其分泌大约增加 5 倍（Ho, J Clin Invest 1988）。它此刻的任务：守护瘦肌肉，并更用力地推动脂肪代谢。\n\n于是你一边继续燃脂，一边保住了你以为会失去的肌肉——一次真正优雅的适应。\n\n很多人在这里描述的那股意外的精力？那是激素在说话。</string>
 	<string name="journey_stage_8_body">胰岛素连日维持低位，你的细胞重新对它敏感起来——胰岛素敏感性回调到更健康的水平，正好与 2 型糖尿病之前的抵抗相反。\n\n血糖停留在平静而狭窄的区间；饱腹感也来得轻松。\n\n你正在微调一套几乎没人会刻意去动的系统。</string>
-	<string name="journey_stage_9_body">三天：稀薄的高处。长时间断食可促使身体清除衰老的免疫细胞，并由造血干细胞再生出新的，同时 IGF-1 与 PKA 信号下降（Cheng, Cell Stem Cell 2014）。\n\n炎症持续消退；有些人描述出一种平静而清明的安适。\n\n无论你从这里走多远，你都焕然一新地前行——并温和地结束断食。为自己骄傲。</string>
+	<string name="journey_stage_9_body">三天。长时间断食可促使身体清除衰老的免疫细胞，并由造血干细胞再生出新的，同时 IGF-1 与 PKA 信号下降（Cheng, Cell Stem Cell 2014）。\n\n炎症持续消退；有些人描述出一种平静而清明的安适。\n\n无论你从这里走多远，你都焕然一新地前行——并温和地结束断食。为自己骄傲。</string>
 	<string name="import_easyfast_result">已导入 %1$d 条禁食记录。\n已跳过重叠的条目：%2$d</string>
 	<string name="export_choose_format">导出格式</string>
 

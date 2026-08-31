@@ -381,7 +381,7 @@
 	</string>
 
 	<string name="journey_stage_1_title">La glycémie diminue</string>
-	<string name="journey_stage_1_body">L’absorption ralentit et la tendance s’inverse. L’insuline baisse, le glucagon augmente
+	<string name="journey_stage_1_body">L’insuline baisse, le glucagon augmente
 		et votre foie commence à libérer le glycogène stocké pour maintenir la glycémie autour de ~70–100 mg/dL.\n\nVous
 		passez de l’état nourri à l’état post-absorptif — le relais silencieux où le corps cesse de stocker et commence à
 		dépenser.\n\nCette première pointe de faim est surtout liée à la baisse de l’insuline. Elle disparaît en une ou deux
@@ -446,7 +446,7 @@
 	</string>
 
 	<string name="journey_stage_9_title">Régénération des cellules immunitaires</string>
-	<string name="journey_stage_9_body">Trois jours. Une étape rare. Le jeûne prolongé peut amener l’organisme à éliminer
+	<string name="journey_stage_9_body">Trois jours. Le jeûne prolongé peut amener l’organisme à éliminer
 		des cellules immunitaires sénescentes et à en régénérer de nouvelles à partir de cellules souches
 		hématopoïétiques, à mesure que la signalisation de l’IGF-1 et de la PKA diminue (Cheng, Cell Stem Cell 2014).\n\n
 		L’inflammation continue de diminuer ; certaines personnes décrivent un sentiment de bien-être calme et lucide.
