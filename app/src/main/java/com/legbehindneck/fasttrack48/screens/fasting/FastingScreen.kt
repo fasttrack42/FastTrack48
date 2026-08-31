@@ -36,6 +36,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
+import com.legbehindneck.fasttrack48.utils.WordSafe
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -587,7 +588,7 @@ private fun FastHeadingContent(
 		BasicText(
 			text = uiState.stageTitle,
 			maxLines = 2,
-			autoSize = TextAutoSize.StepBased(
+			autoSize = TextAutoSize.WordSafe(
 				minFontSize = 16.sp,
 				maxFontSize = titleStyle.fontSize.takeIf { it != TextUnit.Unspecified } ?: 28.sp,
 				stepSize = 1.sp,
@@ -656,7 +657,7 @@ private fun FastHeadingContent(
 							text = timerText,
 							maxLines = 1,
 							softWrap = false,
-							autoSize = TextAutoSize.StepBased(
+							autoSize = TextAutoSize.WordSafe(
 								minFontSize = 20.sp,
 								maxFontSize = 60.sp,
 								stepSize = 1.sp,
@@ -673,7 +674,7 @@ private fun FastHeadingContent(
 						BasicText(
 							text = uiState.energyMode,
 							maxLines = 2,
-							autoSize = TextAutoSize.StepBased(
+							autoSize = TextAutoSize.WordSafe(
 								minFontSize = 9.sp,
 								maxFontSize = 15.sp,
 								stepSize = 1.sp,
@@ -1260,7 +1261,7 @@ private fun EndFastAction(
 			// is the second valve — with half the band guaranteed, two lines at 10sp hold
 			// every translation of two words, so the break lands between them.
 			maxLines = 2,
-			autoSize = TextAutoSize.StepBased(
+			autoSize = TextAutoSize.WordSafe(
 				minFontSize = 10.sp,
 				maxFontSize = 14.sp,
 				stepSize = 1.sp,

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
+import com.legbehindneck.fasttrack48.utils.WordSafe
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
@@ -97,7 +98,7 @@ fun FastStartBlock(
 		BasicText(
 			text = label,
 			maxLines = 1,
-			autoSize = TextAutoSize.StepBased(
+			autoSize = TextAutoSize.WordSafe(
 				minFontSize = 10.sp,
 				maxFontSize = 14.sp,
 				stepSize = 1.sp,

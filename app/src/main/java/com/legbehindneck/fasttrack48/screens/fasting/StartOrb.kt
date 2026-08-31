@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
+import com.legbehindneck.fasttrack48.utils.WordSafe
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -331,7 +332,7 @@ fun StartOrb(
 				BasicText(
 					text = stringResource(id = R.string.start_orb_label).uppercase(),
 					maxLines = 1,
-					autoSize = TextAutoSize.StepBased(
+					autoSize = TextAutoSize.WordSafe(
 						minFontSize = 10.sp,
 						maxFontSize = 15.sp,
 						stepSize = 1.sp,
