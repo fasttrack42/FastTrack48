@@ -54,7 +54,7 @@ DIST         := dist/$(VERSION_CODE)
 .PHONY: help version release debug bundle install install-debug test lint \
         icons preflight dist clean clean-dist tasks check-jetifier \
         verify-signing play-internal play-production play-metadata \
-        require-signing upload-key key-fingerprints
+        require-signing upload-key key-fingerprints deps
 
 help: ## Show this help
 	@printf '\033[1mFastTrack48\033[0m %s (versionCode %s)\n' \
@@ -214,6 +214,9 @@ tasks: ## List the Gradle tasks
 
 check-jetifier: ## Check whether any dependency still needs Jetifier
 	$(GRADLE) checkJetifier
+
+deps: ## print dependency tree
+	./gradlew :app:dependencies
 
 clean: ## Gradle clean
 	$(GRADLE) clean

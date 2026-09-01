@@ -98,6 +98,19 @@ kotlin {
 	}
 }
 
+// F-Droid's dependency scanner enumerates every resolvable Gradle configuration and flags
+// io.opencensus:* as a Tracker. It arrives through com.google.testing.platform:launcher, in
+// the `_internal-unified-test-platform-*` configurations AGP registers unconditionally on
+// every Android module -- not through anything declared below, and never on
+// releaseRuntimeClasspath. UTP has been mandatory since AGP 8.0, so the configurations cannot
+// be removed; excluding the group from them takes the coordinates out of the graph the
+// scanner reads. OpenCensus is an optional gRPC tracing bridge, absent from the shipped APK
+// either way. If a host-side UTP run ever needs it, this is the line to revert.
+configurations.matching { it.name.startsWith("_internal-unified-test-platform") }
+	.configureEach {
+		exclude(group = "io.opencensus")
+	}
+
 ksp {
 	arg("room.schemaLocation", "$projectDir/schemas")
 }
