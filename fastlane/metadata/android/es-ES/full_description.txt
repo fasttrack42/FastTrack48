@@ -53,7 +53,7 @@ FastTrack48 no es una aplicación médica ni ofrece asesoramiento médico. Los t
 
 <h3>Atribución</h3>
 
-FastTrack48 es una obra derivada modificada —un fork directo— de FastTrack, creado por Adam Brown (@Wavesonics) y publicado por Dark Rock Studios. El software original es Copyright © 2020 Adam Brown y se distribuye bajo licencia MIT, que sigue rigiendo las partes originales de esta app. El texto completo de la licencia se reproduce en la app, en Acerca de → Agradecimientos.
+FastTrack48 es una obra derivada modificada de FastTrack, creado por Adam Brown (@Wavesonics) y publicado por Dark Rock Studios. El software original es Copyright © 2020 Adam Brown y se distribuye bajo licencia MIT, que sigue rigiendo las partes originales de esta app. El texto completo de la licencia se reproduce en la app, en Acerca de → Agradecimientos.
 
 Todas las modificaciones, incorporaciones y cambios de diseño de FastTrack48 son obra y responsabilidad exclusiva de este proyecto. Adam Brown y Dark Rock Studios no mantienen, respaldan, patrocinan ni dan soporte a FastTrack48, y no asumen responsabilidad alguna por él. Dirige cualquier pregunta o solicitud de soporte sobre FastTrack48 a https://github.com/fasttrack42/FastTrack48/issues y nunca al proyecto original.
 

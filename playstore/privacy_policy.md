@@ -283,7 +283,7 @@ country of residence, including under EU and UK consumer protection law.
 
 ## 13. Attribution
 
-FastTrack48 is a derivative work — a fork — of FastTrack by Adam Brown (@Wavesonics),
+FastTrack48 is a derivative work of FastTrack by Adam Brown (@Wavesonics),
 published by Dark Rock Studios and licensed under the MIT Licence. This privacy policy covers
 FastTrack48 only. Adam Brown and Dark Rock Studios do not maintain, endorse or support
 FastTrack48 and bear no responsibility for it, including for this policy. Direct all questions
