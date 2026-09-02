@@ -457,6 +457,20 @@ private fun FloatingTopActions(
 					// where nobody looking for them would think to look. Both still live
 					// there too; this is a shortcut, not a move.
 					DropdownMenuItem(
+						text = { Text(stringResource(id = R.string.action_import)) },
+						leadingIcon = {
+							Icon(
+								imageVector = Icons.Default.FileDownload,
+								contentDescription = null,
+							)
+						},
+						onClick = {
+							onImportClick()
+							showMenu = false
+						},
+					)
+
+					DropdownMenuItem(
 						text = { Text(stringResource(id = R.string.action_export)) },
 						leadingIcon = {
 							Icon(
@@ -470,19 +484,6 @@ private fun FloatingTopActions(
 						},
 					)
 
-					DropdownMenuItem(
-						text = { Text(stringResource(id = R.string.action_import)) },
-						leadingIcon = {
-							Icon(
-								imageVector = Icons.Default.FileDownload,
-								contentDescription = null,
-							)
-						},
-						onClick = {
-							onImportClick()
-							showMenu = false
-						},
-					)
 
 					DropdownMenuItem(
 						text = { Text(stringResource(id = R.string.action_settings)) },

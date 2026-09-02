@@ -1,0 +1,1 @@
+- import your fasting history by tapping from a file manager a .csv .json .ics file created by FastTrack48 or a .zip backup from EasyFast

@@ -231,18 +231,18 @@ private fun SettingsList(
 			item(key = "logbook_header") {
 				SettingsSectionHeader(title = R.string.settings_section_logbook)
 			}
-			item(key = "export_logbook") {
-				SettingsActionItem(
-					headline = R.string.action_export,
-					details = R.string.action_export_description,
-					onClick = { showExportFormatDialog = true }
-				)
-			}
 			item(key = "import_logbook") {
 				SettingsActionItem(
 					headline = R.string.action_import,
 					details = R.string.action_import_description,
 					onClick = onImportClick
+				)
+			}
+			item(key = "export_logbook") {
+				SettingsActionItem(
+					headline = R.string.action_export,
+					details = R.string.action_export_description,
+					onClick = { showExportFormatDialog = true }
 				)
 			}
 		}

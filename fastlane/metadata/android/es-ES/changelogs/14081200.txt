@@ -1,0 +1,1 @@
+* Carga tu historial de ayunos tocando, desde un gestor de archivos, un archivo `.csv`, `.json` o `.ics` creado por FastTrack48, o una copia de seguridad `.zip` de EasyFast.
