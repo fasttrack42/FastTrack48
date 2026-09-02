@@ -11,8 +11,6 @@
 	<string name="import_formats_title">支持的格式</string>
 	<string name="import_formats_message">文件类型会自动识别。可导入：\n\n• FastTrack48 CSV — 本应用导出的文件\n• 旧版 FastTrack CSV\n• EasyFast 备份 (.zip)\n• 本应用导出的 iCalendar (.ics)\n• 本应用导出的 ActivityStreams JSON</string>
 	<string name="import_formats_continue">选择文件</string>
-	<string name="import_success">日志成功导入</string>
-	<string name="import_failed">导入日志本失败</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">通知</string>
 	<string name="settings_section_ui">界面</string>
@@ -256,7 +254,16 @@
 	<string name="journey_stage_7_body">两天，生长激素飙升——约 2 天的断食可使其分泌大约增加 5 倍（Ho, J Clin Invest 1988）。它此刻的任务：守护瘦肌肉，并更用力地推动脂肪代谢。\n\n于是你一边继续燃脂，一边保住了你以为会失去的肌肉——一次真正优雅的适应。\n\n很多人在这里描述的那股意外的精力？那是激素在说话。</string>
 	<string name="journey_stage_8_body">胰岛素连日维持低位，你的细胞重新对它敏感起来——胰岛素敏感性回调到更健康的水平，正好与 2 型糖尿病之前的抵抗相反。\n\n血糖停留在平静而狭窄的区间；饱腹感也来得轻松。\n\n你正在微调一套几乎没人会刻意去动的系统。</string>
 	<string name="journey_stage_9_body">三天。长时间断食可促使身体清除衰老的免疫细胞，并由造血干细胞再生出新的，同时 IGF-1 与 PKA 信号下降（Cheng, Cell Stem Cell 2014）。\n\n炎症持续消退；有些人描述出一种平静而清明的安适。\n\n无论你从这里走多远，你都焕然一新地前行——并温和地结束断食。为自己骄傲。</string>
-	<string name="import_easyfast_result">已导入 %1$d 条禁食记录。\n已跳过重叠的条目：%2$d</string>
+	<string name="import_result_title">导入完成</string>
+	<string name="import_result_title_failed">导入失败</string>
+	<string name="import_result_added">已添加</string>
+	<string name="import_result_updated">已更新</string>
+	<string name="import_result_already_logged">已记录</string>
+	<string name="import_result_unreadable_rows">无法读取的条目</string>
+	<string name="import_result_ongoing_restored">已恢复你正在进行的禁食。</string>
+	<string name="import_result_ongoing_declined">已跳过文件中正在进行的禁食：当前已有禁食在进行。</string>
+	<string name="import_error_unreadable">无法读取此文件。它可能已被移动或删除，或未共享给本应用。</string>
+	<string name="import_error_empty">未在此文件中找到禁食记录。</string>
 	<string name="export_choose_format">导出格式</string>
 
 

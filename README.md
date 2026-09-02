@@ -51,6 +51,7 @@ FastTrack48 explains the physiological changes associated with fasting and estim
 ## Import and export
 - Export fasting history as CSV, iCalendar (.ics), or ActivityStreams 2.0 (JSON-LD).
 - Import previous exports, including EasyFast `.zip` backups; overlapping entries are skipped to prevent duplicates.
+- import your fasting history by tapping from a file manager a .csv .json .ics file created by FastTrack48 or a .zip backup from EasyFast
 
 ## Body profile
 - Age, sex, height, and weight, with metric or imperial units.
@@ -73,7 +74,8 @@ No Internet permission. The app cannot make network connections.
 
 ---
 
-Evidence for fasting physiology varies considerably by process. Some fasting responses are well established in humans, while others—particularly the timing of autophagy and claims about peaks —remain difficult to measure directly in living humans.
+Evidence for fasting physiology varies considerably by process. Some fasting responses are well established in humans, 
+while others — particularly the timing of autophagy and claims about peaks — remain difficult to measure directly in living humans.
 
 | Approx. window | Process                        | Human evidence   | Timing confidence |
 | -------------- | ------------------------------ | ---------------- | ----------------- |

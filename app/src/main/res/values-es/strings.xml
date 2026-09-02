@@ -11,8 +11,6 @@
 	<string name="import_formats_title">Formatos admitidos</string>
 	<string name="import_formats_message">El tipo de archivo se detecta automáticamente. Puedes importar:\n\n• CSV de FastTrack48 creado con esta aplicación\n• CSV del antiguo FastTrack\n• Copia de seguridad de EasyFast (.zip)\n• iCalendar (.ics) exportado por esta aplicación\n• JSON de ActivityStreams exportado por esta aplicación</string>
 	<string name="import_formats_continue">Elegir archivo</string>
-	<string name="import_success">Registro importado correctamente</string>
-	<string name="import_failed">Error al importar el historial de ayunos</string>
 
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notificaciones</string>
@@ -247,7 +245,7 @@
 	<string name="settings_theme_mode_light">Claro</string>
 	<string name="settings_theme_mode_dark">Oscuro</string>
 	<string name="log_no_entries">¡Aún no hay entradas!</string>
-	<string name="log_logbook_label">Bitácora</string>
+	<string name="log_logbook_label">Historial</string>
 	<string name="log_stats_label">Estadísticas acumuladas</string>
 	<string name="log_view_mode_list">Lista</string>
 	<string name="log_view_mode_calendar">Mes</string>
@@ -304,7 +302,16 @@
 	<string name="journey_stage_8_body">Con la insulina baja durante días, tus células vuelven a responderle: la sensibilidad a la insulina se reajusta hacia un nivel más sano, lo contrario de la resistencia que precede a la diabetes tipo 2.\n\nLa glucosa se mantiene en una franja tranquila y estrecha, y la saciedad llega con facilidad.\n\nEstás afinando un sistema que casi nadie ajusta a propósito.</string>
 	<string name="journey_stage_9_body">Tres días: territorio poco común. El ayuno prolongado puede llevar al cuerpo a eliminar células inmunitarias envejecidas y regenerar otras nuevas a partir de células madre hematopoyéticas, a medida que baja la señalización de IGF-1 y PKA (Cheng, Cell Stem Cell 2014).\n\nLa inflamación sigue cediendo; algunas personas describen una sensación de bienestar serena y lúcida.\n\nHasta donde decidas llegar, llegas renovado. Y rompe el ayuno con calma. Siéntete orgulloso.</string>
 
-	<string name="import_easyfast_result">%1$d ayunos importados.\nEntradas superpuestas OMITIDAS: %2$d</string>
+	<string name="import_result_title">Importación completada</string>
+	<string name="import_result_title_failed">Error al importar</string>
+	<string name="import_result_added">Añadidos</string>
+	<string name="import_result_updated">Actualizados</string>
+	<string name="import_result_already_logged">Ya registrados</string>
+	<string name="import_result_unreadable_rows">Entradas ilegibles</string>
+	<string name="import_result_ongoing_restored">Se ha restaurado tu ayuno en curso.</string>
+	<string name="import_result_ongoing_declined">Se omitió el ayuno en curso del archivo: ya hay un ayuno activo.</string>
+	<string name="import_error_unreadable">No se pudo leer este archivo. Puede que se haya movido o eliminado, o que no esté compartido con esta aplicación.</string>
+	<string name="import_error_empty">No se encontraron ayunos en este archivo.</string>
 	<string name="export_choose_format">Formato de exportación</string>
 
 	<string name="export_format_activitystreams">ActivityStreams 2.0 (JSON-LD)</string>
@@ -316,8 +323,8 @@
 	<string name="manual_add_minutes_hint">Minutos</string>
 	<string name="add_fast_for_day_title">¿Añadir un ayuno para %1$s?</string>
 	<string name="add_fast_for_day_confirm">Añadir ayuno</string>
-	<string name="menu_clear_logbook">Vaciar bitácora…</string>
-	<string name="clear_logbook_title">¿Borrar toda la bitácora?</string>
+	<string name="menu_clear_logbook">Borrar ayunos pasados …</string>
+	<string name="clear_logbook_title">¿Borrar historial de ayunos?</string>
 	<string name="clear_logbook_message">Esto elimina permanentemente todos los %1$d ayunos registrados. Esta acción no se puede deshacer.</string>
 	<string name="clear_logbook_confirm">Borrar todos (%1$d)</string>
 	<string name="stage_optimal_autophagy_description_past72">¡La autofagia está a pleno rendimiento! ¡Buen trabajo, sigue así!</string>

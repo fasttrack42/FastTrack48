@@ -11,8 +11,6 @@
 	<string name="import_formats_title">Ondersteunde formaten</string>
 	<string name="import_formats_message">Het bestandstype wordt automatisch herkend. Je kunt importeren:\n\n• FastTrack48-CSV — de eigen export van deze app\n• Oude FastTrack-CSV\n• EasyFast-back-up (.zip)\n• iCalendar (.ics) geëxporteerd door deze app\n• ActivityStreams-JSON geëxporteerd door deze app</string>
 	<string name="import_formats_continue">Bestand kiezen</string>
-	<string name="import_success">Logboek succesvol geïmporteerd</string>
-	<string name="import_failed">Importeren van logboek mislukt</string>
 	<string name="settings_section_notifications">Meldingen</string>
 	<string name="settings_section_ui">Interface</string>
 	<string name="settings_section_logbook">Logboek</string>
@@ -253,7 +251,16 @@
 	<string name="journey_stage_7_body">Twee dagen, en het groeihormoon schiet omhoog — een vasten van ~2 dagen kan de afgifte ervan ongeveer 5 keer verhogen (Ho, J Clin Invest 1988). Zijn taak nu: spiermassa beschermen en de vetstofwisseling harder aanjagen.\n\nZo blijf je vet verbranden terwijl je de spier behoudt die je zou verwachten te verliezen — een werkelijk elegante aanpassing.\n\nDie onverwachte energieboost die veel mensen hier beschrijven? Dat is het hormoon dat spreekt.</string>
 	<string name="journey_stage_8_body">Als de insuline dagenlang laag blijft, worden je cellen er weer gevoelig voor — de insulinegevoeligheid stelt zich in op een gezonder niveau, het tegenovergestelde van de resistentie die aan diabetes type 2 voorafgaat.\n\nDe bloedsuiker blijft in een rustige, smalle band; verzadiging komt moeiteloos.\n\nJe stemt een systeem af dat bijna niemand ooit bewust aanraakt.</string>
 	<string name="journey_stage_9_body">Drie dagen. Langdurig vasten kan het lichaam ertoe aanzetten verouderde immuuncellen op te ruimen en nieuwe aan te maken uit hematopoëtische stamcellen, terwijl de IGF-1- en PKA-signalen dalen (Cheng, Cell Stem Cell 2014).\n\nDe ontsteking blijft afnemen; sommigen beschrijven een rustig, helder gevoel van welzijn.\n\nHoe ver je van hier ook gaat, je gaat vernieuwd verder — en verbreek je vasten rustig. Wees trots.</string>
-	<string name="import_easyfast_result">%1$d vastenperiodes geïmporteerd.\nOverlappende items OVERGESLAGEN: %2$d</string>
+	<string name="import_result_title">Import voltooid</string>
+	<string name="import_result_title_failed">Import mislukt</string>
+	<string name="import_result_added">Toegevoegd</string>
+	<string name="import_result_updated">Bijgewerkt</string>
+	<string name="import_result_already_logged">Al vastgelegd</string>
+	<string name="import_result_unreadable_rows">Onleesbare items</string>
+	<string name="import_result_ongoing_restored">Je lopende vasten is hersteld.</string>
+	<string name="import_result_ongoing_declined">Het lopende vasten uit het bestand is overgeslagen: er loopt al een vasten.</string>
+	<string name="import_error_unreadable">Dit bestand kon niet worden gelezen. Mogelijk is het verplaatst of verwijderd, of is het niet gedeeld met deze app.</string>
+	<string name="import_error_empty">Geen vastenperiodes gevonden in dit bestand.</string>
 	<string name="export_choose_format">Exportformaat</string>
 
 

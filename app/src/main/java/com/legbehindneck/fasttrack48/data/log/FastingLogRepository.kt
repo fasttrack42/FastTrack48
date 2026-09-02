@@ -44,7 +44,7 @@ interface FastingLogRepository {
 	 * was still running at export and is restored as the fast in progress — unless one is
 	 * already running, in which case the row is dropped and the live fast is left alone.
 	 */
-	suspend fun importLog(cvsExport: String): Boolean
+	suspend fun importLog(cvsExport: String): ImportResult
 
 	/**
 	 * Export the logbook as an iCalendar (RFC 5545) document. iCalendar cannot express an
@@ -77,9 +77,33 @@ interface FastingLogRepository {
 	suspend fun importActivityStreams(jsonText: String): ImportResult
 }
 
-/** Outcome of a backup import. */
+/**
+ * What an import did, in the terms the user is shown.
+ *
+ * Every importer reports through this one shape, even though they do not all behave the same:
+ * the CSV reader keys on the start second and *replaces* what it finds there, while the backup
+ * readers *skip* anything overlapping a fast that is already logged. Both are deliberate — a
+ * CSV is this app's own export, a backup is someone else's — and the difference is only
+ * visible here, as [replaced] against [skippedOverlapping].
+ *
+ * [unreadable] is the one failure that is not about content: the file could not be opened or
+ * read at all. Everything else that goes wrong leaves [ok] false with the counts saying why.
+ */
 data class ImportResult(
-	val imported: Int,
-	val skippedOverlapping: Int,
-	val ok: Boolean,
+	/** Fasts added to the logbook. */
+	val imported: Int = 0,
+	/** CSV only: existing entries at the same start second, overwritten in place. */
+	val replaced: Int = 0,
+	/** Backup formats: records dropped because they overlapped a fast already logged. */
+	val skippedOverlapping: Int = 0,
+	/** Rows or records that could not be parsed. */
+	val skippedInvalid: Int = 0,
+	/** The file held a fast in progress and it is now the running one. */
+	val ongoingRestored: Boolean = false,
+	/** The file held a fast in progress, but one was already running and was left alone. */
+	val ongoingDeclined: Boolean = false,
+	/** The file could not be opened or read — moved, deleted, or no longer granted. */
+	val unreadable: Boolean = false,
+	/** Whether the file was understood and something in it was acted on. */
+	val ok: Boolean = false,
 )

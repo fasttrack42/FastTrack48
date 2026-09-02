@@ -11,9 +11,16 @@
 	<string name="import_formats_title">Supported formats</string>
 	<string name="import_formats_message">The file type is detected automatically. You can import:\n\n• FastTrack48 CSV — this app\'s own export\n• Legacy FastTrack CSV\n• EasyFast backup (.zip)\n• iCalendar (.ics) exported by this app\n• ActivityStreams JSON exported by this app</string>
 	<string name="import_formats_continue">Choose file</string>
-	<string name="import_success">Fast history imported successfully</string>
-	<string name="import_failed">Failed to import fasting history</string>
-	<string name="import_easyfast_result">Imported %1$d fasts.\nOverlapping entries SKIPPED: %2$d</string>
+	<string name="import_result_title">Import complete</string>
+	<string name="import_result_title_failed">Import failed</string>
+	<string name="import_result_added">Added</string>
+	<string name="import_result_updated">Updated</string>
+	<string name="import_result_already_logged">Already logged</string>
+	<string name="import_result_unreadable_rows">Unreadable entries</string>
+	<string name="import_result_ongoing_restored">Your fast in progress was restored.</string>
+	<string name="import_result_ongoing_declined">The fast in progress in the file was skipped — a fast is already running.</string>
+	<string name="import_error_unreadable">This file could not be read. It may have been moved, deleted, or is not shared with this app.</string>
+	<string name="import_error_empty">No fasts were found in this file.</string>
 	<string name="export_choose_format">Export format</string>
 	<string name="export_format_csv" translatable="false">CSV (Excel)</string>
 	<string name="export_format_ics" translatable="false">iCalendar (.ics)</string>

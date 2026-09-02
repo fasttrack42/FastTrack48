@@ -76,6 +76,53 @@
 					android:name="android.app.shortcuts"
 					android:resource="@xml/shortcuts"/>
 		</activity>
+		<!--
+			Tapping a logbook file in a file manager, or sharing one to this app. Declared MIME
+			types only decide whether the chooser lists us; the actual format is detected from the
+			file's bytes, so a manager that mislabels an export still imports correctly. text/plain
+			is deliberately absent — matching it would offer this app for every .txt on the device.
+		-->
+		<activity
+				android:name=".screens.settings.ImportActivity"
+				android:exported="true"
+				android:excludeFromRecents="true"
+				android:taskAffinity=""
+				android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|density|uiMode|locale|layoutDirection|fontScale"
+				android:theme="@style/Theme.FastTrackTheme.Transparent">
+			<intent-filter android:label="@string/action_import">
+				<action android:name="android.intent.action.VIEW"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:mimeType="text/csv"/>
+				<data android:mimeType="text/comma-separated-values"/>
+				<data android:mimeType="application/csv"/>
+				<data android:mimeType="application/json"/>
+				<data android:mimeType="text/json"/>
+				<data android:mimeType="application/zip"/>
+				<data android:mimeType="application/x-zip-compressed"/>
+				<data android:mimeType="multipart/x-zip"/>
+				<data android:mimeType="text/calendar"/>
+			</intent-filter>
+			<intent-filter android:label="@string/action_import">
+				<action android:name="android.intent.action.SEND"/>
+
+				<category android:name="android.intent.category.DEFAULT"/>
+
+				<data android:mimeType="text/csv"/>
+				<data android:mimeType="text/comma-separated-values"/>
+				<data android:mimeType="application/csv"/>
+				<data android:mimeType="application/json"/>
+				<data android:mimeType="text/json"/>
+				<data android:mimeType="application/zip"/>
+				<data android:mimeType="application/x-zip-compressed"/>
+				<data android:mimeType="multipart/x-zip"/>
+				<data android:mimeType="text/calendar"/>
+			</intent-filter>
+		</activity>
 		<provider
 				android:name="androidx.core.content.FileProvider"
 				android:authorities="${applicationId}.fileprovider"

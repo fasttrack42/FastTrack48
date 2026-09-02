@@ -11,8 +11,6 @@
 	<string name="import_formats_title">Підтримувані формати</string>
 	<string name="import_formats_message">Тип файлу визначається автоматично. Можна імпортувати:\n\n• CSV FastTrack48 — власний експорт цього застосунку\n• Старий CSV FastTrack\n• Резервну копію EasyFast (.zip)\n• iCalendar (.ics), експортований цим застосунком\n• JSON ActivityStreams, експортований цим застосунком</string>
 	<string name="import_formats_continue">Вибрати файл</string>
-	<string name="import_success">Журнал успішно імпортовано</string>
-	<string name="import_failed">Не вдалося імпортувати журнал</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Сповіщення</string>
 	<string name="settings_section_ui">Інтерфейс</string>
@@ -289,7 +287,16 @@
 	<string name="journey_stage_7_body">Два дні, і гормон росту стрімко зростає — ~2-денне голодування може підвищити його секрецію приблизно в 5 разів (Ho, J Clin Invest 1988). Його завдання зараз: захищати м\'язову масу й сильніше розганяти метаболізм жиру.\n\nТож ти й далі спалюєш жир, зберігаючи м\'яз, який очікував втратити, — справді елегантна адаптація.\n\nТой несподіваний приплив енергії, що його описують тут? Це говорить гормон.</string>
 	<string name="journey_stage_8_body">Коли інсулін тримається низьким днями, твої клітини знову стають чутливими до нього — чутливість до інсуліну повертається до здоровішого рівня, протилежність резистентності, що передує діабету 2 типу.\n\nГлюкоза тримається у спокійному вузькому діапазоні; насичення настає легко.\n\nТи налаштовуєш систему, якої майже ніхто не торкається свідомо.</string>
 	<string name="journey_stage_9_body">Три дні. Тривале голодування може спонукати тіло позбуватися старіючих імунних клітин і відновлювати нові з гемопоетичних стовбурових клітин, поки знижується сигналізація IGF-1 і PKA (Cheng, Cell Stem Cell 2014).\n\nЗапалення й далі вщухає; дехто описує тихе, ясне відчуття добробуту.\n\nХоч як далеко ти зайдеш звідси, ти виходиш оновленим — і виходь із голодування лагідно. Пишайся собою.</string>
-	<string name="import_easyfast_result">Імпортовано голодувань: %1$d.\nПропущено записів, що перекриваються: %2$d</string>
+	<string name="import_result_title">Імпорт завершено</string>
+	<string name="import_result_title_failed">Не вдалося імпортувати</string>
+	<string name="import_result_added">Додано</string>
+	<string name="import_result_updated">Оновлено</string>
+	<string name="import_result_already_logged">Уже записано</string>
+	<string name="import_result_unreadable_rows">Нечитабельні записи</string>
+	<string name="import_result_ongoing_restored">Ваше активне голодування відновлено.</string>
+	<string name="import_result_ongoing_declined">Активне голодування з файлу пропущено: голодування вже триває.</string>
+	<string name="import_error_unreadable">Не вдалося прочитати цей файл. Можливо, його переміщено чи видалено або він недоступний для цього застосунку.</string>
+	<string name="import_error_empty">У цьому файлі не знайдено голодувань.</string>
 	<string name="export_choose_format">Формат експорту</string>
 
 

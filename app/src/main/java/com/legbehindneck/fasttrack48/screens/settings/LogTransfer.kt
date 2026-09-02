@@ -30,61 +30,80 @@ import kotlin.time.Clock
  * was the only door to them. It no longer is: the overflow menu offers the same two actions
  * on every page, and a second copy of the format sniffing would be a second thing to keep
  * correct. Extensions on the activity rather than a class, because the only state either one
- * needs is the activity itself — a launcher registration, a content resolver, a file
- * provider, and a place to put a toast.
+ * needs is the activity itself — a launcher registration, a content resolver and a file
+ * provider.
  */
 
 /**
  * Registers the import picker and returns its launcher. Must be called before the activity
  * reaches STARTED, i.e. from `onCreate`, which is what `registerForActivityResult` demands.
  *
- * Launch it with an unfiltered wildcard type: the file's type is decided by sniffing its bytes, not by its
- * extension or the MIME type a file manager claims for it. Every import path this app can
- * take is auto-detected here — a ZIP is an EasyFast backup, `BEGIN:VCALENDAR` is an
- * iCalendar export, a JSON document mentioning ActivityStreams is one of ours, and anything
- * else is handed to the CSV reader, which handles both the legacy FastTrack layout and the
- * current one.
+ * Launch it with an unfiltered wildcard type: the file's type is decided by sniffing its bytes,
+ * not by its extension or the MIME type a file manager claims for it.
  */
 fun AppCompatActivity.registerLogImport(
 	logRepository: FastingLogRepository,
+	onResult: (ImportResult) -> Unit = {},
 ): ActivityResultLauncher<String> =
 	registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-		uri?.let {
-			lifecycle.coroutineScope.launch(Dispatchers.Default) {
-				val message = try {
-					val bytes = contentResolver.openInputStream(it)?.use { s -> s.readBytes() }
-					if (bytes == null) {
-						getString(R.string.import_failed)
-					} else if (isZip(bytes)) {
-						importResultMessage(logRepository.importEasyFastBackup(bytes))
-					} else {
-						val text = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
-						val head = text.trimStart()
-						when {
-							head.startsWith("BEGIN:VCALENDAR", ignoreCase = true) ->
-								importResultMessage(logRepository.importIcs(text))
+		// A cancelled picker hands back null and is not an outcome worth reporting.
+		uri?.let { importLogFromUri(logRepository, it, onResult) }
+	}
 
-							(head.startsWith("{") || head.startsWith("[")) &&
-								text.contains("activitystreams") ->
-								importResultMessage(logRepository.importActivityStreams(text))
+/**
+ * Reads [uri], detects its format from its bytes, merges it into the logbook and hands the
+ * outcome to [onFinished] on the main thread.
+ *
+ * Every import path this app can take is auto-detected here — a ZIP is an EasyFast backup,
+ * `BEGIN:VCALENDAR` is an iCalendar export, a JSON document mentioning ActivityStreams is one
+ * of ours, and anything else is handed to the CSV reader, which handles both the legacy
+ * FastTrack layout and the current one. Nothing here trusts the URI's extension or its
+ * declared MIME type, which is what lets the same code serve both the in-app picker and a
+ * file tapped in an explorer ([ImportActivity]).
+ *
+ * Nothing is shown from here. The result is a value, and the caller decides where it is
+ * rendered — over the Log page in [com.legbehindneck.fasttrack48.screens.main.MainActivity],
+ * over Settings, wherever the import was asked for. [onFinished] runs whether the import
+ * succeeded or failed; a trampoline activity uses it to finish only once the work is actually
+ * done, since the coroutine is scoped to the lifecycle and would be cancelled by an early
+ * `finish()`.
+ */
+fun AppCompatActivity.importLogFromUri(
+	logRepository: FastingLogRepository,
+	uri: Uri,
+	onFinished: (ImportResult) -> Unit = {},
+) {
+	lifecycle.coroutineScope.launch(Dispatchers.Default) {
+		val result = try {
+			val bytes = contentResolver.openInputStream(uri)?.use { s -> s.readBytes() }
+			if (bytes == null) {
+				ImportResult(unreadable = true)
+			} else if (isZip(bytes)) {
+				logRepository.importEasyFastBackup(bytes)
+			} else {
+				val text = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
+				val head = text.trimStart()
+				when {
+					head.startsWith("BEGIN:VCALENDAR", ignoreCase = true) ->
+						logRepository.importIcs(text)
 
-							else -> {
-								val ok = logRepository.importLog(text)
-								getString(if (ok) R.string.import_success else R.string.import_failed)
-							}
-						}
-					}
-				} catch (e: Exception) {
-					Napier.w("Failed to import Log", e)
-					getString(R.string.import_failed)
-				}
+					(head.startsWith("{") || head.startsWith("[")) &&
+						text.contains("activitystreams") ->
+						logRepository.importActivityStreams(text)
 
-				withContext(Dispatchers.Main) {
-					Toast.makeText(this@registerLogImport, message, Toast.LENGTH_LONG).show()
+					else -> logRepository.importLog(text)
 				}
 			}
+		} catch (e: Exception) {
+			// Only the read can land here — every importer catches its own parse failures
+			// and reports them as a result — so this is the file being gone or ungranted.
+			Napier.w("Failed to read the file to import", e)
+			ImportResult(unreadable = true)
 		}
+
+		withContext(Dispatchers.Main) { onFinished(result) }
 	}
+}
 
 /**
  * Writes the logbook to the cache in [format] and hands it to the system share sheet.
@@ -146,11 +165,3 @@ private fun isZip(bytes: ByteArray): Boolean =
 	bytes.size >= 4 &&
 		bytes[0] == 0x50.toByte() && bytes[1] == 0x4B.toByte() &&
 		bytes[2] == 0x03.toByte() && bytes[3] == 0x04.toByte()
-
-/** Turn an [ImportResult] into a user-facing toast message. */
-private fun AppCompatActivity.importResultMessage(result: ImportResult): String =
-	if (result.ok) {
-		getString(R.string.import_easyfast_result, result.imported, result.skippedOverlapping)
-	} else {
-		getString(R.string.import_failed)
-	}

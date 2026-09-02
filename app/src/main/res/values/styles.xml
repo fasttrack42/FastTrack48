@@ -26,6 +26,20 @@
 	<style name="Theme.FastTrackTheme.NoActionBar" parent="android:Theme.Material.Light.NoActionBar">
 	</style>
 
+	<!--
+		The import trampoline ([ImportActivity]) has no UI of its own: it reads a file, toasts
+		the outcome and finishes. Translucent rather than Theme.NoDisplay, because it must stay
+		alive across an asynchronous read and NoDisplay crashes an activity that reaches onResume
+		without having finished.
+	-->
+	<style name="Theme.FastTrackTheme.Transparent" parent="Theme.AppCompat.DayNight.NoActionBar">
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowAnimationStyle">@null</item>
+		<item name="android:backgroundDimEnabled">false</item>
+	</style>
+
 	<style name="Theme.FastTrackTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 	<style name="Theme.FastTrackTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

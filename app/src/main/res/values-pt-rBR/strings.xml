@@ -11,8 +11,6 @@
 	<string name="import_formats_title">Formatos compatíveis</string>
 	<string name="import_formats_message">O tipo de arquivo é detectado automaticamente. Você pode importar:\n\n• CSV do FastTrack48 — a exportação deste app\n• CSV do FastTrack antigo\n• Backup do EasyFast (.zip)\n• iCalendar (.ics) exportado por este app\n• JSON do ActivityStreams exportado por este app</string>
 	<string name="import_formats_continue">Escolher arquivo</string>
-	<string name="import_success">Registro importado com sucesso</string>
-	<string name="import_failed">Falha ao importar o registro</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notificações</string>
 	<string name="settings_section_ui">Interface</string>
@@ -256,7 +254,16 @@
 	<string name="journey_stage_7_body">Dois dias, e o hormônio do crescimento dispara — um jejum de ~2 dias pode aumentar sua secreção em cerca de 5 vezes (Ho, J Clin Invest 1988). Sua missão agora: proteger a massa muscular e acelerar mais o metabolismo da gordura.\n\nAssim você continua queimando gordura enquanto preserva o músculo que esperaria perder — uma adaptação realmente elegante.\n\nAquele aumento inesperado de energia que muitos descrevem aqui? É o hormônio falando.</string>
 	<string name="journey_stage_8_body">Com a insulina mantida baixa por dias, suas células voltam a responder a ela — a sensibilidade à insulina se reajusta para um nível mais saudável, o oposto da resistência que precede o diabetes tipo 2.\n\nA glicose fica numa faixa calma e estreita; a saciedade vem com facilidade.\n\nVocê está afinando um sistema que quase ninguém ajusta de propósito.</string>
 	<string name="journey_stage_9_body">Três dias. O jejum prolongado pode levar o corpo a eliminar células imunológicas envelhecidas e regenerar novas a partir de células-tronco hematopoéticas, à medida que a sinalização de IGF-1 e PKA diminui (Cheng, Cell Stem Cell 2014).\n\nA inflamação continua cedendo; algumas pessoas descrevem um bem-estar calmo e lúcido.\n\nPor mais longe que você vá daqui, você sai renovado — e quebre o jejum com calma. Tenha orgulho.</string>
-	<string name="import_easyfast_result">%1$d jejuns importados.\nEntradas sobrepostas IGNORADAS: %2$d</string>
+	<string name="import_result_title">Importação concluída</string>
+	<string name="import_result_title_failed">Falha na importação</string>
+	<string name="import_result_added">Adicionados</string>
+	<string name="import_result_updated">Atualizados</string>
+	<string name="import_result_already_logged">Já registrados</string>
+	<string name="import_result_unreadable_rows">Entradas ilegíveis</string>
+	<string name="import_result_ongoing_restored">Seu jejum em andamento foi restaurado.</string>
+	<string name="import_result_ongoing_declined">O jejum em andamento do arquivo foi ignorado: já há um jejum em andamento.</string>
+	<string name="import_error_unreadable">Não foi possível ler este arquivo. Ele pode ter sido movido ou excluído, ou não está compartilhado com este app.</string>
+	<string name="import_error_empty">Nenhum jejum foi encontrado neste arquivo.</string>
 	<string name="export_choose_format">Formato de exportação</string>
 
 

@@ -71,9 +71,11 @@ help: ## Show this help
 
 debug: ## Assemble the debug APK
 	$(GRADLE) assembleDebug
+	@echo $(APK_DEBUG)
 
 release: require-signing ## Assemble the signed release APK (sideloading only)
 	$(SIGN_ENV) $(GRADLE) assembleRelease
+	@echo $(APK_RELEASE)
 
 bundle: require-signing ## Assemble the signed release AAB — the Play upload
 	$(SIGN_ENV) $(GRADLE) bundleRelease

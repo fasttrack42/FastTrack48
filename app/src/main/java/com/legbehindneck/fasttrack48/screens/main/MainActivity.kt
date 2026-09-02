@@ -20,6 +20,7 @@ import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
+import com.legbehindneck.fasttrack48.data.log.ImportResult
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.data.settings.ThemeMode
@@ -30,8 +31,12 @@ import com.legbehindneck.fasttrack48.screens.info.InfoActivity
 import com.legbehindneck.fasttrack48.screens.intro.IntroActivity
 import com.legbehindneck.fasttrack48.screens.settings.ExportFormatDialog
 import com.legbehindneck.fasttrack48.screens.settings.ImportFormatsDialog
+import com.legbehindneck.fasttrack48.screens.settings.ImportResultDialog
 import com.legbehindneck.fasttrack48.screens.settings.SettingsActivity
+import com.legbehindneck.fasttrack48.screens.settings.ImportActivity
+import com.legbehindneck.fasttrack48.screens.settings.clearImportResult
 import com.legbehindneck.fasttrack48.screens.settings.exportFasts
+import com.legbehindneck.fasttrack48.screens.settings.readImportResult
 import com.legbehindneck.fasttrack48.screens.settings.registerLogImport
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import io.github.aakira.napier.Napier
@@ -47,6 +52,8 @@ class MainActivity : AppCompatActivity() {
 	private var showAboutState by mutableStateOf(false)
 	private var showExportFormatState by mutableStateOf(false)
 	private var showImportNoticeState by mutableStateOf(false)
+	private var pageRequestState by mutableStateOf<ScreenPages?>(null)
+	private var importResultState by mutableStateOf<ImportResult?>(null)
 	private var themeModeState by mutableStateOf(ThemeMode.SYSTEM)
 	private var dateStyleState by mutableStateOf(DateStyle.OPTIMIZED_COMPACT)
 	private val settings by inject<SettingsDatasource>()
@@ -68,7 +75,11 @@ class MainActivity : AppCompatActivity() {
 		themeModeState = settings.getThemeMode()
 		dateStyleState = settings.getDateStyle()
 		handleStartFastExtra(intent)
-		importLauncher = registerLogImport(logRepository)
+		handlePageExtra(intent)
+		handleImportResultExtra(intent)
+		// The picker's outcome is shown in the same dialog an [ImportActivity] import gets:
+		// one door or the other, the user is told the same thing in the same place.
+		importLauncher = registerLogImport(logRepository) { result -> importResultState = result }
 
 		if (!settings.getIntroSeen()) {
 			startActivity(Intent(this, IntroActivity::class.java))
@@ -95,6 +106,8 @@ class MainActivity : AppCompatActivity() {
 						if (settings.getImportFormatsSeen()) importLauncher.launch("*/*")
 						else showImportNoticeState = true
 					},
+					pageRequest = pageRequestState,
+					consumePageRequest = { pageRequestState = null },
 					externalRequests = ExternalRequests(
 						startFastRequest = startFastRequestState,
 						stopFastRequested = stopFastRequestState,
@@ -119,6 +132,13 @@ class MainActivity : AppCompatActivity() {
 					ExportFormatDialog(
 						onDismiss = { showExportFormatState = false },
 						onSelect = { format -> exportFasts(logRepository, format) },
+					)
+				}
+
+				importResultState?.let { result ->
+					ImportResultDialog(
+						result = result,
+						onDismiss = { importResultState = null },
 					)
 				}
 
@@ -171,6 +191,8 @@ class MainActivity : AppCompatActivity() {
 	override fun onNewIntent(intent: Intent) {
 		super.onNewIntent(intent)
 		handleStartFastExtra(intent)
+		handlePageExtra(intent)
+		handleImportResultExtra(intent)
 	}
 
 	private fun handleStartFastExtra(intent: Intent?) {
@@ -180,6 +202,32 @@ class MainActivity : AppCompatActivity() {
 		} else if (intent?.getBooleanExtra(STOP_FAST_EXTRA, false) == true) {
 			stopFastRequestState = true
 		}
+	}
+
+	/**
+	 * Honours an entry point that asks for a particular page — [ImportActivity] asks for the
+	 * Log once a file has landed in it.
+	 *
+	 * The extra is removed after reading: the intent outlives this call and would otherwise
+	 * drag the pager back to the Log on every recreation, long after the import.
+	 */
+	private fun handlePageExtra(intent: Intent?) {
+		if (intent?.getBooleanExtra(OPEN_LOG_EXTRA, false) == true) {
+			pageRequestState = ScreenPages.Log
+			intent.removeExtra(OPEN_LOG_EXTRA)
+		}
+	}
+
+	/**
+	 * Shows what an import launched from outside the app did — [ImportActivity] does the
+	 * reading and hands the counts over, since the read grant belongs to its task, not this
+	 * one. Cleared from the intent once read, for the same reason [handlePageExtra] clears
+	 * its own extra.
+	 */
+	private fun handleImportResultExtra(intent: Intent?) {
+		val result = intent?.readImportResult() ?: return
+		importResultState = result
+		intent.clearImportResult()
 	}
 
 	private fun openUrl(url: String) {
@@ -213,5 +261,8 @@ class MainActivity : AppCompatActivity() {
 		const val START_FAST_EXTRA = "START_FAST"
 		const val START_FAST_NOW_EXTRA = "START_FAST_NOW"
 		const val STOP_FAST_EXTRA = "STOP_FAST"
+
+		/** Open on the Log page rather than the Fasting one. Set by [ImportActivity]. */
+		const val OPEN_LOG_EXTRA = "OPEN_LOG"
 	}
 }

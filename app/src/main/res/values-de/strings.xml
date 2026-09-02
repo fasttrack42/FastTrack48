@@ -11,8 +11,6 @@
 	<string name="import_formats_title">Unterstützte Formate</string>
 	<string name="import_formats_message">Der Dateityp wird automatisch erkannt. Importierbar sind:\n\n• FastTrack48-CSV — der eigene Export dieser App\n• Alte FastTrack-CSV\n• EasyFast-Backup (.zip)\n• Von dieser App exportierte iCalendar-Datei (.ics)\n• Von dieser App exportiertes ActivityStreams-JSON</string>
 	<string name="import_formats_continue">Datei wählen</string>
-	<string name="import_success">Logbuch erfolgreich importiert</string>
-	<string name="import_failed">Importieren des Logbuchs fehlgeschlagen</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Benachrichtigungen</string>
 	<string name="settings_section_ui">Oberfläche</string>
@@ -278,7 +276,7 @@
 	<string name="journey_stage_8_title">Insulinsensitivität</string>
 	<string name="journey_stage_9_title">Regeneration der Immunzellen</string>
 	<string name="journey_stage_0_body">Du hast gerade gegessen, und dein Blutkreislauf merkt es. Der Blutzucker steigt — bei gesunden Menschen auf einen Höchstwert unter ~140 mg/dl innerhalb von 30–60 min — und deine Bauchspeicheldrüse antwortet mit Insulin, dem Hormon, das diesen Zucker in die Zellen bringt und den Überschuss als Glykogen einlagert.\n\nDas ist der Sättigungszustand: Energie im Überfluss, Speichern hat Vorrang, die Fettverbrennung ist ausgeschaltet.\n\nJetzt heißt es nur verdauen. Die Uhr läuft.</string>
-	<string name="journey_stage_1_body">Insulin sinkt, Glukagon steigt, und deine Leber beginnt, gespeichertes Glykogen freizusetzen, um den Blutzucker um ~70–100 mg/dl stabil zu halten.\n\nDu bist vom Sättigungszustand in den postresorptiven Zustand gewechselt — die stille Übergabe, bei der der Körper aufhört zu speichern und anfängt zu verbrauchen.\n\nDieses erste Hungergefühl ist vor allem der fallende Insulinspiegel. Es geht in ein bis zwei Minuten vorbei.</string>
+	<string name="journey_stage_1_body">Insulin sinkt, Glukagon steigt, und deine Leber beginnt, gespeichertes Glykogen freizusetzen, um den Blutzucker um ~70–100 mg/dl stabil zu halten.\n\nDu bist vom Sättigungszustand in den postresorptiven Zustand gewechselt — die stille Übergabe, bei der Körper aufhört zu speichern und anfängt zu verbrauchen.\n\nDieses erste Hungergefühl ist vor allem der fallende Insulinspiegel. Es geht in ein bis zwei Minuten vorbei.</string>
 	<string name="journey_stage_2_body">Jetzt ist deine Leber der einzige Lieferant: Sie gibt tröpfchenweise Glukose aus dem Glykogen ab (~100 g Reserve), um dich stabil zu halten. Allein dein Gehirn verbraucht ~120 g Glukose pro Tag, diese Stabilität ist also keine Kleinigkeit.\n\nKein Einbruch, keine Spitze — die Glykogenolyse hält die Linie und hält die Unterzuckerung fern.\n\nViele berichten in dieser Phase von ungewöhnlich scharfer Konzentration. Das ist keine Einbildung, sondern gleichmäßiger Brennstoff.</string>
 	<string name="journey_stage_3_body">Das Glykogen wird knapp, also beginnt die Leber, ihre eigene Glukose aus Laktat, Glyzerin und Aminosäuren herzustellen — ein Vorgang namens Gluconeogenese. Nach ~16 h liefert sie bereits rund die Hälfte deiner Glukose (Cahill, Annu Rev Nutr 2006).\n\nDas ist die biologische Intelligenz deines Körpers, die dein Gehirn niemals hungern lässt.\n\nDer Hunger und das leichte Tief, das du vielleicht spürst, hängen mit dem Phasenwechsel zusammen.</string>
 	<string name="journey_stage_4_body">Das Insulin ist endlich niedrig genug, um deine Fettdepots zu öffnen. Die Lipolyse setzt Fettsäuren frei, die Leber beginnt, sie in Ketone umzuwandeln, und du wechselst vom Zucker- zum Fettverbrenner.\n\nDie Insulinsensitivität steigt, und die Fettreserven werden jetzt verbraucht — der metabolische Kern, warum Fasten wirkt.\n\nEin metallischer Geschmack oder leichte Kopfschmerzen sind ein Zeichen dafür, dass die ersten Ketone entstehen. Das Feuer brennt 🔥.</string>
@@ -287,7 +285,16 @@
 	<string name="journey_stage_7_body">Zwei Tage, und das Wachstumshormon schießt nach oben — ein ~2-tägiges Fasten kann seine Ausschüttung um etwa das 5-Fache steigern (Ho, J Clin Invest 1988). Seine Aufgabe jetzt: Muskelmasse schützen und den Fettstoffwechsel stärker antreiben.\n\nSo verbrennst du weiter Fett und bewahrst zugleich den Muskel, den du zu verlieren glaubtest — eine wirklich elegante Anpassung.\n\nDieser unerwartete Energieschub, den viele hier beschreiben? Das ist das Hormon.</string>
 	<string name="journey_stage_8_body">Wenn das Insulin tagelang niedrig bleibt, sprechen deine Zellen wieder neu darauf an — die Insulinsensitivität stellt sich auf ein gesünderes Niveau zurück, das Gegenteil der Resistenz, die dem Typ-2-Diabetes vorausgeht.\n\nDer Blutzucker bleibt in einem ruhigen, engen Bereich, und die Sättigung stellt sich leicht ein.\n\nDu justierst ein System, das die meisten Menschen nie bewusst berühren.</string>
 	<string name="journey_stage_9_body">Drei Tage. Längeres Fasten kann den Körper dazu bringen, gealterte Immunzellen abzubauen und aus hämatopoetischen Stammzellen neue zu bilden, während die IGF-1- und PKA-Signale sinken (Cheng, Cell Stem Cell 2014).\n\nDie Entzündung klingt weiter ab; manche beschreiben ein ruhiges, klares Wohlbefinden.\n\nWie weit du von hier aus auch gehst, du gehst erneuert — und brich dein Fasten sanft. Sei stolz.</string>
-	<string name="import_easyfast_result">%1$d Fasten importiert.\nÜberlappende Einträge ÜBERSPRUNGEN: %2$d</string>
+	<string name="import_result_title">Import abgeschlossen</string>
+	<string name="import_result_title_failed">Import fehlgeschlagen</string>
+	<string name="import_result_added">Hinzugefügt</string>
+	<string name="import_result_updated">Aktualisiert</string>
+	<string name="import_result_already_logged">Bereits erfasst</string>
+	<string name="import_result_unreadable_rows">Unlesbare Einträge</string>
+	<string name="import_result_ongoing_restored">Dein laufendes Fasten wurde wiederhergestellt.</string>
+	<string name="import_result_ongoing_declined">Das laufende Fasten aus der Datei wurde übersprungen – es läuft bereits ein Fasten.</string>
+	<string name="import_error_unreadable">Diese Datei konnte nicht gelesen werden. Möglicherweise wurde sie verschoben oder gelöscht oder sie ist für diese App nicht freigegeben.</string>
+	<string name="import_error_empty">In dieser Datei wurden keine Fastenzeiten gefunden.</string>
 	<string name="export_choose_format">Exportformat</string>
 
 

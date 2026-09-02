@@ -192,9 +192,10 @@ class FastingLogRepositoryImplTest {
 
 		val csv = repository.exportLog()
 		fakeDatasource.clear()
-		val ok = repository.importLog(csv)
+		val result = repository.importLog(csv)
 
-		assertTrue(ok)
+		assertTrue(result.ok)
+		assertEquals(1, result.imported)
 		val entries = fakeDatasource.getAll()
 		assertEquals(1, entries.size)
 		assertEquals(start.toEpochMilliseconds(), entries[0].start)
@@ -218,7 +219,9 @@ class FastingLogRepositoryImplTest {
 		val result = repository.importLog(csvInput)
 
 		// Then
-		assertTrue(result) // Import should succeed
+		assertTrue(result.ok) // Import should succeed
+		assertEquals(2, result.imported)
+		assertEquals(0, result.replaced)
 
 		val entries = fakeDatasource.getAll()
 		assertEquals(2, entries.size)
@@ -245,7 +248,10 @@ class FastingLogRepositoryImplTest {
 		val result = repository.importLog(csvInput)
 
 		// Then
-		assertTrue(result)
+		assertTrue(result.ok)
+		// Reported as an update, not an addition: nothing new landed in the logbook
+		assertEquals(1, result.replaced)
+		assertEquals(0, result.imported)
 		val entries = fakeDatasource.getAll()
 		assertEquals(1, entries.size) // replaced, not duplicated
 		assertEquals(16L * 60 * 60 * 1000, entries[0].length)
@@ -264,7 +270,9 @@ class FastingLogRepositoryImplTest {
 		val result = repository.importLog(invalidCsv)
 
 		// Then
-		assertFalse(result) // Import should fail
+		assertFalse(result.ok) // Import should fail
+		// The unparseable line is counted rather than silently dropped
+		assertEquals(1, result.skippedInvalid)
 
 		// Check that no entries were added
 		val entries = fakeDatasource.getAll()

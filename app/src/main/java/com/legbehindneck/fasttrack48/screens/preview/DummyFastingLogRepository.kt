@@ -25,10 +25,10 @@ class DummyFastingLogRepository(private val entries: List<FastingLogEntry> = emp
 	// The idle band's summary, on the other hand, is worth seeing in a preview.
 	override fun latestLoggedFast(): FastingLogEntry? = entries.lastOrNull()
 	override suspend fun exportLog(): String = ""
-	override suspend fun importLog(cvsExport: String) = true
-	override suspend fun importEasyFastBackup(zipBytes: ByteArray) = ImportResult(0, 0, ok = true)
+	override suspend fun importLog(cvsExport: String) = ImportResult(imported = 1, ok = true)
+	override suspend fun importEasyFastBackup(zipBytes: ByteArray) = ImportResult(imported = 1, ok = true)
 	override suspend fun exportIcs(): String = ""
 	override suspend fun exportActivityStreams(): String = ""
-	override suspend fun importIcs(icsText: String) = ImportResult(0, 0, ok = true)
-	override suspend fun importActivityStreams(jsonText: String) = ImportResult(0, 0, ok = true)
+	override suspend fun importIcs(icsText: String) = ImportResult(imported = 1, ok = true)
+	override suspend fun importActivityStreams(jsonText: String) = ImportResult(imported = 1, ok = true)
 }

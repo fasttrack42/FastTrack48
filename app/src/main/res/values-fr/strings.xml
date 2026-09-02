@@ -12,9 +12,16 @@
 	<string name="import_formats_title">Formats pris en charge</string>
 	<string name="import_formats_message">Le type de fichier est détecté automatiquement. Vous pouvez importer :\n\n• CSV FastTrack48 — export de cette application\n• Ancien CSV FastTrack\n• Sauvegarde EasyFast (.zip)\n• iCalendar (.ics) exporté par cette application\n• JSON ActivityStreams exporté par cette application</string>
 	<string name="import_formats_continue">Choisir un fichier</string>
-	<string name="import_success">Historique des jeûnes importé avec succès</string>
-	<string name="import_failed">Échec de l’importation de l’historique des jeûnes</string>
-	<string name="import_easyfast_result">%1$d jeûnes importés.\nEntrées en chevauchement IGNORÉES : %2$d</string>
+	<string name="import_result_title">Importation terminée</string>
+	<string name="import_result_title_failed">Échec de l\'importation</string>
+	<string name="import_result_added">Ajoutés</string>
+	<string name="import_result_updated">Mis à jour</string>
+	<string name="import_result_already_logged">Déjà enregistrés</string>
+	<string name="import_result_unreadable_rows">Entrées illisibles</string>
+	<string name="import_result_ongoing_restored">Votre jeûne en cours a été restauré.</string>
+	<string name="import_result_ongoing_declined">Le jeûne en cours du fichier a été ignoré : un jeûne est déjà en cours.</string>
+	<string name="import_error_unreadable">Ce fichier n\'a pas pu être lu. Il a peut-être été déplacé ou supprimé, ou il n\'est pas partagé avec cette application.</string>
+	<string name="import_error_empty">Aucun jeûne n\'a été trouvé dans ce fichier.</string>
 	<string name="export_choose_format">Format d’exportation</string>
 	<string name="export_format_csv" translatable="false">CSV (Excel)</string>
 	<string name="export_format_ics" translatable="false">iCalendar (.ics)</string>

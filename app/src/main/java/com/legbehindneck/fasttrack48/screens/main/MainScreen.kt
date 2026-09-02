@@ -41,6 +41,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -95,6 +96,8 @@ fun MainScreen(
 	onEndFastClick: () -> Unit = {},
 	onExportClick: () -> Unit = {},
 	onImportClick: () -> Unit = {},
+	pageRequest: ScreenPages? = null,
+	consumePageRequest: () -> Unit = {},
 	externalRequests: ExternalRequests = ExternalRequests(),
 ) {
 	val pagerState =
@@ -102,6 +105,17 @@ fun MainScreen(
 			initialPage = ScreenPages.Fasting.ordinal,
 			pageCount = { ScreenPages.entries.size })
 	val coroutineScope = rememberCoroutineScope()
+
+	// An entry point that names a page -- currently a file imported from a file manager,
+	// which lands on the Log. Not animated: the app is only now becoming visible, so a
+	// scroll from the Fasting page would be a transition out of a screen the user never
+	// saw. Consumed once, so the page is free to be swiped away afterwards.
+	LaunchedEffect(pageRequest) {
+		pageRequest?.let { page ->
+			pagerState.scrollToPage(page.ordinal)
+			consumePageRequest()
+		}
+	}
 
 	// Same activity-scoped LogViewModel instance the Log page uses, so the
 	// contextual "Clear logbook" overflow action drives its confirmation state.

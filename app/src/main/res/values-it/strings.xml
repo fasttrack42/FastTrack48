@@ -11,8 +11,6 @@
 	<string name="import_formats_title">Formati supportati</string>
 	<string name="import_formats_message">Il tipo di file viene rilevato automaticamente. Puoi importare:\n\n• CSV di FastTrack48 — l\'esportazione di questa app\n• CSV del vecchio FastTrack\n• Backup di EasyFast (.zip)\n• iCalendar (.ics) esportato da questa app\n• JSON ActivityStreams esportato da questa app</string>
 	<string name="import_formats_continue">Scegli file</string>
-	<string name="import_success">Registro importato con successo</string>
-	<string name="import_failed">Importazione del registro non riuscita</string>
 	<!-- Settings -->
 	<string name="settings_section_notifications">Notifiche</string>
 	<string name="settings_section_ui">Interfaccia</string>
@@ -298,7 +296,16 @@
 	<string name="journey_stage_7_body">Due giorni, e l\'ormone della crescita schizza in alto — un digiuno di ~2 giorni può aumentarne la secrezione di circa 5 volte (Ho, J Clin Invest 1988). Il suo compito ora: proteggere la massa magra e spingere più forte il metabolismo dei grassi.\n\nCosì continui a bruciare grasso conservando il muscolo che ti aspetteresti di perdere — un adattamento davvero elegante.\n\nQuell\'inatteso sprint di energia che molti descrivono qui? È l\'ormone che parla.</string>
 	<string name="journey_stage_8_body">Con l\'insulina tenuta bassa per giorni, le tue cellule tornano a rispondervi — la sensibilità all\'insulina si riporta verso un livello più sano, l\'opposto della resistenza che precede il diabete di tipo 2.\n\nLa glicemia resta in una fascia calma e stretta; la sazietà arriva con facilità.\n\nStai mettendo a punto un sistema che quasi nessuno regola di proposito.</string>
 	<string name="journey_stage_9_body">Tre giorni: aria rara. Il digiuno prolungato può spingere il corpo a eliminare cellule immunitarie invecchiate e a rigenerarne di nuove dalle cellule staminali ematopoietiche, mentre calano i segnali di IGF-1 e PKA (Cheng, Cell Stem Cell 2014).\n\nL\'infiammazione continua a placarsi; alcuni descrivono un benessere calmo e lucido.\n\nPer quanto lontano tu vada da qui, ne esci rinnovato — e rompi il digiuno con dolcezza. Sii fiero.</string>
-	<string name="import_easyfast_result">%1$d digiuni importati.\nVoci sovrapposte SALTATE: %2$d</string>
+	<string name="import_result_title">Importazione completata</string>
+	<string name="import_result_title_failed">Importazione non riuscita</string>
+	<string name="import_result_added">Aggiunti</string>
+	<string name="import_result_updated">Aggiornati</string>
+	<string name="import_result_already_logged">Già registrati</string>
+	<string name="import_result_unreadable_rows">Voci illeggibili</string>
+	<string name="import_result_ongoing_restored">Il tuo digiuno in corso è stato ripristinato.</string>
+	<string name="import_result_ongoing_declined">Il digiuno in corso presente nel file è stato ignorato: è già in corso un digiuno.</string>
+	<string name="import_error_unreadable">Impossibile leggere questo file. Potrebbe essere stato spostato o eliminato, oppure non è condiviso con questa app.</string>
+	<string name="import_error_empty">Nessun digiuno trovato in questo file.</string>
 	<string name="export_choose_format">Formato di esportazione</string>
 
 

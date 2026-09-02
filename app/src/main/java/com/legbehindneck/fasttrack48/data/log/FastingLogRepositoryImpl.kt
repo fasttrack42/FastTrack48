@@ -149,10 +149,10 @@ class FastingLogRepositoryImpl(
 	 * import must not silently replace it. A row with a malformed end is still discarded;
 	 * only genuinely empty cells mean "open".
 	 */
-	override suspend fun importLog(cvsExport: String): Boolean = withContext(Dispatchers.IO) {
+	override suspend fun importLog(cvsExport: String): ImportResult = withContext(Dispatchers.IO) {
 		try {
 			val allRows = parseCsv(cvsExport).filter { row -> row.any { it.isNotBlank() } }
-			if (allRows.isEmpty()) return@withContext false
+			if (allRows.isEmpty()) return@withContext ImportResult(ok = false)
 
 			val headerCells = allRows.first().map { it.trim().lowercase() }
 			val hasHeader = headerCells.any { cell ->
@@ -176,7 +176,11 @@ class FastingLogRepositoryImpl(
 				return default
 			}
 
-			var imported = false
+			var imported = 0
+			var replaced = 0
+			var skippedInvalid = 0
+			var ongoingRestored = false
+			var ongoingDeclined = false
 			for (row in dataRows) {
 				val parsed = if (isLegacy) {
 					parseLegacyRow(
@@ -195,26 +199,44 @@ class FastingLogRepositoryImpl(
 						notesIdx = col("notes", default = 5),
 						tz = tz,
 					)
-				} ?: continue
+				}
+				// A row that will not parse is not silently forgotten: it is counted, so a
+				// file that is half-readable says so instead of reporting a short import.
+				if (parsed == null) {
+					skippedInvalid++
+					continue
+				}
 
 				val (startEpoch, lengthMs, notes) = parsed
 				if (lengthMs == null) {
 					// An open row belongs in the active-fast store, not the logbook, so it
 					// skips the de-dupe below — there is no row to replace.
-					if (restoreOngoing(startEpoch)) imported = true
+					if (restoreOngoing(startEpoch)) ongoingRestored = true
+					else ongoingDeclined = true
 					continue
 				}
-				// De-dupe within the whole second the start falls in
+				// De-dupe within the whole second the start falls in. Whether a row was
+				// actually removed is what separates an update from an addition, and it is
+				// the only signal the user has that a re-import changed nothing.
 				val secondFloor = startEpoch - (startEpoch % 1000)
-				datasource.deleteByStartRange(secondFloor, secondFloor + 1000)
+				val overwrote = datasource.deleteByStartRange(secondFloor, secondFloor + 1000)
 				datasource.insertAll(FastEntry(start = startEpoch, length = lengthMs, notes = notes))
-				imported = true
+				if (overwrote) replaced++ else imported++
 			}
 
-			imported
+			ImportResult(
+				imported = imported,
+				replaced = replaced,
+				skippedInvalid = skippedInvalid,
+				ongoingRestored = ongoingRestored,
+				ongoingDeclined = ongoingDeclined,
+				// Understood and acted on. A file of nothing but unparseable rows is a
+				// failure, however many of them there were.
+				ok = imported + replaced > 0 || ongoingRestored || ongoingDeclined,
+			)
 		} catch (e: Exception) {
 			Napier.e("Failed to import journal", e)
-			false
+			ImportResult(ok = false)
 		}
 	}
 
@@ -297,9 +319,14 @@ class FastingLogRepositoryImpl(
 
 		var imported = 0
 		var skippedOverlapping = 0
+		var skippedInvalid = 0
 		for (rec in records) {
-			// Ignore records without a valid finished range (never counted)
-			if (rec.finish <= rec.start) continue
+			// A record without a valid finished range is nothing we can log; counted so the
+			// totals add up to what was in the file.
+			if (rec.finish <= rec.start) {
+				skippedInvalid++
+				continue
+			}
 
 			val overlaps = intervals.any { (s, e) -> rec.start < e && s < rec.finish }
 			if (overlaps) {
@@ -317,7 +344,12 @@ class FastingLogRepositoryImpl(
 			intervals.add(rec.start to rec.finish)
 			imported++
 		}
-		return ImportResult(imported, skippedOverlapping, ok = true)
+		return ImportResult(
+			imported = imported,
+			skippedOverlapping = skippedOverlapping,
+			skippedInvalid = skippedInvalid,
+			ok = true,
+		)
 	}
 
 	/**
@@ -343,11 +375,11 @@ class FastingLogRepositoryImpl(
 		withContext(Dispatchers.IO) {
 			try {
 				val json = extractFastsJson(zipBytes)
-					?: return@withContext ImportResult(0, 0, ok = false)
+					?: return@withContext ImportResult(ok = false)
 				importFasts(parseEasyFastRecords(json))
 			} catch (e: Exception) {
 				Napier.e("Failed to import EasyFast backup", e)
-				ImportResult(0, 0, ok = false)
+				ImportResult(ok = false)
 			}
 		}
 
@@ -435,7 +467,7 @@ class FastingLogRepositoryImpl(
 			importFasts(parseIcs(icsText))
 		} catch (e: Exception) {
 			Napier.e("Failed to import iCalendar", e)
-			ImportResult(0, 0, ok = false)
+			ImportResult(ok = false)
 		}
 	}
 
@@ -691,18 +723,18 @@ class FastingLogRepositoryImpl(
 		try {
 			val parsed = parseActivityStreams(jsonText)
 			val result = importFasts(parsed.finished)
-			// An unfinished Event is counted like any other item in the file, so the totals
-			// the user is shown still account for everything that was in it.
+			// An unfinished Event is reported on its own terms rather than folded into the
+			// finished counts: it lands in the active-fast store, not the logbook, and
+			// "a fast is already running" is the only reason it can be turned away.
 			when {
 				parsed.ongoingStart == null -> result
-				restoreOngoing(parsed.ongoingStart) ->
-					result.copy(imported = result.imported + 1)
+				restoreOngoing(parsed.ongoingStart) -> result.copy(ongoingRestored = true)
 
-				else -> result.copy(skippedOverlapping = result.skippedOverlapping + 1)
+				else -> result.copy(ongoingDeclined = true)
 			}
 		} catch (e: Exception) {
 			Napier.e("Failed to import ActivityStreams", e)
-			ImportResult(0, 0, ok = false)
+			ImportResult(ok = false)
 		}
 	}
 

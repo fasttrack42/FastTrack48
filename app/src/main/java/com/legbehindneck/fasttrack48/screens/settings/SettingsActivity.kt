@@ -18,6 +18,7 @@ import androidx.core.view.WindowCompat
 import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
+import com.legbehindneck.fasttrack48.data.log.ImportResult
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.data.settings.ThemeMode
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
@@ -36,6 +37,7 @@ class SettingsActivity : AppCompatActivity() {
 	private var stageAlertsSettingState by mutableStateOf(false)
 	private var metricSystemSettingState by mutableStateOf(false)
 	private var themeModeState by mutableStateOf(ThemeMode.SYSTEM)
+	private var importResultState by mutableStateOf<ImportResult?>(null)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -48,7 +50,7 @@ class SettingsActivity : AppCompatActivity() {
 		metricSystemSettingState = settings.getUseMetricSystem(default = isMetricSystemLocale())
 		themeModeState = settings.getThemeMode()
 		registerNotificationPermissionCallback()
-		getContent = registerLogImport(logRepository)
+		getContent = registerLogImport(logRepository) { result -> importResultState = result }
 
 		setContent {
 			FastTrackTheme(themeMode = themeModeState) {
@@ -68,6 +70,13 @@ class SettingsActivity : AppCompatActivity() {
 					// whatever type the picker claims for it.
 					onImportClick = { getContent.launch("*/*") }
 				)
+
+				importResultState?.let { result ->
+					ImportResultDialog(
+						result = result,
+						onDismiss = { importResultState = null },
+					)
+				}
 			}
 		}
 	}
