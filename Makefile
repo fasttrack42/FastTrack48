@@ -225,3 +225,6 @@ clean: ## Gradle clean
 
 clean-dist: ## Remove the staged dist/ artifacts
 	rm -rf dist
+
+fix-images: ## fix images for fastlane
+	find fastlane/metadata/android/en-US/images -iname '*.png' -exec python3 ./scripts/play/pad_screenshots.py {} \;
