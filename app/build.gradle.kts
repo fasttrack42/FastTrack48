@@ -27,8 +27,8 @@ android {
 		// file at the release tag and cannot evaluate a catalog reference, so a lookup reads
 		// as code 0. `make tag VERSION=MAJOR.MMDD.HH` (scripts/release.sh) rewrites both
 		// lines in the commit the tag points to; the code is the name without its dots.
-		versionCode = 14090716
-		versionName = "14.0907.16"
+		versionCode = 14100310
+		versionName = "14.1003.10"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 	}
