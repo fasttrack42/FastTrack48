@@ -22,9 +22,11 @@ export JAVA_HOME := /Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Ho
 
 GRADLE       := ./gradlew --no-daemon
 PYTHON       := python3
-TOML         := gradle/libs.versions.toml
-VERSION_CODE := $(shell sed -n 's/^versionCode *= *"\(.*\)"/\1/p' $(TOML))
-VERSION_NAME := $(shell sed -n 's/^versionName *= *"\(.*\)"/\1/p' $(TOML))
+# The version lives as literals in app/build.gradle.kts, where F-Droid reads it;
+# `make tag` writes them.
+APP_GRADLE   := app/build.gradle.kts
+VERSION_CODE := $(shell sed -n 's/^[[:space:]]*versionCode = \([0-9][0-9]*\)$$/\1/p' $(APP_GRADLE))
+VERSION_NAME := $(shell sed -n 's/^[[:space:]]*versionName = "\([^"]*\)"$$/\1/p' $(APP_GRADLE))
 
 # Play App Signing keeps the app signing key; what you upload with must be a
 # DIFFERENT, app-specific upload key. This is the single source of truth for
@@ -54,7 +56,7 @@ DIST         := dist/$(VERSION_CODE)
 .PHONY: help version release debug bundle install install-debug test lint \
         icons preflight dist clean clean-dist tasks check-jetifier \
         verify-signing play-internal play-production play-metadata \
-        require-signing upload-key key-fingerprints deps
+        require-signing upload-key key-fingerprints deps tag
 
 help: ## Show this help
 	@printf '\033[1mFastTrack48\033[0m %s (versionCode %s)\n' \
@@ -210,6 +212,12 @@ install-debug: ## adb install the debug APK
 
 version: ## Print the current version name and code
 	@echo "$(VERSION_NAME) ($(VERSION_CODE))"
+
+# The F-Droid and GitHub release: version literals, changelog, commit and tag
+# in one step (scripts/release.sh). Write the changelog for the new code first.
+tag: ## Cut a release: make tag VERSION=14.0907.16 [DRY_RUN=1] [FORCE=1]
+	@test -n "$(VERSION)" || { echo "usage: make tag VERSION=MAJOR.MMDD.HH [DRY_RUN=1]" >&2; exit 2; }
+	@DRY_RUN="$(DRY_RUN)" FORCE="$(FORCE)" sh scripts/release.sh "$(VERSION)"
 
 tasks: ## List the Gradle tasks
 	$(GRADLE) -q :tasks
