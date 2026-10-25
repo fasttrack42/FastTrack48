@@ -1,7 +1,4 @@
 [versions]
-versionCode = "14081200"
-versionName = "14.0812.00"
-
 kotlin = "2.3.21"
 javaVersion = "17"
 agp = "9.0.1"

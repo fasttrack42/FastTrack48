@@ -1,7 +1,9 @@
 import com.android.build.api.dsl.ManagedVirtualDevice
 
 plugins {
-	alias(libs.plugins.android.application)
+	// By id, not alias(libs.plugins...): F-Droid only takes the version from a gradle file
+	// in which it finds this literal plugin id. The root build script pins its version.
+	id("com.android.application")
 	alias(libs.plugins.kotlin.serialization)
 	alias(libs.plugins.ksp)
 	alias(libs.plugins.kotlin.compose)
@@ -21,8 +23,12 @@ android {
 		applicationId = "com.legbehindneck.fasttrack48"
 		minSdk = libs.versions.minSdk.get().toInt()
 		targetSdk = libs.versions.targetSdk.get().toInt()
-		versionCode = libs.versions.versionCode.get().toInt()
-		versionName = libs.versions.versionName.get()
+		// Literals, not catalog lookups: F-Droid reads the version with a regex over this
+		// file at the release tag and cannot evaluate a catalog reference, so a lookup reads
+		// as code 0. `make tag VERSION=MAJOR.MMDD.HH` (scripts/release.sh) rewrites both
+		// lines in the commit the tag points to; the code is the name without its dots.
+		versionCode = 14090716
+		versionName = "14.0907.16"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -51,7 +57,11 @@ android {
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
 			)
-			signingConfig = signingConfigs.getByName("release")
+			// Signed only when a keystore is supplied (Makefile, CI). F-Droid builds without
+			// one and signs the APK itself, so an unsigned release must not fail the build.
+			if (System.getenv("KEYSTORE") != null) {
+				signingConfig = signingConfigs.getByName("release")
+			}
 		}
 		debug {
 			applicationIdSuffix = ".dev"

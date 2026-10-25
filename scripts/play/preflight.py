@@ -73,11 +73,11 @@ def image_size(path):
 
 
 # ------------------------------------------------------------------- helpers --
-def toml_version(key):
-	src = open(os.path.join(ROOT, 'gradle', 'libs.versions.toml')).read()
-	m = re.search(r'^%s\s*=\s*"([^"]+)"' % re.escape(key), src, re.M)
+def gradle_version(key):
+	src = open(os.path.join(ROOT, 'app', 'build.gradle.kts')).read()
+	m = re.search(r'^\s*%s\s*=\s*"?([^"\s]+)"?\s*$' % re.escape(key), src, re.M)
 	if not m:
-		err('gradle/libs.versions.toml: no "%s" entry' % key)
+		err('app/build.gradle.kts: no literal "%s" line' % key)
 		return None
 	return m.group(1)
 
@@ -269,8 +269,8 @@ def check_manifest():
 
 
 def main():
-	version_code = toml_version('versionCode')
-	version_name = toml_version('versionName')
+	version_code = gradle_version('versionCode')
+	version_name = gradle_version('versionName')
 
 	check_identity()
 	check_listing_text()
