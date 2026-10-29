@@ -141,6 +141,12 @@ private fun SettingsList(
 					}
 				)
 			}
+			item(key = "lunar_header") {
+				SettingsSectionHeader(title = R.string.settings_section_lunar)
+			}
+			item(key = "lunar") {
+				LunarSettingsSection(dateStyle = dateStyle)
+			}
 			item(key = "ui_header") {
 				SettingsSectionHeader(title = R.string.settings_section_ui)
 			}

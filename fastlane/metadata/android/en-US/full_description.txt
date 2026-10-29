@@ -21,7 +21,7 @@ about each phase as you progress in your fast
 <i>Fasting history</i>
 • Every fast recorded with start time, total length, hours in ketosis and hours in autophagy.
 • Add text notes for any entry.
-• List and calendar views of your previous fasts.
+• List and calendar views for previous fasts.
 • Tap any past day in the calendar to add a fast for it.
 • Manual entry: set start date and time plus a duration, or set an end time and let the app calculate.
 • Edit or delete any entry, including backdating a start you forgot to log.
@@ -46,8 +46,6 @@ about each phase as you progress in your fast
 • Toggles for the ongoing notification and for stage alerts.
 
 <h3>Localization</h3>
-• Free and open source under the MIT licence, no strings attached
-• Material design throughout, with light, dark and system themes and a configurable date and time format
 • Available in nine languages
 
 FastTrack48 is not a medical app and does not provide medical advice. The stage timings come from a rule-of-thumb model informed by published research and real-world testing, and they are an approximation: what stage you are actually in depends on your metabolism, your last meal, your activity and much else. Talk to a doctor before fasting, especially if you are pregnant, are taking medication, or have a medical condition.

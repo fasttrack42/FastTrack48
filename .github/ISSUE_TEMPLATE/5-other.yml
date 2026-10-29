@@ -1,0 +1,9 @@
+name: ✏️ Something else
+description: Nothing fits? Write in your own words.
+body:
+  - type: textarea
+    id: message
+    attributes:
+      label: Summary
+    validations:
+      required: true

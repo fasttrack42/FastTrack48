@@ -50,14 +50,14 @@
 	<string name="title_log">Historial</string>
 	<string name="title_profile">Perfil</string>
 	<string name="fasting_fragment_label">Ayuno</string>
-	<string name="start_fast_button">Comenzar ayuno</string>
-	<string name="start_orb_label">Comenzar</string>
-	<string name="start_fast_now_button">Comenzar ayuno ahora</string>
+	<string name="start_fast_button">Iniciar</string>
+	<string name="start_orb_label">Iniciar</string>
+	<string name="start_fast_now_button">Iniciar ayuno ahora</string>
 	<string name="end_fast_button">Terminar ayuno</string>
 	<string name="fasting_energy_mode">Modo de energía: %1$s</string>
 	<string name="fasting_energy_mode_glucose">Glucosa</string>
 	<string name="fasting_energy_mode_fat">Cuerpos cetónicos</string>
-	<string name="confirm_start_fast_title">¿Comenzar ayuno?</string>
+	<string name="confirm_start_fast_title">¿Iniciar ayuno?</string>
 	<string name="confirm_start_fast_positive">Ahora</string>
 	<string name="confirm_start_fast_neutral">Ya he comenzado</string>
 	<string name="confirm_start_fast_negative">No</string>
@@ -112,7 +112,7 @@
 	<string name="manual_add_start_date_time_label">Fecha y hora de inicio</string>
 	<string name="edit_date">Editar fecha</string>
 	<string name="edit_time">Editar hora</string>
-	<string name="manual_start_title">Comenzar</string>
+	<string name="manual_start_title">Iniciar</string>
 	<string name="manual_add_set_end_title">Fin del ayuno</string>
 	<string name="manual_add_set_end_complete">Calcular</string>
 	<string name="fast_autophagy_label">Autofagia</string>
@@ -211,7 +211,7 @@
 	<string name="app_widget_time_compact">%1$d h</string>
 	<string name="app_widget_start_fast_button">Iniciar ayuno</string>
 	<string name="app_widget_stop_fast_button">Detener ayuno</string>
-	<string name="app_widget_start_compact">Comenzar</string>
+	<string name="app_widget_start_compact">Iniciar</string>
 	<string name="app_widget_start">Toca para iniciar</string>
 	<string name="close_button_content_description">Cerrar</string>
 	<string name="cancel_button">Cancelar</string>
@@ -347,4 +347,74 @@
 	<string name="settings_language_title">Idioma de la aplicación</string>
 	<string name="settings_language_system">Predeterminado del sistema</string>
 
+	<!-- Ekadashi and Purnima reminders -->
+	<string name="settings_section_lunar">Ekadashi y Purnima</string>
+	<string name="lunar_ekadashi_title">Recordatorios de Ekadashi</string>
+	<string name="lunar_ekadashi_subtitle_off">Un recordatorio antes de cada ayuno de Ekadashi</string>
+	<string name="lunar_fullmoon_title">Recordatorios de luna llena</string>
+	<string name="lunar_fullmoon_subtitle_off">Un recordatorio antes de cada Purnima o luna llena</string>
+	<string name="lunar_calculating">Calculando…</string>
+	<string name="lunar_no_days_selected">Elige al menos un día para recibir recordatorios</string>
+	<string name="lunar_tradition_title">Calendario de Ekadashi</string>
+	<string name="lunar_tradition_question">¿Qué calendario de Ekadashi sigues?</string>
+	<string name="lunar_tradition_smarta">Smarta</string>
+	<string name="lunar_tradition_smarta_detail">La mayoría de los calendarios hindúes, incluido Drik Panchang</string>
+	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
+	<string name="lunar_tradition_vaishnava_detail">ISKCON y otros calendarios vaishnavas. Algunos ayunos caen un día después.</string>
+	<string name="lunar_fullmoon_style_title">Día de luna llena</string>
+	<string name="lunar_fullmoon_style_purnima">Día de ayuno de Purnima</string>
+	<string name="lunar_fullmoon_style_purnima_detail">El día de ayuno del calendario hindú, a veces el día antes de la luna llena</string>
+	<string name="lunar_fullmoon_style_astronomical">Luna llena astronómica</string>
+	<string name="lunar_fullmoon_style_astronomical_detail">La fecha exacta de la luna llena en tu zona horaria</string>
+	<string name="lunar_remind_me">Recordarme</string>
+	<string name="lunar_lead_same_day">El mismo día</string>
+	<string name="lunar_lead_1_day">1 día antes</string>
+	<string name="lunar_lead_2_days">2 días antes</string>
+	<string name="lunar_lead_3_days">3 días antes</string>
+	<string name="lunar_reminder_time_title">Hora del recordatorio</string>
+	<string name="lunar_save">Guardar</string>
+	<string name="lunar_location_title">Ubicación para la hora del amanecer</string>
+	<string name="lunar_location_timezone">Estimada según tu zona horaria (%1$s)</string>
+	<string name="lunar_location_device">Tu ubicación, guardada el %1$s</string>
+	<string name="lunar_location_finding">Buscando tu ubicación…</string>
+	<string name="lunar_location_dialog_title">¿Usar tu ubicación?</string>
+	<string name="lunar_location_dialog_text">Ekadashi y Purnima dependen del amanecer local, así que la fecha puede variar según dónde estés.\n\nFastTrack estima tu ubicación a partir de tu zona horaria, lo que es correcto casi en todas partes. Cerca del borde de una zona horaria amplia, un día de ayuno puede desplazarse un día.\n\nPara un resultado exacto, FastTrack puede leer tu ubicación aproximada. Es opcional y basta con hacerlo una vez. Tu ubicación no sale de este teléfono: FastTrack no tiene acceso a internet.\n\nSi viajas a otra zona horaria, FastTrack vuelve a usar la estimación por zona horaria.</string>
+	<string name="lunar_location_use">Usar mi ubicación</string>
+	<string name="lunar_location_use_timezone">Usar mi zona horaria</string>
+	<string name="lunar_location_not_now">Ahora no</string>
+	<string name="lunar_location_saved">Ubicación guardada. Ahora se usa para la hora del amanecer.</string>
+	<string name="lunar_location_not_found">No se pudo encontrar tu ubicación. FastTrack sigue usando tu zona horaria.</string>
+	<string name="lunar_location_off">La ubicación está desactivada en este teléfono. FastTrack sigue usando tu zona horaria.</string>
+	<string name="lunar_location_denied">Sin permiso de ubicación. FastTrack sigue usando tu zona horaria.</string>
+	<string name="lunar_notifications_off">Las notificaciones están desactivadas, así que no pueden aparecer recordatorios.</string>
+	<string name="lunar_notifications_turn_on">Activar</string>
+	<string name="lunar_channel_name">Ekadashi y Purnima</string>
+	<string name="lunar_channel_description">Recordatorios antes de los días de Ekadashi y de luna llena</string>
+	<string name="lunar_ekadashi_today">Hoy es Ekadashi</string>
+	<string name="lunar_ekadashi_tomorrow">Mañana es Ekadashi</string>
+	<plurals name="lunar_ekadashi_in_days">
+		<item quantity="one">Ekadashi en %d día</item>
+		<item quantity="many">Ekadashi en %d días</item>
+		<item quantity="other">Ekadashi en %d días</item>
+	</plurals>
+	<string name="lunar_purnima_today">Hoy, ayuno de Purnima</string>
+	<string name="lunar_purnima_tomorrow">Mañana, ayuno de Purnima</string>
+	<plurals name="lunar_purnima_in_days">
+		<item quantity="one">Ayuno de Purnima en %d día</item>
+		<item quantity="many">Ayuno de Purnima en %d días</item>
+		<item quantity="other">Ayuno de Purnima en %d días</item>
+	</plurals>
+	<string name="lunar_fullmoon_today">Hoy hay luna llena</string>
+	<string name="lunar_fullmoon_tomorrow">Mañana hay luna llena</string>
+	<plurals name="lunar_fullmoon_in_days">
+		<item quantity="one">Luna llena en %d día</item>
+		<item quantity="many">Luna llena en %d días</item>
+		<item quantity="other">Luna llena en %d días</item>
+	</plurals>
+	<string name="lunar_ekadashi_details">Día de ayuno: %1$s. Romper el ayuno: %2$s.</string>
+	<string name="lunar_ekadashi_details_no_parana">Día de ayuno: %1$s.</string>
+	<string name="lunar_purnima_details">Día de ayuno: %1$s. Inicio de Purnima: %2$s.</string>
+	<string name="lunar_fullmoon_details">Luna llena: %1$s, %2$s.</string>
+	<string name="lunar_parana_after">%1$s, después de las %2$s</string>
+	<!-- /Ekadashi and Purnima reminders -->
 </resources>

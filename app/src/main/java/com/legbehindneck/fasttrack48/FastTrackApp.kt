@@ -15,6 +15,7 @@ import cafe.adriel.satchel.storer.file.FileSatchelStorer
 import com.legbehindneck.fasttrack48.data.Data
 import com.legbehindneck.fasttrack48.data.SafeRawSatchelSerializer
 import com.legbehindneck.fasttrack48.di.mainModule
+import com.legbehindneck.fasttrack48.lunar.LunarReminderScheduler
 import com.legbehindneck.fasttrack48.widget.FastingWidgetReceiver
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
@@ -44,6 +45,9 @@ class FastTrackApp : Application(), Configuration.Provider {
 			androidContext(this@FastTrackApp)
 			modules(mainModule)
 		}
+
+		// Post any Ekadashi / Purnima reminder an alarm missed (force-stop, Doze) and re-arm.
+		LunarReminderScheduler.refresh(this)
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
 			GlobalScope.launch {

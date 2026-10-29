@@ -3,9 +3,12 @@
 	<cloud-backup>
 		<include domain="sharedpref" path="."/>
 		<include domain="database" path="."/>
+		<!-- Device-bound: the location the user shared for sunrise times never leaves the phone. -->
+		<exclude domain="sharedpref" path="lunar_device.xml"/>
 	</cloud-backup>
 	<device-transfer>
 		<include domain="sharedpref" path="."/>
 		<include domain="database" path="."/>
+		<exclude domain="sharedpref" path="lunar_device.xml"/>
 	</device-transfer>
 </data-extraction-rules>

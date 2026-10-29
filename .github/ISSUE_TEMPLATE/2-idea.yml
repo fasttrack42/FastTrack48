@@ -1,0 +1,34 @@
+name: 💡 Idea or improvement
+description: How we can improve?
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🖋️
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like to do but cannot?
+      description: Describe the need or annoyance rather than the solution.
+      placeholder: 🖋️
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: What would work for you better?
+      description: the solution
+      placeholder: 🖋️
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: more info
+    validations:
+      required: false

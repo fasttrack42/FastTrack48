@@ -1,0 +1,107 @@
+name: 🐞 A defect
+description: A crash, incorrect data, wrong notification, etc
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Has this already been reported? Check in [open issues](https://github.com/fasttrack42/FastTrack48/issues).
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Summary
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The sequence that caused the defect.
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshot or screen recording
+      description: Drag and drop or paste here. Please don't include private private data.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ### System info
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Tap ⋮ (top right) → About. The version appears under the app name.
+      placeholder: "14.1003.10"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: android-version
+    attributes:
+      label: Android version
+      description: Settings → About phone → Android version.
+      options:
+        - Android 17
+        - Android 16
+        - Android 15
+        - Android 14
+        - Android 13
+        - Android 12 / 12L
+        - Android 11
+        - Android 10
+        - Android 9
+        - Android 8.0 / 8.1
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Phone or tablet model
+      description: Helps with notification and widget problems, since some manufacturers stop apps running in the background.
+      placeholder: "Pixel 8, Samsung Galaxy A54, Xiaomi Redmi Note 13…"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does it happen?
+      options:
+        - Every time
+        - Intermittently
+        - It happened once
+    validations:
+      required: false
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: Where did you install the app from?
+      options:
+        - Google Play
+        - GitHub release
+        - Obtainium
+        - F-Droid or IzzyOnDroid
+        - Built from source
+        - Not sure
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Workarounds you found, when it started, or a crash log if you have one (paste it between lines of ```).
+    validations:
+      required: false

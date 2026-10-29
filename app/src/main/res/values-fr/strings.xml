@@ -507,5 +507,75 @@
 	<string name="settings_section_language">Langue</string>
 	<string name="settings_language_title">Langue de l’application</string>
 	<string name="settings_language_system">Par défaut du système</string>
-</resources>
 
+	<!-- Ekadashi and Purnima reminders -->
+	<string name="settings_section_lunar">Ekadashi et Purnima</string>
+	<string name="lunar_ekadashi_title">Rappels d’Ekadashi</string>
+	<string name="lunar_ekadashi_subtitle_off">Un rappel avant chaque jeûne d’Ekadashi</string>
+	<string name="lunar_fullmoon_title">Rappels de pleine lune</string>
+	<string name="lunar_fullmoon_subtitle_off">Un rappel avant chaque Purnima ou pleine lune</string>
+	<string name="lunar_calculating">Calcul en cours…</string>
+	<string name="lunar_no_days_selected">Choisissez au moins un jour pour recevoir des rappels</string>
+	<string name="lunar_tradition_title">Calendrier d’Ekadashi</string>
+	<string name="lunar_tradition_question">Quel calendrier d’Ekadashi suivez-vous ?</string>
+	<string name="lunar_tradition_smarta">Smarta</string>
+	<string name="lunar_tradition_smarta_detail">La plupart des calendriers hindous, dont Drik Panchang</string>
+	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
+	<string name="lunar_tradition_vaishnava_detail">ISKCON et les autres calendriers vaishnavas. Certains jeûnes tombent un jour plus tard.</string>
+	<string name="lunar_fullmoon_style_title">Jour de pleine lune</string>
+	<string name="lunar_fullmoon_style_purnima">Jour de jeûne de Purnima</string>
+	<string name="lunar_fullmoon_style_purnima_detail">Le jour de jeûne du calendrier hindou, parfois la veille de la pleine lune</string>
+	<string name="lunar_fullmoon_style_astronomical">Pleine lune astronomique</string>
+	<string name="lunar_fullmoon_style_astronomical_detail">La date exacte de la pleine lune dans votre fuseau horaire</string>
+	<string name="lunar_remind_me">Me le rappeler</string>
+	<string name="lunar_lead_same_day">Le jour même</string>
+	<string name="lunar_lead_1_day">1 jour avant</string>
+	<string name="lunar_lead_2_days">2 jours avant</string>
+	<string name="lunar_lead_3_days">3 jours avant</string>
+	<string name="lunar_reminder_time_title">Heure du rappel</string>
+	<string name="lunar_save">Enregistrer</string>
+	<string name="lunar_location_title">Lieu pour l’heure du lever du soleil</string>
+	<string name="lunar_location_timezone">Estimé d’après votre fuseau horaire (%1$s)</string>
+	<string name="lunar_location_device">Votre position, enregistrée le %1$s</string>
+	<string name="lunar_location_finding">Recherche de votre position…</string>
+	<string name="lunar_location_dialog_title">Utiliser votre position ?</string>
+	<string name="lunar_location_dialog_text">Ekadashi et Purnima suivent le lever du soleil local : la date peut donc dépendre de l’endroit où vous êtes.\n\nFastTrack estime votre position d’après votre fuseau horaire, ce qui est juste presque partout. Près du bord d’un fuseau étendu, un jour de jeûne peut se décaler d’un jour.\n\nPour un résultat exact, FastTrack peut lire votre position approximative. C’est facultatif, et une fois suffit. Votre position reste sur ce téléphone : FastTrack n’a pas accès à Internet.\n\nSi vous changez de fuseau horaire, FastTrack revient à l’estimation par fuseau horaire.</string>
+	<string name="lunar_location_use">Utiliser ma position</string>
+	<string name="lunar_location_use_timezone">Utiliser plutôt mon fuseau horaire</string>
+	<string name="lunar_location_not_now">Plus tard</string>
+	<string name="lunar_location_saved">Position enregistrée. Elle sert désormais au calcul du lever du soleil.</string>
+	<string name="lunar_location_not_found">Position introuvable. FastTrack continue d’utiliser votre fuseau horaire.</string>
+	<string name="lunar_location_off">La localisation est désactivée sur ce téléphone. FastTrack continue d’utiliser votre fuseau horaire.</string>
+	<string name="lunar_location_denied">Pas d’autorisation de localisation. FastTrack continue d’utiliser votre fuseau horaire.</string>
+	<string name="lunar_notifications_off">Les notifications sont désactivées : aucun rappel ne peut s’afficher.</string>
+	<string name="lunar_notifications_turn_on">Activer</string>
+	<string name="lunar_channel_name">Ekadashi et Purnima</string>
+	<string name="lunar_channel_description">Rappels avant les jours d’Ekadashi et de pleine lune</string>
+	<string name="lunar_ekadashi_today">Ekadashi aujourd’hui</string>
+	<string name="lunar_ekadashi_tomorrow">Ekadashi demain</string>
+	<plurals name="lunar_ekadashi_in_days">
+		<item quantity="one">Ekadashi dans %d jour</item>
+		<item quantity="many">Ekadashi dans %d jours</item>
+		<item quantity="other">Ekadashi dans %d jours</item>
+	</plurals>
+	<string name="lunar_purnima_today">Jeûne de Purnima aujourd’hui</string>
+	<string name="lunar_purnima_tomorrow">Jeûne de Purnima demain</string>
+	<plurals name="lunar_purnima_in_days">
+		<item quantity="one">Jeûne de Purnima dans %d jour</item>
+		<item quantity="many">Jeûne de Purnima dans %d jours</item>
+		<item quantity="other">Jeûne de Purnima dans %d jours</item>
+	</plurals>
+	<string name="lunar_fullmoon_today">Pleine lune aujourd’hui</string>
+	<string name="lunar_fullmoon_tomorrow">Pleine lune demain</string>
+	<plurals name="lunar_fullmoon_in_days">
+		<item quantity="one">Pleine lune dans %d jour</item>
+		<item quantity="many">Pleine lune dans %d jours</item>
+		<item quantity="other">Pleine lune dans %d jours</item>
+	</plurals>
+	<string name="lunar_ekadashi_details">Jour de jeûne : %1$s. Rompre le jeûne : %2$s.</string>
+	<string name="lunar_ekadashi_details_no_parana">Jour de jeûne : %1$s.</string>
+	<string name="lunar_purnima_details">Jour de jeûne : %1$s. Début de Purnima : %2$s.</string>
+	<string name="lunar_fullmoon_details">Pleine lune : %1$s, %2$s.</string>
+	<string name="lunar_parana_after">%1$s, après %2$s</string>
+	<!-- /Ekadashi and Purnima reminders -->
+</resources>

@@ -296,4 +296,72 @@
 	<string name="settings_section_language">Taal</string>
 	<string name="settings_language_title">App-taal</string>
 	<string name="settings_language_system">Systeemstandaard</string>
+
+	<!-- Ekadashi and Purnima reminders -->
+	<string name="settings_section_lunar">Ekadashi en Purnima</string>
+	<string name="lunar_ekadashi_title">Ekadashi-herinneringen</string>
+	<string name="lunar_ekadashi_subtitle_off">Een herinnering vóór elke Ekadashi-vastendag</string>
+	<string name="lunar_fullmoon_title">Volle-maanherinneringen</string>
+	<string name="lunar_fullmoon_subtitle_off">Een herinnering vóór elke Purnima of volle maan</string>
+	<string name="lunar_calculating">Berekenen…</string>
+	<string name="lunar_no_days_selected">Kies minstens één dag om herinneringen te krijgen</string>
+	<string name="lunar_tradition_title">Ekadashi-kalender</string>
+	<string name="lunar_tradition_question">Welke Ekadashi-kalender volg je?</string>
+	<string name="lunar_tradition_smarta">Smarta</string>
+	<string name="lunar_tradition_smarta_detail">De meeste hindoeïstische kalenders, waaronder Drik Panchang</string>
+	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
+	<string name="lunar_tradition_vaishnava_detail">ISKCON en andere Vaishnava-kalenders. Sommige vastendagen vallen een dag later.</string>
+	<string name="lunar_fullmoon_style_title">Dag van volle maan</string>
+	<string name="lunar_fullmoon_style_purnima">Purnima-vastendag</string>
+	<string name="lunar_fullmoon_style_purnima_detail">De vastendag van de hindoeïstische kalender, soms de dag vóór volle maan</string>
+	<string name="lunar_fullmoon_style_astronomical">Astronomische volle maan</string>
+	<string name="lunar_fullmoon_style_astronomical_detail">De exacte datum van volle maan in jouw tijdzone</string>
+	<string name="lunar_remind_me">Herinner me</string>
+	<string name="lunar_lead_same_day">Op de dag zelf</string>
+	<string name="lunar_lead_1_day">1 dag ervoor</string>
+	<string name="lunar_lead_2_days">2 dagen ervoor</string>
+	<string name="lunar_lead_3_days">3 dagen ervoor</string>
+	<string name="lunar_reminder_time_title">Tijd van de herinnering</string>
+	<string name="lunar_save">Opslaan</string>
+	<string name="lunar_location_title">Locatie voor zonsopgangstijden</string>
+	<string name="lunar_location_timezone">Geschat op basis van je tijdzone (%1$s)</string>
+	<string name="lunar_location_device">Je locatie, opgeslagen op %1$s</string>
+	<string name="lunar_location_finding">Locatie zoeken…</string>
+	<string name="lunar_location_dialog_title">Je locatie gebruiken?</string>
+	<string name="lunar_location_dialog_text">Ekadashi en Purnima volgen de lokale zonsopgang, dus de datum kan afhangen van waar je bent.\n\nFastTrack schat je locatie op basis van je tijdzone; dat klopt bijna overal. Aan de rand van een brede tijdzone kan een vastendag een dag verschuiven.\n\nVoor een exact resultaat kan FastTrack je geschatte locatie uitlezen. Dat is optioneel, en één keer is genoeg. Je locatie blijft op deze telefoon: FastTrack heeft geen internettoegang.\n\nAls je naar een andere tijdzone reist, gaat FastTrack terug naar de schatting op basis van de tijdzone.</string>
+	<string name="lunar_location_use">Mijn locatie gebruiken</string>
+	<string name="lunar_location_use_timezone">Toch mijn tijdzone gebruiken</string>
+	<string name="lunar_location_not_now">Niet nu</string>
+	<string name="lunar_location_saved">Locatie opgeslagen. Zonsopgangstijden gebruiken die nu.</string>
+	<string name="lunar_location_not_found">Je locatie is niet gevonden. FastTrack blijft je tijdzone gebruiken.</string>
+	<string name="lunar_location_off">Locatie staat uit op deze telefoon. FastTrack blijft je tijdzone gebruiken.</string>
+	<string name="lunar_location_denied">Geen toestemming voor locatie. FastTrack blijft je tijdzone gebruiken.</string>
+	<string name="lunar_notifications_off">Meldingen staan uit, dus herinneringen kunnen niet verschijnen.</string>
+	<string name="lunar_notifications_turn_on">Aanzetten</string>
+	<string name="lunar_channel_name">Ekadashi en Purnima</string>
+	<string name="lunar_channel_description">Herinneringen vóór Ekadashi en volle maan</string>
+	<string name="lunar_ekadashi_today">Vandaag is het Ekadashi</string>
+	<string name="lunar_ekadashi_tomorrow">Morgen is het Ekadashi</string>
+	<plurals name="lunar_ekadashi_in_days">
+		<item quantity="one">Ekadashi over %d dag</item>
+		<item quantity="other">Ekadashi over %d dagen</item>
+	</plurals>
+	<string name="lunar_purnima_today">Vandaag Purnima-vasten</string>
+	<string name="lunar_purnima_tomorrow">Morgen Purnima-vasten</string>
+	<plurals name="lunar_purnima_in_days">
+		<item quantity="one">Purnima-vasten over %d dag</item>
+		<item quantity="other">Purnima-vasten over %d dagen</item>
+	</plurals>
+	<string name="lunar_fullmoon_today">Vandaag is het volle maan</string>
+	<string name="lunar_fullmoon_tomorrow">Morgen is het volle maan</string>
+	<plurals name="lunar_fullmoon_in_days">
+		<item quantity="one">Volle maan over %d dag</item>
+		<item quantity="other">Volle maan over %d dagen</item>
+	</plurals>
+	<string name="lunar_ekadashi_details">Vastendag: %1$s. Vasten verbreken: %2$s.</string>
+	<string name="lunar_ekadashi_details_no_parana">Vastendag: %1$s.</string>
+	<string name="lunar_purnima_details">Vastendag: %1$s. Begin van Purnima: %2$s.</string>
+	<string name="lunar_fullmoon_details">Volle maan: %1$s, %2$s.</string>
+	<string name="lunar_parana_after">%1$s, na %2$s</string>
+	<!-- /Ekadashi and Purnima reminders -->
 </resources>

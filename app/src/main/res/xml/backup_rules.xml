@@ -2,4 +2,6 @@
 <full-backup-content>
 	<include domain="sharedpref" path="."/>
 	<include domain="database" path="."/>
+	<!-- Device-bound: the location the user shared for sunrise times never leaves the phone. -->
+	<exclude domain="sharedpref" path="lunar_device.xml"/>
 </full-backup-content>

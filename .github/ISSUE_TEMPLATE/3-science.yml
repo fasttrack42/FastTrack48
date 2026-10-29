@@ -1,0 +1,51 @@
+name: 🔬 Fasting info looks wrong
+description: Description
+labels: ["science"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🖋️
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: Which part?
+      description: Pick one or more.
+      multiple: true
+      options:
+        - Blood Sugar Rises
+        - Blood Sugar Falls
+        - Blood Sugar Stabilizes
+        - Gluconeogenesis
+        - Fat Burning
+        - Ketosis
+        - Autophagy
+        - Growth Hormone Surge
+        - Insulin Sensitivity
+        - Immune Cell Regeneration
+        - Phase bubbles or stage notifications
+        - BMI or BMR calculation
+        - Intro screens
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: The issue, and suggested fix
+      description: text, screenshot, etc
+      placeholder: |
+        🖋️
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Source, e.g. PubMed, DOI, journal
+      placeholder: https://doi.org/…
+    validations:
+      required: false
