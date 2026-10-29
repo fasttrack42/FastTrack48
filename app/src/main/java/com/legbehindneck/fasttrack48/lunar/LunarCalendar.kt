@@ -19,12 +19,15 @@ enum class EkadashiTradition {
 	VAISHNAVA,
 }
 
-/** What a full-moon reminder is about. */
-enum class FullMoonStyle {
-	/** The Purnima vrat (fast) day of the Hindu calendar. */
-	PURNIMA,
+/** Full or new moon. */
+enum class MoonPhase { FULL, NEW }
 
-	/** The local date of the exact astronomical full moon. */
+/** Which day a full- or new-moon reminder is about. */
+enum class MoonDayStyle {
+	/** The fast day of the Hindu calendar: Purnima vrat, Darsha Amavasya. */
+	VEDIC,
+
+	/** The local date of the exact astronomical full or new moon. */
 	ASTRONOMICAL,
 }
 
@@ -46,15 +49,16 @@ data class EkadashiDay(
 	val mahadvadashi: EkadashiCalculator.Mahadvadashi?,
 ) : LunarDay
 
-data class FullMoonDay(
+data class MoonDay(
 	override val day: LocalDate,
-	val style: FullMoonStyle,
-	/** [FullMoonStyle.PURNIMA]: when the Purnima tithi begins; otherwise the exact full moon. */
+	val phase: MoonPhase,
+	val style: MoonDayStyle,
+	/** [MoonDayStyle.VEDIC]: when the Purnima / Amavasya tithi begins; otherwise the exact moment. */
 	val moment: ZonedDateTime,
 ) : LunarDay
 
 /**
- * Upcoming Ekadashi and full-moon days for a place, Android-free. The observance rules
+ * Upcoming Ekadashi, full-moon and new-moon days for a place, Android-free. The observance rules
  * live in [EkadashiCalculator]; this only walks the lunations of a date window.
  */
 object LunarCalendar {
@@ -95,29 +99,37 @@ object LunarCalendar {
 		return out.sortedBy { it.day }
 	}
 
-	/** Full-moon days of the given [style] in [from, from + days], sorted. */
-	fun fullMoons(
+	/** Full- or new-moon days of the given [style] in [from, from + days], sorted. */
+	fun moonDays(
 		from: LocalDate,
 		days: Int,
 		location: GeoPoint,
 		zone: ZoneId,
-		style: FullMoonStyle,
-	): List<FullMoonDay> {
+		phase: MoonPhase,
+		style: MoonDayStyle,
+	): List<MoonDay> {
 		val until = from.plusDays(days.toLong())
-		val out = ArrayList<FullMoonDay>()
+		val out = ArrayList<MoonDay>()
 		for (newMoon in newMoons(from, days, zone)) {
 			val day = when (style) {
-				FullMoonStyle.PURNIMA -> {
-					val r = EkadashiCalculator.computePurnimaVrat(
-						newMoon, location.latitude, location.longitude, zone,
-					)
-					FullMoonDay(r.fastDay, style, r.tithiStart)
+				MoonDayStyle.VEDIC -> {
+					val r = when (phase) {
+						MoonPhase.FULL -> EkadashiCalculator.computePurnimaVrat(
+							newMoon, location.latitude, location.longitude, zone,
+						)
+						MoonPhase.NEW -> EkadashiCalculator.computeDarshaAmavasya(
+							newMoon, location.latitude, location.longitude, zone,
+						)
+					}
+					MoonDay(r.fastDay, phase, style, r.tithiStart)
 				}
-				FullMoonStyle.ASTRONOMICAL -> {
-					val full = Instant.ofEpochMilli(
-						Meeus.millisFromJulianDay(Meeus.elongationCrossingInLunation(newMoon, 180.0))
+				MoonDayStyle.ASTRONOMICAL -> {
+					// The lunation's full moon, or the new moon that ends it.
+					val elongation = if (phase == MoonPhase.FULL) 180.0 else 360.0
+					val moment = Instant.ofEpochMilli(
+						Meeus.millisFromJulianDay(Meeus.elongationCrossingInLunation(newMoon, elongation))
 					).atZone(zone)
-					FullMoonDay(full.toLocalDate(), style, full)
+					MoonDay(moment.toLocalDate(), phase, style, moment)
 				}
 			}
 			if (day.day in from..until) out.add(day)
@@ -127,7 +139,8 @@ object LunarCalendar {
 
 	/**
 	 * New moons whose lunations can hold an observance in the window: from the last new
-	 * moon before [from] (a lunation's Krishna Ekadashi falls ~25 days after it) onwards.
+	 * moon before [from] (a lunation's Krishna Ekadashi falls ~25 days after it, its
+	 * Amavasya ~29) onwards.
 	 */
 	private fun newMoons(from: LocalDate, days: Int, zone: ZoneId): List<Double> {
 		val startMillis = from.atStartOfDay(zone).minusDays(3).toInstant().toEpochMilli()

@@ -19,8 +19,8 @@ import java.util.TreeSet;
 
 /**
  * External anchors for the observance rules: every fast day, Gauna day,
- * Parana window and Purnima day below was read from Drik Panchang
- * (drikpanchang.com Smartha / ISKCON / Purnima lists and per-Ekadashi pages,
+ * Parana window, Purnima and Amavasya day below was read from Drik Panchang
+ * (drikpanchang.com Smartha / ISKCON / Purnima / Amavasya lists and per-Ekadashi pages,
  * fetched 2026-10-29) for the stated city and year.
  */
 public class DrikAnchorsTest {
@@ -185,6 +185,38 @@ public class DrikAnchorsTest {
                 "01-29 02-28 03-29 04-28 05-27 06-25 07-25 08-23 09-22 10-22 11-20 12-20");
     }
 
+    // ---- Darsha Amavasya and Amavasya days (Drik "Amavasya" lists) ----------------
+
+    @Test
+    public void amavasya_newDelhi2026() {
+        amavasya(DELHI, 2026,
+                "01-18 02-17 03-18 04-17 05-16 06-14 07-14 08-12 09-10 10-10 11-08 12-08",
+                "01-18 02-17 03-19 04-17 05-16 06-15 07-14 08-12 09-11 10-10 11-09 12-08");
+    }
+
+    @Test
+    public void amavasya_newDelhi2027() {
+        amavasya(DELHI, 2027,
+                "01-07 02-06 03-07 04-06 05-06 06-04 07-03 08-02 08-31 09-29 10-29 11-27 12-27",
+                "01-07 02-06 03-08 04-06 05-06 06-04 07-04 08-02 08-31 09-30 10-29 11-28 12-27");
+    }
+
+    @Test
+    public void amavasya_newYork2026() {
+        // 17 Jan starts 13:33 but covers only half that day's Aparahna -> Darsha is 18 Jan;
+        // 11 Aug starts 16:22 and 12 Aug has no Aparahna Amavasya -> Darsha is 11 Aug.
+        amavasya(NEW_YORK, 2026,
+                "01-18 02-16 03-18 04-16 05-16 06-14 07-13 08-11 09-10 10-09 11-08 12-08",
+                "01-18 02-17 03-18 04-17 05-16 06-14 07-14 08-12 09-10 10-10 11-08 12-08");
+    }
+
+    @Test
+    public void amavasya_london2026() {
+        amavasya(LONDON, 2026,
+                "01-18 02-16 03-18 04-16 05-16 06-14 07-13 08-12 09-10 10-10 11-08 12-08",
+                "01-18 02-17 03-18 04-17 05-16 06-14 07-14 08-12 09-10 10-10 11-08 12-08");
+    }
+
     // ---- helpers ------------------------------------------------------------------
 
     private static void smarta(City c, int year, String primary, String gauna) {
@@ -284,6 +316,23 @@ public class DrikAnchorsTest {
         }
         assertEquals(c.name + " " + year + " Purnima vrat days", dates(year, vrat), gotVrat);
         assertEquals(c.name + " " + year + " Purnima days", dates(year, tithiDay), gotDay);
+    }
+
+    private static void amavasya(City c, int year, String darsha, String tithiDay) {
+        Set<LocalDate> gotDarsha = new TreeSet<LocalDate>();
+        Set<LocalDate> gotDay = new TreeSet<LocalDate>();
+        for (double nm : lunations(c, year)) {
+            EkadashiCalculator.Result v = EkadashiCalculator.computeDarshaAmavasya(nm, c.lat, c.lon, c.zone);
+            EkadashiCalculator.Result d = EkadashiCalculator.computeAmavasya(nm, c.lat, c.lon, c.zone);
+            if (v.fastDay.getYear() == year) {
+                gotDarsha.add(v.fastDay);
+            }
+            if (d.fastDay.getYear() == year) {
+                gotDay.add(d.fastDay);
+            }
+        }
+        assertEquals(c.name + " " + year + " Darsha Amavasya days", dates(year, darsha), gotDarsha);
+        assertEquals(c.name + " " + year + " Amavasya days", dates(year, tithiDay), gotDay);
     }
 
     private static void assertWindow(String label, LocalDate day, String from, String to,

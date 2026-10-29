@@ -334,11 +334,18 @@
 	<string name="settings_language_system">Системна</string>
 
 	<!-- Ekadashi and Purnima reminders -->
-	<string name="settings_section_lunar">Екадаші та Пурніма</string>
+	<string name="settings_section_lunar">Екадаші, Пурніма та Амавасья</string>
 	<string name="lunar_ekadashi_title">Нагадування про Екадаші</string>
 	<string name="lunar_ekadashi_subtitle_off">Нагадування перед кожним постом Екадаші</string>
 	<string name="lunar_fullmoon_title">Нагадування про повню</string>
 	<string name="lunar_fullmoon_subtitle_off">Нагадування перед кожною Пурнімою або повнею</string>
+	<string name="lunar_newmoon_title">Нагадування про молодик</string>
+	<string name="lunar_newmoon_subtitle_off">Нагадування перед кожною Амавасьєю або молодиком</string>
+	<string name="lunar_moon_style_title">Дні повні та молодика</string>
+	<string name="lunar_moon_style_vedic">Дні посту Пурніми та Амавасьї</string>
+	<string name="lunar_moon_style_vedic_detail">Дні посту за індуїстським календарем, іноді за день до повні або молодика</string>
+	<string name="lunar_moon_style_astronomical">Астрономічні повня та молодик</string>
+	<string name="lunar_moon_style_astronomical_detail">Дата точної повні або молодика у вашому часовому поясі</string>
 	<string name="lunar_calculating">Обчислення…</string>
 	<string name="lunar_no_days_selected">Виберіть хоча б один день, щоб отримувати нагадування</string>
 	<string name="lunar_tradition_title">Календар Екадаші</string>
@@ -347,11 +354,6 @@
 	<string name="lunar_tradition_smarta_detail">Більшість індуїстських календарів, зокрема Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Вайшнавський (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON та інші вайшнавські календарі. Деякі пости припадають на день пізніше.</string>
-	<string name="lunar_fullmoon_style_title">День повні</string>
-	<string name="lunar_fullmoon_style_purnima">День посту Пурніми</string>
-	<string name="lunar_fullmoon_style_purnima_detail">День посту за індуїстським календарем, іноді за день до повні</string>
-	<string name="lunar_fullmoon_style_astronomical">Астрономічна повня</string>
-	<string name="lunar_fullmoon_style_astronomical_detail">Дата точної повні у вашому часовому поясі</string>
 	<string name="lunar_remind_me">Нагадати</string>
 	<string name="lunar_lead_same_day">У цей день</string>
 	<string name="lunar_lead_1_day">За 1 день</string>
@@ -364,7 +366,7 @@
 	<string name="lunar_location_device">Ваше місцезнаходження, збережене %1$s</string>
 	<string name="lunar_location_finding">Пошук місцезнаходження…</string>
 	<string name="lunar_location_dialog_title">Використати ваше місцезнаходження?</string>
-	<string name="lunar_location_dialog_text">Екадаші та Пурніма визначаються за місцевим сходом сонця, тож дата може залежати від того, де ви є.\n\nFastTrack оцінює ваше місцезнаходження за часовим поясом, і майже скрізь це правильно. Біля краю широкого часового поясу день посту може зміститися на один день.\n\nДля точного результату FastTrack може зчитати ваше приблизне місцезнаходження. Це необов’язково, і одного разу достатньо. Ваше місцезнаходження залишається на цьому телефоні: FastTrack не має доступу до інтернету.\n\nКоли ви їдете в інший часовий пояс, FastTrack знову використовує оцінку за часовим поясом.</string>
+	<string name="lunar_location_dialog_text">Екадаші, Пурніма та Амавасья визначаються за місцевим сходом сонця, тож дата може залежати від того, де ви є.\n\nFastTrack оцінює ваше місцезнаходження за часовим поясом, і майже скрізь це правильно. Біля краю широкого часового поясу день посту може зміститися на один день.\n\nДля точного результату FastTrack може зчитати ваше приблизне місцезнаходження. Це необов’язково, і одного разу достатньо. Ваше місцезнаходження залишається на цьому телефоні: FastTrack не має доступу до інтернету.\n\nКоли ви їдете в інший часовий пояс, FastTrack знову використовує оцінку за часовим поясом.</string>
 	<string name="lunar_location_use">Використати моє місцезнаходження</string>
 	<string name="lunar_location_use_timezone">Натомість використати часовий пояс</string>
 	<string name="lunar_location_not_now">Не зараз</string>
@@ -374,8 +376,8 @@
 	<string name="lunar_location_denied">Немає дозволу на геолокацію. FastTrack і далі використовує ваш часовий пояс.</string>
 	<string name="lunar_notifications_off">Сповіщення вимкнено, тому нагадування не з’являтимуться.</string>
 	<string name="lunar_notifications_turn_on">Увімкнути</string>
-	<string name="lunar_channel_name">Екадаші та Пурніма</string>
-	<string name="lunar_channel_description">Нагадування перед днями Екадаші та повні</string>
+	<string name="lunar_channel_name">Екадаші, Пурніма та Амавасья</string>
+	<string name="lunar_channel_description">Нагадування перед днями Екадаші, повні та молодика</string>
 	<string name="lunar_ekadashi_today">Сьогодні Екадаші</string>
 	<string name="lunar_ekadashi_tomorrow">Завтра Екадаші</string>
 	<plurals name="lunar_ekadashi_in_days">
@@ -400,10 +402,28 @@
 		<item quantity="many">Повня через %d днів</item>
 		<item quantity="other">Повня через %d дня</item>
 	</plurals>
+	<string name="lunar_amavasya_today">Сьогодні пост Амавасьї</string>
+	<string name="lunar_amavasya_tomorrow">Завтра пост Амавасьї</string>
+	<plurals name="lunar_amavasya_in_days">
+		<item quantity="one">Пост Амавасьї через %d день</item>
+		<item quantity="few">Пост Амавасьї через %d дні</item>
+		<item quantity="many">Пост Амавасьї через %d днів</item>
+		<item quantity="other">Пост Амавасьї через %d дня</item>
+	</plurals>
+	<string name="lunar_newmoon_today">Сьогодні молодик</string>
+	<string name="lunar_newmoon_tomorrow">Завтра молодик</string>
+	<plurals name="lunar_newmoon_in_days">
+		<item quantity="one">Молодик через %d день</item>
+		<item quantity="few">Молодик через %d дні</item>
+		<item quantity="many">Молодик через %d днів</item>
+		<item quantity="other">Молодик через %d дня</item>
+	</plurals>
 	<string name="lunar_ekadashi_details">День посту: %1$s. Завершити пост: %2$s.</string>
 	<string name="lunar_ekadashi_details_no_parana">День посту: %1$s.</string>
 	<string name="lunar_purnima_details">День посту: %1$s. Початок Пурніми: %2$s.</string>
 	<string name="lunar_fullmoon_details">Повня: %1$s, %2$s.</string>
+	<string name="lunar_amavasya_details">День посту: %1$s. Початок Амавасьї: %2$s.</string>
+	<string name="lunar_newmoon_details">Молодик: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, після %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>

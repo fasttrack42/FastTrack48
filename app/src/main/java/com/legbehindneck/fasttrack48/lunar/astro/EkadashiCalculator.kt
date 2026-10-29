@@ -7,7 +7,7 @@ import java.time.ZonedDateTime
 
 /**
  * Ekadashi fast days and Parana (fast-breaking) windows, plus the Vedic
- * Purnima/Amavasya civil days and the Purnima vrat (fasting) day.
+ * Purnima/Amavasya civil days and their fast days (Purnima vrat, Darsha Amavasya).
  *
  * A tithi is the period during which the Moon-Sun elongation traverses a
  * 12-degree slice. Ekadashi is the 11th tithi of each fortnight:
@@ -45,7 +45,8 @@ import java.time.ZonedDateTime
  * Validation (scratch harness, 2026-10): against Drik Panchang for New Delhi
  * 2026-2027, New York 2026 and London 2029 - Smarta 98/98 fast days and 7/7
  * Gauna days, ISKCON 97/98 fast days with every Parana within 2 minutes,
- * Purnima vrat and Purnima tithi days 38/38. The single miss is a Purnima end
+ * Purnima vrat and Purnima tithi days 38/38, Darsha Amavasya and Amavasya days 49/49
+ * (New Delhi 2026-2027, New York 2026, London 2026). The single miss is a Purnima end
  * within one minute of sunrise: this theory's tithi instants agree with JPL
  * Horizons to -25..+62 s (Sun series), while Drik's run a near-constant
  * 36-66 s earlier than JPL, so only such knife-edge cases can differ.
@@ -252,6 +253,48 @@ object EkadashiCalculator {
             Result(label.tithiStart, label.tithiEnd, d0, rise)
         } else {
             label
+        }
+    }
+
+    /**
+     * Darsha Amavasya - the Amavasya fast and Pitru (ancestor) day - Drik Panchang rule:
+     * the civil day whose Aparahna (the fourth fifth of daylight) the Amavasya tithi
+     * covers longest, the earlier day on a tie; when it covers no Aparahna at all, the
+     * Amavasya day of [computeAmavasya]. It falls on the previous day (Chaturdashi) when
+     * Amavasya begins during the day and ends the next morning. The tithi fields are
+     * those of the Amavasya tithi.
+     */
+    @JvmStatic
+    fun computeDarshaAmavasya(
+        newMoonJdUt: Double,
+        latitudeDeg: Double,
+        longitudeDeg: Double,
+        zone: ZoneId,
+    ): Result {
+        val label = computeAmavasya(newMoonJdUt, latitudeDeg, longitudeDeg, zone)
+        val start = millis(label.tithiStart)
+        val end = millis(label.tithiEnd)
+        var bestDay: LocalDate? = null
+        var bestSunrise: ZonedDateTime? = null
+        var bestCover = 0L
+        var day = label.tithiStart.toLocalDate()
+        while (!day.isAfter(label.tithiEnd.toLocalDate())) {
+            val rise = Sunrise.sunrise(day, zone, latitudeDeg, longitudeDeg) ?: return label
+            val set = Sunrise.sunset(day, zone, latitudeDeg, longitudeDeg) ?: return label
+            val r = millis(rise)
+            val daylight = millis(set) - r
+            val cover = minOf(r + daylight * 4 / 5, end) - maxOf(r + daylight * 3 / 5, start)
+            if (cover > bestCover) {
+                bestCover = cover
+                bestDay = day
+                bestSunrise = rise
+            }
+            day = day.plusDays(1)
+        }
+        return if (bestDay == null || bestSunrise == null || bestDay == label.fastDay) {
+            label
+        } else {
+            Result(label.tithiStart, label.tithiEnd, bestDay, bestSunrise)
         }
     }
 

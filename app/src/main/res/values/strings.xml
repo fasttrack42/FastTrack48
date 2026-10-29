@@ -434,11 +434,18 @@
 	<string name="settings_language_system">System default</string>
 
 	<!-- Ekadashi and Purnima reminders -->
-	<string name="settings_section_lunar">Ekadashi and Purnima</string>
+	<string name="settings_section_lunar">Ekadashi, Purnima and Amavasya</string>
 	<string name="lunar_ekadashi_title">Ekadashi reminders</string>
 	<string name="lunar_ekadashi_subtitle_off">A reminder before each Ekadashi fast</string>
 	<string name="lunar_fullmoon_title">Full moon reminders</string>
 	<string name="lunar_fullmoon_subtitle_off">A reminder before each Purnima or full moon</string>
+	<string name="lunar_newmoon_title">New moon reminders</string>
+	<string name="lunar_newmoon_subtitle_off">A reminder before each Amavasya or new moon</string>
+	<string name="lunar_moon_style_title">Full and new moon days</string>
+	<string name="lunar_moon_style_vedic">Purnima and Amavasya fast days</string>
+	<string name="lunar_moon_style_vedic_detail">The fast days of the Hindu calendar, sometimes a day before the full or new moon</string>
+	<string name="lunar_moon_style_astronomical">Astronomical full and new moon</string>
+	<string name="lunar_moon_style_astronomical_detail">The date of the exact full or new moon in your time zone</string>
 	<string name="lunar_calculating">Calculating…</string>
 	<string name="lunar_no_days_selected">Pick at least one day to get reminders</string>
 	<string name="lunar_tradition_title">Ekadashi calendar</string>
@@ -447,11 +454,6 @@
 	<string name="lunar_tradition_smarta_detail">Most Hindu calendars, including Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON and other Vaishnava calendars. A few fasts fall one day later.</string>
-	<string name="lunar_fullmoon_style_title">Full moon day</string>
-	<string name="lunar_fullmoon_style_purnima">Purnima fast day</string>
-	<string name="lunar_fullmoon_style_purnima_detail">The fast day of the Hindu calendar, sometimes the day before the full moon</string>
-	<string name="lunar_fullmoon_style_astronomical">Astronomical full moon</string>
-	<string name="lunar_fullmoon_style_astronomical_detail">The date of the exact full moon in your time zone</string>
 	<string name="lunar_remind_me">Remind me</string>
 	<string name="lunar_lead_same_day">On the day</string>
 	<string name="lunar_lead_1_day">1 day before</string>
@@ -464,7 +466,7 @@
 	<string name="lunar_location_device">Your location, saved %1$s</string>
 	<string name="lunar_location_finding">Finding your location…</string>
 	<string name="lunar_location_dialog_title">Use your location?</string>
-	<string name="lunar_location_dialog_text">Ekadashi and Purnima follow local sunrise, so the date can depend on where you are.\n\nFastTrack estimates your location from your time zone, which is right almost everywhere. Near the edge of a wide time zone, a fast day can shift by one day.\n\nFor an exact result, FastTrack can read your approximate location. This is optional, and once is enough. Your location stays on this phone: FastTrack has no internet access.\n\nWhen you travel to another time zone, FastTrack goes back to the time zone estimate.</string>
+	<string name="lunar_location_dialog_text">Ekadashi, Purnima and Amavasya follow local sunrise, so the date can depend on where you are.\n\nFastTrack estimates your location from your time zone, which is right almost everywhere. Near the edge of a wide time zone, a fast day can shift by one day.\n\nFor an exact result, FastTrack can read your approximate location. This is optional, and once is enough. Your location stays on this phone: FastTrack has no internet access.\n\nWhen you travel to another time zone, FastTrack goes back to the time zone estimate.</string>
 	<string name="lunar_location_use">Use my location</string>
 	<string name="lunar_location_use_timezone">Use my time zone instead</string>
 	<string name="lunar_location_not_now">Not now</string>
@@ -474,8 +476,8 @@
 	<string name="lunar_location_denied">No location permission. FastTrack keeps using your time zone.</string>
 	<string name="lunar_notifications_off">Notifications are off, so reminders cannot appear.</string>
 	<string name="lunar_notifications_turn_on">Turn on</string>
-	<string name="lunar_channel_name">Ekadashi and Purnima</string>
-	<string name="lunar_channel_description">Reminders before Ekadashi and full moon days</string>
+	<string name="lunar_channel_name">Ekadashi, Purnima and Amavasya</string>
+	<string name="lunar_channel_description">Reminders before Ekadashi, full moon and new moon days</string>
 	<string name="lunar_ekadashi_today">Ekadashi today</string>
 	<string name="lunar_ekadashi_tomorrow">Ekadashi tomorrow</string>
 	<plurals name="lunar_ekadashi_in_days">
@@ -494,10 +496,24 @@
 		<item quantity="one">Full moon in %d day</item>
 		<item quantity="other">Full moon in %d days</item>
 	</plurals>
+	<string name="lunar_amavasya_today">Amavasya fast today</string>
+	<string name="lunar_amavasya_tomorrow">Amavasya fast tomorrow</string>
+	<plurals name="lunar_amavasya_in_days">
+		<item quantity="one">Amavasya fast in %d day</item>
+		<item quantity="other">Amavasya fast in %d days</item>
+	</plurals>
+	<string name="lunar_newmoon_today">New moon today</string>
+	<string name="lunar_newmoon_tomorrow">New moon tomorrow</string>
+	<plurals name="lunar_newmoon_in_days">
+		<item quantity="one">New moon in %d day</item>
+		<item quantity="other">New moon in %d days</item>
+	</plurals>
 	<string name="lunar_ekadashi_details">Fast day: %1$s. Break the fast: %2$s.</string>
 	<string name="lunar_ekadashi_details_no_parana">Fast day: %1$s.</string>
 	<string name="lunar_purnima_details">Fast day: %1$s. Purnima begins: %2$s.</string>
 	<string name="lunar_fullmoon_details">Full moon: %1$s, %2$s.</string>
+	<string name="lunar_amavasya_details">Fast day: %1$s. Amavasya begins: %2$s.</string>
+	<string name="lunar_newmoon_details">New moon: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, after %2$s</string>
 	<string name="lunar_parana_window" translatable="false">%1$s, %2$s–%3$s</string>
 	<string name="lunar_date_time" translatable="false">%1$s, %2$s</string>

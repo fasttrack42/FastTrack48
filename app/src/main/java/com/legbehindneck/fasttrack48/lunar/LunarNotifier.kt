@@ -17,7 +17,7 @@ import io.github.aakira.napier.Napier
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-/** Posts Ekadashi / full-moon reminders on their own channel, so they can be tuned apart. */
+/** Posts Ekadashi / full- and new-moon reminders on their own channel, so they can be tuned apart. */
 object LunarNotifier : KoinComponent {
 	const val CHANNEL_ID = "lunar_days"
 	private const val NOTIFICATION_TAG = "lunar"

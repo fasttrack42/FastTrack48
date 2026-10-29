@@ -21,13 +21,23 @@ internal object LunarTexts {
 			is EkadashiDay -> Triple(
 				R.string.lunar_ekadashi_today, R.string.lunar_ekadashi_tomorrow, R.plurals.lunar_ekadashi_in_days,
 			)
-			is FullMoonDay -> when (subject.style) {
-				FullMoonStyle.PURNIMA -> Triple(
-					R.string.lunar_purnima_today, R.string.lunar_purnima_tomorrow, R.plurals.lunar_purnima_in_days,
-				)
-				FullMoonStyle.ASTRONOMICAL -> Triple(
-					R.string.lunar_fullmoon_today, R.string.lunar_fullmoon_tomorrow, R.plurals.lunar_fullmoon_in_days,
-				)
+			is MoonDay -> when (subject.phase) {
+				MoonPhase.FULL -> when (subject.style) {
+					MoonDayStyle.VEDIC -> Triple(
+						R.string.lunar_purnima_today, R.string.lunar_purnima_tomorrow, R.plurals.lunar_purnima_in_days,
+					)
+					MoonDayStyle.ASTRONOMICAL -> Triple(
+						R.string.lunar_fullmoon_today, R.string.lunar_fullmoon_tomorrow, R.plurals.lunar_fullmoon_in_days,
+					)
+				}
+				MoonPhase.NEW -> when (subject.style) {
+					MoonDayStyle.VEDIC -> Triple(
+						R.string.lunar_amavasya_today, R.string.lunar_amavasya_tomorrow, R.plurals.lunar_amavasya_in_days,
+					)
+					MoonDayStyle.ASTRONOMICAL -> Triple(
+						R.string.lunar_newmoon_today, R.string.lunar_newmoon_tomorrow, R.plurals.lunar_newmoon_in_days,
+					)
+				}
 			}
 		}
 		return when (lead) {
@@ -47,13 +57,20 @@ internal object LunarTexts {
 				context.getString(R.string.lunar_ekadashi_details, day, parana(context, it, style))
 			} ?: context.getString(R.string.lunar_ekadashi_details_no_parana, day)
 		}
-		is FullMoonDay -> when (subject.style) {
-			FullMoonStyle.PURNIMA -> context.getString(
-				R.string.lunar_purnima_details, date(subject.day, style), dateTime(context, subject.moment, style),
-			)
-			FullMoonStyle.ASTRONOMICAL -> context.getString(
-				R.string.lunar_fullmoon_details, date(subject.day, style), time(context, subject.moment, style),
-			)
+		is MoonDay -> {
+			val full = subject.phase == MoonPhase.FULL
+			when (subject.style) {
+				MoonDayStyle.VEDIC -> context.getString(
+					if (full) R.string.lunar_purnima_details else R.string.lunar_amavasya_details,
+					date(subject.day, style),
+					dateTime(context, subject.moment, style),
+				)
+				MoonDayStyle.ASTRONOMICAL -> context.getString(
+					if (full) R.string.lunar_fullmoon_details else R.string.lunar_newmoon_details,
+					date(subject.day, style),
+					time(context, subject.moment, style),
+				)
+			}
 		}
 	}
 

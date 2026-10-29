@@ -4,7 +4,7 @@
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 	<uses-permission android:name="android.permission.VIBRATE"/>
-	<!-- Optional, asked once from Settings: sunrise for Ekadashi and Purnima days. Approximate is enough. -->
+	<!-- Optional, asked once from Settings: sunrise for Ekadashi, Purnima and Amavasya days. Approximate is enough. -->
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 	<!-- Injected by androidx.work for its NetworkType constraints, which this app never uses. -->
@@ -61,7 +61,7 @@
 			android:label="@string/title_activity_settings" />
 
 		<!--
-			Ekadashi and Purnima reminders: the alarm target, and a refresh after the events that
+			Ekadashi, Purnima and Amavasya reminders: the alarm target, and a refresh after the events that
 			clear or skew alarms. Not exported: these are system broadcasts or the app's own alarm.
 		-->
 		<receiver

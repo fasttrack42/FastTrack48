@@ -301,11 +301,18 @@
 	<string name="settings_language_system">跟随系统</string>
 
 	<!-- Ekadashi and Purnima reminders -->
-	<string name="settings_section_lunar">Ekadashi 与 Purnima</string>
+	<string name="settings_section_lunar">Ekadashi、Purnima 与 Amavasya</string>
 	<string name="lunar_ekadashi_title">Ekadashi 提醒</string>
 	<string name="lunar_ekadashi_subtitle_off">在每个 Ekadashi 斋戒日之前提醒你</string>
 	<string name="lunar_fullmoon_title">满月提醒</string>
 	<string name="lunar_fullmoon_subtitle_off">在每个 Purnima 或满月之前提醒你</string>
+	<string name="lunar_newmoon_title">新月提醒</string>
+	<string name="lunar_newmoon_subtitle_off">在每个 Amavasya 或新月之前提醒你</string>
+	<string name="lunar_moon_style_title">满月与新月日</string>
+	<string name="lunar_moon_style_vedic">Purnima 与 Amavasya 斋戒日</string>
+	<string name="lunar_moon_style_vedic_detail">印度教历法中的斋戒日，有时是满月或新月的前一天</string>
+	<string name="lunar_moon_style_astronomical">天文满月与新月</string>
+	<string name="lunar_moon_style_astronomical_detail">你所在时区的精确满月或新月日期</string>
 	<string name="lunar_calculating">正在计算…</string>
 	<string name="lunar_no_days_selected">至少选择一天才能收到提醒</string>
 	<string name="lunar_tradition_title">Ekadashi 历法</string>
@@ -314,11 +321,6 @@
 	<string name="lunar_tradition_smarta_detail">大多数印度教历法，包括 Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava（ISKCON）</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON 及其他毗湿奴派历法。少数斋戒日会晚一天。</string>
-	<string name="lunar_fullmoon_style_title">满月日</string>
-	<string name="lunar_fullmoon_style_purnima">Purnima 斋戒日</string>
-	<string name="lunar_fullmoon_style_purnima_detail">印度教历法中的斋戒日，有时是满月的前一天</string>
-	<string name="lunar_fullmoon_style_astronomical">天文满月</string>
-	<string name="lunar_fullmoon_style_astronomical_detail">你所在时区的精确满月日期</string>
 	<string name="lunar_remind_me">提醒我</string>
 	<string name="lunar_lead_same_day">当天</string>
 	<string name="lunar_lead_1_day">提前 1 天</string>
@@ -331,7 +333,7 @@
 	<string name="lunar_location_device">你的位置，保存于 %1$s</string>
 	<string name="lunar_location_finding">正在获取你的位置…</string>
 	<string name="lunar_location_dialog_title">使用你的位置？</string>
-	<string name="lunar_location_dialog_text">Ekadashi 和 Purnima 以当地日出为准，因此日期可能因所在地点而异。\n\nFastTrack 会根据你的时区估算位置，几乎在所有地方都准确。在跨度较大的时区边缘，斋戒日可能相差一天。\n\n如需精确结果，FastTrack 可以读取你的大致位置。这是可选的，一次即可。你的位置只保存在这部手机上：FastTrack 无法访问互联网。\n\n当你前往其他时区时，FastTrack 会重新使用时区估算。</string>
+	<string name="lunar_location_dialog_text">Ekadashi、Purnima 和 Amavasya 以当地日出为准，因此日期可能因所在地点而异。\n\nFastTrack 会根据你的时区估算位置，几乎在所有地方都准确。在跨度较大的时区边缘，斋戒日可能相差一天。\n\n如需精确结果，FastTrack 可以读取你的大致位置。这是可选的，一次即可。你的位置只保存在这部手机上：FastTrack 无法访问互联网。\n\n当你前往其他时区时，FastTrack 会重新使用时区估算。</string>
 	<string name="lunar_location_use">使用我的位置</string>
 	<string name="lunar_location_use_timezone">改用我的时区</string>
 	<string name="lunar_location_not_now">暂不</string>
@@ -341,8 +343,8 @@
 	<string name="lunar_location_denied">没有位置权限。FastTrack 将继续使用你的时区。</string>
 	<string name="lunar_notifications_off">通知已关闭，因此无法显示提醒。</string>
 	<string name="lunar_notifications_turn_on">开启</string>
-	<string name="lunar_channel_name">Ekadashi 与 Purnima</string>
-	<string name="lunar_channel_description">Ekadashi 和满月日之前的提醒</string>
+	<string name="lunar_channel_name">Ekadashi、Purnima 与 Amavasya</string>
+	<string name="lunar_channel_description">Ekadashi、满月和新月日之前的提醒</string>
 	<string name="lunar_ekadashi_today">今天是 Ekadashi</string>
 	<string name="lunar_ekadashi_tomorrow">明天是 Ekadashi</string>
 	<plurals name="lunar_ekadashi_in_days">
@@ -358,10 +360,22 @@
 	<plurals name="lunar_fullmoon_in_days">
 		<item quantity="other">%d 天后是满月</item>
 	</plurals>
+	<string name="lunar_amavasya_today">今天是 Amavasya 斋戒日</string>
+	<string name="lunar_amavasya_tomorrow">明天是 Amavasya 斋戒日</string>
+	<plurals name="lunar_amavasya_in_days">
+		<item quantity="other">%d 天后是 Amavasya 斋戒日</item>
+	</plurals>
+	<string name="lunar_newmoon_today">今天是新月</string>
+	<string name="lunar_newmoon_tomorrow">明天是新月</string>
+	<plurals name="lunar_newmoon_in_days">
+		<item quantity="other">%d 天后是新月</item>
+	</plurals>
 	<string name="lunar_ekadashi_details">斋戒日：%1$s。开斋时间：%2$s。</string>
 	<string name="lunar_ekadashi_details_no_parana">斋戒日：%1$s。</string>
 	<string name="lunar_purnima_details">斋戒日：%1$s。Purnima 开始：%2$s。</string>
 	<string name="lunar_fullmoon_details">满月：%1$s，%2$s。</string>
+	<string name="lunar_amavasya_details">斋戒日：%1$s。Amavasya 开始：%2$s。</string>
+	<string name="lunar_newmoon_details">新月：%1$s，%2$s。</string>
 	<string name="lunar_parana_after">%1$s，%2$s 之后</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>

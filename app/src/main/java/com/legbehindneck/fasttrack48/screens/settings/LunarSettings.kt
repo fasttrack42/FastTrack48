@@ -52,7 +52,6 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.lunar.DeviceLocation
 import com.legbehindneck.fasttrack48.lunar.EkadashiTradition
-import com.legbehindneck.fasttrack48.lunar.FullMoonStyle
 import com.legbehindneck.fasttrack48.lunar.LunarCalendar
 import com.legbehindneck.fasttrack48.lunar.LunarDay
 import com.legbehindneck.fasttrack48.lunar.LunarLocation
@@ -60,6 +59,8 @@ import com.legbehindneck.fasttrack48.lunar.LunarReminderScheduler
 import com.legbehindneck.fasttrack48.lunar.LunarReminderSettings
 import com.legbehindneck.fasttrack48.lunar.LunarSettingsStore
 import com.legbehindneck.fasttrack48.lunar.LunarTexts
+import com.legbehindneck.fasttrack48.lunar.MoonDayStyle
+import com.legbehindneck.fasttrack48.lunar.MoonPhase
 import com.legbehindneck.fasttrack48.lunar.SavedLocation
 import com.legbehindneck.fasttrack48.utils.AppDateTime
 import com.legbehindneck.fasttrack48.utils.shouldUse24HourFormat
@@ -71,13 +72,14 @@ import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.roundToInt
 
-private enum class LunarDialog { NONE, ENABLE_EKADASHI, TRADITION, FULL_MOON_STYLE, HOUR, LOCATION }
+private enum class LunarDialog { NONE, ENABLE_EKADASHI, TRADITION, MOON_DAY_STYLE, HOUR, LOCATION }
 
 /** How far ahead the settings preview looks for the next observance. */
 private const val PREVIEW_DAYS = 60
 
 /**
- * Ekadashi and full-moon (Purnima) reminders: off until the user turns them on. The first
+ * Ekadashi, full-moon (Purnima) and new-moon (Amavasya) reminders: off until the user turns
+ * them on. The first
  * time Ekadashi is turned on, the user picks a calendar - the Smarta and Vaishnava fast days
  * differ on about 1 Ekadashi in 13, so there is no safe default.
  */
@@ -156,18 +158,30 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 			null
 		}
 	}
-	val nextFullMoon by produceState<LunarDay?>(null, settings.fullMoonEnabled, settings.fullMoonStyle, location) {
+	val nextFullMoon by produceState<LunarDay?>(null, settings.fullMoonEnabled, settings.moonDayStyle, location) {
 		value = if (settings.fullMoonEnabled) {
 			withContext(Dispatchers.Default) {
-				LunarCalendar.fullMoons(LocalDate.now(zone), PREVIEW_DAYS, location.point, zone, settings.fullMoonStyle)
-					.firstOrNull()
+				LunarCalendar.moonDays(
+					LocalDate.now(zone), PREVIEW_DAYS, location.point, zone, MoonPhase.FULL, settings.moonDayStyle,
+				).firstOrNull()
+			}
+		} else {
+			null
+		}
+	}
+	val nextNewMoon by produceState<LunarDay?>(null, settings.newMoonEnabled, settings.moonDayStyle, location) {
+		value = if (settings.newMoonEnabled) {
+			withContext(Dispatchers.Default) {
+				LunarCalendar.moonDays(
+					LocalDate.now(zone), PREVIEW_DAYS, location.point, zone, MoonPhase.NEW, settings.moonDayStyle,
+				).firstOrNull()
 			}
 		} else {
 			null
 		}
 	}
 
-	val anyEnabled = settings.ekadashiEnabled || settings.fullMoonEnabled
+	val anyEnabled = settings.ekadashiEnabled || settings.fullMoonEnabled || settings.newMoonEnabled
 
 	Column {
 		if (anyEnabled && !notificationsOn) {
@@ -216,12 +230,33 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 			},
 		)
 		if (settings.fullMoonEnabled) {
-			LunarValueRow(
-				title = stringResource(R.string.lunar_fullmoon_style_title),
-				value = stringResource(fullMoonStyleLabel(settings.fullMoonStyle)),
-				onClick = { dialog = LunarDialog.FULL_MOON_STYLE },
-			)
 			LeadDayChips(selected = settings.fullMoonLeadDays) { update(settings.copy(fullMoonLeadDays = it)) }
+		}
+
+		LunarSwitchRow(
+			title = stringResource(R.string.lunar_newmoon_title),
+			subtitle = when {
+				!settings.newMoonEnabled -> stringResource(R.string.lunar_newmoon_subtitle_off)
+				settings.newMoonLeadDays.isEmpty() -> stringResource(R.string.lunar_no_days_selected)
+				else -> nextNewMoon?.let { LunarTexts.details(context, it, dateStyle) }
+					?: stringResource(R.string.lunar_calculating)
+			},
+			checked = settings.newMoonEnabled,
+			onChange = { checked ->
+				update(settings.copy(newMoonEnabled = checked))
+				if (checked) askForNotifications()
+			},
+		)
+		if (settings.newMoonEnabled) {
+			LeadDayChips(selected = settings.newMoonLeadDays) { update(settings.copy(newMoonLeadDays = it)) }
+		}
+
+		if (settings.fullMoonEnabled || settings.newMoonEnabled) {
+			LunarValueRow(
+				title = stringResource(R.string.lunar_moon_style_title),
+				value = stringResource(moonDayStyleLabel(settings.moonDayStyle)),
+				onClick = { dialog = LunarDialog.MOON_DAY_STYLE },
+			)
 		}
 
 		if (anyEnabled) {
@@ -264,13 +299,13 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 				onDismiss = { dialog = LunarDialog.NONE },
 			)
 		}
-		LunarDialog.FULL_MOON_STYLE -> ChoiceDialog(
-			title = stringResource(R.string.lunar_fullmoon_style_title),
-			options = FullMoonStyle.entries.map { it to (fullMoonStyleLabel(it) to fullMoonStyleDetail(it)) },
-			selected = settings.fullMoonStyle,
+		LunarDialog.MOON_DAY_STYLE -> ChoiceDialog(
+			title = stringResource(R.string.lunar_moon_style_title),
+			options = MoonDayStyle.entries.map { it to (moonDayStyleLabel(it) to moonDayStyleDetail(it)) },
+			selected = settings.moonDayStyle,
 			onPick = { style ->
 				dialog = LunarDialog.NONE
-				update(settings.copy(fullMoonStyle = style))
+				update(settings.copy(moonDayStyle = style))
 			},
 			onDismiss = { dialog = LunarDialog.NONE },
 		)
@@ -488,13 +523,13 @@ private fun traditionDetail(tradition: EkadashiTradition): Int = when (tradition
 }
 
 @StringRes
-private fun fullMoonStyleLabel(style: FullMoonStyle): Int = when (style) {
-	FullMoonStyle.PURNIMA -> R.string.lunar_fullmoon_style_purnima
-	FullMoonStyle.ASTRONOMICAL -> R.string.lunar_fullmoon_style_astronomical
+private fun moonDayStyleLabel(style: MoonDayStyle): Int = when (style) {
+	MoonDayStyle.VEDIC -> R.string.lunar_moon_style_vedic
+	MoonDayStyle.ASTRONOMICAL -> R.string.lunar_moon_style_astronomical
 }
 
 @StringRes
-private fun fullMoonStyleDetail(style: FullMoonStyle): Int = when (style) {
-	FullMoonStyle.PURNIMA -> R.string.lunar_fullmoon_style_purnima_detail
-	FullMoonStyle.ASTRONOMICAL -> R.string.lunar_fullmoon_style_astronomical_detail
+private fun moonDayStyleDetail(style: MoonDayStyle): Int = when (style) {
+	MoonDayStyle.VEDIC -> R.string.lunar_moon_style_vedic_detail
+	MoonDayStyle.ASTRONOMICAL -> R.string.lunar_moon_style_astronomical_detail
 }

@@ -15,13 +15,17 @@ data class LunarReminderSettings(
 	val tradition: EkadashiTradition? = null,
 	val ekadashiLeadDays: Set<Int> = setOf(1),
 	val fullMoonEnabled: Boolean = false,
-	val fullMoonStyle: FullMoonStyle = FullMoonStyle.PURNIMA,
 	val fullMoonLeadDays: Set<Int> = setOf(1),
+	val newMoonEnabled: Boolean = false,
+	val newMoonLeadDays: Set<Int> = setOf(1),
+	/** Shared by the full- and new-moon reminders: Purnima and Amavasya, or astronomical. */
+	val moonDayStyle: MoonDayStyle = MoonDayStyle.VEDIC,
 	val hourOfDay: Int = DEFAULT_HOUR,
 ) {
 	val ekadashiActive: Boolean get() = ekadashiEnabled && tradition != null && ekadashiLeadDays.isNotEmpty()
 	val fullMoonActive: Boolean get() = fullMoonEnabled && fullMoonLeadDays.isNotEmpty()
-	val anyActive: Boolean get() = ekadashiActive || fullMoonActive
+	val newMoonActive: Boolean get() = newMoonEnabled && newMoonLeadDays.isNotEmpty()
+	val anyActive: Boolean get() = ekadashiActive || fullMoonActive || newMoonActive
 
 	companion object {
 		/** Before dinner on the day before a fast. */
@@ -38,12 +42,18 @@ data class PlannedLunarReminder(
 ) {
 	/** One notification per observance, so a closer reminder replaces an earlier one. */
 	val notificationId: Int
-		get() = (if (subject is EkadashiDay) EKADASHI_ID_BASE else FULL_MOON_ID_BASE) +
-			subject.day.toEpochDay().toInt()
+		get() {
+			val base = when (subject) {
+				is EkadashiDay -> EKADASHI_ID_BASE
+				is MoonDay -> if (subject.phase == MoonPhase.FULL) FULL_MOON_ID_BASE else NEW_MOON_ID_BASE
+			}
+			return base + subject.day.toEpochDay().toInt()
+		}
 
 	private companion object {
 		const val EKADASHI_ID_BASE = 1_000_000
 		const val FULL_MOON_ID_BASE = 2_000_000
+		const val NEW_MOON_ID_BASE = 3_000_000
 	}
 }
 
@@ -82,8 +92,13 @@ object LunarReminderPlanner {
 			}
 		}
 		if (settings.fullMoonActive) {
-			for (day in LunarCalendar.fullMoons(firstDay, span, location, zone, settings.fullMoonStyle)) {
+			for (day in LunarCalendar.moonDays(firstDay, span, location, zone, MoonPhase.FULL, settings.moonDayStyle)) {
 				add(day, settings.fullMoonLeadDays)
+			}
+		}
+		if (settings.newMoonActive) {
+			for (day in LunarCalendar.moonDays(firstDay, span, location, zone, MoonPhase.NEW, settings.moonDayStyle)) {
+				add(day, settings.newMoonLeadDays)
 			}
 		}
 		out.sortBy { it.fireAt.toInstant() }

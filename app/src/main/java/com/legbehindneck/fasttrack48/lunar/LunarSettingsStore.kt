@@ -8,7 +8,7 @@ import androidx.core.content.edit
 data class SavedLocation(val point: GeoPoint, val zoneId: String, val savedAtMillis: Long)
 
 /**
- * Persists the Ekadashi / Purnima reminder choices. Device-bound state (the shared
+ * Persists the Ekadashi / Purnima / Amavasya reminder choices. Device-bound state (the shared
  * location and the scheduler's watermark) lives in a separate file that backup and
  * device transfer exclude (res/xml/backup_rules.xml, data_extraction_rules.xml), so a
  * location never leaves the phone.
@@ -22,8 +22,10 @@ object LunarSettingsStore {
 	private const val KEY_TRADITION = "tradition"
 	private const val KEY_EKADASHI_LEADS = "ekadashi_leads"
 	private const val KEY_FULL_MOON = "full_moon_enabled"
-	private const val KEY_FULL_MOON_STYLE = "full_moon_style"
 	private const val KEY_FULL_MOON_LEADS = "full_moon_leads"
+	private const val KEY_NEW_MOON = "new_moon_enabled"
+	private const val KEY_NEW_MOON_LEADS = "new_moon_leads"
+	private const val KEY_MOON_DAY_STYLE = "moon_day_style"
 	private const val KEY_HOUR = "hour"
 
 	private const val KEY_LAT = "latitude"
@@ -47,10 +49,12 @@ object LunarSettingsStore {
 				?.let { name -> EkadashiTradition.entries.firstOrNull { it.name == name } },
 			ekadashiLeadDays = parseLeads(p.getString(KEY_EKADASHI_LEADS, null), defaults.ekadashiLeadDays),
 			fullMoonEnabled = p.getBoolean(KEY_FULL_MOON, defaults.fullMoonEnabled),
-			fullMoonStyle = p.getString(KEY_FULL_MOON_STYLE, null)
-				?.let { name -> FullMoonStyle.entries.firstOrNull { it.name == name } }
-				?: defaults.fullMoonStyle,
 			fullMoonLeadDays = parseLeads(p.getString(KEY_FULL_MOON_LEADS, null), defaults.fullMoonLeadDays),
+			newMoonEnabled = p.getBoolean(KEY_NEW_MOON, defaults.newMoonEnabled),
+			newMoonLeadDays = parseLeads(p.getString(KEY_NEW_MOON_LEADS, null), defaults.newMoonLeadDays),
+			moonDayStyle = p.getString(KEY_MOON_DAY_STYLE, null)
+				?.let { name -> MoonDayStyle.entries.firstOrNull { it.name == name } }
+				?: defaults.moonDayStyle,
 			hourOfDay = p.getInt(KEY_HOUR, defaults.hourOfDay).coerceIn(0, 23),
 		)
 	}
@@ -61,8 +65,10 @@ object LunarSettingsStore {
 			if (settings.tradition == null) remove(KEY_TRADITION) else putString(KEY_TRADITION, settings.tradition.name)
 			putString(KEY_EKADASHI_LEADS, settings.ekadashiLeadDays.sorted().joinToString(","))
 			putBoolean(KEY_FULL_MOON, settings.fullMoonEnabled)
-			putString(KEY_FULL_MOON_STYLE, settings.fullMoonStyle.name)
 			putString(KEY_FULL_MOON_LEADS, settings.fullMoonLeadDays.sorted().joinToString(","))
+			putBoolean(KEY_NEW_MOON, settings.newMoonEnabled)
+			putString(KEY_NEW_MOON_LEADS, settings.newMoonLeadDays.sorted().joinToString(","))
+			putString(KEY_MOON_DAY_STYLE, settings.moonDayStyle.name)
 			putInt(KEY_HOUR, settings.hourOfDay.coerceIn(0, 23))
 		}
 	}

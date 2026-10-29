@@ -46,7 +46,7 @@ class FastTrackApp : Application(), Configuration.Provider {
 			modules(mainModule)
 		}
 
-		// Post any Ekadashi / Purnima reminder an alarm missed (force-stop, Doze) and re-arm.
+		// Post any Ekadashi / Purnima / Amavasya reminder an alarm missed (force-stop, Doze) and re-arm.
 		LunarReminderScheduler.refresh(this)
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {

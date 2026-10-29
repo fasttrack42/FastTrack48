@@ -343,11 +343,18 @@
 	<string name="settings_language_system">Predefinita di sistema</string>
 
 	<!-- Ekadashi and Purnima reminders -->
-	<string name="settings_section_lunar">Ekadashi e Purnima</string>
+	<string name="settings_section_lunar">Ekadashi, Purnima e Amavasya</string>
 	<string name="lunar_ekadashi_title">Promemoria di Ekadashi</string>
 	<string name="lunar_ekadashi_subtitle_off">Un promemoria prima di ogni digiuno di Ekadashi</string>
 	<string name="lunar_fullmoon_title">Promemoria di luna piena</string>
 	<string name="lunar_fullmoon_subtitle_off">Un promemoria prima di ogni Purnima o luna piena</string>
+	<string name="lunar_newmoon_title">Promemoria di luna nuova</string>
+	<string name="lunar_newmoon_subtitle_off">Un promemoria prima di ogni Amavasya o luna nuova</string>
+	<string name="lunar_moon_style_title">Giorni di luna piena e nuova</string>
+	<string name="lunar_moon_style_vedic">Giorni di digiuno di Purnima e Amavasya</string>
+	<string name="lunar_moon_style_vedic_detail">I giorni di digiuno del calendario indù, a volte il giorno prima della luna piena o nuova</string>
+	<string name="lunar_moon_style_astronomical">Luna piena e nuova astronomiche</string>
+	<string name="lunar_moon_style_astronomical_detail">La data esatta della luna piena o nuova nel tuo fuso orario</string>
 	<string name="lunar_calculating">Calcolo in corso…</string>
 	<string name="lunar_no_days_selected">Scegli almeno un giorno per ricevere i promemoria</string>
 	<string name="lunar_tradition_title">Calendario di Ekadashi</string>
@@ -356,11 +363,6 @@
 	<string name="lunar_tradition_smarta_detail">La maggior parte dei calendari indù, tra cui Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON e altri calendari vaishnava. Alcuni digiuni cadono un giorno dopo.</string>
-	<string name="lunar_fullmoon_style_title">Giorno di luna piena</string>
-	<string name="lunar_fullmoon_style_purnima">Giorno di digiuno di Purnima</string>
-	<string name="lunar_fullmoon_style_purnima_detail">Il giorno di digiuno del calendario indù, a volte il giorno prima della luna piena</string>
-	<string name="lunar_fullmoon_style_astronomical">Luna piena astronomica</string>
-	<string name="lunar_fullmoon_style_astronomical_detail">La data esatta della luna piena nel tuo fuso orario</string>
 	<string name="lunar_remind_me">Ricordamelo</string>
 	<string name="lunar_lead_same_day">Il giorno stesso</string>
 	<string name="lunar_lead_1_day">1 giorno prima</string>
@@ -373,7 +375,7 @@
 	<string name="lunar_location_device">La tua posizione, salvata il %1$s</string>
 	<string name="lunar_location_finding">Ricerca della posizione…</string>
 	<string name="lunar_location_dialog_title">Usare la tua posizione?</string>
-	<string name="lunar_location_dialog_text">Ekadashi e Purnima seguono l’alba locale, quindi la data può dipendere da dove ti trovi.\n\nFastTrack stima la tua posizione dal fuso orario, e quasi ovunque la stima è corretta. Vicino al bordo di un fuso orario ampio, un giorno di digiuno può spostarsi di un giorno.\n\nPer un risultato esatto, FastTrack può leggere la tua posizione approssimativa. È facoltativo e basta farlo una volta. La tua posizione resta su questo telefono: FastTrack non ha accesso a internet.\n\nSe viaggi in un altro fuso orario, FastTrack torna alla stima basata sul fuso orario.</string>
+	<string name="lunar_location_dialog_text">Ekadashi, Purnima e Amavasya seguono l’alba locale, quindi la data può dipendere da dove ti trovi.\n\nFastTrack stima la tua posizione dal fuso orario, e quasi ovunque la stima è corretta. Vicino al bordo di un fuso orario ampio, un giorno di digiuno può spostarsi di un giorno.\n\nPer un risultato esatto, FastTrack può leggere la tua posizione approssimativa. È facoltativo e basta farlo una volta. La tua posizione resta su questo telefono: FastTrack non ha accesso a internet.\n\nSe viaggi in un altro fuso orario, FastTrack torna alla stima basata sul fuso orario.</string>
 	<string name="lunar_location_use">Usa la mia posizione</string>
 	<string name="lunar_location_use_timezone">Usa invece il mio fuso orario</string>
 	<string name="lunar_location_not_now">Non ora</string>
@@ -383,8 +385,8 @@
 	<string name="lunar_location_denied">Nessuna autorizzazione alla posizione. FastTrack continua a usare il tuo fuso orario.</string>
 	<string name="lunar_notifications_off">Le notifiche sono disattivate, quindi i promemoria non possono comparire.</string>
 	<string name="lunar_notifications_turn_on">Attiva</string>
-	<string name="lunar_channel_name">Ekadashi e Purnima</string>
-	<string name="lunar_channel_description">Promemoria prima dei giorni di Ekadashi e di luna piena</string>
+	<string name="lunar_channel_name">Ekadashi, Purnima e Amavasya</string>
+	<string name="lunar_channel_description">Promemoria prima dei giorni di Ekadashi, luna piena e luna nuova</string>
 	<string name="lunar_ekadashi_today">Oggi è Ekadashi</string>
 	<string name="lunar_ekadashi_tomorrow">Domani è Ekadashi</string>
 	<plurals name="lunar_ekadashi_in_days">
@@ -406,10 +408,26 @@
 		<item quantity="many">Luna piena tra %d giorni</item>
 		<item quantity="other">Luna piena tra %d giorni</item>
 	</plurals>
+	<string name="lunar_amavasya_today">Oggi digiuno di Amavasya</string>
+	<string name="lunar_amavasya_tomorrow">Domani digiuno di Amavasya</string>
+	<plurals name="lunar_amavasya_in_days">
+		<item quantity="one">Digiuno di Amavasya tra %d giorno</item>
+		<item quantity="many">Digiuno di Amavasya tra %d giorni</item>
+		<item quantity="other">Digiuno di Amavasya tra %d giorni</item>
+	</plurals>
+	<string name="lunar_newmoon_today">Oggi c’è la luna nuova</string>
+	<string name="lunar_newmoon_tomorrow">Domani c’è la luna nuova</string>
+	<plurals name="lunar_newmoon_in_days">
+		<item quantity="one">Luna nuova tra %d giorno</item>
+		<item quantity="many">Luna nuova tra %d giorni</item>
+		<item quantity="other">Luna nuova tra %d giorni</item>
+	</plurals>
 	<string name="lunar_ekadashi_details">Giorno di digiuno: %1$s. Interrompere il digiuno: %2$s.</string>
 	<string name="lunar_ekadashi_details_no_parana">Giorno di digiuno: %1$s.</string>
 	<string name="lunar_purnima_details">Giorno di digiuno: %1$s. Inizio di Purnima: %2$s.</string>
 	<string name="lunar_fullmoon_details">Luna piena: %1$s, %2$s.</string>
+	<string name="lunar_amavasya_details">Giorno di digiuno: %1$s. Inizio di Amavasya: %2$s.</string>
+	<string name="lunar_newmoon_details">Luna nuova: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, dopo le %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>
