@@ -19,11 +19,19 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
-import java.text.ParseException
+import java.text.ParsePosition
 import java.util.*
-import kotlin.math.floor
 import kotlin.math.pow
 import kotlin.math.roundToInt
+
+// Accepted ranges: about twice the usual adult spread, wide enough for anyone and narrow
+// enough to catch a slipped digit. Each imperial range spans about the same as its metric one.
+private val HEIGHT_CM = 60..300
+private val HEIGHT_FEET = 2..9
+private val HEIGHT_INCHES = 0..11
+private val WEIGHT_KG = 20..500
+private val WEIGHT_LBS = 45..1100
+private val AGE_YEARS = 10..130
 
 class ProfileViewModel(
     private val appContext: Context,
@@ -33,7 +41,13 @@ class ProfileViewModel(
     private val _uiState = MutableStateFlow(IProfileViewModel.ProfileUiState())
     override val uiState: StateFlow<IProfileViewModel.ProfileUiState> = _uiState.asStateFlow()
 
+    // onCreate runs from a LaunchedEffect each time the screen enters composition; one
+    // collector for the life of the view model, not one per entry.
+    private var started = false
+
     override fun onCreate() {
+        if (started) return
+        started = true
         viewModelScope.launch {
             settings.useMetricSystemFlow(default = isMetricSystemLocale()).collectLatest { isMetric ->
                 val profile = Satchel.storage.getOrSet(Data.KEY_PROFILE, Profile())
@@ -43,9 +57,11 @@ class ProfileViewModel(
     }
 
     private fun populateUiState(profile: Profile, isMetric: Boolean) {
-        val totalInches = Data.cmToInch(profile.heightCm)
-        val feet = floor(totalInches / 12.0).toInt()
-        val inches = (totalInches % 12).toInt()
+        // Rounded, not floored: 5 ft 2 in is stored as 157.48 cm, which converts back to
+        // 61.99999… inches and would otherwise come back as 5 ft 1 in.
+        val totalInches = Data.cmToInch(profile.heightCm).roundToInt()
+        val feet = totalInches / 12
+        val inches = totalInches % 12
 
         val totalCmStr = if (profile.heightCm == 0.0) "" else profile.heightCm.roundToInt().toString()
         val feetStr = if (profile.heightCm == 0.0) "" else feet.toString()
@@ -56,6 +72,26 @@ class ProfileViewModel(
         val weightPoundsStr = if (profile.weightKg == 0.0) "" else "%.01f".format(pounds)
         val weightKgStr = if (profile.weightKg == 0.0) "" else "%.01f".format(profile.weightKg)
 
+        val (bmiValue, bmrValue) = derivedValues(profile)
+
+        _uiState.update {
+            it.copy(
+                isMetric = isMetric,
+                heightCm = totalCmStr,
+                heightFeet = feetStr,
+                heightInches = inchesStr,
+                weightKg = weightKgStr,
+                weightLbs = weightPoundsStr,
+                age = if (profile.ageYears == 0) "" else profile.ageYears.toString(),
+                gender = profile.gender,
+                bmiValue = bmiValue,
+                bmrValue = bmrValue
+            )
+        }
+    }
+
+    /** BMI and BMR text for [profile]; both empty until the profile is complete. */
+    private fun derivedValues(profile: Profile): Pair<String, String> {
         // Only surface BMI/BMR once the profile is complete; an empty profile
         // has a BMI of 0.0, which would otherwise read as "Underweight".
         val bmiValue: String
@@ -75,21 +111,7 @@ class ProfileViewModel(
             bmiValue = ""
             bmrValue = ""
         }
-
-        _uiState.update {
-            it.copy(
-                isMetric = isMetric,
-                heightCm = totalCmStr,
-                heightFeet = feetStr,
-                heightInches = inchesStr,
-                weightKg = weightKgStr,
-                weightLbs = weightPoundsStr,
-                age = if (profile.ageYears == 0) "" else profile.ageYears.toString(),
-                gender = profile.gender,
-                bmiValue = bmiValue,
-                bmrValue = bmrValue
-            )
-        }
+        return bmiValue to bmrValue
     }
 
     override fun updateHeightCm(value: String) {
@@ -134,70 +156,14 @@ class ProfileViewModel(
     }
 
     private fun validateProfile(): Boolean {
-        val currentState = _uiState.value
-        var isValid = true
-        var heightCmError: String? = null
-        var heightFeetError: String? = null
-        var heightInchesError: String? = null
-        var weightKgError: String? = null
-        var weightLbsError: String? = null
-        var ageError: String? = null
-
-        if (currentState.isMetric) {
-            // Validate height in cm
-            if (currentState.heightCm.isEmpty()) {
-                heightCmError = appContext.getString(R.string.profile_error)
-                isValid = false
-            } else if (parseInt(currentState.heightCm) <= 0) {
-                heightCmError = appContext.getString(R.string.profile_error)
-                isValid = false
-            }
-
-            // Validate weight in kg
-            if (currentState.weightKg.isEmpty()) {
-                weightKgError = appContext.getString(R.string.profile_error)
-                isValid = false
-            } else if (parseDouble(currentState.weightKg) <= 0.0) {
-                weightKgError = appContext.getString(R.string.profile_error)
-                isValid = false
-            }
-        } else {
-            // Validate height in feet
-            if (currentState.heightFeet.isEmpty()) {
-                heightFeetError = appContext.getString(R.string.profile_error)
-                isValid = false
-            } else if (parseInt(currentState.heightFeet) <= 0) {
-                heightFeetError = appContext.getString(R.string.profile_error)
-                isValid = false
-            }
-
-            // Validate height in inches
-            if (currentState.heightInches.isEmpty()) {
-                heightInchesError = appContext.getString(R.string.profile_error)
-                isValid = false
-            } else if (parseInt(currentState.heightInches) < 0) {
-                heightInchesError = appContext.getString(R.string.profile_error)
-                isValid = false
-            }
-
-            // Validate weight in pounds
-            if (currentState.weightLbs.isEmpty()) {
-                weightLbsError = appContext.getString(R.string.profile_error)
-                isValid = false
-            } else if (parseDouble(currentState.weightLbs) <= 0.0) {
-                weightLbsError = appContext.getString(R.string.profile_error)
-                isValid = false
-            }
-        }
-
-        // Validate age
-        if (currentState.age.isEmpty()) {
-            ageError = appContext.getString(R.string.profile_error)
-            isValid = false
-        } else if (parseInt(currentState.age) <= 0) {
-            ageError = appContext.getString(R.string.profile_error)
-            isValid = false
-        }
+        val state = _uiState.value
+        val metric = state.isMetric
+        val heightCmError = if (metric) decimalError(state.heightCm, HEIGHT_CM) else null
+        val heightFeetError = if (metric) null else wholeError(state.heightFeet, HEIGHT_FEET)
+        val heightInchesError = if (metric) null else wholeError(state.heightInches, HEIGHT_INCHES)
+        val weightKgError = if (metric) decimalError(state.weightKg, WEIGHT_KG) else null
+        val weightLbsError = if (metric) null else decimalError(state.weightLbs, WEIGHT_LBS)
+        val ageError = wholeError(state.age, AGE_YEARS)
 
         _uiState.update {
             it.copy(
@@ -210,8 +176,22 @@ class ProfileViewModel(
             )
         }
 
-        return isValid
+        return heightCmError == null && heightFeetError == null && heightInchesError == null &&
+            weightKgError == null && weightLbsError == null && ageError == null
     }
+
+    /** Null when [text] is a number in [range]; otherwise the message that names the range. */
+    private fun decimalError(text: String, range: IntRange): String? {
+        val value = parseDecimal(text)
+        // NaN fails both comparisons, so "NaN" is reported like any other bad entry.
+        return if (value != null && value >= range.first && value <= range.last) null
+        else appContext.getString(R.string.profile_error_range, range.first, range.last)
+    }
+
+    /** Null when [text] is a whole number in [range]; otherwise the message that names the range. */
+    private fun wholeError(text: String, range: IntRange): String? =
+        if (parseWhole(text)?.let { it in range } == true) null
+        else appContext.getString(R.string.profile_error_range_whole, range.first, range.last)
 
     private fun saveProfile() {
         val profile = createProfileFromUiState()
@@ -219,42 +199,40 @@ class ProfileViewModel(
             Satchel.storage.apply {
                 set(Data.KEY_PROFILE, profile)
             }
-            populateUiState(profile, _uiState.value.isMetric)
+            // Refresh only what is derived. Re-formatting the fields from the saved profile
+            // would rewrite the text under the user's cursor on every valid keystroke — "72."
+            // parses to 72 and comes back as "72.0", so a decimal could never be typed.
+            val (bmiValue, bmrValue) = derivedValues(profile)
+            _uiState.update { it.copy(bmiValue = bmiValue, bmrValue = bmrValue) }
             Napier.i("Profile saved")
         }
     }
 
+    /** The profile the fields describe; null unless every field parses. Call after validation. */
     private fun createProfileFromUiState(): Profile? {
-        val currentState = _uiState.value
+        val state = _uiState.value
 
         val totalCm: Double
         val kg: Double
 
-        if (currentState.isMetric) {
-            totalCm = parseInt(currentState.heightCm).toDouble()
-            kg = parseDouble(currentState.weightKg)
+        if (state.isMetric) {
+            totalCm = parseDecimal(state.heightCm) ?: return null
+            kg = parseDecimal(state.weightKg) ?: return null
         } else {
-            val feet = parseInt(currentState.heightFeet)
-            val inches = parseInt(currentState.heightInches)
-            val totalInches = (feet * 12) + inches
-            totalCm = Data.inchToCm(totalInches)
-
-            val pounds = parseDouble(currentState.weightLbs)
-            kg = Data.lbsToKg(pounds)
+            val feet = parseWhole(state.heightFeet) ?: return null
+            val inches = parseWhole(state.heightInches) ?: return null
+            totalCm = Data.inchToCm(feet * 12 + inches)
+            kg = Data.lbsToKg(parseDecimal(state.weightLbs) ?: return null)
         }
 
-        val age = parseInt(currentState.age)
+        val age = parseWhole(state.age) ?: return null
 
-        return if (age > 0 && totalCm > 0 && kg > 0) {
-            Profile(
-                ageYears = age,
-                heightCm = totalCm,
-                weightKg = kg,
-                gender = currentState.gender
-            )
-        } else {
-            null
-        }
+        return Profile(
+            ageYears = age,
+            heightCm = totalCm,
+            weightKg = kg,
+            gender = state.gender
+        ).takeIf { it.isValid() }
     }
 
     private fun calculateBmi(profile: Profile): Double {
@@ -280,30 +258,19 @@ class ProfileViewModel(
         }
     }
 
-    private fun parseInt(text: String?): Int {
-        var number = 0
-        text?.let {
-            try {
-                number = text.toInt()
-            } catch (_: NumberFormatException) {
-                Napier.w("Failed to parse int")
-            }
-        }
-        return number
-    }
+    private fun parseWhole(text: String): Int? = text.trim().toIntOrNull()
 
-    private fun parseDouble(text: String?): Double {
-        if (text.isNullOrEmpty()) return 0.0
-        return try {
-            text.toDouble()
-        } catch (_: NumberFormatException) {
-            try {
-                NumberFormat.getInstance().parse(text)?.toDouble() ?: 0.0
-            } catch (_: ParseException) {
-                Napier.w("Failed to parse double")
-                0.0
-            }
-        }
+    /**
+     * [text] as a number, written either as "72.5" or in the locale's own form ("72,5"). Null
+     * unless the number is the whole text, so "72kg" is not quietly read as 72.
+     */
+    private fun parseDecimal(text: String): Double? {
+        val trimmed = text.trim()
+        if (trimmed.isEmpty()) return null
+        trimmed.toDoubleOrNull()?.let { return it }
+        val position = ParsePosition(0)
+        val number = NumberFormat.getInstance().parse(trimmed, position) ?: return null
+        return if (position.index == trimmed.length) number.toDouble() else null
     }
 
     private fun isMetricSystemLocale(): Boolean {

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- API 31+. Keep in step with backup_rules.xml, which older versions read instead. -->
 <data-extraction-rules>
 	<cloud-backup>
 		<include domain="sharedpref" path="."/>
 		<include domain="database" path="."/>
+		<!-- The body profile (Satchel, Data.STORAGE_PATH). -->
+		<include domain="file" path="storage"/>
 		<!-- Device-bound: the location the user shared for sunrise times never leaves the phone. -->
 		<exclude domain="sharedpref" path="lunar_device.xml"/>
 	</cloud-backup>
 	<device-transfer>
 		<include domain="sharedpref" path="."/>
 		<include domain="database" path="."/>
+		<include domain="file" path="storage"/>
 		<exclude domain="sharedpref" path="lunar_device.xml"/>
 	</device-transfer>
 </data-extraction-rules>

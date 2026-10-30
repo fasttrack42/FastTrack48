@@ -1,10 +1,13 @@
 package com.legbehindneck.fasttrack48.data.log
 
+import com.legbehindneck.fasttrack48.utils.ICalendar
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.database.FastEntry
+import com.legbehindneck.fasttrack48.utils.MAX_IMPORT_BYTES
 import com.legbehindneck.fasttrack48.utils.csvEscape
 import com.legbehindneck.fasttrack48.utils.formatDurationFull
 import com.legbehindneck.fasttrack48.utils.parseCsv
+import com.legbehindneck.fasttrack48.utils.readAtMost
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -275,6 +278,8 @@ class FastingLogRepositoryImpl(
 
 			else -> secondsCell.toLongOrNull()?.times(1000) ?: return null
 		}
+		// A fast has a positive length; zero or negative is a corrupt row, not a fast.
+		if (lengthMs <= 0) return null
 
 		return ParsedRow(startInstant.toEpochMilliseconds(), lengthMs, notes)
 	}
@@ -294,6 +299,7 @@ class FastingLogRepositoryImpl(
 		// Legacy duration was whole hours (but tolerate a decimal just in case)
 		val hoursStr = row.getOrNull(hoursIdx)?.trim() ?: return null
 		val hours = hoursStr.toLongOrNull()?.toDouble() ?: hoursStr.toDoubleOrNull() ?: return null
+		if (!hours.isFinite() || hours <= 0.0) return null
 		val lengthMs = (hours * 60.0 * 60.0 * 1000.0).toLong()
 
 		return ParsedRow(startInstant.toEpochMilliseconds(), lengthMs, "")
@@ -389,7 +395,9 @@ class FastingLogRepositoryImpl(
 			var entry = zis.nextEntry
 			while (entry != null) {
 				if (!entry.isDirectory && entry.name.substringAfterLast('/') == "fasts.json") {
-					return zis.readBytes().toString(Charsets.UTF_8)
+					// Bounded: a compressed entry can inflate to far more than the file that
+					// holds it, and an unbounded read is how a zip bomb exhausts the heap.
+					return zis.readAtMost(MAX_IMPORT_BYTES)?.toString(Charsets.UTF_8)
 				}
 				entry = zis.nextEntry
 			}
@@ -445,7 +453,7 @@ class FastingLogRepositoryImpl(
 		lines += "END:VCALENDAR"
 
 		// RFC 5545 uses CRLF line breaks and folds content lines over 75 octets.
-		lines.joinToString("\r\n") { foldIcsLine(it) } + "\r\n"
+		ICalendar.document(lines)
 	}
 
 	/** One VEVENT over the half-open range [start, finish), both epoch millis. */
@@ -456,8 +464,8 @@ class FastingLogRepositoryImpl(
 		lines += "DTSTAMP:$dtStamp"
 		lines += "DTSTART:${icsUtc(start)}"
 		lines += "DTEND:${icsUtc(finish)}"
-		lines += "SUMMARY:${icsEscape("Fast — " + formatDurationFull((finish - start).milliseconds))}"
-		if (notes.isNotBlank()) lines += "DESCRIPTION:${icsEscape(notes)}"
+		lines += "SUMMARY:${ICalendar.escape("Fast — " + formatDurationFull((finish - start).milliseconds))}"
+		if (notes.isNotBlank()) lines += "DESCRIPTION:${ICalendar.escape(notes)}"
 		lines += "END:VEVENT"
 		return lines
 	}
@@ -474,26 +482,37 @@ class FastingLogRepositoryImpl(
 	private fun parseIcs(icsText: String): List<ImportedFast> {
 		val out = ArrayList<ImportedFast>()
 		var inEvent = false
+		// Depth of components nested inside the VEVENT (a VALARM, typically). Their
+		// DESCRIPTION / DURATION describe the alarm, not the fast, and must not leak into it.
+		var nested = 0
 		var start: Long? = null
 		var end: Long? = null
 		var durationMs: Long? = null
 		var desc = ""
+		// A whole-day event (DTSTART;VALUE=DATE) is a calendar day, such as an exported fast
+		// day, never a logged fast, which always has a start time.
+		var allDay = false
 
 		for (line in unfoldIcs(icsText)) {
-			when (line.uppercase()) {
-				"BEGIN:VEVENT" -> {
-					inEvent = true; start = null; end = null; durationMs = null; desc = ""
+			val upper = line.uppercase()
+			when {
+				upper == "BEGIN:VEVENT" -> {
+					inEvent = true; nested = 0; start = null; end = null; durationMs = null; desc = ""; allDay = false
 				}
 
-				"END:VEVENT" -> {
-					if (inEvent && start != null) {
+				inEvent && upper.startsWith("BEGIN:") -> nested++
+
+				inEvent && nested > 0 && upper.startsWith("END:") -> nested--
+
+				upper == "END:VEVENT" -> {
+					if (inEvent && start != null && !allDay) {
 						val finish = end ?: durationMs?.let { start + it }
 						if (finish != null) out += ImportedFast(start, finish, desc.trim())
 					}
 					inEvent = false
 				}
 
-				else -> if (inEvent) {
+				else -> if (inEvent && nested == 0) {
 					val colon = line.indexOf(':')
 					if (colon > 0) {
 						val propPart = line.substring(0, colon)
@@ -503,7 +522,10 @@ class FastingLogRepositoryImpl(
 							.firstOrNull { it.uppercase().startsWith("TZID=") }
 							?.substringAfter('=')
 						when (segs[0].uppercase()) {
-							"DTSTART" -> start = parseIcsDateTime(value, tzid)
+							"DTSTART" -> {
+								start = parseIcsDateTime(value, tzid)
+								allDay = segs.drop(1).any { it.equals("VALUE=DATE", ignoreCase = true) }
+							}
 							"DTEND" -> end = parseIcsDateTime(value, tzid)
 							"DURATION" -> durationMs = parseIsoDurationMs(value)
 							"DESCRIPTION" -> desc = icsUnescape(value)
@@ -632,14 +654,6 @@ class FastingLogRepositoryImpl(
 		)
 	}
 
-	private fun icsEscape(text: String): String =
-		text.replace("\\", "\\\\")
-			.replace(";", "\\;")
-			.replace(",", "\\,")
-			.replace("\r\n", "\\n")
-			.replace("\n", "\\n")
-			.replace("\r", "\\n")
-
 	private fun icsUnescape(text: String): String {
 		val sb = StringBuilder(text.length)
 		var i = 0
@@ -660,22 +674,6 @@ class FastingLogRepositoryImpl(
 			}
 		}
 		return sb.toString()
-	}
-
-	/** Fold a content line to <=75 octets per physical line (continuation begins with a space). */
-	private fun foldIcsLine(line: String): String {
-		val out = StringBuilder()
-		var octets = 0
-		for (ch in line) {
-			val chOctets = ch.toString().toByteArray(Charsets.UTF_8).size
-			if (octets + chOctets > 75) {
-				out.append("\r\n ")
-				octets = 1
-			}
-			out.append(ch)
-			octets += chOctets
-		}
-		return out.toString()
 	}
 
 	// endregion
@@ -797,14 +795,9 @@ class FastingLogRepositoryImpl(
 		return "PT${h}H${m}M${s}S"
 	}
 
-	/** Parse an extended-format ISO 8601 date-time (Z, ±offset, or floating/local), or null. */
-// ====================================================================
-// SECTION 1: Standard ISO 8601 Parser (V4 Supercharged)
-// ====================================================================
-
 	/**
-	 * High-performance, zero-allocation parser for ISO 8601 date-time strings.
-	 * Hand-optimized to avoid substrings, splits, and JVM allocations.
+	 * Parse an extended-format ISO 8601 date-time (Z, ±offset, or floating/local), or null.
+	 * Allocation-free: no substrings or splits.
 	 */
 	internal fun parseIso8601(value: String): Long? {
 		// 1. Zero-Allocation Unicode-Aware Trim
@@ -986,7 +979,8 @@ class FastingLogRepositoryImpl(
 	// endregion
 
 	private fun formatDateTime(d: LocalDateTime): String =
-		"%04d-%02d-%02d %02d:%02d:%02d".format(
+		String.format(
+			Locale.ROOT, "%04d-%02d-%02d %02d:%02d:%02d",
 			d.year, d.month.number, d.day, d.hour, d.minute, d.second
 		)
 

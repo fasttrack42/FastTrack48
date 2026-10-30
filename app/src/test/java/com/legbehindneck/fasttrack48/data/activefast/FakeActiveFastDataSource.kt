@@ -29,6 +29,10 @@ class FakeActiveFastDataSource : ActiveFastDataSource {
 		state.value = state.value.copy(end = time)
 	}
 
+	override fun beginFast(time: Instant) {
+		state.value = ActiveFastWindow(start = time, end = null)
+	}
+
 	override fun clearFastStart() {
 		state.value = state.value.copy(start = null)
 	}

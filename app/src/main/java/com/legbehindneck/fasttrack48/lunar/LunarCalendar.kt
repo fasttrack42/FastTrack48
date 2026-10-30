@@ -10,13 +10,22 @@ import java.time.ZonedDateTime
 /** Observer location in decimal degrees (north/east positive). */
 data class GeoPoint(val latitude: Double, val longitude: Double)
 
-/** Which calendar picks the Ekadashi fast day. */
+/** Which calendar picks the fast days. */
 enum class EkadashiTradition {
 	/** Drik Panchang and most Hindu calendars. */
 	SMARTA,
 
 	/** ISKCON / GCal. */
 	VAISHNAVA,
+
+	/** Ananda Marga: the sunrise-to-sunrise day at Varanasi that holds most of the tithi. */
+	ANANDA_MARGA,
+
+	/** Ananda Marga as the India chart has it: the Indian calendar date that holds most of the tithi. */
+	ANANDA_MARGA_INDIA;
+
+	/** Ananda Marga picks Purnima and Amavasya by the same rule, and every fast runs sunrise to sunrise. */
+	val anandaMarga: Boolean get() = this == ANANDA_MARGA || this == ANANDA_MARGA_INDIA
 }
 
 /** Full or new moon. */
@@ -37,6 +46,9 @@ data class TimeWindow(val start: ZonedDateTime, val end: ZonedDateTime?)
 /** A day a reminder can be about. */
 sealed interface LunarDay {
 	val day: LocalDate
+
+	/** Ananda Marga: the fast runs from sunrise on [day] to the next sunrise. */
+	val sunriseToSunrise: Boolean
 }
 
 data class EkadashiDay(
@@ -47,7 +59,9 @@ data class EkadashiDay(
 	val parana: TimeWindow?,
 	/** Vaishnava only: the Mahadvadashi behind [day], if any. */
 	val mahadvadashi: EkadashiCalculator.Mahadvadashi?,
-) : LunarDay
+) : LunarDay {
+	override val sunriseToSunrise: Boolean get() = tradition.anandaMarga
+}
 
 data class MoonDay(
 	override val day: LocalDate,
@@ -55,6 +69,9 @@ data class MoonDay(
 	val style: MoonDayStyle,
 	/** [MoonDayStyle.VEDIC]: when the Purnima / Amavasya tithi begins; otherwise the exact moment. */
 	val moment: ZonedDateTime,
+	override val sunriseToSunrise: Boolean = false,
+	/** Ananda Marga: the next sunrise, when the fast ends; null at polar latitudes. */
+	val breakFast: TimeWindow? = null,
 ) : LunarDay
 
 /**
@@ -82,6 +99,13 @@ object LunarCalendar {
 					EkadashiTradition.VAISHNAVA -> EkadashiCalculator.computeVaishnava(
 						newMoon, krishna, location.latitude, location.longitude, zone,
 					)
+					EkadashiTradition.ANANDA_MARGA, EkadashiTradition.ANANDA_MARGA_INDIA ->
+						EkadashiCalculator.computeAnandaMarga(
+							newMoon,
+							if (krishna) EkadashiCalculator.KRISHNA_START_DEGREES else EkadashiCalculator.SHUKLA_START_DEGREES,
+							tradition == EkadashiTradition.ANANDA_MARGA_INDIA,
+							location.latitude, location.longitude, zone,
+						)
 				}
 				if (r.fastDay in from..until) {
 					out.add(
@@ -99,7 +123,10 @@ object LunarCalendar {
 		return out.sortedBy { it.day }
 	}
 
-	/** Full- or new-moon days of the given [style] in [from, from + days], sorted. */
+	/**
+	 * Full- or new-moon days of the given [style] in [from, from + days], sorted. An Ananda
+	 * Marga [tradition] picks the Purnima and Amavasya fast days by its own rule.
+	 */
 	fun moonDays(
 		from: LocalDate,
 		days: Int,
@@ -107,12 +134,25 @@ object LunarCalendar {
 		zone: ZoneId,
 		phase: MoonPhase,
 		style: MoonDayStyle,
+		tradition: EkadashiTradition? = null,
 	): List<MoonDay> {
 		val until = from.plusDays(days.toLong())
 		val out = ArrayList<MoonDay>()
 		for (newMoon in newMoons(from, days, zone)) {
 			val day = when (style) {
-				MoonDayStyle.VEDIC -> {
+				MoonDayStyle.VEDIC -> if (tradition?.anandaMarga == true) {
+					val r = EkadashiCalculator.computeAnandaMarga(
+						newMoon,
+						if (phase == MoonPhase.FULL) PURNIMA_START_DEGREES else AMAVASYA_START_DEGREES,
+						tradition == EkadashiTradition.ANANDA_MARGA_INDIA,
+						location.latitude, location.longitude, zone,
+					)
+					MoonDay(
+						r.fastDay, phase, style, r.tithiStart,
+						sunriseToSunrise = true,
+						breakFast = r.parana?.let { TimeWindow(it.start, it.end) },
+					)
+				} else {
 					val r = when (phase) {
 						MoonPhase.FULL -> EkadashiCalculator.computePurnimaVrat(
 							newMoon, location.latitude, location.longitude, zone,
@@ -136,6 +176,9 @@ object LunarCalendar {
 		}
 		return out.sortedBy { it.day }
 	}
+
+	private const val PURNIMA_START_DEGREES = 168.0
+	private const val AMAVASYA_START_DEGREES = 348.0
 
 	/**
 	 * New moons whose lunations can hold an observance in the window: from the last new

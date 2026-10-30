@@ -102,8 +102,19 @@ object AppDateTime {
 	): String {
 		val date = datePart(dt, style, locale)
 		val time = timePart(dt, style, is24Hour, locale)
-		return if (style == DateStyle.ISO) "$date $time" else "$date, $time"
+		return joinDateTime(date, time, style, locale)
 	}
+
+	/**
+	 * A formatted date and time (or time range) as one phrase, joined as [locale] writes it:
+	 * "Thu, Nov 5, 13:59", but "11月5日周四 13:59" — Chinese, Japanese and Korean put a space
+	 * there, not a comma (CLDR). ISO keeps its plain space in every language.
+	 */
+	fun joinDateTime(date: String, time: String, style: DateStyle, locale: Locale): String =
+		if (style == DateStyle.ISO || locale.language in SPACE_JOINED_LANGUAGES) "$date $time"
+		else "$date, $time"
+
+	private val SPACE_JOINED_LANGUAGES = setOf("zh", "ja", "ko")
 
 	/** Localized month + year for a calendar header, e.g. "June 2025" / "2025年6月". */
 	fun formatMonthYear(yearMonth: YearMonth, locale: Locale = Locale.getDefault()): String =
@@ -133,7 +144,19 @@ object AppDateTime {
 		return if (start.date == end.date) {
 			"$startDate · $startTime – $endTime"
 		} else {
-			"$startDate, $startTime → ${datePart(end, style, locale)}, $endTime"
+			"${joinDateTime(startDate, startTime, style, locale)} → " +
+				joinDateTime(datePart(end, style, locale), endTime, style, locale)
 		}
 	}
+
+	/**
+	 * [text] with each doubled full stop reduced to one. A formatted date or time can end in an
+	 * abbreviation's period ("Mi., 4. Nov.", "1:59 p. m."), and a sentence that ends on one
+	 * takes no second period: "Fastentag: Mi., 4. Nov. Fastenbrechen: …". For text built from
+	 * a template that puts a date or time before a full stop. Exactly two dots only, so an
+	 * ellipsis written as three is left alone.
+	 */
+	fun dropDoubledPeriods(text: String): String = text.replace(DOUBLED_PERIOD, ".")
+
+	private val DOUBLED_PERIOD = Regex("""(?<!\.)\.\.(?!\.)""")
 }

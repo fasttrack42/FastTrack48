@@ -1,8 +1,10 @@
 package com.legbehindneck.fasttrack48.lunar
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.temporal.ChronoUnit
 
 /**
  * What the user wants to be reminded of, and when. Lead days count back from the
@@ -40,6 +42,9 @@ data class PlannedLunarReminder(
 	val leadDays: Int,
 	val fireAt: ZonedDateTime,
 ) {
+	/** One reminder's identity across re-plans and time zones: the observance and the lead. */
+	val key: String get() = "$notificationId:$leadDays"
+
 	/** One notification per observance, so a closer reminder replaces an earlier one. */
 	val notificationId: Int
 		get() {
@@ -51,9 +56,9 @@ data class PlannedLunarReminder(
 		}
 
 	private companion object {
-		const val EKADASHI_ID_BASE = 1_000_000
-		const val FULL_MOON_ID_BASE = 2_000_000
-		const val NEW_MOON_ID_BASE = 3_000_000
+		const val EKADASHI_ID_BASE = LunarReminderPlanner.OBSERVANCE_ID_SPAN
+		const val FULL_MOON_ID_BASE = 2 * LunarReminderPlanner.OBSERVANCE_ID_SPAN
+		const val NEW_MOON_ID_BASE = 3 * LunarReminderPlanner.OBSERVANCE_ID_SPAN
 	}
 }
 
@@ -92,18 +97,66 @@ object LunarReminderPlanner {
 			}
 		}
 		if (settings.fullMoonActive) {
-			for (day in LunarCalendar.moonDays(firstDay, span, location, zone, MoonPhase.FULL, settings.moonDayStyle)) {
+			for (day in LunarCalendar.moonDays(firstDay, span, location, zone, MoonPhase.FULL, settings.moonDayStyle, tradition)) {
 				add(day, settings.fullMoonLeadDays)
 			}
 		}
 		if (settings.newMoonActive) {
-			for (day in LunarCalendar.moonDays(firstDay, span, location, zone, MoonPhase.NEW, settings.moonDayStyle)) {
+			for (day in LunarCalendar.moonDays(firstDay, span, location, zone, MoonPhase.NEW, settings.moonDayStyle, tradition)) {
 				add(day, settings.newMoonLeadDays)
 			}
 		}
 		out.sortBy { it.fireAt.toInstant() }
 		return out
 	}
+
+	/**
+	 * The reminders owed at [now]: due by [until], not yet [posted], about an observance that
+	 * is still today or ahead, and due after [floor], the local wall-clock time of the previous
+	 * check, so a reminder that only came into being with a settings change is not posted for
+	 * a time already past. Compared as local times, a time-zone change moves every reminder
+	 * with the clock: one due at 18:00 is owed at 18:00 in the new zone, even if that instant
+	 * was before the last check; one already shown is in [posted] and stays shown once.
+	 *
+	 * Several leads of one observance collapse into the latest. Its lead is counted again from
+	 * today, so a reminder that comes late (an inexact alarm after midnight, a phone that was
+	 * off) still says "today" or "tomorrow" truly. Every due reminder is in [Due.handled].
+	 */
+	fun due(
+		plan: List<PlannedLunarReminder>,
+		now: ZonedDateTime,
+		until: ZonedDateTime,
+		floor: LocalDateTime,
+		posted: Set<String>,
+	): Due {
+		val today = now.toLocalDate()
+		val due = plan.filter {
+			!it.fireAt.isAfter(until) &&
+				!it.fireAt.isAfter(now) &&
+				!it.subject.day.isBefore(today) &&
+				it.key !in posted &&
+				it.fireAt.toLocalDateTime().isAfter(floor)
+		}
+		val toPost = due.groupBy { it.notificationId }.values.map { leads ->
+			val latest = leads.maxBy { it.fireAt.toInstant() }
+			latest.copy(leadDays = ChronoUnit.DAYS.between(today, latest.subject.day).toInt())
+		}.sortedBy { it.subject.day }
+		return Due(toPost, due.mapTo(HashSet()) { it.key })
+	}
+
+	/** What [due] found: the reminders to post, and the keys of every one it covered. */
+	data class Due(val toPost: List<PlannedLunarReminder>, val handled: Set<String>)
+
+	/** Posted keys still worth remembering: those of observances from yesterday on. */
+	fun prune(posted: Set<String>, today: LocalDate): Set<String> {
+		val keep = today.minusDays(1).toEpochDay()
+		return posted.filterTo(HashSet()) { key ->
+			key.substringBefore(':').toIntOrNull()?.let { it % OBSERVANCE_ID_SPAN >= keep } ?: false
+		}
+	}
+
+	/** Notification ids are a kind base (multiples of this) plus the observance's epoch day. */
+	internal const val OBSERVANCE_ID_SPAN = 1_000_000
 
 	/**
 	 * [hourOfDay] on the local date [leadDays] before [day]. Built from the local date and

@@ -34,6 +34,12 @@ interface ActiveFastDataSource {
 	fun setFastStart(time: Instant)
 	fun setFastEnd(time: Instant)
 
+	/**
+	 * Begin a fast at [time]: the start set and any previous end cleared in one write, so no
+	 * observer ever sees the new start paired with the last fast's end.
+	 */
+	fun beginFast(time: Instant)
+
 	fun clearFastStart()
 	fun clearFastEnd()
 }

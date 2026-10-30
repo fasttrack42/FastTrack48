@@ -16,6 +16,7 @@ import androidx.core.app.NotificationCompat
 import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.data.descriptionFor
 import com.legbehindneck.fasttrack48.screens.main.MainActivity
+import com.legbehindneck.fasttrack48.screens.settings.withAppLanguage
 import com.legbehindneck.fasttrack48.utils.formatDuration
 import com.legbehindneck.fasttrack48.utils.getColorFor
 import io.github.aakira.napier.Napier
@@ -43,6 +44,11 @@ object FastingNotificationManager {
 			}
 		}
 
+		post(withAppLanguage(context), elapsedTime)
+	}
+
+	/** [context] carries the app's language, so every text below is in it. */
+	private fun post(context: Context, elapsedTime: Duration) {
 		createNotificationChannel(context)
 
 		val elapsedHours = elapsedTime.inWholeHours

@@ -42,47 +42,20 @@ object Sunrise {
         latitudeDeg: Double,
         longitudeDeg: Double,
     ): ZonedDateTime? {
-        // Anchor: UTC midnight of the UTC day containing the local noon of the
-        // requested date. The NOAA formula yields minutes past UTC midnight of
-        // that day (possibly negative or beyond 1440 for longitudes far from the
-        // zone's nominal meridian - that is fine, they are simply offsets from
-        // the anchor).
-        val localNoonMillis = date.atStartOfDay(zone).plusHours(12).toInstant().toEpochMilli()
-        val anchorUtcMidnight = floorToUtcMidnight(localNoonMillis)
-
-        var sunriseMillis = solveSunrise(anchorUtcMidnight, latitudeDeg, longitudeDeg)
-            ?: return null
-
-        var result = Instant.ofEpochMilli(sunriseMillis).atZone(zone)
-
-        // Near the date line the anchor UTC day can be off by one from the day
-        // that actually contains the requested local date's sunrise; correct
-        // once in the indicated direction.
-        val dayDelta = compareLocalDate(result.toLocalDate(), date)
-        if (dayDelta != 0) {
-            sunriseMillis = solveSunrise(
-                anchorUtcMidnight - dayDelta * MILLIS_PER_DAY,
-                latitudeDeg,
-                longitudeDeg,
-            ) ?: return null
-            result = Instant.ofEpochMilli(sunriseMillis).atZone(zone)
-            if (compareLocalDate(result.toLocalDate(), date) != 0) {
-                // Cannot place a sunrise on this civil date (pathological
-                // zone/longitude combination) - report as "no sunrise".
-                return null
-            }
-        }
-        return result
+        val (_, sunriseMillis) = sunriseAnchor(date, zone, latitudeDeg, longitudeDeg) ?: return null
+        return Instant.ofEpochMilli(sunriseMillis).atZone(zone)
     }
 
     /**
-     * Compute the sunset on the given civil date in the given time zone - the
-     * mirror of [sunrise] (same zenith, same date-line handling), needed for
-     * the day divisions (Pratahkal, Madhyahna, 1/3 of daylight) of the Parana
-     * and Purnima vrat rules. The sunrise path is deliberately left untouched.
+     * Compute the sunset that follows the sunrise of the given civil date: the end of that
+     * day's daylight, needed for the day divisions (Pratahkal, Madhyahna, 1/3 of daylight) of
+     * the Parana and Purnima vrat rules. Solved for the same solar day as [sunrise], so it
+     * may fall on the next civil date: near the Arctic Circle in summer the sun sets after
+     * local midnight (Nuuk, 64 N, early July: about 00:37), and taking the sunset dated
+     * [date] instead would return the previous evening's and a negative daylight.
      *
-     * @return the sunset instant, or null if the sun does not set on that date
-     *         at that latitude (polar day/night)
+     * @return the sunset instant, or null if the sun does not rise or set on that date at
+     *         that latitude (polar day/night)
      */
     @JvmStatic
     fun sunset(
@@ -91,27 +64,39 @@ object Sunrise {
         latitudeDeg: Double,
         longitudeDeg: Double,
     ): ZonedDateTime? {
+        val (anchor, _) = sunriseAnchor(date, zone, latitudeDeg, longitudeDeg) ?: return null
+        val sunsetMillis = solveSunset(anchor, latitudeDeg, longitudeDeg) ?: return null
+        return Instant.ofEpochMilli(sunsetMillis).atZone(zone)
+    }
+
+    /**
+     * The UTC midnight the NOAA formula counts from for [date]'s sunrise, and that sunrise
+     * (epoch millis). The anchor is the midnight of the UTC day
+     * holding the local noon. Near the date line that day can be off by one from the one
+     * whose sunrise falls on [date]; it is corrected once in the indicated direction. Null
+     * when there is no sunrise, or none can be placed on [date] (a pathological zone and
+     * longitude combination).
+     */
+    private fun sunriseAnchor(
+        date: LocalDate,
+        zone: ZoneId,
+        latitudeDeg: Double,
+        longitudeDeg: Double,
+    ): Pair<Long, Long>? {
+        // The formula yields minutes past the anchor, possibly negative or beyond 1440 for
+        // longitudes far from the zone's nominal meridian; they are simply offsets from it.
         val localNoonMillis = date.atStartOfDay(zone).plusHours(12).toInstant().toEpochMilli()
-        val anchorUtcMidnight = floorToUtcMidnight(localNoonMillis)
-
-        var sunsetMillis = solveSunset(anchorUtcMidnight, latitudeDeg, longitudeDeg)
-            ?: return null
-
-        var result = Instant.ofEpochMilli(sunsetMillis).atZone(zone)
-
-        val dayDelta = compareLocalDate(result.toLocalDate(), date)
-        if (dayDelta != 0) {
-            sunsetMillis = solveSunset(
-                anchorUtcMidnight - dayDelta * MILLIS_PER_DAY,
-                latitudeDeg,
-                longitudeDeg,
-            ) ?: return null
-            result = Instant.ofEpochMilli(sunsetMillis).atZone(zone)
-            if (compareLocalDate(result.toLocalDate(), date) != 0) {
-                return null
-            }
+        val anchor = floorToUtcMidnight(localNoonMillis)
+        val first = solveSunrise(anchor, latitudeDeg, longitudeDeg) ?: return null
+        val dayDelta = compareLocalDate(Instant.ofEpochMilli(first).atZone(zone).toLocalDate(), date)
+        if (dayDelta == 0) return anchor to first
+        val corrected = anchor - dayDelta * MILLIS_PER_DAY
+        val second = solveSunrise(corrected, latitudeDeg, longitudeDeg) ?: return null
+        return if (compareLocalDate(Instant.ofEpochMilli(second).atZone(zone).toLocalDate(), date) == 0) {
+            corrected to second
+        } else {
+            null
         }
-        return result
     }
 
     /**

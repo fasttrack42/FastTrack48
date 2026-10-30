@@ -43,6 +43,7 @@ FastTrack48 laat je zien wat er in je lichaam gebeurt terwijl je vast, en je lee
 • Instelbare datum- en tijdnotatie.
 • Metrische of imperiale eenheden.
 • Schakelaars voor de doorlopende melding en de stadiummeldingen.
+• Optionele herinneringen voor Ekadashi, Purnima en Amavasya, of voor volle en nieuwe maan.
 
 <h3>Lokalisatie</h3>
 • Gratis en open source onder de MIT-licentie, zonder voorwaarden.

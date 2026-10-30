@@ -39,9 +39,13 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
 import com.legbehindneck.fasttrack48.data.FastingJourney
 import com.legbehindneck.fasttrack48.data.JourneyStage
 import com.legbehindneck.fasttrack48.ui.theme.LocalDarkTheme
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.min
@@ -60,39 +64,57 @@ val gaugeColors = listOf(
 	Color.Magenta
 )
 
-/** Journey stage colors tuned for dark backgrounds: dawn → fire → clarity → renewal. */
+/*
+ * Journey stage colours run one way only: dawn gold, through fire, to violet. The ring is
+ * read as progress, and a progress scale reads best when hue and lightness each move in one
+ * direction. The old ramp turned green at fat burning and back to gold at ketosis, so the
+ * fifth stage looked like part of another scale. Fire colours now sit on the fire stages.
+ */
+
+/** Tuned for dark backgrounds: light, so the lit arc stays the brightest thing on screen. */
 private val journeyColorsDark = listOf(
-	Color(0xFFF5F0E1), // Fueling Up: warm ivory
-	Color(0xFFF0E4C0), // Settling In: pale sand
-	Color(0xFFEDD9A0), // Finding Balance: soft gold
-	Color(0xFFE8CD7E), // Inner Alchemy: deep gold
-	Color(0xFF7BE495), // The Burn Begins: spring green
-	Color(0xFFFFD54F), // Clear Waters: amber
-	Color(0xFFFF7A6B), // Deep Renewal: coral
-	Color(0xFFF48FB1), // Strength Rising: rose
-	Color(0xFFCE8FFF), // Fine Tuning: violet
-	Color(0xFFA98BFF), // Rebirth: deep violet
+	Color(0xFFF5F0E1), // Blood sugar rises: warm ivory
+	Color(0xFFF0E4C0), // Blood sugar falls: pale sand
+	Color(0xFFEDD9A0), // Blood sugar stabilizes: soft gold
+	Color(0xFFF2C27A), // Gluconeogenesis: honey
+	Color(0xFFF4A86A), // Fat burning: apricot
+	Color(0xFFF48F72), // Ketosis: coral
+	Color(0xFFF07F93), // Autophagy: rose
+	Color(0xFFE07FBF), // Growth hormone surge: orchid
+	Color(0xFFCE8FFF), // Insulin sensitivity: violet
+	Color(0xFFA98BFF), // Immune cell regeneration: deep violet
 )
 
-/** Journey stage colors tuned for light backgrounds. */
+/** Tuned for light backgrounds. */
 private val journeyColorsLight = listOf(
-	Color(0xFFCFA24E), // Fueling Up: warm gold
-	Color(0xFFD49A3F), // Settling In: deeper gold
-	Color(0xFFD98F2F), // Finding Balance: amber gold
-	Color(0xFFDE8420), // Inner Alchemy: amber
-	Color(0xFF2E9E5B), // The Burn Begins: deep green
-	Color(0xFFE6A817), // Clear Waters: goldenrod
-	Color(0xFFDE5B4C), // Deep Renewal: terracotta
-	Color(0xFFC2559E), // Strength Rising: magenta rose
-	Color(0xFF9450C8), // Fine Tuning: royal violet
-	Color(0xFF7A3FB8), // Rebirth: deep violet
+	Color(0xFFCFA24E), // Blood sugar rises: warm gold
+	Color(0xFFD3953F), // Blood sugar falls: deeper gold
+	Color(0xFFD88833), // Blood sugar stabilizes: amber gold
+	Color(0xFFDB782C), // Gluconeogenesis: amber
+	Color(0xFFD9662F), // Fat burning: flame
+	Color(0xFFCF5540), // Ketosis: ember
+	Color(0xFFC0495D), // Autophagy: crimson rose
+	Color(0xFFA84B86), // Growth hormone surge: magenta
+	Color(0xFF8E4DA8), // Insulin sensitivity: royal violet
+	Color(0xFF7A3FB8), // Immune cell regeneration: deep violet
 )
 
-/** Accent color of a journey stage, matching the dial's gradient. */
+/** Accent colour of a journey stage, matching the dial's gradient. For fills, arcs and dots. */
 @Composable
 fun journeyStageColor(stageIndex: Int): Color {
 	val colors = if (LocalDarkTheme.current) journeyColorsDark else journeyColorsLight
 	return colors.getOrElse(stageIndex) { colors.last() }
+}
+
+/**
+ * [journeyStageColor] for thin marks such as an icon. The light ramp sits near 2:1 on the
+ * violet ground, under the 3:1 a meaningful icon needs, so light theme mixes in a third of
+ * black: the same hue at about 4:1. The dark ramp already clears it by a wide margin.
+ */
+@Composable
+fun journeyStageInk(stageIndex: Int): Color {
+	val color = journeyStageColor(stageIndex)
+	return if (LocalDarkTheme.current) color else lerp(color, Color.Black, 0.33f)
 }
 
 // The ring is an open arc: 270 degrees of sweep with the gap facing down,
@@ -102,7 +124,13 @@ private const val TOTAL_SWEEP = 270f
 
 // Golden-ratio derived proportions (phi = 1.618...)
 internal const val PHI = 1.618034f
-private const val STROKE_FRACTION = 1f / (PHI * PHI * PHI * PHI) / 2.4f // of min dimension
+// The stroke is the sixth step of the chain, D / phi^6 (~16dp on a 291dp dial). It used to be
+// D / (phi^4 * 2.4), and the 2.4 broke the chain. The start disc's label is set at this same
+// size (disc / phi^4 = D / phi^6), so the word and the ring are drawn at one weight.
+internal const val STROKE_FRACTION = 1f / (PHI * PHI * PHI * PHI * PHI * PHI) // of min dimension
+// Ring radius = half the side minus this many strokes: room for the current bubble, which is
+// drawn 2.1 strokes wide and scaled by 1.15 (about 1.21 strokes of radius).
+internal const val RING_INSET = 1.18f
 private const val TRACK_ALPHA_DARK = 0.16f
 private const val TRACK_ALPHA_LIGHT = 0.24f
 
@@ -114,10 +142,11 @@ private val FINAL_STAGE_VISUAL_END_HOURS = FINAL_STAGE.startHours + 24f
 /**
  * Fasting journey dial: a circular mandala-like gauge. The ten journey stages
  * wrap around an open ring as a continuous color gradient with an emoji
- * milestone bubble at each stage's heart; fine radial ticks give it a subtle
- * fractal texture. On first composition the lit arc blooms from zero up to the
- * current position, where a glowing knob breathes gently. Milestones wake up
- * one by one as the arc reaches them.
+ * milestone bubble at each stage's heart and a tick at each boundary; while a
+ * fast runs, the current stage's start and end hours sit beside its two ticks.
+ * On first composition the lit arc blooms from zero up to the current position,
+ * where a glowing knob breathes gently. Milestones wake up one by one as the arc
+ * reaches them.
  *
  * [content] is rendered centered inside the ring (the timer lives there).
  * Tapping a milestone bubble, the knob, or anywhere on the band reports the
@@ -174,6 +203,20 @@ fun TimeLine(
 	}
 	val breath = breathAnim.value
 
+	// The current stage's two boundaries and their hours: its start (not for the first stage,
+	// whose start is the fast's own) and its end (none for the open last stage).
+	val boundaryLabels = remember(curIndex, pulsing) {
+		if (!pulsing) return@remember emptyList()
+		val stage = stages[curIndex]
+		buildList {
+			if (curIndex > 0) add(curIndex to stage.startHours)
+			stage.endHours?.let { add(curIndex + 1 to it) }
+		}
+	}
+	val textMeasurer = rememberTextMeasurer()
+	val labelColor = outlineColor.copy(alpha = 0.65f)
+	val labelStyle = MaterialTheme.typography.labelMedium
+
 	// The sweep gradient's color stops depend only on the palette and geometry,
 	// not on time — remember them so a fasting redraw doesn't rebuild the array
 	// (and Brush) on every animation frame.
@@ -198,7 +241,7 @@ fun TimeLine(
 					detectTapGestures { offset ->
 						val minDim = min(size.width, size.height).toFloat()
 						val stroke = minDim * STROKE_FRACTION
-						val radius = minDim / 2f - stroke * 1.18f
+						val radius = minDim / 2f - stroke * RING_INSET
 						val center = Offset(size.width / 2f, size.height / 2f)
 
 						val dx = offset.x - center.x
@@ -225,7 +268,7 @@ fun TimeLine(
 		) {
 			val minDim = min(size.width, size.height)
 			val stroke = minDim * STROKE_FRACTION
-			val radius = minDim / 2f - stroke * 1.18f
+			val radius = minDim / 2f - stroke * RING_INSET
 			val center = Offset(size.width / 2f, size.height / 2f)
 			val arcSize = Size(radius * 2f, radius * 2f)
 			val arcTopLeft = Offset(center.x - radius, center.y - radius)
@@ -239,21 +282,19 @@ fun TimeLine(
 			// Rotate so relative angle 0 is the arc start; the sweep gradient
 			// rotates with the geometry, keeping its stops aligned to stages.
 			rotate(degrees = START_ANGLE, pivot = center) {
-				// Fine radial ticks: quiet fractal texture just inside the band,
-				// with stronger ticks landing on stage boundaries.
-				val tickStep = segmentSweep / 3f
-				val tickCount = (TOTAL_SWEEP / tickStep).toInt()
-				for (i in 0..tickCount) {
-					val angle = Math.toRadians((i * tickStep).toDouble())
-					val major = i % 3 == 0
+				// Stage boundaries only. Every stage gets the same 27 degrees whether it lasts 2
+				// hours or 24, so evenly spaced ticks inside a stage made the arc read as a clock
+				// face it is not. The hours of the current stage are written at its boundaries.
+				for (i in 0..stages.size) {
+					val angle = Math.toRadians((i * segmentSweep).toDouble())
 					val rOuter = radius - stroke * 0.95f
-					val rInner = rOuter - (if (major) stroke * 0.62f else stroke * 0.34f)
+					val rInner = rOuter - stroke * 0.62f
 					val dir = Offset(cos(angle).toFloat(), sin(angle).toFloat())
 					drawLine(
-						color = outlineColor.copy(alpha = if (major) 0.22f else 0.10f),
+						color = outlineColor.copy(alpha = 0.22f),
 						start = center + dir * rInner,
 						end = center + dir * rOuter,
-						strokeWidth = (if (major) 1.5.dp else 1.dp).toPx(),
+						strokeWidth = 1.5.dp.toPx(),
 						cap = StrokeCap.Round
 					)
 				}
@@ -306,6 +347,31 @@ fun TimeLine(
 					)
 				}
 			}
+
+			// The current stage's hours outside the ring at its two boundaries, upright, like the
+			// numerals on a watch bezel: they fall between two bubbles, where there is room. Inside
+			// the ring they would hit the timer whenever a boundary sits at three or nine o'clock.
+			// Each box is pushed out by its own half-extent along the radius, so a wide label at an
+			// oblique angle still clears the stroke. Sized from the dp stroke (never under 11dp),
+			// not from the font scale, like everything else drawn on the ring; TextMeasurer caches
+			// the layout, so the breathing redraw does not re-measure it.
+			if (boundaryLabels.isNotEmpty()) {
+				val labelSize = maxOf(stroke / PHI, 11.dp.toPx()).toSp()
+				boundaryLabels.forEach { (boundary, hours) ->
+					val layout = textMeasurer.measure(
+						text = "${hours}h",
+						style = labelStyle.copy(color = labelColor, fontSize = labelSize),
+					)
+					val angle = Math.toRadians((START_ANGLE + boundary * segmentSweep).toDouble())
+					val dir = Offset(cos(angle).toFloat(), sin(angle).toFloat())
+					val halfExtent = abs(dir.x) * layout.size.width / 2f + abs(dir.y) * layout.size.height / 2f
+					val at = center + dir * (radius + stroke * 0.75f + halfExtent)
+					drawText(
+						textLayoutResult = layout,
+						topLeft = Offset(at.x - layout.size.width / 2f, at.y - layout.size.height / 2f),
+					)
+				}
+			}
 		}
 
 		// Milestone bubbles, one at the heart of each stage segment.
@@ -331,7 +397,7 @@ fun TimeLine(
 			val height = constraints.maxHeight
 			val minDim = min(width, height).toFloat()
 			val stroke = minDim * STROKE_FRACTION
-			val radius = minDim / 2f - stroke * 1.18f
+			val radius = minDim / 2f - stroke * RING_INSET
 			val bubbleSize = (stroke * 2.1f).roundToInt()
 
 			val placeables = measurables.map { it.measure(Constraints.fixed(bubbleSize, bubbleSize)) }
@@ -365,7 +431,7 @@ fun TimeLine(
 // Fraction of the dial width available to centered content (timer + label).
 // Derived from the inscribed square of the inner circle, trimmed for margin.
 private val INNER_CONTENT_FRACTION =
-	((0.5f - STROKE_FRACTION * 1.18f) * 2f / 1.41421f) * 0.94f
+	((0.5f - STROKE_FRACTION * RING_INSET) * 2f / 1.41421f) * 0.94f
 
 @Composable
 private fun MilestoneBubble(

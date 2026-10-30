@@ -99,6 +99,6 @@ class LunarReminderPlannerTest {
 		val settings = LunarReminderSettings(newMoonEnabled = true, newMoonLeadDays = setOf(1))
 		val plan = LunarReminderPlanner.plan(from, settings, newDelhi, horizonDays = 60)
 		assertTrue(plan.isNotEmpty())
-		assertTrue(plan.all { it.subject is MoonDay && (it.subject as MoonDay).phase == MoonPhase.NEW })
+		assertTrue(plan.all { val s = it.subject; s is MoonDay && s.phase == MoonPhase.NEW })
 	}
 }

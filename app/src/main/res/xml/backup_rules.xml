@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Auto Backup, API 23-30. Keep in step with data_extraction_rules.xml, which API 31+ reads instead. -->
 <full-backup-content>
 	<include domain="sharedpref" path="."/>
 	<include domain="database" path="."/>
+	<!-- The body profile (Satchel, Data.STORAGE_PATH). -->
+	<include domain="file" path="storage"/>
 	<!-- Device-bound: the location the user shared for sunrise times never leaves the phone. -->
 	<exclude domain="sharedpref" path="lunar_device.xml"/>
 </full-backup-content>

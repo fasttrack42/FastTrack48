@@ -10,14 +10,18 @@ import kotlinx.datetime.toKotlinLocalDate
 import kotlinx.datetime.toKotlinLocalDateTime
 import java.time.LocalDate
 import java.time.ZonedDateTime
+import java.util.Locale
 
 /** User-facing text for observance days, shared by the notifications and Settings. */
 internal object LunarTexts {
 
 	/** Notification title, e.g. "Ekadashi tomorrow". */
-	fun title(context: Context, reminder: PlannedLunarReminder): String {
-		val lead = reminder.leadDays
-		val (today, tomorrow, inDays) = when (val subject = reminder.subject) {
+	fun title(context: Context, reminder: PlannedLunarReminder): String =
+		title(context, reminder.subject, reminder.leadDays)
+
+	/** "Ekadashi today", "Purnima fast tomorrow", "Full moon in 5 days": [subject] [lead] days ahead. */
+	fun title(context: Context, subject: LunarDay, lead: Int): String {
+		val (today, tomorrow, inDays) = when (subject) {
 			is EkadashiDay -> Triple(
 				R.string.lunar_ekadashi_today, R.string.lunar_ekadashi_tomorrow, R.plurals.lunar_ekadashi_in_days,
 			)
@@ -48,26 +52,37 @@ internal object LunarTexts {
 	}
 
 	/** The facts of the day: the date and, for Ekadashi, when to break the fast. */
-	fun details(context: Context, subject: LunarDay, style: DateStyle): String = when (subject) {
+	fun details(context: Context, subject: LunarDay, style: DateStyle): String =
+		AppDateTime.dropDoubledPeriods(sentences(context, subject, style))
+
+	private fun sentences(context: Context, subject: LunarDay, style: DateStyle): String = when (subject) {
 		is EkadashiDay -> {
 			val day = subject.mahadvadashi?.let {
-				context.getString(R.string.lunar_day_with_name, date(subject.day, style), mahadvadashiName(context, it))
-			} ?: date(subject.day, style)
+				context.getString(
+					R.string.lunar_day_with_name, date(context, subject.day, style), mahadvadashiName(context, it),
+				)
+			} ?: date(context, subject.day, style)
 			subject.parana?.let {
 				context.getString(R.string.lunar_ekadashi_details, day, parana(context, it, style))
 			} ?: context.getString(R.string.lunar_ekadashi_details_no_parana, day)
 		}
 		is MoonDay -> {
 			val full = subject.phase == MoonPhase.FULL
-			when (subject.style) {
+			// Ananda Marga: like an Ekadashi, the fast breaks at the next sunrise.
+			if (subject.sunriseToSunrise) {
+				val day = date(context, subject.day, style)
+				subject.breakFast?.let {
+					context.getString(R.string.lunar_ekadashi_details, day, parana(context, it, style))
+				} ?: context.getString(R.string.lunar_ekadashi_details_no_parana, day)
+			} else when (subject.style) {
 				MoonDayStyle.VEDIC -> context.getString(
 					if (full) R.string.lunar_purnima_details else R.string.lunar_amavasya_details,
-					date(subject.day, style),
+					date(context, subject.day, style),
 					dateTime(context, subject.moment, style),
 				)
 				MoonDayStyle.ASTRONOMICAL -> context.getString(
 					if (full) R.string.lunar_fullmoon_details else R.string.lunar_newmoon_details,
-					date(subject.day, style),
+					date(context, subject.day, style),
 					time(context, subject.moment, style),
 				)
 			}
@@ -75,24 +90,32 @@ internal object LunarTexts {
 	}
 
 	fun parana(context: Context, window: TimeWindow, style: DateStyle): String {
-		val day = date(window.start.toLocalDate(), style)
+		val day = date(context, window.start.toLocalDate(), style)
 		val from = time(context, window.start, style)
-		return window.end?.let { context.getString(R.string.lunar_parana_window, day, from, time(context, it, style)) }
+		return window.end?.let { AppDateTime.joinDateTime(day, "$from–${time(context, it, style)}", style, locale(context)) }
 			?: context.getString(R.string.lunar_parana_after, day, from)
 	}
 
 	/** A reminder is about a day, so the weekday helps: the compact style gains it. */
-	fun date(day: LocalDate, style: DateStyle): String =
-		AppDateTime.formatDate(day.toKotlinLocalDate(), withWeekday(style))
+	fun date(context: Context, day: LocalDate, style: DateStyle): String =
+		AppDateTime.formatDate(day.toKotlinLocalDate(), withWeekday(style), locale(context))
 
 	fun time(context: Context, moment: ZonedDateTime, style: DateStyle): String =
 		AppDateTime.formatTime(
 			moment.toLocalDateTime().toKotlinLocalDateTime(), style, shouldUse24HourFormat(context),
+			locale(context),
 		)
 
+	/**
+	 * The language of [context]'s texts. A notification's context carries the app's language
+	 * while the process default may still be the device's, and the dates must match the words.
+	 */
+	private fun locale(context: Context): Locale =
+		context.resources.configuration.locales[0] ?: Locale.getDefault()
+
 	private fun dateTime(context: Context, moment: ZonedDateTime, style: DateStyle): String =
-		context.getString(
-			R.string.lunar_date_time, date(moment.toLocalDate(), style), time(context, moment, style),
+		AppDateTime.joinDateTime(
+			date(context, moment.toLocalDate(), style), time(context, moment, style), style, locale(context),
 		)
 
 	private fun withWeekday(style: DateStyle): DateStyle =

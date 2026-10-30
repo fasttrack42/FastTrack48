@@ -166,8 +166,6 @@ object EkadashiCalculator {
         val t = tithis(newMoonJdUt, krishna, zone)
         val ek = sunriseDays(t.ekStart, t.ekEnd, latitudeDeg, longitudeDeg, zone)
             ?: return midpointFallback(t.ekStart, t.ekEnd, zone)
-        val dv = sunriseDays(t.ekEnd, t.dvEnd, latitudeDeg, longitudeDeg, zone)
-            ?: return midpointFallback(t.ekStart, t.ekEnd, zone)
         var label: Mahadvadashi? = null
         val fastDay: LocalDate = when {
             // Kshaya: the first sunrise after the tithi already belongs to Dvadashi.
@@ -184,23 +182,32 @@ object EkadashiCalculator {
                     // Dashami current at arunodaya -> viddha; fast the next day.
                     d.plusDays(1)
                 } else {
-                    val fifteenth = sunriseDays(
-                        t.fifteenthStart, t.fifteenthEnd, latitudeDeg, longitudeDeg, zone,
-                    ) ?: return midpointFallback(t.ekStart, t.ekEnd, zone)
+                    // Only a pure (Suddha) Ekadashi needs the Dvadashi sunrises, and only a
+                    // single Dvadashi sunrise needs the 15th tithi's: solved here, not up front,
+                    // so a polar day in a span the rules never look at does not force the
+                    // midpoint fallback.
+                    val dv = sunriseDays(t.ekEnd, t.dvEnd, latitudeDeg, longitudeDeg, zone)
+                        ?: return midpointFallback(t.ekStart, t.ekEnd, zone)
                     when {
                         dv.size >= 2 -> {
                             label = Mahadvadashi.VYANJULI
-                            dv[0]
-                        }
-                        dv.size == 1 && fifteenth.size >= 2 -> {
-                            label = Mahadvadashi.PAKSAVARDHINI
                             dv[0]
                         }
                         dv.isEmpty() -> {
                             label = Mahadvadashi.TRISPRSA
                             d
                         }
-                        else -> d
+                        else -> {
+                            val fifteenth = sunriseDays(
+                                t.fifteenthStart, t.fifteenthEnd, latitudeDeg, longitudeDeg, zone,
+                            ) ?: return midpointFallback(t.ekStart, t.ekEnd, zone)
+                            if (fifteenth.size >= 2) {
+                                label = Mahadvadashi.PAKSAVARDHINI
+                                dv[0]
+                            } else {
+                                d
+                            }
+                        }
                     }
                 }
             }
@@ -296,6 +303,54 @@ object EkadashiCalculator {
         } else {
             Result(label.tithiStart, label.tithiEnd, bestDay, bestSunrise)
         }
+    }
+
+    /**
+     * Ananda Marga fast day for the tithi that begins at [startDegrees] in the lunation that
+     * starts at the given new moon: 120 / 300 for the Shukla / Krishna Ekadashi, 168 for
+     * Purnima, 348 for Amavasya. One rule for all four: the day that holds most of the tithi.
+     * A tithi lasts at most ~26.8 h, so half of it never fills a day, and the day holding most
+     * of it is the one holding its midpoint; that also gives exactly one day per tithi, with no
+     * special case for a tithi that misses a sunrise or spans two.
+     *
+     * [indiaCalendarDate] false: the sunrise-to-sunrise day at Varanasi, the written rule (the
+     * 1976 instructions for the Ananda Marga Diary). True: the Indian Standard Time calendar
+     * date, which reproduces the India chart of 2026 (48 of 49 dates).
+     *
+     * The day is the same date everywhere. The fast runs from the local sunrise on that date to
+     * the next local sunrise; [Result.parana] starts at that next sunrise (null at polar
+     * latitudes) and [Result.displayInstant] is the first one (the tithi midpoint without one).
+     */
+    @JvmStatic
+    fun computeAnandaMarga(
+        newMoonJdUt: Double,
+        startDegrees: Double,
+        indiaCalendarDate: Boolean,
+        latitudeDeg: Double,
+        longitudeDeg: Double,
+        zone: ZoneId,
+    ): Result {
+        val startJd = Meeus.elongationCrossingInLunation(newMoonJdUt, startDegrees)
+        val endJd = Meeus.elongationCrossingInLunation(newMoonJdUt, startDegrees + TITHI_WIDTH_DEGREES)
+        val tithiStart = at(startJd, zone)
+        val tithiEnd = at(endJd, zone)
+        val midpoint = (millis(tithiStart) + millis(tithiEnd)) / 2
+        val indianDate = at(midpoint, INDIA).toLocalDate()
+        val fastDay = if (indiaCalendarDate) {
+            indianDate
+        } else {
+            // Before the Varanasi sunrise of its Indian date, the midpoint belongs to the solar
+            // day that began at the previous sunrise.
+            val rise = Sunrise.sunrise(indianDate, INDIA, VARANASI_LATITUDE, VARANASI_LONGITUDE)
+            if (rise != null && midpoint < millis(rise)) indianDate.minusDays(1) else indianDate
+        }
+        val sunrise = Sunrise.sunrise(fastDay, zone, latitudeDeg, longitudeDeg)
+        val nextSunrise = Sunrise.sunrise(fastDay.plusDays(1), zone, latitudeDeg, longitudeDeg)
+        return Result(
+            tithiStart, tithiEnd, fastDay,
+            displayInstant = sunrise ?: at(midpoint, zone),
+            parana = nextSunrise?.let { Parana(it, null) },
+        )
     }
 
     /**
@@ -518,4 +573,10 @@ object EkadashiCalculator {
      * the standard Gaudiya value used by GCal.
      */
     private const val ARUNODAYA_MINUTES: Long = 96L
+
+    /** Where the Ananda Marga rule takes its sunrise, as instructed (the written rule). */
+    private const val VARANASI_LATITUDE: Double = 25.3176
+    private const val VARANASI_LONGITUDE: Double = 82.9739
+
+    private val INDIA: ZoneId = ZoneId.of("Asia/Kolkata")
 }

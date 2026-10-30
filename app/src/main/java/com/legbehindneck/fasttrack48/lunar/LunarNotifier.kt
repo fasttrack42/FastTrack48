@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.screens.main.MainActivity
+import com.legbehindneck.fasttrack48.screens.settings.withAppLanguage
 import io.github.aakira.napier.Napier
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -32,6 +33,11 @@ object LunarNotifier : KoinComponent {
 			Napier.w("Notification permission not granted, cannot post lunar reminder")
 			return
 		}
+		show(withAppLanguage(context), reminder)
+	}
+
+	/** [context] carries the app's language, so every text below is in it. */
+	private fun show(context: Context, reminder: PlannedLunarReminder) {
 		ensureChannel(context)
 
 		val title = LunarTexts.title(context, reminder)

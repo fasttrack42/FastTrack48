@@ -46,11 +46,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -61,8 +61,8 @@ import com.legbehindneck.fasttrack48.screens.fasting.FastingScreen
 import com.legbehindneck.fasttrack48.screens.fasting.FastingViewModel
 import com.legbehindneck.fasttrack48.screens.log.LogScreen
 import com.legbehindneck.fasttrack48.screens.log.LogViewModel
+import com.legbehindneck.fasttrack48.screens.profile.InfoDialog
 import com.legbehindneck.fasttrack48.screens.profile.ProfileScreen
-import com.legbehindneck.fasttrack48.utils.Utils
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.time.ExperimentalTime
@@ -589,17 +589,15 @@ private fun PageContainer(
 		}
 
 		ScreenPages.Profile -> {
-			val context = LocalContext.current
+			// Title and text of the open explanation; saveable, so it outlives a rotation.
+			var infoDialog by rememberSaveable { mutableStateOf<Pair<Int, Int>?>(null) }
 			ProfileScreen(
 				contentPaddingValues = contentPaddingValues,
-				onShowInfoDialog = { titleRes, contentRes ->
-					Utils.showInfoDialog(
-						titleRes,
-						contentRes,
-						context
-					)
-				}
+				onShowInfoDialog = { titleRes, contentRes -> infoDialog = titleRes to contentRes },
 			)
+			infoDialog?.let { (titleRes, contentRes) ->
+				InfoDialog(titleRes, contentRes, onDismiss = { infoDialog = null })
+			}
 		}
 	}
 }

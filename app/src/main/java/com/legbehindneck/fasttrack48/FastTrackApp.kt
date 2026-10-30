@@ -58,10 +58,16 @@ class FastTrackApp : Application(), Configuration.Provider {
 
 	@RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
 	private suspend fun publishWidgetPreviews(context: Context) {
-		GlanceAppWidgetManager(context).setWidgetPreviews(
-			receiver = FastingWidgetReceiver::class,
-			widgetCategories = intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN)
-		)
+		// Runs in GlobalScope on every process start: an exception escaping here (the system
+		// rate-limits preview updates) would be uncaught and take the whole app down.
+		try {
+			GlanceAppWidgetManager(context).setWidgetPreviews(
+				receiver = FastingWidgetReceiver::class,
+				widgetCategories = intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN)
+			)
+		} catch (e: Exception) {
+			Napier.w("Could not publish widget previews", e)
+		}
 	}
 
 	override val workManagerConfiguration: Configuration

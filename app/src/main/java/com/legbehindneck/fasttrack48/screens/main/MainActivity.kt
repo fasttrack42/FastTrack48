@@ -74,14 +74,22 @@ class MainActivity : AppCompatActivity() {
 
 		themeModeState = settings.getThemeMode()
 		dateStyleState = settings.getDateStyle()
-		handleStartFastExtra(intent)
-		handlePageExtra(intent)
-		handleImportResultExtra(intent)
+		// A recreation (rotation, theme change, process death) re-delivers the launch intent;
+		// a widget or shortcut tap, a page to open or an import result is a one-shot request,
+		// not something to re-raise each time. removeExtra cannot help after process death:
+		// the system restores from the intent it kept, extras and all.
+		if (savedInstanceState == null) {
+			handleStartFastExtra(intent)
+			handlePageExtra(intent)
+			handleImportResultExtra(intent)
+		}
 		// The picker's outcome is shown in the same dialog an [ImportActivity] import gets:
 		// one door or the other, the user is told the same thing in the same place.
 		importLauncher = registerLogImport(logRepository) { result -> importResultState = result }
 
-		if (!settings.getIntroSeen()) {
+		// Once per launch, not once per recreation: the intro is still on top when this
+		// activity is recreated behind it, and a second copy would stack over the first.
+		if (savedInstanceState == null && !settings.getIntroSeen()) {
 			startActivity(Intent(this, IntroActivity::class.java))
 		}
 
@@ -195,6 +203,10 @@ class MainActivity : AppCompatActivity() {
 		handleImportResultExtra(intent)
 	}
 
+	/**
+	 * A start or stop asked for from outside — the widget, a launcher shortcut. The extras
+	 * are removed once read, as [handlePageExtra] does, so the request is acted on once.
+	 */
 	private fun handleStartFastExtra(intent: Intent?) {
 		if (intent?.getBooleanExtra(START_FAST_EXTRA, false) == true) {
 			val startNow = intent.getBooleanExtra(START_FAST_NOW_EXTRA, false)
@@ -202,6 +214,9 @@ class MainActivity : AppCompatActivity() {
 		} else if (intent?.getBooleanExtra(STOP_FAST_EXTRA, false) == true) {
 			stopFastRequestState = true
 		}
+		intent?.removeExtra(START_FAST_EXTRA)
+		intent?.removeExtra(START_FAST_NOW_EXTRA)
+		intent?.removeExtra(STOP_FAST_EXTRA)
 	}
 
 	/**
@@ -240,16 +255,21 @@ class MainActivity : AppCompatActivity() {
 
 	private fun rateApp() {
 		try {
-			startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri()))
+			startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$STORE_ID".toUri()))
 		} catch (_: ActivityNotFoundException) {
 			// No Play Store on this device; fall back to the web listing
-			openUrl("https://play.google.com/store/apps/details?id=$packageName")
+			openUrl(PLAY_URL)
 		}
 	}
 
+	/** Every place to get the app, so the recipient can pick the one their phone uses. */
 	private fun shareApp() {
-		val shareText =
-			"${getString(R.string.app_name)} — https://play.google.com/store/apps/details?id=$packageName"
+		val shareText = listOf(
+			getString(R.string.app_name),
+			"Google Play: $PLAY_URL",
+			"F-Droid: $FDROID_URL",
+			"GitHub (Obtainium): $GITHUB_URL",
+		).joinToString("\n")
 		val intent = Intent(Intent.ACTION_SEND).apply {
 			type = "text/plain"
 			putExtra(Intent.EXTRA_TEXT, shareText)
@@ -258,6 +278,13 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	companion object {
+		// The published id, not packageName: the debug build's ".dev" id is listed nowhere.
+		private const val STORE_ID = "com.legbehindneck.fasttrack48"
+		private const val PLAY_URL = "https://play.google.com/store/apps/details?id=$STORE_ID"
+		private const val FDROID_URL = "https://f-droid.org/packages/$STORE_ID/"
+		// Obtainium adds an app from its repository address.
+		private const val GITHUB_URL = "https://github.com/fasttrack42/FastTrack48"
+
 		const val START_FAST_EXTRA = "START_FAST"
 		const val START_FAST_NOW_EXTRA = "START_FAST_NOW"
 		const val STOP_FAST_EXTRA = "STOP_FAST"

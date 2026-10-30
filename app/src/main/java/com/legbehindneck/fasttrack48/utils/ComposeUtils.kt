@@ -39,7 +39,7 @@ fun combinePadding(padding1: PaddingValues, padding2: PaddingValues): PaddingVal
 class PastAndTodaySelectableDates : SelectableDates {
 	override fun isSelectableDate(utcTimeMillis: Long): Boolean {
 		val today = JavaLocalDate.now()
-		val date = JavaLocalDate.ofEpochDay(utcTimeMillis / (24 * 60 * 60 * 1000))
+		val date = JavaLocalDate.ofEpochDay(Math.floorDiv(utcTimeMillis, MILLIS_PER_DAY))
 		return !date.isAfter(today)
 	}
 }
@@ -50,20 +50,23 @@ class PastAndTodaySelectableDates : SelectableDates {
 class DateRangeSelectableDates(private val minDateMillis: Long?) : SelectableDates {
 	override fun isSelectableDate(utcTimeMillis: Long): Boolean {
 		val today = JavaLocalDate.now()
-		val date = JavaLocalDate.ofEpochDay(utcTimeMillis / (24 * 60 * 60 * 1000))
+		val date = JavaLocalDate.ofEpochDay(Math.floorDiv(utcTimeMillis, MILLIS_PER_DAY))
 
 		// Date must not be after today
 		if (date.isAfter(today)) return false
 
 		// If minDateMillis is specified, date must not be before it
 		if (minDateMillis != null) {
-			val minDate = JavaLocalDate.ofEpochDay(minDateMillis / (24 * 60 * 60 * 1000))
+			val minDate = JavaLocalDate.ofEpochDay(Math.floorDiv(minDateMillis, MILLIS_PER_DAY))
 			if (date.isBefore(minDate)) return false
 		}
 
 		return true
 	}
 }
+
+/** Floor division keeps pre-1970 days (negative millis) on the right date. */
+private const val MILLIS_PER_DAY = 24L * 60 * 60 * 1000
 
 val MAX_COLUMN_WIDTH = 600.dp
 

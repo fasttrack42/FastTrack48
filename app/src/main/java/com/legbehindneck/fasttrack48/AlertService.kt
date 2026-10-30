@@ -17,6 +17,7 @@ import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.screens.main.MainActivity
+import com.legbehindneck.fasttrack48.screens.settings.withAppLanguage
 import io.github.aakira.napier.Napier
 import org.koin.android.ext.android.inject
 import kotlin.time.Duration
@@ -28,8 +29,11 @@ class AlertService : JobService() {
 	private val settingsDatasource: SettingsDatasource by inject()
 
 	override fun onStartJob(params: JobParameters): Boolean {
+		// A phase job can outlive the reason it was scheduled: the fast may have ended, or
+		// the user may have turned stage alerts off since. Neither should still post.
+		val phaseAlertWanted = repository.isFasting() && settingsDatasource.getFastingAlerts()
 		when (params.jobId) {
-			JobId.FAT_BURN.id -> {
+			JobId.FAT_BURN.id -> if (phaseAlertWanted) {
 				postNotification(
 					R.string.notification_fat_burn_title,
 					R.string.notification_fat_burn_content,
@@ -38,7 +42,7 @@ class AlertService : JobService() {
 				updateFastingNotification()
 			}
 
-			JobId.KETOSIS.id -> {
+			JobId.KETOSIS.id -> if (phaseAlertWanted) {
 				postNotification(
 					R.string.notification_ketosis_title,
 					R.string.notification_ketosis_content,
@@ -47,7 +51,7 @@ class AlertService : JobService() {
 				updateFastingNotification()
 			}
 
-			JobId.AUTOPHAGY.id -> {
+			JobId.AUTOPHAGY.id -> if (phaseAlertWanted) {
 				postNotification(
 					R.string.notification_autophagy_title,
 					R.string.notification_autophagy_content,
@@ -56,7 +60,7 @@ class AlertService : JobService() {
 				updateFastingNotification()
 			}
 
-			JobId.OPTIMAL_AUTOPHAGY.id -> {
+			JobId.OPTIMAL_AUTOPHAGY.id -> if (phaseAlertWanted) {
 				postNotification(
 					R.string.notification_optimal_autophagy_title,
 					R.string.notification_optimal_autophagy_content,
@@ -90,9 +94,11 @@ class AlertService : JobService() {
 		@StringRes content: Int,
 		notificationId: Int
 	) {
-		createNotificationChannel()
+		// This job's own context does not carry the app's language below API 33.
+		val texts = withAppLanguage(this)
+		createNotificationChannel(texts)
 
-		val contentStr = getString(content)
+		val contentStr = texts.getString(content)
 
 		val intent = Intent(this, MainActivity::class.java).apply {
 			flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -102,7 +108,7 @@ class AlertService : JobService() {
 
 		val builder = NotificationCompat.Builder(this, ALERTS_CHANNEL_ID)
 			.setSmallIcon(R.drawable.ic_alert)
-			.setContentTitle(getString(title))
+			.setContentTitle(texts.getString(title))
 			.setContentText(contentStr)
 			.setStyle(
 				NotificationCompat.BigTextStyle()
@@ -116,9 +122,9 @@ class AlertService : JobService() {
 		notificationManager.notify(NOTIFICATION_TAG, notificationId, builder.build())
 	}
 
-	private fun createNotificationChannel() {
-		val name = getString(R.string.notification_channel_name)
-		val descriptionText = getString(R.string.notification_channel_description)
+	private fun createNotificationChannel(texts: Context) {
+		val name = texts.getString(R.string.notification_channel_name)
+		val descriptionText = texts.getString(R.string.notification_channel_description)
 		val importance = NotificationManager.IMPORTANCE_DEFAULT
 		val channel = NotificationChannel(ALERTS_CHANNEL_ID, name, importance).apply {
 			description = descriptionText
@@ -155,14 +161,17 @@ class AlertService : JobService() {
 		private val LEEWAY = 30.minutes
 
 		fun cancelAlerts(context: Context) {
+			cancelPhaseAlerts(context)
+			cancelHourlyUpdates(context)
+		}
+
+		/** Cancel the stage alerts only, leaving the ongoing notification's hourly refresh. */
+		fun cancelPhaseAlerts(context: Context) {
 			val jobScheduler = context.getSystemService(JobScheduler::class.java)
-			// Cancel stage alerts
 			jobScheduler.cancel(JobId.FAT_BURN.id)
 			jobScheduler.cancel(JobId.KETOSIS.id)
 			jobScheduler.cancel(JobId.AUTOPHAGY.id)
 			jobScheduler.cancel(JobId.OPTIMAL_AUTOPHAGY.id)
-			// Cancel hourly updates
-			cancelHourlyUpdates(context)
 		}
 
 		fun cancelHourlyUpdates(context: Context) {
@@ -171,33 +180,31 @@ class AlertService : JobService() {
 		}
 
 		fun scheduleAlerts(elapsedTime: Duration, context: Context) {
-			val elapsedHours = elapsedTime.inWholeHours
-
 			JobId.entries.forEach { jobId ->
 				when (jobId) {
 					JobId.FAT_BURN -> schedulePhase(
-						elapsedHours,
+						elapsedTime,
 						Stages.PHASE_FAT_BURN,
 						jobId.id,
 						context
 					)
 
 					JobId.KETOSIS -> schedulePhase(
-						elapsedHours,
+						elapsedTime,
 						Stages.PHASE_KETOSIS,
 						jobId.id,
 						context
 					)
 
 					JobId.AUTOPHAGY -> schedulePhase(
-						elapsedHours,
+						elapsedTime,
 						Stages.PHASE_AUTOPHAGY,
 						jobId.id,
 						context
 					)
 
 					JobId.OPTIMAL_AUTOPHAGY -> schedulePhase(
-						elapsedHours,
+						elapsedTime,
 						Stages.PHASE_OPTIMAL_AUTOPHAGY,
 						jobId.id,
 						context
@@ -210,10 +217,15 @@ class AlertService : JobService() {
 			}
 		}
 
-		private fun schedulePhase(elapsedHours: Long, phase: Phase, jobId: Int, context: Context) {
-			if (elapsedHours < phase.hours) {
-				val msUntil = phase.hours.minus(elapsedHours).hours.inWholeMilliseconds
-				scheduleAlert(jobId, msUntil, context)
+		/**
+		 * Arm [phase]'s alert for the moment the fast reaches it. Computed from the exact
+		 * elapsed time: whole hours would put a fast 15h50m in on a 1h delay, and its 16h
+		 * alert at 16h50m.
+		 */
+		private fun schedulePhase(elapsedTime: Duration, phase: Phase, jobId: Int, context: Context) {
+			val until = phase.hours.hours - elapsedTime
+			if (until > Duration.ZERO) {
+				scheduleAlert(jobId, until.inWholeMilliseconds, context)
 			}
 		}
 

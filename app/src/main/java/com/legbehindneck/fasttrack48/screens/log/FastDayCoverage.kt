@@ -44,14 +44,20 @@ fun coverageByDay(entries: List<FastingLogEntry>, tz: TimeZone): CalendarCoverag
 		// that day), never earlier than the start day.
 		val endDate = maxOf(startDate, (endInstant - 1.milliseconds).toLocalDateTime(tz).date)
 		endDateById[e.id] = endDate
+		// Bounded walk, as in dailyFastedHours: a corrupt or hand-edited entry claiming years
+		// of coverage must not become millions of iterations on the main thread.
+		val lastDay = minOf(endDate, startDate.plus(MAX_COVERAGE_DAYS, DateTimeUnit.DAY))
 		var d = startDate
-		while (d <= endDate) {
+		while (d <= lastDay) {
 			byDay.getOrPut(d) { mutableListOf() }.add(e)
 			d = d.plus(1, DateTimeUnit.DAY)
 		}
 	}
 	return CalendarCoverage(byDay, endDateById)
 }
+
+/** The most days one fast is drawn across: past the longest fast on record (382 days). */
+private const val MAX_COVERAGE_DAYS = 400
 
 /** Hours fasted on one calendar day, and the longest fast that touched it. */
 data class DayLoad(

@@ -1,5 +1,5 @@
 name: 💡 Idea or improvement
-description: How we can improve?
+description: How can we improve?
 labels: ["enhancement"]
 body:
   - type: markdown

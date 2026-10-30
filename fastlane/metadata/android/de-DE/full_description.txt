@@ -43,6 +43,7 @@ FastTrack48 zeigt Dir, was in Deinem Körper während des Fastens geschieht, und
 • Konfigurierbares Datums- und Zeitformat.
 • Metrische oder imperiale Einheiten.
 • Schalter für laufende Benachrichtigung und Stadien-Hinweise.
+• Optionale Erinnerungen an Ekadashi, Purnima und Amavasya oder an Voll- und Neumond.
 
 <h3>Lokalisierung</h3>
 • Kostenlos und quelloffen unter der MIT-Lizenz, ohne Bedingungen.

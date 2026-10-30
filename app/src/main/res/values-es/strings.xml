@@ -49,7 +49,6 @@
 	<string name="title_fasting">Ayuno</string>
 	<string name="title_log">Historial</string>
 	<string name="title_profile">Perfil</string>
-	<string name="fasting_fragment_label">Ayuno</string>
 	<string name="start_fast_button">Iniciar</string>
 	<string name="start_orb_label">Iniciar</string>
 	<string name="start_fast_now_button">Iniciar ayuno ahora</string>
@@ -58,26 +57,15 @@
 	<string name="fasting_energy_mode_glucose">Glucosa</string>
 	<string name="fasting_energy_mode_fat">Cuerpos cetónicos</string>
 	<string name="confirm_start_fast_title">¿Iniciar ayuno?</string>
-	<string name="confirm_start_fast_positive">Ahora</string>
-	<string name="confirm_start_fast_neutral">Ya he comenzado</string>
-	<string name="confirm_start_fast_negative">No</string>
 	<string name="already_started_dialog_title">Ya ha comenzado</string>
-	<string name="start_picker_title">¿Cuándo comenzaste tu ayuno?</string>
 	<string name="confirm_end_fast_title">¿Terminar ayuno?</string>
-	<string name="confirm_end_fast_positive">Ahora</string>
-	<string name="confirm_end_fast_neutral">¿Ya terminaste el ayuno?</string>
-	<string name="confirm_end_fast_negative">No</string>
 	<string name="already_stopped_dialog_title">¿Cuándo terminaste?</string>
 	<string name="menu_edit">Editar</string>
 	<string name="menu_delete">Eliminar</string>
 	<string name="confirm_delete_fast_title">¿Eliminar ayuno?</string>
 	<string name="confirm_delete_fast_positive">Sí</string>
 	<string name="confirm_delete_fast_negative">No</string>
-	<string name="fast_status_fasting">Ayuno en curso</string>
-	<string name="fast_status_not_fasting">No estás ayunando</string>
-	<string name="next_stage">Siguiente etapa en: %1$d horas</string>
 
-	<string name="log_entry_started">Iniciado: %1$s</string>
 	<string name="log_entry_length">%1$d horas</string>
 	<string name="log_entry_ketosis">Cetosis: %1$d horas</string>
 	<string name="log_entry_autophagy">Autofagia: %1$d horas</string>
@@ -86,15 +74,15 @@
 	<string name="profile_weight_label">Peso</string>
 	<string name="profile_weight_pounds_label">Libras</string>
 	<string name="profile_weight_kg_label">Kilos</string>
-	<string name="profile_update_button">Actualizar</string>
 	<string name="profile_bmi_label">IMC:</string>
 	<string name="profile_bmi_value">%1$.1f - %2$s</string>
 	<string name="profile_bmi_category_underweight">Bajo peso</string>
-	<string name="profile_bmi_category_normal">Normal</string>
+	<string name="profile_bmi_category_normal">Peso saludable</string>
 	<string name="profile_bmi_category_overweight">Sobrepeso</string>
 	<string name="profile_bmi_category_obese">Obesidad</string>
 	<string name="profile_bmi_category_morbidly_obese">Obesidad mórbida</string>
-	<string name="profile_error">Valor incorrecto</string>
+	<string name="profile_error_range">Introduce un número entre %1$d y %2$d.</string>
+	<string name="profile_error_range_whole">Introduce un número entero entre %1$d y %2$d.</string>
 	<string name="profile_bmr_label">TMB:</string>
 	<string name="profile_bmr_value">%.0f kcal/día</string>
 	<string name="profile_height_label">Altura</string>
@@ -105,14 +93,11 @@
 	<string name="profile_gender_female">Femenino</string>
 	<string name="manual_add_title">Añadir manualmente</string>
 	<string name="manual_edit_title">Editar entrada</string>
-	<string name="manual_add_length_hint">Duración (horas)</string>
 	<string name="manual_add_complete_button">Añadir</string>
 	<string name="manual_add_save_button">Guardar</string>
-	<string name="manual_add_fast_started_on">Ayuno iniciado el: %1$s</string>
 	<string name="manual_add_start_date_time_label">Fecha y hora de inicio</string>
 	<string name="edit_date">Editar fecha</string>
 	<string name="edit_time">Editar hora</string>
-	<string name="manual_start_title">Iniciar</string>
 	<string name="manual_add_set_end_title">Fin del ayuno</string>
 	<string name="manual_add_set_end_complete">Calcular</string>
 	<string name="fast_autophagy_label">Autofagia</string>
@@ -138,10 +123,6 @@
 	<string name="phase_ketosis">Cetosis</string>
 	<string name="phase_autophagy">Autofagia</string>
 	<string name="phase_optimal_autophagy">Autofagia óptima</string>
-	<string name="share_text">¡He estado ayunando durante %1$d horas y %2$d minutos! Mi cuerpo está utilizando
-        %3$s como fuente de energía.</string>
-	<string name="share_text_past_tense">¡Ayuné durante %1$d horas y %2$d minutos!</string>
-	<string name="stage_alerts_checkbox">Alertas de etapa</string>
 	<string name="notification_channel_name">Alertas de ayuno</string>
 	<string name="notification_channel_description">Alertas que te informan cuando has entrado en una nueva fase de tu
         ayuno.</string>
@@ -160,29 +141,8 @@
 	<string name="notification_fasting_channel_name">Estado de ayuno</string>
 	<string name="notification_fasting_channel_description">Notificación permanente que muestra tu estado de ayuno actual y
         tu progreso.</string>
-	<string name="notification_fasting_title">Ayuno: %1$s horas</string>
 	<string name="notification_fasting_energy_mode">Modo de energía: %1$s</string>
 
-	<string name="info_dialog_fat_burn_title">Quema de grasa</string>
-	<string name="info_dialog_fat_burn_content">En esta etapa, tu cuerpo ha agotado sus reservas de glucosa. La glucosa
-        se almacena como glucógeno para su uso posterior; en esta etapa, la mayor parte del glucógeno almacenado se ha
-        descompuesto en glucosa y se ha consumido para obtener energía.\n\nAhora comienza a descomponer el tejido
-        adiposo (grasa) en cuerpos cetónicos. Además de poder utilizar glucosa para obtener energía, tu cuerpo también
-        puede utilizar cuerpos cetónicos para obtener energía y, a medida que las reservas de glucosa se agotan, tu
-        cuerpo cambiará su fuente de energía a los cuerpos cetónicos.</string>
-	<string name="info_dialog_ketosis_title">Cetosis</string>
-	<string name="info_dialog_ketosis_content">En esta etapa, tu cuerpo ha estado descomponiendo grasa el tiempo
-        suficiente como para que esté siendo alimentado principalmente por cuerpos cetónicos en lugar de
-        glucosa.\n\nAdemás de los beneficios de pérdida de grasa que esto implica, los estudios han demostrado
-        beneficios para enfermedades relacionadas con la inflamación, aunque actualmente se desconoce el mecanismo
-        de acción.</string>
-	<string name="info_dialog_autophagy_title">Autofagia</string>
-	<string name="info_dialog_autophagy_content">En esta etapa, tu cuerpo ha comenzado a activar algunos procesos más
-        para obtener energía. Además de descomponer el tejido adiposo en cuerpos cetónicos, ha comenzado a buscar
-        células viejas o dañadas y a consumirlas para obtener más energía.\n\nLa investigación sobre esta fase está en
-        sus primeras etapas, pero parece que este es un mecanismo importante para que el cuerpo detenga problemas antes
-        de que comiencen. Por ejemplo, las tasas de cáncer son más bajas en personas que entran regularmente en
-        autofagia. Además, algunos estudios también han mostrado tasas más bajas de enfermedad de Alzheimer.</string>
 	<string name="info_dialog_bmi_title">Índice de masa corporal</string>
 	<string name="info_dialog_bmi_content">Una estimación aproximada del peso saludable que un adulto humano promedio
         debería tener. Se calcula simplemente dividiendo el peso por la altura.\n\nA menudo criticado por ser inexacto,
@@ -201,14 +161,10 @@
 	<string name="title_activity_info">Información sobre el ayuno</string>
 	<string name="log_total_autophagy">🧬 Autofagia total:</string>
 	<string name="log_total_ketosis">🔥 Cetosis total:</string>
-	<string name="log_total_hours">%1$d horas</string>
-	<string name="profile_metric_switch">Métrico</string>
 	<string name="title_activity_intro">Introducción</string>
 	<string name="app_widget_description">Controla tu progreso de ayuno desde la pantalla de inicio.</string>
 	<string name="app_widget_not_fasting">No estás ayunando</string>
 	<string name="app_widget_fast_in_progress">Ayuno en curso</string>
-	<string name="app_widget_time">%1$d horas</string>
-	<string name="app_widget_time_compact">%1$d h</string>
 	<string name="app_widget_start_fast_button">Iniciar ayuno</string>
 	<string name="app_widget_stop_fast_button">Detener ayuno</string>
 	<string name="app_widget_start_compact">Iniciar</string>
@@ -220,20 +176,13 @@
 	<string name="skip_button">Omitir</string>
 	<string name="done_button">Hecho</string>
 	<string name="debug_add_hour_button">Depurar: añadir 1 hora</string>
-	<string name="stop_fast_button_description">Detener ayuno</string>
-	<string name="start_fast_button_description">Iniciar ayuno</string>
 	<string name="bmi_info_button_description">Información del IMC</string>
 	<string name="bmr_info_button_description">Información de la TMB</string>
-	<string name="profile_gender_label">Género</string>
+	<string name="profile_gender_label">Sexo (para la TMB)</string>
 	<string name="more_options_button_description">Más opciones</string>
-	<string name="manual_add_close_button_description">Cerrar</string>
-	<string name="manual_add_selected_start">Iniciado: %1$s</string>
-	<string name="manual_add_cancel_button">Cancelar</string>
-	<string name="manual_add_next_button">Siguiente</string>
 	<string name="manual_add_calculate_from_end">Calcular desde el final</string>
 	<string name="action_settings">Ajustes</string>
 	<string name="title_activity_settings">Ajustes</string>
-	<string name="settings_placeholder">Configuración próximamente</string>
 	<string name="back">Atrás</string>
 	<string name="settings_fancy_background_title">Mostrar fondo elegante</string>
 	<string name="settings_fancy_background_subtitle">Desactívalo para usar un fondo más sencillo y limpio</string>
@@ -245,8 +194,6 @@
 	<string name="settings_theme_mode_light">Claro</string>
 	<string name="settings_theme_mode_dark">Oscuro</string>
 	<string name="log_no_entries">¡Aún no hay entradas!</string>
-	<string name="log_logbook_label">Historial</string>
-	<string name="log_stats_label">Estadísticas acumuladas</string>
 	<string name="log_view_mode_list">Lista</string>
 	<string name="log_view_mode_calendar">Mes</string>
 	<string name="log_view_mode_year">Año</string>
@@ -255,13 +202,14 @@
 	<string name="duration_less_than_minute">Recién empezado</string>
 	<string name="fast_notes_label">Notas (opcional)</string>
 	<string name="fast_notes_placeholder">¿Qué tal ha ido? ¿Hay algo que quieras recordar de este ayuno?</string>
-	<string name="just_finished_fast">Acabas de terminar un ayuno. ¡Bien hecho!</string>
+	<string name="time_since_last_fast">Tiempo desde el último ayuno: %1$s</string>
+	<string name="duration_under_minute">menos de un minuto</string>
+	<string name="fast_well_done">Bien hecho: has ayunado %1$s.</string>
+	<string name="milestone_in">%1$s en %2$s</string>
+	<string name="milestone_for">%1$s desde hace %2$s</string>
 
 	<string name="notification_fasting_title_duration">Ayuno: %1$s</string>
 	<string name="phase_time_until">en %1$s</string>
-	<string name="time_since_last_fast">Tiempo desde tu último ayuno: %1$s</string>
-	<string name="last_fast_length">Ayuno de %1$s</string>
-	<string name="last_fast_ended">terminó %1$s</string>
 	<string name="share_text_fasting">¡Llevo ayunando %1$s! Ahora mismo mi cuerpo utiliza %2$s como fuente de energía.</string>
 	<string name="share_text_finished">¡He ayunado %1$s!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
@@ -362,8 +310,8 @@
 	<string name="lunar_moon_style_astronomical_detail">La fecha exacta de la luna llena o nueva en tu zona horaria</string>
 	<string name="lunar_calculating">Calculando…</string>
 	<string name="lunar_no_days_selected">Elige al menos un día para recibir recordatorios</string>
-	<string name="lunar_tradition_title">Calendario de Ekadashi</string>
-	<string name="lunar_tradition_question">¿Qué calendario de Ekadashi sigues?</string>
+	<string name="lunar_tradition_title">Calendario de ayuno</string>
+	<string name="lunar_tradition_question">¿Qué calendario de ayuno sigues?</string>
 	<string name="lunar_tradition_smarta">Smarta</string>
 	<string name="lunar_tradition_smarta_detail">La mayoría de los calendarios hindúes, incluido Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
@@ -434,5 +382,46 @@
 	<string name="lunar_amavasya_details">Día de ayuno: %1$s. Inicio de Amavasya: %2$s.</string>
 	<string name="lunar_newmoon_details">Luna nueva: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, después de las %2$s</string>
+	<string name="lunar_tradition_ananda_marga">Ananda Marga</string>
+	<string name="lunar_tradition_ananda_marga_detail">El día de amanecer a amanecer en Varanasi que contiene la mayor parte del tithi. Las mismas fechas en todas partes.</string>
+	<string name="lunar_tradition_ananda_marga_india">Ananda Marga, calendario de la India</string>
+	<string name="lunar_tradition_ananda_marga_india_detail">La fecha del calendario indio que contiene la mayor parte del tithi, como en el calendario oficial de la India.</string>
+	<string name="fast_days_title">Días de ayuno</string>
+	<string name="fast_days_see_all">Ver todos los días de ayuno</string>
+	<string name="fast_days_add_to_calendar">Añadir al calendario</string>
+	<string name="fast_days_export_failed">No se pudo crear el archivo de calendario.</string>
+	<string name="fast_days_source_ananda_marga">Regla de Ananda Marga. Fechas: Varanasi. Amanecer: %1$s.</string>
+	<string name="fast_days_source_ananda_marga_india">Ananda Marga, calendario de la India. Fechas: India. Amanecer: %1$s.</string>
+	<string name="fast_days_source_local">%1$s. Fechas y amanecer: %2$s.</string>
+	<string name="fast_days_your_location">tu ubicación</string>
+	<string name="fast_days_next_full_moon">Luna llena %1$s</string>
+	<string name="fast_days_next_new_moon">Luna nueva %1$s</string>
+	<string name="fast_days_today_marker">hoy</string>
+	<string name="fast_days_empty">No hay días de ayuno en los próximos 12 meses.</string>
+	<string name="moon_phase_new">Luna nueva</string>
+	<string name="moon_phase_waxing_crescent">Luna creciente</string>
+	<string name="moon_phase_first_quarter">Cuarto creciente</string>
+	<string name="moon_phase_waxing_gibbous">Gibosa creciente</string>
+	<string name="moon_phase_full">Luna llena</string>
+	<string name="moon_phase_waning_gibbous">Gibosa menguante</string>
+	<string name="moon_phase_last_quarter">Cuarto menguante</string>
+	<string name="moon_phase_waning_crescent">Luna menguante</string>
+	<string name="fast_kind_shukla_ekadashi">Shukla Ekadashi</string>
+	<string name="fast_kind_krishna_ekadashi">Krishna Ekadashi</string>
+	<string name="fast_kind_purnima">Purnima</string>
+	<string name="fast_kind_amavasya">Amavasya</string>
+	<string name="fast_day_today">hoy</string>
+	<string name="fast_day_tomorrow">mañana</string>
+	<plurals name="fast_day_in_days">
+		<item quantity="one">en %d día</item>
+		<item quantity="many">en %d días</item>
+		<item quantity="other">en %d días</item>
+	</plurals>
+	<string name="fast_day_from_sunrise">Ayuno desde el amanecer: %1$s</string>
+	<string name="fast_day_until_sunrise">Ayuno hasta el amanecer: %1$s</string>
+	<string name="fast_day_window">Ayuno del amanecer (%1$s) al amanecer (%2$s)</string>
+	<string name="fast_day_break_fast">Romper el ayuno: %1$s</string>
+	<string name="fast_day_begins">%1$s empieza: %2$s</string>
+	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>

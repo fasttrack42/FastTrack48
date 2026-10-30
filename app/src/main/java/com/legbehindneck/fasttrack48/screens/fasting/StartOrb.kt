@@ -13,17 +13,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.TextAutoSize
-import com.legbehindneck.fasttrack48.utils.WordSafe
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,8 +29,8 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalDensity
@@ -50,51 +43,43 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.em
 import com.legbehindneck.fasttrack48.R
 
 /**
- * The entrance to a fast: a struck gold medallion seated on the dial's own centre.
+ * The entrance to a fast: a matte, dawn-coloured disc on the dial's own centre, carrying one
+ * word.
  *
- * The idle dial is a hashed empty ring, and the action that fills it used to be the
- * smallest element on the screen, parked on the arc's left shoulder with nothing facing
- * it. Putting it in the centre lets the geometry state the intent — *you are entering the
- * ring* — and the composition finally has a subject.
+ * Dawn because the dial's first stage is the dawn of the journey, so the disc reads as "begin
+ * here". It is warm against the violet ground, which keeps the pop-out of the gold coin it
+ * replaces without the coin's message (a medal, before any effort). Matte because the rest
+ * of the screen is flat; one metal object in it looked like another app. The colours are
+ * fixed in both themes: a material, not a palette entry.
  *
- * Nesting, all fractions of the dial's side D and all derived rather than chosen:
+ * Nesting, all fractions of the dial's side D:
  *
- *   core disc   D / phi^2 = 0.382 D   ~130dp on the portrait dial
- *   bloom       D / phi   = 0.618 D   radius 0.309 D
- *   glyph       disc / phi^2          the same step, one level down
+ *   disc     d = D / φ²                ~111dp on a 291dp dial
+ *   bloom    D / φ                     radius 0.309 D; the innermost tick is at 0.347 D
+ *   label    em = d / φ⁴ = D / φ⁶      the arc's own stroke width: word and ring, one weight
+ *            ink width ≤ d / φ         the disc's golden minor
  *
- * The bloom's radius is the binding constraint: [TimeLine]'s innermost tick reaches
- * 0.3328 D, so the halo stops ~0.024 D short of the texture and never touches it. This is
- * the largest orb the existing dial permits, not a number picked to look big.
+ * The label is centred on the disc's centre. A word wider than the golden minor at that size
+ * steps down until it fits ("STARTEN", "ПОЧАТИ"). If that would take it under a legible 13dp,
+ * it may use the disc's inscribed square (d / √2) with tighter tracking instead
+ * ("COMMENCER"), and nothing goes under 11dp. Sized in dp, not sp, so a 200% font setting
+ * cannot push the word through the rim; at 16dp bold and 9:1 on this ground it is legible at
+ * any setting.
  *
- * ### Why the metal is hand-built and theme-independent
+ * The one animation on an idle screen is the bloom's breath. It runs on a [graphicsLayer]
+ * over a small composable rather than invalidating the dial's canvas, which is what lets
+ * [TimeLine] keep its "nothing moves while idle" rule.
  *
- * The first cut of this used `journeyStageColor(0)` for the disc. In dark theme that is a
- * near-white ivory, so the "gold" orb rendered as a pale blob. Metal is not a palette
- * entry that inverts with the theme — gold is gold on either ground — so the ramp below is
- * its own, fixed, and used verbatim in both themes. Only the bloom borrows the stage-0
- * accent's role, and it does so in this same gold.
- *
- * The face is a [Brush.sweepGradient] rather than a linear or radial one, because that is
- * what lathe-turned metal actually is: brightness as a function of *angle*, two bright
- * lobes on the axis facing the light and two dark ones across from them. A radial gradient
- * can only ever produce a dome. Over it sit three cheap physical cues, in order — an
- * ambient-occlusion falloff toward the rim, one diffuse specular in the upper left, and a
- * hairline shade where the face meets the bevel. The bevel itself is a second sweep, phase
- * shifted so its bright quarter faces the same 315 degrees the specular does.
- *
- * The one animation on an idle screen is the bloom's breath, and it runs on a
- * [graphicsLayer] over a small composable rather than invalidating the dial's canvas —
- * which is what lets [TimeLine] keep its deliberate "nothing moves while idle" rule.
- *
- * [capturing] hides the orb for a shared image, by alpha rather than by removal, so the
+ * [capturing] hides the disc for a shared image, by alpha rather than by removal, so the
  * bounds the capture was measured against do not shift underneath it.
  */
 @Composable
@@ -104,7 +89,6 @@ fun StartOrb(
 	capturing: Boolean,
 	modifier: Modifier = Modifier,
 ) {
-	val spacing = fastingSpacing()
 	val haptics = LocalHapticFeedback.current
 	val description = stringResource(id = R.string.start_fast_button)
 
@@ -131,9 +115,8 @@ fun StartOrb(
 		label = "orbBreathAlpha",
 	)
 
-	// Press: the disc dips, the halo brightens, and an inner shadow closes over the face —
-	// the medallion pressing into its seat. All three through graphicsLayer or the existing
-	// draw pass, so a touch never relayouts the dial underneath.
+	// Press: the disc dips, the halo brightens, and a shade closes over the face. All through
+	// graphicsLayer or the disc's own draw pass, so a touch never relayouts the dial.
 	val pressScale by animateFloatAsState(
 		targetValue = if (pressed) 0.965f else 1f,
 		animationSpec = spring(
@@ -153,11 +136,22 @@ fun StartOrb(
 		label = "orbPressSink",
 	)
 
-	val discSize = dialSize * DiscFraction
-	val bloomSize = dialSize * BloomFraction
-	// EmOverInk corrects the em box up to the ink it actually contains, so the flame's
-	// visible height — not the invisible box around it — is the golden nesting step.
-	val glyphEm = with(LocalDensity.current) { (dialSize * GlyphFraction * EmOverInk).toSp() }
+	val discSize = dialSize / (PHI * PHI)
+	val bloomSize = dialSize / PHI
+
+	val label = stringResource(id = R.string.start_orb_label).uppercase()
+	val baseStyle = MaterialTheme.typography.titleSmall.merge(
+		TextStyle(
+			color = Ink,
+			fontWeight = FontWeight.Bold,
+			textAlign = TextAlign.Center,
+			// Letterpress: a light lip under each stroke, the way a matte surface catches
+			// light on the lower edge of a cut.
+			shadow = Shadow(color = Color.White.copy(alpha = 0.45f), offset = Offset(0f, 1.5f), blurRadius = 0f),
+			platformStyle = PlatformTextStyle(includeFontPadding = false),
+		)
+	)
+	val (fontSize, tracking) = rememberLabelFit(label, discSize, baseStyle)
 
 	Box(
 		modifier = modifier
@@ -179,16 +173,15 @@ fun StartOrb(
 					val radius = size.minDimension / 2f
 					drawCircle(
 						brush = Brush.radialGradient(
-							// Fading to a transparent *gold* rather than to
-							// Color.Transparent: the latter is transparent black, and
-							// interpolating through it greys the halo's outer half.
+							// Fading to a transparent dawn rather than to Color.Transparent: the
+							// latter is transparent black, and interpolating through it greys
+							// the halo's outer half.
 							colorStops = arrayOf(
-								0f to Gold,
-								// 0.62 is where the disc's rim sits (0.382 / 0.618), so
-								// this stop is the halo's *visible* starting alpha rather
-								// than a point hidden under the medallion.
-								0.62f to Gold.copy(alpha = 0.26f),
-								1f to Gold.copy(alpha = 0f),
+								0f to Dawn,
+								// 0.62 is where the disc's rim sits (0.382 / 0.618), so this stop
+								// is the halo's visible starting alpha, not a point under the disc.
+								0.62f to Dawn.copy(alpha = 0.26f),
+								1f to Dawn.copy(alpha = 0f),
 							),
 							center = center,
 							radius = radius,
@@ -208,210 +201,133 @@ fun StartOrb(
 				.clip(CircleShape)
 				.drawBehind {
 					val radius = size.minDimension / 2f
-					val bevel = radius * BevelFraction
-					val faceRadius = radius - bevel
 
-					// 1. The bevel: a full disc of angular metal, most of which the face
-					//    then covers. Bright at 315 degrees (upper left), dark opposite.
+					// 1. The face: lit from the upper left, where the screen's own gradient
+					//    is brightest. Radial, because a matte disc has no lathe marks.
 					drawCircle(
-						brush = Brush.sweepGradient(colorStops = BevelStops, center = center),
+						brush = Brush.radialGradient(
+							colorStops = arrayOf(0f to DawnPale, 0.55f to Dawn, 1f to DawnDeep),
+							center = Offset(size.width * 0.36f, size.height * 0.30f),
+							radius = size.minDimension * 0.8f,
+						),
 						radius = radius,
 					)
 
-					// 2. The face, turned on the same axis but with a shallower contrast
-					//    range, so the bevel stays the brightest thing on the medallion.
-					drawCircle(
-						brush = Brush.sweepGradient(colorStops = FaceStops, center = center),
-						radius = faceRadius,
-					)
-
-					// 3. Ambient occlusion: metal darkens toward a rim it cannot see past.
+					// 2. A little falloff at the rim, where the surface turns away.
 					drawCircle(
 						brush = Brush.radialGradient(
 							colorStops = arrayOf(
 								0f to Color.Transparent,
-								0.72f to Color.Black.copy(alpha = 0.06f),
-								1f to Color.Black.copy(alpha = 0.30f),
+								0.78f to Color.Transparent,
+								1f to Color.Black.copy(alpha = 0.10f),
 							),
 							center = center,
-							radius = faceRadius,
+							radius = radius,
 						),
-						radius = faceRadius,
+						radius = radius,
 					)
 
-					// 4. One diffuse specular, upper left, where the screen's own gradient
-					//    is brightest. Broad and soft — a hard spot would read as plastic.
-					drawCircle(
-						brush = Brush.radialGradient(
-							colors = listOf(
-								Color.White.copy(alpha = 0.34f),
-								Color.White.copy(alpha = 0f),
-							),
-							center = Offset(size.width * 0.34f, size.height * 0.28f),
-							radius = faceRadius * 0.92f,
-						),
-						radius = faceRadius,
-					)
-
-					// 5. The shade line where the face steps down from the bevel. One
-					//    hairline is what separates "two circles" from "one machined part".
+					// 3. A hairline catch-light on the rim: one line separates "a flat circle"
+					//    from "an object".
 					val hairline = 1.dp.toPx()
 					drawCircle(
-						color = Color.Black.copy(alpha = 0.28f),
-						radius = faceRadius - hairline / 2f,
+						color = Color.White.copy(alpha = 0.35f),
+						radius = radius - hairline / 2f,
 						style = Stroke(width = hairline),
 					)
 
-					// 6. Pressed: the face sinks into shadow from the rim inward.
+					// 4. Pressed: the face sinks into shade from the rim inward.
 					if (pressSink > 0f) {
 						drawCircle(
 							brush = Brush.radialGradient(
 								colorStops = arrayOf(
 									0f to Color.Black.copy(alpha = 0.06f * pressSink),
-									1f to Color.Black.copy(alpha = 0.34f * pressSink),
+									1f to Color.Black.copy(alpha = 0.30f * pressSink),
 								),
 								center = center,
-								radius = faceRadius,
+								radius = radius,
 							),
-							radius = faceRadius,
+							radius = radius,
 						)
 					}
 				}
 				.clickable(
 					interactionSource = interactionSource,
-					// No ripple: the sink, the scale and the halo already answer the touch,
-					// and a rectangular-origin ripple over turned metal reads as a smudge.
+					// No ripple: the sink, the scale and the halo already answer the touch.
 					indication = null,
 					role = Role.Button,
 				) {
 					haptics.performHapticFeedback(HapticFeedbackType.Confirm)
 					onClick()
 				}
-				// The glyph and the one-word label are decoration over a control that
-				// already says what it does; without this, TalkBack reads "Start, Start".
+				// The word is decoration over a control that already says what it does;
+				// without this, TalkBack reads "Start fast, Start".
 				.semantics { contentDescription = description },
 			contentAlignment = Alignment.Center,
 		) {
-			Column(
-				horizontalAlignment = Alignment.CenterHorizontally,
-				// The disc's inscribed square: everything inside stays off the bevel.
-				modifier = Modifier
-					.width(discSize / Sqrt2)
-					.clearAndSetSemantics { },
-			) {
-				// The flame is type, not a vector: it is a colour emoji, and a colour emoji
-				// cannot be tinted, so it is drawn at a size rather than at a colour. Drawn
-				// as an engraved monochrome silhouette it read as a leaf — fire is carried by
-				// its gradient, not by its outline — and as the emoji it also lands in the
-				// same token family as the stage bubbles around the dial.
-				//
-				// Its slot is its em box, sized through Dp.toSp() so the glyph follows the
-				// dial's geometry and not the user's font scale: a 200% accessibility setting
-				// must not push a flame out through the rim.
-				BasicText(
-					text = FlameGlyph,
-					style = TextStyle(
-						fontSize = glyphEm,
-						lineHeight = glyphEm,
-						textAlign = TextAlign.Center,
-						// The emoji is the one thing on the medallion that is not metal, so it
-						// gets the one thing metal gives an object resting on it: a contact
-						// shadow, short and soft, cast the way the face's own specular implies.
-						shadow = Shadow(
-							color = Color.Black.copy(alpha = 0.28f),
-							offset = Offset(0f, 2f),
-							blurRadius = 5f,
-						),
-						platformStyle = PlatformTextStyle(includeFontPadding = false),
-					),
-					modifier = Modifier.fillMaxWidth(),
-				)
-				Spacer(modifier = Modifier.height(spacing.small))
-				// One word, tracked. Autosized rather than fixed because "Commencer" and
-				// "ПОЧАТИ" have to live inside the same circle as "START".
-				BasicText(
-					text = stringResource(id = R.string.start_orb_label).uppercase(),
-					maxLines = 1,
-					autoSize = TextAutoSize.WordSafe(
-						minFontSize = 10.sp,
-						maxFontSize = 15.sp,
-						stepSize = 1.sp,
-					),
-					style = MaterialTheme.typography.titleSmall.merge(
-						TextStyle(
-							color = Engraved,
-							fontWeight = FontWeight.Bold,
-							letterSpacing = 1.6.sp,
-							textAlign = TextAlign.Center,
-						)
-					),
-					modifier = Modifier.fillMaxWidth(),
-				)
-			}
+			BasicText(
+				text = label,
+				maxLines = 1,
+				softWrap = false,
+				style = baseStyle.copy(fontSize = fontSize, letterSpacing = tracking),
+				modifier = Modifier.clearAndSetSemantics { },
+			)
 		}
 	}
 }
 
 /**
- * The medallion's own palette, fixed in both themes.
- *
- * Metal is described by where the light is, not by whether the page around it is dark, and
- * a gold that inverted with the theme would be a yellow shape rather than a material.
+ * Font size and tracking for the disc's word, by the rules in [StartOrb]'s documentation:
+ * em = d / φ⁴, narrowed until the ink fits d / φ; past the legible floor, d / √2 with tighter
+ * tracking; never under the hard floor. Width is linear in the font size, so one measurement
+ * per rule gives the exact size, and the result is remembered per word and disc.
  */
-private val Gold = Color(0xFFE3B24E)
-private val GoldPale = Color(0xFFF7E4A8)
-private val GoldDeep = Color(0xFFA8752A)
-private val GoldShadow = Color(0xFF6E4A18)
+@Composable
+private fun rememberLabelFit(label: String, disc: Dp, style: TextStyle): Pair<TextUnit, TextUnit> {
+	val measurer = rememberTextMeasurer()
+	val density = LocalDensity.current
+	return remember(label, disc, style, density) {
+		with(density) {
+			val emMax = (disc / (PHI * PHI * PHI * PHI)).toPx()
+			fun inkWidth(em: Float, tracking: Float): Int = measurer.measure(
+				text = label,
+				style = style.copy(fontSize = em.toSp(), letterSpacing = tracking.em),
+				maxLines = 1,
+				softWrap = false,
+			).size.width
+			fun fit(limit: Float, tracking: Float): Float {
+				val width = inkWidth(emMax, tracking)
+				return if (width <= limit) emMax else emMax * limit / width
+			}
 
-/** Deep bronze rather than black: an engraved mark keeps the metal's hue in its shadow. */
-private val Engraved = Color(0xFF3B2708)
+			var tracking = Tracking
+			var em = fit((disc / PHI).toPx(), tracking)
+			if (em < LegibleEm.toPx()) {
+				tracking = TightTracking
+				em = fit((disc / Sqrt2).toPx(), tracking)
+			}
+			em.coerceAtLeast(FloorEm.toPx()).toSp() to tracking.em
+		}
+	}
+}
 
-/**
- * Angular brightness of the bevel. Compose's sweep starts at three o'clock and runs
- * clockwise, so upper left is 0.625 of a turn and lower right is 0.125 — the light sits at
- * the former, the cast shade at the latter. First and last stops match, or the seam shows.
- */
-private val BevelStops = arrayOf(
-	0.000f to GoldDeep,
-	0.125f to GoldShadow,
-	0.375f to Gold,
-	0.625f to GoldPale,
-	0.875f to Gold,
-	1.000f to GoldDeep,
-)
+/** The disc's own palette, the same in both themes. Dawn is the warm end of the dial. */
+private val DawnPale = Color(0xFFFFE2B0)
+private val Dawn = Color(0xFFF4B06A)
+private val DawnDeep = Color(0xFFE5895E)
 
-/** The same axis, compressed: the face must stay a step below its own rim. */
-private val FaceStops = arrayOf(
-	0.000f to GoldDeep,
-	0.125f to GoldDeep,
-	0.375f to Gold,
-	0.625f to GoldPale,
-	0.875f to Gold,
-	1.000f to GoldDeep,
-)
+/** The word's colour: burnt umber, 9:1 at the disc's centre and 5.5:1 at its deepest edge. */
+private val Ink = Color(0xFF4A1E00)
 
-/** Core disc: the golden minor of the golden minor of the dial. */
-private const val DiscFraction = 1f / (PHI * PHI)
+/** Tracking for one word in capitals: open enough to read as a stamp, tight enough to fit. */
+private const val Tracking = 0.1f
+private const val TightTracking = 0.04f
 
-/** Ambient halo, bounded by the dial's innermost tick ring at 0.3328 of the side. */
-private const val BloomFraction = 1f / PHI
+/** Below this a word on the golden minor is too small to read at a glance. */
+private val LegibleEm = 13.dp
 
-/** The same nesting step again, from the disc to the glyph inside it. */
-private const val GlyphFraction = DiscFraction / (PHI * PHI)
-
-/**
- * Noto Color Emoji draws the flame about 15% *taller* than its em square — the glyph
- * overshoots the ascent — so the em box has to be set below the target for the fire itself
- * to land on the nesting step. Measured off the rendered glyph, not assumed: the naive
- * assumption is that ink fits inside the em, and it does not.
- */
-private const val EmOverInk = 0.87f
-
-/** Stage four's mark, and the app's own symbol for what a fast is. */
-private const val FlameGlyph = "\uD83D\uDD25"
-
-/** Rim width as a fraction of the disc's radius — ~5dp on the portrait dial. */
-private const val BevelFraction = 0.075f
+/** Nothing on the disc goes below this. */
+private val FloorEm = 11.dp
 
 /** Slow enough to read as breathing rather than as pulsing. */
 private const val BreathMillis = 3400

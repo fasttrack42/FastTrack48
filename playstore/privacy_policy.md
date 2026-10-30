@@ -1,6 +1,6 @@
 # Privacy Policy
 
-- **Effective date:** 20 August 2026
+- **Effective date:** 30 October 2026
 - **Applies to:** the FastTrack48 Android application, all versions from 14.0725.23 onwards
 - **Publisher / data controller:** `FastTrack42` (“we”, “us”)
 - **Privacy contact:** `glwnd2030@gmail.com`
@@ -26,7 +26,7 @@ links you tap that open another app.
 ## 2. What the app stores on your device
 
 FastTrack48 stores the following locally, in the app's private sandbox directory, using
-an on-device database (Room), preference storage (DataStore) and encrypted file storage:
+an on-device database (Room) and private settings files:
 
 **Fasting data**
 - start and end times of each fast, and the resulting duration
@@ -41,10 +41,38 @@ an on-device database (Room), preference storage (DataStore) and encrypted file 
 - theme, locale, date and time format, notification and alert preferences, units
 - which informational phases you have unlocked
 
+**Fasting-day reminders (optional — off until you turn them on)**
+- which reminders are on (Ekadashi, Purnima, Amavasya, or full and new moon), the Ekadashi
+  calendar, the reminder time and how many days ahead
+- only if you choose it, an approximate location (see below)
+
 We do not assign you an identifier of any kind. There is no account, no device ID, no
 advertising ID, no email address and no telephone number. The app never asks for your
-name, and does not read your contacts, location, camera, microphone, call logs, SMS,
-installed-app list, or any health data held by other apps or by Health Connect.
+name, and does not read your contacts, camera, microphone, call logs, SMS, installed-app
+list, or any health data held by other apps or by Health Connect. It reads your
+approximate location only when you ask it to, as described next.
+
+### Approximate location (optional)
+
+Ekadashi, Purnima and Amavasya dates follow local sunrise, so they can depend on where you
+are. By default the app estimates your location from the device's time zone. This needs no
+permission and reads nothing from the device.
+
+For an exact result you can tap **Use my location** in the reminder settings. Only then does
+the app ask for the `ACCESS_COARSE_LOCATION` permission. With it, the app reads one
+approximate position from Android (a recent stored fix, or else one new fix) and stops. It
+does not track your location, does not read it in the background, and does not use Google
+Play services.
+
+The app rounds the position to 0.01° (about 1 km), saves it with its date and time zone, and
+uses it only to calculate sunrise for reminder dates. The position never leaves your device:
+the app has no internet access, and the position is excluded from Android backup and from
+device-to-device transfer (section 4.1).
+
+The saved position stays on the device until you replace it, choose **Use my time zone
+instead** (this deletes it), clear the app's storage or uninstall the app. When you are in a
+different time zone from the one where you saved it, the app ignores it and uses the time
+zone estimate. You can withdraw the permission at any time in Android's settings.
 
 ### Special category data
 
@@ -69,10 +97,11 @@ user-interface, storage and date-handling libraries that operate entirely offlin
 
 | Permission | Purpose |
 | --- | --- |
-| `POST_NOTIFICATIONS` | show the ongoing fast notification and stage-change alerts |
-| `RECEIVE_BOOT_COMPLETED` | restore a fast in progress and its alerts after a restart |
+| `POST_NOTIFICATIONS` | show the ongoing fast notification, stage-change alerts and fasting-day reminders |
+| `RECEIVE_BOOT_COMPLETED` | restore a fast in progress, its alerts and your reminders after a restart |
 | `VIBRATE` | vibrate on a stage-change alert, if you enable it |
-| `FOREGROUND_SERVICE`, `WAKE_LOCK` | required by the Android components that schedule those alerts |
+| `ACCESS_COARSE_LOCATION` | optional, asked only when you tap **Use my location** for reminder dates; read once, kept on the device (section 2) |
+| `FOREGROUND_SERVICE`, `WAKE_LOCK` | required by the Android component (WorkManager) that keeps the home screen widget up to date |
 
 The app **does not request `INTERNET`**, and it explicitly removes the network-state
 permission that one of its dependencies would otherwise add. This is verifiable: extract
@@ -85,11 +114,12 @@ the public source repository.
 
 ### 4.1 Android cloud backup (on by default, controlled by you)
 
-FastTrack48 participates in Android's standard backup system. **If backup is enabled in
-your Google account settings**, the Android operating system may copy the app's database
-and preferences — which include your fasting history and body profile — to your personal
-Google Drive backup, so that your data returns when you set up a new phone. The same
-mechanism is used for device-to-device transfer.
+FastTrack48 participates in Android's standard backup system (Auto Backup). **If backup is
+enabled in your Google account settings**, the Android operating system may copy the app's
+database, settings and body profile — which include your fasting history and body
+measurements — to your personal Google Drive backup, so that your data returns when you set
+up a new phone. The same rules apply to device-to-device transfer. The approximate location
+from section 2, if you saved one, is excluded from both.
 
 This copy is made **by the operating system, not by the app**, into **your own** Google
 account, and we have no access to it. Google acts as the provider of that backup service
@@ -122,6 +152,9 @@ hands the link to your browser or to the relevant app, which then applies its ow
 policy. We receive nothing when you do so, but the destination may log the visit as it
 would any other.
 
+**Share app** sends the app's public download links (Google Play, F-Droid and GitHub) to the
+app you pick in the Android share sheet. The text contains none of your data.
+
 ### 4.4 Distribution through app stores
 
 Installing and updating the app is a transaction between you and the store you obtained it
@@ -139,6 +172,7 @@ Because your data lives only on your device, retention is entirely in your hands
 - delete individual entries in the journal
 - clear the body profile in Settings
 - delete all app data: **Android Settings → Apps → FastTrack48 → Storage → Clear storage**
+- remove a saved location: **Use my time zone instead** in the reminder settings
 - uninstalling the app removes its local data
 
 If Android cloud backup has been enabled, a copy may persist in your Google account after
@@ -165,8 +199,8 @@ immediately:
 - **Rectification** — edit or correct any entry or profile field
 - **Erasure** — delete entries, clear storage, or uninstall (section 5)
 - **Portability** — export your complete history as CSV, iCalendar or Activity Streams JSON
-- **Objection / restriction** — stop using a feature, revoke the notification permission, or
-  disable Android backup
+- **Objection / restriction** — stop using a feature, revoke the notification or location
+  permission, or disable Android backup
 
 Where any processing does fall to us, the legal basis is your consent (Article 6(1)(a)) and,
 for health-related data, your explicit consent (Article 9(2)(a)), given by entering the data;
@@ -212,9 +246,9 @@ and guardians should not encourage its use by a minor without qualified medical 
 ## 8. Security
 
 Your data is held in the app's private storage area, which Android isolates from other
-applications, and preference storage additionally uses encrypted file storage. On a device
-with a screen lock and full-disk or file-based encryption enabled — the default on modern
-Android — that data is encrypted at rest by the operating system.
+applications. The app adds no encryption of its own. On a device with a screen lock and
+full-disk or file-based encryption enabled — the default on modern Android — that data is
+encrypted at rest by the operating system.
 
 No safeguard is absolute. Data on a device that has been rooted, modified, infected with
 malware, or physically handed to someone else may be accessible to that party. We can offer

@@ -43,6 +43,7 @@ FastTrack48 vous montre ce qui se passe dans votre corps pendant le jeûne, et v
 • Format de date et d'heure configurable.
 • Unités métriques ou impériales.
 • Interrupteurs pour la notification permanente et les alertes d'étape.
+• Rappels facultatifs d’Ekadashi, Purnima et Amavasya, ou de pleine et nouvelle lune.
 
 <h3>Localisation</h3>
 • Gratuite et open source sous licence MIT, sans conditions.

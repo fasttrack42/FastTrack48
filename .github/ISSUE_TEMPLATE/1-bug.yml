@@ -27,7 +27,7 @@ body:
     id: screenshots
     attributes:
       label: Screenshot or screen recording
-      description: Drag and drop or paste here. Please don't include private private data.
+      description: Drag and drop or paste here. Please don't include private data.
     validations:
       required: false
 

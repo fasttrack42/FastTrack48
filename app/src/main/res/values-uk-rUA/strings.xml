@@ -46,7 +46,6 @@
 	<string name="title_fasting">Голодування</string>
 	<string name="title_log">Журнал</string>
 	<string name="title_profile">Профіль</string>
-	<string name="fasting_fragment_label">Голодування</string>
 	<string name="start_fast_button">Почати голодування</string>
 	<string name="start_orb_label">Почати</string>
 	<string name="start_fast_now_button">Почати голодування зараз</string>
@@ -55,26 +54,15 @@
 	<string name="fasting_energy_mode_glucose">глюкоза</string>
 	<string name="fasting_energy_mode_fat">кетонові тіла</string>
 	<string name="confirm_start_fast_title">Почати голодування?</string>
-	<string name="confirm_start_fast_positive">Зараз</string>
-	<string name="confirm_start_fast_neutral">Уже розпочато</string>
-	<string name="confirm_start_fast_negative">Ні</string>
 	<string name="already_started_dialog_title">Уже розпочато</string>
-	<string name="start_picker_title">Коли Ви розпочали голодування</string>
 	<string name="confirm_end_fast_title">Закінчити голодування?</string>
-	<string name="confirm_end_fast_positive">Зараз</string>
-	<string name="confirm_end_fast_neutral">Уже закінчили?</string>
-	<string name="confirm_end_fast_negative">Ні</string>
 	<string name="already_stopped_dialog_title">Коли Ви закінчили?</string>
 	<string name="menu_edit">Редагувати</string>
 	<string name="menu_delete">Видалити</string>
 	<string name="confirm_delete_fast_title">Видалити запис?</string>
 	<string name="confirm_delete_fast_positive">Так</string>
 	<string name="confirm_delete_fast_negative">Ні</string>
-	<string name="fast_status_fasting">Голодування триває</string>
-	<string name="fast_status_not_fasting">Ви не голодуєте</string>
-	<string name="next_stage">Наступна стадія через: %1$d годин</string>
 
-	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d годин</string>
 	<string name="log_entry_ketosis">Кетоз: %1$d годин</string>
 	<string name="log_entry_autophagy">Автофагія: %1$d годин</string>
@@ -83,15 +71,15 @@
 	<string name="profile_weight_label">Вага</string>
 	<string name="profile_weight_pounds_label">фунтів</string>
 	<string name="profile_weight_kg_label">Кілограмів</string>
-	<string name="profile_update_button">Оновити</string>
 	<string name="profile_bmi_label">ІМТ:</string>
 	<string name="profile_bmi_value">%1$.1f - %2$s</string>
 	<string name="profile_bmi_category_underweight">Недостатня вага</string>
-	<string name="profile_bmi_category_normal">Нормальна вага</string>
+	<string name="profile_bmi_category_normal">Здорова вага</string>
 	<string name="profile_bmi_category_overweight">Зайва вага</string>
 	<string name="profile_bmi_category_obese">Ожиріння</string>
 	<string name="profile_bmi_category_morbidly_obese">Патологічне ожиріння</string>
-	<string name="profile_error">Недопустиме значення</string>
+	<string name="profile_error_range">Введіть число від %1$d до %2$d.</string>
+	<string name="profile_error_range_whole">Введіть ціле число від %1$d до %2$d.</string>
 	<string name="profile_bmr_label">Основний обмін:</string>
 	<string name="profile_bmr_value">%.0f ккал / день</string>
 	<string name="profile_height_label">Зріст</string>
@@ -102,14 +90,11 @@
 	<string name="profile_gender_female">Жінка</string>
 	<string name="manual_add_title">Додавання вручну</string>
 	<string name="manual_edit_title">Редагувати запис</string>
-	<string name="manual_add_length_hint">Тривалість (годин)</string>
 	<string name="manual_add_complete_button">Додати</string>
 	<string name="manual_add_save_button">Зберегти</string>
-	<string name="manual_add_fast_started_on">Голодування розпочато: %1$s</string>
 	<string name="manual_add_start_date_time_label">Дата і час початку</string>
 	<string name="edit_date">Редагувати дату</string>
 	<string name="edit_time">Редагувати час</string>
-	<string name="manual_start_title">Голодування розпочалося</string>
 	<string name="manual_add_set_end_title">Установити кінець голодування</string>
 	<string name="manual_add_set_end_complete">Розрахувати</string>
 	<string name="fast_autophagy_label">Автофагія</string>
@@ -133,9 +118,6 @@
 	<string name="phase_ketosis">Кетоз</string>
 	<string name="phase_autophagy">Автофагія</string>
 	<string name="phase_optimal_autophagy">Оптимальна автофагія</string>
-	<string name="share_text">Я голодую вже %1$d годин і %2$d хвилин! Зараз джерелом енергії для мого тіла є %3$s.</string>
-	<string name="share_text_past_tense">Я проголодував %1$d годин і %2$d хвилин!</string>
-	<string name="stage_alerts_checkbox">Сповіщення про стадії</string>
 	<string name="notification_channel_name">Сповіщення про голодування</string>
 	<string name="notification_channel_description">Сповіщення, що приходять, коли Ви переходите на нову стадію
 		голодування.</string>
@@ -154,25 +136,7 @@
 	<string name="notification_fasting_channel_name">Стан голодування</string>
 	<string name="notification_fasting_channel_description">Постійне сповіщення, що показує поточний стан та прогрес
 		голодування.</string>
-	<string name="notification_fasting_title">Голодування: %1$s годин</string>
 	<string name="notification_fasting_energy_mode">Джерело енергії: %1$s</string>
-	<string name="info_dialog_fat_burn_title">Спалювання жиру</string>
-	<string name="info_dialog_fat_burn_content">На цій стадії Ваш організм виснажив запаси глюкози. Глюкоза зберігається 
-		у вигляді глікогену, а на цій стадії більшість Вашого глікогену вже була розщеплена 
-		і спожита для отримання енергії.\n\nТепер почалося розщеплення жирової тканини (жиру) на кетонові
-		тіла. Окрім глюкози, Ваш організм може також споживати кетонові тіла,
-		тож коли запаси глюкози вичерпуються, джерело енергії поступово переключається.</string>
-	<string name="info_dialog_ketosis_title">Кетоз</string>
-	<string name="info_dialog_ketosis_content">На цій стадії Ваш організм уже достатньо довго розщеплював жири, тож
-		енергія тепер в основному походить від кетонових тіл, а не від глюкози.\n\nНа додаток до схуднення,
-		дослідження показали покращення захворювань, пов\'язаних із запаленнями, хоча механізм цієї дії наразі невідомий.</string>
-	<string name="info_dialog_autophagy_title">Автофагія</string>
-	<string name="info_dialog_autophagy_content">На цій стадії Ваш організм почав активувати деякі додаткові процеси
-		збору енергії. Окрім розщеплення жирової тканини на кетонові тіла, він почав шукати старі чи пошкоджені
-		клітини і переробляти їх.\n\nДослідження щодо цього ще доволі ранні,
-		але схоже, що цей важливий механізм здатний зупинити проблеми, перш ніж вони виникнуть. Наприклад,
-		у людей, які регулярно входять в автофагію, нижчий рівень раку. Крім того, деякі дослідження також показали
-		меншу захворюваність на Альцгеймера.</string>
 	<string name="info_dialog_bmi_title">Індекс маси тіла</string>
 	<string name="info_dialog_bmi_content">Приблизна оцінка ваги, якої повинна бути середньостатистична доросла людина. Цей індекс
 		розраховується шляхом ділення ваги на зріст у квадраті.\n\nЙого часто критикують за свою неточність, бо він не враховує 
@@ -189,14 +153,10 @@
 	<string name="title_activity_info">Інформація про голодування</string>
 	<string name="log_total_autophagy">🧬 Автофагія:</string>
 	<string name="log_total_ketosis">🔥 Кетоз:</string>
-	<string name="log_total_hours">%1$d годин</string>
-	<string name="profile_metric_switch">Метрична система</string>
 	<string name="title_activity_intro">Вступ</string>
 	<string name="app_widget_description">Відстежуйте прогрес голодування на головному екрані</string>
 	<string name="app_widget_not_fasting">Ви не голодуєте</string>
 	<string name="app_widget_fast_in_progress">Ви голодуєте</string>
-	<string name="app_widget_time">%1$d годин</string>
-	<string name="app_widget_time_compact">%1$d год</string>
 	<string name="app_widget_start_fast_button">Почати голодування</string>
 	<string name="app_widget_stop_fast_button">Закінчити голодування</string>
 	<string name="app_widget_start_compact">Почати</string>
@@ -208,20 +168,13 @@
 	<string name="skip_button">Пропустити</string>
 	<string name="done_button">Готово</string>
 	<string name="debug_add_hour_button">Налагодження: додати 1 годину</string>
-	<string name="stop_fast_button_description">Закінчити голодування</string>
-	<string name="start_fast_button_description">Почати голодування</string>
 	<string name="bmi_info_button_description">Інформація про ІМТ</string>
 	<string name="bmr_info_button_description">Інформація про основний обмін</string>
-	<string name="profile_gender_label">Стать</string>
+	<string name="profile_gender_label">Стать (для основного обміну)</string>
 	<string name="more_options_button_description">Більше опцій</string>
-	<string name="manual_add_close_button_description">Закрити</string>
-	<string name="manual_add_selected_start">Розпочато: %1$s</string>
-	<string name="manual_add_cancel_button">Скасувати</string>
-	<string name="manual_add_next_button">Далі</string>
 	<string name="manual_add_calculate_from_end">Розрахувати з кінця</string>
 	<string name="action_settings">Налаштування</string>
 	<string name="title_activity_settings">Налаштування</string>
-	<string name="settings_placeholder">Налаштування з\'являться незабаром</string>
 	<string name="back">Назад</string>
 	<string name="settings_fancy_background_title">Показати красивий фон</string>
 	<string name="settings_fancy_background_subtitle">Вимкніть для простішого фону</string>
@@ -233,8 +186,6 @@
 	<string name="settings_theme_mode_light">Світла</string>
 	<string name="settings_theme_mode_dark">Темна</string>
 	<string name="log_no_entries">Ще немає записів!</string>
-	<string name="log_logbook_label">Журнал</string>
-	<string name="log_stats_label">Статистика за весь час</string>
 	<string name="log_view_mode_list">Список</string>
 	<string name="log_view_mode_calendar">Місяць</string>
 	<string name="log_view_mode_year">Рік</string>
@@ -243,13 +194,14 @@
 	<string name="duration_less_than_minute">Щойно почато</string>
 	<string name="fast_notes_label">Нотатки (необов\'язково)</string>
 	<string name="fast_notes_placeholder">Як усе пройшло? Щось, що варто запам\'ятати про це голодування?</string>
-	<string name="just_finished_fast">Ти щойно завершив голодування — молодець!</string>
+	<string name="time_since_last_fast">Час від останнього голодування: %1$s</string>
+	<string name="duration_under_minute">менше хвилини</string>
+	<string name="fast_well_done">Чудово: голодування тривало %1$s.</string>
+	<string name="milestone_in">%1$s через %2$s</string>
+	<string name="milestone_for">%1$s уже %2$s</string>
 
 	<string name="notification_fasting_title_duration">Голодування: %1$s</string>
 	<string name="phase_time_until">через %1$s</string>
-	<string name="time_since_last_fast">Час від останнього голодування: %1$s</string>
-	<string name="last_fast_length">Голодування %1$s</string>
-	<string name="last_fast_ended">завершено %1$s</string>
 	<string name="share_text_fasting">Я голодую вже %1$s! Зараз моє тіло використовує %2$s як джерело енергії.</string>
 	<string name="share_text_finished">Я голодував %1$s!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d год</string>
@@ -261,11 +213,11 @@
 	<string name="settings_section_phases">Фази голодування</string>
 	<string name="settings_phase_auto_title">Авто: показувати лише активні фази</string>
 	<string name="settings_phase_auto_subtitle">Показує кожну фазу, щойно вона починається. Замінює окремі перемикачі нижче.</string>
-	<string name="settings_phase_fatburn_title">Показувати Спалювання жиру</string>
+	<string name="settings_phase_fatburn_title">Показувати спалювання жиру</string>
 	<string name="settings_phase_fatburn_subtitle">Показує зворотний відлік спалювання жиру на екрані голодування.</string>
-	<string name="settings_phase_ketosis_title">Показувати Кетоз</string>
+	<string name="settings_phase_ketosis_title">Показувати кетоз</string>
 	<string name="settings_phase_ketosis_subtitle">Показує зворотний відлік кетозу на екрані голодування.</string>
-	<string name="settings_phase_autophagy_title">Показувати Автофагію</string>
+	<string name="settings_phase_autophagy_title">Показувати автофагію</string>
 	<string name="settings_phase_autophagy_subtitle">Показує зворотний відлік автофагії на екрані голодування.</string>
 	<string name="journey_stage_0_title">Цукор у крові зростає</string>
 	<string name="journey_stage_1_title">Цукор у крові падає</string>
@@ -348,8 +300,8 @@
 	<string name="lunar_moon_style_astronomical_detail">Дата точної повні або молодика у вашому часовому поясі</string>
 	<string name="lunar_calculating">Обчислення…</string>
 	<string name="lunar_no_days_selected">Виберіть хоча б один день, щоб отримувати нагадування</string>
-	<string name="lunar_tradition_title">Календар Екадаші</string>
-	<string name="lunar_tradition_question">Якого календаря Екадаші ви дотримуєтеся?</string>
+	<string name="lunar_tradition_title">Календар постів</string>
+	<string name="lunar_tradition_question">Якого календаря постів ви дотримуєтеся?</string>
 	<string name="lunar_tradition_smarta">Смарта</string>
 	<string name="lunar_tradition_smarta_detail">Більшість індуїстських календарів, зокрема Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Вайшнавський (ISKCON)</string>
@@ -425,5 +377,47 @@
 	<string name="lunar_amavasya_details">День посту: %1$s. Початок Амавасьї: %2$s.</string>
 	<string name="lunar_newmoon_details">Молодик: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, після %2$s</string>
+	<string name="lunar_tradition_ananda_marga">Ананда Марга</string>
+	<string name="lunar_tradition_ananda_marga_detail">День від сходу до сходу сонця у Варанасі, на який припадає більша частина тітхі. Скрізь ті самі дати.</string>
+	<string name="lunar_tradition_ananda_marga_india">Ананда Марга, календар для Індії</string>
+	<string name="lunar_tradition_ananda_marga_india_detail">Дата за індійським календарем, на яку припадає більша частина тітхі, як в офіційному календарі для Індії.</string>
+	<string name="fast_days_title">Дні посту</string>
+	<string name="fast_days_see_all">Усі дні посту</string>
+	<string name="fast_days_add_to_calendar">Додати до календаря</string>
+	<string name="fast_days_export_failed">Не вдалося створити файл календаря.</string>
+	<string name="fast_days_source_ananda_marga">Правило Ананда Марги. Дати: Варанасі. Схід сонця: %1$s.</string>
+	<string name="fast_days_source_ananda_marga_india">Ананда Марга, календар для Індії. Дати: Індія. Схід сонця: %1$s.</string>
+	<string name="fast_days_source_local">%1$s. Дати та схід сонця: %2$s.</string>
+	<string name="fast_days_your_location">ваше місце</string>
+	<string name="fast_days_next_full_moon">Повня %1$s</string>
+	<string name="fast_days_next_new_moon">Молодик %1$s</string>
+	<string name="fast_days_today_marker">сьогодні</string>
+	<string name="fast_days_empty">У найближчі 12 місяців немає днів посту.</string>
+	<string name="moon_phase_new">Молодик</string>
+	<string name="moon_phase_waxing_crescent">Молодий місяць</string>
+	<string name="moon_phase_first_quarter">Перша чверть</string>
+	<string name="moon_phase_waxing_gibbous">Зростаючий місяць</string>
+	<string name="moon_phase_full">Повня</string>
+	<string name="moon_phase_waning_gibbous">Спадний місяць</string>
+	<string name="moon_phase_last_quarter">Остання чверть</string>
+	<string name="moon_phase_waning_crescent">Старий місяць</string>
+	<string name="fast_kind_shukla_ekadashi">Шукла Екадаші</string>
+	<string name="fast_kind_krishna_ekadashi">Крішна Екадаші</string>
+	<string name="fast_kind_purnima">Пурніма</string>
+	<string name="fast_kind_amavasya">Амавасья</string>
+	<string name="fast_day_today">сьогодні</string>
+	<string name="fast_day_tomorrow">завтра</string>
+	<plurals name="fast_day_in_days">
+		<item quantity="one">через %d день</item>
+		<item quantity="few">через %d дні</item>
+		<item quantity="many">через %d днів</item>
+		<item quantity="other">через %d дня</item>
+	</plurals>
+	<string name="fast_day_from_sunrise">Пост від сходу сонця %1$s</string>
+	<string name="fast_day_until_sunrise">Пост до сходу сонця %1$s</string>
+	<string name="fast_day_window">Пост від сходу сонця %1$s до сходу сонця %2$s</string>
+	<string name="fast_day_break_fast">Завершити пост: %1$s</string>
+	<string name="fast_day_begins">%1$s починається: %2$s</string>
+	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>

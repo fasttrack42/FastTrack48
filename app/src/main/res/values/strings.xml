@@ -4,9 +4,9 @@
 	<string name="action_share">Share</string>
 	<string name="action_info">Info</string>
 	<string name="action_about">About</string>
-	<string name="action_export">Export Fasts</string>
+	<string name="action_export">Export fasts</string>
     <string name="action_export_description">Save your fasting history as CSV, iCalendar (.ics), or ActivityStreams JSON</string>
-	<string name="action_import">Import Fasts</string>
+	<string name="action_import">Import fasts</string>
     <string name="action_import_description">Import fasts from a FastTrack48 or legacy FastTrack CSV, an EasyFast backup (.zip), or an .ics / ActivityStreams file exported by this app</string>
 	<string name="import_formats_title">Supported formats</string>
 	<string name="import_formats_message">The file type is detected automatically. You can import:\n\n• FastTrack48 CSV — this app\'s own export\n• Legacy FastTrack CSV\n• EasyFast backup (.zip)\n• iCalendar (.ics) exported by this app\n• ActivityStreams JSON exported by this app</string>
@@ -32,11 +32,11 @@
     <string name="settings_section_logbook">History</string>
 
     <!-- Settings: Fasting notification -->
-	<string name="settings_fasting_notification_title">Show Fasting Notification</string>
+	<string name="settings_fasting_notification_title">Show fasting notification</string>
 	<string name="settings_fasting_notification_subtitle">Provides real-time info during a fast</string>
 
     <!-- Settings: Stage alerts -->
-    <string name="settings_stage_alerts_title">Stage Alerts</string>
+    <string name="settings_stage_alerts_title">Stage alerts</string>
     <string name="settings_stage_alerts_subtitle">Get notified when entering new fasting stages</string>
 
     <string name="export_failed">Failed to export fasting history</string>
@@ -44,7 +44,7 @@
 	<string name="intro_00_title">Welcome to FastTrack48!</string>
 	<string name="intro_00_description">What is this app all about?</string>
 
-	<string name="intro_01_title">Motivational Help</string>
+	<string name="intro_01_title">Motivational help</string>
 	<string name="intro_01_description">The idea behind FastTrack48 is to motivate you during your fasts and
 		explain to you what your body is doing at the different stages of fasting.
 	</string>
@@ -54,13 +54,13 @@
 		create, no in-app purchases, no ads, no telemetry and no tracking. The app has no internet access, and works fully offline.
 	</string>
 
-	<string name="intro_03_title">Intermittent Fasting</string>
+	<string name="intro_03_title">Intermittent fasting</string>
 	<string name="intro_03_description">This is a new area of study which is showing lots of benefits beyond simple
 		weight loss.\n\nTo explore what we know about fasting and what the research is saying, check out the Info
 		section of this app!
 	</string>
 
-	<string name="intro_04_title">Stay Motivated with Notifications</string>
+	<string name="intro_04_title">Stay motivated with notifications</string>
 	<string name="intro_04_description">FastTrack48 can show notifications to keep you motivated during a
 		fast.\n\nYou’ll see what phase you’re in, and the energy mode your body is
 		using.
@@ -95,47 +95,34 @@
 	<string name="title_log">Log</string>
 	<string name="title_profile">Profile</string>
 
-	<string name="fasting_fragment_label">Fast</string>
-	<string name="start_fast_button">Start Fast</string>
+	<string name="start_fast_button">Start fast</string>
 	<!-- One word, set inside the launch orb: the disc is a circle and a two-word
 	     label has to shrink to fit it. The full phrase stays on start_fast_button,
 	     which the sheet and the widget still use. -->
 	<string name="start_orb_label">Start</string>
-	<string name="start_fast_now_button">Start Fast Now</string>
-	<string name="end_fast_button">End Fast</string>
+	<string name="start_fast_now_button">Start fast now</string>
+	<string name="end_fast_button">End fast</string>
 
-	<string name="fasting_energy_mode">Energy Mode: %1$s</string>
+	<string name="fasting_energy_mode">Energy mode: %1$s</string>
 	<string name="fasting_energy_mode_glucose">Glucose</string>
-	<string name="fasting_energy_mode_fat">Ketone Bodies</string>
+	<string name="fasting_energy_mode_fat">Ketone bodies</string>
 
-	<string name="confirm_start_fast_title">Start Fast?</string>
-	<string name="confirm_start_fast_positive">Now</string>
-	<string name="confirm_start_fast_neutral">Already Started</string>
-	<string name="confirm_start_fast_negative">No</string>
-	<string name="already_started_dialog_title">Already Started</string>
+	<string name="confirm_start_fast_title">Start fast?</string>
+	<string name="already_started_dialog_title">Already started</string>
 
-	<string name="start_picker_title">When did you start your Fast</string>
 
-	<string name="confirm_end_fast_title">End Fast?</string>
-	<string name="confirm_end_fast_positive">Now</string>
-	<string name="confirm_end_fast_neutral">Already Stopped?</string>
-	<string name="confirm_end_fast_negative">No</string>
+	<string name="confirm_end_fast_title">End fast?</string>
 	<string name="already_stopped_dialog_title">When did you stop?</string>
 
 	<string name="menu_edit">Edit</string>
 	<string name="menu_delete">Delete</string>
-	<string name="confirm_delete_fast_title">Delete Fast?</string>
+	<string name="confirm_delete_fast_title">Delete fast?</string>
 	<string name="confirm_delete_fast_positive">Yes</string>
 	<string name="confirm_delete_fast_negative">No</string>
 
-	<string name="fast_status_fasting">Fast in progress</string>
-	<string name="fast_status_not_fasting">You are not fasting</string>
 
-	<string name="next_stage">Next stage at: %1$d hours</string>
 
-	<string name="start_fast_button_advanced" translatable="false">*</string>
 
-	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d hours</string>
 	<string name="log_entry_ketosis">Ketosis: %1$d hours</string>
 	<string name="log_entry_autophagy">Autophagy: %1$d hours</string>
@@ -147,17 +134,17 @@
 	<string name="profile_weight_pounds_label">Pounds</string>
 	<string name="profile_weight_kg_label">Kilograms</string>
 
-	<string name="profile_update_button">Update</string>
 
 	<string name="profile_bmi_label">BMI:</string>
 	<string name="profile_bmi_value">%1$.1f - %2$s</string>
 	<string name="profile_bmi_category_underweight">Underweight</string>
-	<string name="profile_bmi_category_normal">Normal</string>
+	<string name="profile_bmi_category_normal">Healthy weight</string>
 	<string name="profile_bmi_category_overweight">Overweight</string>
 	<string name="profile_bmi_category_obese">Obese</string>
-	<string name="profile_bmi_category_morbidly_obese">Morbidly Obese</string>
+	<string name="profile_bmi_category_morbidly_obese">Morbidly obese</string>
 
-	<string name="profile_error">Bad Value</string>
+	<string name="profile_error_range">Enter a number from %1$d to %2$d.</string>
+	<string name="profile_error_range_whole">Enter a whole number from %1$d to %2$d.</string>
 
 	<string name="profile_bmr_label">BMR:</string>
 	<string name="profile_bmr_value">%.0f kcal / day</string>
@@ -168,20 +155,17 @@
 	<string name="profile_height_metric_label">Centimeters</string>
 	<string name="profile_gender_male">Male</string>
 	<string name="profile_gender_female">Female</string>
-	<string name="manual_add_title">Manual Add</string>
-	<string name="manual_edit_title">Edit Entry</string>
-	<string name="manual_add_length_hint">Length (Hours)</string>
+	<string name="manual_add_title">Manual add</string>
+	<string name="manual_edit_title">Edit entry</string>
 	<string name="manual_add_duration_label">Duration</string>
 	<string name="manual_add_hours_hint">Hours</string>
 	<string name="manual_add_minutes_hint">Minutes</string>
 	<string name="manual_add_complete_button">Add</string>
 	<string name="manual_add_save_button">Save</string>
-	<string name="manual_add_fast_started_on">Fast Started On: %1$s</string>
-	<string name="manual_add_start_date_time_label">Start Date and Time</string>
+	<string name="manual_add_start_date_time_label">Start date and time</string>
 	<string name="edit_date">Edit date</string>
 	<string name="edit_time">Edit time</string>
-	<string name="manual_start_title">Fast Started</string>
-	<string name="manual_add_set_end_title">Set Fast End</string>
+	<string name="manual_add_set_end_title">Set fast end</string>
 	<string name="manual_add_set_end_complete">Calculate</string>
 	<string name="add_fast_for_day_title">Add a fast for %1$s?</string>
 	<string name="add_fast_for_day_confirm">Add fast</string>
@@ -198,100 +182,73 @@
 	<string name="clear_logbook_confirm">Delete all %1$d</string>
 	<string name="fast_autophagy_label">Autophagy</string>
 	<string name="fast_ketosis_label">Ketosis</string>
-	<string name="fast_fat_burn_label">Fat Burn</string>
+	<string name="fast_fat_burn_label">Fat burn</string>
 
 	<string name="stage_fasting_title">Fasting</string>
 	<string name="stage_fasting_description">Your body is consuming its stores of glucose, keep it up!</string>
 
-	<string name="stage_fat_burning_title">Fat Burning</string>
+	<string name="stage_fat_burning_title">Fat burning</string>
 	<string name="stage_fat_burning_description">Your glucose stores are depleted! Your body is now burning fat for
 		energy. A workout in the next couple of hours would be optimal.
 	</string>
 
-	<string name="stage_fat_fasting_sweet_spot_title">Fasting Sweet Spot</string>
+	<string name="stage_fat_fasting_sweet_spot_title">Fasting sweet spot</string>
 	<string name="stage_fat_fasting_sweet_spot_description">You’re in the fasting sweet spot, keep it up!</string>
 
-	<string name="stage_fat_peak_fat_burning_title">Peak Fat Burning</string>
+	<string name="stage_fat_peak_fat_burning_title">Peak fat burning</string>
 	<string name="stage_fat_peak_fat_burning_description">Your body is burning fat rapidly now, and ketosis has begun.
 	</string>
 
 	<string name="stage_autophagy_title">Autophagy</string>
 	<string name="stage_autophagy_description">Your body has begun autophagy!</string>
 
-	<string name="stage_optimal_autophagy_title">Optimal Autophagy</string>
+	<string name="stage_optimal_autophagy_title">Optimal autophagy</string>
 	<string name="stage_optimal_autophagy_description">Autophagy is in full swing! Keep it up, between now and 72 hours
 		autophagy will be very effective.
 	</string>
 
-	<string name="phase_glucose">Glucose Burning</string>
-	<string name="phase_fat_burning">Fat Burning</string>
+	<string name="phase_glucose">Glucose burning</string>
+	<string name="phase_fat_burning">Fat burning</string>
 	<string name="phase_ketosis">Ketosis</string>
 	<string name="phase_autophagy">Autophagy</string>
-	<string name="phase_optimal_autophagy">Optimal Autophagy</string>
+	<string name="phase_optimal_autophagy">Optimal autophagy</string>
 
-	<string name="share_text">I’ve been fasting for %1$d hours and %2$d minutes! My body is currently consuming %3$s
-		for energy.
-	</string>
-	<string name="share_text_past_tense">I fasted for %1$d hours and %2$d minutes!</string>
-	<string name="stage_alerts_checkbox">Stage Alerts</string>
 
-	<string name="notification_channel_name">Fasting Alerts</string>
+	<string name="notification_channel_name">Fasting alerts</string>
 	<string name="notification_channel_description">Alerts that let you know when you have entered a new phase of your
 		fast.
 	</string>
 
-	<string name="notification_fat_burn_title">Fast Stage: Fat Burning</string>
+	<string name="notification_fat_burn_title">Fast stage: Fat burning</string>
 	<string name="notification_fat_burn_content">You have exhausted your glucose reserves and your body is now consuming
 		fat for energy.
 	</string>
 
-	<string name="notification_ketosis_title">Fast Stage: Ketosis</string>
+	<string name="notification_ketosis_title">Fast stage: Ketosis</string>
 	<string name="notification_ketosis_content">Your body has now broken down enough fat reserves that you have
-		entered Ketosis.
+		entered ketosis.
 	</string>
 
-	<string name="notification_autophagy_title">Fast Stage: Autophagy</string>
-	<string name="notification_autophagy_content">Your body has entered Autophagy. Old or damaged cells are now being
+	<string name="notification_autophagy_title">Fast stage: Autophagy</string>
+	<string name="notification_autophagy_content">Your body has entered autophagy. Old or damaged cells are now being
 		consumed for energy.
 	</string>
 
-	<string name="notification_optimal_autophagy_title">Fast Stage: Optimal Autophagy</string>
+	<string name="notification_optimal_autophagy_title">Fast stage: Optimal autophagy</string>
 	<string name="notification_optimal_autophagy_content">Your body has been in autophagy for a long time now, and
 		your cellular health is seeing great benefits.
 	</string>
 
-	<string name="notification_fasting_channel_name">Fasting Status</string>
+	<string name="notification_fasting_channel_name">Fasting status</string>
 	<string name="notification_fasting_channel_description">Ongoing notification showing your current fasting status and
 		progress.
 	</string>
-	<string name="notification_fasting_title">Fasting: %1$s hours</string>
-	<string name="notification_fasting_energy_mode">Energy Mode: %1$s</string>
+	<string name="notification_fasting_energy_mode">Energy mode: %1$s</string>
 
-	<string name="info_dialog_fat_burn_title">Fat Burning</string>
-	<string name="info_dialog_fat_burn_content">In this stage your body has exhausted your glucose reserves. Glucose is
-		stored as glycogen for later use, in this stage, most of your stored glycogen has been broken down into glucose
-		and consumed for energy.\n\n Now it begins to break down adipose tissue (fat) into Ketone Bodies. In addition to
-		being able to consume glucose for energy, your body can alternatively consume ketone bodies for energy, and as
-		glucose stores run low, your body will switch its energy mode to Ketone Bodies.
-	</string>
 
-	<string name="info_dialog_ketosis_title">Ketosis</string>
-	<string name="info_dialog_ketosis_content">In this stage your body has been breaking down fat for long enough that
-		your body is primarily being powered by Ketone Bodies rather than Glucose.\n\nIn addition to the fat loss
-		benefits this implies, studies have shown benefits for inflammation related illnesses, though the mechanism of
-		action for this is currently unknown.
-	</string>
 
-	<string name="info_dialog_autophagy_title">Autophagy</string>
-	<string name="info_dialog_autophagy_content">In this stage your body has begun to activate some more processes for
-		harvesting energy. In addition to breaking down adipose tissue into Ketone Bodies, it has begun seeking out old
-		or damaged cells, and consuming them for more energy.\n\nThe research on this phase is in its early stages,
-		but it appears this is an important mechanism for the body to stop problems before they start. For instance,
-		cancer rates are lower in people who regularly enter Autophagy. Additionally, some studies have also shown lower
-		rates of Alzheimer’s disease.
-	</string>
 
-	<string name="info_dialog_bmi_title">Body Mass Index</string>
+	<string name="info_dialog_bmi_title">Body mass index</string>
 	<string name="info_dialog_bmi_content">A rough estimation of the healthy weight an average adult human should be. It
 		is calculated simply by dividing weight by height.\n\nOften criticized for being inaccurate, it is true that
 		there are factors that can cause it to be misleading. For instance: an extremely muscular body builder, or a
@@ -300,7 +257,7 @@
 		weight range.
 	</string>
 
-	<string name="info_dialog_bmr_title">Basal Metabolic Rate</string>
+	<string name="info_dialog_bmr_title">Basal metabolic rate</string>
 	<string name="info_dialog_bmr_content">This is an estimate of the number of calories your body will burn in a day
 		while completely at rest. If all you did was lay in bed all day, this is how many calories you could eat without
 		gaining weight.\n\nThis is a critical number for people who are dieting by restricting daily calorie intake.
@@ -311,49 +268,38 @@
 	<string name="info_page_title_info">Info</string>
 	<string name="info_page_title_tips">Tips</string>
 
-	<string name="title_activity_info">Fasting Info</string>
+	<string name="title_activity_info">Fasting info</string>
 	<string name="log_total_autophagy">🧬 Autophagy:</string>
 	<string name="log_total_ketosis">🔥 Ketosis:</string>
-	<string name="stat_total_fasts">Total Fasts</string>
-	<string name="stat_total_fasted">Total Fasted</string>
-	<string name="stat_longest_fast">Longest Fast</string>
-	<string name="log_total_hours">%1$d hours</string>
-	<string name="profile_metric_switch">Metric</string>
+	<string name="stat_total_fasts">Total fasts</string>
+	<string name="stat_total_fasted">Total fasted</string>
+	<string name="stat_longest_fast">Longest fast</string>
 	<string name="title_activity_intro">Intro</string>
 	<string name="app_widget_description">Track your fasting progress from your home screen</string>
 	<string name="app_widget_not_fasting">Not fasting</string>
 	<string name="app_widget_fast_in_progress">Fasting in progress</string>
-	<string name="app_widget_time">%1$d hours</string>
-	<string name="app_widget_time_compact">%1$d h</string>
-	<string name="app_widget_start_fast_button">Start Fast</string>
-	<string name="app_widget_stop_fast_button">Stop Fast</string>
+	<string name="app_widget_start_fast_button">Start fast</string>
+	<string name="app_widget_stop_fast_button">Stop fast</string>
 	<string name="app_widget_start_compact">Start</string>
-	<string name="app_widget_start">Tap to Start</string>
+	<string name="app_widget_start">Tap to start</string>
 	<string name="close_button_content_description">Close</string>
 	<string name="cancel_button">Cancel</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
 	<string name="skip_button">Skip</string>
 	<string name="done_button">Done</string>
-	<string name="debug_add_hour_button">Debug: Add 1 hour</string>
-	<string name="stop_fast_button_description">Stop Fast</string>
-	<string name="start_fast_button_description">Start Fast</string>
-	<string name="bmi_info_button_description">BMI Info</string>
-	<string name="bmr_info_button_description">BMR Info</string>
-	<string name="profile_gender_label">Gender</string>
+	<string name="debug_add_hour_button">Debug: add 1 hour</string>
+	<string name="bmi_info_button_description">BMI info</string>
+	<string name="bmr_info_button_description">BMR info</string>
+	<string name="profile_gender_label">Sex (for BMR)</string>
 	<string name="more_options_button_description">More options</string>
-	<string name="manual_add_close_button_description">Close</string>
-	<string name="manual_add_selected_start">Started: %1$s</string>
-	<string name="manual_add_cancel_button">Cancel</string>
-	<string name="manual_add_next_button">Next</string>
-	<string name="manual_add_calculate_from_end">Calculate From End</string>
+	<string name="manual_add_calculate_from_end">Calculate from end</string>
 	<string name="action_settings">Settings</string>
 	<string name="title_activity_settings">Settings</string>
-	<string name="settings_placeholder">Settings coming soon</string>
 	<string name="back">Back</string>
-	<string name="settings_fancy_background_title">Show Fancy Background</string>
-	<string name="settings_fancy_background_subtitle">Disable for a simpler Fasting background</string>
-	<string name="settings_metric_system_title">Metric System</string>
+	<string name="settings_fancy_background_title">Show fancy background</string>
+	<string name="settings_fancy_background_subtitle">Disable for a simpler fasting background</string>
+	<string name="settings_metric_system_title">Metric system</string>
 	<string name="settings_metric_system_subtitle">Display height and weight in metric units</string>
 	<string name="settings_theme_mode_title">Theme</string>
 	<string name="settings_theme_mode_subtitle">Choose light, dark, or follow system</string>
@@ -361,8 +307,6 @@
 	<string name="settings_theme_mode_light">Light</string>
 	<string name="settings_theme_mode_dark">Dark</string>
 	<string name="log_no_entries">No entries yet!</string>
-	<string name="log_logbook_label">Logbook</string>
-	<string name="log_stats_label">Lifetime stats</string>
 	<string name="log_view_mode_list">List</string>
 	<string name="log_view_mode_calendar">Month</string>
 	<string name="log_view_mode_year">Year</string>
@@ -370,46 +314,47 @@
 	<string name="log_year_axis_hours">%1$dh</string>
 
 	<!-- Fasting journey stages (dial milestones) -->
-	<string name="journey_stage_0_title">Blood Sugar Rises</string>
+	<string name="journey_stage_0_title">Blood sugar rises</string>
 	<string name="journey_stage_0_body">You just ate, and your bloodstream knows it. Glucose climbs — in healthy people peaking under ~140 mg/dL within 30–60 min — your pancreas shoots insulin into the blood, the hormone that ushers the sugar into cells and stashes the surplus as glycogen.\n\nThis is the fed state: energy is abundant, storage is the priority, fat-burning mode is off.\n\nNothing to do but digest. The clock has started.</string>
-	<string name="journey_stage_1_title">Blood Sugar Falls</string>
+	<string name="journey_stage_1_title">Blood sugar falls</string>
 	<string name="journey_stage_1_body">Insulin drops, glucagon rises, and your liver starts releasing stored glycogen to hold blood glucose steady near ~70–100 mg/dL.\n\nYou\'ve crossed from the fed state into the post-absorptive state — the quiet handoff where the body stops storing and starts spending.\n\nThat first flicker of hunger is mostly insulin falling. It passes within a minute or two.</string>
-	<string name="journey_stage_2_title">Blood Sugar Stabilizes</string>
+	<string name="journey_stage_2_title">Blood sugar stabilizes</string>
 	<string name="journey_stage_2_body">Your liver is now the sole supplier, drip-feeding glucose from glycogen (~100 g in reserve) to keep you level. Your brain alone burns ~120 g of glucose a day, so this stability is not trivial.\n\nNo dip, no spike — glycogenolysis holds the line and keeps hypoglycemia away.\n\nMany people report unusually sharp focus at this stage. That\'s not imagination; it\'s steady fuel.</string>
 	<string name="journey_stage_3_title">Gluconeogenesis</string>
 	<string name="journey_stage_3_body">Glycogen is running thin, so the liver starts manufacturing its own glucose from lactate, glycerol, and amino acids — a process called gluconeogenesis. By ~16 h it already supplies roughly half of your glucose output (Cahill, Annu Rev Nutr 2006).\n\nThis is your body\'s biological intelligence which never lets your brain go hungry.\n\nThe hunger and mild dip you might feel are related to the phase switch.</string>
-	<string name="journey_stage_4_title">Fat Burning</string>
+	<string name="journey_stage_4_title">Fat burning</string>
 	<string name="journey_stage_4_body">Insulin is finally low enough to unlock the fat reserves. Lipolysis frees fatty acids, the liver begins spinning them into ketones, and you transition from sugar-burning to fat-burning.\n\nInsulin sensitivity increases, and fat reserves are now being consumed — the metabolic core of why fasting works.\n\nA metallic taste or faint headache is a sign early first ketones being generated. The fire is burning 🔥.</string>
 	<string name="journey_stage_5_title">Ketosis</string>
 	<string name="journey_stage_5_body">Blood ketones level crosses ~0.5 mmol/L — nutritional ketosis — and keep climbing. Your brain can\'t oxidize fatty acids directly, but it runs beautifully on this ketone stream, which spares muscle from being cannibalized for glucose.\n\nMany report an unusual mental clarity, and a hunger that quietly switches off — ketones themselves blunt appetite.\n\nTwenty-four hours. Your body now prefers its own home-made fuel.</string>
 	<string name="journey_stage_6_title">Autophagy</string>
 	<string name="journey_stage_6_body">A full day in, and self-cleaning intensifies: autophagy — cells disassembling damaged proteins and organelles and recycling the parts (the mechanism that earned Ohsumi the 2016 Nobel Prize). \n\nThink of it as maintenance you can\'t buy — clearance associated with longevity and lower disease risk.\n\nTiredness or a headache? Salt and water. Deep work is underway.</string>
-	<string name="journey_stage_7_title">Growth Hormone Surge</string>
+	<string name="journey_stage_7_title">Growth hormone surge</string>
 	<string name="journey_stage_7_body">Two days, and growth hormone spikes — a ~2-day fast can raise GH secretion roughly 5-fold (Ho, J Clin Invest 1988). Its brief right now: defend lean muscle and push fat metabolism harder.\n\nSo you keep burning fat while sparing the muscle you\'d expect to lose — a genuinely elegant adaptation.\n\nThat unexpected lift in energy people describe here? That\'s the hormone talking.</string>
-	<string name="journey_stage_8_title">Insulin Sensitivity</string>
+	<string name="journey_stage_8_title">Insulin sensitivity</string>
 	<string name="journey_stage_8_body">With insulin held low for days, your cells turn newly responsive to it — insulin sensitivity resets toward a healthier baseline, the opposite of the resistance that precedes type 2 diabetes.\n\nBlood glucose sits in a calm, narrowband; satiety comes easily.\n\nYou\'re tuning a system most people never deliberately touch.</string>
-	<string name="journey_stage_9_title">Immune Cell Regeneration</string>
+	<string name="journey_stage_9_title">Immune cell regeneration</string>
 	<string name="journey_stage_9_body">Three days. Prolonged fasting can prompt the body to clear senescent immune cells and regenerate new ones from hematopoietic stem cells, as IGF-1 and PKA signaling drop (Cheng, Cell Stem Cell 2014).\n\nInflammation keeps easing; some describe a quiet, lucid sense of well-being.\n\nHowever far you go from here, you go renewed — and break your fast gently. Be proud.</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
 	<string name="journey_stage_hours_open">%1$d h+</string>
 	<string name="phase_time_until">in %1$s</string>
-	<string name="time_since_last_fast">Time since your last fast: %1$s</string>
 	<!-- Idle band, under the dial: what the last fast came to. Both values are
 	     produced by ICU/DateUtils in the device locale, so these two carry only
 	     the wording around them. -->
-	<string name="last_fast_length">%1$s fast</string>
-	<string name="last_fast_ended">ended %1$s</string>
-	<string name="just_finished_fast">You just finished a fast — well done!</string>
+	<string name="time_since_last_fast">Time since last fast: %1$s</string>
+	<string name="duration_under_minute">under a minute</string>
+	<string name="fast_well_done">Well done: you fasted for %1$s.</string>
+	<string name="milestone_in">%1$s in %2$s</string>
+	<string name="milestone_for">%1$s for %2$s</string>
 	<string name="duration_less_than_minute">Just started</string>
-	<string name="settings_section_phases">Fasting Phases</string>
+	<string name="settings_section_phases">Fasting phases</string>
 	<string name="settings_phase_auto_title">Auto: show only active phases</string>
 	<string name="settings_phase_auto_subtitle">Reveal each phase once it begins. Overrides the individual toggles below.</string>
-	<string name="settings_phase_fatburn_title">Show Fat Burn</string>
-	<string name="settings_phase_fatburn_subtitle">Display the Fat Burn countdown on the fasting screen</string>
-	<string name="settings_phase_ketosis_title">Show Ketosis</string>
-	<string name="settings_phase_ketosis_subtitle">Display the Ketosis countdown on the fasting screen</string>
-	<string name="settings_phase_autophagy_title">Show Autophagy</string>
-	<string name="settings_phase_autophagy_subtitle">Display the Autophagy countdown on the fasting screen</string>
+	<string name="settings_phase_fatburn_title">Show fat burn</string>
+	<string name="settings_phase_fatburn_subtitle">Display the fat burn countdown on the fasting screen</string>
+	<string name="settings_phase_ketosis_title">Show ketosis</string>
+	<string name="settings_phase_ketosis_subtitle">Display the ketosis countdown on the fasting screen</string>
+	<string name="settings_phase_autophagy_title">Show autophagy</string>
+	<string name="settings_phase_autophagy_subtitle">Display the autophagy countdown on the fasting screen</string>
 	<string name="share_text_fasting">I’ve been fasting for %1$s! My body is currently consuming %2$s for energy.</string>
 	<string name="share_text_finished">I fasted for %1$s!</string>
 	<string name="notification_fasting_title_duration">Fasting: %1$s</string>
@@ -419,11 +364,10 @@
 	<string name="sheet_end_earlier">I stopped earlier…</string>
 	<string name="fast_notes_label">Notes (optional)</string>
 	<string name="fast_notes_placeholder">How did it go? Anything to remember about this fast?</string>
-	<string name="log_entry_note_prefix" translatable="false">📝</string>
 	<string name="stage_optimal_autophagy_description_past72">Autophagy is in full swing! Keep it up!</string>
 	<string name="fast_start_label">Start</string>
 	<string name="edit_start_time">Edit start time</string>
-	<string name="edit_start_dialog_title">Fast Started</string>
+	<string name="edit_start_dialog_title">Fast started</string>
 	<string name="relative_today">Today</string>
 	<string name="relative_yesterday">Yesterday</string>
 	<string name="start_overlap_title">Overlaps your previous fast</string>
@@ -448,8 +392,8 @@
 	<string name="lunar_moon_style_astronomical_detail">The date of the exact full or new moon in your time zone</string>
 	<string name="lunar_calculating">Calculating…</string>
 	<string name="lunar_no_days_selected">Pick at least one day to get reminders</string>
-	<string name="lunar_tradition_title">Ekadashi calendar</string>
-	<string name="lunar_tradition_question">Which Ekadashi calendar do you follow?</string>
+	<string name="lunar_tradition_title">Fasting calendar</string>
+	<string name="lunar_tradition_question">Which fasting calendar do you follow?</string>
 	<string name="lunar_tradition_smarta">Smarta</string>
 	<string name="lunar_tradition_smarta_detail">Most Hindu calendars, including Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
@@ -515,8 +459,47 @@
 	<string name="lunar_amavasya_details">Fast day: %1$s. Amavasya begins: %2$s.</string>
 	<string name="lunar_newmoon_details">New moon: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, after %2$s</string>
-	<string name="lunar_parana_window" translatable="false">%1$s, %2$s–%3$s</string>
-	<string name="lunar_date_time" translatable="false">%1$s, %2$s</string>
+	<string name="lunar_tradition_ananda_marga">Ananda Marga</string>
+	<string name="lunar_tradition_ananda_marga_detail">The sunrise-to-sunrise day in Varanasi that holds most of the tithi. The same dates everywhere.</string>
+	<string name="lunar_tradition_ananda_marga_india">Ananda Marga, India chart</string>
+	<string name="lunar_tradition_ananda_marga_india_detail">The Indian calendar date that holds most of the tithi, as on the official India chart.</string>
+	<string name="fast_days_title">Fast days</string>
+	<string name="fast_days_see_all">See all fast days</string>
+	<string name="fast_days_add_to_calendar">Add to calendar</string>
+	<string name="fast_days_export_failed">Could not create the calendar file.</string>
+	<string name="fast_days_source_ananda_marga">Ananda Marga rule. Dates: Varanasi. Sunrise: %1$s.</string>
+	<string name="fast_days_source_ananda_marga_india">Ananda Marga, India chart. Dates: India. Sunrise: %1$s.</string>
+	<string name="fast_days_source_local">%1$s. Dates and sunrise: %2$s.</string>
+	<string name="fast_days_your_location">your location</string>
+	<string name="fast_days_next_full_moon">Full moon %1$s</string>
+	<string name="fast_days_next_new_moon">New moon %1$s</string>
+	<string name="fast_days_today_marker">today</string>
+	<string name="fast_days_empty">No fast days in the next 12 months.</string>
+	<string name="moon_phase_new">New moon</string>
+	<string name="moon_phase_waxing_crescent">Waxing crescent</string>
+	<string name="moon_phase_first_quarter">First quarter</string>
+	<string name="moon_phase_waxing_gibbous">Waxing gibbous</string>
+	<string name="moon_phase_full">Full moon</string>
+	<string name="moon_phase_waning_gibbous">Waning gibbous</string>
+	<string name="moon_phase_last_quarter">Last quarter</string>
+	<string name="moon_phase_waning_crescent">Waning crescent</string>
+	<string name="fast_kind_shukla_ekadashi">Shukla Ekadashi</string>
+	<string name="fast_kind_krishna_ekadashi">Krishna Ekadashi</string>
+	<string name="fast_kind_purnima">Purnima</string>
+	<string name="fast_kind_amavasya">Amavasya</string>
+	<string name="fast_day_today">today</string>
+	<string name="fast_day_tomorrow">tomorrow</string>
+	<plurals name="fast_day_in_days">
+		<item quantity="one">in %d day</item>
+		<item quantity="other">in %d days</item>
+	</plurals>
+	<string name="fast_day_from_sunrise">Fast from sunrise %1$s</string>
+	<string name="fast_day_until_sunrise">Fast until sunrise %1$s</string>
+	<string name="fast_day_window">Fast from sunrise %1$s to sunrise %2$s</string>
+	<string name="fast_day_break_fast">Break the fast: %1$s</string>
+	<string name="fast_day_begins">%1$s begins: %2$s</string>
+	<string name="fast_day_exact">%1$s: %2$s</string>
+	<string name="fast_days_joined" translatable="false">%1$s · %2$s</string>
 	<string name="lunar_day_with_name" translatable="false">%1$s (%2$s)</string>
 	<string name="lunar_mahadvadashi_unmilani" translatable="false">Unmilani Mahadvadashi</string>
 	<string name="lunar_mahadvadashi_vyanjuli" translatable="false">Vyanjuli Mahadvadashi</string>

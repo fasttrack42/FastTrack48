@@ -16,6 +16,9 @@ import androidx.annotation.MainThread
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlin.math.roundToLong
 
 /**
@@ -36,32 +39,49 @@ object DeviceLocation {
 	private const val FIX_TIMEOUT_MS = 30_000L
 	private const val MAX_LAST_KNOWN_AGE_MS = 24 * 60 * 60 * 1000L
 
-	/** Reports exactly once, on the main thread. */
+	private val running = MutableStateFlow(false)
+
+	/**
+	 * Whether a request is under way. Process-wide rather than screen state: a Settings screen
+	 * recreated mid-request (rotation) still shows the request and cannot start a second one.
+	 */
+	val inProgress: StateFlow<Boolean> = running.asStateFlow()
+
+	/**
+	 * Reports exactly once, on the main thread. Ignored while another request is running;
+	 * that one's outcome is still reported to the caller that started it.
+	 */
 	@MainThread
 	@SuppressLint("MissingPermission") // checked first; every call is also guarded below
 	fun requestOnce(context: Context, onResult: (Outcome) -> Unit) {
+		if (running.value) return
+		running.value = true
+		val report: (Outcome) -> Unit = { outcome ->
+			running.value = false
+			onResult(outcome)
+		}
 		val app = context.applicationContext
 		if (ContextCompat.checkSelfPermission(app, Manifest.permission.ACCESS_COARSE_LOCATION)
 			!= PackageManager.PERMISSION_GRANTED
 		) {
-			onResult(Outcome.NoPermission)
+			report(Outcome.NoPermission)
 			return
 		}
 		val lm = app.getSystemService(LocationManager::class.java)
 		if (lm == null || !LocationManagerCompat.isLocationEnabled(lm)) {
-			onResult(Outcome.LocationOff)
+			report(Outcome.LocationOff)
 			return
 		}
 		recentLastKnown(lm)?.let {
-			onResult(Outcome.Found(it.toPoint()))
+			report(Outcome.Found(it.toPoint()))
 			return
 		}
-		val provider = providers(lm).firstOrNull()
-		if (provider == null) {
-			onResult(Outcome.LocationOff)
+		val providers = providers(lm)
+		if (providers.isEmpty()) {
+			report(Outcome.LocationOff)
 			return
 		}
-		requestFix(lm, provider, onResult)
+		requestFix(lm, providers, report)
 	}
 
 	@SuppressLint("MissingPermission")
@@ -97,8 +117,13 @@ object DeviceLocation {
 		return preferred.filter { it in enabled }
 	}
 
+	/**
+	 * One fix from the first provider that accepts the request. A provider that refuses
+	 * outright (an approximate-location app asking GPS before API 31) hands over to the next;
+	 * one that accepts and then finds nothing ends in [Outcome.NotFound] at the timeout.
+	 */
 	@SuppressLint("MissingPermission")
-	private fun requestFix(lm: LocationManager, provider: String, onResult: (Outcome) -> Unit) {
+	private fun requestFix(lm: LocationManager, providers: List<String>, onResult: (Outcome) -> Unit) {
 		val main = Handler(Looper.getMainLooper())
 		var done = false
 		var cleanup: () -> Unit = {}
@@ -111,32 +136,34 @@ object DeviceLocation {
 			onResult(if (location != null) Outcome.Found(location.toPoint()) else Outcome.NotFound)
 		}
 
-		try {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-				val cancel = CancellationSignal()
-				cleanup = { cancel.cancel() }
-				lm.getCurrentLocation(provider, cancel, { main.post(it) }) { location -> finish(location) }
-			} else {
-				// Every method is overridden: before API 30 they are abstract, and the
-				// framework calls them.
-				val listener = object : LocationListener {
-					override fun onLocationChanged(location: Location) = finish(location)
-					@Deprecated("Deprecated in Java")
-					override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-					override fun onProviderEnabled(provider: String) {}
-					override fun onProviderDisabled(provider: String) {}
+		for (provider in providers) {
+			try {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+					val cancel = CancellationSignal()
+					cleanup = { cancel.cancel() }
+					lm.getCurrentLocation(provider, cancel, { main.post(it) }) { location -> finish(location) }
+				} else {
+					// Every method is overridden: before API 30 they are abstract, and the
+					// framework calls them.
+					val listener = object : LocationListener {
+						override fun onLocationChanged(location: Location) = finish(location)
+						@Deprecated("Deprecated in Java")
+						override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+						override fun onProviderEnabled(provider: String) {}
+						override fun onProviderDisabled(provider: String) {}
+					}
+					cleanup = { lm.removeUpdates(listener) }
+					lm.requestLocationUpdates(provider, 0L, 0f, listener, Looper.getMainLooper())
 				}
-				cleanup = { lm.removeUpdates(listener) }
-				lm.requestLocationUpdates(provider, 0L, 0f, listener, Looper.getMainLooper())
+				main.postDelayed({ finish(null) }, FIX_TIMEOUT_MS)
+				return
+			} catch (e: SecurityException) {
+				Napier.w("Location request refused for $provider", e)
+			} catch (e: IllegalArgumentException) {
+				Napier.w("Location provider $provider unavailable", e)
 			}
-			main.postDelayed({ finish(null) }, FIX_TIMEOUT_MS)
-		} catch (e: SecurityException) {
-			Napier.w("Location request refused for $provider", e)
-			finish(null)
-		} catch (e: IllegalArgumentException) {
-			Napier.w("Location provider $provider unavailable", e)
-			finish(null)
 		}
+		finish(null)
 	}
 
 	private fun Location.toPoint() = GeoPoint(round2(latitude), round2(longitude))

@@ -31,13 +31,15 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.screens.preview.getContext
 import com.legbehindneck.fasttrack48.utils.AppDateTime
+import com.legbehindneck.fasttrack48.utils.rememberToday
+import kotlinx.datetime.toKotlinLocalDate
 import com.legbehindneck.fasttrack48.utils.LocalDateStyle
 import com.legbehindneck.fasttrack48.utils.shouldUse24HourFormat
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Clock
 import kotlin.time.Instant
+import java.util.Locale
 
 /**
  * When the running fast began — the caption on the arc's origin.
@@ -89,7 +91,8 @@ fun FastStartBlock(
 				imageVector = Icons.Default.Edit,
 				contentDescription = null,
 				modifier = Modifier.size(spacing.large),
-				tint = journeyStageColor(0),
+				// The first stage's hue, as ink: the plain ramp colour is 1.7:1 on the ground.
+				tint = journeyStageInk(0),
 			)
 		}
 		// The datum itself, and the one line on this screen that must stay legible in full:
@@ -124,11 +127,13 @@ private fun rememberStartLabel(
 ): String {
 	val todayLabel = stringResource(R.string.relative_today)
 	val yesterdayLabel = stringResource(R.string.relative_yesterday)
+	// A key, so "Today" becomes "Yesterday" at midnight on a fast left running overnight.
+	val todayDate = rememberToday()
 
-	return remember(instant, style, is24Hour, todayLabel, yesterdayLabel) {
+	return remember(instant, style, is24Hour, todayLabel, yesterdayLabel, todayDate) {
 		val tz = TimeZone.currentSystemDefault()
 		val dateTime = instant.toLocalDateTime(tz)
-		val today = Clock.System.now().toLocalDateTime(tz).date
+		val today = todayDate.toKotlinLocalDate()
 		// Negative for a future date, which the clamp forbids; it falls through to the
 		// absolute format either way rather than claiming a relative day it isn't.
 		val daysAgo = dateTime.date.daysUntil(today)
@@ -139,6 +144,6 @@ private fun rememberStartLabel(
 			daysAgo == 1 -> yesterdayLabel
 			else -> AppDateTime.formatDate(dateTime.date, style)
 		}
-		"$day, ${AppDateTime.formatTime(dateTime, style, is24Hour)}"
+		AppDateTime.joinDateTime(day, AppDateTime.formatTime(dateTime, style, is24Hour), style, Locale.getDefault())
 	}
 }

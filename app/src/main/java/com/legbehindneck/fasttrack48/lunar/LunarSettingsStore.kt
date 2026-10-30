@@ -3,6 +3,13 @@ package com.legbehindneck.fasttrack48.lunar
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 /** A location the user chose to share, and the time zone it was taken in. */
 data class SavedLocation(val point: GeoPoint, val zoneId: String, val savedAtMillis: Long)
@@ -32,7 +39,19 @@ object LunarSettingsStore {
 	private const val KEY_LON = "longitude"
 	private const val KEY_LOCATION_ZONE = "location_zone"
 	private const val KEY_LOCATION_TIME = "location_time"
+	/** Legacy: the instant of the last check; read once, to seed [KEY_FLOOR]. */
 	private const val KEY_WATERMARK = "watermark"
+	private const val KEY_FLOOR = "floor_local"
+	private const val KEY_ARMED = "armed_at"
+	private const val KEY_POSTED = "posted"
+
+	private val locationChanges = MutableStateFlow(0)
+
+	/**
+	 * Bumped on every [saveLocation]. A location request can finish after the screen that
+	 * started it was recreated, so screens observe this rather than holding a private copy.
+	 */
+	val locationVersion: StateFlow<Int> = locationChanges.asStateFlow()
 
 	private fun prefs(context: Context): SharedPreferences =
 		context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -98,14 +117,40 @@ object LunarSettingsStore {
 				putLong(KEY_LOCATION_TIME, location.savedAtMillis)
 			}
 		}
+		locationChanges.update { it + 1 }
 	}
 
-	/** Reminders that fire at or before this instant (epoch millis) are already handled. */
-	internal fun watermark(context: Context): Long? =
-		devicePrefs(context).let { if (it.contains(KEY_WATERMARK)) it.getLong(KEY_WATERMARK, 0L) else null }
+	/**
+	 * The scheduler's memory between runs (see [LunarReminderScheduler]): the local wall-clock
+	 * time of the last check, the reminders already posted (by [PlannedLunarReminder.key]), and
+	 * when the armed alarm is due. A first run after an update starts from the old watermark.
+	 */
+	internal data class SchedulerState(
+		val floor: LocalDateTime?,
+		val posted: Set<String>,
+		val armedAtMillis: Long?,
+	)
 
-	internal fun setWatermark(context: Context, epochMillis: Long) {
-		devicePrefs(context).edit { putLong(KEY_WATERMARK, epochMillis) }
+	internal fun schedulerState(context: Context, zone: ZoneId): SchedulerState {
+		val p = devicePrefs(context)
+		val floor = p.getString(KEY_FLOOR, null)?.let { runCatching { LocalDateTime.parse(it) }.getOrNull() }
+			?: p.takeIf { it.contains(KEY_WATERMARK) }
+				?.let { Instant.ofEpochMilli(it.getLong(KEY_WATERMARK, 0L)).atZone(zone).toLocalDateTime() }
+		return SchedulerState(
+			floor = floor,
+			posted = p.getStringSet(KEY_POSTED, null).orEmpty().toSet(),
+			armedAtMillis = if (p.contains(KEY_ARMED)) p.getLong(KEY_ARMED, 0L) else null,
+		)
+	}
+
+	internal fun saveSchedulerState(context: Context, state: SchedulerState) {
+		devicePrefs(context).edit {
+			remove(KEY_WATERMARK)
+			if (state.floor == null) remove(KEY_FLOOR) else putString(KEY_FLOOR, state.floor.toString())
+			// A new set each time: SharedPreferences must not be handed back the instance it gave out.
+			putStringSet(KEY_POSTED, HashSet(state.posted))
+			if (state.armedAtMillis == null) remove(KEY_ARMED) else putLong(KEY_ARMED, state.armedAtMillis)
+		}
 	}
 
 	private fun parseLeads(raw: String?, default: Set<Int>): Set<Int> {

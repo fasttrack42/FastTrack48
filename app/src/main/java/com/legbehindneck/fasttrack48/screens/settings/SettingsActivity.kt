@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
+import com.legbehindneck.fasttrack48.AlertService
 import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
@@ -153,6 +154,13 @@ class SettingsActivity : AppCompatActivity() {
 	private fun handleStageAlertsSettingChange(enabled: Boolean) {
 		settings.setFastingAlerts(enabled)
 		stageAlertsSettingState = enabled
+		// Act on a fast already running rather than at the next app start: arm its remaining
+		// alerts now, or drop the ones still pending (the hourly refresh is not an alert).
+		if (enabled && activeFastRepository.isFasting()) {
+			AlertService.scheduleAlerts(activeFastRepository.getElapsedFastTime(), this)
+		} else if (!enabled) {
+			AlertService.cancelPhaseAlerts(this)
+		}
 	}
 
 	private fun handleMetricSystemSettingChange(enabled: Boolean) {

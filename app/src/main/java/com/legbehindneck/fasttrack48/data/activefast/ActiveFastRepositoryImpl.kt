@@ -33,10 +33,7 @@ class ActiveFastRepositoryImpl(
 	override fun startFast(timeStarted: Instant?) {
 		if (isFasting()) error("Cannot start a fast, one is already running")
 
-		val startedMills = timeStarted ?: clock.now()
-
-		datasource.setFastStart(startedMills)
-		datasource.clearFastEnd()
+		datasource.beginFast(timeStarted ?: clock.now())
 	}
 
 	override fun endFast(timeEnded: Instant?) {

@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.annotation.StringRes
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -24,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -109,6 +112,19 @@ fun ProfileScreen(
 			)
 		}
 	}
+}
+
+/** Explains a figure on this screen (BMI, BMR). */
+@Composable
+fun InfoDialog(@StringRes titleRes: Int, @StringRes contentRes: Int, onDismiss: () -> Unit) {
+	AlertDialog(
+		onDismissRequest = onDismiss,
+		title = { Text(stringResource(titleRes)) },
+		text = { Text(stringResource(contentRes)) },
+		confirmButton = {
+			TextButton(onClick = onDismiss) { Text(stringResource(R.string.info_dialog_positive)) }
+		},
+	)
 }
 
 @Composable

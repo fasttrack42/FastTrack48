@@ -78,23 +78,33 @@ class ManualAddViewModel(
 		// The user is typing an exact hours+minutes value, so the fields now carry
 		// the full precision and any preserved length is superseded.
 		exactLength = null
+		val hours = digitsOnly(length, MAX_HOURS_DIGITS)
 		_uiState.update { state ->
 			state.copy(
-				lengthHours = length,
-				isCompleteButtonEnabled = durationEntered(length, state.lengthMinutes, state.selectedDateTime),
+				lengthHours = hours,
+				isCompleteButtonEnabled = durationEntered(hours, state.lengthMinutes, state.selectedDateTime),
 			)
 		}
 	}
 
 	override fun onMinutesChanged(minutes: String) {
 		exactLength = null
+		val mins = digitsOnly(minutes, MAX_MINUTES_DIGITS)
 		_uiState.update { state ->
 			state.copy(
-				lengthMinutes = minutes,
-				isCompleteButtonEnabled = durationEntered(state.lengthHours, minutes, state.selectedDateTime),
+				lengthMinutes = mins,
+				isCompleteButtonEnabled = durationEntered(state.lengthHours, mins, state.selectedDateTime),
 			)
 		}
 	}
+
+	/**
+	 * A number keyboard still offers "-" and "." and accepts pasted text, and an unbounded
+	 * run of digits overflows into an infinite Duration that would be saved as Long.MAX_VALUE
+	 * ms. Digits only, capped well short of that.
+	 */
+	private fun digitsOnly(text: String, maxDigits: Int): String =
+		text.filter { it in '0'..'9' }.take(maxDigits)
 
 	/** A savable duration is present when the start is set and hours+minutes > 0. */
 	private fun durationEntered(hours: String, minutes: String, start: LocalDateTime?): Boolean {
@@ -207,5 +217,11 @@ class ManualAddViewModel(
 
 	override fun goToStep(step: ManualAddStep) {
 		_uiState.update { it.copy(currentStep = step) }
+	}
+
+	private companion object {
+		/** Up to 99,999 hours (over 11 years): far beyond any fast, far below overflow. */
+		const val MAX_HOURS_DIGITS = 5
+		const val MAX_MINUTES_DIGITS = 4
 	}
 }

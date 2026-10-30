@@ -4,7 +4,6 @@ plugins {
 	// By id, not alias(libs.plugins...): F-Droid only takes the version from a gradle file
 	// in which it finds this literal plugin id. The root build script pins its version.
 	id("com.android.application")
-	alias(libs.plugins.kotlin.serialization)
 	alias(libs.plugins.ksp)
 	alias(libs.plugins.kotlin.compose)
 }
@@ -46,9 +45,6 @@ android {
 		resValues = true
 	}
 
-	composeOptions {
-		kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-	}
 	buildTypes {
 		release {
 			isMinifyEnabled = true
@@ -132,52 +128,31 @@ android {
 
 dependencies {
 	implementation(libs.kotlinx.datetime)
-	implementation(libs.kotlinx.serialization.core)
 	implementation(libs.core.ktx)
-	implementation(libs.activity.ktx)
-	implementation(libs.collection.ktx)
-	implementation(libs.fragment.ktx)
-	implementation(libs.recyclerview)
+	implementation(libs.activity)
+	implementation(libs.collection)
 
+	// AppCompatActivity, its DayNight theme, and the per-app language store below API 33.
 	implementation(libs.appcompat)
-	implementation(libs.constraintlayout)
 
-	implementation(libs.navigation.runtime.ktx)
-	implementation(libs.androidx.navigation.fragment.ktx)
-	implementation(libs.androidx.navigation.ui.ktx)
-
-	implementation(libs.androidx.datastore.preferences)
-
-	implementation(libs.androidx.legacy.support.v4)
-	implementation(libs.androidx.lifecycle.extensions)
-	implementation(libs.androidx.lifecycle.viewmodel.ktx)
-	implementation(libs.androidx.lifecycle.common.java8)
+	implementation(libs.androidx.lifecycle.viewmodel)
 
 	implementation(libs.kotlinx.coroutines.android)
 
 	implementation(libs.androidx.room.runtime)
-	implementation(libs.androidx.cardview)
-	implementation(libs.androidx.lifecycle.livedata.ktx)
 	implementation(libs.androidx.material3.android)
-	implementation(libs.androidx.material3.window.sizeclass)
-	implementation(libs.androidx.material3.adaptive.navigation.suite)
-	implementation(libs.androidx.adaptive.navigation)
+	implementation(libs.androidx.adaptive)
 
 	ksp(libs.androidx.room.compiler)
-	implementation(libs.androidx.room.ktx)
 
 	implementation(libs.napier)
 
 	implementation(project.dependencies.platform(libs.koin.bom))
 	implementation(libs.koin.core)
 	implementation(libs.koin.android)
-	implementation(libs.koin.core.coroutines)
 	implementation(libs.koin.androidx.compose)
-	implementation(libs.koin.androidx.workmanager)
 
 	implementation(libs.satchel.core)
-	implementation(libs.satchel.storer.encrypted.file)
-	implementation(libs.satchel.serializer.base64.android)
 
 	implementation(libs.compose.ui)
 	implementation(libs.compose.ui.tooling.preview)
@@ -186,16 +161,29 @@ dependencies {
 	implementation(libs.compose.material.icons.extended)
 	debugImplementation(libs.compose.ui.tooling)
 
-	implementation(libs.accompanist.pager)
-	implementation(libs.accompanist.pager.indicators)
+	// The calendar declares ui-tooling (Android Studio's preview runtime) as a runtime dependency,
+	// which would ship in release with an exported PreviewActivity. Debug gets it back above.
+	implementation(libs.kizitonwose.calendar.compose) {
+		exclude(group = "androidx.compose.ui", module = "ui-tooling")
+	}
 
-	implementation(libs.kizitonwose.calendar.compose)
-
+	// The WorkManager Configuration the app provides for Glance. It used to arrive only
+	// transitively; pinned to the version that resolved.
+	implementation(libs.androidx.work.runtime)
 	implementation(libs.glance)
 	implementation(libs.glance.appwidget)
-	implementation(libs.glance.material)
 	debugImplementation(libs.glance.preview)
 	debugImplementation(libs.glance.appwidget.preview)
+
+	// Removed direct dependencies had raised these transitive libraries (Glance's DataStore,
+	// AppCompat's DrawerLayout) above what their own dependents ask for. The constraints hold them
+	// at the versions already shipped: DataStore holds the widget's state on disk, and nothing
+	// gains from moving the rest backwards.
+	constraints {
+		implementation(libs.pin.customview)
+		implementation(libs.pin.datastore.preferences)
+		implementation(libs.pin.drawerlayout)
+	}
 
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)

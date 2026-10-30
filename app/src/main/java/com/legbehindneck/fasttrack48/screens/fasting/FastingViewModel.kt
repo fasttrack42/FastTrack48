@@ -48,12 +48,12 @@ class FastingViewModel(
 	)
 	override val uiState: StateFlow<IFastingViewModel.FastingUiState> = _uiState.asStateFlow()
 
-	private data class StageStrings(val title: String, val description: String, val energyMode: String)
+	private data class StageStrings(val title: String, val description: String)
 
 	// Declared ahead of init: viewModelScope runs on Dispatchers.Main.immediate, so a
 	// collector started there can deliver its first value before construction finishes,
 	// and render() reads this.
-	private val EMPTY_STAGE = StageStrings("", "", "")
+	private val EMPTY_STAGE = StageStrings("", "")
 
 	/**
 	 * Every input this screen has, subscribed once for the life of the view model.
@@ -158,7 +158,6 @@ class FastingViewModel(
 					milliseconds = "",
 					stageTitle = stage.title,
 					stageDescription = stage.description,
-					energyMode = stage.energyMode,
 					fatBurnTime = fatBurn.first,
 					fatBurnStageState = fatBurn.second,
 					ketosisTime = ketosis.first,
@@ -174,7 +173,6 @@ class FastingViewModel(
 					fastStartTime = null,
 					stageTitle = "",
 					stageDescription = "",
-					energyMode = "",
 				)
 			}
 		}
@@ -187,19 +185,9 @@ class FastingViewModel(
 		if (stageIndex < 0) stageIndex = 0
 		val stage = Stages.stage[stageIndex]
 
-		val curPhase = Stages.getCurrentPhase(elapsedTime)
-		val energyMode = appContext.getString(
-			R.string.fasting_energy_mode,
-			appContext.getString(
-				if (curPhase.fatBurning) R.string.fasting_energy_mode_fat
-				else R.string.fasting_energy_mode_glucose
-			)
-		)
-
 		return StageStrings(
 			title = appContext.getString(stage.title),
 			description = appContext.getString(descriptionFor(stage, elapsedTime.inWholeHours)),
-			energyMode = energyMode,
 		)
 	}
 
@@ -227,7 +215,9 @@ class FastingViewModel(
 
 	override fun startFast(timeStartedMills: Instant?) {
 		if (!repository.isFasting()) {
-			repository.startFast(timeStartedMills)
+			// Same authoritative clamp as adjustFastStart: the picker can sit open for
+			// minutes, and a start in the future yields a negative elapsed time.
+			repository.startFast(timeStartedMills?.let { minOf(it, clock.now()) })
 
 			updateUi()
 			setupAlerts()
@@ -241,12 +231,20 @@ class FastingViewModel(
 	}
 
 	override fun endFast(timeEnded: Instant?, notes: String) {
-		if (repository.isFasting()) {
-			repository.endFast(timeEnded)
+		val start = repository.getFastStart()
+		if (repository.isFasting() && start != null) {
+			// An end is neither in the future nor before the start; either would log a fast
+			// that never happened (negative, or still running).
+			val now = clock.now()
+			val end = (timeEnded ?: now).coerceIn(start, maxOf(start, now))
+			repository.endFast(end)
 
-			// The written row comes back through loadAll(); nothing to refresh by hand.
+			// The window is captured here, not read back inside the coroutine: a fast started
+			// straight after (widget, menu) would otherwise overwrite the slot first and the
+			// wrong window — or none — would be logged. The written row comes back through
+			// loadAll(); nothing to refresh by hand.
 			viewModelScope.launch(Dispatchers.IO) {
-				saveFastToLog(repository.getFastStart(), repository.getFastEnd(), notes)
+				saveFastToLog(start, end, notes)
 			}
 
 			Napier.i("Fast ended!")
@@ -335,12 +333,8 @@ class FastingViewModel(
 		WidgetUpdater.updateWidgets(appContext)
 	}
 
-	private suspend fun saveFastToLog(startTime: Instant?, endTime: Instant?, notes: String) =
-		withContext(Dispatchers.Default) {
-			if (startTime != null && endTime != null) {
-				logRepository.logFast(startTime, endTime, notes)
-			} else {
-				Napier.e("No start time when ending fast!")
-			}
+	private suspend fun saveFastToLog(startTime: Instant, endTime: Instant, notes: String) =
+		withContext(Dispatchers.IO) {
+			logRepository.logFast(startTime, endTime, notes)
 		}
 }

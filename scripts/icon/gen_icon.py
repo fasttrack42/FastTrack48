@@ -298,9 +298,6 @@ def main():
     w(os.path.join(res, 'drawable', 'ic_launcher_monochrome.xml'),
       vd_foreground(mono='#FF000000'))
     w(os.path.join(res, 'drawable', 'ic_launcher_background.xml'), vd_background())
-    w(os.path.join(res, 'values', 'ic_launcher_background.xml'),
-      '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
-      '    <color name="ic_launcher_background">%s</color>\n</resources>\n' % BG_MID)
     for n in ('ic_launcher.xml', 'ic_launcher_round.xml'):
         w(os.path.join(res, 'mipmap-anydpi-v26', n), ADAPTIVE)
 
@@ -310,11 +307,7 @@ def main():
         png(svg_icon('squircle'), os.path.join(res, 'mipmap-%s' % dpi, 'ic_launcher.png'), sz)
         png(svg_icon('circle'), os.path.join(res, 'mipmap-%s' % dpi, 'ic_launcher_round.png'), sz)
 
-    # ---- 3. in-app about icon (96dp base)
-    for dpi, sz in (('hdpi', 72), ('xhdpi', 96), ('xxhdpi', 144)):
-        png(svg_icon('circle'), os.path.join(res, 'drawable-%s' % dpi, 'app_icon.png'), sz)
-
-    # ---- 4. store icons
+    # ---- 3. store icons
     store512 = svg_icon('square')
     png(store512, os.path.join(ROOT, 'app', 'src', 'main', 'ic_launcher-playstore.png'), 512)
     png(store512, os.path.join(ROOT, 'fastlane', 'metadata', 'android', 'en-US',
@@ -336,7 +329,7 @@ def main():
                  'icon-1024-round.png'):
         png_rgba.to_rgba(os.path.join(OUT, name))
 
-    # ---- 5. storefront lockups
+    # ---- 4. storefront lockups
     fg = svg_lockup(1024, 500)
     png(fg, os.path.join(OUT, 'feature-graphic-1024x500.png'), 1024, 500)
     png(fg, os.path.join(ROOT, 'fastlane', 'metadata', 'android', 'en-US',
@@ -345,7 +338,7 @@ def main():
     png(svg_stacked(1280, 720), os.path.join(OUT, 'tv-banner-1280x720.png'), 1280, 720)
     png(svg_stacked(3840, 2160), os.path.join(OUT, 'hero-3840x2160.png'), 3840, 2160)
 
-    # ---- 6. svg sources
+    # ---- 5. svg sources
     w(os.path.join(SVGD, 'icon.svg'), svg_icon('square', 1024))
     w(os.path.join(SVGD, 'icon-round.svg'), svg_icon('circle', 1024))
     w(os.path.join(SVGD, 'icon-squircle.svg'), svg_icon('squircle', 1024))

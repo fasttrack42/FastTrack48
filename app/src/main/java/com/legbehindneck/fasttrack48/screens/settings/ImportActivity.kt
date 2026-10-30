@@ -101,8 +101,8 @@ class ImportActivity : AppCompatActivity() {
  * The result, written into an intent as plain primitives.
  *
  * Primitives rather than a serialized object because that is the whole dependency budget this
- * needs: the app carries `kotlinx-serialization-core` but not `-json`, and `@Parcelize` would
- * mean adding the `kotlin-parcelize` plugin for one data class that crosses one boundary.
+ * needs: the app carries no serialization library, and `@Parcelize` would mean adding the
+ * `kotlin-parcelize` plugin for one data class that crosses one boundary.
  */
 internal fun Intent.putImportResult(result: ImportResult): Intent = apply {
 	putExtra(EXTRA_RESULT_PRESENT, true)

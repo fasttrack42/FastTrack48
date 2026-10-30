@@ -44,6 +44,7 @@ about each phase as you progress in your fast
 • Configurable date and time format.
 • Metric / imperial units.
 • Toggles for the ongoing notification and for stage alerts.
+• Optional reminders for Ekadashi, Purnima and Amavasya, or for full and new moon.
 
 <h3>Localization</h3>
 • Available in nine languages

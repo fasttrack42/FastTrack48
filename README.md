@@ -63,10 +63,19 @@ FastTrack48 explains the physiological changes associated with fasting and estim
 - Metric or imperial units.
 - Independent controls for the ongoing notification and stage alerts.
 
+## Fasting-day reminders
+- Optional reminders for Ekadashi, Purnima and Amavasya by the Smarta, Vaishnava (ISKCON) and Ananda Marga calendar, or for the astronomical full and new moon.
+- Reminder time of your choice, on the day or up to three days ahead. Ekadashi reminders include the time to break the fast (parana).
+- The next fast day under the dial; a tap shows a year of fast days, with the Moon's phase, and adds them to your calendar (.ics).
+- Ananda Marga dates are calculated, not copied from a chart: the sunrise-to-sunrise day in Varanasi that holds most of the tithi (the written rule), or the Indian calendar date that does (as on the India chart). Each fast runs from your local sunrise to the next.
+- Smarta and Vaishnava dates follow local sunrise. The app estimates your location from the time zone; for an exact result, you can let it read your approximate location once. The location stays on the phone.
+
 ## Privacy
 No Internet permission. The app cannot make network connections.
 - No account, no sign-up, no ads, no analytics, no crash reporting, no trackers, no third-party SDKs.
-- All data stays in the app's private storage on the device.
+- All data stays in the app's private storage on the device. Android's own backup can copy it to your Google account; you can turn this off in the system settings.
+- Location is optional and approximate, read only when you ask, and excluded from backups.
+- Full details: [privacy policy](playstore/privacy_policy.md).
 - Free and open source under the MIT License. The complete source code is public, and the build is reproducible from it.
 
 ## Languages

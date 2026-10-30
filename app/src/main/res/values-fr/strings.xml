@@ -97,7 +97,6 @@
 	<string name="title_log">Historique</string>
 	<string name="title_profile">Profil</string>
 
-	<string name="fasting_fragment_label">Jeûne</string>
 	<string name="start_fast_button">Commencer un jeûne</string>
 	<string name="start_orb_label">Commencer</string>
 	<string name="start_fast_now_button">Commencer un jeûne maintenant</string>
@@ -108,17 +107,10 @@
 	<string name="fasting_energy_mode_fat">Corps cétoniques</string>
 
 	<string name="confirm_start_fast_title">Commencer un jeûne ?</string>
-	<string name="confirm_start_fast_positive">Maintenant</string>
-	<string name="confirm_start_fast_neutral">Déjà commencé</string>
-	<string name="confirm_start_fast_negative">Non</string>
 	<string name="already_started_dialog_title">Déjà commencé</string>
 
-	<string name="start_picker_title">Quand avez-vous commencé votre jeûne ?</string>
 
 	<string name="confirm_end_fast_title">Terminer le jeûne ?</string>
-	<string name="confirm_end_fast_positive">Maintenant</string>
-	<string name="confirm_end_fast_neutral">Déjà terminé ?</string>
-	<string name="confirm_end_fast_negative">Non</string>
 	<string name="already_stopped_dialog_title">Quand avez-vous arrêté ?</string>
 
 	<string name="menu_edit">Modifier</string>
@@ -127,18 +119,12 @@
 	<string name="confirm_delete_fast_positive">Oui</string>
 	<string name="confirm_delete_fast_negative">Non</string>
 
-	<string name="fast_status_fasting">Jeûne en cours</string>
-	<string name="fast_status_not_fasting">Vous ne jeûnez pas</string>
 
-	<string name="next_stage">Prochaine phase à : %1$d heures</string>
 
-	<string name="start_fast_button_advanced" translatable="false">*</string>
 
-	<string name="log_entry_started">%1$s</string>
 	<string name="log_entry_length">%1$d heures</string>
 	<string name="log_entry_ketosis">Cétose : %1$d heures</string>
 	<string name="log_entry_autophagy">Autophagie : %1$d heures</string>
-	<string name="log_entry_note_prefix" translatable="false">📝</string>
 
 	<string name="profile_age_label">Âge</string>
 	<string name="profile_age_years">Ans</string>
@@ -147,17 +133,17 @@
 	<string name="profile_weight_pounds_label">Livres</string>
 	<string name="profile_weight_kg_label">Kilogrammes</string>
 
-	<string name="profile_update_button">Mettre à jour</string>
 
 	<string name="profile_bmi_label">IMC :</string>
 	<string name="profile_bmi_value">%1$.1f - %2$s</string>
 	<string name="profile_bmi_category_underweight">Insuffisance pondérale</string>
-	<string name="profile_bmi_category_normal">Normal</string>
+	<string name="profile_bmi_category_normal">Poids santé</string>
 	<string name="profile_bmi_category_overweight">Surpoids</string>
 	<string name="profile_bmi_category_obese">Obésité</string>
 	<string name="profile_bmi_category_morbidly_obese">Obésité morbide</string>
 
-	<string name="profile_error">Valeur incorrecte</string>
+	<string name="profile_error_range">Saisissez un nombre entre %1$d et %2$d.</string>
+	<string name="profile_error_range_whole">Saisissez un nombre entier entre %1$d et %2$d.</string>
 
 	<string name="profile_bmr_label">MB :</string>
 	<string name="profile_bmr_value">%.0f kcal / jour</string>
@@ -171,17 +157,14 @@
 
 	<string name="manual_add_title">Ajout manuel</string>
 	<string name="manual_edit_title">Modifier l’entrée</string>
-	<string name="manual_add_length_hint">Durée (heures)</string>
 	<string name="manual_add_duration_label">Durée</string>
 	<string name="manual_add_hours_hint">Heures</string>
 	<string name="manual_add_minutes_hint">Minutes</string>
 	<string name="manual_add_complete_button">Ajouter</string>
 	<string name="manual_add_save_button">Enregistrer</string>
-	<string name="manual_add_fast_started_on">Jeûne commencé le %1$s</string>
 	<string name="manual_add_start_date_time_label">Date et heure de début</string>
 	<string name="edit_date">Modifier la date</string>
 	<string name="edit_time">Modifier l’heure</string>
-	<string name="manual_start_title">Jeûne commencé</string>
 	<string name="manual_add_set_end_title">Définir la fin du jeûne</string>
 	<string name="manual_add_set_end_complete">Calculer</string>
 	<string name="add_fast_for_day_title">Ajouter un jeûne pour %1$s ?</string>
@@ -234,12 +217,7 @@
 	<string name="phase_autophagy">Autophagie</string>
 	<string name="phase_optimal_autophagy">Autophagie optimale</string>
 
-	<string name="share_text">Je jeûne depuis %1$d heures et %2$d minutes ! Mon corps utilise actuellement %3$s
-		comme source d’énergie.
-	</string>
-	<string name="share_text_past_tense">J’ai jeûné pendant %1$d heures et %2$d minutes !</string>
 
-	<string name="stage_alerts_checkbox">Alertes de phase</string>
 
 	<string name="notification_channel_name">Alertes de jeûne</string>
 	<string name="notification_channel_description">Alertes qui vous informent lorsque vous entrez dans une nouvelle phase de
@@ -270,34 +248,10 @@
 	<string name="notification_fasting_channel_description">Notification persistante indiquant votre statut de jeûne actuel et
 		votre progression.
 	</string>
-	<string name="notification_fasting_title">Jeûne : %1$s heures</string>
 	<string name="notification_fasting_energy_mode">Mode énergétique : %1$s</string>
 
-	<string name="info_dialog_fat_burn_title">Combustion des graisses</string>
-	<string name="info_dialog_fat_burn_content">À ce stade, votre corps a épuisé ses réserves de glucose. Le glucose est
-		stocké sous forme de glycogène pour une utilisation ultérieure ; à ce stade, la majeure partie du glycogène
-		stocké a été décomposée en glucose et utilisée comme source d’énergie.\n\nVotre corps commence alors à décomposer
-		le tissu adipeux (graisse) en corps cétoniques. En plus de pouvoir utiliser le glucose comme source d’énergie,
-		votre corps peut également utiliser les corps cétoniques pour produire de l’énergie et, à mesure que les réserves
-		de glucose diminuent, il passe à un mode énergétique fondé sur les corps cétoniques.
-	</string>
 
-	<string name="info_dialog_ketosis_title">Cétose</string>
-	<string name="info_dialog_ketosis_content">À ce stade, votre corps décompose des graisses depuis suffisamment longtemps
-		pour être principalement alimenté par des corps cétoniques plutôt que par du glucose.\n\nEn plus des bénéfices
-		liés à la perte de graisse, des études ont montré des effets bénéfiques dans certaines maladies liées à
-		l’inflammation, bien que le mécanisme d’action soit actuellement inconnu.
-	</string>
 
-	<string name="info_dialog_autophagy_title">Autophagie</string>
-	<string name="info_dialog_autophagy_content">À ce stade, votre corps a commencé à activer d’autres processus pour
-		produire de l’énergie. En plus de décomposer le tissu adipeux en corps cétoniques, il commence à éliminer des
-		cellules anciennes ou endommagées afin d’en récupérer les constituants.\n\nLes recherches sur cette phase en sont
-		encore à leurs débuts, mais il semble qu’il s’agisse d’un mécanisme important permettant à l’organisme de
-		limiter certains problèmes avant qu’ils ne surviennent. Par exemple, les taux de cancer sont plus faibles chez
-		les personnes qui entrent régulièrement en autophagie. Certaines études ont également montré des taux plus faibles
-		de maladie d’Alzheimer.
-	</string>
 
 	<string name="info_dialog_bmi_title">Indice de masse corporelle</string>
 	<string name="info_dialog_bmi_content">Une estimation approximative de la corpulence d’un adulte. L’IMC est calculé en
@@ -326,14 +280,10 @@
 	<string name="stat_total_fasts">Nombre total de jeûnes</string>
 	<string name="stat_total_fasted">Durée totale de jeûne</string>
 	<string name="stat_longest_fast">Jeûne le plus long</string>
-	<string name="log_total_hours">%1$d heures</string>
-	<string name="profile_metric_switch">Métrique</string>
 	<string name="title_activity_intro">Introduction</string>
 	<string name="app_widget_description">Suivez votre progression de jeûne depuis l’écran d’accueil</string>
 	<string name="app_widget_not_fasting">Aucun jeûne en cours</string>
 	<string name="app_widget_fast_in_progress">Jeûne en cours</string>
-	<string name="app_widget_time">%1$d heures</string>
-	<string name="app_widget_time_compact">%1$d h</string>
 	<string name="app_widget_start_fast_button">Commencer un jeûne</string>
 	<string name="app_widget_stop_fast_button">Arrêter le jeûne</string>
 	<string name="app_widget_start_compact">Commencer</string>
@@ -345,20 +295,13 @@
 	<string name="skip_button">Ignorer</string>
 	<string name="done_button">Terminé</string>
 	<string name="debug_add_hour_button">Débogage : ajouter 1 heure</string>
-	<string name="stop_fast_button_description">Arrêter le jeûne</string>
-	<string name="start_fast_button_description">Commencer un jeûne</string>
 	<string name="bmi_info_button_description">Infos sur l’IMC</string>
 	<string name="bmr_info_button_description">Infos sur le métabolisme de base</string>
-	<string name="profile_gender_label">Sexe</string>
+	<string name="profile_gender_label">Sexe (pour le MB)</string>
 	<string name="more_options_button_description">Plus d’options</string>
-	<string name="manual_add_close_button_description">Fermer</string>
-	<string name="manual_add_selected_start">Commencé : %1$s</string>
-	<string name="manual_add_cancel_button">Annuler</string>
-	<string name="manual_add_next_button">Suivant</string>
 	<string name="manual_add_calculate_from_end">Calculer à partir de la fin</string>
 	<string name="action_settings">Paramètres</string>
 	<string name="title_activity_settings">Paramètres</string>
-	<string name="settings_placeholder">Paramètres à venir</string>
 	<string name="back">Retour</string>
 	<string name="settings_fancy_background_title">Afficher l’arrière-plan stylisé</string>
 	<string name="settings_fancy_background_subtitle">Désactivez-le pour un arrière-plan de jeûne plus sobre</string>
@@ -370,8 +313,6 @@
 	<string name="settings_theme_mode_light">Clair</string>
 	<string name="settings_theme_mode_dark">Sombre</string>
 	<string name="log_no_entries">Aucune entrée pour l’instant !</string>
-	<string name="log_logbook_label">Historique</string>
-	<string name="log_stats_label">Statistiques cumulées</string>
 	<string name="log_view_mode_list">Liste</string>
 	<string name="log_view_mode_calendar">Mois</string>
 	<string name="log_view_mode_year">Année</string>
@@ -464,10 +405,11 @@
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
 	<string name="journey_stage_hours_open">%1$d h+</string>
 	<string name="phase_time_until">dans %1$s</string>
-	<string name="time_since_last_fast">Temps écoulé depuis votre dernier jeûne : %1$s</string>
-	<string name="last_fast_length">Jeûne de %1$s</string>
-	<string name="last_fast_ended">terminé %1$s</string>
-	<string name="just_finished_fast">Vous venez de terminer un jeûne — bravo !</string>
+	<string name="time_since_last_fast">Temps depuis le dernier jeûne : %1$s</string>
+	<string name="duration_under_minute">moins d’une minute</string>
+	<string name="fast_well_done">Bravo : vous avez jeûné %1$s.</string>
+	<string name="milestone_in">%1$s dans %2$s</string>
+	<string name="milestone_for">%1$s depuis %2$s</string>
 	<string name="duration_less_than_minute">À peine commencé</string>
 
 	<string name="settings_section_phases">Phases du jeûne</string>
@@ -523,8 +465,8 @@
 	<string name="lunar_moon_style_astronomical_detail">La date exacte de la pleine ou nouvelle lune dans votre fuseau horaire</string>
 	<string name="lunar_calculating">Calcul en cours…</string>
 	<string name="lunar_no_days_selected">Choisissez au moins un jour pour recevoir des rappels</string>
-	<string name="lunar_tradition_title">Calendrier d’Ekadashi</string>
-	<string name="lunar_tradition_question">Quel calendrier d’Ekadashi suivez-vous ?</string>
+	<string name="lunar_tradition_title">Calendrier de jeûne</string>
+	<string name="lunar_tradition_question">Quel calendrier de jeûne suivez-vous ?</string>
 	<string name="lunar_tradition_smarta">Smarta</string>
 	<string name="lunar_tradition_smarta_detail">La plupart des calendriers hindous, dont Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
@@ -595,5 +537,46 @@
 	<string name="lunar_amavasya_details">Jour de jeûne : %1$s. Début d’Amavasya : %2$s.</string>
 	<string name="lunar_newmoon_details">Nouvelle lune : %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, après %2$s</string>
+	<string name="lunar_tradition_ananda_marga">Ananda Marga</string>
+	<string name="lunar_tradition_ananda_marga_detail">Le jour d’un lever du soleil à l’autre, à Varanasi, qui contient la plus grande partie du tithi. Les mêmes dates partout.</string>
+	<string name="lunar_tradition_ananda_marga_india">Ananda Marga, calendrier de l’Inde</string>
+	<string name="lunar_tradition_ananda_marga_india_detail">La date du calendrier indien qui contient la plus grande partie du tithi, comme dans le calendrier officiel de l’Inde.</string>
+	<string name="fast_days_title">Jours de jeûne</string>
+	<string name="fast_days_see_all">Voir tous les jours de jeûne</string>
+	<string name="fast_days_add_to_calendar">Ajouter au calendrier</string>
+	<string name="fast_days_export_failed">Impossible de créer le fichier de calendrier.</string>
+	<string name="fast_days_source_ananda_marga">Règle d’Ananda Marga. Dates : Varanasi. Lever du soleil : %1$s.</string>
+	<string name="fast_days_source_ananda_marga_india">Ananda Marga, calendrier de l’Inde. Dates : Inde. Lever du soleil : %1$s.</string>
+	<string name="fast_days_source_local">%1$s. Dates et lever du soleil : %2$s.</string>
+	<string name="fast_days_your_location">votre position</string>
+	<string name="fast_days_next_full_moon">Pleine lune %1$s</string>
+	<string name="fast_days_next_new_moon">Nouvelle lune %1$s</string>
+	<string name="fast_days_today_marker">aujourd’hui</string>
+	<string name="fast_days_empty">Aucun jour de jeûne dans les 12 prochains mois.</string>
+	<string name="moon_phase_new">Nouvelle lune</string>
+	<string name="moon_phase_waxing_crescent">Premier croissant</string>
+	<string name="moon_phase_first_quarter">Premier quartier</string>
+	<string name="moon_phase_waxing_gibbous">Gibbeuse croissante</string>
+	<string name="moon_phase_full">Pleine lune</string>
+	<string name="moon_phase_waning_gibbous">Gibbeuse décroissante</string>
+	<string name="moon_phase_last_quarter">Dernier quartier</string>
+	<string name="moon_phase_waning_crescent">Dernier croissant</string>
+	<string name="fast_kind_shukla_ekadashi">Shukla Ekadashi</string>
+	<string name="fast_kind_krishna_ekadashi">Krishna Ekadashi</string>
+	<string name="fast_kind_purnima">Purnima</string>
+	<string name="fast_kind_amavasya">Amavasya</string>
+	<string name="fast_day_today">aujourd’hui</string>
+	<string name="fast_day_tomorrow">demain</string>
+	<plurals name="fast_day_in_days">
+		<item quantity="one">dans %d jour</item>
+		<item quantity="many">dans %d jours</item>
+		<item quantity="other">dans %d jours</item>
+	</plurals>
+	<string name="fast_day_from_sunrise">Jeûne dès le lever du soleil : %1$s</string>
+	<string name="fast_day_until_sunrise">Jeûne jusqu’au lever du soleil : %1$s</string>
+	<string name="fast_day_window">Jeûne du lever du soleil (%1$s) au lever du soleil (%2$s)</string>
+	<string name="fast_day_break_fast">Rompre le jeûne : %1$s</string>
+	<string name="fast_day_begins">%1$s commence : %2$s</string>
+	<string name="fast_day_exact">%1$s : %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>

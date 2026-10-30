@@ -31,7 +31,7 @@
 	<string name="intro_02_description">FastTrack48 è e sarà sempre gratuito e open source. Non c\'è bisogno di creare un
 		account, non ci sono acquisti in-app, nessuna pubblicità da evitare. E non ha nemmeno accesso a Internet, quindi
 		non può inviare i tuoi dati da nessuna parte.</string>
-	<string name="intro_03_title">Digiuno Intermittente</string>
+	<string name="intro_03_title">Digiuno intermittente</string>
 	<string name="intro_03_description">Questa è una nuova area di studio che sta mostrando molti benefici oltre alla
 		semplice perdita di peso.\n\nPer esplorare cosa sappiamo sul digiuno e cosa dicono le ricerche, controlla la
 		sezione Info di questa app!</string>
@@ -44,35 +44,23 @@
 	<string name="title_fasting">Digiuno</string>
 	<string name="title_log">Registro</string>
 	<string name="title_profile">Profilo</string>
-	<string name="fasting_fragment_label">Digiuno</string>
 	<string name="start_fast_button">Inizia digiuno</string>
 	<string name="start_orb_label">Inizia</string>
 	<string name="start_fast_now_button">Inizia subito il digiuno</string>
 	<string name="end_fast_button">Fine digiuno</string>
-	<string name="fasting_energy_mode">Modalità Energia: %1$s</string>
+	<string name="fasting_energy_mode">Modalità energia: %1$s</string>
 	<string name="fasting_energy_mode_glucose">Glucosio</string>
 	<string name="fasting_energy_mode_fat">Corpi chetonici</string>
 	<string name="confirm_start_fast_title">Iniziare il digiuno?</string>
-	<string name="confirm_start_fast_positive">Adesso</string>
-	<string name="confirm_start_fast_neutral">Già iniziato</string>
-	<string name="confirm_start_fast_negative">No</string>
 	<string name="already_started_dialog_title">Già iniziato</string>
-	<string name="start_picker_title">Quando hai iniziato il tuo Digiuno?</string>
 	<string name="confirm_end_fast_title">Terminare il digiuno?</string>
-	<string name="confirm_end_fast_positive">Ora</string>
-	<string name="confirm_end_fast_neutral">Già interrotto?</string>
-	<string name="confirm_end_fast_negative">No</string>
 	<string name="already_stopped_dialog_title">Quando hai smesso?</string>
 	<string name="menu_edit">Modifica</string>
 	<string name="menu_delete">Elimina</string>
-	<string name="confirm_delete_fast_title">Eliminare Digiuno?</string>
+	<string name="confirm_delete_fast_title">Eliminare il digiuno?</string>
 	<string name="confirm_delete_fast_positive">Sì</string>
 	<string name="confirm_delete_fast_negative">No</string>
-	<string name="fast_status_fasting">Digiuno in corso</string>
-	<string name="fast_status_not_fasting">Non stai digiunando</string>
-	<string name="next_stage">Prossima fase tra: %1$d ore</string>
 
-	<string name="log_entry_started">Iniziato: %1$s</string>
 	<string name="log_entry_length">%1$d ore</string>
 	<string name="log_entry_ketosis">Chetosi: %1$d ore</string>
 	<string name="log_entry_autophagy">Autofagia: %1$d ore</string>
@@ -81,15 +69,15 @@
 	<string name="profile_weight_label">Peso</string>
 	<string name="profile_weight_pounds_label">Libbre</string>
 	<string name="profile_weight_kg_label">Chilogrammi</string>
-	<string name="profile_update_button">Aggiorna</string>
 	<string name="profile_bmi_label">IMC:</string>
 	<string name="profile_bmi_value">%1$.1f - %2$s</string>
 	<string name="profile_bmi_category_underweight">Sottopeso</string>
-	<string name="profile_bmi_category_normal">Normale</string>
+	<string name="profile_bmi_category_normal">Peso sano</string>
 	<string name="profile_bmi_category_overweight">Sovrappeso</string>
 	<string name="profile_bmi_category_obese">Obeso</string>
 	<string name="profile_bmi_category_morbidly_obese">Obeso grave</string>
-	<string name="profile_error">Valore non valido</string>
+	<string name="profile_error_range">Inserisci un numero da %1$d a %2$d.</string>
+	<string name="profile_error_range_whole">Inserisci un numero intero da %1$d a %2$d.</string>
 	<string name="profile_bmr_label">BMR:</string>
 	<string name="profile_bmr_value">%.0f kcal / giorno</string>
 	<string name="profile_height_label">Altezza</string>
@@ -98,47 +86,40 @@
 	<string name="profile_height_metric_label">Centimetri</string>
 	<string name="profile_gender_male">Maschio</string>
 	<string name="profile_gender_female">Femmina</string>
-	<string name="manual_add_title">Aggiunta Manuale</string>
-	<string name="manual_edit_title">Modifica Voce</string>
-	<string name="manual_add_length_hint">Lunghezza (Ore)</string>
+	<string name="manual_add_title">Aggiunta manuale</string>
+	<string name="manual_edit_title">Modifica voce</string>
 	<string name="manual_add_complete_button">Aggiungi</string>
 	<string name="manual_add_save_button">Salva</string>
-	<string name="manual_add_fast_started_on">Digiuno iniziato il: %1$s</string>
 	<string name="manual_add_start_date_time_label">Data e ora di inizio</string>
 	<string name="edit_date">Modifica data</string>
 	<string name="edit_time">Modifica ora</string>
-	<string name="manual_start_title">Inizio digiuno</string>
-	<string name="manual_add_set_end_title">Imposta Fine digiuno</string>
+	<string name="manual_add_set_end_title">Imposta fine digiuno</string>
 	<string name="manual_add_set_end_complete">Calcola</string>
 	<string name="fast_autophagy_label">Autofagia</string>
 	<string name="fast_ketosis_label">Chetosi</string>
-	<string name="fast_fat_burn_label">Brucia Grassi</string>
+	<string name="fast_fat_burn_label">Brucia grassi</string>
 	<string name="stage_fasting_title">Digiuno</string>
 	<string name="stage_fasting_description">Il tuo corpo sta consumando le sue riserve di glucosio, continua così!</string>
-	<string name="stage_fat_burning_title">Brucia Grassi</string>
+	<string name="stage_fat_burning_title">Brucia grassi</string>
 	<string name="stage_fat_burning_description">I tuoi depositi di glucosio sono esauriti! Il tuo corpo sta ora
 		bruciando grassi per ottenere energia. Un allenamento nelle prossime ore sarebbe ottimale.</string>
-	<string name="stage_fat_fasting_sweet_spot_title">Punto giusto del Digiuno</string>
+	<string name="stage_fat_fasting_sweet_spot_title">Punto giusto del digiuno</string>
 	<string name="stage_fat_fasting_sweet_spot_description">Sei nel punto dolce di digiuno, continua!</string>
-	<string name="stage_fat_peak_fat_burning_title">Brucia Grassi al picco</string>
+	<string name="stage_fat_peak_fat_burning_title">Brucia grassi al picco</string>
 	<string name="stage_fat_peak_fat_burning_description">Il tuo corpo sta bruciando grasso rapidamente ora, e la
 		chetosi è iniziata.</string>
 	<string name="stage_autophagy_title">Autofagia</string>
 	<string name="stage_autophagy_description">Il tuo corpo ha iniziato l\'autofagia!</string>
-	<string name="stage_optimal_autophagy_title">Autofagia Ottimale</string>
+	<string name="stage_optimal_autophagy_title">Autofagia ottimale</string>
 	<string name="stage_optimal_autophagy_description">L\'autofagia è in pieno svolgimento! Continua così, tra ora e 72
 		ore
 		l\'autofagia sarà molto efficace.</string>
-	<string name="phase_glucose">Consumo di Glucosio</string>
-	<string name="phase_fat_burning">Brucia Grassi</string>
+	<string name="phase_glucose">Consumo di glucosio</string>
+	<string name="phase_fat_burning">Brucia grassi</string>
 	<string name="phase_ketosis">Chetosi</string>
 	<string name="phase_autophagy">Autofagia</string>
-	<string name="phase_optimal_autophagy">Autofagia Ottimale</string>
-	<string name="share_text">Sto digiunando da %1$d ore e %2$d minuti! Il mio corpo sta attualmente consumando %3$s per
-		energia.</string>
-	<string name="share_text_past_tense">Ho digiunato per %1$d ore e %2$d minuti!</string>
-	<string name="stage_alerts_checkbox">Avvisi di Fase</string>
-	<string name="notification_channel_name">Avvisi di Digiuno</string>
+	<string name="phase_optimal_autophagy">Autofagia ottimale</string>
+	<string name="notification_channel_name">Avvisi di digiuno</string>
 	<string name="notification_channel_description">Avvisi che ti informano quando hai iniziato una nuova fase del tuo
 		digiuno.</string>
 	<string name="notification_fat_burn_title">Fase digiuno: Brucia grassi</string>
@@ -156,30 +137,7 @@
 	<string name="notification_fasting_channel_name">Stato di digiuno</string>
 	<string name="notification_fasting_channel_description">Notifica continua che mostra lo stato attuale del digiuno e il
 		progresso.</string>
-	<string name="notification_fasting_title">Digiuno: %1$s ore</string>
-	<string name="notification_fasting_energy_mode">Modalità Energetica: %1$s</string>
-	<string name="info_dialog_fat_burn_title">Brucia Grassi</string>
-	<string name="info_dialog_fat_burn_content">In questa fase il tuo corpo ha esaurito le riserve di glucosio. Il
-		glucosio è conservato come glicogeno per un uso successivo; in questa fase, la maggior parte del tuo glicogeno
-		immagazzinato è stata scomposta in glucosio e consumata per energia. \n\n Ora inizia a scomporre il tessuto
-		adiposo (grassi) in corpi chetonici. Oltre a essere in grado di consumare glucosio per energia, il tuo corpo può
-		alternativamente consumare corpi chetonici per energia e, man mano che le riserve di glucosio si esauriscono, il
-		tuo corpo cambierà la sua modalità energetica ai corpi chetonici.</string>
-	<string name="info_dialog_ketosis_title">Chetosi</string>
-	<string name="info_dialog_ketosis_content">In questa fase, il tuo corpo ha bruciato grasso per un tempo sufficiente
-		affinché
-		il tuo corpo sia principalmente alimentato da corpi chetonici piuttosto che da glucosio.\n\nOltre ai benefici
-		per la perdita di grasso
-		che questo comporta, studi hanno mostrato benefici per le malattie legate all\'infiammazione, anche se il
-		meccanismo
-		alla base di ciò è attualmente sconosciuto.</string>
-	<string name="info_dialog_autophagy_title">Autofagia</string>
-	<string name="info_dialog_autophagy_content">In questa fase, il tuo corpo ha iniziato ad attivare ulteriori processi
-		per raccogliere energia. Oltre a scomporre il tessuto adiposo in corpi chetonici, ha iniziato a cercare cellule
-		vecchie o danneggiate e a consumarle per ottenere più energia.\n\nLa ricerca su questa fase è nelle sue fasi
-		iniziali, ma sembra che questo sia un meccanismo importante per il corpo per fermare i problemi prima che
-		inizino. Ad esempio, le percentuali di cancro sono più basse nelle persone che entrano regolarmente in
-		Autofagia. Inoltre, alcuni studi hanno anche mostrato tassi più bassi di Alzheimer.</string>
+	<string name="notification_fasting_energy_mode">Modalità energetica: %1$s</string>
 	<string name="info_dialog_bmi_title">Indice di massa corporea</string>
 	<string name="info_dialog_bmi_content">Una stima approssimativa del peso sano che un adulto medio dovrebbe avere.
 		Viene calcolato semplicemente dividendo il peso per l\'altezza.\n\nSpesso criticato per essere impreciso, è vero
@@ -187,7 +145,7 @@
 		persona molto alta o molto bassa. Questi casi estremi daranno risultati imprecisi dal calcolo base
 		dell\'IMC.\n\nMa per la maggior parte delle persone, questo è un buon punto di partenza per sapere se si è in un
 		intervallo di peso sano.</string>
-	<string name="info_dialog_bmr_title">Tasso Metabolico Basale</string>
+	<string name="info_dialog_bmr_title">Tasso metabolico basale</string>
 	<string name="info_dialog_bmr_content">Questa è una stima del numero di calorie che il tuo corpo brucerà in un
 		giorno mentre è completamente a riposo. Se tutto quello che facessi fosse stare sdraiato a letto tutto il
 		giorno, queste sono le calorie che potresti mangiare senza aumentare di peso.\n\nQuesto è un numero critico per
@@ -195,17 +153,13 @@
 	<string name="info_dialog_positive">Fantastico!</string>
 	<string name="info_page_title_info">Informazioni</string>
 	<string name="info_page_title_tips">Suggerimenti</string>
-	<string name="title_activity_info">Informazioni sul Digiuno</string>
-	<string name="log_total_autophagy">🧬 Autofagia Totale:</string>
-	<string name="log_total_ketosis">🔥 Chetosi Totale:</string>
-	<string name="log_total_hours">%1$d ore</string>
-	<string name="profile_metric_switch">Metrico</string>
+	<string name="title_activity_info">Informazioni sul digiuno</string>
+	<string name="log_total_autophagy">🧬 Autofagia totale:</string>
+	<string name="log_total_ketosis">🔥 Chetosi totale:</string>
 	<string name="title_activity_intro">Introduzione</string>
 	<string name="app_widget_description">Monitora i tuoi progressi di digiuno dalla schermata principale</string>
 	<string name="app_widget_not_fasting">Non a digiuno</string>
 	<string name="app_widget_fast_in_progress">Digiuno in corso</string>
-	<string name="app_widget_time">%1$d ore</string>
-	<string name="app_widget_time_compact">%1$d h</string>
 	<string name="app_widget_start_fast_button">Inizia digiuno</string>
 	<string name="app_widget_stop_fast_button">Ferma digiuno</string>
 	<string name="app_widget_start_compact">Inizia</string>
@@ -216,25 +170,18 @@
 	<string name="previous_button">Precedente</string>
 	<string name="skip_button">Salta</string>
 	<string name="done_button">Fatto</string>
-	<string name="debug_add_hour_button">Debug: Aggiungi 1 ora</string>
-	<string name="stop_fast_button_description">Interrompi digiuno</string>
-	<string name="start_fast_button_description">Inizia digiuno</string>
+	<string name="debug_add_hour_button">Debug: aggiungi 1 ora</string>
 	<string name="bmi_info_button_description">Informazioni sul BMI</string>
 	<string name="bmr_info_button_description">Informazioni sul BMR</string>
-	<string name="profile_gender_label">Genere</string>
+	<string name="profile_gender_label">Sesso (per il BMR)</string>
 	<string name="more_options_button_description">Più opzioni</string>
-	<string name="manual_add_close_button_description">Chiudi</string>
-	<string name="manual_add_selected_start">Iniziato: %1$s</string>
-	<string name="manual_add_cancel_button">Annulla</string>
-	<string name="manual_add_next_button">Successivo</string>
 	<string name="manual_add_calculate_from_end">Calcola dalla fine</string>
 	<string name="action_settings">Impostazioni</string>
 	<string name="title_activity_settings">Impostazioni</string>
-	<string name="settings_placeholder">Impostazioni in arrivo</string>
 	<string name="back">Indietro</string>
-	<string name="settings_fancy_background_title">Mostra Sfondo Fantastico</string>
+	<string name="settings_fancy_background_title">Mostra sfondo fantastico</string>
 	<string name="settings_fancy_background_subtitle">Disabilita per uno sfondo di digiuno più semplice</string>
-	<string name="settings_metric_system_title">Sistema Metrico</string>
+	<string name="settings_metric_system_title">Sistema metrico</string>
 	<string name="settings_metric_system_subtitle">Mostra altezza e peso in unità metriche</string>
 	<string name="settings_theme_mode_title">Tema</string>
 	<string name="settings_theme_mode_subtitle">Scegli il sistema leggero, scuro o segui</string>
@@ -242,8 +189,6 @@
 	<string name="settings_theme_mode_light">Chiaro</string>
 	<string name="settings_theme_mode_dark">Scuro</string>
 	<string name="log_no_entries">Ancora nessuna voce!</string>
-	<string name="log_logbook_label">Registro</string>
-	<string name="log_stats_label">Statistiche a vita</string>
 	<string name="log_view_mode_list">Elenco</string>
 	<string name="log_view_mode_calendar">Mese</string>
 	<string name="log_view_mode_year">Anno</string>
@@ -252,13 +197,14 @@
 	<string name="duration_less_than_minute">Appena iniziato</string>
 	<string name="fast_notes_label">Note (facoltativo)</string>
 	<string name="fast_notes_placeholder">Com\'è andata? Qualcosa da ricordare di questo digiuno?</string>
-	<string name="just_finished_fast">Hai appena finito un digiuno — bravo!</string>
+	<string name="time_since_last_fast">Tempo dall\'ultimo digiuno: %1$s</string>
+	<string name="duration_under_minute">meno di un minuto</string>
+	<string name="fast_well_done">Ben fatto: hai digiunato per %1$s.</string>
+	<string name="milestone_in">%1$s tra %2$s</string>
+	<string name="milestone_for">%1$s da %2$s</string>
 
 	<string name="notification_fasting_title_duration">Digiuno: %1$s</string>
 	<string name="phase_time_until">tra %1$s</string>
-	<string name="time_since_last_fast">Tempo dal tuo ultimo digiuno: %1$s</string>
-	<string name="last_fast_length">Digiuno di %1$s</string>
-	<string name="last_fast_ended">terminato %1$s</string>
 	<string name="share_text_fasting">Sto digiunando da %1$s! Il mio corpo sta usando %2$s come fonte di energia.</string>
 	<string name="share_text_finished">Ho digiunato per %1$s!</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
@@ -270,11 +216,11 @@
 	<string name="settings_section_phases">Fasi del digiuno</string>
 	<string name="settings_phase_auto_title">Automatico: mostra solo le fasi attive</string>
 	<string name="settings_phase_auto_subtitle">Mostra ogni fase quando inizia. Sostituisce gli interruttori individuali qui sotto.</string>
-	<string name="settings_phase_fatburn_title">Mostra Combustione dei grassi</string>
+	<string name="settings_phase_fatburn_title">Mostra combustione dei grassi</string>
 	<string name="settings_phase_fatburn_subtitle">Mostra il conto alla rovescia della combustione dei grassi nella schermata del digiuno.</string>
-	<string name="settings_phase_ketosis_title">Mostra Chetosi</string>
+	<string name="settings_phase_ketosis_title">Mostra chetosi</string>
 	<string name="settings_phase_ketosis_subtitle">Mostra il conto alla rovescia della chetosi nella schermata del digiuno.</string>
-	<string name="settings_phase_autophagy_title">Mostra Autofagia</string>
+	<string name="settings_phase_autophagy_title">Mostra autofagia</string>
 	<string name="settings_phase_autophagy_subtitle">Mostra il conto alla rovescia dell\'autofagia nella schermata del digiuno.</string>
 	<string name="journey_stage_0_title">La glicemia sale</string>
 	<string name="journey_stage_1_title">La glicemia scende</string>
@@ -357,8 +303,8 @@
 	<string name="lunar_moon_style_astronomical_detail">La data esatta della luna piena o nuova nel tuo fuso orario</string>
 	<string name="lunar_calculating">Calcolo in corso…</string>
 	<string name="lunar_no_days_selected">Scegli almeno un giorno per ricevere i promemoria</string>
-	<string name="lunar_tradition_title">Calendario di Ekadashi</string>
-	<string name="lunar_tradition_question">Quale calendario di Ekadashi segui?</string>
+	<string name="lunar_tradition_title">Calendario del digiuno</string>
+	<string name="lunar_tradition_question">Quale calendario del digiuno segui?</string>
 	<string name="lunar_tradition_smarta">Smarta</string>
 	<string name="lunar_tradition_smarta_detail">La maggior parte dei calendari indù, tra cui Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
@@ -429,5 +375,46 @@
 	<string name="lunar_amavasya_details">Giorno di digiuno: %1$s. Inizio di Amavasya: %2$s.</string>
 	<string name="lunar_newmoon_details">Luna nuova: %1$s, %2$s.</string>
 	<string name="lunar_parana_after">%1$s, dopo le %2$s</string>
+	<string name="lunar_tradition_ananda_marga">Ananda Marga</string>
+	<string name="lunar_tradition_ananda_marga_detail">Il giorno da un’alba all’altra a Varanasi che contiene la maggior parte del tithi. Le stesse date ovunque.</string>
+	<string name="lunar_tradition_ananda_marga_india">Ananda Marga, calendario dell’India</string>
+	<string name="lunar_tradition_ananda_marga_india_detail">La data del calendario indiano che contiene la maggior parte del tithi, come nel calendario ufficiale dell’India.</string>
+	<string name="fast_days_title">Giorni di digiuno</string>
+	<string name="fast_days_see_all">Vedi tutti i giorni di digiuno</string>
+	<string name="fast_days_add_to_calendar">Aggiungi al calendario</string>
+	<string name="fast_days_export_failed">Impossibile creare il file del calendario.</string>
+	<string name="fast_days_source_ananda_marga">Regola di Ananda Marga. Date: Varanasi. Alba: %1$s.</string>
+	<string name="fast_days_source_ananda_marga_india">Ananda Marga, calendario dell’India. Date: India. Alba: %1$s.</string>
+	<string name="fast_days_source_local">%1$s. Date e alba: %2$s.</string>
+	<string name="fast_days_your_location">la tua posizione</string>
+	<string name="fast_days_next_full_moon">Luna piena %1$s</string>
+	<string name="fast_days_next_new_moon">Luna nuova %1$s</string>
+	<string name="fast_days_today_marker">oggi</string>
+	<string name="fast_days_empty">Nessun giorno di digiuno nei prossimi 12 mesi.</string>
+	<string name="moon_phase_new">Luna nuova</string>
+	<string name="moon_phase_waxing_crescent">Luna crescente</string>
+	<string name="moon_phase_first_quarter">Primo quarto</string>
+	<string name="moon_phase_waxing_gibbous">Gibbosa crescente</string>
+	<string name="moon_phase_full">Luna piena</string>
+	<string name="moon_phase_waning_gibbous">Gibbosa calante</string>
+	<string name="moon_phase_last_quarter">Ultimo quarto</string>
+	<string name="moon_phase_waning_crescent">Luna calante</string>
+	<string name="fast_kind_shukla_ekadashi">Shukla Ekadashi</string>
+	<string name="fast_kind_krishna_ekadashi">Krishna Ekadashi</string>
+	<string name="fast_kind_purnima">Purnima</string>
+	<string name="fast_kind_amavasya">Amavasya</string>
+	<string name="fast_day_today">oggi</string>
+	<string name="fast_day_tomorrow">domani</string>
+	<plurals name="fast_day_in_days">
+		<item quantity="one">tra %d giorno</item>
+		<item quantity="many">tra %d giorni</item>
+		<item quantity="other">tra %d giorni</item>
+	</plurals>
+	<string name="fast_day_from_sunrise">Digiuno dall’alba: %1$s</string>
+	<string name="fast_day_until_sunrise">Digiuno fino all’alba: %1$s</string>
+	<string name="fast_day_window">Digiuno dall’alba (%1$s) all’alba (%2$s)</string>
+	<string name="fast_day_break_fast">Interrompere il digiuno: %1$s</string>
+	<string name="fast_day_begins">%1$s inizia: %2$s</string>
+	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
 </resources>

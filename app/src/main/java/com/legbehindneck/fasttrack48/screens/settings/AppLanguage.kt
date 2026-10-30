@@ -1,6 +1,10 @@
 package com.legbehindneck.fasttrack48.screens.settings
 
+import android.content.Context
+import android.content.res.Configuration
+import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.LocaleManagerCompat
 import androidx.core.os.LocaleListCompat
 import java.util.Locale
 
@@ -54,6 +58,24 @@ fun selectedLanguageTag(): String? {
 	return SupportedLanguageTags.firstOrNull {
 		Locale.forLanguageTag(it).language == locale.language
 	}
+}
+
+/**
+ * [context] in the app's language, for text built outside an activity: notifications posted
+ * from a job, an alarm or the application context. Below API 33 AppCompat applies the language
+ * to its activities only, so such text would otherwise come in the device's language. Returns
+ * [context] itself when the app follows the device.
+ *
+ * Reads the store directly rather than [AppCompatDelegate.getApplicationLocales], which below
+ * API 33 stays empty until an activity has started, and a reminder can fire in a process that
+ * never starts one.
+ */
+fun withAppLanguage(context: Context): Context {
+	val locales = LocaleManagerCompat.getApplicationLocales(context)
+	if (locales.isEmpty) return context
+	val config = Configuration(context.resources.configuration)
+	config.setLocales(LocaleList.forLanguageTags(locales.toLanguageTags()))
+	return context.createConfigurationContext(config)
 }
 
 /**

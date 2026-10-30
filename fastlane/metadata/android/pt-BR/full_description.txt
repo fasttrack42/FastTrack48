@@ -43,6 +43,7 @@ O FastTrack48 mostra o que acontece no seu corpo enquanto você jejua, e você a
 • Formato de data e hora configurável.
 • Unidades métricas ou imperiais.
 • Chaves para a notificação contínua e os avisos de estágio.
+• Lembretes opcionais de Ekadashi, Purnima e Amavasya, ou de lua cheia e lua nova.
 
 <h3>Localização</h3>
 • Gratuito e de código aberto sob a licença MIT, sem condições.

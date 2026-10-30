@@ -1,9 +1,7 @@
 package com.legbehindneck.fasttrack48.screens.fasting
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.unit.dp
@@ -14,10 +12,11 @@ import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.time.Duration.Companion.hours
 
 /**
- * Compose UI tests for the Fasting Screen.
- * Verifies core labels and start/stop FABs for both not-fasting and fasting states.
+ * Compose UI tests for the Fasting screen: the start disc while idle; the timer, the next
+ * milestone and End fast while a fast runs.
  */
 @RunWith(AndroidJUnit4::class)
 class FastingScreenComposeTest {
@@ -28,87 +27,50 @@ class FastingScreenComposeTest {
 	private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
 	@Test
-	fun testFastingScreen_NotFasting_ShowsStartButtonAndLabels() {
-		// Arrange a non-fasting state
-		val state = IFastingViewModel.FastingUiState(
-			isFasting = false,
-			stageTitle = "Not Fasting",
-			stageDescription = "Start a fast to begin tracking your progress.",
-			energyMode = "Energy Mode: Glucose",
-			elapsedHours = 0.0,
-			timerText = "0:00:00",
-			milliseconds = "0",
-			fatBurnTime = "--:--:--",
-			ketosisTime = "--:--:--",
-			autophagyTime = "--:--:--",
-		)
-		val vm = FakeFastingViewModel(state)
+	fun testFastingScreen_NotFasting_ShowsStartDisc() {
+		val vm = FakeFastingViewModel(IFastingViewModel.FastingUiState(isFasting = false))
 
 		composeTestRule.setContent {
 			FastTrackTheme {
-				FastingScreen(
-					contentPaddingValues = PaddingValues(0.dp),
-					viewModel = vm
-				)
+				FastingScreen(contentPaddingValues = PaddingValues(0.dp), viewModel = vm)
 			}
 		}
 
-		// Phase labels exist
-		composeTestRule.onAllNodesWithText(context.getString(R.string.fast_fat_burn_label))
-			.assertCountEquals(1)
-		composeTestRule.onAllNodesWithText(context.getString(R.string.fast_ketosis_label))
-			.assertCountEquals(1)
-		composeTestRule.onAllNodesWithText(context.getString(R.string.fast_autophagy_label))
-			.assertCountEquals(1)
-
-		// Start FAB exists; Stop FAB does not
-		composeTestRule.onNodeWithContentDescription(context.getString(R.string.start_fast_button_description))
+		composeTestRule.onNodeWithContentDescription(context.getString(R.string.start_fast_button))
 			.assertExists()
-		composeTestRule.onNodeWithContentDescription(context.getString(R.string.stop_fast_button_description))
+		composeTestRule.onNodeWithText(context.getString(R.string.end_fast_button))
 			.assertDoesNotExist()
 	}
 
 	@Test
-	fun testFastingScreen_Fasting_ShowsStopButtonAndTimer() {
-		// Arrange a fasting/active state
-		val state = IFastingViewModel.FastingUiState(
-			isFasting = true,
-			stageTitle = "Ketosis",
-			stageDescription = "Your liver is producing ketones, which are being used for energy by your brain and body.",
-			energyMode = "Energy Mode: Fat",
-			elapsedHours = 24.0,
-			timerText = "24:00:00",
-			milliseconds = "0",
-			fatBurnTime = "12:00:00",
-			ketosisTime = "6:00:00",
-			autophagyTime = "-12:00:00",
+	fun testFastingScreen_Fasting_ShowsTimerMilestoneAndEndFast() {
+		// 17 hours in: fat burning (12h) is behind, ketosis (18h) is next, autophagy (24h) after.
+		val vm = FakeFastingViewModel(
+			IFastingViewModel.FastingUiState(
+				isFasting = true,
+				elapsedTime = 17.hours,
+				elapsedHours = 17.0,
+				stageTitle = "Fat burning",
+				stageDescription = "Your body is now burning fat for energy.",
+			)
 		)
-		val vm = FakeFastingViewModel(state)
 
 		composeTestRule.setContent {
 			FastTrackTheme {
-				FastingScreen(
-					contentPaddingValues = PaddingValues(0.dp),
-					viewModel = vm
-				)
+				FastingScreen(contentPaddingValues = PaddingValues(0.dp), viewModel = vm)
 			}
 		}
 
-		// Phase labels exist
-		composeTestRule.onAllNodesWithText(context.getString(R.string.fast_fat_burn_label))
-			.assertCountEquals(1)
-		composeTestRule.onAllNodesWithText(context.getString(R.string.fast_ketosis_label))
-			.assertCountEquals(1)
-		composeTestRule.onAllNodesWithText(context.getString(R.string.fast_autophagy_label))
-			.assertCountEquals(1)
-
-		// Stop FAB exists; Start FAB does not
-		composeTestRule.onNodeWithContentDescription(context.getString(R.string.stop_fast_button_description))
+		val ketosis = context.getString(R.string.fast_ketosis_label)
+		val autophagy = context.getString(R.string.fast_autophagy_label)
+		composeTestRule.onNodeWithText("17h").assertExists()
+		composeTestRule.onNodeWithText(context.getString(R.string.milestone_in, ketosis, "1h"))
 			.assertExists()
-		composeTestRule.onNodeWithContentDescription(context.getString(R.string.start_fast_button_description))
+		composeTestRule.onNodeWithText(context.getString(R.string.milestone_in, autophagy, "7h"))
+			.assertExists()
+		composeTestRule.onNodeWithText(context.getString(R.string.end_fast_button))
+			.assertExists()
+		composeTestRule.onNodeWithContentDescription(context.getString(R.string.start_fast_button))
 			.assertDoesNotExist()
-
-		// Timer text is shown
-		composeTestRule.onNodeWithText("24:00:00").assertExists()
 	}
 }

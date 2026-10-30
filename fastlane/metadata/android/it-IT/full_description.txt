@@ -43,6 +43,7 @@ FastTrack48 ti mostra che cosa succede nel tuo corpo mentre digiuni, e impari di
 • Formato di data e ora configurabile.
 • Unità metriche o imperiali.
 • Interruttori per la notifica persistente e per gli avvisi di stadio.
+• Promemoria facoltativi per Ekadashi, Purnima e Amavasya, o per luna piena e nuova.
 
 <h3>Localizzazione</h3>
 • Gratuita e open source con licenza MIT, senza vincoli.

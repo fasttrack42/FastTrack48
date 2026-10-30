@@ -67,6 +67,13 @@ class ActiveFastPreferencesDataSource(appContext: Context) : ActiveFastDataSourc
 		storage.edit { putLong(Data.KEY_FAST_END, time.toEpochMilliseconds()) }
 	}
 
+	override fun beginFast(time: Instant) {
+		storage.edit {
+			putLong(Data.KEY_FAST_START, time.toEpochMilliseconds())
+			putLong(Data.KEY_FAST_END, -1)
+		}
+	}
+
 	override fun clearFastStart() {
 		storage.edit { putLong(Data.KEY_FAST_START, -1) }
 	}

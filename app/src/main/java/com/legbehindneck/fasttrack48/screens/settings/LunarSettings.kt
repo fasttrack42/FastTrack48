@@ -1,6 +1,7 @@
 package com.legbehindneck.fasttrack48.screens.settings
 
 import android.Manifest
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -31,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -52,9 +54,11 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.lunar.DeviceLocation
 import com.legbehindneck.fasttrack48.lunar.EkadashiTradition
+import com.legbehindneck.fasttrack48.lunar.FastDays
 import com.legbehindneck.fasttrack48.lunar.LunarCalendar
 import com.legbehindneck.fasttrack48.lunar.LunarDay
 import com.legbehindneck.fasttrack48.lunar.LunarLocation
+import com.legbehindneck.fasttrack48.lunar.LunarNotifier
 import com.legbehindneck.fasttrack48.lunar.LunarReminderScheduler
 import com.legbehindneck.fasttrack48.lunar.LunarReminderSettings
 import com.legbehindneck.fasttrack48.lunar.LunarSettingsStore
@@ -62,13 +66,14 @@ import com.legbehindneck.fasttrack48.lunar.LunarTexts
 import com.legbehindneck.fasttrack48.lunar.MoonDayStyle
 import com.legbehindneck.fasttrack48.lunar.MoonPhase
 import com.legbehindneck.fasttrack48.lunar.SavedLocation
+import com.legbehindneck.fasttrack48.screens.fastdays.FastDaysSheet
 import com.legbehindneck.fasttrack48.utils.AppDateTime
+import com.legbehindneck.fasttrack48.utils.rememberToday
 import com.legbehindneck.fasttrack48.utils.shouldUse24HourFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 import java.time.Instant
-import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.roundToInt
 
@@ -79,25 +84,36 @@ private const val PREVIEW_DAYS = 60
 
 /**
  * Ekadashi, full-moon (Purnima) and new-moon (Amavasya) reminders: off until the user turns
- * them on. The first
- * time Ekadashi is turned on, the user picks a calendar - the Smarta and Vaishnava fast days
- * differ on about 1 Ekadashi in 13, so there is no safe default.
+ * them on. The first time Ekadashi is turned on, the user picks a calendar - the Smarta and
+ * Vaishnava fast days differ on about 1 Ekadashi in 13, so there is no safe default. The
+ * calendar also picks the Purnima and Amavasya fast days, so its row stays while either
+ * follows the Hindu calendar. Choosing Ananda Marga turns on all four of its fasts, as
+ * suggestions: each can be turned off again.
  */
 @Composable
 internal fun LunarSettingsSection(dateStyle: DateStyle) {
 	val context = LocalContext.current
-	val zone = remember { ZoneId.systemDefault() }
+	// Location results can land after this screen is gone (a recreation mid-request), so
+	// anything they touch outlives the activity.
+	val appContext = context.applicationContext
+	var zone by remember { mutableStateOf(ZoneId.systemDefault()) }
 	var settings by remember { mutableStateOf(LunarSettingsStore.load(context)) }
-	var savedLocation by remember { mutableStateOf(LunarSettingsStore.loadLocation(context)) }
+	val locationVersion by LunarSettingsStore.locationVersion.collectAsState()
+	val savedLocation = remember(locationVersion) { LunarSettingsStore.loadLocation(context) }
 	var notificationsOn by remember { mutableStateOf(notificationsAllowed(context)) }
-	var findingLocation by remember { mutableStateOf(false) }
+	val findingLocation by DeviceLocation.inProgress.collectAsState()
 	var dialog by remember { mutableStateOf(LunarDialog.NONE) }
+	var showFastDays by remember { mutableStateOf(false) }
 
-	// Notifications can be turned on in system settings while this screen is in the background.
+	// Notifications can be turned on in system settings, and the time zone can change, while
+	// this screen is in the background.
 	val lifecycleOwner = context as? LifecycleOwner
 	DisposableEffect(lifecycleOwner) {
 		val observer = LifecycleEventObserver { _, event ->
-			if (event == Lifecycle.Event.ON_RESUME) notificationsOn = notificationsAllowed(context)
+			if (event == Lifecycle.Event.ON_RESUME) {
+				notificationsOn = notificationsAllowed(context)
+				zone = ZoneId.systemDefault()
+			}
 		}
 		lifecycleOwner?.lifecycle?.addObserver(observer)
 		onDispose { lifecycleOwner?.lifecycle?.removeObserver(observer) }
@@ -120,25 +136,22 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 	}
 
 	fun onLocationOutcome(outcome: DeviceLocation.Outcome) {
-		findingLocation = false
 		val message = when (outcome) {
 			is DeviceLocation.Outcome.Found -> {
-				val saved = SavedLocation(outcome.point, zone.id, System.currentTimeMillis())
-				LunarSettingsStore.saveLocation(context, saved)
-				savedLocation = saved
-				LunarReminderScheduler.onSettingsChanged(context)
+				val saved = SavedLocation(outcome.point, ZoneId.systemDefault().id, System.currentTimeMillis())
+				LunarSettingsStore.saveLocation(appContext, saved)
+				LunarReminderScheduler.onSettingsChanged(appContext)
 				R.string.lunar_location_saved
 			}
 			DeviceLocation.Outcome.NoPermission -> R.string.lunar_location_denied
 			DeviceLocation.Outcome.LocationOff -> R.string.lunar_location_off
 			DeviceLocation.Outcome.NotFound -> R.string.lunar_location_not_found
 		}
-		Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+		Toast.makeText(appContext, message, Toast.LENGTH_LONG).show()
 	}
 
 	fun findLocation() {
-		findingLocation = true
-		DeviceLocation.requestOnce(context, ::onLocationOutcome)
+		DeviceLocation.requestOnce(appContext, ::onLocationOutcome)
 	}
 
 	val locationPermission = rememberLauncherForActivityResult(
@@ -147,33 +160,41 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 		if (granted) findLocation() else onLocationOutcome(DeviceLocation.Outcome.NoPermission)
 	}
 
-	val location = remember(savedLocation) { LunarLocation.resolve(context, zone) }
-	val nextEkadashi by produceState<LunarDay?>(null, settings.ekadashiEnabled, settings.tradition, location) {
+	val location = remember(savedLocation, zone) { LunarLocation.resolve(context, zone) }
+	// A key for the previews below, so "next" moves on when the day does.
+	val today = rememberToday(zone)
+	val nextEkadashi by produceState<LunarDay?>(null, settings.ekadashiEnabled, settings.tradition, location, today) {
 		val tradition = settings.tradition
 		value = if (settings.ekadashiEnabled && tradition != null) {
 			withContext(Dispatchers.Default) {
-				LunarCalendar.ekadashis(LocalDate.now(zone), PREVIEW_DAYS, location.point, zone, tradition).firstOrNull()
+				LunarCalendar.ekadashis(today, PREVIEW_DAYS, location.point, zone, tradition).firstOrNull()
 			}
 		} else {
 			null
 		}
 	}
-	val nextFullMoon by produceState<LunarDay?>(null, settings.fullMoonEnabled, settings.moonDayStyle, location) {
+	val nextFullMoon by produceState<LunarDay?>(
+		null, settings.fullMoonEnabled, settings.moonDayStyle, settings.tradition, location, today,
+	) {
 		value = if (settings.fullMoonEnabled) {
 			withContext(Dispatchers.Default) {
 				LunarCalendar.moonDays(
-					LocalDate.now(zone), PREVIEW_DAYS, location.point, zone, MoonPhase.FULL, settings.moonDayStyle,
+					today, PREVIEW_DAYS, location.point, zone, MoonPhase.FULL, settings.moonDayStyle,
+					settings.tradition,
 				).firstOrNull()
 			}
 		} else {
 			null
 		}
 	}
-	val nextNewMoon by produceState<LunarDay?>(null, settings.newMoonEnabled, settings.moonDayStyle, location) {
+	val nextNewMoon by produceState<LunarDay?>(
+		null, settings.newMoonEnabled, settings.moonDayStyle, settings.tradition, location, today,
+	) {
 		value = if (settings.newMoonEnabled) {
 			withContext(Dispatchers.Default) {
 				LunarCalendar.moonDays(
-					LocalDate.now(zone), PREVIEW_DAYS, location.point, zone, MoonPhase.NEW, settings.moonDayStyle,
+					today, PREVIEW_DAYS, location.point, zone, MoonPhase.NEW, settings.moonDayStyle,
+					settings.tradition,
 				).firstOrNull()
 			}
 		} else {
@@ -207,11 +228,6 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 			},
 		)
 		if (settings.ekadashiEnabled) {
-			LunarValueRow(
-				title = stringResource(R.string.lunar_tradition_title),
-				value = stringResource(traditionLabel(settings.tradition ?: EkadashiTradition.SMARTA)),
-				onClick = { dialog = LunarDialog.TRADITION },
-			)
 			LeadDayChips(selected = settings.ekadashiLeadDays) { update(settings.copy(ekadashiLeadDays = it)) }
 		}
 
@@ -251,6 +267,17 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 			LeadDayChips(selected = settings.newMoonLeadDays) { update(settings.copy(newMoonLeadDays = it)) }
 		}
 
+		// The calendar picks every Hindu-calendar fast day, so it heads the shared rows.
+		val moonDaysFollowCalendar =
+			(settings.fullMoonEnabled || settings.newMoonEnabled) && settings.moonDayStyle == MoonDayStyle.VEDIC
+		if (settings.ekadashiEnabled || moonDaysFollowCalendar) {
+			LunarValueRow(
+				title = stringResource(R.string.lunar_tradition_title),
+				value = stringResource(traditionLabel(settings.tradition ?: EkadashiTradition.SMARTA)),
+				onClick = { dialog = LunarDialog.TRADITION },
+			)
+		}
+
 		if (settings.fullMoonEnabled || settings.newMoonEnabled) {
 			LunarValueRow(
 				title = stringResource(R.string.lunar_moon_style_title),
@@ -272,6 +299,7 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 					location.fromDevice -> stringResource(
 						R.string.lunar_location_device,
 						LunarTexts.date(
+							context,
 							Instant.ofEpochMilli(savedLocation?.savedAtMillis ?: 0L).atZone(zone).toLocalDate(),
 							dateStyle,
 						),
@@ -281,6 +309,24 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 				onClick = { if (!findingLocation) dialog = LunarDialog.LOCATION },
 			)
 		}
+
+		if (FastDays.follows(settings)) {
+			ListItem(
+				headlineContent = {
+					Text(
+						text = stringResource(R.string.fast_days_see_all),
+						style = MaterialTheme.typography.labelLarge,
+						fontWeight = FontWeight.Bold,
+						color = MaterialTheme.colorScheme.primary,
+					)
+				},
+				modifier = Modifier.clickable { showFastDays = true },
+			)
+		}
+	}
+
+	if (showFastDays) {
+		FastDaysSheet(dateStyle = dateStyle, onDismiss = { showFastDays = false })
 	}
 
 	when (dialog) {
@@ -293,8 +339,23 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 				selected = settings.tradition,
 				onPick = { tradition ->
 					dialog = LunarDialog.NONE
-					update(settings.copy(tradition = tradition, ekadashiEnabled = true))
-					if (enabling) askForNotifications()
+					// Ananda Marga keeps four fasts, so joining it suggests all four; switching
+					// between its two rules, or leaving it, keeps the switches as they are.
+					val joining = tradition.anandaMarga && settings.tradition?.anandaMarga != true
+					update(
+						if (joining) {
+							settings.copy(
+								tradition = tradition,
+								ekadashiEnabled = true,
+								fullMoonEnabled = true,
+								newMoonEnabled = true,
+								moonDayStyle = MoonDayStyle.VEDIC,
+							)
+						} else {
+							settings.copy(tradition = tradition, ekadashiEnabled = enabling || settings.ekadashiEnabled)
+						}
+					)
+					if (enabling || joining) askForNotifications()
 				},
 				onDismiss = { dialog = LunarDialog.NONE },
 			)
@@ -333,7 +394,6 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 			onUseTimeZone = {
 				dialog = LunarDialog.NONE
 				LunarSettingsStore.saveLocation(context, null)
-				savedLocation = null
 				LunarReminderScheduler.onSettingsChanged(context)
 			},
 			onDismiss = { dialog = LunarDialog.NONE },
@@ -490,12 +550,29 @@ private fun LocationDialog(
 	)
 }
 
-private fun notificationsAllowed(context: Context): Boolean =
-	NotificationManagerCompat.from(context).areNotificationsEnabled()
+/**
+ * Whether a reminder can appear: notifications are on for the app, and the reminders' own
+ * channel, which the user can block on its own, is not blocked. The channel exists only once
+ * a reminder has been posted; until then the app-wide setting decides.
+ */
+private fun notificationsAllowed(context: Context): Boolean {
+	val manager = NotificationManagerCompat.from(context)
+	if (!manager.areNotificationsEnabled()) return false
+	val channel = manager.getNotificationChannel(LunarNotifier.CHANNEL_ID) ?: return true
+	return channel.importance != NotificationManager.IMPORTANCE_NONE
+}
 
+/** The reminders' channel page when only that channel is blocked, else the app's page. */
 private fun openNotificationSettings(context: Context) {
-	val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-		.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+	val appOn = NotificationManagerCompat.from(context).areNotificationsEnabled()
+	val intent = if (appOn) {
+		Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+			.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+			.putExtra(Settings.EXTRA_CHANNEL_ID, LunarNotifier.CHANNEL_ID)
+	} else {
+		Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+			.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+	}
 	context.startActivity(intent)
 }
 
@@ -514,12 +591,16 @@ private fun leadLabel(lead: Int): Int = when (lead) {
 private fun traditionLabel(tradition: EkadashiTradition): Int = when (tradition) {
 	EkadashiTradition.SMARTA -> R.string.lunar_tradition_smarta
 	EkadashiTradition.VAISHNAVA -> R.string.lunar_tradition_vaishnava
+	EkadashiTradition.ANANDA_MARGA -> R.string.lunar_tradition_ananda_marga
+	EkadashiTradition.ANANDA_MARGA_INDIA -> R.string.lunar_tradition_ananda_marga_india
 }
 
 @StringRes
 private fun traditionDetail(tradition: EkadashiTradition): Int = when (tradition) {
 	EkadashiTradition.SMARTA -> R.string.lunar_tradition_smarta_detail
 	EkadashiTradition.VAISHNAVA -> R.string.lunar_tradition_vaishnava_detail
+	EkadashiTradition.ANANDA_MARGA -> R.string.lunar_tradition_ananda_marga_detail
+	EkadashiTradition.ANANDA_MARGA_INDIA -> R.string.lunar_tradition_ananda_marga_india_detail
 }
 
 @StringRes

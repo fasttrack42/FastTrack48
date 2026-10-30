@@ -24,7 +24,6 @@ interface IFastingViewModel {
 		val lastLoggedFast: FastingLogEntry? = null,
 		val stageTitle: String = "",
 		val stageDescription: String = "",
-		val energyMode: String = "",
 		val fatBurnTime: String = "—",
 		val ketosisTime: String = "—",
 		val autophagyTime: String = "—",

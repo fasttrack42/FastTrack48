@@ -12,6 +12,8 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.log.ImportResult
 import com.legbehindneck.fasttrack48.data.log.LogExportFormat
+import com.legbehindneck.fasttrack48.utils.MAX_IMPORT_BYTES
+import com.legbehindneck.fasttrack48.utils.readAtMost
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,7 +77,7 @@ fun AppCompatActivity.importLogFromUri(
 ) {
 	lifecycle.coroutineScope.launch(Dispatchers.Default) {
 		val result = try {
-			val bytes = contentResolver.openInputStream(uri)?.use { s -> s.readBytes() }
+			val bytes = contentResolver.openInputStream(uri)?.use { s -> s.readAtMost(MAX_IMPORT_BYTES) }
 			if (bytes == null) {
 				ImportResult(unreadable = true)
 			} else if (isZip(bytes)) {
@@ -98,6 +100,12 @@ fun AppCompatActivity.importLogFromUri(
 			// Only the read can land here — every importer catches its own parse failures
 			// and reports them as a result — so this is the file being gone or ungranted.
 			Napier.w("Failed to read the file to import", e)
+			ImportResult(unreadable = true)
+		} catch (e: OutOfMemoryError) {
+			// A file under MAX_IMPORT_BYTES that is still too big for this phone's heap. Safe to
+			// recover from here: the failed allocation is this import's own buffer, and every
+			// buffer it filled is garbage once the stack unwinds.
+			Napier.w("File too large to import on this device", e)
 			ImportResult(unreadable = true)
 		}
 
@@ -133,7 +141,7 @@ fun AppCompatActivity.exportFasts(
 		val exportFile = File(cacheDir, "fastingLogbook-$stamp.${format.extension}")
 
 		try {
-			exportFile.writeText(content)
+			withContext(Dispatchers.IO) { exportFile.writeText(content) }
 
 			val fileUri = FileProvider.getUriForFile(
 				this@exportFasts,

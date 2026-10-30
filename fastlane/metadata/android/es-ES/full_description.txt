@@ -43,6 +43,7 @@ FastTrack48 te muestra qué ocurre en tu cuerpo mientras ayunas, y aprendes más
 • Formato de fecha y hora configurable.
 • Unidades métricas o imperiales.
 • Interruptores para la notificación permanente y los avisos de etapa.
+• Recordatorios opcionales de Ekadashi, Purnima y Amavasya, o de luna llena y nueva.
 
 <h3>Localización</h3>
 • Gratuita y de código abierto bajo licencia MIT, sin condiciones.

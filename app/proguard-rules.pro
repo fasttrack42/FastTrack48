@@ -11,10 +11,9 @@
 -keep public class * extends androidx.glance.appwidget.GlanceAppWidget
 -keep public class * extends androidx.glance.appwidget.action.ActionCallback
 
-
-# Android Preferences
--keep class android.preference.PreferenceManager { *; }
--keepclassmembers class android.preference.PreferenceManager { 
-    public static android.content.SharedPreferences getDefaultSharedPreferences(android.content.Context);
-}
-
+# Profile and Gender are stored with Java serialization (Satchel), which records class and
+# field names and the serialVersionUID. Kept as written from now on, so a release never
+# renames them under data already stored. Data from earlier releases, written under R8's
+# names, is read by shape in SafeRawSatchelSerializer.
+-keep class com.legbehindneck.fasttrack48.data.Profile { *; }
+-keep enum com.legbehindneck.fasttrack48.data.Gender { *; }
