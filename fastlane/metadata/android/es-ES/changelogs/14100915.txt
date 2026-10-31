@@ -1,0 +1,4 @@
+- Recordatorios: Ekadashi, Purnima, Amavasya, luna llena y nueva (Smarta, Vaishnava, Ananda Marga)
+- Días de ayuno: el próximo siempre a la vista, un año con fases lunares, añadir al calendario
+- Consulta los próximos días de ayuno sin activar recordatorios
+- Notificaciones en el idioma de la app

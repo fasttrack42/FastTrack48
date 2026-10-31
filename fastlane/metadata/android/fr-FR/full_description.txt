@@ -15,7 +15,6 @@ FastTrack48 vous montre ce qui se passe dans votre corps pendant le jeûne, et v
 • Widget pour l'écran d'accueil.
 • Raccourcis : démarrer un jeûne, démarrer maintenant, terminer.
 • Partagez votre jeûne en cours ou terminé sous forme de texte.
-• Introduction en six écrans au premier lancement.
 
 <i>Historique des jeûnes</i>
 • Chaque jeûne avec heure de début, durée totale, heures en cétose et heures en autophagie.
@@ -24,12 +23,10 @@ FastTrack48 vous montre ce qui se passe dans votre corps pendant le jeûne, et v
 • Touchez un jour passé dans le calendrier pour y ajouter un jeûne.
 • Saisie manuelle : date et heure de début plus durée, ou heure de fin calculée.
 • Modifiez ou supprimez toute entrée, y compris rétroactivement.
-• Effacez tout l'historique.
+• Sauvegarde Android : historique, réglages et profil.
 
 <i>Import et export</i>
-• Export en CSV (compatible Excel).
-• Export en iCalendar (.ics) pour n'importe quelle application d'agenda.
-• Export en ActivityStreams 2.0 (JSON-LD).
+• Export en CSV (compatible Excel), iCalendar (.ics) ou ActivityStreams 2.0 (JSON-LD).
 • Réimportez un export précédent.
 • Importez les sauvegardes .zip d'EasyFast ; les doublons sont ignorés.
 
@@ -43,11 +40,12 @@ FastTrack48 vous montre ce qui se passe dans votre corps pendant le jeûne, et v
 • Format de date et d'heure configurable.
 • Unités métriques ou impériales.
 • Interrupteurs pour la notification permanente et les alertes d'étape.
-• Rappels facultatifs d’Ekadashi, Purnima et Amavasya, ou de pleine et nouvelle lune.
+
+<i>Jours de jeûne</i>
+• Rappels facultatifs d’Ekadashi, Purnima et Amavasya (calendrier Smarta, Vaishnava ou Ananda Marga), ou de pleine et nouvelle lune.
+• Le prochain jour de jeûne toujours en vue, une année à l'avance avec les phases de la Lune : consultez-les sans rappel ou ajoutez-les à votre agenda (.ics).
 
 <h3>Localisation</h3>
-• Gratuite et open source sous licence MIT, sans conditions.
-• Material Design dans toute l'application.
 • Disponible en neuf langues.
 
 FastTrack48 n'est pas une application médicale et ne fournit aucun conseil médical. Les durées des étapes proviennent d'un modèle indicatif fondé sur des recherches publiées et des tests réels ; ce sont des approximations : l'étape réelle dépend de votre métabolisme, de votre dernier repas, de votre activité et d'autres facteurs. Consultez un médecin avant de jeûner, en particulier si vous êtes enceinte, prenez des médicaments ou souffrez d'une pathologie.

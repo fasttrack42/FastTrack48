@@ -15,7 +15,6 @@ FastTrack48 te muestra qué ocurre en tu cuerpo mientras ayunas, y aprendes más
 • Widget para la pantalla de inicio.
 • Accesos directos: iniciar un ayuno, iniciar ahora, finalizar.
 • Comparte tu ayuno en curso o terminado como texto.
-• Introducción de seis pantallas en el primer inicio.
 
 <i>Historial de ayunos</i>
 • Cada ayuno con hora de inicio, duración, horas en cetosis y horas en autofagia.
@@ -24,12 +23,10 @@ FastTrack48 te muestra qué ocurre en tu cuerpo mientras ayunas, y aprendes más
 • Pulsa cualquier día pasado del calendario para añadir un ayuno.
 • Entrada manual: fecha, hora de inicio y duración, o indica el final y la app calcula.
 • Edita o elimina cualquier registro, incluso con fecha retroactiva.
-• Borra todo el historial.
+• Copia de seguridad de Android: historial, ajustes y perfil.
 
 <i>Importación y exportación</i>
-• Exporta en CSV (compatible con Excel).
-• Exporta en iCalendar (.ics) para cualquier app de calendario.
-• Exporta en ActivityStreams 2.0 (JSON-LD).
+• Exporta en CSV (compatible con Excel), iCalendar (.ics) o ActivityStreams 2.0 (JSON-LD).
 • Importa de nuevo una exportación anterior.
 • Importa copias .zip de EasyFast; las entradas solapadas se omiten.
 
@@ -43,11 +40,12 @@ FastTrack48 te muestra qué ocurre en tu cuerpo mientras ayunas, y aprendes más
 • Formato de fecha y hora configurable.
 • Unidades métricas o imperiales.
 • Interruptores para la notificación permanente y los avisos de etapa.
-• Recordatorios opcionales de Ekadashi, Purnima y Amavasya, o de luna llena y nueva.
+
+<i>Días de ayuno</i>
+• Recordatorios opcionales de Ekadashi, Purnima y Amavasya (calendario Smarta, Vaishnava o Ananda Marga), o de luna llena y nueva.
+• El próximo día de ayuno siempre a la vista, un año por delante con fases lunares: consúltalos sin recordatorios o añádelos a tu calendario (.ics).
 
 <h3>Localización</h3>
-• Gratuita y de código abierto bajo licencia MIT, sin condiciones.
-• Material Design en toda la app.
 • Disponible en nueve idiomas.
 
 FastTrack48 no es una aplicación médica ni ofrece asesoramiento médico. Los tiempos de cada etapa proceden de un modelo orientativo basado en investigación publicada y pruebas reales, y son aproximados: la etapa en la que estés depende de tu metabolismo, tu última comida, tu actividad y mucho más. Consulta a un médico antes de ayunar, sobre todo si estás embarazada, tomas medicación o padeces alguna enfermedad.

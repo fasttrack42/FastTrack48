@@ -23,7 +23,8 @@
 # A computed version moves on every hour, and the notes are named after the
 # code: notes written for this release under an earlier hour's code (any
 # changelog above the file's code and below the new one) are carried over to the
-# new code. More than one such file is an error; delete the stale ones.
+# new code, together with the same file in every other language's changelogs.
+# More than one such file is an error; delete the stale ones.
 #
 # DRY_RUN=1 prints what it would do and changes nothing.
 set -eu
@@ -77,6 +78,16 @@ if [ ! -s "$notes" ]; then
 	[ -s "$from" ] || die "$from is empty: the release notes stores show for this version"
 fi
 src=${from:-$notes}
+
+# The other languages' notes under the same earlier code travel with the English.
+others=
+if [ -n "$from" ]; then
+	for f in fastlane/metadata/android/*/changelogs/"${from##*/}"; do
+		[ -f "$f" ] && [ "$f" != "$from" ] || continue
+		[ ! -e "${f%/*}/$code.txt" ] || die "${f%/*}/$code.txt and $f are both waiting; keep one"
+		others="$others $f"
+	done
+fi
 size=$(LC_ALL=C wc -c <"$src" | tr -d ' ')
 [ "$size" -le 500 ] || die "$src is $size bytes; F-Droid shows 500 - shorten it"
 
@@ -85,6 +96,7 @@ git rev-parse -q --verify "refs/tags/$tag" >/dev/null && die "$tag already exist
 if [ "${DRY_RUN:-}" = 1 ]; then
 	echo "tag $tag  versionName $ver  versionCode $code (was $cur)"
 	[ -z "$from" ] || echo "notes $from would become $notes"
+	for f in $others; do echo "notes $f would become ${f%/*}/$code.txt"; done
 	echo "--- $src"
 	cat "$src"
 	exit 0
@@ -92,13 +104,18 @@ fi
 
 git diff --quiet && git diff --cached --quiet || die "commit or stash your changes first: the tag must hold exactly what is committed"
 
+# Renames a notes file to the new code, staging the rename if git tracks it.
+carry() {
+	if git ls-files --error-unmatch "$1" >/dev/null 2>&1; then git mv "$1" "$2"; else mv "$1" "$2"; fi
+	echo "release: notes $1 -> $2"
+}
+moved=
 if [ -n "$from" ]; then
-	if git ls-files --error-unmatch "$from" >/dev/null 2>&1; then
-		git mv "$from" "$notes"
-	else
-		mv "$from" "$notes"
-	fi
-	echo "release: notes $from -> $notes"
+	carry "$from" "$notes"
+	for f in $others; do
+		carry "$f" "${f%/*}/$code.txt"
+		moved="$moved ${f%/*}/$code.txt"
+	done
 fi
 
 sed -i.bak -e "s/^\([[:space:]]*versionCode = \)[0-9][0-9]*$/\1$code/" \
@@ -107,7 +124,11 @@ rm -f "$gradle.bak"
 grep -Eq "^[[:space:]]*versionCode = $code\$" "$gradle" && grep -Fq "versionName = \"$ver\"" "$gradle" ||
 	die "$gradle: the version lines were not rewritten"
 
-git add "$gradle" "$notes"
+# The other languages' notes for this code, carried or written for it directly.
+for f in fastlane/metadata/android/*/changelogs/"$code.txt"; do
+	[ ! -f "$f" ] || moved="$moved $f"
+done
+git add "$gradle" "$notes" $moved
 # Nothing to commit when the file already held this version and the notes were
 # committed: the tag then goes on HEAD as it is.
 git diff --cached --quiet || git commit -q -m "chore(release): $tag"

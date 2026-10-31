@@ -15,7 +15,6 @@ FastTrack48 ti mostra che cosa succede nel tuo corpo mentre digiuni, e impari di
 • Widget per la schermata iniziale.
 • Scorciatoie: avvia un digiuno, avvia ora, termina.
 • Condividi il digiuno in corso o concluso come testo.
-• Introduzione in sei schermate al primo avvio.
 
 <i>Cronologia dei digiuni</i>
 • Ogni digiuno con ora di inizio, durata totale, ore in chetosi e ore in autofagia.
@@ -24,12 +23,10 @@ FastTrack48 ti mostra che cosa succede nel tuo corpo mentre digiuni, e impari di
 • Tocca un giorno passato nel calendario per aggiungervi un digiuno.
 • Inserimento manuale: data e ora di inizio più durata, oppure indica la fine e l'app calcola.
 • Modifica o elimina qualsiasi voce, anche a posteriori.
-• Cancella l'intero registro.
+• Backup di Android: cronologia, impostazioni e profilo.
 
 <i>Importazione ed esportazione</i>
-• Esporta in CSV (compatibile con Excel).
-• Esporta in iCalendar (.ics) per qualsiasi app di calendario.
-• Esporta in ActivityStreams 2.0 (JSON-LD).
+• Esporta in CSV (compatibile con Excel), iCalendar (.ics) o ActivityStreams 2.0 (JSON-LD).
 • Reimporta un'esportazione precedente.
 • Importa i backup .zip di EasyFast; le voci sovrapposte vengono ignorate.
 
@@ -43,11 +40,12 @@ FastTrack48 ti mostra che cosa succede nel tuo corpo mentre digiuni, e impari di
 • Formato di data e ora configurabile.
 • Unità metriche o imperiali.
 • Interruttori per la notifica persistente e per gli avvisi di stadio.
-• Promemoria facoltativi per Ekadashi, Purnima e Amavasya, o per luna piena e nuova.
+
+<i>Giorni di digiuno</i>
+• Promemoria facoltativi per Ekadashi, Purnima e Amavasya (calendario Smarta, Vaishnava o Ananda Marga), o per luna piena e nuova.
+• Il prossimo giorno di digiuno sempre in vista, un anno in anticipo con le fasi lunari: consultali senza promemoria o aggiungili al tuo calendario (.ics).
 
 <h3>Localizzazione</h3>
-• Gratuita e open source con licenza MIT, senza vincoli.
-• Material Design in tutta l'applicazione.
 • Disponibile in nove lingue.
 
 FastTrack48 non è un'applicazione medica e non fornisce consigli medici. I tempi degli stadi derivano da un modello indicativo basato su ricerche pubblicate e prove sul campo e sono approssimazioni: lo stadio in cui ti trovi davvero dipende dal tuo metabolismo, dall'ultimo pasto, dall'attività fisica e da molto altro. Consulta un medico prima di digiunare, soprattutto se sei in gravidanza, assumi farmaci o hai una patologia.

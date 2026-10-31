@@ -16,7 +16,6 @@ about each phase as you progress in your fast
 • Home screen widget.
 • Launcher shortcuts: start a fast, start now, end fast.
 • Share your current or finished fast as text.
-• Six-screen intro explaining the app on first launch.
 
 <i>Fasting history</i>
 • Every fast recorded with start time, total length, hours in ketosis and hours in autophagy.
@@ -25,12 +24,10 @@ about each phase as you progress in your fast
 • Tap any past day in the calendar to add a fast for it.
 • Manual entry: set start date and time plus a duration, or set an end time and let the app calculate.
 • Edit or delete any entry, including backdating a start you forgot to log.
-• Clear the entire fasting history.
+• Android backup: fasting history, settings and profile.
 
 <i>Import and export</i>
-• Export as CSV (Excel-compatible).
-• Export as iCalendar (.ics) to load your fasts into any calendar app.
-• Export as ActivityStreams 2.0 (JSON-LD).
+• Export as CSV (Excel-compatible), iCalendar (.ics) or ActivityStreams 2.0 (JSON-LD).
 • Import a previous export back into the app.
 • Import EasyFast .zip backups; overlapping entries are skipped to avoid duplicates.
 
@@ -44,7 +41,10 @@ about each phase as you progress in your fast
 • Configurable date and time format.
 • Metric / imperial units.
 • Toggles for the ongoing notification and for stage alerts.
-• Optional reminders for Ekadashi, Purnima and Amavasya, or for full and new moon.
+
+<i>Fasting days</i>
+• Optional reminders for Ekadashi, Purnima and Amavasya (Smarta, Vaishnava or Ananda Marga calendar), or for full and new moon.
+• The next fast day always in view, a year ahead with moon phases: look them up without reminders, or add them to your calendar (.ics).
 
 <h3>Localization</h3>
 • Available in nine languages

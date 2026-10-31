@@ -27,8 +27,8 @@ android {
 		// as code 0. `make tag` (scripts/release.sh) rewrites both lines in the commit the
 		// tag points to. The name is YY.MMDD.HH, the time elapsed since 2012-01-23
 		// (scripts/version.sh), not a calendar date; the code is the name without its dots.
-		versionCode = 14100310
-		versionName = "14.1003.10"
+		versionCode = 14100915
+		versionName = "14.1009.15"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 	}

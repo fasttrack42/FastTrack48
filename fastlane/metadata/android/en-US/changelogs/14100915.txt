@@ -1,0 +1,4 @@
+- Fast-day reminders: Ekadashi, Purnima, Amavasya, full and new moon (Smarta, Vaishnava, Ananda Marga)
+- Fast days: the next one always in view, a year ahead with moon phases, add to calendar
+- Look up the next fasting days without turning reminders on
+- Notifications follow the app language

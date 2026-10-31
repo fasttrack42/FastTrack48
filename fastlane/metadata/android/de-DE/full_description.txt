@@ -15,7 +15,6 @@ FastTrack48 zeigt Dir, was in Deinem Körper während des Fastens geschieht, und
 • Widget für den Startbildschirm.
 • Verknüpfungen: Fasten starten, jetzt starten, Fasten beenden.
 • Teile Dein laufendes oder beendetes Fasten als Text.
-• Sechs Einführungsbildschirme beim ersten Start.
 
 <i>Fastenverlauf</i>
 • Jedes Fasten mit Startzeit, Gesamtdauer, Stunden in Ketose und Stunden in Autophagie.
@@ -24,12 +23,10 @@ FastTrack48 zeigt Dir, was in Deinem Körper während des Fastens geschieht, und
 • Tippe auf einen vergangenen Tag im Kalender, um dort ein Fasten einzutragen.
 • Manuelle Eingabe: Startdatum, Uhrzeit und Dauer, oder Ende angeben und berechnen lassen.
 • Einträge bearbeiten oder löschen, auch nachträglich.
-• Gesamtes Logbuch löschen.
+• Android-Sicherung: Fastenverlauf, Einstellungen und Profil.
 
 <i>Import und Export</i>
-• Export als CSV (Excel-kompatibel).
-• Export als iCalendar (.ics) für jede Kalender-App.
-• Export als ActivityStreams 2.0 (JSON-LD).
+• Export als CSV (Excel-kompatibel), iCalendar (.ics) oder ActivityStreams 2.0 (JSON-LD).
 • Frühere Exporte wieder importieren.
 • EasyFast-Backups (.zip) importieren; überlappende Einträge werden übersprungen.
 
@@ -43,11 +40,12 @@ FastTrack48 zeigt Dir, was in Deinem Körper während des Fastens geschieht, und
 • Konfigurierbares Datums- und Zeitformat.
 • Metrische oder imperiale Einheiten.
 • Schalter für laufende Benachrichtigung und Stadien-Hinweise.
-• Optionale Erinnerungen an Ekadashi, Purnima und Amavasya oder an Voll- und Neumond.
+
+<i>Fastentage</i>
+• Optionale Erinnerungen an Ekadashi, Purnima und Amavasya (Smarta-, Vaishnava- oder Ananda-Marga-Kalender) oder an Voll- und Neumond.
+• Der nächste Fastentag immer im Blick, ein Jahr im Voraus mit Mondphasen: ohne Erinnerungen nachschlagen oder in den Kalender übernehmen (.ics).
 
 <h3>Lokalisierung</h3>
-• Kostenlos und quelloffen unter der MIT-Lizenz, ohne Bedingungen.
-• Durchgängiges Material Design.
 • In neun Sprachen verfügbar.
 
 FastTrack48 ist keine medizinische App und gibt keine medizinischen Ratschläge. Die Zeitangaben der Stadien stammen aus einem Faustregel-Modell auf Basis veröffentlichter Forschung und praktischer Tests und sind Näherungswerte: In welchem Stadium Du tatsächlich bist, hängt von Deinem Stoffwechsel, Deiner letzten Mahlzeit, Deiner Aktivität und vielem mehr ab. Sprich vor dem Fasten mit einer Ärztin oder einem Arzt, besonders wenn Du schwanger bist, Medikamente nimmst oder eine Erkrankung hast.
