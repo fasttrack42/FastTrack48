@@ -13,8 +13,10 @@
 # versionName is MAJOR.MMDD.HH; versionCode is the name without its dots:
 #   14.0907.16 -> 14090716
 # so the code follows from the version, is known before any build, and two
-# names never share a code. It must not go below the code already in the file:
-# Play and F-Droid both refuse an update whose code is not higher.
+# names never share a code. It must not go below the code already in the file
+# (Play and F-Droid refuse an update whose code is not higher), nor below any
+# pre-release tag's on origin (.github/workflows/apk.yml), whose testers could
+# not update. FORCE=1 skips both checks.
 #
 # DRY_RUN=1 prints what it would do and changes nothing.
 set -eu
@@ -37,6 +39,11 @@ code=$(printf '%s' "$ver" | tr -d .)
 [ "$(grep -Ec '^[[:space:]]*versionName = "[^"]*"$' "$gradle")" = 1 ] || die "$gradle: want exactly one literal versionName line"
 cur=$(sed -n 's/^[[:space:]]*versionCode = \([0-9][0-9]*\)$/\1/p' "$gradle")
 [ "$code" -ge "$cur" ] || [ "${FORCE:-}" = 1 ] || die "$tag: versionCode $code is below $cur (FORCE=1 to write it anyway)"
+if [ "${FORCE:-}" != 1 ]; then
+	refs=$(git ls-remote --tags --refs origin) || die "cannot list origin's tags to check pre-release codes (FORCE=1 skips)"
+	pre=$(printf '%s\n' "$refs" | sed -n 's|.*refs/tags/v\([1-9][0-9]\{0,1\}\)\.\([0-9]\{4\}\)\.\([0-9]\{2\}\)-[0-9A-Za-z][0-9A-Za-z.]*$|\1\2\3|p' | sort -n | tail -n 1)
+	[ -z "$pre" ] || [ "$code" -ge "$pre" ] || die "$tag: versionCode $code is below pre-release $pre on origin; its testers could not update (FORCE=1 to cut it anyway)"
+fi
 
 notes=$changes/$code.txt
 [ -s "$notes" ] || die "write $notes first: the release notes stores show for this version"

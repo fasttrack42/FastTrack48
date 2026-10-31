@@ -1,3 +1,21 @@
+# Signed APK -> GitHub release; the tag's shape picks the kind:
+#
+#   v14.1101.09       release      cut with `make tag`, pushed; F-Droid builds the same tag
+#                                  (UpdateCheckMode: Tags ^v[0-9]+\.[0-9]{4}\.[0-9]{2}$)
+#   v14.1101.09-rc1   pre-release  pushed by hand; F-Droid's anchored regex never matches it
+#
+# Dispatched from a branch: an automatic pre-release v<MAJOR>.<UTC MMDD.HH>-pre<run#>,
+# tagged through the API at the built commit (GITHUB_TOKEN events start no workflows).
+# Dispatched from a tag: rebuild it, replacing its release's APK.
+#
+# A release builds app/build.gradle.kts as committed, so its literals must match the tag.
+# A pre-release's versionName is the tag without "v", its versionCode the part before "-"
+# without dots (scripts/release.sh's rule), stamped into this checkout only. That code
+# must exceed the file's to install over the release; make tag in turn refuses a release
+# code below any pre-release's on origin, so testers can always update.
+#
+# Secrets: KEYSTORE (base64), STORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD.
+
 name: APK build-and-release
 
 on:
@@ -5,62 +23,92 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+# Per ref: in a shared group, a later run would cancel a pending release.
+concurrency: apk-${{ github.ref }}
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -euo pipefail {0}
+
 jobs:
   build-and-release:
-    name: Build and Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # needed for the release step
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
+      # No token in .git/config for the build to read; origin is public.
+      - uses: actions/checkout@v7
         with:
-          fetch-depth: 0   # needed to fetch the ci branch below
-          fetch-tags: true
+          persist-credentials: false
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
+      - name: Version
+        run: |
+          die() { echo "::error::$*"; exit 1; }
+          g=app/build.gradle.kts
+          cur_code=$(sed -n 's/^[[:space:]]*versionCode = \([0-9][0-9]*\)$/\1/p' "$g")
+          cur_name=$(sed -n 's/^[[:space:]]*versionName = "\([^"]*\)"$/\1/p' "$g")
+          case $cur_code in ''|*[!0-9]*) die "$g: want one literal versionCode line";; esac
+          [ -n "$cur_name" ] || die "$g: want a literal versionName line"
+
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            tag=$GITHUB_REF_NAME
+          else
+            tag=v${cur_name%%.*}.$(date -u +%m%d.%H)-pre$GITHUB_RUN_NUMBER
+            # A re-run within the hour finds its own tag, on this commit.
+            ref=$(git ls-remote --tags origin "refs/tags/$tag")
+            [ -z "$ref" ] || [ "${ref%%[[:space:]]*}" = "$GITHUB_SHA" ] || die "$tag exists on another commit"
+          fi
+          re='^v[1-9][0-9]?\.[0-9]{4}\.[0-9]{2}(-[0-9A-Za-z][0-9A-Za-z.]*)?$'
+          [[ $tag =~ $re ]] || die "$tag: want vMAJOR.MMDD.HH (release) or vMAJOR.MMDD.HH-label (pre-release)"
+          name=${tag#v}; code=${name%%-*}; code=${code//./}
+
+          if [[ $tag != *-* ]]; then
+            [ "$name $code" = "$cur_name $cur_code" ] || die "$tag, but $g holds $cur_name ($cur_code): cut releases with make tag"
+          else
+            [ "$code" -gt "$cur_code" ] || die "$tag: versionCode $code must exceed $cur_code ($cur_name in $g) to install over that release"
+            sed -i -e "s/^\([[:space:]]*versionCode = \)[0-9][0-9]*$/\1$code/" \
+                   -e "s/^\([[:space:]]*versionName = \)\"[^\"]*\"$/\1\"$name\"/" "$g"
+          fi
+          grep -E '^[[:space:]]*version(Code|Name) = ' "$g"
+          printf '%s\n' "TAG=$tag" "APK=$RUNNER_TEMP/FastTrack48-$name.apk" \
+            "NOTES=fastlane/metadata/android/en-US/changelogs/$code.txt" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-java@v6
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
+      - uses: gradle/actions/setup-gradle@v6
 
-      - name: Grant Permission to Execute
-        run: chmod +x gradlew
-
-      - name: Decode keystore
-        run: |
-          echo "${{ secrets.KEYSTORE }}" | base64 --decode > "$RUNNER_TEMP/release.keystore"
-
-      - name: Build Release APK
+      - name: Test, build and verify the signed APK
         env:
-          KEYSTORE: ${{ runner.temp }}/release.keystore
+          KEYSTORE_B64: ${{ secrets.KEYSTORE }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-        run: ./gradlew assembleRelease
-
-      - name: list artifacts
         run: |
-          find . -iname '*.apk'
+          # Without KEYSTORE, build.gradle.kts builds UNSIGNED (for F-Droid); published,
+          # that APK installs over nothing, so a missing secret fails the run here.
+          : "${KEYSTORE_B64:?}" "${STORE_PASSWORD:?}" "${KEY_ALIAS:?}" "${KEY_PASSWORD:?}"
+          export KEYSTORE=$RUNNER_TEMP/release.keystore
+          base64 -d <<<"$KEYSTORE_B64" > "$KEYSTORE"
+          keytool -list -keystore "$KEYSTORE" -storepass:env STORE_PASSWORD -alias "$KEY_ALIAS" >/dev/null
+          ./gradlew app:testDebugUnitTest assembleRelease
+          apk=app/build/outputs/apk/release/FastTrack48-release.apk
+          "$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -n 1)" verify --print-certs "$apk"
+          cp "$apk" "$APK"
 
-      - name: Set TAG env var
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          RAW=$(git describe --tags --always --abbrev=0 2>/dev/null)
-          # CLEAN=$(echo "$RAW" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
-          echo "TAG=$RAW" >> $GITHUB_ENV
-          echo "raw=$RAW" >> $GITHUB_OUTPUT
-
-      - name: Create GitHub Release
-        # if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v3
-        with:
-          name: ${{ env.TAG }}
-          tag_name: ${{ env.TAG }}
-          files: app/build/outputs/apk/release/*.apk
-          token: ${{ secrets.GITHUB_TOKEN }}
-          generate_release_notes: false
-          make_latest: true
+          # Rebuild: replace the APK, leave title, notes and flags alone.
+          gh release view "$TAG" >/dev/null 2>&1 && exec gh release upload "$TAG" "$APK" --clobber
+          args=(--title "$TAG")
+          # Only a dispatched pre-release's tag is new; place it on the built commit.
+          [ "$GITHUB_REF_TYPE" = tag ] || args+=(--target "$GITHUB_SHA")
+          if [[ $TAG == *-* ]]; then args+=(--prerelease --generate-notes)
+          elif [ -s "$NOTES" ]; then args+=(--notes-file "$NOTES")
+          else args+=(--generate-notes); fi
+          gh release create "$TAG" "$APK" "${args[@]}"
