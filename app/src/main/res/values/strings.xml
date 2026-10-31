@@ -386,8 +386,8 @@
 	<string name="lunar_newmoon_title">New moon reminders</string>
 	<string name="lunar_newmoon_subtitle_off">A reminder before each Amavasya or new moon</string>
 	<string name="lunar_moon_style_title">Full and new moon days</string>
-	<string name="lunar_moon_style_vedic">Purnima and Amavasya fast days</string>
-	<string name="lunar_moon_style_vedic_detail">The fast days of the Hindu calendar, sometimes a day before the full or new moon</string>
+	<string name="lunar_moon_style_vedic">Purnima and Amavasya fasting days</string>
+	<string name="lunar_moon_style_vedic_detail">The fasting days of the Hindu calendar, sometimes a day before the full or new moon</string>
 	<string name="lunar_moon_style_astronomical">Astronomical full and new moon</string>
 	<string name="lunar_moon_style_astronomical_detail">The date of the exact full or new moon in your time zone</string>
 	<string name="lunar_calculating">Calculating…</string>
@@ -463,8 +463,8 @@
 	<string name="lunar_tradition_ananda_marga_detail">The sunrise-to-sunrise day in Varanasi that holds most of the tithi. The same dates everywhere.</string>
 	<string name="lunar_tradition_ananda_marga_india">Ananda Marga, India chart</string>
 	<string name="lunar_tradition_ananda_marga_india_detail">The Indian calendar date that holds most of the tithi, as on the official India chart.</string>
-	<string name="fast_days_title">Fast days</string>
-	<string name="fast_days_see_all">See all fast days</string>
+	<string name="fast_days_title">Next fast</string>
+	<string name="fast_days_see_all">All fasting days</string>
 	<string name="fast_days_add_to_calendar">Add to calendar</string>
 	<string name="fast_days_export_failed">Could not create the calendar file.</string>
 	<string name="fast_days_source_ananda_marga">Ananda Marga rule. Dates: Varanasi. Sunrise: %1$s.</string>
@@ -474,7 +474,9 @@
 	<string name="fast_days_next_full_moon">Full moon %1$s</string>
 	<string name="fast_days_next_new_moon">New moon %1$s</string>
 	<string name="fast_days_today_marker">today</string>
-	<string name="fast_days_empty">No fast days in the next 12 months.</string>
+	<string name="fast_days_empty">No fasting days in the next 12 months.</string>
+	<string name="fast_days_preview">Not followed yet, so no reminders.</string>
+	<string name="fast_days_follow">Set up reminders</string>
 	<string name="moon_phase_new">New moon</string>
 	<string name="moon_phase_waxing_crescent">Waxing crescent</string>
 	<string name="moon_phase_first_quarter">First quarter</string>

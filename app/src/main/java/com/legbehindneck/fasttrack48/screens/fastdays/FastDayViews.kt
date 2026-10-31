@@ -5,15 +5,19 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
@@ -42,6 +46,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -74,17 +82,23 @@ import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.cos
 
-/** The fast days the user follows, where they are, and the minute the views were drawn for. */
-internal data class FastDayData(
+/**
+ * The fast days the user follows, where they are, and the minute the views were drawn for.
+ * Public because the public FastingScreen takes it.
+ */
+data class FastDayData(
+	/** The settings [days] were computed by: the [FastDays.preview] ones when [preview]. */
 	val settings: LunarReminderSettings,
 	val zone: ZoneId,
 	val location: ResolvedLocation,
 	/**
 	 * From a lunar month back, so the strip shows the fasts already behind and a fast still
-	 * running past midnight stays current; empty when none is followed.
+	 * running past midnight stays current; empty when none is followed (and no [preview]).
 	 */
 	val days: List<FastDay>,
 	val now: ZonedDateTime,
+	/** None is followed, and [days] are the ones a follower of the Hindu calendar would keep. */
+	val preview: Boolean = false,
 ) {
 	/** The fast under way, or else the next one. */
 	val current: FastDay? get() = FastDays.current(days, now)
@@ -96,16 +110,25 @@ private data class FastDayInputs(
 	val location: ResolvedLocation,
 )
 
-private data class FastDayList(val inputs: FastDayInputs, val days: List<FastDay>)
+private data class FastDayList(
+	val inputs: FastDayInputs,
+	val settings: LunarReminderSettings,
+	val preview: Boolean,
+	val days: List<FastDay>,
+)
+
+/** The idle line and the chrome look two months ahead: always past the next fast, short enough to be quick. */
+internal const val FAST_DAY_ENTRY_SPAN = 60
 
 /**
  * The followed fast days for [span] days ahead, or null while they are calculated (and in
- * previews). Settings live in another activity and the time zone can change in the
+ * previews). With [preview], someone who follows none gets the [FastDays.preview] days
+ * instead of none. Settings live in another activity and the time zone can change in the
  * background, so both are read again on every resume; the list is recalculated when they
  * change or the date turns, the clock re-read every minute.
  */
 @Composable
-internal fun rememberFastDays(span: Int): FastDayData? {
+internal fun rememberFastDays(span: Int, preview: Boolean = false): FastDayData? {
 	if (LocalInspectionMode.current) return null
 	val context = LocalContext.current
 	val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
@@ -127,23 +150,146 @@ internal fun rememberFastDays(span: Int): FastDayData? {
 	}
 	val today = now.toLocalDate()
 
-	val list by produceState<FastDayList?>(null, inputs, today) {
+	val list by produceState<FastDayList?>(null, inputs, today, preview) {
 		val current = inputs
+		val followed = FastDays.follows(current.settings)
+		val previewing = !followed && preview
+		val settings = if (previewing) FastDays.preview(current.settings) else current.settings
 		value = FastDayList(
-			current,
-			if (!FastDays.follows(current.settings)) {
+			inputs = current,
+			settings = settings,
+			preview = previewing,
+			days = if (!followed && !previewing) {
 				emptyList()
 			} else {
 				withContext(Dispatchers.Default) {
 					FastDays.list(
-						today.minusDays(LOOKBACK_DAYS.toLong()), span + LOOKBACK_DAYS, current.settings, current.location.point, current.zone,
+						today.minusDays(LOOKBACK_DAYS.toLong()), span + LOOKBACK_DAYS, settings, current.location.point, current.zone,
 					)
 				}
 			},
 		)
 	}
-	return list?.let { FastDayData(it.inputs.settings, it.inputs.zone, it.inputs.location, it.days, now) }
+	return list?.let { FastDayData(it.settings, it.inputs.zone, it.inputs.location, it.days, now, it.preview) }
 }
+
+/**
+ * The moon the fast-day door wears: the next followed fast's own, as its line under the dial
+ * shows it; following none, the Moon tonight (re-read on the hour, it moves half a degree).
+ */
+@Composable
+internal fun rememberFastDayMoon(data: FastDayData): Double {
+	val live = remember(data.now.toLocalDate(), data.now.hour, data.zone) { FastDays.moon(data.now).elongation }
+	return data.current?.kind?.elongation ?: live
+}
+
+/**
+ * The fast-day calendar's door in the floating chrome, on every page and in every state:
+ *
+ *   ( Ekadashi in 11 days  ◐ )( ⋮ )
+ *
+ * Never the moon alone: a bare moon up there reads as a light/dark switch, and a sentence is
+ * something no theme toggle carries. Following none, "Fast days" with the Moon tonight. The
+ * moon trails, next to the overflow button, so it sits in the same spot whatever the text.
+ * Nothing until the days are in, so it never shows a moon it then has to swap.
+ */
+@Composable
+internal fun FastDayChip(data: FastDayData?, onClick: () -> Unit, modifier: Modifier = Modifier) {
+	if (data == null) return
+	val context = LocalContext.current
+	// Read so that a change of language redraws the texts built from the context.
+	val configuration = LocalConfiguration.current
+	val fast = data.current
+	val ahead = fast?.let { daysAhead(data.now, it) }
+	val label = remember(fast, ahead, configuration) {
+		if (fast != null && ahead != null) {
+			LunarTexts.title(context, fast.subject, ahead)
+		} else {
+			context.getString(R.string.fast_days_title)
+		}
+	}
+	val elongation = rememberFastDayMoon(data)
+	val maxLabel = (configuration.screenWidthDp * 0.5f).dp.coerceAtMost(233.dp)
+	Row(
+		modifier = modifier
+			.heightIn(min = 48.dp)
+			.clip(CircleShape)
+			.clickable(
+				onClickLabel = stringResource(R.string.fast_days_see_all),
+				role = Role.Button,
+				onClick = onClick,
+			)
+			.padding(horizontal = 13.dp),
+		verticalAlignment = Alignment.CenterVertically,
+	) {
+		Text(
+			text = label,
+			style = MaterialTheme.typography.labelLarge,
+			// Today or tomorrow, the fast is worth the accent; further off, the chrome's own ink.
+			color = if (ahead != null && ahead <= 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+			maxLines = 1,
+			overflow = TextOverflow.Ellipsis,
+			modifier = Modifier.widthIn(max = maxLabel),
+		)
+		Spacer(modifier = Modifier.width(8.dp))
+		MoonIcon(elongation = elongation, modifier = Modifier.size(21.dp))
+	}
+}
+
+/**
+ * The same door in landscape, at the head of the navigation rail: the strip the overflow
+ * button keeps at the end edge has no room for words, and the rail does. Laid out like a rail
+ * item, the moon over "Fast days", so it reads as a place to go, not as a theme switch. The
+ * spoken label carries how far off the next fast is.
+ */
+@Composable
+internal fun FastDayRailItem(data: FastDayData?, onClick: () -> Unit, modifier: Modifier = Modifier) {
+	if (data == null) {
+		// Holds the place while the days are calculated, so the rail's items do not drop
+		// when the door arrives.
+		Spacer(modifier = modifier.heightIn(min = RAIL_ITEM_MIN))
+		return
+	}
+	val context = LocalContext.current
+	val configuration = LocalConfiguration.current
+	val fast = data.current
+	val ahead = fast?.let { daysAhead(data.now, it) }
+	val title = stringResource(R.string.fast_days_title)
+	val spoken = remember(fast, ahead, configuration, title) {
+		if (fast != null && ahead != null) LunarTexts.title(context, fast.subject, ahead) else title
+	}
+	val elongation = rememberFastDayMoon(data)
+	Column(
+		modifier = modifier
+			.widthIn(min = RAIL_ITEM_MIN)
+			.heightIn(min = RAIL_ITEM_MIN)
+			.clip(RoundedCornerShape(16.dp))
+			.clickable(
+				onClickLabel = stringResource(R.string.fast_days_see_all),
+				role = Role.Button,
+				onClick = onClick,
+			)
+			.semantics { contentDescription = spoken }
+			.padding(horizontal = 8.dp, vertical = 5.dp),
+		horizontalAlignment = Alignment.CenterHorizontally,
+		verticalArrangement = Arrangement.Center,
+	) {
+		MoonIcon(elongation = elongation, modifier = Modifier.size(24.dp))
+		Spacer(modifier = Modifier.height(5.dp))
+		Text(
+			text = title,
+			style = MaterialTheme.typography.labelMedium,
+			color = if (ahead != null && ahead <= 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+			maxLines = 1,
+			overflow = TextOverflow.Ellipsis,
+			// Spoken through the item's description, which says more.
+			modifier = Modifier.clearAndSetSemantics { },
+		)
+	}
+}
+
+/** A rail item's footprint: the moon and its one-line label. */
+private val RAIL_ITEM_MIN = 56.dp
 
 private fun loadInputs(context: Context): FastDayInputs {
 	val zone = ZoneId.systemDefault()

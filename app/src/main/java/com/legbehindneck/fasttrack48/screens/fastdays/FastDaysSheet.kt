@@ -29,6 +29,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -85,23 +86,25 @@ private const val TINT = 0.10f
 /**
  * Every followed fast day for a year ahead, over whatever opened it. Half height shows the
  * next fast and the month ahead; dragged up, the whole year, month by month. A tap outside or
- * a swipe down closes it.
+ * a swipe down closes it. Following none, it shows the Hindu calendar's fast days anyway, so
+ * a date can be looked up without asking for reminders, and says they are not followed;
+ * [onFollow], when given, is the way to follow them.
  */
 @Composable
-internal fun FastDaysSheet(dateStyle: DateStyle, onDismiss: () -> Unit) {
+internal fun FastDaysSheet(dateStyle: DateStyle, onDismiss: () -> Unit, onFollow: (() -> Unit)? = null) {
 	// Shown once the days are in (a fraction of a second), so the sheet opens at half height
 	// around them instead of growing from a placeholder to full height.
-	val data = rememberFastDays(FAST_DAYS_SPAN) ?: return
+	val data = rememberFastDays(FAST_DAYS_SPAN, preview = true) ?: return
 	ModalBottomSheet(
 		onDismissRequest = onDismiss,
 		sheetState = rememberModalBottomSheetState(),
 	) {
-		FastDaysContent(data = data, dateStyle = dateStyle)
+		FastDaysContent(data = data, dateStyle = dateStyle, onFollow = onFollow)
 	}
 }
 
 @Composable
-private fun FastDaysContent(data: FastDayData, dateStyle: DateStyle) {
+private fun FastDaysContent(data: FastDayData, dateStyle: DateStyle, onFollow: (() -> Unit)?) {
 	val context = LocalContext.current
 	// Read so that a change of language redraws the texts built from the context.
 	val configuration = LocalConfiguration.current
@@ -132,6 +135,9 @@ private fun FastDaysContent(data: FastDayData, dateStyle: DateStyle) {
 			}
 		}
 		item { Note(source) }
+		if (data.preview) {
+			item { PreviewNote(onFollow) }
+		}
 		if (upcoming.isEmpty()) {
 			item { Note(stringResource(R.string.fast_days_empty)) }
 			return@LazyColumn
@@ -163,6 +169,30 @@ private fun Note(text: String) {
 		color = MaterialTheme.colorScheme.onSurfaceVariant,
 		modifier = Modifier.padding(top = 3.dp, bottom = 13.dp),
 	)
+}
+
+/** The days shown are not followed: no reminder comes for them. */
+@Composable
+private fun PreviewNote(onFollow: (() -> Unit)?) {
+	Row(
+		modifier = Modifier
+			.fillMaxWidth()
+			.padding(bottom = 8.dp),
+		verticalAlignment = Alignment.CenterVertically,
+	) {
+		Text(
+			text = stringResource(R.string.fast_days_preview),
+			style = MaterialTheme.typography.bodySmall,
+			color = MaterialTheme.colorScheme.onSurfaceVariant,
+			modifier = Modifier.weight(1f),
+		)
+		if (onFollow != null) {
+			Spacer(modifier = Modifier.width(8.dp))
+			TextButton(onClick = onFollow) {
+				Text(stringResource(R.string.fast_days_follow))
+			}
+		}
+	}
 }
 
 /** What the dates follow, and where the times are for. */

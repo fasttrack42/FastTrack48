@@ -356,6 +356,8 @@
 	<string name="fast_days_next_new_moon">新月 %1$s</string>
 	<string name="fast_days_today_marker">今天</string>
 	<string name="fast_days_empty">未来 12 个月内没有斋戒日。</string>
+	<string name="fast_days_preview">尚未开启，因此不会提醒。</string>
+	<string name="fast_days_follow">设置提醒</string>
 	<string name="moon_phase_new">新月</string>
 	<string name="moon_phase_waxing_crescent">娥眉月</string>
 	<string name="moon_phase_first_quarter">上弦月</string>

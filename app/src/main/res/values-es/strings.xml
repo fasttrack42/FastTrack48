@@ -386,7 +386,7 @@
 	<string name="lunar_tradition_ananda_marga_detail">El día de amanecer a amanecer en Varanasi que contiene la mayor parte del tithi. Las mismas fechas en todas partes.</string>
 	<string name="lunar_tradition_ananda_marga_india">Ananda Marga, calendario de la India</string>
 	<string name="lunar_tradition_ananda_marga_india_detail">La fecha del calendario indio que contiene la mayor parte del tithi, como en el calendario oficial de la India.</string>
-	<string name="fast_days_title">Días de ayuno</string>
+	<string name="fast_days_title">Próximo ayuno</string>
 	<string name="fast_days_see_all">Ver todos los días de ayuno</string>
 	<string name="fast_days_add_to_calendar">Añadir al calendario</string>
 	<string name="fast_days_export_failed">No se pudo crear el archivo de calendario.</string>
@@ -398,6 +398,8 @@
 	<string name="fast_days_next_new_moon">Luna nueva %1$s</string>
 	<string name="fast_days_today_marker">hoy</string>
 	<string name="fast_days_empty">No hay días de ayuno en los próximos 12 meses.</string>
+	<string name="fast_days_preview">Aún no activados, así que sin recordatorios.</string>
+	<string name="fast_days_follow">Configurar recordatorios</string>
 	<string name="moon_phase_new">Luna nueva</string>
 	<string name="moon_phase_waxing_crescent">Luna creciente</string>
 	<string name="moon_phase_first_quarter">Cuarto creciente</string>

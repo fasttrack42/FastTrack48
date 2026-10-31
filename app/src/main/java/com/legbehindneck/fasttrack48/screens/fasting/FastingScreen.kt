@@ -101,8 +101,6 @@ import com.legbehindneck.fasttrack48.screens.confetti.ConfettiState
 import com.legbehindneck.fasttrack48.screens.confetti.confettiEffect
 import com.legbehindneck.fasttrack48.screens.fastdays.FastDayData
 import com.legbehindneck.fasttrack48.screens.fastdays.FastDayEntry
-import com.legbehindneck.fasttrack48.screens.fastdays.FastDaysSheet
-import com.legbehindneck.fasttrack48.screens.fastdays.rememberFastDays
 import com.legbehindneck.fasttrack48.ui.theme.Black900
 import com.legbehindneck.fasttrack48.ui.theme.White50
 import com.legbehindneck.fasttrack48.ui.theme.fastBackgroundGradient
@@ -131,11 +129,17 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 import kotlin.time.Instant
 
+/**
+ * [fastDays] and [onOpenFastDays] come from the main screen, which owns the fast-day calendar:
+ * its door is in the chrome on every page, and this page's idle line is one more way in.
+ */
 @Composable
 fun FastingScreen(
 	contentPaddingValues: PaddingValues,
 	viewModel: IFastingViewModel = koinViewModel<FastingViewModel>(),
 	externalRequests: ExternalRequests = ExternalRequests(),
+	fastDays: FastDayData? = null,
+	onOpenFastDays: () -> Unit = {},
 ) {
 	val scope = rememberCoroutineScope()
 	val confetti = remember { ConfettiState() }
@@ -319,10 +323,6 @@ fun FastingScreen(
 	// Journey stage overlay, opened from the dial or the phase rows
 	var selectedStage by remember { mutableStateOf<JourneyStage?>(null) }
 
-	// The next followed fast day, under the idle dial; a tap opens the year of them.
-	val fastDays = rememberFastDays(FAST_DAY_ENTRY_SPAN)
-	var showFastDays by rememberSaveable { mutableStateOf(false) }
-
 	// One shared time format for the center timer and the phase rows:
 	// days+hours ("2d 12h") vs total hours ("60h 30m"), toggled by tapping either
 	var showTotalHours by rememberSaveable { mutableStateOf(false) }
@@ -504,7 +504,7 @@ fun FastingScreen(
 						showTotalHours = showTotalHours,
 						onStageSelected = { selectedStage = it },
 						fastDays = fastDays,
-						onOpenFastDays = { showFastDays = true },
+						onOpenFastDays = onOpenFastDays,
 						modifier = Modifier
 							.weight(1f)
 							.fillMaxHeight()
@@ -544,7 +544,7 @@ fun FastingScreen(
 							capturing = capturing,
 							maxBandWidth = screenWidth,
 							fastDays = fastDays,
-							onOpenFastDays = { showFastDays = true },
+							onOpenFastDays = onOpenFastDays,
 							modifier = Modifier
 								.fillMaxWidth()
 								.onGloballyPositioned { heroBounds = it.boundsInWindow().toAndroidRect() }
@@ -561,14 +561,7 @@ fun FastingScreen(
 			onDismiss = { selectedStage = null }
 		)
 	}
-
-	if (showFastDays) {
-		FastDaysSheet(dateStyle = LocalDateStyle.current, onDismiss = { showFastDays = false })
-	}
 }
-
-/** The idle line looks two months ahead: always past the next fast, short enough to be quick. */
-private const val FAST_DAY_ENTRY_SPAN = 60
 
 /**
  * The dial with everything that lives on it: the ring, its centre, the band in its notch and

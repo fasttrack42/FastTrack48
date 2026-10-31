@@ -1,10 +1,11 @@
 # Signed APK -> GitHub release; the tag's shape picks the kind:
 #
-#   v14.1101.09       release      cut with `make tag`, pushed; F-Droid builds the same tag
+#   v14.1009.15       release      cut with `make tag`, pushed; F-Droid builds the same tag
 #                                  (UpdateCheckMode: Tags ^v[0-9]+\.[0-9]{4}\.[0-9]{2}$)
-#   v14.1101.09-rc1   pre-release  pushed by hand; F-Droid's anchored regex never matches it
+#   v14.1009.15-rc1   pre-release  pushed by hand; F-Droid's anchored regex never matches it
 #
-# Dispatched from a branch: an automatic pre-release v<MAJOR>.<UTC MMDD.HH>-pre<run#>,
+# Versions are YY.MMDD.HH, the time elapsed since 2012-01-23 (scripts/version.sh), not a
+# calendar date. Dispatched from a branch: an automatic pre-release v<that, now>-pre<run#>,
 # tagged through the API at the built commit (GITHUB_TOKEN events start no workflows).
 # Dispatched from a tag: rebuild it, replacing its release's APK.
 #
@@ -54,13 +55,15 @@ jobs:
           if [ "$GITHUB_REF_TYPE" = tag ]; then
             tag=$GITHUB_REF_NAME
           else
-            tag=v${cur_name%%.*}.$(date -u +%m%d.%H)-pre$GITHUB_RUN_NUMBER
+            # The releases' own clock: a calendar MMDD would run weeks ahead of it, and
+            # make tag would refuse every release below the pre-release.
+            tag=v$(sh scripts/version.sh)-pre$GITHUB_RUN_NUMBER
             # A re-run within the hour finds its own tag, on this commit.
             ref=$(git ls-remote --tags origin "refs/tags/$tag")
             [ -z "$ref" ] || [ "${ref%%[[:space:]]*}" = "$GITHUB_SHA" ] || die "$tag exists on another commit"
           fi
           re='^v[1-9][0-9]?\.[0-9]{4}\.[0-9]{2}(-[0-9A-Za-z][0-9A-Za-z.]*)?$'
-          [[ $tag =~ $re ]] || die "$tag: want vMAJOR.MMDD.HH (release) or vMAJOR.MMDD.HH-label (pre-release)"
+          [[ $tag =~ $re ]] || die "$tag: want vYY.MMDD.HH (release) or vYY.MMDD.HH-label (pre-release)"
           name=${tag#v}; code=${name%%-*}; code=${code//./}
 
           if [[ $tag != *-* ]]; then

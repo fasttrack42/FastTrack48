@@ -24,8 +24,9 @@ android {
 		targetSdk = libs.versions.targetSdk.get().toInt()
 		// Literals, not catalog lookups: F-Droid reads the version with a regex over this
 		// file at the release tag and cannot evaluate a catalog reference, so a lookup reads
-		// as code 0. `make tag VERSION=MAJOR.MMDD.HH` (scripts/release.sh) rewrites both
-		// lines in the commit the tag points to; the code is the name without its dots.
+		// as code 0. `make tag` (scripts/release.sh) rewrites both lines in the commit the
+		// tag points to. The name is YY.MMDD.HH, the time elapsed since 2012-01-23
+		// (scripts/version.sh), not a calendar date; the code is the name without its dots.
 		versionCode = 14100310
 		versionName = "14.1003.10"
 

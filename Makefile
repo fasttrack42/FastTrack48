@@ -53,10 +53,10 @@ NATIVE_SYMS  := $(OUTPUTS)/native-debug-symbols/release/native-debug-symbols.zip
 
 DIST         := dist/$(VERSION_CODE)
 
-.PHONY: help version release debug bundle install install-debug test lint \
+.PHONY: help version release debug bundle install-release install-debug test lint \
         icons preflight dist clean clean-dist tasks check-jetifier \
         verify-signing play-internal play-production play-metadata \
-        require-signing upload-key key-fingerprints deps tag
+        require-signing upload-key key-fingerprints deps tag version-now
 
 help: ## Show this help
 	@printf '\033[1mFastTrack48\033[0m %s (versionCode %s)\n' \
@@ -204,19 +204,22 @@ play-metadata: ## Upload listing text and graphics only, no binary
 
 # ---- misc
 
-install: ## adb install the release APK
+install-release: release ## adb install the release APK
 	adb install -r $(APK_RELEASE)
 
-install-debug: ## adb install the debug APK
+install-debug: debug ## adb install the debug APK
 	adb install -r $(APK_DEBUG)
 
 version: ## Print the current version name and code
 	@echo "$(VERSION_NAME) ($(VERSION_CODE))"
 
+version-now: ## Print the version a release cut now would get (scripts/version.sh)
+	@sh scripts/version.sh
+
 # The F-Droid and GitHub release: version literals, changelog, commit and tag
-# in one step (scripts/release.sh). Write the changelog for the new code first.
-tag: ## Cut a release: make tag VERSION=14.0907.16 [DRY_RUN=1] [FORCE=1]
-	@test -n "$(VERSION)" || { echo "usage: make tag VERSION=MAJOR.MMDD.HH [DRY_RUN=1]" >&2; exit 2; }
+# in one step (scripts/release.sh). The version is now's unless VERSION gives it;
+# write the changelog for its code first (`make version-now`, or DRY_RUN=1 names it).
+tag: ## Cut a release: make tag [VERSION=14.1009.15] [DRY_RUN=1] [FORCE=1]
 	@DRY_RUN="$(DRY_RUN)" FORCE="$(FORCE)" sh scripts/release.sh "$(VERSION)"
 
 tasks: ## List the Gradle tasks

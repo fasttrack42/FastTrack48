@@ -553,6 +553,8 @@
 	<string name="fast_days_next_new_moon">Nouvelle lune %1$s</string>
 	<string name="fast_days_today_marker">aujourd’hui</string>
 	<string name="fast_days_empty">Aucun jour de jeûne dans les 12 prochains mois.</string>
+	<string name="fast_days_preview">Pas encore activés, donc aucun rappel.</string>
+	<string name="fast_days_follow">Configurer les rappels</string>
 	<string name="moon_phase_new">Nouvelle lune</string>
 	<string name="moon_phase_waxing_crescent">Premier croissant</string>
 	<string name="moon_phase_first_quarter">Premier quartier</string>

@@ -82,6 +82,17 @@ object FastDays {
 	fun follows(settings: LunarReminderSettings): Boolean =
 		(settings.ekadashiEnabled && settings.tradition != null) || settings.fullMoonEnabled || settings.newMoonEnabled
 
+	/**
+	 * What someone who follows nothing is shown on asking: every fast day of the Hindu calendar,
+	 * by the calendar and moon-day style last chosen (Smarta until one is). Always [follows].
+	 */
+	fun preview(settings: LunarReminderSettings): LunarReminderSettings = settings.copy(
+		ekadashiEnabled = true,
+		fullMoonEnabled = true,
+		newMoonEnabled = true,
+		tradition = settings.tradition ?: EkadashiTradition.SMARTA,
+	)
+
 	/** The followed fast days in [from, from + days], in date order. */
 	fun list(
 		from: LocalDate,

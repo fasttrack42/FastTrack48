@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -56,6 +57,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.screens.fastdays.FAST_DAY_ENTRY_SPAN
+import com.legbehindneck.fasttrack48.screens.fastdays.FastDayChip
+import com.legbehindneck.fasttrack48.screens.fastdays.FastDayData
+import com.legbehindneck.fasttrack48.screens.fastdays.FastDayRailItem
+import com.legbehindneck.fasttrack48.screens.fastdays.FastDaysSheet
+import com.legbehindneck.fasttrack48.screens.fastdays.MoonIcon
+import com.legbehindneck.fasttrack48.screens.fastdays.rememberFastDayMoon
+import com.legbehindneck.fasttrack48.screens.fastdays.rememberFastDays
 import com.legbehindneck.fasttrack48.screens.fasting.ExternalRequests
 import com.legbehindneck.fasttrack48.screens.fasting.FastingScreen
 import com.legbehindneck.fasttrack48.screens.fasting.FastingViewModel
@@ -63,6 +72,7 @@ import com.legbehindneck.fasttrack48.screens.log.LogScreen
 import com.legbehindneck.fasttrack48.screens.log.LogViewModel
 import com.legbehindneck.fasttrack48.screens.profile.InfoDialog
 import com.legbehindneck.fasttrack48.screens.profile.ProfileScreen
+import com.legbehindneck.fasttrack48.utils.LocalDateStyle
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.time.ExperimentalTime
@@ -127,6 +137,12 @@ fun MainScreen(
 	// both. Reading it here costs nothing: the page below already created it.
 	val fastingViewModel: FastingViewModel = koinViewModel()
 	val fastingState by fastingViewModel.uiState.collectAsState()
+
+	// The fast-day calendar is the app's, not a page's: its door sits in the chrome on every
+	// page and in every state (during a fast, the line under the dial is gone), so the days
+	// are read once, here, for the door and for the Fasting page's idle line.
+	val fastDays = rememberFastDays(FAST_DAY_ENTRY_SPAN)
+	var showFastDays by rememberSaveable { mutableStateOf(false) }
 
 	val fastingTitle = stringResource(id = R.string.title_fasting)
 	val logTitle = stringResource(id = R.string.title_log)
@@ -235,7 +251,11 @@ fun MainScreen(
 						.padding(top = paddingValues.calculateTopPadding())
 						.fillMaxSize()
 				) {
-					NavigationRail {
+					// Landscape's door to the fast days: the strip kept for the overflow button
+					// has no room for words, the rail does.
+					NavigationRail(
+						header = { FastDayRailItem(data = fastDays, onClick = { showFastDays = true }) },
+					) {
 					NavigationRailItem(
 						icon = {
 							Icon(
@@ -290,6 +310,8 @@ fun MainScreen(
 					contentPaddingValues = contentPadding,
 					pagerState,
 					externalRequests,
+					fastDays = fastDays,
+					onOpenFastDays = { showFastDays = true },
 				)
 			}
 			} else {
@@ -298,6 +320,8 @@ fun MainScreen(
 					contentPaddingValues = contentPadding,
 					pagerState,
 					externalRequests,
+					fastDays = fastDays,
+					onOpenFastDays = { showFastDays = true },
 				)
 			}
 
@@ -317,6 +341,9 @@ fun MainScreen(
 				onInfoClick = onInfoClick,
 				onAboutClick = onAboutClick,
 				onSettingsClick = onSettingsClick,
+				fastDays = fastDays,
+				showFastDayChip = !compactHeight,
+				onFastDaysClick = { showFastDays = true },
 				modifier = Modifier
 					.align(Alignment.TopEnd)
 					.padding(
@@ -325,6 +352,15 @@ fun MainScreen(
 					)
 			)
 		}
+	}
+
+	if (showFastDays) {
+		FastDaysSheet(
+			dateStyle = LocalDateStyle.current,
+			onDismiss = { showFastDays = false },
+			// Following none, the sheet offers to; the reminders are set up in Settings.
+			onFollow = onSettingsClick,
+		)
 	}
 }
 
@@ -354,6 +390,9 @@ private fun FloatingTopActions(
 	onInfoClick: () -> Unit,
 	onAboutClick: () -> Unit,
 	onSettingsClick: () -> Unit,
+	fastDays: FastDayData?,
+	showFastDayChip: Boolean,
+	onFastDaysClick: () -> Unit,
 	modifier: Modifier = Modifier,
 ) {
 	var showMenu by remember { mutableStateOf(false) }
@@ -364,6 +403,12 @@ private fun FloatingTopActions(
 		color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f),
 	) {
 		Row(verticalAlignment = Alignment.CenterVertically) {
+			// The fast days' door, beside the overflow button so the corner keeps the button where
+			// it has always been. Portrait only: the top band it sits in is reserved across the
+			// width there; landscape's door is at the head of the navigation rail.
+			if (showFastDayChip) {
+				FastDayChip(data = fastDays, onClick = onFastDaysClick)
+			}
 			Box {
 				IconButton(onClick = { showMenu = !showMenu }) {
 					Icon(
@@ -450,6 +495,19 @@ private fun FloatingTopActions(
 						)
 						HorizontalDivider()
 					}
+
+					// The fast days, mirrored from their door beside this button for whoever looks
+					// in the menu first.
+					DropdownMenuItem(
+						text = { Text(stringResource(id = R.string.fast_days_title)) },
+						leadingIcon = {
+							fastDays?.let { MoonIcon(elongation = rememberFastDayMoon(it), modifier = Modifier.size(24.dp)) }
+						},
+						onClick = {
+							onFastDaysClick()
+							showMenu = false
+						},
+					)
 
 					// The logbook's two doors, on every page. They are the app's strongest
 					// claim — data leaves in open formats and arrives from a competitor's
@@ -551,6 +609,8 @@ private fun Content(
 	contentPaddingValues: PaddingValues,
 	pagerState: PagerState,
 	externalRequests: ExternalRequests,
+	fastDays: FastDayData?,
+	onOpenFastDays: () -> Unit,
 ) {
 	val stateHolder = rememberSaveableStateHolder()
 	HorizontalPager(
@@ -564,6 +624,8 @@ private fun Content(
 				page = ScreenPages.fromOrdinal(page),
 				contentPaddingValues = contentPaddingValues,
 				externalRequests = externalRequests,
+				fastDays = fastDays,
+				onOpenFastDays = onOpenFastDays,
 			)
 		}
 	}
@@ -575,12 +637,16 @@ private fun PageContainer(
 	page: ScreenPages,
 	contentPaddingValues: PaddingValues,
 	externalRequests: ExternalRequests,
+	fastDays: FastDayData?,
+	onOpenFastDays: () -> Unit,
 ) {
 	when (page) {
 		ScreenPages.Fasting -> {
 			FastingScreen(
 				contentPaddingValues = contentPaddingValues,
 				externalRequests = externalRequests,
+				fastDays = fastDays,
+				onOpenFastDays = onOpenFastDays,
 			)
 		}
 

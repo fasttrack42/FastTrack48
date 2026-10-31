@@ -378,6 +378,8 @@
 	<string name="fast_days_next_new_moon">Neumond %1$s</string>
 	<string name="fast_days_today_marker">heute</string>
 	<string name="fast_days_empty">Keine Fastentage in den nächsten 12 Monaten.</string>
+	<string name="fast_days_preview">Noch nicht aktiviert, daher keine Erinnerungen.</string>
+	<string name="fast_days_follow">Erinnerungen einrichten</string>
 	<string name="moon_phase_new">Neumond</string>
 	<string name="moon_phase_waxing_crescent">Zunehmende Sichel</string>
 	<string name="moon_phase_first_quarter">Erstes Viertel</string>

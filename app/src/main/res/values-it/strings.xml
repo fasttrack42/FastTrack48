@@ -391,6 +391,8 @@
 	<string name="fast_days_next_new_moon">Luna nuova %1$s</string>
 	<string name="fast_days_today_marker">oggi</string>
 	<string name="fast_days_empty">Nessun giorno di digiuno nei prossimi 12 mesi.</string>
+	<string name="fast_days_preview">Non ancora attivati, quindi nessun promemoria.</string>
+	<string name="fast_days_follow">Imposta i promemoria</string>
 	<string name="moon_phase_new">Luna nuova</string>
 	<string name="moon_phase_waxing_crescent">Luna crescente</string>
 	<string name="moon_phase_first_quarter">Primo quarto</string>

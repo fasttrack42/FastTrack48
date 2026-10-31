@@ -358,6 +358,8 @@
 	<string name="fast_days_next_new_moon">Nieuwe maan %1$s</string>
 	<string name="fast_days_today_marker">vandaag</string>
 	<string name="fast_days_empty">Geen vastendagen in de komende 12 maanden.</string>
+	<string name="fast_days_preview">Nog niet ingeschakeld, dus geen herinneringen.</string>
+	<string name="fast_days_follow">Herinneringen instellen</string>
 	<string name="moon_phase_new">Nieuwe maan</string>
 	<string name="moon_phase_waxing_crescent">Wassende sikkel</string>
 	<string name="moon_phase_first_quarter">Eerste kwartier</string>

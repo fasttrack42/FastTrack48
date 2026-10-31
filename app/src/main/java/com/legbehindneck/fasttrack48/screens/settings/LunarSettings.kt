@@ -54,7 +54,6 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.lunar.DeviceLocation
 import com.legbehindneck.fasttrack48.lunar.EkadashiTradition
-import com.legbehindneck.fasttrack48.lunar.FastDays
 import com.legbehindneck.fasttrack48.lunar.LunarCalendar
 import com.legbehindneck.fasttrack48.lunar.LunarDay
 import com.legbehindneck.fasttrack48.lunar.LunarLocation
@@ -310,19 +309,19 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 			)
 		}
 
-		if (FastDays.follows(settings)) {
-			ListItem(
-				headlineContent = {
-					Text(
-						text = stringResource(R.string.fast_days_see_all),
-						style = MaterialTheme.typography.labelLarge,
-						fontWeight = FontWeight.Bold,
-						color = MaterialTheme.colorScheme.primary,
-					)
-				},
-				modifier = Modifier.clickable { showFastDays = true },
-			)
-		}
+		// Always: following none, the sheet shows the Hindu calendar's fast days unfollowed, so a
+		// date can be looked up without turning a reminder on.
+		ListItem(
+			headlineContent = {
+				Text(
+					text = stringResource(R.string.fast_days_see_all),
+					style = MaterialTheme.typography.labelLarge,
+					fontWeight = FontWeight.Bold,
+					color = MaterialTheme.colorScheme.primary,
+				)
+			},
+			modifier = Modifier.clickable { showFastDays = true },
+		)
 	}
 
 	if (showFastDays) {

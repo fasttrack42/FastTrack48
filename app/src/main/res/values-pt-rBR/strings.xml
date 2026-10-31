@@ -366,6 +366,8 @@
 	<string name="fast_days_next_new_moon">Lua nova %1$s</string>
 	<string name="fast_days_today_marker">hoje</string>
 	<string name="fast_days_empty">Nenhum dia de jejum nos próximos 12 meses.</string>
+	<string name="fast_days_preview">Ainda não ativados, então sem lembretes.</string>
+	<string name="fast_days_follow">Configurar lembretes</string>
 	<string name="moon_phase_new">Lua nova</string>
 	<string name="moon_phase_waxing_crescent">Lua crescente</string>
 	<string name="moon_phase_first_quarter">Quarto crescente</string>

@@ -393,6 +393,8 @@
 	<string name="fast_days_next_new_moon">Молодик %1$s</string>
 	<string name="fast_days_today_marker">сьогодні</string>
 	<string name="fast_days_empty">У найближчі 12 місяців немає днів посту.</string>
+	<string name="fast_days_preview">Ще не ввімкнено, тож нагадувань немає.</string>
+	<string name="fast_days_follow">Налаштувати нагадування</string>
 	<string name="moon_phase_new">Молодик</string>
 	<string name="moon_phase_waxing_crescent">Молодий місяць</string>
 	<string name="moon_phase_first_quarter">Перша чверть</string>
