@@ -56,7 +56,7 @@
 				android:label="@string/title_activity_intro"/>
 		<activity
 				android:name=".screens.info.InfoActivity"
-				android:label="@string/title_activity_info"/>
+				android:label="@string/kb_library_title"/>
 		<activity
 			android:name=".screens.settings.SettingsActivity"
 			android:label="@string/title_activity_settings" />
