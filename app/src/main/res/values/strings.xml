@@ -2,7 +2,7 @@
 <resources>
 	<string name="app_name" translatable="false">FastTrack48</string>
 	<string name="action_share">Share</string>
-	<string name="action_info">Info</string>
+	<string name="action_info">Library</string>
 	<string name="action_about">About</string>
 	<string name="action_export">Export fasts</string>
     <string name="action_export_description">Save your fasting history as CSV, iCalendar (.ics), or ActivityStreams JSON</string>
@@ -55,10 +55,7 @@
 	</string>
 
 	<string name="intro_03_title">Intermittent fasting</string>
-	<string name="intro_03_description">This is a new area of study which is showing lots of benefits beyond simple
-		weight loss.\n\nTo explore what we know about fasting and what the research is saying, check out the Info
-		section of this app!
-	</string>
+	<string name="intro_03_description">A young field of research. Some findings are well established; many are still early.\n\nTo see what is known, and how strong the evidence is, open the Library from the menu.</string>
 
 	<string name="intro_04_title">Stay motivated with notifications</string>
 	<string name="intro_04_description">FastTrack48 can show notifications to keep you motivated during a
@@ -124,8 +121,9 @@
 
 
 	<string name="log_entry_length">%1$d hours</string>
-	<string name="log_entry_ketosis">Ketosis: %1$d hours</string>
-	<string name="log_entry_autophagy">Autophagy: %1$d hours</string>
+	<string name="log_entry_ketosis">Ketosis: %1$s hours</string>
+	<string name="log_entry_autophagy">Autophagy: %1$s hours</string>
+	<string name="log_approx">≈%1$s</string>
 
 	<string name="profile_age_label">Age</string>
 	<string name="profile_age_years">Years</string>
@@ -185,33 +183,28 @@
 	<string name="fast_fat_burn_label">Fat burn</string>
 
 	<string name="stage_fasting_title">Fasting</string>
-	<string name="stage_fasting_description">Your body is consuming its stores of glucose, keep it up!</string>
+	<string name="stage_fasting_description">Your liver is making its own glucose, and fat is starting to take over.</string>
 
 	<string name="stage_fat_burning_title">Fat burning</string>
-	<string name="stage_fat_burning_description">Your glucose stores are depleted! Your body is now burning fat for
-		energy. A workout in the next couple of hours would be optimal.
-	</string>
+	<string name="stage_fat_burning_description">Fat is taking over as your fuel. A walk speeds up the switch.</string>
 
-	<string name="stage_fat_fasting_sweet_spot_title">Fasting sweet spot</string>
-	<string name="stage_fat_fasting_sweet_spot_description">You’re in the fasting sweet spot, keep it up!</string>
+	<string name="stage_fat_fasting_sweet_spot_title">Ketones rising</string>
+	<string name="stage_fat_fasting_sweet_spot_description">Fat burning is in full swing. Hunger comes in waves; this one will pass too.</string>
 
-	<string name="stage_fat_peak_fat_burning_title">Peak fat burning</string>
-	<string name="stage_fat_peak_fat_burning_description">Your body is burning fat rapidly now, and ketosis has begun.
-	</string>
+	<string name="stage_fat_peak_fat_burning_title">Ketosis begins</string>
+	<string name="stage_fat_peak_fat_burning_description">Your brain is starting to run on fuel made from fat.</string>
 
 	<string name="stage_autophagy_title">Autophagy</string>
-	<string name="stage_autophagy_description">Your body has begun autophagy!</string>
+	<string name="stage_autophagy_description">A full day. Your cells are stepping up autophagy, recycling their worn-out parts.</string>
 
-	<string name="stage_optimal_autophagy_title">Optimal autophagy</string>
-	<string name="stage_optimal_autophagy_description">Autophagy is in full swing! Keep it up, between now and 72 hours
-		autophagy will be very effective.
-	</string>
+	<string name="stage_optimal_autophagy_title">Deep autophagy</string>
+	<string name="stage_optimal_autophagy_description">Two days. Recycling runs deep, and growth hormone is protecting your muscle. Autophagy timings in humans are estimates.</string>
 
 	<string name="phase_glucose">Glucose burning</string>
 	<string name="phase_fat_burning">Fat burning</string>
 	<string name="phase_ketosis">Ketosis</string>
 	<string name="phase_autophagy">Autophagy</string>
-	<string name="phase_optimal_autophagy">Optimal autophagy</string>
+	<string name="phase_optimal_autophagy">Deep autophagy</string>
 
 
 	<string name="notification_channel_name">Fasting alerts</string>
@@ -220,24 +213,16 @@
 	</string>
 
 	<string name="notification_fat_burn_title">Fast stage: Fat burning</string>
-	<string name="notification_fat_burn_content">You have exhausted your glucose reserves and your body is now consuming
-		fat for energy.
-	</string>
+	<string name="notification_fat_burn_content">Insulin is low, and fat is taking over as your fuel.</string>
 
 	<string name="notification_ketosis_title">Fast stage: Ketosis</string>
-	<string name="notification_ketosis_content">Your body has now broken down enough fat reserves that you have
-		entered ketosis.
-	</string>
+	<string name="notification_ketosis_content">Ketones are rising: your brain is starting to run on fuel made from fat.</string>
 
 	<string name="notification_autophagy_title">Fast stage: Autophagy</string>
-	<string name="notification_autophagy_content">Your body has entered autophagy. Old or damaged cells are now being
-		consumed for energy.
-	</string>
+	<string name="notification_autophagy_content">Your cells are stepping up autophagy, recycling their worn-out parts.</string>
 
-	<string name="notification_optimal_autophagy_title">Fast stage: Optimal autophagy</string>
-	<string name="notification_optimal_autophagy_content">Your body has been in autophagy for a long time now, and
-		your cellular health is seeing great benefits.
-	</string>
+	<string name="notification_optimal_autophagy_title">Fast stage: Deep autophagy</string>
+	<string name="notification_optimal_autophagy_content">Two days in. Growth hormone is protecting your muscle while fat does the work.</string>
 
 	<string name="notification_fasting_channel_name">Fasting status</string>
 	<string name="notification_fasting_channel_description">Ongoing notification showing your current fasting status and
@@ -264,11 +249,6 @@
 	</string>
 
 	<string name="info_dialog_positive">Cool!</string>
-
-	<string name="info_page_title_info">Info</string>
-	<string name="info_page_title_tips">Tips</string>
-
-	<string name="title_activity_info">Fasting info</string>
 	<string name="log_total_autophagy">🧬 Autophagy:</string>
 	<string name="log_total_ketosis">🔥 Ketosis:</string>
 	<string name="stat_total_fasts">Total fasts</string>
@@ -315,25 +295,25 @@
 
 	<!-- Fasting journey stages (dial milestones) -->
 	<string name="journey_stage_0_title">Blood sugar rises</string>
-	<string name="journey_stage_0_body">You just ate, and your bloodstream knows it. Glucose climbs — in healthy people peaking under ~140 mg/dL within 30–60 min — your pancreas shoots insulin into the blood, the hormone that ushers the sugar into cells and stashes the surplus as glycogen.\n\nThis is the fed state: energy is abundant, storage is the priority, fat-burning mode is off.\n\nNothing to do but digest. The clock has started.</string>
+	<string name="journey_stage_0_body">Glucose floods your blood and peaks within the hour (under ~140 mg/dL in healthy people). Insulin answers, packing the surplus into glycogen and fat.\n\nStorage mode: fat-burning is paused.\n\nA 10-minute walk now flattens the peak. The clock is running.</string>
 	<string name="journey_stage_1_title">Blood sugar falls</string>
-	<string name="journey_stage_1_body">Insulin drops, glucagon rises, and your liver starts releasing stored glycogen to hold blood glucose steady near ~70–100 mg/dL.\n\nYou\'ve crossed from the fed state into the post-absorptive state — the quiet handoff where the body stops storing and starts spending.\n\nThat first flicker of hunger is mostly insulin falling. It passes within a minute or two.</string>
+	<string name="journey_stage_1_body">Insulin ebbs, glucagon rises, and your liver starts paying out glycogen to hold blood sugar at 70–100 mg/dL.\n\nThe body stops storing and starts spending.\n\nHunger at your usual mealtime is a learned ghrelin wave, not an empty tank. It rises, then passes.</string>
 	<string name="journey_stage_2_title">Blood sugar stabilizes</string>
-	<string name="journey_stage_2_body">Your liver is now the sole supplier, drip-feeding glucose from glycogen (~100 g in reserve) to keep you level. Your brain alone burns ~120 g of glucose a day, so this stability is not trivial.\n\nNo dip, no spike — glycogenolysis holds the line and keeps hypoglycemia away.\n\nMany people report unusually sharp focus at this stage. That\'s not imagination; it\'s steady fuel.</string>
+	<string name="journey_stage_2_body">Your liver is now the sole supplier, drip-feeding glucose from about 100 g of glycogen. Your brain alone burns ~120 g a day.\n\nNo spikes, no crashes: a flat, steady line.\n\nMany people feel clear and focused here. Water or tea keeps it that way.</string>
 	<string name="journey_stage_3_title">Gluconeogenesis</string>
-	<string name="journey_stage_3_body">Glycogen is running thin, so the liver starts manufacturing its own glucose from lactate, glycerol, and amino acids — a process called gluconeogenesis. By ~16 h it already supplies roughly half of your glucose output (Cahill, Annu Rev Nutr 2006).\n\nThis is your body\'s biological intelligence which never lets your brain go hungry.\n\nThe hunger and mild dip you might feel are related to the phase switch.</string>
+	<string name="journey_stage_3_body">Glycogen runs thin, so your liver builds glucose from scratch: from lactate, glycerol and amino acids. By around hour 22, this supplies most of your glucose (Rothman, Science 1991).\n\nThis keeps your brain supplied.\n\nHungry? That\'s mealtime habit. A hot drink or a walk carries you over the wave.</string>
 	<string name="journey_stage_4_title">Fat burning</string>
-	<string name="journey_stage_4_body">Insulin is finally low enough to unlock the fat reserves. Lipolysis frees fatty acids, the liver begins spinning them into ketones, and you transition from sugar-burning to fat-burning.\n\nInsulin sensitivity increases, and fat reserves are now being consumed — the metabolic core of why fasting works.\n\nA metallic taste or faint headache is a sign early first ketones being generated. The fire is burning 🔥.</string>
+	<string name="journey_stage_4_body">Insulin is now low enough to open your fat stores: fatty acids pour out, and your liver turns some of them into ketones.\n\nFrom here, stored fat supplies a growing share of your fuel.\n\nFaint headache or fatigue? Usually salt. A pinch in water helps within minutes.</string>
 	<string name="journey_stage_5_title">Ketosis</string>
-	<string name="journey_stage_5_body">Blood ketones level crosses ~0.5 mmol/L — nutritional ketosis — and keep climbing. Your brain can\'t oxidize fatty acids directly, but it runs beautifully on this ketone stream, which spares muscle from being cannibalized for glucose.\n\nMany report an unusual mental clarity, and a hunger that quietly switches off — ketones themselves blunt appetite.\n\nTwenty-four hours. Your body now prefers its own home-made fuel.</string>
+	<string name="journey_stage_5_body">Ketones climb toward 0.5 mmol/L, the threshold of ketosis. For many people it arrives now; a carb-heavy last meal or a sedentary day pushes it later.\n\nYour brain runs well on ketones, which spares muscle protein.\n\nHunger still comes in waves, often around your usual mealtimes; each one passes.</string>
 	<string name="journey_stage_6_title">Autophagy</string>
-	<string name="journey_stage_6_body">A full day in, and self-cleaning intensifies: autophagy — cells disassembling damaged proteins and organelles and recycling the parts (the mechanism that earned Ohsumi the 2016 Nobel Prize). \n\nThink of it as maintenance you can\'t buy — clearance associated with longevity and lower disease risk.\n\nTiredness or a headache? Salt and water. Deep work is underway.</string>
+	<string name="journey_stage_6_body">Your cells step up autophagy: taking apart worn proteins and organelles and recycling the parts (Nobel Prize, Ohsumi 2016). In humans, markers rise after 24–36 h; exact timings are estimates.\n\nIn animals, this cleanup is linked to longer, healthier lives.\n\nDay two is often the hungriest; then hunger fades. Salt and water help.</string>
 	<string name="journey_stage_7_title">Growth hormone surge</string>
-	<string name="journey_stage_7_body">Two days, and growth hormone spikes — a ~2-day fast can raise GH secretion roughly 5-fold (Ho, J Clin Invest 1988). Its brief right now: defend lean muscle and push fat metabolism harder.\n\nSo you keep burning fat while sparing the muscle you\'d expect to lose — a genuinely elegant adaptation.\n\nThat unexpected lift in energy people describe here? That\'s the hormone talking.</string>
+	<string name="journey_stage_7_body">Over a two-day fast, growth hormone rises about fivefold (Hartman, J Clin Endocrinol Metab 1992). It frees fat and helps protect muscle.\n\nNoradrenaline keeps you alert, and your resting metabolism rises.\n\nIf you feel more energetic, that\'s why: your body is mobilizing, not shutting down.</string>
 	<string name="journey_stage_8_title">Insulin sensitivity</string>
-	<string name="journey_stage_8_body">With insulin held low for days, your cells turn newly responsive to it — insulin sensitivity resets toward a healthier baseline, the opposite of the resistance that precedes type 2 diabetes.\n\nBlood glucose sits in a calm, narrowband; satiety comes easily.\n\nYou\'re tuning a system most people never deliberately touch.</string>
+	<string name="journey_stage_8_body">For now, insulin sensitivity dips on purpose: your muscles respond less to insulin, leaving glucose for your brain (Hoeks, Diabetes 2010). It reverses when you eat.\n\nKetones now supply much of your brain\'s fuel; fat does the heavy lifting.\n\nThe lasting gain in insulin sensitivity comes from repeated fasts and fat loss over weeks.</string>
 	<string name="journey_stage_9_title">Immune cell regeneration</string>
-	<string name="journey_stage_9_body">Three days. Prolonged fasting can prompt the body to clear senescent immune cells and regenerate new ones from hematopoietic stem cells, as IGF-1 and PKA signaling drop (Cheng, Cell Stem Cell 2014).\n\nInflammation keeps easing; some describe a quiet, lucid sense of well-being.\n\nHowever far you go from here, you go renewed — and break your fast gently. Be proud.</string>
+	<string name="journey_stage_9_body">Three days. IGF-1 and growth signals have fallen. In mice, fasts like this clear out old immune cells and trigger stem-cell renewal on refeeding (Cheng, Cell Stem Cell 2014); in humans, it\'s unproven.\n\nFrom here on, continue only under medical supervision.\n\nBreak your fast gently: a small meal first.</string>
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
 	<string name="journey_stage_hours_open">%1$d h+</string>
 	<string name="phase_time_until">in %1$s</string>
@@ -364,7 +344,7 @@
 	<string name="sheet_end_earlier">I stopped earlier…</string>
 	<string name="fast_notes_label">Notes (optional)</string>
 	<string name="fast_notes_placeholder">How did it go? Anything to remember about this fast?</string>
-	<string name="stage_optimal_autophagy_description_past72">Autophagy is in full swing! Keep it up!</string>
+	<string name="stage_optimal_autophagy_description_past72">Three days and beyond. Continue only under medical supervision, and break your fast gently.</string>
 	<string name="fast_start_label">Start</string>
 	<string name="edit_start_time">Edit start time</string>
 	<string name="edit_start_dialog_title">Fast started</string>

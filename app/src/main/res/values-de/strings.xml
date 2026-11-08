@@ -2,7 +2,7 @@
 <resources>
 
 	<string name="action_share">Teilen</string>
-	<string name="action_info">Info</string>
+	<string name="action_info">Bibliothek</string>
 	<string name="action_about">Über</string>
 	<string name="action_export">Fastenzeiten exportieren</string>
 	<string name="action_export_description">Speichern Sie Ihre Fastenhistorie als CSV, iCalendar (.ics) oder ActivityStreams-JSON</string>
@@ -29,7 +29,7 @@
 	<string name="intro_02_title">Eine einfache kostenlose App</string>
 	<string name="intro_02_description">FastTrack48 ist und wird immer kostenlos und Open Source sein. Es muss kein Konto erstellt werden, es gibt keine In-App-Käufe, keine Werbung, keine Telemetrie und kein Tracking. Die App hat keinen Internetzugang und funktioniert vollständig offline.</string>
 	<string name="intro_03_title">Intermittierendes Fasten</string>
-	<string name="intro_03_description">Dies ist ein neues Studienfeld, das viele Vorteile über den einfachen Gewichtsverlust hinaus zeigt.\n\nUm zu erkunden, was wir über das Fasten wissen und was die Forschung dazu sagt, schauen Sie sich den Bereich Info dieser App an</string>
+	<string name="intro_03_description">Ein junges Forschungsfeld. Manches ist gut belegt, vieles noch früh.\n\nWas bekannt ist und wie stark die Belege sind, findest du in der Bibliothek im Menü.</string>
 	<string name="intro_04_title">Bleibe durch Benachrichtigungen motiviert</string>
 	<string name="intro_04_description">FastTrack48 kann dir hilfreiche Benachrichtigungen senden, damit du beim Fasten motiviert bleibst.\n\nDu siehst deine aktuelle Fastenzeit, in welcher Phase du dich befindest und welchen Energiemodus dein Körper gerade nutzt.\n\nSo bleibst du am Ball, ohne die App öffnen zu müssen</string>
 	<string name="intro_05_title">Das war\'s!</string>
@@ -55,8 +55,9 @@
 	<string name="confirm_delete_fast_negative">Nein</string>
 
 	<string name="log_entry_length">%1$d Stunden</string>
-	<string name="log_entry_ketosis">Ketose: %1$d Stunden</string>
-	<string name="log_entry_autophagy">Autophagie: %1$d Stunden</string>
+	<string name="log_entry_ketosis">Ketose: %1$s Stunden</string>
+	<string name="log_entry_autophagy">Autophagie: %1$s Stunden</string>
+	<string name="log_approx">≈%1$s</string>
 	<string name="profile_age_label">Alter</string>
 	<string name="profile_age_years">Jahre</string>
 	<string name="profile_weight_label">Gewicht</string>
@@ -92,40 +93,33 @@
 	<string name="fast_ketosis_label">Ketose</string>
 	<string name="fast_fat_burn_label">Fettverbrennung</string>
 	<string name="stage_fasting_title">Fasten</string>
-	<string name="stage_fasting_description">Dein Körper braucht seine Glukosespeicher auf, mach weiter so!</string>
+	<string name="stage_fasting_description">Deine Leber stellt jetzt eigene Glukose her, und Fett übernimmt nach und nach.</string>
 	<string name="stage_fat_burning_title">Fettverbrennung</string>
-	<string name="stage_fat_burning_description">Ihre Glukosespeicher sind erschöpft! Ihr Körper verbrennt jetzt Fett
-		für Energie. Ein Training in den nächsten paar Stunden wäre optimal.</string>
-	<string name="stage_fat_fasting_sweet_spot_title">Optimale Fettverbrennung</string>
-	<string name="stage_fat_fasting_sweet_spot_description">Du bist in der perfekten Fettverbrennungsphase, mach weiter so!</string>
-	<string name="stage_fat_peak_fat_burning_title">Spitzenfettverbrennung</string>
-	<string name="stage_fat_peak_fat_burning_description">Ihr Körper verbrennt jetzt schnell Fett, und die Ketose hat
-		begonnen.</string>
+	<string name="stage_fat_burning_description">Fett übernimmt als Treibstoff. Ein Spaziergang beschleunigt den Wechsel.</string>
+	<string name="stage_fat_fasting_sweet_spot_title">Ketone steigen</string>
+	<string name="stage_fat_fasting_sweet_spot_description">Die Fettverbrennung läuft auf Hochtouren. Hunger kommt in Wellen; auch diese geht vorbei.</string>
+	<string name="stage_fat_peak_fat_burning_title">Ketose beginnt</string>
+	<string name="stage_fat_peak_fat_burning_description">Dein Gehirn beginnt, mit Treibstoff aus Fett zu laufen.</string>
 	<string name="stage_autophagy_title">Autophagie</string>
-	<string name="stage_autophagy_description">Dein Körper hat mit der Autophagie begonnen!</string>
-	<string name="stage_optimal_autophagy_title">Optimale Autophagie</string>
-	<string name="stage_optimal_autophagy_description">Die Autophagie ist in vollem Gange! Mach weiter so, zwischen
-		jetzt und 72 Stunden wird die Autophagie sehr effektiv sein.</string>
+	<string name="stage_autophagy_description">Ein voller Tag. Deine Zellen fahren die Autophagie hoch und verwerten abgenutzte Teile neu.</string>
+	<string name="stage_optimal_autophagy_title">Tiefe Autophagie</string>
+	<string name="stage_optimal_autophagy_description">Zwei Tage. Das Recycling läuft tief, und das Wachstumshormon schützt deine Muskeln. Zeitangaben zur Autophagie beim Menschen sind Schätzungen.</string>
 	<string name="phase_glucose">Glucoseverbrennung</string>
 	<string name="phase_fat_burning">Fettverbrennung</string>
 	<string name="phase_ketosis">Ketose</string>
 	<string name="phase_autophagy">Autophagie</string>
-	<string name="phase_optimal_autophagy">Optimale Autophagie</string>
+	<string name="phase_optimal_autophagy">Tiefe Autophagie</string>
 	<string name="notification_channel_name">Fastenbenachrichtigungen</string>
 	<string name="notification_channel_description">Benachrichtigungen, die Sie informieren, wenn Sie eine neue Phase
 		Ihres Fastens erreicht haben.</string>
 	<string name="notification_fat_burn_title">Fasten-Phase: Fettverbrennung</string>
-	<string name="notification_fat_burn_content">Sie haben Ihre Glukosevorräte erschöpft und Ihr Körper verbrennt jetzt
-		Fett zur Energiegewinnung.</string>
+	<string name="notification_fat_burn_content">Das Insulin ist niedrig, und Fett übernimmt als Treibstoff.</string>
 	<string name="notification_ketosis_title">Fasten-Phase: Ketose</string>
-	<string name="notification_ketosis_content">Ihr Körper hat jetzt genügend Fettreserven abgebaut, sodass Sie in die
-		Ketose eingetreten sind.</string>
+	<string name="notification_ketosis_content">Die Ketone steigen: Dein Gehirn beginnt, mit Treibstoff aus Fett zu laufen.</string>
 	<string name="notification_autophagy_title">Fasten-Phase: Autophagie</string>
-	<string name="notification_autophagy_content">Ihr Körper hat die Autophagie erreicht. Alte oder beschädigte Zellen
-		werden jetzt zur Energiegewinnung konsumiert.</string>
-	<string name="notification_optimal_autophagy_title">Fasten-Phase: Optimale Autophagie</string>
-	<string name="notification_optimal_autophagy_content">Ihr Körper befindet sich schon lange im Autophagie-Zustand,
-		und Ihre zelluläre Gesundheit profitiert enorm davon.</string>
+	<string name="notification_autophagy_content">Deine Zellen fahren die Autophagie hoch und verwerten abgenutzte Teile neu.</string>
+	<string name="notification_optimal_autophagy_title">Fasten-Phase: Tiefe Autophagie</string>
+	<string name="notification_optimal_autophagy_content">Zwei Tage. Das Wachstumshormon schützt deine Muskeln, während das Fett die Arbeit macht.</string>
 	<string name="notification_fasting_channel_name">Fastenstatus</string>
 	<string name="notification_fasting_channel_description">Laufende Benachrichtigung, die deinen aktuellen Fastenstatus und
 		Fortschritt anzeigt.</string>
@@ -143,9 +137,6 @@
 		Kalorien, die Sie ohne Gewichtszunahme essen könnten.\n\nDiese Zahl ist entscheidend für Menschen, die durch
 		Einschränkung der täglichen Kalorienaufnahme diäten.</string>
 	<string name="info_dialog_positive">Alles klar!</string>
-	<string name="info_page_title_info">Info</string>
-	<string name="info_page_title_tips">Tipps</string>
-	<string name="title_activity_info">Fasteninformationen</string>
 	<string name="log_total_autophagy">🧬 Gesamte Autophagie:</string>
 	<string name="log_total_ketosis">🔥 Gesamtketose:</string>
 	<string name="title_activity_intro">Einführung</string>
@@ -224,16 +215,16 @@
 	<string name="journey_stage_7_title">Wachstumshormon-Schub</string>
 	<string name="journey_stage_8_title">Insulinsensitivität</string>
 	<string name="journey_stage_9_title">Regeneration der Immunzellen</string>
-	<string name="journey_stage_0_body">Du hast gerade gegessen, und dein Blutkreislauf merkt es. Der Blutzucker steigt — bei gesunden Menschen auf einen Höchstwert unter ~140 mg/dl innerhalb von 30–60 min — und deine Bauchspeicheldrüse antwortet mit Insulin, dem Hormon, das diesen Zucker in die Zellen bringt und den Überschuss als Glykogen einlagert.\n\nDas ist der Sättigungszustand: Energie im Überfluss, Speichern hat Vorrang, die Fettverbrennung ist ausgeschaltet.\n\nJetzt heißt es nur verdauen. Die Uhr läuft.</string>
-	<string name="journey_stage_1_body">Insulin sinkt, Glukagon steigt, und deine Leber beginnt, gespeichertes Glykogen freizusetzen, um den Blutzucker um ~70–100 mg/dl stabil zu halten.\n\nDu bist vom Sättigungszustand in den postresorptiven Zustand gewechselt — die stille Übergabe, bei der Körper aufhört zu speichern und anfängt zu verbrauchen.\n\nDieses erste Hungergefühl ist vor allem der fallende Insulinspiegel. Es geht in ein bis zwei Minuten vorbei.</string>
-	<string name="journey_stage_2_body">Jetzt ist deine Leber der einzige Lieferant: Sie gibt tröpfchenweise Glukose aus dem Glykogen ab (~100 g Reserve), um dich stabil zu halten. Allein dein Gehirn verbraucht ~120 g Glukose pro Tag, diese Stabilität ist also keine Kleinigkeit.\n\nKein Einbruch, keine Spitze — die Glykogenolyse hält die Linie und hält die Unterzuckerung fern.\n\nViele berichten in dieser Phase von ungewöhnlich scharfer Konzentration. Das ist keine Einbildung, sondern gleichmäßiger Brennstoff.</string>
-	<string name="journey_stage_3_body">Das Glykogen wird knapp, also beginnt die Leber, ihre eigene Glukose aus Laktat, Glyzerin und Aminosäuren herzustellen — ein Vorgang namens Gluconeogenese. Nach ~16 h liefert sie bereits rund die Hälfte deiner Glukose (Cahill, Annu Rev Nutr 2006).\n\nDas ist die biologische Intelligenz deines Körpers, die dein Gehirn niemals hungern lässt.\n\nDer Hunger und das leichte Tief, das du vielleicht spürst, hängen mit dem Phasenwechsel zusammen.</string>
-	<string name="journey_stage_4_body">Das Insulin ist endlich niedrig genug, um deine Fettdepots zu öffnen. Die Lipolyse setzt Fettsäuren frei, die Leber beginnt, sie in Ketone umzuwandeln, und du wechselst vom Zucker- zum Fettverbrenner.\n\nDie Insulinsensitivität steigt, und die Fettreserven werden jetzt verbraucht — der metabolische Kern, warum Fasten wirkt.\n\nEin metallischer Geschmack oder leichte Kopfschmerzen sind ein Zeichen dafür, dass die ersten Ketone entstehen. Das Feuer brennt 🔥.</string>
-	<string name="journey_stage_5_body">Die Ketone im Blut überschreiten ~0,5 mmol/l — ernährungsbedingte Ketose — und steigen weiter. Dein Gehirn kann Fettsäuren nicht direkt verwerten, läuft aber wunderbar mit diesem Ketonstrom, der verhindert, dass Muskeln für Glukose abgebaut werden.\n\nViele berichten von einer ungewöhnlichen geistigen Klarheit und einem Hunger, der sich einfach abschaltet — Ketone selbst dämpfen den Appetit.\n\nVierundzwanzig Stunden. Dein Körper bevorzugt jetzt den Brennstoff, den er selbst herstellt.</string>
-	<string name="journey_stage_6_body">Ein ganzer Tag, und die Selbstreinigung verstärkt sich: Autophagie — Zellen zerlegen beschädigte Proteine und Organellen und recyceln die Teile (der Mechanismus, der Ohsumi 2016 den Nobelpreis einbrachte).\n\nStell es dir als Wartung vor, die man nicht kaufen kann — eine Reinigung, die mit Langlebigkeit und geringerem Krankheitsrisiko verbunden ist.\n\nMüdigkeit oder Kopfschmerzen? Salz und Wasser. Hier wird tiefe Arbeit geleistet.</string>
-	<string name="journey_stage_7_body">Zwei Tage, und das Wachstumshormon schießt nach oben — ein ~2-tägiges Fasten kann seine Ausschüttung um etwa das 5-Fache steigern (Ho, J Clin Invest 1988). Seine Aufgabe jetzt: Muskelmasse schützen und den Fettstoffwechsel stärker antreiben.\n\nSo verbrennst du weiter Fett und bewahrst zugleich den Muskel, den du zu verlieren glaubtest — eine wirklich elegante Anpassung.\n\nDieser unerwartete Energieschub, den viele hier beschreiben? Das ist das Hormon.</string>
-	<string name="journey_stage_8_body">Wenn das Insulin tagelang niedrig bleibt, sprechen deine Zellen wieder neu darauf an — die Insulinsensitivität stellt sich auf ein gesünderes Niveau zurück, das Gegenteil der Resistenz, die dem Typ-2-Diabetes vorausgeht.\n\nDer Blutzucker bleibt in einem ruhigen, engen Bereich, und die Sättigung stellt sich leicht ein.\n\nDu justierst ein System, das die meisten Menschen nie bewusst berühren.</string>
-	<string name="journey_stage_9_body">Drei Tage. Längeres Fasten kann den Körper dazu bringen, gealterte Immunzellen abzubauen und aus hämatopoetischen Stammzellen neue zu bilden, während die IGF-1- und PKA-Signale sinken (Cheng, Cell Stem Cell 2014).\n\nDie Entzündung klingt weiter ab; manche beschreiben ein ruhiges, klares Wohlbefinden.\n\nWie weit du von hier aus auch gehst, du gehst erneuert — und brich dein Fasten sanft. Sei stolz.</string>
+	<string name="journey_stage_0_body">Glukose strömt ins Blut und erreicht binnen einer Stunde ihren Gipfel (bei Gesunden unter ~140 mg/dl). Insulin antwortet und packt den Überschuss in Glykogen und Fett.\n\nSpeichermodus: Die Fettverbrennung pausiert.\n\nEin 10-Minuten-Spaziergang jetzt flacht die Spitze ab. Die Uhr läuft.</string>
+	<string name="journey_stage_1_body">Insulin ebbt ab, Glukagon steigt, und deine Leber zahlt Glykogen aus, um den Blutzucker bei 70–100 mg/dl zu halten.\n\nDer Körper hört auf zu speichern und beginnt zu verbrauchen.\n\nHunger zur gewohnten Essenszeit ist eine erlernte Ghrelin-Welle, kein leerer Tank. Sie steigt an und ebbt wieder ab.</string>
+	<string name="journey_stage_2_body">Deine Leber ist jetzt die einzige Quelle und gibt Glukose tröpfchenweise aus rund 100 g Glykogen ab. Allein dein Gehirn verbraucht ~120 g am Tag.\n\nKeine Spitzen, keine Einbrüche: eine ruhige, gerade Linie.\n\nViele fühlen sich jetzt klar und konzentriert. Wasser oder Tee halten das so.</string>
+	<string name="journey_stage_3_body">Das Glykogen wird knapp, also baut deine Leber Glukose neu: aus Laktat, Glycerin und Aminosäuren. Um die 22. Stunde liefert das den Großteil deiner Glukose (Rothman, Science 1991).\n\nSo bleibt dein Gehirn versorgt.\n\nHunger? Das ist Gewohnheit zur Essenszeit. Ein heißes Getränk oder ein Spaziergang trägt dich über die Welle.</string>
+	<string name="journey_stage_4_body">Das Insulin ist jetzt niedrig genug, um deine Fettspeicher zu öffnen: Fettsäuren strömen aus, und die Leber macht aus einem Teil davon Ketone.\n\nAb jetzt liefert gespeichertes Fett einen wachsenden Teil deiner Energie.\n\nLeichte Kopfschmerzen oder Müdigkeit? Meist fehlt Salz. Eine Prise in Wasser hilft in Minuten.</string>
+	<string name="journey_stage_5_body">Die Ketone steigen Richtung 0,5 mmol/l, die Schwelle zur Ketose. Bei vielen ist es jetzt so weit; eine kohlenhydratreiche letzte Mahlzeit oder ein bewegungsarmer Tag schieben sie hinaus.\n\nDein Gehirn läuft gut mit Ketonen, und das schont Muskeleiweiß.\n\nHunger kommt weiter in Wellen, oft zu deinen gewohnten Essenszeiten; jede geht vorbei.</string>
+	<string name="journey_stage_6_body">Deine Zellen fahren die Autophagie hoch: Sie zerlegen abgenutzte Proteine und Organellen und verwerten die Teile neu (Nobelpreis, Ohsumi 2016). Beim Menschen steigen die Marker nach 24–36 h; genaue Zeitpunkte sind Schätzungen.\n\nBei Tieren hängt dieses Aufräumen mit einem längeren, gesünderen Leben zusammen.\n\nTag zwei ist oft der hungrigste, danach lässt der Hunger nach. Salz und Wasser helfen.</string>
+	<string name="journey_stage_7_body">Über zwei Fastentage steigt das Wachstumshormon etwa auf das Fünffache (Hartman, J Clin Endocrinol Metab 1992). Es setzt Fett frei und hilft, die Muskeln zu schützen.\n\nNoradrenalin hält dich wach, und dein Ruheumsatz steigt.\n\nWenn du dich energiegeladener fühlst, liegt es daran: Dein Körper mobilisiert, statt herunterzufahren.</string>
+	<string name="journey_stage_8_body">Vorerst sinkt die Insulinsensitivität gewollt: Deine Muskeln reagieren schwächer auf Insulin, damit die Glukose fürs Gehirn bleibt (Hoeks, Diabetes 2010). Das kehrt sich um, sobald du isst.\n\nKetone liefern jetzt einen großen Teil der Energie deines Gehirns; das Fett leistet die Schwerarbeit.\n\nDie dauerhaft bessere Insulinempfindlichkeit kommt von wiederholtem Fasten und Fettverlust über Wochen.</string>
+	<string name="journey_stage_9_body">Drei Tage. IGF-1 und Wachstumssignale sind gesunken. Bei Mäusen räumt solches Fasten alte Immunzellen ab und löst beim Wiederessen eine Erneuerung aus Stammzellen aus (Cheng, Cell Stem Cell 2014); beim Menschen ist das nicht belegt.\n\nGeh ab hier nur unter ärztlicher Aufsicht weiter.\n\nBrich dein Fasten sanft: zuerst eine kleine Mahlzeit.</string>
 	<string name="import_result_title">Import abgeschlossen</string>
 	<string name="import_result_title_failed">Import fehlgeschlagen</string>
 	<string name="import_result_added">Hinzugefügt</string>
@@ -260,7 +251,7 @@
 	<string name="clear_logbook_title">Gesamtes Logbuch löschen?</string>
 	<string name="clear_logbook_message">Dies löscht endgültig alle %1$d protokollierten Fasten. Dies kann nicht rückgängig gemacht werden.</string>
 	<string name="clear_logbook_confirm">Alle %1$d löschen</string>
-	<string name="stage_optimal_autophagy_description_past72">Die Autophagie ist in vollem Gange! Mach weiter so!</string>
+	<string name="stage_optimal_autophagy_description_past72">Drei Tage und mehr. Faste nur unter ärztlicher Aufsicht weiter und brich dein Fasten sanft.</string>
 	<string name="settings_dateformat_title">Datums- &amp; Zeitformat</string>
 	<string name="dateformat_optimized_compact">Kompakt</string>
 	<string name="dateformat_optimized_weekday">Kompakt + Wochentag</string>

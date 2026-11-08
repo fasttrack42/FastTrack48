@@ -59,9 +59,8 @@ fun autophagyHours(length: Duration): Double {
 }
 
 /**
- * The description to show for [stage] at [elapsedHours]. Optimal autophagy's copy
- * talks about the window "between now and 72 hours", which no longer applies once a
- * fast is past 72h, so beyond that we switch to a version without the deadline.
+ * The description to show for [stage] at [elapsedHours]. Past 72 h the deep-autophagy
+ * stage switches to copy that asks for medical supervision and a gentle refeed.
  */
 @StringRes
 fun descriptionFor(stage: Stage, elapsedHours: Long): Int =

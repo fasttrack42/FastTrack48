@@ -1,116 +1,101 @@
 # The Fasting Journey
 
-Ten stages, one continuous arc. Written for an intelligent reader who is comfortable
-with the science — personal and vivid, but never dumbed down. Real figures where they
-earn their place, cited in shortest-lookup form. Dense enough to reward 30–60 seconds
-of attention.
+Ten stages, one arc. This file is the spec for the dial milestones (`journey_stage_*`); the strings in
+every locale follow it. Shorter stage and notification copy (`stage_*`, `notification_*`) follows the same facts.
 
-This file is the fasting spec: each stage below maps to one milestone dot on the dial.
-
-Citations are compressed to `Author, Journal Year` — enough to find the paper.
+## How the copy is written
+- Three short paragraphs: what is happening (one image, one anchor number), what it means, then what you may feel and what to do.
+- Present tense, second person, the body as the one acting. About 50–60 words per stage.
+- Every sensation comes with an action (salt, water, a walk). Hunger is framed as a wave that passes.
+- Certainty is stated plainly: "in mice", "estimates", "unproven". There is no "optimal" autophagy.
+- Stage 5 points ahead ("a full day is almost behind you"). The last stage ends on a safety step, then pride.
+- Glucose units follow local practice: mg/dL (en, de, es, it, pt-BR), g/L (fr), mmol/L (nl, uk, zh-CN).
+- Citations are `Author, Journal Year`. Corrections from `knowledge/AUDIT-stage-copy.md`:
+  - growth hormone is cited to Hartman 1992 (not Ho 1988)
+  - the energy lift is credited to noradrenaline, not growth hormone
+  - 54–72 h keeps the title "Insulin sensitivity"; its text now says it dips for a while (Hoeks 2010) and improves over weeks of fasting
+  - 72 h+ keeps the title "Immune cell regeneration"; its text frames it as a mouse finding, unproven in humans
+  - autophagy timings are labelled as estimates; "Optimal autophagy" is now "Deep autophagy"
+  - ketosis timing is said to vary
 
 ---
 
-## 0–2 h · Blood Sugar Rises · 🌅
+## 0–2 h · Blood sugar rises · 🌅
 
-You just ate, and your bloodstream knows it. Glucose climbs — in healthy people peaking under ~140 mg/dL within 30–60 min — and your pancreas answers with insulin, the hormone that ushers that sugar into cells and banks the surplus as glycogen.
+Glucose floods your blood and peaks within the hour (under ~140 mg/dL in healthy people). Insulin answers, packing the surplus into glycogen and fat.
 
-This is the fed state: energy is abundant, storage is the priority, fat-burning is switched off.
+Storage mode: fat-burning is paused.
 
-Nothing to do but digest. The clock has started.
+A 10-minute walk now flattens the peak. The clock is running.
 
-## 2–5 h · Blood Sugar Falls · 🌊
+## 2–5 h · Blood sugar falls · 🌊
 
-Absorption tapers and the tide turns. Insulin recedes, glucagon rises, and your liver starts releasing stored glycogen to hold blood glucose steady near ~70–100 mg/dL.
+Insulin ebbs, glucagon rises, and your liver starts paying out glycogen to hold blood sugar at 70–100 mg/dL.
 
-You've crossed from the fed state into the post-absorptive state — the quiet handoff where the body stops storing and starts spending.
+The body stops storing and starts spending.
 
-That first flicker of hunger is mostly insulin falling. It passes.
+Hunger at your usual mealtime is a learned ghrelin wave, not an empty tank. It rises, then passes.
 
-## 5–8 h · Blood Sugar Stabilizes · ⚖️
+## 5–8 h · Blood sugar stabilizes · ⚖️
 
-Your liver is now the sole supplier, drip-feeding glucose from glycogen (~100 g in reserve) to keep you level. Your brain alone burns ~120 g of glucose a day, so this stability is not trivial.
+Your liver is now the sole supplier, drip-feeding glucose from about 100 g of glycogen. Your brain alone burns ~120 g a day.
 
-No dip, no spike — glycogenolysis holds the line and keeps hypoglycemia away.
+No spikes, no crashes: a flat, steady line.
 
-Focus often feels unusually clean here. That's not imagination; it's steady fuel.
+Many people feel clear and focused here. Water or tea keeps it that way.
 
 ## 8–12 h · Gluconeogenesis · 🧪
 
-Glycogen is running thin, so the liver takes up a second trade: building glucose from scratch — lactate, glycerol, amino acids — a process called gluconeogenesis. By ~16 h it already supplies roughly half of your glucose output (Cahill, Annu Rev Nutr 2006).
+Glycogen runs thin, so your liver builds glucose from scratch: from lactate, glycerol and amino acids. By around hour 22, this supplies most of your glucose (Rothman, Science 1991).
 
-This is metabolic flexibility made visible: your body will not let the brain go hungry.
+This keeps your brain supplied.
 
-The hunger and mild dip you feel are the switch being thrown. Fat is next.
+Hungry? That's mealtime habit. A hot drink or a walk carries you over the wave.
 
-## 12–18 h · Fat Burning · 🔥
+## 12–20 h · Fat burning · 🔥
 
-Insulin is finally low enough to unlock your fat stores. Lipolysis frees fatty acids, the liver begins spinning them into ketones, and you pivot from sugar-burner to fat-burner.
+Insulin is now low enough to open your fat stores: fatty acids pour out, and your liver turns some of them into ketones.
 
-Every hour here nudges insulin sensitivity upward and draws down fat reserves — the metabolic core of why fasting works.
+From here, stored fat supplies a growing share of your fuel.
 
-A metallic taste or faint headache is early ketones. The fire is lit.
+Faint headache or fatigue? Usually salt. A pinch in water helps within minutes.
 
-## 18–24 h · Ketosis · 💎
+## 20–24 h · Ketosis · 💎
 
-Blood ketones cross ~0.5 mmol/L — nutritional ketosis — and keep climbing. Your brain can't oxidize fatty acids directly, but it runs beautifully on this ketone stream, which spares muscle from being cannibalized for glucose.
+Ketones climb toward 0.5 mmol/L, the threshold of ketosis. For many people it arrives now; a carb-heavy last meal or a sedentary day pushes it later.
 
-Many report an unusual mental clarity, and a hunger that quietly switches off — ketones themselves blunt appetite.
+Your brain runs well on ketones, which spares muscle protein.
 
-Twenty-four hours. Your body now prefers the fuel it's making.
+Hunger still comes in waves, often around your usual mealtimes; each one passes.
 
 ## 24–48 h · Autophagy · ♻️
 
-A full day in, and self-cleaning intensifies: autophagy — cells disassembling damaged proteins and organelles and recycling the parts (the mechanism that earned Ohsumi the 2016 Nobel). Human timing is still being mapped, but the pathway is clearly upregulated by fasting.
+Your cells step up autophagy: taking apart worn proteins and organelles and recycling the parts (Nobel Prize, Ohsumi 2016). In humans, markers rise after 24–36 h; exact timings are estimates.
 
-Think of it as maintenance you can't buy — clearance associated with longevity and lower disease risk.
+In animals, this cleanup is linked to longer, healthier lives.
 
-Tiredness or a headache? Salt and water. Deep work is underway.
+Day two is often the hungriest; then hunger fades. Salt and water help.
 
-## 48–54 h · Growth Hormone Surge · 💪
+## 48–54 h · Growth hormone surge · 💪
 
-Two days, and growth hormone spikes — a ~2-day fast can raise GH secretion roughly 5-fold (Ho, J Clin Invest 1988). Its brief right now: defend lean muscle and push fat metabolism harder.
+Over a two-day fast, growth hormone rises about fivefold (Hartman, J Clin Endocrinol Metab 1992). It frees fat and helps protect muscle.
 
-So you keep burning fat while sparing the muscle you'd expect to lose — a genuinely elegant adaptation.
+Noradrenaline keeps you alert, and your resting metabolism rises.
 
-That unexpected lift in energy people describe here? That's the hormone talking.
+If you feel more energetic, that's why: your body is mobilizing, not shutting down.
 
-## 54–72 h · Insulin Sensitivity · 🎯
+## 54–72 h · Insulin sensitivity · 🎯
 
-With insulin held low for days, your cells turn newly responsive to it — insulin sensitivity resets toward a healthier baseline, the opposite of the resistance that precedes type 2 diabetes.
+For now, insulin sensitivity dips on purpose: your muscles respond less to insulin, leaving glucose for your brain (Hoeks, Diabetes 2010). It reverses when you eat.
 
-Blood glucose sits in a calm, narrow band; satiety comes easily.
+Ketones now supply much of your brain's fuel; fat does the heavy lifting.
 
-You're tuning a system most people never deliberately touch.
+The lasting gain in insulin sensitivity comes from repeated fasts and fat loss over weeks.
 
-## 72 h+ · Immune Cell Regeneration · 🌱
+## 72 h+ · Immune cell regeneration · 🌱
 
-Three days: rare air. Prolonged fasting can prompt the body to clear senescent immune cells and regenerate new ones from hematopoietic stem cells, as IGF-1 and PKA signaling drop (Cheng, Cell Stem Cell 2014).
+Three days. IGF-1 and growth signals have fallen. In mice, fasts like this clear out old immune cells and trigger stem-cell renewal on refeeding (Cheng, Cell Stem Cell 2014); in humans, it's unproven.
 
-Inflammation keeps easing; some describe a quiet, lucid sense of well-being.
+From here on, continue only under medical supervision.
 
-However far you go from here, you go renewed — and break your fast gently. Be proud.
-
----
-
-### Icon anchors
-
-| Stage | Icon | Anchor |
-|---|---|---|
-| 0–2 h | 🌅 | Dawn — the fed state begins |
-| 2–5 h | 🌊 | Tide turning — glucose ebbs |
-| 5–8 h | ⚖️ | Balance — glycemic steadiness |
-| 8–12 h | 🧪 | Chemistry — glucose synthesized de novo |
-| 12–18 h | 🔥 | Fire — fat becomes fuel |
-| 18–24 h | 💎 | Clarity — ketones feed the brain |
-| 24–48 h | ♻️ | Recycling — cellular self-cleaning |
-| 48–54 h | 💪 | Strength — muscle defended |
-| 54–72 h | 🎯 | Precision — insulin retuned |
-| 72 h+ | 🌱 | New growth — immune renewal |
-
-### Sources
-
-- Cahill GF. *Fuel metabolism in starvation.* Annu Rev Nutr 2006;26:1–22.
-- Ho KY et al. *Fasting enhances growth hormone secretion…* J Clin Invest 1988;81(4):968–75.
-- Cheng CW et al. *Prolonged fasting reduces IGF-1/PKA to promote hematopoietic-stem-cell regeneration.* Cell Stem Cell 2014;14(6):810–23.
-- Ohsumi Y. Nobel Prize in Physiology or Medicine 2016 (autophagy mechanisms).
+Break your fast gently: a small meal first.

@@ -2,10 +2,10 @@
 <resources>
 
 	<string name="action_share">Поділитися</string>
-	<string name="action_info">Інформація</string>
+	<string name="action_info">Бібліотека</string>
 	<string name="action_about">Про застосунок</string>
 	<string name="action_export">Експортувати голодування</string>
-	<string name="action_export_description">Збережіть історію голодувань у форматі CSV, iCalendar (.ics) або ActivityStreams JSON</string>
+	<string name="action_export_description">Збережи історію голодувань у форматі CSV, iCalendar (.ics) або ActivityStreams JSON</string>
 	<string name="action_import">Імпортувати голодування</string>
 	<string name="action_import_description">Імпорт голодувань із CSV FastTrack48 або старого FastTrack, резервної копії EasyFast (.zip) чи файлу .ics / ActivityStreams, експортованого цим застосунком</string>
 	<string name="import_formats_title">Підтримувані формати</string>
@@ -25,19 +25,17 @@
 	<string name="intro_00_title">Ласкаво просимо до FastTrack48!</string>
 	<string name="intro_00_description">Що це за програма?</string>
 	<string name="intro_01_title">Мотиваційна допомога</string>
-	<string name="intro_01_description">Головна ідея FastTrack48 полягає в тому, щоби допомогти мотивувати Вас під час голодувань і
-		пояснити, що відбувається з Вашим організмом на різних стадіях голодування.</string>
+	<string name="intro_01_description">Головна ідея FastTrack48 полягає в тому, щоби допомогти тобі не втратити мотивацію під час голодувань і
+		пояснити, що відбувається з твоїм організмом на різних стадіях голодування.</string>
 	<string name="intro_02_title">Простий безкоштовний додаток</string>
 	<string name="intro_02_description">FastTrack48 є і завжди буде безкоштовним додатком з відкритим
 		вихідним кодом. Не потрібно створювати обліковий запис, немає покупок у додатку, немає реклами, немає
 		телеметрії й відстеження. Додаток не має доступу до інтернету й повністю працює офлайн.
 	</string>
 	<string name="intro_03_title">Інтервальне голодування</string>
-	<string name="intro_03_description">Це нова галузь досліджень, яка обіцяє набагато більше користі для здоров\'я, окрім простого
-		схуднення. \n\nЩоби дізнатися, що ми знаємо про інтервальне голодування, і що показують дослідження, перегляньте розділ
-		«Інформація» цього застосунку!</string>
-	<string name="intro_04_title">Залишайтеся вмотивованими завдяки сповіщенням</string>
-	<string name="intro_04_description">FastTrack48 може показувати корисні сповіщення, щоби мотивувати Вас протягом голодування. \n\nВи бачитимете поточний час голодування, на якій Ви стадії, і яке джерело енергії використовується Вашим організмом. \n\nЦе допоможе Вам не зійти з курсу, навіть не відкриваючи додаток!</string>
+	<string name="intro_03_description">Молода галузь досліджень. Дещо добре доведено, багато що — ще на ранній стадії.\n\nЩо відомо і наскільки це обґрунтовано, дивись у Бібліотеці в меню.</string>
+	<string name="intro_04_title">Сповіщення тримають мотивацію</string>
+	<string name="intro_04_description">FastTrack48 може показувати корисні сповіщення, щоби підтримувати тебе протягом голодування. \n\nТи бачитимеш поточний час голодування, свою стадію і яке джерело енергії використовує твій організм. \n\nЦе допоможе тобі не зійти з курсу, навіть не відкриваючи додаток!</string>
 	<string name="intro_05_title">От і все!</string>
 	<string name="intro_05_description">Ласкаво просимо у світ голодування!</string>
 
@@ -56,7 +54,7 @@
 	<string name="confirm_start_fast_title">Почати голодування?</string>
 	<string name="already_started_dialog_title">Уже розпочато</string>
 	<string name="confirm_end_fast_title">Закінчити голодування?</string>
-	<string name="already_stopped_dialog_title">Коли Ви закінчили?</string>
+	<string name="already_stopped_dialog_title">Коли закінчилося голодування?</string>
 	<string name="menu_edit">Редагувати</string>
 	<string name="menu_delete">Видалити</string>
 	<string name="confirm_delete_fast_title">Видалити запис?</string>
@@ -64,8 +62,9 @@
 	<string name="confirm_delete_fast_negative">Ні</string>
 
 	<string name="log_entry_length">%1$d годин</string>
-	<string name="log_entry_ketosis">Кетоз: %1$d годин</string>
-	<string name="log_entry_autophagy">Автофагія: %1$d годин</string>
+	<string name="log_entry_ketosis">Кетоз: %1$s год</string>
+	<string name="log_entry_autophagy">Автофагія: %1$s год</string>
+	<string name="log_approx">≈%1$s</string>
 	<string name="profile_age_label">Вік</string>
 	<string name="profile_age_years">Років</string>
 	<string name="profile_weight_label">Вага</string>
@@ -78,8 +77,8 @@
 	<string name="profile_bmi_category_overweight">Зайва вага</string>
 	<string name="profile_bmi_category_obese">Ожиріння</string>
 	<string name="profile_bmi_category_morbidly_obese">Патологічне ожиріння</string>
-	<string name="profile_error_range">Введіть число від %1$d до %2$d.</string>
-	<string name="profile_error_range_whole">Введіть ціле число від %1$d до %2$d.</string>
+	<string name="profile_error_range">Введи число від %1$d до %2$d.</string>
+	<string name="profile_error_range_whole">Введи ціле число від %1$d до %2$d.</string>
 	<string name="profile_bmr_label">Основний обмін:</string>
 	<string name="profile_bmr_value">%.0f ккал / день</string>
 	<string name="profile_height_label">Зріст</string>
@@ -101,38 +100,33 @@
 	<string name="fast_ketosis_label">Кетоз</string>
 	<string name="fast_fat_burn_label">Спалювання жиру</string>
 	<string name="stage_fasting_title">Голодування</string>
-	<string name="stage_fasting_description">Ваш організм споживає свої запаси глюкози, тримайтеся!</string>
+	<string name="stage_fasting_description">Печінка вже виробляє власну глюкозу, а жир поступово бере справу на себе.</string>
 	<string name="stage_fat_burning_title">Спалювання жиру</string>
-	<string name="stage_fat_burning_description">Запаси глюкози закінчилися! Тепер Ваш організм спалює жир задля
-		енергії. Наступні кілька годин ідеально підходять для занять спортом.</string>
-	<string name="stage_fat_fasting_sweet_spot_title">Золота середина голодування</string>
-	<string name="stage_fat_fasting_sweet_spot_description">Ви досягли золотої середини голодування, так тримати!</string>
-	<string name="stage_fat_peak_fat_burning_title">Пік спалювання жиру</string>
-	<string name="stage_fat_peak_fat_burning_description">Тепер Ваш організм швидко спалює жир, і вже розпочався кетоз.</string>
+	<string name="stage_fat_burning_description">Жир перебирає роль пального. Прогулянка пришвидшить перемикання.</string>
+	<string name="stage_fat_fasting_sweet_spot_title">Кетони зростають</string>
+	<string name="stage_fat_fasting_sweet_spot_description">Спалювання жиру в розпалі. Голод приходить хвилями; і ця мине.</string>
+	<string name="stage_fat_peak_fat_burning_title">Початок кетозу</string>
+	<string name="stage_fat_peak_fat_burning_description">Мозок починає працювати на пальному з жиру.</string>
 	<string name="stage_autophagy_title">Автофагія</string>
-	<string name="stage_autophagy_description">Ваш організм розпочав автофагію!</string>
-	<string name="stage_optimal_autophagy_title">Оптимальна автофагія</string>
-	<string name="stage_optimal_autophagy_description">Автофагія у повному розпалі! Так тримати, від цього моменту і до настання 72-ї години автофагія буде дуже ефективною.</string>
+	<string name="stage_autophagy_description">Ціла доба. Клітини посилюють автофагію і переробляють зношені деталі.</string>
+	<string name="stage_optimal_autophagy_title">Глибока автофагія</string>
+	<string name="stage_optimal_autophagy_description">Два дні. Переробка йде глибоко, а гормон росту береже м\'язи. Терміни автофагії в людей — лише оцінки.</string>
 	<string name="phase_glucose">Спалювання глюкози</string>
 	<string name="phase_fat_burning">Спалювання жиру</string>
 	<string name="phase_ketosis">Кетоз</string>
 	<string name="phase_autophagy">Автофагія</string>
-	<string name="phase_optimal_autophagy">Оптимальна автофагія</string>
+	<string name="phase_optimal_autophagy">Глибока автофагія</string>
 	<string name="notification_channel_name">Сповіщення про голодування</string>
-	<string name="notification_channel_description">Сповіщення, що приходять, коли Ви переходите на нову стадію
+	<string name="notification_channel_description">Сповіщення, що приходять, коли ти переходиш на нову стадію
 		голодування.</string>
 	<string name="notification_fat_burn_title">Стадія голодування: спалювання жиру</string>
-	<string name="notification_fat_burn_content">Ваші запаси глюкози закінчилися, і тепер Ваш організм використовує
-		жир як джерело енергії.</string>
+	<string name="notification_fat_burn_content">Інсулін низький, і жир перебирає роль пального.</string>
 	<string name="notification_ketosis_title">Стадія голодування: кетоз</string>
-	<string name="notification_ketosis_content">Ваш організм спалив достатню кількість жиру, і тепер Ви перейшли
-		в кетоз.</string>
+	<string name="notification_ketosis_content">Кетони зростають: мозок починає працювати на пальному з жиру.</string>
 	<string name="notification_autophagy_title">Стадія голодування: автофагія</string>
-	<string name="notification_autophagy_content">Ваш організм розпочав автофагію. Старі чи пошкоджені клітини тепер
-		переробляються в енергію.</string>
-	<string name="notification_optimal_autophagy_title">Стадія голодування: оптимальна автофагія</string>
-	<string name="notification_optimal_autophagy_content">Ваше тіло вже довго займається автофагією, від чого
-		значно покращується здоров\'я Ваших клітин.</string>
+	<string name="notification_autophagy_content">Клітини посилюють автофагію і переробляють зношені деталі.</string>
+	<string name="notification_optimal_autophagy_title">Стадія голодування: глибока автофагія</string>
+	<string name="notification_optimal_autophagy_content">Два дні. Гормон росту береже м\'язи, поки жир виконує роботу.</string>
 	<string name="notification_fasting_channel_name">Стан голодування</string>
 	<string name="notification_fasting_channel_description">Постійне сповіщення, що показує поточний стан та прогрес
 		голодування.</string>
@@ -144,23 +138,20 @@
 		низькою. Ці крайні випадки дадуть неточні результати.\n\nВтім, для більшості людей цієї оцінки буде 
 		достатньо для того, щоби дізнатися, чи нормальна у них вага.</string>
 	<string name="info_dialog_bmr_title">Основний обмін</string>
-	<string name="info_dialog_bmr_content">Це оцінка кількості калорій, які Ваш організм спалить за день, проведений
-		у повній нерухомості. Якби Ви просто весь день лежали на дивані, то ось це — кількість калорій, яку Ви могли би з\'їсти, не набираючи
+	<string name="info_dialog_bmr_content">Це оцінка кількості калорій, які твій організм спалить за день, проведений
+		у повній нерухомості. Якби весь день просто лежати на дивані, то ось це — кількість калорій, яку можна було б з\'їсти, не набираючи
 		вагу.\n\nЦе дуже важливе число для тих людей, які худнуть, обмежуючи щоденну кількість калорій.</string>
 	<string name="info_dialog_positive">Круто!</string>
-	<string name="info_page_title_info">Інформація</string>
-	<string name="info_page_title_tips">Поради</string>
-	<string name="title_activity_info">Інформація про голодування</string>
 	<string name="log_total_autophagy">🧬 Автофагія:</string>
 	<string name="log_total_ketosis">🔥 Кетоз:</string>
 	<string name="title_activity_intro">Вступ</string>
-	<string name="app_widget_description">Відстежуйте прогрес голодування на головному екрані</string>
-	<string name="app_widget_not_fasting">Ви не голодуєте</string>
-	<string name="app_widget_fast_in_progress">Ви голодуєте</string>
+	<string name="app_widget_description">Відстежуй прогрес голодування на головному екрані</string>
+	<string name="app_widget_not_fasting">Ти не голодуєш</string>
+	<string name="app_widget_fast_in_progress">Ти голодуєш</string>
 	<string name="app_widget_start_fast_button">Почати голодування</string>
 	<string name="app_widget_stop_fast_button">Закінчити голодування</string>
 	<string name="app_widget_start_compact">Почати</string>
-	<string name="app_widget_start">Торкніться, щоб почати</string>
+	<string name="app_widget_start">Торкнись, щоб почати</string>
 	<string name="close_button_content_description">Закрити</string>
 	<string name="cancel_button">Скасувати</string>
 	<string name="next_button">Далі</string>
@@ -177,11 +168,11 @@
 	<string name="title_activity_settings">Налаштування</string>
 	<string name="back">Назад</string>
 	<string name="settings_fancy_background_title">Показати красивий фон</string>
-	<string name="settings_fancy_background_subtitle">Вимкніть для простішого фону</string>
+	<string name="settings_fancy_background_subtitle">Вимкни для простішого фону</string>
 	<string name="settings_metric_system_title">Метрична система</string>
 	<string name="settings_metric_system_subtitle">Показувати зріст та вагу в метричних одиницях</string>
 	<string name="settings_theme_mode_title">Тема</string>
-	<string name="settings_theme_mode_subtitle">Оберіть світлу, темну чи системну</string>
+	<string name="settings_theme_mode_subtitle">Обери світлу, темну чи системну</string>
 	<string name="settings_theme_mode_system">Системна</string>
 	<string name="settings_theme_mode_light">Світла</string>
 	<string name="settings_theme_mode_dark">Темна</string>
@@ -229,23 +220,23 @@
 	<string name="journey_stage_7_title">Сплеск гормону росту</string>
 	<string name="journey_stage_8_title">Чутливість до інсуліну</string>
 	<string name="journey_stage_9_title">Регенерація імунних клітин</string>
-	<string name="journey_stage_0_body">Ти щойно поїв, і твоя кров це відчуває. Глюкоза зростає — у здорових людей сягає піку нижче ~140 мг/дл за 30–60 хв — а підшлункова залоза відповідає інсуліном, гормоном, що заводить цей цукор у клітини й відкладає надлишок як глікоген.\n\nЦе стан насичення: енергії вдосталь, пріоритет — накопичувати, спалювання жиру вимкнене.\n\nЛишається тільки перетравлювати. Годинник пішов.</string>
-	<string name="journey_stage_1_body">Інсулін відступає, глюкагон зростає, а печінка починає вивільняти запасений глікоген, щоб утримувати глюкозу біля ~70–100 мг/дл.\n\nТи перейшов зі стану насичення до постабсорбтивного — тиха передача естафети, коли тіло припиняє накопичувати й починає витрачати.\n\nТой перший проблиск голоду — це переважно інсулін, що падає. Він мине за хвилину-дві.</string>
-	<string name="journey_stage_2_body">Тепер печінка — єдиний постачальник: краплями віддає глюкозу з глікогену (~100 г запасу), щоб тримати тебе стабільно. Сам лише мозок спалює ~120 г глюкози на день, тож ця стабільність — не дрібниця.\n\nНі спадів, ні піків — глікогеноліз тримає лінію й не пускає гіпоглікемію.\n\nБагато хто повідомляє на цій стадії про напрочуд гостру зосередженість. Це не уява; це рівне пальне.</string>
-	<string name="journey_stage_3_body">Глікоген вичерпується, тож печінка починає сама виробляти глюкозу з лактату, гліцеролу й амінокислот — процес, що зветься глюконеогенезом. Близько ~16 год вона вже дає майже половину твоєї глюкози (Cahill, Annu Rev Nutr 2006).\n\nЦе біологічний розум твого тіла, який ніколи не дасть мозку голодувати.\n\nГолод і легкий спад, які ти можеш відчувати, пов\'язані зі зміною фази.</string>
-	<string name="journey_stage_4_body">Інсулін нарешті достатньо низький, щоб відкрити твої запаси жиру. Ліполіз вивільняє жирні кислоти, печінка починає перетворювати їх на кетони, і ти переходиш зі спалювача цукру на спалювача жиру.\n\nЧутливість до інсуліну зростає, і запаси жиру вже витрачаються — метаболічна серцевина того, чому голодування працює.\n\nМеталевий присмак чи легкий головний біль — ознака того, що з\'являються перші кетони. Вогонь горить 🔥.</string>
-	<string name="journey_stage_5_body">Кетони в крові переходять ~0,5 ммоль/л — харчовий кетоз — і продовжують зростати. Твій мозок не може окиснювати жирні кислоти напряму, але чудово працює на цьому потоці кетонів, що береже м\'язи від розщеплення заради глюкози.\n\nБагато хто відзначає незвичну ясність думки й голод, що сам собою вщухає, — кетони притуплюють апетит.\n\nДвадцять чотири години. Тепер твоє тіло віддає перевагу пальному, яке саме виробляє.</string>
-	<string name="journey_stage_6_body">Цілий день, і самоочищення посилюється: автофагія — клітини розбирають ушкоджені білки й органели та переробляють деталі (механізм, що приніс Осумі Нобелівську премію 2016 року).\n\nУяви це як обслуговування, яке не купиш, — очищення, пов\'язане з довголіттям і нижчим ризиком хвороб.\n\nВтома чи головний біль? Сіль і вода. Триває глибока робота.</string>
-	<string name="journey_stage_7_body">Два дні, і гормон росту стрімко зростає — ~2-денне голодування може підвищити його секрецію приблизно в 5 разів (Ho, J Clin Invest 1988). Його завдання зараз: захищати м\'язову масу й сильніше розганяти метаболізм жиру.\n\nТож ти й далі спалюєш жир, зберігаючи м\'яз, який очікував втратити, — справді елегантна адаптація.\n\nТой несподіваний приплив енергії, що його описують тут? Це говорить гормон.</string>
-	<string name="journey_stage_8_body">Коли інсулін тримається низьким днями, твої клітини знову стають чутливими до нього — чутливість до інсуліну повертається до здоровішого рівня, протилежність резистентності, що передує діабету 2 типу.\n\nГлюкоза тримається у спокійному вузькому діапазоні; насичення настає легко.\n\nТи налаштовуєш систему, якої майже ніхто не торкається свідомо.</string>
-	<string name="journey_stage_9_body">Три дні. Тривале голодування може спонукати тіло позбуватися старіючих імунних клітин і відновлювати нові з гемопоетичних стовбурових клітин, поки знижується сигналізація IGF-1 і PKA (Cheng, Cell Stem Cell 2014).\n\nЗапалення й далі вщухає; дехто описує тихе, ясне відчуття добробуту.\n\nХоч як далеко ти зайдеш звідси, ти виходиш оновленим — і виходь із голодування лагідно. Пишайся собою.</string>
+	<string name="journey_stage_0_body">Глюкоза заливає кров і досягає піку за годину (у здорових людей — нижче ~7,8 ммоль/л). Інсулін відповідає й відкладає надлишок у глікоген і жир.\n\nРежим запасання: спалювання жиру на паузі.\n\n10-хвилинна прогулянка зараз згладить пік. Годинник пішов.</string>
+	<string name="journey_stage_1_body">Інсулін відступає, глюкагон зростає, і печінка починає віддавати глікоген, щоб тримати цукор на рівні 3,9–5,6 ммоль/л.\n\nТіло перестає запасати й починає витрачати.\n\nГолод у звичну годину їжі — це завчена хвиля греліну, а не порожній бак. Вона наростає й минає.</string>
+	<string name="journey_stage_2_body">Печінка тепер єдиний постачальник: крапля за краплею віддає глюкозу з приблизно 100 г глікогену. Лише мозок спалює ~120 г на день.\n\nНі стрибків, ні провалів — рівна, спокійна лінія.\n\nБагато хто зараз почувається ясно й зібрано. Вода чи чай допоможуть це втримати.</string>
+	<string name="journey_stage_3_body">Глікоген закінчується, тож печінка будує глюкозу з нуля: з лактату, гліцеролу й амінокислот. Приблизно на 22-й годині це дає більшу частину твоєї глюкози (Rothman, Science 1991).\n\nТак мозок і далі отримує пальне.\n\nГолод? Це звичка до години їжі. Гарячий напій чи прогулянка допоможуть перечекати хвилю.</string>
+	<string name="journey_stage_4_body">Інсулін уже досить низький, щоб відчинити жирові запаси: жирні кислоти виходять, і печінка перетворює частину з них на кетони.\n\nВідтепер дедалі більшу частину енергії дає запасений жир.\n\nЛегкий головний біль чи втома? Зазвичай бракує солі. Дрібка у воді допомагає за кілька хвилин.</string>
+	<string name="journey_stage_5_body">Кетони зростають до 0,5 ммоль/л — порогу кетозу. У багатьох він настає саме зараз; вуглеводна остання їжа чи малорухливий день його відсувають.\n\nМозок добре працює на кетонах, і це береже м\'язовий білок.\n\nГолод і далі приходить хвилями, часто у звичні години їжі; кожна минає.</string>
+	<string name="journey_stage_6_body">Клітини посилюють автофагію: розбирають зношені білки й органели і пускають деталі в переробку (Нобелівська премія, Осумі 2016). У людей маркери зростають після 24–36 годин; точні терміни — лише оцінки.\n\nУ тварин це прибирання пов\'язане з довшим і здоровішим життям.\n\nДругий день часто найголодніший, далі голод згасає. Допомагають сіль і вода.</string>
+	<string name="journey_stage_7_body">За два дні голодування гормон росту зростає приблизно вп\'ятеро (Hartman, J Clin Endocrinol Metab 1992). Він вивільняє жир і допомагає берегти м\'язи.\n\nНорадреналін додає бадьорості, а обмін речовин у спокої зростає.\n\nЯкщо відчуваєш більше енергії, ось чому: тіло мобілізується, а не вимикається.</string>
+	<string name="journey_stage_8_body">Поки що чутливість до інсуліну навмисно знижується: м\'язи слабше реагують на інсулін, щоб глюкоза лишилася мозку (Hoeks, Diabetes 2010). Це минає, щойно ти поїси.\n\nКетони тепер дають мозку значну частину пального; важку роботу виконує жир.\n\nСтійке покращення чутливості до інсуліну дають повторні голодування й втрата жиру впродовж тижнів.</string>
+	<string name="journey_stage_9_body">Три дні. ІФР-1 і сигнали росту знизилися. У мишей такі голодування прибирають старі імунні клітини й запускають оновлення зі стовбурових клітин, коли харчування відновлюється (Cheng, Cell Stem Cell 2014); у людей це не доведено.\n\nДалі — лише під наглядом лікаря.\n\nВиходь із голодування м\'яко: спершу невелика порція.</string>
 	<string name="import_result_title">Імпорт завершено</string>
 	<string name="import_result_title_failed">Не вдалося імпортувати</string>
 	<string name="import_result_added">Додано</string>
 	<string name="import_result_updated">Оновлено</string>
 	<string name="import_result_already_logged">Уже записано</string>
 	<string name="import_result_unreadable_rows">Нечитабельні записи</string>
-	<string name="import_result_ongoing_restored">Ваше активне голодування відновлено.</string>
+	<string name="import_result_ongoing_restored">Твоє активне голодування відновлено.</string>
 	<string name="import_result_ongoing_declined">Активне голодування з файлу пропущено: голодування вже триває.</string>
 	<string name="import_error_unreadable">Не вдалося прочитати цей файл. Можливо, його переміщено чи видалено або він недоступний для цього застосунку.</string>
 	<string name="import_error_empty">У цьому файлі не знайдено голодувань.</string>
@@ -265,7 +256,7 @@
 	<string name="clear_logbook_title">Видалити весь журнал?</string>
 	<string name="clear_logbook_message">Це назавжди видаляє всі %1$d записаних голодувань. Цю дію не можна скасувати.</string>
 	<string name="clear_logbook_confirm">Видалити всі %1$d</string>
-	<string name="stage_optimal_autophagy_description_past72">Автофагія у повному розпалі! Так тримати!</string>
+	<string name="stage_optimal_autophagy_description_past72">Три дні й більше. Продовжуй лише під наглядом лікаря й виходь із голодування м\'яко.</string>
 	<string name="settings_dateformat_title">Формат дати та часу</string>
 	<string name="dateformat_optimized_compact">Компактний</string>
 	<string name="dateformat_optimized_weekday">Компактний + день тижня</string>
@@ -279,7 +270,7 @@
 	<string name="relative_today">Сьогодні</string>
 	<string name="relative_yesterday">Учора</string>
 	<string name="start_overlap_title">Перекривається з попереднім голодуванням</string>
-	<string name="start_overlap_message">Ваше останнє записане голодування завершилося %1$s. Початок цього о %2$s перекриє його.</string>
+	<string name="start_overlap_message">Твоє останнє записане голодування завершилося %1$s. Початок цього о %2$s перекриє його.</string>
 	<string name="start_overlap_confirm">Усе одно зберегти</string>
 	<string name="settings_section_language">Мова</string>
 	<string name="settings_language_title">Мова застосунку</string>
@@ -297,11 +288,11 @@
 	<string name="lunar_moon_style_vedic">Дні посту Пурніми та Амавасьї</string>
 	<string name="lunar_moon_style_vedic_detail">Дні посту за індуїстським календарем, іноді за день до повні або молодика</string>
 	<string name="lunar_moon_style_astronomical">Астрономічні повня та молодик</string>
-	<string name="lunar_moon_style_astronomical_detail">Дата точної повні або молодика у вашому часовому поясі</string>
+	<string name="lunar_moon_style_astronomical_detail">Дата точної повні або молодика у твоєму часовому поясі</string>
 	<string name="lunar_calculating">Обчислення…</string>
-	<string name="lunar_no_days_selected">Виберіть хоча б один день, щоб отримувати нагадування</string>
+	<string name="lunar_no_days_selected">Вибери хоча б один день, щоб отримувати нагадування</string>
 	<string name="lunar_tradition_title">Календар постів</string>
-	<string name="lunar_tradition_question">Якого календаря постів ви дотримуєтеся?</string>
+	<string name="lunar_tradition_question">Якого календаря постів ти дотримуєшся?</string>
 	<string name="lunar_tradition_smarta">Смарта</string>
 	<string name="lunar_tradition_smarta_detail">Більшість індуїстських календарів, зокрема Drik Panchang</string>
 	<string name="lunar_tradition_vaishnava">Вайшнавський (ISKCON)</string>
@@ -314,18 +305,18 @@
 	<string name="lunar_reminder_time_title">Час нагадування</string>
 	<string name="lunar_save">Зберегти</string>
 	<string name="lunar_location_title">Місцезнаходження для часу сходу сонця</string>
-	<string name="lunar_location_timezone">Оцінено за вашим часовим поясом (%1$s)</string>
-	<string name="lunar_location_device">Ваше місцезнаходження, збережене %1$s</string>
+	<string name="lunar_location_timezone">Оцінено за твоїм часовим поясом (%1$s)</string>
+	<string name="lunar_location_device">Твоє місцезнаходження, збережене %1$s</string>
 	<string name="lunar_location_finding">Пошук місцезнаходження…</string>
-	<string name="lunar_location_dialog_title">Використати ваше місцезнаходження?</string>
-	<string name="lunar_location_dialog_text">Екадаші, Пурніма та Амавасья визначаються за місцевим сходом сонця, тож дата може залежати від того, де ви є.\n\nFastTrack оцінює ваше місцезнаходження за часовим поясом, і майже скрізь це правильно. Біля краю широкого часового поясу день посту може зміститися на один день.\n\nДля точного результату FastTrack може зчитати ваше приблизне місцезнаходження. Це необов’язково, і одного разу достатньо. Ваше місцезнаходження залишається на цьому телефоні: FastTrack не має доступу до інтернету.\n\nКоли ви їдете в інший часовий пояс, FastTrack знову використовує оцінку за часовим поясом.</string>
+	<string name="lunar_location_dialog_title">Використати твоє місцезнаходження?</string>
+	<string name="lunar_location_dialog_text">Екадаші, Пурніма та Амавасья визначаються за місцевим сходом сонця, тож дата може залежати від того, де ти є.\n\nFastTrack оцінює твоє місцезнаходження за часовим поясом, і майже скрізь це правильно. Біля краю широкого часового поясу день посту може зміститися на один день.\n\nДля точного результату FastTrack може зчитати твоє приблизне місцезнаходження. Це необов’язково, і одного разу достатньо. Твоє місцезнаходження залишається на цьому телефоні: FastTrack не має доступу до інтернету.\n\nКоли ти їдеш в інший часовий пояс, FastTrack знову використовує оцінку за часовим поясом.</string>
 	<string name="lunar_location_use">Використати моє місцезнаходження</string>
 	<string name="lunar_location_use_timezone">Натомість використати часовий пояс</string>
 	<string name="lunar_location_not_now">Не зараз</string>
 	<string name="lunar_location_saved">Місцезнаходження збережено. Тепер воно використовується для сходу сонця.</string>
-	<string name="lunar_location_not_found">Не вдалося знайти ваше місцезнаходження. FastTrack і далі використовує ваш часовий пояс.</string>
-	<string name="lunar_location_off">Геолокацію на цьому телефоні вимкнено. FastTrack і далі використовує ваш часовий пояс.</string>
-	<string name="lunar_location_denied">Немає дозволу на геолокацію. FastTrack і далі використовує ваш часовий пояс.</string>
+	<string name="lunar_location_not_found">Не вдалося знайти твоє місцезнаходження. FastTrack і далі використовує твій часовий пояс.</string>
+	<string name="lunar_location_off">Геолокацію на цьому телефоні вимкнено. FastTrack і далі використовує твій часовий пояс.</string>
+	<string name="lunar_location_denied">Немає дозволу на геолокацію. FastTrack і далі використовує твій часовий пояс.</string>
 	<string name="lunar_notifications_off">Сповіщення вимкнено, тому нагадування не з’являтимуться.</string>
 	<string name="lunar_notifications_turn_on">Увімкнути</string>
 	<string name="lunar_channel_name">Екадаші, Пурніма та Амавасья</string>
@@ -388,7 +379,7 @@
 	<string name="fast_days_source_ananda_marga">Правило Ананда Марги. Дати: Варанасі. Схід сонця: %1$s.</string>
 	<string name="fast_days_source_ananda_marga_india">Ананда Марга, календар для Індії. Дати: Індія. Схід сонця: %1$s.</string>
 	<string name="fast_days_source_local">%1$s. Дати та схід сонця: %2$s.</string>
-	<string name="fast_days_your_location">ваше місце</string>
+	<string name="fast_days_your_location">твоє місце</string>
 	<string name="fast_days_next_full_moon">Повня %1$s</string>
 	<string name="fast_days_next_new_moon">Молодик %1$s</string>
 	<string name="fast_days_today_marker">сьогодні</string>

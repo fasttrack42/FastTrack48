@@ -2,6 +2,7 @@ package com.legbehindneck.fasttrack48.screens.settings
 
 import android.content.Context
 import android.content.res.Configuration
+import android.icu.util.ULocale
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.LocaleManagerCompat
@@ -23,10 +24,12 @@ import java.util.Locale
  *
  * Must mirror `res/xml/locales_config.xml`: that file is what the *system* picker offers, this
  * list is what the in-app picker offers, and a language in one but not the other is either a
- * dead end or a missing option. Region qualifiers match the `res/values-*` folders exactly.
+ * dead end or a missing option. Region qualifiers match the `res/values-*` folders exactly, except
+ * zh-TW, whose folder is `values-b+zh+Hant`: Traditional script with Taiwan vocabulary, which the
+ * platform selects for every Traditional locale (zh-TW, zh-HK, zh-MO).
  */
 val SupportedLanguageTags: List<String> = listOf(
-	"de", "en", "es", "fr", "it", "nl", "pt-BR", "uk-UA", "zh-CN",
+	"de", "en", "es", "fr", "it", "nl", "pt-BR", "uk-UA", "zh-CN", "zh-TW",
 )
 
 /**
@@ -49,16 +52,24 @@ fun languageAutonym(tag: String): String {
  * Resolved back to one of [SupportedLanguageTags] rather than returned verbatim: the platform
  * may hand back a locale it has canonicalised or a resource-resolved variant (`zh-Hans-CN` for
  * `zh-CN`, a bare `uk` for `uk-UA`), and the picker still has to recognise it as the row the
- * user chose. Matching on language alone is exact here because no language appears twice in
- * the list; an override outside the list (nothing in-app can set one) reads as "follow device",
- * which is what the user would see on screen anyway.
+ * user chose. Chinese appears twice, so a row matches on language *and* script, each side
+ * maximised with likely subtags (zh-CN → Hans, zh-TW → Hant, bare uk → Cyrl); every other
+ * language is listed once, so for them this reduces to matching on language. An override
+ * outside the list (nothing in-app can set one) reads as "follow device", which is what the
+ * user would see on screen anyway.
  */
 fun selectedLanguageTag(): String? {
 	val locale = AppCompatDelegate.getApplicationLocales()[0] ?: return null
+	val script = scriptOf(locale)
 	return SupportedLanguageTags.firstOrNull {
-		Locale.forLanguageTag(it).language == locale.language
+		val row = Locale.forLanguageTag(it)
+		row.language == locale.language && scriptOf(row) == script
 	}
 }
+
+/** The locale's script, inferred when absent ("zh-TW" → "Hant"); "" if ICU knows none. */
+private fun scriptOf(locale: Locale): String =
+	ULocale.addLikelySubtags(ULocale.forLocale(locale)).script
 
 /**
  * [context] in the app's language, for text built outside an activity: notifications posted

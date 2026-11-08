@@ -79,7 +79,7 @@ No Internet permission. The app cannot make network connections.
 - Free and open source under the MIT License. The complete source code is public, and the build is reproducible from it.
 
 ## Languages
-- English, German, Spanish, French, Italian, Dutch, Brazilian Portuguese, Ukrainian, and Simplified Chinese.
+- English, German, Spanish, French, Italian, Dutch, Brazilian Portuguese, Ukrainian, Simplified Chinese, and Traditional Chinese (Taiwan).
 
 ---
 

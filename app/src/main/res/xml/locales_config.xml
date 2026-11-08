@@ -7,7 +7,9 @@
 	Offering anything beyond these tags would only promise a translation that does not exist.
 
 	Tags are region-qualified wherever the res/values-* folder is, so the requested locale
-	matches a resource folder exactly instead of relying on language-level fallback.
+	matches a resource folder exactly instead of relying on language-level fallback. The one
+	exception is zh-TW: its folder is values-b+zh+Hant (Traditional script, Taiwan vocabulary),
+	which Android (API 24+) selects for any Traditional locale, zh-TW, zh-HK and zh-MO alike.
 -->
 <locale-config xmlns:android="http://schemas.android.com/apk/res/android"
 	android:defaultLocale="en">
@@ -20,4 +22,5 @@
 	<locale android:name="pt-BR"/>
 	<locale android:name="uk-UA"/>
 	<locale android:name="zh-CN"/>
+	<locale android:name="zh-TW"/>
 </locale-config>

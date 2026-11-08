@@ -50,6 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.screens.knowledge.FastDaysKnowledge
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
 import com.legbehindneck.fasttrack48.lunar.EkadashiTradition
 import com.legbehindneck.fasttrack48.lunar.FastDay
@@ -157,6 +158,9 @@ private fun FastDaysContent(data: FastDayData, dateStyle: DateStyle, onFollow: (
 			items(fasts, key = { "${it.kind}-${it.day}" }) { fast ->
 				FastRow(fast = fast, now = data.now, highlighted = fast == upcoming.first())
 			}
+		}
+		item(key = "about_fast_days") {
+			FastDaysKnowledge(modifier = Modifier.padding(top = 21.dp))
 		}
 	}
 }

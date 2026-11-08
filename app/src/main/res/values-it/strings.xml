@@ -2,7 +2,7 @@
 <resources>
 
 	<string name="action_share">Condividi</string>
-	<string name="action_info">Informazioni</string>
+	<string name="action_info">Biblioteca</string>
 	<string name="action_about">Informazioni sull\'app</string>
 	<string name="action_export">Esporta digiuni</string>
 	<string name="action_export_description">Salva la cronologia dei digiuni come CSV, iCalendar (.ics) o JSON ActivityStreams</string>
@@ -32,9 +32,7 @@
 		account, non ci sono acquisti in-app, nessuna pubblicità da evitare. E non ha nemmeno accesso a Internet, quindi
 		non può inviare i tuoi dati da nessuna parte.</string>
 	<string name="intro_03_title">Digiuno intermittente</string>
-	<string name="intro_03_description">Questa è una nuova area di studio che sta mostrando molti benefici oltre alla
-		semplice perdita di peso.\n\nPer esplorare cosa sappiamo sul digiuno e cosa dicono le ricerche, controlla la
-		sezione Info di questa app!</string>
+	<string name="intro_03_description">Un campo di ricerca giovane. Alcuni risultati sono consolidati, molti ancora preliminari.\n\nPer vedere cosa si sa e quanto sono solide le prove, apri la Biblioteca dal menu.</string>
 	<string name="intro_04_title">Resta motivato con le notifiche</string>
 	<string name="intro_04_description">FastTrack48 può mostrarti notifiche utili per tenerti motivato durante il
 		digiuno.\n\nVedrai il tuo tempo di digiuno attuale, in che fase ti trovi e quale modalità energetica il tuo
@@ -62,8 +60,9 @@
 	<string name="confirm_delete_fast_negative">No</string>
 
 	<string name="log_entry_length">%1$d ore</string>
-	<string name="log_entry_ketosis">Chetosi: %1$d ore</string>
-	<string name="log_entry_autophagy">Autofagia: %1$d ore</string>
+	<string name="log_entry_ketosis">Chetosi: %1$s ore</string>
+	<string name="log_entry_autophagy">Autofagia: %1$s ore</string>
+	<string name="log_approx">≈%1$s</string>
 	<string name="profile_age_label">Età</string>
 	<string name="profile_age_years">Anni</string>
 	<string name="profile_weight_label">Peso</string>
@@ -99,41 +98,33 @@
 	<string name="fast_ketosis_label">Chetosi</string>
 	<string name="fast_fat_burn_label">Brucia grassi</string>
 	<string name="stage_fasting_title">Digiuno</string>
-	<string name="stage_fasting_description">Il tuo corpo sta consumando le sue riserve di glucosio, continua così!</string>
+	<string name="stage_fasting_description">Il fegato ora produce il suo glucosio, e il grasso comincia a prendere il testimone.</string>
 	<string name="stage_fat_burning_title">Brucia grassi</string>
-	<string name="stage_fat_burning_description">I tuoi depositi di glucosio sono esauriti! Il tuo corpo sta ora
-		bruciando grassi per ottenere energia. Un allenamento nelle prossime ore sarebbe ottimale.</string>
-	<string name="stage_fat_fasting_sweet_spot_title">Punto giusto del digiuno</string>
-	<string name="stage_fat_fasting_sweet_spot_description">Sei nel punto dolce di digiuno, continua!</string>
-	<string name="stage_fat_peak_fat_burning_title">Brucia grassi al picco</string>
-	<string name="stage_fat_peak_fat_burning_description">Il tuo corpo sta bruciando grasso rapidamente ora, e la
-		chetosi è iniziata.</string>
+	<string name="stage_fat_burning_description">Il grasso sta subentrando come carburante. Una passeggiata accelera il passaggio.</string>
+	<string name="stage_fat_fasting_sweet_spot_title">I chetoni salgono</string>
+	<string name="stage_fat_fasting_sweet_spot_description">La combustione dei grassi è a pieno regime. La fame arriva a ondate; passerà anche questa.</string>
+	<string name="stage_fat_peak_fat_burning_title">Inizia la chetosi</string>
+	<string name="stage_fat_peak_fat_burning_description">Il tuo cervello inizia a funzionare con carburante ricavato dal grasso.</string>
 	<string name="stage_autophagy_title">Autofagia</string>
-	<string name="stage_autophagy_description">Il tuo corpo ha iniziato l\'autofagia!</string>
-	<string name="stage_optimal_autophagy_title">Autofagia ottimale</string>
-	<string name="stage_optimal_autophagy_description">L\'autofagia è in pieno svolgimento! Continua così, tra ora e 72
-		ore
-		l\'autofagia sarà molto efficace.</string>
+	<string name="stage_autophagy_description">Una giornata intera. Le tue cellule potenziano l\'autofagia e riciclano le parti usurate.</string>
+	<string name="stage_optimal_autophagy_title">Autofagia profonda</string>
+	<string name="stage_optimal_autophagy_description">Due giorni. Il riciclo è profondo e l\'ormone della crescita protegge i muscoli. I tempi dell\'autofagia nell\'uomo sono stime.</string>
 	<string name="phase_glucose">Consumo di glucosio</string>
 	<string name="phase_fat_burning">Brucia grassi</string>
 	<string name="phase_ketosis">Chetosi</string>
 	<string name="phase_autophagy">Autofagia</string>
-	<string name="phase_optimal_autophagy">Autofagia ottimale</string>
+	<string name="phase_optimal_autophagy">Autofagia profonda</string>
 	<string name="notification_channel_name">Avvisi di digiuno</string>
 	<string name="notification_channel_description">Avvisi che ti informano quando hai iniziato una nuova fase del tuo
 		digiuno.</string>
 	<string name="notification_fat_burn_title">Fase digiuno: Brucia grassi</string>
-	<string name="notification_fat_burn_content">Hai esaurito le tue riserve di glucosio e il tuo corpo ora sta
-		consumando grassi per energia.</string>
+	<string name="notification_fat_burn_content">L\'insulina è bassa e il grasso sta subentrando come carburante.</string>
 	<string name="notification_ketosis_title">Fase digiuno: Chetosi</string>
-	<string name="notification_ketosis_content">Il tuo corpo ha ora scomposto abbastanza riserve di grasso da entrare in
-		chetosi.</string>
+	<string name="notification_ketosis_content">I chetoni salgono: il tuo cervello inizia a funzionare con carburante ricavato dal grasso.</string>
 	<string name="notification_autophagy_title">Fase digiuno: Autofagia</string>
-	<string name="notification_autophagy_content">Il tuo corpo è entrato in Autofagia. Le cellule vecchie o danneggiate
-		vengono ora consumate per energia.</string>
-	<string name="notification_optimal_autophagy_title">Fase digiuno: Autofagia ottimale</string>
-	<string name="notification_optimal_autophagy_content">Il tuo corpo è stato in Autofagia per molto tempo ormai e la
-		tua salute cellulare sta ottenendo grandi benefici.</string>
+	<string name="notification_autophagy_content">Le tue cellule potenziano l\'autofagia e riciclano le parti usurate.</string>
+	<string name="notification_optimal_autophagy_title">Fase digiuno: Autofagia profonda</string>
+	<string name="notification_optimal_autophagy_content">Due giorni. L\'ormone della crescita protegge i muscoli mentre il grasso fa il lavoro.</string>
 	<string name="notification_fasting_channel_name">Stato di digiuno</string>
 	<string name="notification_fasting_channel_description">Notifica continua che mostra lo stato attuale del digiuno e il
 		progresso.</string>
@@ -151,9 +142,6 @@
 		giorno, queste sono le calorie che potresti mangiare senza aumentare di peso.\n\nQuesto è un numero critico per
 		le persone che seguono diete limitando l\'apporto calorico giornaliero.</string>
 	<string name="info_dialog_positive">Fantastico!</string>
-	<string name="info_page_title_info">Informazioni</string>
-	<string name="info_page_title_tips">Suggerimenti</string>
-	<string name="title_activity_info">Informazioni sul digiuno</string>
 	<string name="log_total_autophagy">🧬 Autofagia totale:</string>
 	<string name="log_total_ketosis">🔥 Chetosi totale:</string>
 	<string name="title_activity_intro">Introduzione</string>
@@ -232,16 +220,16 @@
 	<string name="journey_stage_7_title">Picco dell\'ormone della crescita</string>
 	<string name="journey_stage_8_title">Sensibilità all\'insulina</string>
 	<string name="journey_stage_9_title">Rigenerazione delle cellule immunitarie</string>
-	<string name="journey_stage_0_body">Hai appena mangiato, e il tuo sangue lo sa. La glicemia sale — nelle persone sane raggiunge un picco sotto i ~140 mg/dl entro 30–60 min — e il pancreas risponde con l\'insulina, l\'ormone che porta lo zucchero nelle cellule e mette da parte l\'eccesso come glicogeno.\n\nÈ lo stato nutrito: energia in abbondanza, la priorità è immagazzinare, la combustione dei grassi è spenta.\n\nNon resta che digerire. Il cronometro è partito.</string>
-	<string name="journey_stage_1_body">L\'assorbimento si esaurisce e la marea cambia. L\'insulina cala, il glucagone sale e il fegato inizia a rilasciare il glicogeno immagazzinato per tenere la glicemia intorno a ~70–100 mg/dl.\n\nSei passato dallo stato nutrito a quello post-assorbimento — il passaggio silenzioso in cui il corpo smette di immagazzinare e inizia a spendere.\n\nQuel primo accenno di fame è soprattutto l\'insulina che scende. Passa.</string>
-	<string name="journey_stage_2_body">Ora il fegato è l\'unico fornitore: rilascia glucosio dal glicogeno (~100 g di riserva) per tenerti stabile. Il solo cervello brucia ~120 g di glucosio al giorno, quindi questa stabilità non è cosa da poco.\n\nNé cali né picchi — la glicogenolisi tiene la linea e tiene lontana l\'ipoglicemia.\n\nQui la concentrazione sembra spesso insolitamente limpida. Non è immaginazione; è carburante costante.</string>
-	<string name="journey_stage_3_body">Il glicogeno scarseggia, così il fegato prende un secondo mestiere: costruire glucosio da zero — lattato, glicerolo, amminoacidi — un processo chiamato gluconeogenesi. Verso le ~16 h fornisce già circa metà del tuo glucosio (Cahill, Annu Rev Nutr 2006).\n\nÈ la flessibilità metabolica resa visibile: il tuo corpo non lascerà che il cervello resti a digiuno.\n\nLa fame e il lieve calo che senti sono l\'interruttore che scatta. Ora tocca al grasso.</string>
-	<string name="journey_stage_4_body">L\'insulina è finalmente abbastanza bassa da aprire le tue riserve di grasso. La lipolisi libera acidi grassi, il fegato inizia a trasformarli in chetoni, e passi da bruciatore di zuccheri a bruciatore di grassi.\n\nOgni ora qui migliora un po\' la tua sensibilità all\'insulina e intacca le riserve di grasso — il cuore metabolico del perché il digiuno funziona.\n\nUn sapore metallico o un lieve mal di testa sono i primi chetoni. Il fuoco è acceso.</string>
-	<string name="journey_stage_5_body">I chetoni nel sangue superano ~0,5 mmol/l — chetosi nutrizionale — e continuano a salire. Il tuo cervello non può ossidare direttamente gli acidi grassi, ma funziona benissimo con questo flusso di chetoni, che evita di sacrificare muscolo per produrre glucosio.\n\nMolti riferiscono una lucidità mentale insolita e una fame che si spegne da sola — i chetoni stessi smorzano l\'appetito.\n\nVentiquattro ore. Ora il tuo corpo preferisce il carburante che produce da sé.</string>
-	<string name="journey_stage_6_body">Un giorno intero, e l\'autopulizia si intensifica: l\'autofagia — le cellule smontano proteine e organelli danneggiati e ne riciclano i pezzi (il meccanismo che è valso a Ohsumi il Nobel 2016). Nell\'uomo i tempi sono ancora allo studio, ma il digiuno attiva chiaramente questa via.\n\nPensala come una manutenzione che non si può comprare — una pulizia associata alla longevità e a un minor rischio di malattia.\n\nStanchezza o mal di testa? Sale e acqua. È in corso un lavoro profondo.</string>
-	<string name="journey_stage_7_body">Due giorni, e l\'ormone della crescita schizza in alto — un digiuno di ~2 giorni può aumentarne la secrezione di circa 5 volte (Ho, J Clin Invest 1988). Il suo compito ora: proteggere la massa magra e spingere più forte il metabolismo dei grassi.\n\nCosì continui a bruciare grasso conservando il muscolo che ti aspetteresti di perdere — un adattamento davvero elegante.\n\nQuell\'inatteso sprint di energia che molti descrivono qui? È l\'ormone che parla.</string>
-	<string name="journey_stage_8_body">Con l\'insulina tenuta bassa per giorni, le tue cellule tornano a rispondervi — la sensibilità all\'insulina si riporta verso un livello più sano, l\'opposto della resistenza che precede il diabete di tipo 2.\n\nLa glicemia resta in una fascia calma e stretta; la sazietà arriva con facilità.\n\nStai mettendo a punto un sistema che quasi nessuno regola di proposito.</string>
-	<string name="journey_stage_9_body">Tre giorni: aria rara. Il digiuno prolungato può spingere il corpo a eliminare cellule immunitarie invecchiate e a rigenerarne di nuove dalle cellule staminali ematopoietiche, mentre calano i segnali di IGF-1 e PKA (Cheng, Cell Stem Cell 2014).\n\nL\'infiammazione continua a placarsi; alcuni descrivono un benessere calmo e lucido.\n\nPer quanto lontano tu vada da qui, ne esci rinnovato — e rompi il digiuno con dolcezza. Sii fiero.</string>
+	<string name="journey_stage_0_body">Il glucosio invade il sangue e raggiunge il picco entro un\'ora (sotto ~140 mg/dl nelle persone sane). L\'insulina risponde e mette da parte l\'eccesso come glicogeno e grasso.\n\nModalità accumulo: la combustione dei grassi è in pausa.\n\nUna passeggiata di 10 minuti adesso appiattisce il picco. Il cronometro è partito.</string>
+	<string name="journey_stage_1_body">L\'insulina si ritira, il glucagone sale e il fegato inizia a liberare glicogeno per tenere la glicemia sui 70–100 mg/dl.\n\nIl corpo smette di accumulare e comincia a spendere.\n\nLa fame all\'ora del solito pasto è un\'ondata di grelina appresa, non un serbatoio vuoto. Sale e poi passa.</string>
+	<string name="journey_stage_2_body">Il fegato ora è l\'unico fornitore e rilascia glucosio goccia a goccia da circa 100 g di glicogeno. Il solo cervello ne consuma ~120 g al giorno.\n\nNiente picchi, niente cali: una linea piatta e stabile.\n\nMolti qui si sentono lucidi e concentrati. Acqua o tè aiutano a restarlo.</string>
+	<string name="journey_stage_3_body">Il glicogeno si esaurisce, così il fegato costruisce glucosio da zero: da lattato, glicerolo e amminoacidi. Verso la 22ª ora, questo fornisce la maggior parte del tuo glucosio (Rothman, Science 1991).\n\nCosì il tuo cervello resta rifornito.\n\nFame? È l\'abitudine dell\'ora del pasto. Una bevanda calda o una passeggiata ti fanno superare l\'ondata.</string>
+	<string name="journey_stage_4_body">L\'insulina ora è abbastanza bassa da aprire le riserve di grasso: gli acidi grassi escono e il fegato ne trasforma una parte in chetoni.\n\nDa qui, il grasso accumulato fornisce una quota crescente della tua energia.\n\nLeggero mal di testa o stanchezza? Di solito manca sale. Un pizzico in acqua risolve in pochi minuti.</string>
+	<string name="journey_stage_5_body">I chetoni salgono verso 0,5 mmol/l, la soglia della chetosi. Per molti arriva adesso; un ultimo pasto ricco di carboidrati o una giornata sedentaria la ritardano.\n\nIl tuo cervello funziona bene a chetoni, e questo risparmia le proteine dei muscoli.\n\nLa fame arriva ancora a ondate, spesso all\'ora dei soliti pasti; ognuna passa.</string>
+	<string name="journey_stage_6_body">Le tue cellule potenziano l\'autofagia: smontano proteine e organelli usurati e ne riciclano i pezzi (Nobel, Ohsumi 2016). Nell\'uomo i marcatori salgono dopo 24–36 ore; i tempi esatti sono stime.\n\nNegli animali questa pulizia è legata a una vita più lunga e più sana.\n\nIl secondo giorno è spesso quello con più fame; poi si spegne. Sale e acqua aiutano.</string>
+	<string name="journey_stage_7_body">In due giorni di digiuno l\'ormone della crescita aumenta di circa cinque volte (Hartman, J Clin Endocrinol Metab 1992). Libera grasso e aiuta a proteggere i muscoli.\n\nLa noradrenalina ti tiene vigile e il metabolismo a riposo sale.\n\nSe ti senti più carico, ecco perché: il tuo corpo si mobilita, non si spegne.</string>
+	<string name="journey_stage_8_body">Per ora la sensibilità all\'insulina cala di proposito: i tuoi muscoli rispondono meno all\'insulina per lasciare il glucosio al cervello (Hoeks, Diabetes 2010). Si inverte quando mangi.\n\nOra i chetoni coprono gran parte del carburante del cervello; il grasso fa il lavoro pesante.\n\nIl miglioramento duraturo della sensibilità all\'insulina arriva con digiuni ripetuti e perdita di grasso nell\'arco di settimane.</string>
+	<string name="journey_stage_9_body">Tre giorni. IGF-1 e segnali di crescita sono scesi. Nei topi, digiuni così eliminano vecchie cellule immunitarie e innescano il rinnovamento dalle staminali quando si torna a mangiare (Cheng, Cell Stem Cell 2014); nell\'uomo non è dimostrato.\n\nDa qui in poi, prosegui solo con supervisione medica.\n\nRompi il digiuno con delicatezza: prima un pasto piccolo.</string>
 	<string name="import_result_title">Importazione completata</string>
 	<string name="import_result_title_failed">Importazione non riuscita</string>
 	<string name="import_result_added">Aggiunti</string>
@@ -268,7 +256,7 @@
 	<string name="clear_logbook_title">Eliminare tutto il registro?</string>
 	<string name="clear_logbook_message">Questa operazione elimina definitivamente tutti i %1$d digiuni registrati. Non può essere annullata.</string>
 	<string name="clear_logbook_confirm">Elimina tutti (%1$d)</string>
-	<string name="stage_optimal_autophagy_description_past72">L\'autofagia è in pieno svolgimento! Continua così!</string>
+	<string name="stage_optimal_autophagy_description_past72">Tre giorni e oltre. Prosegui solo con supervisione medica e rompi il digiuno con delicatezza.</string>
 	<string name="settings_dateformat_title">Formato data e ora</string>
 	<string name="dateformat_optimized_compact">Compatto</string>
 	<string name="dateformat_optimized_weekday">Compatto + giorno della settimana</string>

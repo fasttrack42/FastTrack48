@@ -1,0 +1,778 @@
+{
+  "ui": {
+    "library_title": "Biblioteca",
+    "search_hint": "Buscar na biblioteca",
+    "clear_search": "Limpar busca",
+    "no_results": "Nenhum resultado",
+    "can_i_have": "O que posso beber?",
+    "more_topics": "Mais temas em Configurações › Conhecimento",
+    "why": "Por quê",
+    "what_to_do": "O que fazer",
+    "caveat": "Ressalva",
+    "sources": "Fontes",
+    "expand": "Ver mais",
+    "collapse": "Ver menos",
+    "label_a": "Bem estabelecido",
+    "label_b": "Evidência emergente",
+    "label_c": "Pesquisa inicial",
+    "label_d": "Experiência clínica",
+    "go_deeper": "Saiba mais",
+    "show_all": "Ver todos os %1$d",
+    "tip_prefix": "Dica: %1$s",
+    "pager_position": "%1$d de %2$d",
+    "hows_it_going": "Como você está?",
+    "helper_prompt": "Escolha o que combina com você e veja o que ajuda.",
+    "group_body": "Corpo",
+    "group_mind": "Mente",
+    "group_progress": "Progresso",
+    "chip_headache": "Dor de cabeça",
+    "chip_dizzy": "Tontura",
+    "chip_tired": "Cansaço",
+    "chip_cold": "Frio",
+    "chip_sleep": "Sem sono",
+    "chip_cramps": "Cãibras",
+    "chip_heartburn": "Azia",
+    "chip_bloated": "Inchaço",
+    "chip_loose": "Intestino solto",
+    "chip_constipated": "Intestino preso",
+    "chip_hungry": "Fome",
+    "chip_craving": "Vontade de comer",
+    "chip_bored": "Tédio",
+    "chip_stressed": "Estresse",
+    "chip_slipped": "Escorreguei",
+    "chip_stalled": "Peso parado",
+    "chip_restart": "Recomeçar",
+    "first_fast_title": "Antes do seu primeiro jejum",
+    "before_you_start": "Antes de começar",
+    "women_offer_title": "Mostrar dicas sobre o ciclo?",
+    "women_offer_body": "Dicas de jejum de acordo com o ciclo menstrual, a perimenopausa e a tentativa de engravidar.",
+    "women_offer_yes": "Ativar",
+    "women_offer_no": "Agora não",
+    "fast_days_about": "Sobre os dias de jejum",
+    "settings_section": "Conhecimento",
+    "settings_tips_title": "Dicas durante o jejum",
+    "settings_tips_subtitle": "Uma dica curta a cada nova fase",
+    "settings_labels_title": "Nível de evidência",
+    "settings_labels_subtitle": "Mostra quão sólida é cada afirmação",
+    "settings_conditions_hint": "Escolha o que se aplica a você. Fica salvo só neste celular.",
+    "settings_essentials_note": "Os alertas de segurança ficam sempre ativos e só aparecem quando importam.",
+    "settings_reset_title": "Zerar dicas vistas",
+    "settings_reset_subtitle": "Mostrar de novo as dicas que você já viu",
+    "settings_reset_done": "Dicas zeradas",
+    "cat_essentials": "Segurança",
+    "cat_essentials_sub": "Sempre ativo, só quando importa",
+    "cat_journey": "A jornada do jejum",
+    "cat_journey_sub": "O que seu corpo faz, fase por fase",
+    "cat_mind": "Mente e hábitos",
+    "cat_mind_sub": "Fome, vontades, motivação, sono e estresse",
+    "cat_food": "Comida e bebida",
+    "cat_food_sub": "O que beber, como quebrar o jejum, o que comer",
+    "cat_rhythm": "Ritmo e progresso",
+    "cat_rhythm_sub": "Protocolos, platôs, acompanhar o progresso, mitos",
+    "cat_comfort": "Bem-estar",
+    "cat_comfort_sub": "Incômodos comuns e como aliviar",
+    "cat_women": "Saúde da mulher",
+    "cat_women_sub": "Ciclo, perimenopausa, tentativa de engravidar",
+    "cat_medical": "Doenças e remédios",
+    "cat_medical_sub": "Orientações para as doenças e remédios que você escolher",
+    "cat_traditions": "Dias de jejum",
+    "cat_traditions_sub": "Dias de jejum tradicionais",
+    "cond_group_sugar": "Glicemia",
+    "cond_group_heart": "Coração e rins",
+    "cond_group_hormones": "Hormônios",
+    "cond_group_meds": "Remédios",
+    "cond_group_other": "Outros",
+    "cond_t2d": "Diabetes tipo 2 ou pré-diabetes",
+    "cond_diabetes_meds": "Insulina ou remédios para diabetes",
+    "cond_t1": "Diabetes tipo 1",
+    "cond_bp_heart": "Pressão ou coração",
+    "cond_kidney": "Doença renal",
+    "cond_gout_stones": "Gota ou pedra nos rins",
+    "cond_thyroid": "Tireoide",
+    "cond_pcos": "SOP (ovários policísticos)",
+    "cond_glp1": "Canetas tipo Ozempic",
+    "cond_steroids": "Corticoides",
+    "cond_lithium": "Lítio",
+    "cond_warfarin": "Varfarina (Marevan)",
+    "cond_daily_meds": "Outros remédios de uso diário",
+    "cond_cancer": "Câncer",
+    "cond_gallbladder": "Vesícula",
+    "sources_title": "Fontes e créditos",
+    "sources_credits": "A Biblioteca se baseia principalmente em The Complete Guide to Fasting, do Dr. Jason Fung com Jimmy Moore (2016); em palestras do Dr. Jason Fung, de Megan Ramos, da Dra. Nadia Brito Pateguana e da Dra. Terri Lance nos canais do YouTube Jason Fung, The Fasting Method e Low Carb Down Under; e nos estudos e diretrizes listados abaixo. Cada cartão é um resumo nosso, com nossas palavras; qualquer erro é nosso.",
+    "sources_independence": "O FastTrack48 é independente. Nenhuma das pessoas ou organizações citadas aqui mantém, endossa ou patrocina o app; os nomes aparecem apenas para dar crédito ao seu trabalho.",
+    "sources_medical": "Estas são informações gerais, não orientação médica, e não substituem um médico que conheça você. Se você tem alguma doença ou toma remédios, pergunte ao seu antes de jejuar.",
+    "sources_books": "Livros",
+    "sources_studies": "Estudos e diretrizes",
+    "sources_talks": "Palestras"
+  },
+  "cards": {
+    "FC-024": {
+      "title": "Cansado ou tonto? Experimente sal",
+      "claim": "Cansaço, dor de cabeça ou sensação de cabeça leve no jejum costumam vir de pouco sal e pouca água, não de falta de energia.",
+      "why": "Quando a insulina cai, os rins eliminam sódio e água. Uma pitada de sal costuma ajudar em minutos.",
+      "do": "Sente-se, tome uma pitada de sal na água e levante-se devagar. Se não passar, interrompa o jejum."
+    },
+    "FC-025": {
+      "title": "Intestino solto no começo",
+      "claim": "Algumas pessoas têm intestino solto nos primeiros jejuns, enquanto o corpo elimina a água retida. Costuma passar em poucos dias.",
+      "why": "A queda da insulina libera a água retida; parte dela sai pelo intestino em vez dos rins.",
+      "do": "Psyllium na água pode ajudar. Diarreia persistente ou sinais de desidratação: pare e procure orientação."
+    },
+    "FC-026": {
+      "title": "Azia no jejum",
+      "claim": "A azia pode piorar com o estômago vazio, embora para alguns melhore. Com a perda de peso, o refluxo costuma diminuir.",
+      "why": "O estômago continua produzindo ácido sem comida para absorvê-lo, e a gordura abdominal empurra o conteúdo para cima.",
+      "do": "Pare de comer 3 horas antes de dormir, caminhe depois do jantar, eleve a cabeceira da cama. Peça um antiácido se precisar."
+    },
+    "FC-027": {
+      "title": "Magnésio: escolha a forma certa",
+      "claim": "Cãibras no jejum podem indicar pouco magnésio. Se for suplementar, prefira citrato ou bisglicinato em vez de óxido.",
+      "why": "O exame de sangue detecta mal a falta de magnésio nos tecidos. O óxido é pouco absorvido e funciona mais como laxante."
+    },
+    "FC-066": {
+      "title": "Dor de cabeça no primeiro dia?",
+      "claim": "A dor de cabeça nos primeiros jejuns geralmente vem de pouco sal e some depois de algumas semanas de jejum regular.",
+      "why": "Passar de refeições salgadas para quase nada de sal desequilibra os líquidos do corpo; ele se adapta em poucos jejuns.",
+      "do": "Coloque uma pitada de sal na água."
+    },
+    "FC-150": {
+      "title": "Intestino preso é normal",
+      "claim": "Ir menos ao banheiro durante o jejum é normal e geralmente não incomoda. Se pouca comida entra, pouco precisa sair.",
+      "why": "O incômodo vem do intestino cheio, e no jejum ele não está cheio.",
+      "do": "Nos dias em que você come, mais verduras e fibras; psyllium ajuda. Se continuar, fale com seu médico."
+    },
+    "FC-151": {
+      "title": "Acordado de madrugada?",
+      "claim": "Dormir mal ou acordar cedo nos dias de jejum é comum. O jejum aumenta a noradrenalina, que dá energia.",
+      "why": "O mesmo hormônio que te deixa alerta de dia pode atrasar o sono. Costuma melhorar com a prática.",
+      "do": "Não force o sono: relaxe longe das telas, tome um banho quente, deite quando tiver sono. Se continuar, encurte ou mude o horário dos jejuns."
+    },
+    "FC-152": {
+      "title": "Sentindo frio",
+      "claim": "Sentir frio no começo do jejum é comum e costuma passar quando o corpo aprende a queimar gordura melhor. Agasalhe-se, tome algo quente, mexa-se.",
+      "why": "No começo, a troca para gordura pode ser lenta; o movimento queima o combustível do sangue e gera calor.",
+      "do": "Sente frio sempre, mesmo quando come? Peça ao médico para checar sua tireoide."
+    },
+    "FC-001": {
+      "title": "Quem não deve jejuar",
+      "claim": "Não faça jejum pela saúde se tiver menos de 18 anos, estiver grávida ou amamentando, estiver abaixo do peso (IMC abaixo de 20, mais ou menos) ou já tiver tido transtorno alimentar.",
+      "why": "Crescimento, gravidez e amamentação precisam de nutrientes constantes, quem está abaixo do peso não tem reserva, e restringir de propósito pode reacender um transtorno alimentar.",
+      "do": "Se alguma dessas situações se aplica a você, não jejue e converse com seu médico sobre o que é adequado para você."
+    },
+    "FC-015": {
+      "title": "Mais de 65? Proteja seus músculos",
+      "claim": "Depois dos 65, emagrecer também leva músculo e osso, se você não os proteger. Prefira jejuns mais curtos e coma proteína em todas as refeições.",
+      "why": "O músculo mais velho responde menos à proteína. Em idosos fazendo dieta, juntar musculação e exercício aeróbico preservou massa magra e ossos.",
+      "do": "Faça exercícios de força 2–3 vezes por semana e levante-se devagar para evitar tontura."
+    },
+    "FC-016": {
+      "title": "Fome tudo bem. Passar mal, não.",
+      "claim": "Fome é esperada. Náusea persistente, vômito, tontura, fraqueza forte ou sentir-se realmente mal significam: pare.",
+      "why": "A fome vem em ondas e passa. Esses sinais fogem da adaptação normal e podem indicar desidratação, desequilíbrio de eletrólitos ou problema com remédios.",
+      "do": "Interrompa o jejum, coma algo leve e ligue para o médico se não passar. Parar não é fracassar."
+    },
+    "FC-017": {
+      "title": "Mais de 3 dias, só com médico",
+      "claim": "Não jejue mais de uns três dias por conta própria. Jejuns mais longos exigem acompanhamento médico, exames e um plano para voltar a comer.",
+      "why": "Em programas hospitalares dos anos 1960, jejuns longuíssimos causaram mortes raras e danos ao coração. Exames normais podem esconder reservas esgotadas; no jejum de 382 dias, o magnésio estava baixo.",
+      "do": "Em jejuns longos com acompanhamento: sal na água, um multivitamínico e no máximo uma vez por mês."
+    },
+    "FC-018": {
+      "title": "Voltar a comer depois de um jejum longo",
+      "claim": "Depois de cinco dias ou mais de jejum, recomece com refeições pequenas. A síndrome de realimentação é rara, mas perigosa.",
+      "why": "A comida aumenta a insulina, que leva fósforo, potássio, magnésio e vitamina B1 para dentro das células; os níveis no sangue podem despencar. Maior risco: IMC abaixo de 18,5, grande perda de peso recente, abuso de álcool, diuréticos ou antiácidos.",
+      "do": "Procure atendimento se tiver fraqueza, palpitações, confusão ou falta de ar. Um leve inchaço nos tornozelos nos primeiros dias costuma passar."
+    },
+    "FC-019": {
+      "title": "Nada de álcool no jejum",
+      "claim": "Não beba álcool durante o jejum. Ele bloqueia a produção de glicose no fígado, a glicemia pode cair e o efeito é muito mais forte.",
+      "why": "O fígado processa primeiro o álcool e deixa de lado a produção de glicose; com o estômago vazio, o álcool no sangue sobe rápido. Em qualquer dia, ele atrapalha o sono e traz calorias vazias.",
+      "do": "Se for beber, faça isso junto com uma refeição num dia em que você come, com água ao lado."
+    },
+    "FC-021": {
+      "title": "Se a menstruação parar",
+      "claim": "Nos primeiros meses de jejum, o ciclo pode mudar. Se a menstruação parar por três meses ou mais, pare de jejuar e procure seu médico.",
+      "why": "Alguma alteração acompanha qualquer mudança de peso, alimentação ou estresse. A ausência de menstruação mostra que a energia disponível está baixa demais para a saúde reprodutiva."
+    },
+    "FC-029": {
+      "title": "Alguma doença ou remédio diário?",
+      "claim": "Tem algum diagnóstico ou toma remédio todo dia? Ative “Doenças e remédios” em Configurações para ver só as orientações que valem para você.",
+      "why": "Remédios para glicemia, pressão, humor, tireoide ou inflamação mudam o efeito do jejum em você. Uma orientação específica é mais segura do que um alerta genérico.",
+      "do": "Converse com seu médico antes do seu primeiro jejum de mais de um dia."
+    },
+    "FC-055": {
+      "title": "Ajudas no jejum, com moderação",
+      "claim": "Uma colher de sopa de azeite ou chia hidratada na água podem salvar um jejum. Use só quando forem decidir se você chega até o fim.",
+      "why": "Pequenas quantidades de gordura ou fibra mal mexem na insulina e acalmam a vontade de comer; usadas por hábito, substituem a energia que viria da sua gordura armazenada.",
+      "do": "Pergunte a si mesmo: “Isso vai me ajudar a aguentar mais 12 horas?”"
+    },
+    "FC-056": {
+      "title": "Adoçantes dificultam",
+      "claim": "Refrigerante zero, adoçantes e bebidas “com aroma natural” tendem a deixar o jejum mais difícil; num estudo, trocar refrigerante zero por água melhorou a perda de peso.",
+      "why": "O sabor doce pode despertar apetite e insulina sem trazer energia, mantendo a vontade de comer viva, principalmente no fim do jejum.",
+      "do": "Jejue com bebidas sem açúcar e sem adoçante. Se precisar de um pouco de doce, use pouco e pare se a fome aumentar.",
+      "counter": "Os estudos não concordam se os adoçantes aumentam a insulina em humanos."
+    },
+    "FC-060": {
+      "title": "Pode no jejum",
+      "claim": "Água (com ou sem gás), qualquer chá sem açúcar, limão, canela, sal e vitaminas ou eletrólitos sem adição de nada.",
+      "why": "Quase não fornecem energia, então a insulina continua baixa, e ainda acalmam a fome, hidratam e mantêm seus rituais do dia a dia."
+    },
+    "FC-061": {
+      "title": "Não pode no jejum",
+      "claim": "Açúcar, mel, suco, bebidas adoçadas ou saborizadas e adoçantes quebram ou sabotam o jejum.",
+      "why": "Açúcares aumentam a insulina na hora. O suco concentra açúcar sem a fibra. Adoçantes e aromas tendem a abrir o apetite."
+    },
+    "FC-064": {
+      "title": "Beba ao longo do dia",
+      "claim": "Busque cerca de 2 litros de líquidos nos dias de jejum. Comece a manhã com um copo de água.",
+      "why": "Boa parte da água normalmente vem da comida; quando a insulina cai, você também perde água e sal retidos. É fácil esquecer de beber.",
+      "do": "No começo, ajuda ter um lembrete a cada duas horas: água com uma pitada de sal, ou chá."
+    },
+    "FC-067": {
+      "title": "Chás que ajudam",
+      "claim": "Chá verde, chás de canela ou gengibre e chás amargos podem segurar a fome; o de hortelã-pimenta alivia o inchaço.",
+      "why": "Bebidas quentes, saborosas e sem energia enchem o estômago e mantêm o ritual. As catequinas do chá verde e a canela mostraram um leve efeito no apetite em estudos pequenos."
+    },
+    "FC-070": {
+      "title": "Quebre o jejum com calma",
+      "claim": "Depois de mais de 24 horas de jejum, comece com uma pequena entrada: legumes cozidos ou abacate. A refeição principal 30 minutos depois.",
+      "why": "A digestão fica mais lenta durante o jejum. Uma primeira porção pequena e leve a desperta aos poucos e deixa passar a vontade de exagerar.",
+      "do": "Abaixo de 24 horas, não precisa de nada especial. Em jejuns mais longos, deixe a porção pequena pronta antes."
+    },
+    "FC-071": {
+      "title": "Vá com calma com estes",
+      "claim": "Logo depois do jejum, castanhas, sementes, pastas de castanha, verduras cruas ou fibrosas, ovos, laticínios e vinho são os que mais costumam incomodar o estômago.",
+      "why": "Eles pedem mais ácido e enzimas digestivas, que demoram um pouco para voltar depois do jejum. A tolerância varia de pessoa para pessoa."
+    },
+    "FC-072": {
+      "title": "Coma normal, sem exagero",
+      "claim": "O erro mais comum é comer demais depois. Faça uma refeição de tamanho normal, como se não tivesse jejuado.",
+      "why": "O jejum funciona porque a gordura armazenada cobre as refeições puladas. Depois de 36 horas de jejum, as pessoas comem só ~20 % a mais, mas juntar a comida de um dia inteiro numa refeição anula a vantagem.",
+      "do": "Porção normal, coma devagar, beba água e espere antes de repetir. Nenhum corte extra de calorias."
+    },
+    "FC-073": {
+      "title": "Carboidrato por último",
+      "claim": "Coma primeiro a proteína e os legumes, o carboidrato por último. Assim, a mesma refeição subiu a glicemia cerca de 40 % menos.",
+      "why": "Proteína, gordura e fibra comidas antes atrasam o esvaziamento do estômago e ativam hormônios do intestino, então o amido chega mais tarde e mais devagar.",
+      "do": "Deixe pão, arroz ou batata para o fim da refeição. No restaurante, peça o pão junto com o prato principal."
+    },
+    "FC-074": {
+      "title": "Carboidrato nunca sozinho",
+      "claim": "Combine o amido com acidez, proteína ou gordura: vinagre, limão, picles, ou arroz e batata cozidos e esfriados suavizam o pico de glicemia.",
+      "why": "O ácido retarda a digestão do amido e o esvaziamento do estômago; esfriar o amido cozido forma amido resistente; versões menos processadas (aveia em flocos grossos em vez de instantânea) são absorvidas mais devagar."
+    },
+    "FC-075": {
+      "title": "Hormônios de saciedade da comida",
+      "claim": "Proteína, gorduras naturais e fibra ativam os hormônios de saciedade do seu intestino, o mesmo caminho que os remédios para emagrecer amplificam.",
+      "why": "Esses nutrientes retardam o esvaziamento do estômago e liberam GLP-1; as fibras alimentam bactérias do intestino cujos ácidos graxos aumentam ainda mais esse efeito.",
+      "do": "Monte as refeições em torno de proteína, gorduras naturais e legumes ricos em fibra para ficar saciado por mais tempo.",
+      "counter": "O aumento natural de GLP-1 é muito menor do que o efeito dos remédios."
+    },
+    "FC-076": {
+      "title": "Comida de verdade vence o ultraprocessado",
+      "claim": "Com ultraprocessados, as pessoas comeram cerca de 500 kcal a mais por dia do que com comida de verdade com os mesmos nutrientes.",
+      "why": "O processamento tira fibra e estrutura, acelera o comer e a absorção e enfraquece os sinais de saciedade; açúcar e farinha refinada mais que tudo.",
+      "do": "Encha suas janelas de alimentação com comida de verdade, que dá para reconhecer; corte primeiro o açúcar e a farinha branca."
+    },
+    "FC-077": {
+      "title": "O café da manhã muitas vezes é sobremesa",
+      "claim": "Cereais matinais, muffins, bolachas, iogurtes adoçados e barrinhas costumam ser sobremesa disfarçada e deixam você com fome no meio da manhã.",
+      "why": "Carboidratos refinados fazem a glicemia e a insulina dispararem e depois exagerarem; depois de um mingau de aveia instantânea no café da manhã, crianças comeram mais do que depois de uma omelete.",
+      "do": "Se for tomar café da manhã, escolha ovos, iogurte natural ou aveia em flocos grossos, ou adie a primeira refeição."
+    },
+    "FC-078": {
+      "title": "Açúcar e gordura no fígado",
+      "claim": "A frutose do açúcar é transformada em gordura no fígado. Cortar o açúcar adicionado reduziu a gordura no fígado em cerca de um terço em oito semanas.",
+      "why": "A frutose é processada quase só pelo fígado. A gordura no fígado atinge pelo menos um em cada quatro adultos, geralmente sem sintomas; jejum 5:2 e dieta low carb a reduziram pela metade num estudo."
+    },
+    "FC-079": {
+      "title": "Coma mais cedo quando puder",
+      "claim": "A mesma refeição sobe mais a glicemia e a insulina à noite. Um jantar mais leve e mais cedo combina melhor com seu relógio biológico.",
+      "why": "A sensibilidade à insulina é mínima à noite; comer durante a noite biológica (plantões, jantar tarde) piora a glicemia e reduz os hormônios de saciedade.",
+      "do": "Jante mais leve e mais cedo; se trabalhar à noite, faça a refeição principal antes do turno.",
+      "counter": "Num estudo bem controlado, café da manhã grande contra jantar grande não mudou o peso, só a fome."
+    },
+    "FC-080": {
+      "title": "Proteína e musculação protegem o músculo",
+      "claim": "Treino de força e proteína suficiente quando você come é o que protege o músculo durante o jejum; o jejum sozinho, não.",
+      "why": "O músculo responde à carga. Jejum junto com musculação preserva a massa magra muito melhor do que só o jejum.",
+      "do": "Treine com pesos ou com o peso do corpo 2–3 vezes por semana; nos dias em que você come, busque 1,2–1,6 g de proteína por kg de peso."
+    },
+    "FC-030": {
+      "title": "Depois de comer: armazenando",
+      "claim": "Depois de comer, a glicemia atinge o pico em cerca de uma hora e a insulina sobe. Enquanto a insulina está alta, a queima de gordura fica em pausa.",
+      "why": "A insulina leva a glicose para dentro das células, guarda o excesso como glicogênio e gordura e bloqueia a liberação de gordura até baixar."
+    },
+    "FC-031": {
+      "title": "Uma caminhada curta depois de comer",
+      "claim": "Caminhar tranquilamente por 10–15 minutos depois de uma refeição reduz bem o pico de glicemia e de insulina.",
+      "why": "Os músculos em atividade absorvem glicose com pouca necessidade de insulina; numa meta-análise de estudos cruzados, caminhar devagar foi melhor do que ficar em pé.",
+      "do": "Caminhe depois da maior refeição, principalmente se teve pão, arroz, massa ou sobremesa."
+    },
+    "FC-032": {
+      "title": "A queda das três horas",
+      "claim": "Uma fome enorme algumas horas depois de uma refeição doce ou cheia de amido? Muitas vezes é um rebote da glicemia, não falta real de energia.",
+      "why": "Um pico rápido de glicose provoca uma onda de insulina que pode exagerar, e cerca de três horas depois a glicemia cai abaixo do ponto de partida.",
+      "do": "Segure com água ou chá. Da próxima vez, proteína e legumes primeiro, carboidrato por último."
+    },
+    "FC-033": {
+      "title": "A insulina cai, a gordura sai",
+      "claim": "Algumas horas depois de uma refeição (umas 3–5, mais com resistência à insulina), a insulina volta ao nível basal e as células de gordura começam a liberar gordura.",
+      "why": "Com a insulina baixa, sai o freio da liberação de gordura, enquanto o fígado usa o glicogênio. Um lanchinho sobe a insulina de novo e adia essa virada.",
+      "do": "Deixe essa janela abrir: nada de beliscar entre as refeições."
+    },
+    "FC-034": {
+      "title": "O fígado assume",
+      "claim": "Durante a noite e pela manhã, o fígado mantém a glicemia estável: primeiro com o glicogênio armazenado, depois cada vez mais produzindo glicose nova.",
+      "why": "O fígado guarda cerca de 100 g de glicogênio. Por volta de 22 horas, a glicose recém-produzida (a partir de glicerol, lactato e aminoácidos) fornece a maior parte."
+    },
+    "FC-035": {
+      "title": "Geladeira e freezer",
+      "claim": "O glicogênio é a geladeira: pequena e rápida. A gordura do corpo é o freezer do porão: enorme. Insulina baixa abre o freezer.",
+      "why": "O corpo usa primeiro o glicogênio. Insulina alta mantém a gordura trancada; quando a insulina cai e o glicogênio acaba, a gordura armazenada vira o principal combustível.",
+      "do": "Cada hora com a geladeira vazia é uma hora tirando do freezer. É isso que o jejum te dá.",
+      "counter": "Que a insulina freia a liberação de gordura está nos livros. Que seja a insulina, mais do que o balanço de energia, que causa a obesidade é discutido."
+    },
+    "FC-036": {
+      "title": "A virada é pessoal",
+      "claim": "A passagem para queimar principalmente gordura e cetonas acontece em geral 12–36 horas depois da última refeição: mais cedo para uns, mais tarde para outros.",
+      "why": "Depende de quão cheio estava o glicogênio. Um jantar cheio de carboidrato e ficar parado atrasam a virada; refeições com menos carboidrato e movimento a antecipam.",
+      "do": "Uma caminhada durante o jejum e uma última refeição com menos carboidrato aceleram a virada."
+    },
+    "FC-037": {
+      "title": "Cetonas alimentam o cérebro",
+      "claim": "Seu cérebro não vive só de glicose. Conforme o jejum avança, ele usa cada vez mais cetonas, e os estudos não encontram perda de atenção ou memória.",
+      "why": "As cetonas produzidas pelo fígado chegam ao cérebro e cobrem boa parte da necessidade de glicose. Isso poupa a proteína dos músculos e te mantém lúcido.",
+      "do": "Trabalhe e dirija normalmente. Se sentir a cabeça enevoada, confira primeiro sal e água.",
+      "counter": "As cetonas só cobrem ~60–70 % do cérebro depois de semanas; nos primeiros dias, a parcela é menor."
+    },
+    "FC-038": {
+      "title": "Autofagia, com honestidade",
+      "claim": "O jejum aumenta a autofagia, a reciclagem de partes gastas das células. Mas ninguém sabe exatamente quando ela começa ou atinge o pico em humanos.",
+      "why": "Comer, principalmente proteína e carboidrato, desliga a autofagia via mTOR. Em humanos, os marcadores sobem após 24–36 horas de jejum, mas os horários que circulam por aí vêm de estudos em animais.",
+      "do": "Pausas longas sem lanchinhos dão tempo às células com o freio solto. Encare qualquer número de horas como estimativa."
+    },
+    "FC-039": {
+      "title": "O segundo dia é o mais difícil",
+      "claim": "Em jejuns longos, a fome costuma ter seu pico por volta do segundo dia e depois some. Muita gente se sente depois surpreendentemente lúcida e bem.",
+      "why": "A grelina, o hormônio da fome, chega ao máximo no segundo dia e depois cai enquanto as cetonas sobem; relatos de jejuns em hospital mostram pouca fome depois disso.",
+      "do": "Se o segundo dia for difícil, espere que melhore. Não julgue o jejum todo pelo pior dia."
+    },
+    "FC-040": {
+      "title": "O que a balança mostra",
+      "claim": "A perda real de gordura no jejum é de cerca de 0,25 kg por dia. O resto do que sai é água, que volta quando você come.",
+      "why": "A energia de um dia (~2000 kcal) queima cerca de um quarto de quilo de gordura. O glicogênio fica ligado a umas três vezes o seu peso em água, que sai e depois volta.",
+      "do": "Avalie um jejum pelo peso que você ainda perdeu uma semana depois."
+    },
+    "FC-041": {
+      "title": "O hormônio do crescimento sobe",
+      "claim": "O jejum é um forte estímulo natural do hormônio do crescimento: cerca de cinco vezes mais num jejum de dois dias.",
+      "why": "Refeições e insulina freiam o hormônio do crescimento. Sem comida, seus picos aumentam, ajudando a liberar gordura e limitando a quebra da proteína dos músculos.",
+      "counter": "É um sinal para poupar energia, não antienvelhecimento nem anabólico. O IGF-1 cai ao mesmo tempo; os estudos são pequenos, em homens magros."
+    },
+    "FC-042": {
+      "title": "Sem “modo de fome” em jejuns curtos",
+      "claim": "Jejuns curtos não colocam você em “modo de fome”. O gasto de energia em repouso subiu cerca de 12 % no quarto dia.",
+      "why": "A noradrenalina sobe para liberar as reservas e manter você alerta o bastante para buscar comida: o contrário de desligar.",
+      "do": "Espere energia, não moleza. Cansaço geralmente indica pouco sal.",
+      "counter": "Estudo pequeno, em adultos magros. Jejuns bem mais longos acabam reduzindo o gasto de energia."
+    },
+    "FC-043": {
+      "title": "Poupando açúcar para o cérebro",
+      "claim": "Depois de dois ou três dias, os músculos resistem temporariamente à insulina para poupar glicose para o cérebro. É normal e se resolve quando você come.",
+      "why": "A gordura liberada das reservas inunda o músculo e bloqueia sua absorção de glicose. Valores mais altos no fim de um jejum longo, ou logo depois, são esperados.",
+      "do": "Avalie sua saúde metabólica entre um jejum e outro: jejuns repetidos com perda de gordura a melhoram em poucas semanas."
+    },
+    "FC-044": {
+      "title": "O músculo é poupado, não intocado",
+      "claim": "A quebra de proteína é maior nos primeiros dias de jejum e despenca quando as cetonas assumem. Ela desacelera, mas nunca para.",
+      "why": "No começo, parte da glicose vem dos aminoácidos. Com o aumento das cetonas, a perda de nitrogênio cai; num estudo de 10 dias, a força se manteve e a massa magra caiu pouco.",
+      "do": "Proteja o músculo com treino de força e proteína suficiente nos dias em que você come."
+    },
+    "FC-045": {
+      "title": "Regeneração: o que se sabe",
+      "claim": "Em camundongos, jejuns de vários dias eliminam células de defesa velhas e disparam a regeneração quando voltam a comer. Em humanos, isso não está comprovado.",
+      "why": "O jejum prolongado baixa o IGF-1 e os sinais de crescimento, estimulando as células-tronco a se renovar; o jejum diário comum quase não mexe no IGF-1."
+    },
+    "FC-046": {
+      "title": "Continue se mexendo",
+      "claim": "Durante o jejum, mantenha sua rotina: caminhe, trabalhe, treine. O movimento protege músculos e ossos nos jejuns longos.",
+      "why": "A gordura armazenada fornece a energia. Não foi o jejum, mas a inatividade, que causou a maior parte da perda de músculo e osso em famosos jejuns longos feitos em repouso.",
+      "do": "Caminhe todo dia e mantenha algum treino de força; vá mais devagar se sentir fraqueza."
+    },
+    "FC-108": {
+      "title": "O que o jejum faz de verdade",
+      "claim": "Jejuar com regularidade reduz peso, insulina, glicemia, pressão e inflamação, e é simples, de graça e combina com qualquer dieta.",
+      "why": "Ele limita toda a comida por parte do tempo, em vez de alguns alimentos o tempo todo. Nos estudos, a maior parte dos benefícios acompanha o peso perdido, mais ou menos como uma dieta diária com a mesma perda.",
+      "do": "Sua vantagem real é a constância: escolha a versão que você consegue manter."
+    },
+    "FC-131": {
+      "title": "Pré-diabetes é comum e silencioso",
+      "claim": "Mais da metade dos adultos nos EUA tem diabetes ou pré-diabetes, e a maioria dos que têm pré-diabetes não sabe.",
+      "why": "O pré-diabetes raramente dá sintomas, então fica escondido por anos enquanto o estrago começa.",
+      "do": "Peça um exame de hemoglobina glicada (HbA1c) ou glicemia de jejum, principalmente se estiver acumulando gordura na barriga."
+    },
+    "FC-142": {
+      "title": "Combustível para um mês",
+      "claim": "Até um adulto magro tem gordura corporal suficiente para cobrir mais de um mês de necessidade de energia.",
+      "why": "Com 70 kg e 15 % de gordura, são cerca de 10 kg de gordura, umas 80.000 kcal, contra cerca de 2000 kcal de glicogênio."
+    },
+    "FC-002": {
+      "title": "Remédio para diabetes? Primeiro um plano",
+      "claim": "Jejuar com insulina ou remédios para diabetes sem um plano pode causar hipoglicemias perigosas. Em geral, o médico reduz as doses nos dias de jejum.",
+      "why": "A maioria dos remédios para diabetes é dosada para os dias em que você come. Sem comida, a mesma dose exagera; hipoglicemias repetidas significam dose alta demais, não jejum fracassado.",
+      "do": "Combine doses e metas com o médico, meça a glicemia 2–4 vezes por dia e nunca ajuste a insulina por conta própria."
+    },
+    "FC-003": {
+      "title": "Reconheça uma hipoglicemia",
+      "claim": "Tremor, suor, fome repentina, irritação, confusão ou sensação de desmaio podem indicar glicemia baixa, principalmente se você toma remédio para diabetes.",
+      "why": "Sem remédios, o fígado mantém a glicose estável (em jejuns longos, muitas vezes 60–75 mg/dL, sem sintomas). Com remédios, ela pode despencar rápido, e hipoglicemias graves são perigosas.",
+      "do": "Tome açúcar na hora (suco, açúcar, tabletes de glicose), mesmo que quebre o jejum, e depois ligue para o médico."
+    },
+    "FC-004": {
+      "title": "Cetose não é cetoacidose",
+      "claim": "A cetose do jejum é normal. A cetoacidose é outra coisa e é perigosa: um risco no diabetes tipo 1 ou com inibidores de SGLT2 (nomes terminados em “-gliflozina”).",
+      "why": "Na cetose, a insulina está baixa mas presente, e as cetonas são usadas como combustível. Na cetoacidose, a falta de insulina faz com que se acumulem, às vezes até com glicemia normal.",
+      "do": "Diabetes tipo 1 ou remédio “-gliflozina”: não jejue sem um plano claro do seu médico."
+    },
+    "FC-005": {
+      "title": "Quando o jejum para de baixar a glicemia",
+      "claim": "Se o jejum não baixa mais sua glicemia, pergunte ao médico sobre LADA, um diabetes autoimune lento muitas vezes confundido com o tipo 2.",
+      "why": "No LADA a insulina está baixa, não alta: o jejum ajuda bem menos e surge risco de cetoacidose. Peptídeo C e anticorpos fazem a diferença."
+    },
+    "FC-006": {
+      "title": "Remédio de pressão e jejum",
+      "claim": "O jejum baixa a pressão. Com remédios de pressão ou diuréticos, ela pode cair demais, com tontura ao levantar.",
+      "why": "A queda da insulina faz os rins eliminarem sal e água, somando ao efeito dos remédios.",
+      "do": "Meça a pressão em casa durante o jejum, levante-se devagar e deixe o médico ajustar as doses. Nunca pare remédios do coração por conta própria."
+    },
+    "FC-007": {
+      "title": "Remédios para tomar com comida",
+      "claim": "Aspirina, metformina e comprimidos de ferro ou magnésio podem incomodar com o estômago vazio. Pergunte se pode tomá-los na sua janela de alimentação.",
+      "why": "A aspirina irrita a mucosa do estômago; a metformina dá náusea ou diarreia; o ferro, dor e intestino preso; o magnésio, intestino solto. A comida suaviza isso.",
+      "do": "Nunca pule um remédio receitado. O farmacêutico pode ajudar a organizar os horários."
+    },
+    "FC-008": {
+      "title": "Corticoides: nunca pule uma dose",
+      "claim": "Se você usa corticoide como reposição por insuficiência adrenal, ou prednisona por muito tempo, não jejue sem o endocrinologista e nunca pule uma dose.",
+      "why": "Sem cortisol suficiente, o corpo não consegue manter glicemia e pressão durante o jejum; a crise adrenal é um risco real."
+    },
+    "FC-009": {
+      "title": "Lítio ou varfarina? Pergunte antes",
+      "claim": "Com lítio, desidratação ou menos sal podem levar o nível para a faixa tóxica. Com varfarina (Marevan), mudar a alimentação pode alterar o INR.",
+      "why": "Os rins tratam o lítio como sódio e o retêm quando falta sal e água. O efeito da varfarina depende de uma ingestão estável de vitamina K e do metabolismo do fígado.",
+      "do": "Faça um plano com o médico, beba o suficiente e verifique os níveis com mais frequência no começo."
+    },
+    "FC-010": {
+      "title": "Remédio de tireoide e jejum",
+      "claim": "Se você toma remédio para tireoide, refaça os exames quando começar a jejuar ou a perder peso. A dose necessária pode mudar.",
+      "why": "A perda de peso e menos inflamação podem diminuir a necessidade; os sintomas são um guia pouco confiável. Só aumente os jejuns com exames estáveis, não enquanto a dose está sendo ajustada.",
+      "do": "Coração acelerado, ansiedade, intolerância ao calor ou sono ruim durante o jejum: peça para checar a tireoide."
+    },
+    "FC-011": {
+      "title": "Com canetas tipo Ozempic",
+      "claim": "Com semaglutida ou tirzepatida, proteína, treino de força e líquidos importam mais do que jejuns longos; planeje cada jejum com o médico.",
+      "why": "Esses remédios já cortam muito o apetite, então os riscos passam a ser perda de músculo e desidratação pela náusea. Junto com insulina ou sulfonilureias, a hipoglicemia fica mais provável.",
+      "do": "Aproveite esse período para criar hábitos duradouros: até um ano depois de parar, em geral dois terços do peso perdido voltam."
+    },
+    "FC-012": {
+      "title": "Gota ou pedra nos rins",
+      "claim": "O jejum aumenta o ácido úrico. Se você já teve gota ou pedra nos rins, fale com o médico antes de jejuns longos e beba bastante água.",
+      "why": "As cetonas competem com o ácido úrico pela eliminação nos rins, e beber menos concentra a urina. Cerca de 6 % das pessoas em dieta cetogênica de longo prazo tiveram pedras.",
+      "do": "Mantenha a urina clara; pergunte se deve continuar o remédio para ácido úrico durante os jejuns."
+    },
+    "FC-013": {
+      "title": "Rins, coração ou câncer: primeiro o especialista",
+      "claim": "Com doença renal, cardíaca ou câncer, jejue só com a liberação do seu especialista, mesmo que os primeiros estudos sejam promissores.",
+      "why": "Estudos pequenos mostram benefícios (melhor recuperação do coração após infarto, menos proteína na urina no diabetes), mas eletrólitos, remédios e perda de peso trazem mais risco nessas doenças.",
+      "do": "Com doença renal, tome suplementos de magnésio ou potássio só com aprovação do médico."
+    },
+    "FC-014": {
+      "title": "Pedra na vesícula e emagrecimento rápido",
+      "claim": "Emagrecer rápido aumenta o risco de pedra na vesícula. Inclua um pouco de gordura natural nas refeições e consulte o médico se já teve crise de vesícula.",
+      "why": "A bile parada na vesícula pode cristalizar e formar pedras. Comer pouquíssima gordura e emagrecer rápido favorecem essa estagnação."
+    },
+    "FC-028": {
+      "title": "Ervas que baixam a glicemia se somam",
+      "claim": "Melão-de-são-caetano, canela e alguns chás podem baixar a glicemia. Com remédios para diabetes, isso aumenta o risco de hipoglicemia.",
+      "why": "O leve efeito deles se soma ao do remédio, e o jejum tira a comida que o amortece."
+    },
+    "FC-123": {
+      "title": "SOP e insulina",
+      "claim": "A SOP, o distúrbio hormonal mais comum em mulheres em idade fértil, é alimentada pela resistência à insulina, até em mulheres magras.",
+      "why": "A insulina alta faz os ovários produzirem andrógenos em excesso e atrapalha a ovulação; baixá-la muitas vezes regulariza os ciclos.",
+      "do": "Ciclos irregulares, acne ou excesso de pelos junto com gordura na barriga? Pergunte ao médico sobre SOP."
+    },
+    "FC-130": {
+      "title": "Tipo 2 é insulina demais",
+      "claim": "No diabetes tipo 2, a insulina geralmente está alta, não baixa, e muitas vezes a doença pode entrar em remissão com a alimentação.",
+      "why": "A gordura no fígado e no pâncreas alimenta a resistência e reduz a produção de insulina; perdê-la pode devolver o controle, principalmente no começo da doença.",
+      "do": "Acompanhe a remissão com o médico pela HbA1c. Nunca pare remédios por conta própria."
+    },
+    "FC-132": {
+      "title": "Glicemia de jejum alta",
+      "claim": "Glicemia mais alta de manhã ou num jejum longo não é fracasso. É o fígado liberando açúcar armazenado.",
+      "why": "Antes de acordar e durante o jejum, hormônios empurram a glicose armazenada para fora (o fenômeno do alvorecer). Com resistência à insulina, as medições mostram isso.",
+      "do": "Olhe a tendência ao longo das semanas, não uma medição isolada."
+    },
+    "FC-133": {
+      "title": "Jejum religioso com uma doença",
+      "claim": "Com diabetes, doença renal ou diuréticos, jejuns religiosos sem água precisam de um plano médico, e a maioria das tradições prevê dispensas ou permite água.",
+      "why": "Tirar comida e água ao mesmo tempo aumenta o risco de desidratação, hipoglicemia e pressão baixa; as diretrizes para o Ramadã avaliam o risco e ajustam os horários dos remédios."
+    },
+    "FC-023": {
+      "title": "Um ritmo, não um castigo",
+      "claim": "Jejum não é penitência por ter comido demais. Use-o como um ritmo planejado, não para “compensar” uma refeição.",
+      "why": "Restringir para compensar é um sinal de alerta conhecido de transtorno alimentar, e transforma a comida em culpa."
+    },
+    "FC-050": {
+      "title": "A fome vem em ondas",
+      "claim": "A fome sobe, chega a um pico e passa, muitas vezes em 30–45 minutos, mesmo sem comer nada. Ela não fica só aumentando.",
+      "why": "A grelina dispara perto dos seus horários habituais de refeição e depois cai sozinha, venha comida ou não.",
+      "do": "Tome algo quente, comece uma tarefa, saia um pouco. Marque uma caminhada ou ligação no horário da refeição de sempre."
+    },
+    "FC-051": {
+      "title": "De manhã é mais fácil",
+      "claim": "Quase todo mundo sente menos fome por volta das 8h e mais fome por volta das 20h, não importa quando comeu pela última vez.",
+      "why": "O apetite segue o relógio biológico, e hormônios antes do amanhecer liberam reservas antes mesmo de você acordar.",
+      "do": "Esticar o jejum da noite adiando o café da manhã costuma ser o primeiro passo mais fácil."
+    },
+    "FC-052": {
+      "title": "Muita fome é aprendida",
+      "claim": "Horários, lugares, telas e cheiros podem dar fome como o sino de Pavlov. Perceba o gatilho e dê nome a ele: gatilho, não necessidade.",
+      "why": "Juntar comida repetidamente a momentos e situações condiciona o cérebro a liberar saliva, insulina e fome diante daquele sinal.",
+      "do": "Coma só à mesa; nos dias de jejum, não cozinhe, não faça compras e não trabalhe na cozinha."
+    },
+    "FC-053": {
+      "title": "Um plano “se… então”",
+      "claim": "Decida antes o que vai fazer quando a fome vier: “Se eu abrir a geladeira, vou caminhar dez minutos.”",
+      "why": "Respostas planejadas para gatilhos específicos vencem a força de vontade com segurança. Trocar um hábito (chá no lugar do lanche da noite) funciona melhor do que simplesmente cortá-lo.",
+      "do": "Tenha 3–5 ações rápidas prontas: água, chá, uma caminhada, uma ligação, uma tarefa pequena."
+    },
+    "FC-054": {
+      "title": "Faça as pazes com a fome",
+      "claim": "Fome no jejum significa que você está no caminho certo, não em perigo. Com o jejum regular, o apetite tende a diminuir.",
+      "why": "A fome é sobretudo um sinal passageiro, de hormônios e de hábito; vê-la como uma companhia esperada reduz a ansiedade, e o corpo se adapta com a prática."
+    },
+    "FC-097": {
+      "title": "Dê um mês",
+      "claim": "Os primeiros jejuns costumam ser os mais difíceis. Julgue o jejum pela quinta tentativa, não pela primeira.",
+      "why": "Hábitos de fome, respostas condicionadas e a troca de combustível se ajustam com a repetição; o corpo aprende a passar mais cedo para a queima de gordura.",
+      "do": "Na noite anterior, faça uma refeição caseira simples, com pouco açúcar e amido: o dia seguinte fica mais fácil."
+    },
+    "FC-098": {
+      "title": "Parar antes também conta",
+      "claim": "Um jejum que termina antes ainda conta. Parar em 22 de 24 horas são 22 horas de benefício, não um fracasso.",
+      "why": "Os benefícios se acumulam hora a hora. Ver jejuns parciais como vitórias constrói a confiança que torna possíveis os mais longos."
+    },
+    "FC-099": {
+      "title": "Uma beliscada não zera nada",
+      "claim": "Algumas castanhas, um pedaço de queijo ou uma garfada de salada não zeram seu jejum. Siga em frente.",
+      "why": "Uma ingestão mínima sobe a insulina por pouco tempo, depois ela cai de novo e a queima de gordura continua. Perder um dia de jejum também não apaga semanas de rotina.",
+      "do": "Anote, se quiser, e continue. Amanhã você volta ao plano."
+    },
+    "FC-101": {
+      "title": "Não em época de estresse ou viagem",
+      "claim": "Jejuns longos costumam falhar em viagens, sob estresse ou nas festas. Guarde-os para semanas mais tranquilas.",
+      "why": "O jejum já é um estresse. Somado a outros, aumenta cortisol e glicemia e deixa de fazer bem para desgastar.",
+      "do": "Em fases muito estressantes, encurte os jejuns em vez de forçar mais."
+    },
+    "FC-102": {
+      "title": "Não faça sozinho",
+      "claim": "Quem jejua com parceiro, amigo ou grupo se sai melhor, principalmente para manter o peso.",
+      "why": "Horários em comum tiram tentações de casa, e o compromisso com os outros sustenta o hábito quando a motivação inicial passa.",
+      "do": "Chame alguém para jejuar com você, ou conte para algumas pessoas que te apoiam. Não para todo mundo."
+    },
+    "FC-103": {
+      "title": "O que você come entre os jejuns importa",
+      "claim": "Não dá para compensar uma alimentação ruim com jejum. Se um jejum mais longo leva a compulsão, volte um passo: ainda não está pronto, não é fraqueza.",
+      "why": "Comer mal entre os jejuns vai minando o ganho e torna o próximo mais difícil. O progresso se mantém quando cada nível está estável antes do seguinte.",
+      "do": "Observe sem culpa por que você come (hábito, conforto, companhia) e só aumente os jejuns quando as refeições estiverem estáveis."
+    },
+    "FC-105": {
+      "title": "O sono faz parte",
+      "claim": "Pessoas que dormiam pouco e passaram a dormir cerca de uma hora a mais comeram ~270 kcal a menos por dia e perderam peso sem nenhuma orientação alimentar.",
+      "why": "Dormir pouco aumenta a fome e a atração pela comida e reduz a sensibilidade à insulina. O estresse crônico acrescenta cortisol e fome emocional.",
+      "do": "Dorme menos de 6,5 horas? Deitar mais cedo pode ser seu ganho mais fácil."
+    },
+    "FC-180": {
+      "title": "Um deslize não é um dia perdido",
+      "claim": "Um deslize é uma refeição, não um dia estragado. O “tudo ou nada” transforma pequenos tropeços em grandes; ser gentil consigo evita isso.",
+      "why": "Depois de quebrar uma regra, quem faz dieta rígida costuma comer muito mais (o efeito “agora já era”). A autocompaixão depois de um deslize reduziu os exageros seguintes; a autocrítica os aumentou.",
+      "do": "Retome no próximo momento planejado e fale consigo como falaria com um amigo."
+    },
+    "FC-181": {
+      "title": "Surfe a onda",
+      "claim": "Uma vontade de comer é uma onda. Perceba onde você a sente, respire e observe-a subir e passar sem obedecer.",
+      "why": "Observar um impulso sem julgar quebra a ligação automática entre vontade e ação; um treino curto de “surfar o impulso” enfraqueceu essa ligação num estudo controlado.",
+      "counter": "Testado com cigarro; as evidências com comida são menores, embora o mecanismo seja o mesmo."
+    },
+    "FC-182": {
+      "title": "Pense em daqui a duas horas",
+      "claim": "Antes de uma beliscada fora do plano, imagine como vai se sentir daqui a duas horas e amanhã. Isso esfria a vontade de forma mensurável.",
+      "why": "Pensar no longo prazo ativa áreas de controle do córtex pré-frontal e diminui a resposta do sistema de recompensa à comida desejada."
+    },
+    "FC-183": {
+      "title": "Gatilhos têm força real",
+      "claim": "Ver, cheirar ou ver propaganda de comida leva com segurança a comer e engordar, e a vontade muitas vezes é maior do que o prazer que a comida dá.",
+      "why": "A dopamina move o “querer”; o prazer usa outros circuitos. Os gatilhos inflam a vontade sem aumentar o sabor: evitá-los é estratégia, não fraqueza."
+    },
+    "FC-184": {
+      "title": "Em companhia se come mais",
+      "claim": "As pessoas comem bem mais acompanhadas do que sozinhas, principalmente com amigos e família.",
+      "why": "Refeições em grupo duram mais e definem quanto se come; uma meta-análise confirmou esse efeito social com solidez.",
+      "do": "Planeje os jejuns em torno das refeições em grupo em vez de brigar com elas, e decida sua porção antes de sentar."
+    },
+    "FC-185": {
+      "title": "O próximo marco, não a chegada",
+      "claim": "Mire no próximo marco, não no fim do jejum. A motivação cresce conforme a meta se aproxima.",
+      "why": "O efeito do gradiente de meta: o esforço aumenta com a proximidade percebida, e uma sequência de marcos próximos leva você mais longe do que um distante."
+    },
+    "FC-186": {
+      "title": "Tédio ou fome?",
+      "claim": "Muita “fome” é tédio. A gente come para fugir da sensação vazia de não ter nada para fazer.",
+      "why": "Comer dá um estímulo rápido e desvia a atenção de um estado desagradável de pouco envolvimento.",
+      "do": "Pergunte-se: “Estou com fome ou entediado?” Uma tarefa, uma caminhada ou uma conversa muitas vezes respondem."
+    },
+    "FC-187": {
+      "title": "Concluir gera confiança",
+      "claim": "Cada jejum que você conclui torna o próximo mais possível. Suas próprias conquistas são a maior fonte de autoconfiança.",
+      "why": "A autoeficácia cresce principalmente com experiências de sucesso, não com convencimento, e prevê se um hábito novo vai durar.",
+      "do": "Comece com jejuns que você consegue terminar e depois aumente. Conte os jejuns concluídos, não os interrompidos."
+    },
+    "FC-090": {
+      "title": "Comece cortando os lanchinhos",
+      "claim": "O primeiro jejum mais fácil: três refeições, nada entre elas. Hoje a maioria dos adultos come 5–6 vezes por dia, quase sem momentos de insulina baixa.",
+      "why": "Cada lanchinho sobe a insulina de novo e funciona como aperitivo, abrindo o apetite. Sem lanchinhos, volta uma janela diária de queima de gordura, quase sem fome a mais.",
+      "do": "Depois, corte uma refeição de cada vez. O mesmo caminho serve para recomeçar depois de uma pausa."
+    },
+    "FC-091": {
+      "title": "O melhor protocolo é o que você repete",
+      "claim": "Não existe um único melhor protocolo de jejum. O certo é o que você consegue manter, e dá para mudar quando quiser.",
+      "why": "Jejuns diários curtos (16:8, uma refeição por dia) são os mais fáceis de manter; os mais longos e espaçados agem mais rápido na glicemia e na gordura do fígado, mas são mais difíceis socialmente.",
+      "do": "Monte uma rotina com uma janela diária de alimentação; acrescente jejuns mais longos nas semanas tranquilas."
+    },
+    "FC-092": {
+      "title": "Só a janela de alimentação faz pouco",
+      "claim": "Em grandes estudos, uma janela 16:8 sozinha trouxe pouca perda de peso extra. O benefício vem sobretudo de comer menos e melhor dentro dela.",
+      "why": "Com as mesmas calorias, comer numa janela curta não foi melhor do que a restrição calórica comum. A equipe do The Fasting Method, de Fung, usa 16:8 para manutenção e jejuns mais longos para perder gordura.",
+      "do": "Use a janela como estrutura e preencha com comida de verdade, rica em proteína, sem beliscar.",
+      "counter": "Janelas de alimentação mais cedo no dia melhoraram a sensibilidade à insulina e a pressão, mesmo sem perda de peso."
+    },
+    "FC-093": {
+      "title": "O jejum de 24 horas",
+      "claim": "De jantar a jantar: você ainda faz uma refeição naquele dia, então jantar em família e remédios tomados com comida continuam possíveis.",
+      "why": "Pular café da manhã e almoço dá um dia inteiro de insulina baixa com pouca bagunça na rotina. Duas ou três vezes por semana é um ritmo comum."
+    },
+    "FC-094": {
+      "title": "Os jejuns de 36 e 42 horas",
+      "claim": "Um jejum de 36 horas pula um dia inteiro, do jantar até o café da manhã de dois dias depois; pulando também esse café, são 42 horas.",
+      "why": "Inclui duas noites de sono. A clínica de Fung usa esses jejuns três vezes por semana no diabetes tipo 2, com acompanhamento, e depois espaça."
+    },
+    "FC-095": {
+      "title": "5:2 e jejum em dias alternados",
+      "claim": "O 5:2 tem dois dias leves (~500–600 kcal) por semana. O jejum em dias alternados faz isso dia sim, dia não; os dois funcionam mais ou menos como uma dieta diária.",
+      "why": "Uma pequena porção facilita os dias de jejum. Nos estudos, a perda de peso foi igual à da restrição calórica diária; a insulina às vezes melhorou mais, mas mais gente desistiu."
+    },
+    "FC-096": {
+      "title": "Pular o café da manhã ou o jantar?",
+      "claim": "Pular o café da manhã é mais fácil; pular o jantar é mais eficaz. Escolha o que seu dia permite.",
+      "why": "O café da manhã é pequeno, a fome é baixa e raramente é social. O jantar é a maior refeição, quando a resposta da insulina é mais forte, mas é a mais social."
+    },
+    "FC-100": {
+      "title": "Encaixe o jejum na sua vida",
+      "claim": "Encaixe o jejum na sua vida, não a sua vida no jejum. Aproveite as festas e jejue nos dias seguintes.",
+      "why": "A humanidade sempre alternou banquete e jejum. Boa parte do peso ganho no ano vem das festas de fim de ano; o que conta é o equilíbrio ao longo das semanas, não uma refeição.",
+      "do": "Jantar especial hoje? Pule o café da manhã e o almoço. Jejue mais nos dias úteis corridos, menos nos fins de semana em família."
+    },
+    "FC-104": {
+      "title": "Treine perto do fim",
+      "claim": "Um bom momento para treinar é perto do fim do jejum, e então quebrá-lo com uma refeição rica em proteína.",
+      "why": "Perto do fim do jejum, a noradrenalina está alta e a queima de gordura está a todo vapor. Num estudo, um jejum de 3,5 dias não reduziu força nem resistência.",
+      "do": "Exemplo: jejum desde o jantar, treino ao meio-dia, depois almoço. Vá mais devagar se sentir fraqueza."
+    },
+    "FC-106": {
+      "title": "Ossos precisam de carga",
+      "claim": "Os ossos só ficam mais fortes com carga. Caminhar, subir escadas e treinar força os protegem muito mais do que comprimidos de cálcio.",
+      "why": "O osso se remodela em resposta ao esforço mecânico; astronautas perdem osso mesmo comendo bem. O movimento do dia a dia conta tanto quanto a academia."
+    },
+    "FC-107": {
+      "title": "Primeiro tratamento, depois manutenção",
+      "claim": "O jejum intensivo pode ser um tratamento com prazo. Atingida a meta, a manutenção é bem mais leve.",
+      "why": "As clínicas fazem protocolos terapêuticos por meses e depois passam para janelas diárias de alimentação, com um jejum mais longo de vez em quando depois das festas."
+    },
+    "FC-110": {
+      "title": "Saindo do platô",
+      "claim": "Platôs são normais. Mude o estímulo: um jejum mais longo, outro protocolo ou um jejum mais rigoroso, sem adoçante.",
+      "why": "Toda rotina encontra um equilíbrio em que o peso perdido nos dias de jejum volta. Um protocolo novo faz o progresso andar de novo.",
+      "do": "Tente 24 → 36 → 48 horas, uma refeição por dia ou um jejum mais longo de vez em quando. Confira também lanchinhos e sono."
+    },
+    "FC-111": {
+      "title": "Meça mais do que o peso",
+      "claim": "Quando a balança parar, meça a cintura ou tire uma foto por mês. Tente manter a cintura abaixo da metade da sua altura.",
+      "why": "As variações de água escondem a perda de gordura por semanas. A cintura reflete a gordura visceral, a mais ligada a diabetes e doenças do coração."
+    },
+    "FC-112": {
+      "title": "Seu corpo defende o peso",
+      "claim": "Depois de emagrecer, o apetite sobe cerca de 100 kcal por dia para cada quilo perdido e o metabolismo desacelera. Recuperar peso é biologia, não falta de força de vontade.",
+      "why": "O corpo defende um peso de referência como um termostato. A maioria das dietas de restrição calórica estaciona e dá efeito sanfona; participantes do The Biggest Loser queimavam ~500 kcal a menos por dia seis anos depois.",
+      "do": "Espere mais fome enquanto emagrece; jejum regular, proteína e comida de verdade ajudam a manter."
+    },
+    "FC-140": {
+      "title": "Café da manhã não é obrigatório",
+      "claim": "Pular o café da manhã não faz você comer mais no total: nos estudos, quem tomava café da manhã comia ~260 kcal a mais por dia e não pesava menos.",
+      "why": "A refeição seguinte aumenta só um pouco, então o total cai. A onda de hormônios antes do amanhecer já te deu energia."
+    },
+    "FC-141": {
+      "title": "Balanças de bioimpedância erram no jejum",
+      "claim": "Balanças de bioimpedância e exames de composição costumam acusar “perda de músculo” no jejum que na verdade é água e glicogênio, e volta quando você come.",
+      "why": "Esses aparelhos estimam a massa magra supondo que a água do corpo está estável; o jejum elimina água, que eles leem como músculo perdido.",
+      "do": "Em fases de jejum, acompanhe melhor a força e a medida da cintura."
+    },
+    "FC-143": {
+      "title": "Aquela manchete do “risco cardíaco 91 %”",
+      "claim": "A notícia de 2024 de que “comer em 8 horas aumenta em 91 % o risco de morte cardíaca” veio de um resumo de congresso sem revisão, baseado em dois dias de registro alimentar.",
+      "why": "Os participantes não jejuavam de propósito, e qualidade da dieta e diferenças iniciais não foram relatadas, como observou o próprio revisor da AHA."
+    },
+    "FC-020": {
+      "title": "Jejum seco, só curto",
+      "claim": "Jejuar sem água é mais difícil, mais arriscado e não traz benefício extra. Limite o jejum seco a um dia, como na prática religiosa.",
+      "why": "Sem água, o corpo desidrata além de jejuar, sobrecarregando circulação e rins e limitando quanto tempo dá para jejuar com segurança, sem vantagem metabólica.",
+      "do": "Beba bem nas horas antes e depois de um jejum seco."
+    },
+    "FC-160": {
+      "title": "Um calendário antigo",
+      "claim": "Quase toda tradição tem dias fixos de jejum: jejuns lunares e semanais no hinduísmo, a Quaresma ortodoxa, o Ramadã, monges budistas que não comem depois do meio-dia.",
+      "why": "Muito antes de se entender o metabolismo, as culturas alternavam banquete e jejum como purificação e disciplina. Creta, modelo da dieta mediterrânea, jejuava muitos dias por ano."
+    },
+    "FC-022": {
+      "title": "Se você está tentando engravidar",
+      "claim": "Tentando engravidar? Evite jejuns longos depois da ovulação, porque você pode já estar grávida. Prefira refeições completas e nutritivas.",
+      "why": "A gravidez é um motivo para não jejuar. Na segunda metade do ciclo você ainda não tem como saber, então janelas de alimentação mais curtas são a escolha mais segura."
+    },
+    "FC-120": {
+      "title": "Jejum de acordo com o ciclo",
+      "claim": "O apetite é menor na primeira metade do ciclo e maior depois da ovulação. Planeje os jejuns longos para os dias 2–14.",
+      "why": "O estrogênio freia o apetite; a progesterona o estimula, e a sensibilidade à insulina cai antes da menstruação, o que torna essa semana a mais difícil.",
+      "do": "Na semana ou duas antes da menstruação, prefira jejuns curtos e evite adoçantes entre as refeições."
+    },
+    "FC-121": {
+      "title": "Pese-se de acordo com o ciclo",
+      "claim": "Nas mulheres, a perda de peso segue uma onda mensal. Compare o peso no mesmo ponto de cada ciclo, não de semana em semana.",
+      "why": "A retenção de líquido aumenta na segunda metade do ciclo e cai depois da menstruação, escondendo a perda de gordura."
+    },
+    "FC-122": {
+      "title": "A perimenopausa muda as regras",
+      "claim": "Nos anos antes da menopausa, as mulheres ganham cerca de 0,5 kg por ano e perdem massa magra. É questão de hormônios, não de disciplina.",
+      "why": "A queda do estrogênio aumenta o apetite e leva a gordura para a barriga; dormir mal acelera tudo. Depois da menopausa, o risco cardíaco se aproxima do dos homens.",
+      "do": "Priorize força, proteína e sono; o jejum ajuda, mas espere um progresso mais lento."
+    },
+    "FC-124": {
+      "title": "As mulheres também se beneficiam",
+      "claim": "As mulheres emagrecem com o jejum mais ou menos no mesmo ritmo que os homens; um jejum de 3 dias não alterou os hormônios reprodutivos em mulheres com peso normal.",
+      "why": "Problemas no ciclo vêm de pouca gordura corporal e falta de energia, não do jejum em si, nas mulheres com reservas adequadas.",
+      "counter": "Mulheres magras e muito ativas correm mais risco de falta de energia; os dados de longo prazo específicos para mulheres são limitados."
+    }
+  }
+}

@@ -1,0 +1,778 @@
+{
+  "ui": {
+    "library_title": "Bibliothek",
+    "search_hint": "Bibliothek durchsuchen",
+    "clear_search": "Suche löschen",
+    "no_results": "Nichts gefunden",
+    "can_i_have": "Was ist erlaubt?",
+    "more_topics": "Weitere Themen unter Einstellungen › Wissen",
+    "why": "Warum",
+    "what_to_do": "Was du tun kannst",
+    "caveat": "Einschränkung",
+    "sources": "Quellen",
+    "expand": "Mehr anzeigen",
+    "collapse": "Weniger anzeigen",
+    "label_a": "Gut belegt",
+    "label_b": "Erste Belege",
+    "label_c": "Frühe Forschung",
+    "label_d": "Klinische Erfahrung",
+    "go_deeper": "Mehr erfahren",
+    "show_all": "Alle %1$d anzeigen",
+    "tip_prefix": "Tipp: %1$s",
+    "pager_position": "%1$d von %2$d",
+    "hows_it_going": "Wie geht's dir?",
+    "helper_prompt": "Wähle, was passt – und sieh, was hilft.",
+    "group_body": "Körper",
+    "group_mind": "Kopf",
+    "group_progress": "Fortschritt",
+    "chip_headache": "Kopfschmerzen",
+    "chip_dizzy": "Schwindel",
+    "chip_tired": "Müdigkeit",
+    "chip_cold": "Frieren",
+    "chip_sleep": "Schlafprobleme",
+    "chip_cramps": "Krämpfe",
+    "chip_heartburn": "Sodbrennen",
+    "chip_bloated": "Blähungen",
+    "chip_loose": "Weicher Stuhl",
+    "chip_constipated": "Verstopfung",
+    "chip_hungry": "Hunger",
+    "chip_craving": "Heißhunger",
+    "chip_bored": "Langeweile",
+    "chip_stressed": "Stress",
+    "chip_slipped": "Ausrutscher",
+    "chip_stalled": "Waage steht still",
+    "chip_restart": "Neustart",
+    "first_fast_title": "Vor deinem ersten Fasten",
+    "before_you_start": "Bevor du startest",
+    "women_offer_title": "Zyklusbezogene Tipps anzeigen?",
+    "women_offer_body": "Fastentipps rund um Menstruationszyklus, Perimenopause und Kinderwunsch.",
+    "women_offer_yes": "Einschalten",
+    "women_offer_no": "Nein, danke",
+    "fast_days_about": "Über Fastentage",
+    "settings_section": "Wissen",
+    "settings_tips_title": "Tipps beim Fasten",
+    "settings_tips_subtitle": "Ein kurzer Tipp, sobald du eine neue Phase erreichst",
+    "settings_labels_title": "Evidenz-Hinweise",
+    "settings_labels_subtitle": "Zeigen, wie gut jede Aussage belegt ist",
+    "settings_conditions_hint": "Wähle, was auf dich zutrifft. Wird nur auf diesem Gerät gespeichert.",
+    "settings_essentials_note": "Sicherheitshinweise sind immer aktiv und erscheinen nur, wenn sie relevant sind.",
+    "settings_reset_title": "Gesehene Tipps zurücksetzen",
+    "settings_reset_subtitle": "Bereits gesehene Tipps wieder anzeigen",
+    "settings_reset_done": "Tipps zurückgesetzt",
+    "cat_essentials": "Sicherheitshinweise",
+    "cat_essentials_sub": "Immer aktiv, nur bei Bedarf sichtbar",
+    "cat_journey": "Fastenreise",
+    "cat_journey_sub": "Was dein Körper Phase für Phase tut",
+    "cat_mind": "Kopf & Gewohnheiten",
+    "cat_mind_sub": "Hunger, Heißhunger, Motivation, Schlaf und Stress",
+    "cat_food": "Essen & Trinken",
+    "cat_food_sub": "Was erlaubt ist, wie du das Fasten brichst, was du isst",
+    "cat_rhythm": "Rhythmus & Fortschritt",
+    "cat_rhythm_sub": "Fastenpläne, Plateaus, Fortschritt messen, Mythen",
+    "cat_comfort": "Wohlbefinden",
+    "cat_comfort_sub": "Häufige Begleiterscheinungen und was dagegen hilft",
+    "cat_women": "Frauengesundheit",
+    "cat_women_sub": "Zyklus, Perimenopause, Kinderwunsch",
+    "cat_medical": "Erkrankungen & Medikamente",
+    "cat_medical_sub": "Hinweise zu den Erkrankungen und Medikamenten, die du auswählst",
+    "cat_traditions": "Fastentage",
+    "cat_traditions_sub": "Über traditionelle Fastentage",
+    "cond_group_sugar": "Blutzucker",
+    "cond_group_heart": "Herz & Nieren",
+    "cond_group_hormones": "Hormone",
+    "cond_group_meds": "Medikamente",
+    "cond_group_other": "Sonstiges",
+    "cond_t2d": "Typ-2-Diabetes oder Prädiabetes",
+    "cond_diabetes_meds": "Insulin oder Diabetes-Tabletten",
+    "cond_t1": "Typ-1-Diabetes",
+    "cond_bp_heart": "Blutdruck oder Herz",
+    "cond_kidney": "Nierenerkrankung",
+    "cond_gout_stones": "Gicht oder Nierensteine",
+    "cond_thyroid": "Schilddrüse",
+    "cond_pcos": "PCOS",
+    "cond_glp1": "Abnehmspritzen (z. B. Ozempic)",
+    "cond_steroids": "Kortison (Steroide)",
+    "cond_lithium": "Lithium",
+    "cond_warfarin": "Marcumar oder Warfarin",
+    "cond_daily_meds": "Andere Dauermedikamente",
+    "cond_cancer": "Krebs",
+    "cond_gallbladder": "Gallenblase",
+    "sources_title": "Quellen & Danksagung",
+    "sources_credits": "Die Bibliothek beruht vor allem auf The Complete Guide to Fasting von Dr. Jason Fung mit Jimmy Moore (2016), auf Vorträgen von Dr. Jason Fung, Megan Ramos, Dr. Nadia Brito Pateguana und Dr. Terri Lance auf den YouTube-Kanälen Jason Fung, The Fasting Method und Low Carb Down Under sowie auf den unten aufgeführten Studien und Leitlinien. Jede Karte ist unsere eigene Zusammenfassung in unseren Worten; etwaige Fehler sind unsere.",
+    "sources_independence": "FastTrack48 ist unabhängig. Keine der hier genannten Personen oder Organisationen betreut, empfiehlt oder unterstützt die App; ihre Namen stehen hier nur, um ihre Arbeit zu würdigen.",
+    "sources_medical": "Dies sind allgemeine Informationen, keine medizinische Beratung, und sie ersetzen keine Ärztin und keinen Arzt, die dich kennen. Hast du eine Erkrankung oder nimmst du Medikamente, frag vor dem Fasten in deiner Praxis nach.",
+    "sources_books": "Bücher",
+    "sources_studies": "Studien und Leitlinien",
+    "sources_talks": "Vorträge"
+  },
+  "cards": {
+    "FC-024": {
+      "title": "Müde oder schwindlig? Salz hilft",
+      "claim": "Müdigkeit, Kopfschmerzen oder Benommenheit beim Fasten liegen oft an zu wenig Salz und Wasser – nicht an fehlender Energie.",
+      "why": "Sinkt das Insulin, scheiden die Nieren Natrium und Wasser aus. Eine Prise Salz hilft meist innerhalb von Minuten.",
+      "do": "Setz dich, nimm eine Prise Salz in Wasser und steh langsam auf. Hält es an, beende das Fasten."
+    },
+    "FC-025": {
+      "title": "Weicher Stuhl am Anfang",
+      "claim": "Manche bekommen bei den ersten Fastenperioden weichen Stuhl, weil der Körper eingelagertes Wasser loswird. Das legt sich meist nach wenigen Tagen.",
+      "why": "Sinkendes Insulin setzt gespeichertes Wasser frei; ein Teil verlässt den Körper über den Darm statt über die Nieren.",
+      "do": "Flohsamenschalen in Wasser können helfen. Anhaltender Durchfall oder Zeichen von Austrocknung: aufhören und ärztlichen Rat holen."
+    },
+    "FC-026": {
+      "title": "Sodbrennen beim Fasten",
+      "claim": "Mit leerem Magen kann Sodbrennen zunehmen, bei manchen wird es aber besser. Mit dem Abnehmen lässt der Reflux meist nach.",
+      "why": "Der Magen bildet weiter Säure, ohne dass etwas sie bindet, und Bauchfett drückt nach oben.",
+      "do": "Iss bis 3 Stunden vor dem Schlafen, geh nach dem Abendessen spazieren, stell das Kopfende höher. Frag bei Bedarf nach Säureblockern."
+    },
+    "FC-027": {
+      "title": "Magnesium: die richtige Form",
+      "claim": "Muskelkrämpfe beim Fasten können auf Magnesiummangel hindeuten. Wenn du ergänzt, nimm Citrat oder Glycinat statt Oxid.",
+      "why": "Bluttests erkennen einen Mangel im Gewebe oft nicht. Oxid wird schlecht aufgenommen und wirkt vor allem abführend."
+    },
+    "FC-066": {
+      "title": "Kopfschmerzen am ersten Tag?",
+      "claim": "Kopfschmerzen in den ersten Fastenperioden kommen meist von zu wenig Salz und verschwinden nach ein, zwei Wochen regelmäßigen Fastens.",
+      "why": "Vom salzigen Essen zu fast gar keinem Salz – das verändert den Flüssigkeitshaushalt. Nach ein paar Fastenperioden hat sich der Körper umgestellt.",
+      "do": "Gib eine Prise Salz in dein Wasser."
+    },
+    "FC-150": {
+      "title": "Verstopfung ist normal",
+      "claim": "Seltener Stuhlgang beim Fasten ist normal und meist schmerzlos. Wo wenig hineinkommt, muss wenig heraus.",
+      "why": "Beschwerden entstehen durch einen vollen Darm – und der ist beim Fasten eben nicht voll.",
+      "do": "Iss an Esstagen mehr Gemüse und Ballaststoffe; Flohsamenschalen helfen. Hält es an, frag deinen Arzt."
+    },
+    "FC-151": {
+      "title": "Nachts hellwach?",
+      "claim": "Schlafprobleme oder frühes Aufwachen an Fastentagen sind häufig. Fasten erhöht das anregende Noradrenalin.",
+      "why": "Dasselbe Hormon, das dich tagsüber wach hält, kann das Einschlafen verzögern. Mit Übung wird es meist besser.",
+      "do": "Erzwing keinen Schlaf: ohne Bildschirm runterkommen, ein warmes Bad, erst müde ins Bett. Hält es an, verkürze oder verlege deine Fastenzeiten."
+    },
+    "FC-152": {
+      "title": "Dir ist kalt",
+      "claim": "Frieren ist am Anfang des Fastens häufig und lässt meist nach, sobald dein Körper besser Fett verbrennt. Zieh dich warm an, trink Warmes, beweg dich.",
+      "why": "Wer neu fastet, stellt oft verzögert auf Fett um; Bewegung verbraucht Brennstoff aus dem Blut und erzeugt Wärme.",
+      "do": "Frierst du auch, wenn du isst, ständig? Lass deine Schilddrüse ärztlich prüfen."
+    },
+    "FC-001": {
+      "title": "Wer nicht fasten sollte",
+      "claim": "Faste nicht zu Gesundheitszwecken, wenn du unter 18, schwanger oder in der Stillzeit bist, untergewichtig bist (BMI unter etwa 20) oder je eine Essstörung hattest.",
+      "why": "Wachstum, Schwangerschaft und Muttermilch brauchen stetig Nährstoffe, wenig Körpergewicht lässt keine Reserve, und bewusster Verzicht kann eine Essstörung wieder aufleben lassen.",
+      "do": "Trifft etwas davon zu, lass das Fasten und sprich mit deinem Arzt darüber, was für dich passt."
+    },
+    "FC-015": {
+      "title": "Über 65? Schütze deine Muskeln",
+      "claim": "Ab 65 gehen beim Abnehmen Muskeln und Knochen mit verloren, wenn du sie nicht schützt. Wähle kürzere Fastenzeiten und iss zu jeder Mahlzeit Eiweiß.",
+      "why": "Ältere Muskeln reagieren schwächer auf Eiweiß. Bei älteren Erwachsenen, die abnahmen, erhielten Kraft- und Ausdauertraining zusammen Muskelmasse und Knochen.",
+      "do": "Mach 2–3-mal pro Woche Krafttraining und steh langsam auf, damit dir nicht schwindlig wird."
+    },
+    "FC-016": {
+      "title": "Hunger ist okay. Krank sein nicht.",
+      "claim": "Hunger gehört dazu. Anhaltende Übelkeit, Erbrechen, Schwindel, Erschöpfung oder echtes Unwohlsein heißen: aufhören.",
+      "why": "Hunger kommt in Wellen und geht vorbei. Diese Anzeichen gehören nicht zur normalen Umstellung und können auf Flüssigkeitsmangel, Elektrolytprobleme oder ein Medikamentenproblem hindeuten.",
+      "do": "Beende das Fasten, iss etwas Leichtes und melde dich beim Arzt, wenn es nicht besser wird. Aufhören ist kein Versagen."
+    },
+    "FC-017": {
+      "title": "Ab 3 Tagen: ärztlich begleiten",
+      "claim": "Faste nicht länger als etwa drei Tage auf eigene Faust. Längeres Fasten braucht ärztliche Begleitung, Blutwerte und einen Plan für den Kostaufbau.",
+      "why": "Sehr lange Fastenkuren in Kliniken der 1960er-Jahre führten zu seltenen Todesfällen und Herzschäden. Normale Blutwerte können leere Speicher verbergen; beim 382-Tage-Fasten war das Magnesium dauerhaft niedrig.",
+      "do": "Bei begleitetem Langzeitfasten: Salz ins Wasser, ein Multivitamin und höchstens einmal im Monat."
+    },
+    "FC-018": {
+      "title": "Kostaufbau nach langem Fasten",
+      "claim": "Nach fünf oder mehr Fastentagen fang mit kleinen Mahlzeiten wieder an. Das Refeeding-Syndrom ist selten, aber gefährlich.",
+      "why": "Essen lässt das Insulin steigen, das Phosphat, Kalium, Magnesium und Vitamin B1 in die Zellen zieht; die Blutwerte können abstürzen. Größtes Risiko: BMI unter 18,5, starker Gewichtsverlust, Alkoholmissbrauch, Entwässerungstabletten oder Säureblocker.",
+      "do": "Bei Schwäche, Herzrasen, Verwirrtheit oder Atemnot sofort ärztliche Hilfe holen. Leicht geschwollene Knöchel in den ersten Tagen gehen meist vorüber."
+    },
+    "FC-019": {
+      "title": "Kein Alkohol beim Fasten",
+      "claim": "Trink beim Fasten keinen Alkohol. Er bremst die Zuckerbildung in der Leber, der Blutzucker kann fallen – und er wirkt viel stärker.",
+      "why": "Die Leber baut zuerst den Alkohol ab und stellt die Glukoneogenese zurück; auf leeren Magen steigt der Blutalkohol schnell. An jedem Tag stört er den Schlaf und liefert leere Kalorien.",
+      "do": "Wenn du trinkst, dann zu einer Mahlzeit an einem Esstag, mit Wasser dazu."
+    },
+    "FC-021": {
+      "title": "Wenn deine Periode ausbleibt",
+      "claim": "In den ersten Monaten des Fastens kann sich dein Zyklus verschieben. Bleibt die Periode drei Monate oder länger aus, hör auf zu fasten und geh zum Arzt.",
+      "why": "Gelegentliche Verzögerungen folgen jeder Veränderung bei Gewicht, Ernährung oder Stress. Bleibt die Periode aus, ist die verfügbare Energie für die reproduktive Gesundheit zu niedrig."
+    },
+    "FC-029": {
+      "title": "Erkrankung oder Dauermedikament?",
+      "claim": "Hast du eine Diagnose oder nimmst täglich Medikamente? Schalte in den Einstellungen „Erkrankungen & Medikamente“ ein, um nur die Hinweise zu sehen, die für dich gelten.",
+      "why": "Medikamente gegen hohen Blutzucker, Bluthochdruck, für die Psyche, die Schilddrüse oder gegen Entzündungen verändern, wie Fasten auf dich wirkt. Gezielte Hinweise sind sicherer als allgemeine Warnungen.",
+      "do": "Sprich vor deinem ersten Fasten über einen Tag hinaus mit deinem Arzt."
+    },
+    "FC-055": {
+      "title": "Fastenhelfer sparsam nutzen",
+      "claim": "Ein Löffel Olivenöl oder in Wasser eingeweichte Chiasamen können ein Fasten retten. Greif nur dann dazu, wenn es darüber entscheidet, ob du durchhältst.",
+      "why": "Winzige Mengen Fett oder Ballaststoffe heben das Insulin kaum und dämpfen Heißhunger; aus Gewohnheit genommen, ersetzen sie Energie, die sonst aus deinen Fettreserven käme.",
+      "do": "Frag dich: „Hilft mir das, weitere 12 Stunden zu fasten?“"
+    },
+    "FC-056": {
+      "title": "Süßstoffe machen es schwerer",
+      "claim": "Light-Getränke, Süßstoffe und „natürlich aromatisierte“ Getränke erschweren das Fasten eher; in einer Studie half der Wechsel von Light-Getränken zu Wasser beim Abnehmen.",
+      "why": "Süßer Geschmack kann Appetit und Insulin anregen, ohne Energie zu liefern – der Heißhunger bleibt wach, besonders gegen Ende des Fastens.",
+      "do": "Faste mit ungesüßten Getränken. Brauchst du Süße, nimm wenig und lass sie weg, wenn der Hunger stärker wird.",
+      "counter": "Ob Süßstoffe beim Menschen das Insulin erhöhen, ist in Studien uneinheitlich."
+    },
+    "FC-060": {
+      "title": "Erlaubt beim Fasten",
+      "claim": "Wasser (still oder mit Kohlensäure), jeder ungesüßte Tee oder Kräutertee, Zitrone, Zimt, Salz sowie reine Vitamine oder Elektrolyte.",
+      "why": "Sie liefern fast keine Energie, das Insulin bleibt niedrig – und sie lindern Hunger, versorgen dich mit Flüssigkeit und erhalten deine täglichen Rituale."
+    },
+    "FC-061": {
+      "title": "Nicht erlaubt beim Fasten",
+      "claim": "Zucker, Honig, Saft, gesüßte oder aromatisierte Getränke und Süßstoffe brechen oder untergraben das Fasten.",
+      "why": "Zucker hebt das Insulin direkt. Saft konzentriert Zucker ohne Ballaststoffe. Süßstoffe und Aromazusätze regen eher den Appetit an."
+    },
+    "FC-064": {
+      "title": "Trinken nach Plan",
+      "claim": "Ziel: etwa 2 Liter Flüssigkeit an Fastentagen. Starte den Morgen mit einem Glas Wasser.",
+      "why": "Ein großer Teil deines Wassers kommt sonst mit dem Essen; wenn das Insulin sinkt, verlierst du zusätzlich eingelagertes Wasser und Salz. Ans Trinken denkt man leicht zu spät.",
+      "do": "Am Anfang hilft eine Erinnerung alle paar Stunden: Wasser mit einer Prise Salz oder Tee."
+    },
+    "FC-067": {
+      "title": "Tees, die helfen",
+      "claim": "Grüner Tee, Zimt- oder Ingwertee und bittere Kräutertees können den Hunger dämpfen; Pfefferminztee lindert Blähungen.",
+      "why": "Warme, aromatische Getränke ohne Energie füllen den Magen und erhalten das Ritual. Catechine aus grünem Tee und Zimt zeigten in kleinen Studien eine leichte Wirkung auf den Appetit."
+    },
+    "FC-070": {
+      "title": "Sanft das Fasten brechen",
+      "claim": "Nach mehr als 24 Stunden Fasten beginne mit einer kleinen Vorspeise: gegartes Gemüse oder Avocado. Die Hauptmahlzeit 30 Minuten später.",
+      "why": "Die Verdauung fährt beim Fasten herunter. Eine kleine, leichte erste Portion weckt sie sanft und lässt den Drang nach einem Festmahl abklingen.",
+      "do": "Unter 24 Stunden ist nichts Besonderes nötig. Bei längerem Fasten bereite die kleine Portion vorher zu."
+    },
+    "FC-071": {
+      "title": "Damit erst mal vorsichtig sein",
+      "claim": "Direkt nach dem Fasten schlagen Nüsse, Samen, Nussmus, rohes oder faseriges Gemüse, Eier, Milchprodukte und Wein am ehesten auf den Magen.",
+      "why": "Sie brauchen mehr Magensäure und Enzyme, und die kommen nach dem Fasten erst nach und nach zurück. Wie gut man sie verträgt, ist individuell."
+    },
+    "FC-072": {
+      "title": "Normal essen, kein Festmahl",
+      "claim": "Der häufigste Fastenfehler: danach zu viel essen. Iss eine normale Portion, als hätte das Fasten nicht stattgefunden.",
+      "why": "Fasten wirkt, weil gespeichertes Fett die ausgelassenen Mahlzeiten deckt. Nach 36 Stunden Fasten essen Menschen nur ~20 % mehr – wer aber das Essen eines ganzen Tages in eine Mahlzeit packt, macht den Effekt zunichte.",
+      "do": "Normale Portion, langsam essen, Wasser trinken und vor dem Nachschlag warten. Keine zusätzliche Kalorienreduktion obendrauf."
+    },
+    "FC-073": {
+      "title": "Kohlenhydrate zuletzt",
+      "claim": "Iss zuerst Eiweiß und Gemüse, die Kohlenhydrate zum Schluss. Dieselbe Mahlzeit ließ den Blutzucker so um etwa 40 % weniger steigen.",
+      "why": "Zuerst gegessenes Eiweiß, Fett und Ballaststoffe verlangsamen die Magenentleerung und aktivieren Darmhormone – die Stärke kommt später und sanfter an.",
+      "do": "Heb dir Brot, Reis oder Kartoffeln für das Ende der Mahlzeit auf. Bitte im Restaurant, das Brot mit dem Hauptgang zu bringen."
+    },
+    "FC-074": {
+      "title": "Keine Kohlenhydrate pur",
+      "claim": "Kombiniere Stärke mit Säure, Eiweiß oder Fett: Essig, Zitrone, Eingelegtes oder gekochter und abgekühlter Reis und Kartoffeln dämpfen die Blutzuckerspitze.",
+      "why": "Säure verlangsamt die Stärkeverdauung und die Magenentleerung; Abkühlen bildet resistente Stärke; weniger verarbeitete Varianten (grobe statt Instant-Haferflocken) werden langsamer aufgenommen."
+    },
+    "FC-075": {
+      "title": "Sättigungshormone aus dem Essen",
+      "claim": "Eiweiß, natürliches Fett und Ballaststoffe setzen die körpereigenen Sättigungshormone frei – denselben Weg, den Abnehmspritzen verstärken.",
+      "why": "Diese Nährstoffe verlangsamen die Magenentleerung und setzen GLP-1 frei; Ballaststoffe füttern Darmbakterien, deren Fettsäuren es weiter erhöhen.",
+      "do": "Bau deine Mahlzeiten um Eiweiß, natürliche Fette und faseriges Gemüse herum, damit du länger satt bleibst.",
+      "counter": "Der natürliche GLP-1-Anstieg ist weit kleiner als die Wirkung der Medikamente."
+    },
+    "FC-076": {
+      "title": "Echtes Essen statt Fertigkost",
+      "claim": "Bei hochverarbeiteten Lebensmitteln aßen Menschen täglich etwa 500 kcal mehr als bei unverarbeiteten mit denselben Nährstoffen.",
+      "why": "Verarbeitung entfernt Ballaststoffe und Struktur, beschleunigt Essen und Aufnahme und schwächt Sättigungssignale – Zucker und Weißmehl am stärksten.",
+      "do": "Füll deine Essensfenster mit erkennbaren, naturbelassenen Lebensmitteln; streiche zuerst Zucker und Weißmehl."
+    },
+    "FC-077": {
+      "title": "Frühstück ist oft Dessert",
+      "claim": "Cerealien, Muffins, Gebäck, gesüßter Joghurt und Müsliriegel sind oft verkleidete Desserts – und am Vormittag hast du Heißhunger.",
+      "why": "Raffinierte Kohlenhydrate treiben Blutzucker und Insulin hoch, die dann überschießen; nach Instant-Haferbrei zum Frühstück aßen Kinder später mehr als nach einem Omelett.",
+      "do": "Wenn du frühstückst, dann Eier, Naturjoghurt oder Vollkornhaferflocken – oder verschieb die erste Mahlzeit einfach."
+    },
+    "FC-078": {
+      "title": "Zucker und Leberfett",
+      "claim": "Die Fruktose aus Zucker wird in der Leber zu Fett. Weniger zugesetzter Zucker senkte das Leberfett in acht Wochen um etwa ein Drittel.",
+      "why": "Fruktose wird fast nur in der Leber verarbeitet. Eine Fettleber hat mindestens ein Viertel der Erwachsenen, meist unbemerkt; 5:2-Fasten und Low Carb halbierten sie in einer Studie."
+    },
+    "FC-079": {
+      "title": "Früher essen, wenn möglich",
+      "claim": "Dieselbe Mahlzeit lässt Blutzucker und Insulin abends stärker steigen. Ein leichteres, früheres Abendessen passt besser zu deiner inneren Uhr.",
+      "why": "Die Insulinsensitivität ist nachts am niedrigsten; Essen in der biologischen Nacht (Schichtarbeit, späte Mahlzeiten) verschlechtert den Blutzucker und senkt Sättigungshormone.",
+      "do": "Iss abends leichter und früher; bei Nachtschicht die Hauptmahlzeit vor der Schicht.",
+      "counter": "In einer streng kontrollierten Studie änderte großes Frühstück gegenüber großem Abendessen nicht das Gewicht, nur den Hunger."
+    },
+    "FC-080": {
+      "title": "Eiweiß und Krafttraining schützen Muskeln",
+      "claim": "Krafttraining und genug Eiweiß beim Essen schützen deine Muskeln beim Fasten – Fasten allein tut das nicht.",
+      "why": "Muskeln reagieren auf Belastung. Fasten kombiniert mit Krafttraining erhält die Muskelmasse weit besser als Fasten allein.",
+      "do": "Trainier 2–3-mal pro Woche mit Gewichten oder dem eigenen Körpergewicht; ziel an Esstagen auf etwa 1,2–1,6 g Eiweiß pro kg Körpergewicht."
+    },
+    "FC-030": {
+      "title": "Nach dem Essen: Speichern",
+      "claim": "Nach dem Essen erreicht der Blutzucker nach etwa einer Stunde seinen Höhepunkt, das Insulin steigt. Solange es hoch ist, pausiert die Fettverbrennung.",
+      "why": "Insulin bringt Glukose in die Zellen, speichert den Überschuss als Glykogen und Fett und blockiert die Fettfreisetzung, bis es wieder sinkt."
+    },
+    "FC-031": {
+      "title": "Ein kurzer Spaziergang nach dem Essen",
+      "claim": "10–15 Minuten lockeres Gehen nach einer Mahlzeit senken deren Blutzucker- und Insulinspitze spürbar.",
+      "why": "Arbeitende Muskeln nehmen Glukose fast ohne Insulin auf; in einer Meta-Analyse von Crossover-Studien schlug leichtes Gehen das Stehen.",
+      "do": "Geh nach deiner größten Mahlzeit, besonders wenn es Brot, Reis, Nudeln oder Dessert gab."
+    },
+    "FC-032": {
+      "title": "Das Tief nach drei Stunden",
+      "claim": "Heißhunger ein paar Stunden nach einer süßen oder stärkereichen Mahlzeit? Oft ist das ein Blutzuckerabfall, kein echter Energiemangel.",
+      "why": "Eine schnelle Blutzuckerspitze ruft eine große Insulinwelle hervor, die überschießen kann – etwa drei Stunden später fällt der Zucker unter den Ausgangswert.",
+      "do": "Überbrück es mit Wasser oder Tee. Beim nächsten Mal zuerst Eiweiß und Gemüse, die Kohlenhydrate zuletzt."
+    },
+    "FC-033": {
+      "title": "Insulin sinkt, Fett wird frei",
+      "claim": "Ein paar Stunden nach dem Essen (etwa 3–5, bei Insulinresistenz länger) ist das Insulin wieder auf dem Ausgangswert und die Fettzellen geben Fett frei.",
+      "why": "Niedriges Insulin löst die Bremse der Fettfreisetzung, während die Leber auf Glykogen zurückgreift. Ein Snack hebt das Insulin wieder und schiebt diesen Wechsel hinaus.",
+      "do": "Lass dieses Fenster zu: keine Snacks zwischen den Mahlzeiten."
+    },
+    "FC-034": {
+      "title": "Die Leber übernimmt",
+      "claim": "Über Nacht und bis in den Morgen hält deine Leber den Blutzucker stabil – erst aus gespeichertem Glykogen, dann zunehmend durch neu gebildete Glukose.",
+      "why": "Die Leber speichert rund 100 g Glykogen. Nach etwa 22 Stunden liefert neu gebildete Glukose (aus Glycerin, Laktat und Aminosäuren) den Großteil."
+    },
+    "FC-035": {
+      "title": "Kühlschrank und Gefriertruhe",
+      "claim": "Glykogen ist der Kühlschrank: klein und schnell. Körperfett ist die Gefriertruhe im Keller: riesig. Niedriges Insulin öffnet die Truhe.",
+      "why": "Der Körper greift zuerst auf Glykogen zurück. Hohes Insulin hält das Fett unter Verschluss; sinkt das Insulin und leert sich der Glykogenspeicher, wird gespeichertes Fett zum Hauptbrennstoff.",
+      "do": "Jede Stunde nach dem leeren Kühlschrank ist eine Stunde aus der Gefriertruhe. Genau das bringt dir das Fasten.",
+      "counter": "Dass Insulin die Fettfreisetzung bremst, ist Lehrbuchwissen. Dass Insulin statt der Energiebilanz Übergewicht verursacht, ist umstritten."
+    },
+    "FC-036": {
+      "title": "Der Wechsel ist individuell",
+      "claim": "Die Umstellung auf überwiegend Fett und Ketone geschieht meist 12–36 Stunden nach der letzten Mahlzeit – bei manchen früher, bei anderen später.",
+      "why": "Der Zeitpunkt hängt davon ab, wie voll dein Glykogenspeicher war. Ein kohlenhydratreiches Abendessen und viel Sitzen schieben ihn hinaus; kohlenhydratärmere Mahlzeiten und Bewegung bringen ihn früher.",
+      "do": "Ein Spaziergang während des Fastens und eine kohlenhydratärmere letzte Mahlzeit beschleunigen den Wechsel."
+    },
+    "FC-037": {
+      "title": "Ketone versorgen das Gehirn",
+      "claim": "Dein Gehirn lebt nicht nur von Glukose. Mit fortschreitendem Fasten nutzt es zunehmend Ketone, und Studien zeigen keine Einbußen bei Aufmerksamkeit oder Gedächtnis.",
+      "why": "In der Leber gebildete Ketone gelangen ins Gehirn und ersetzen einen großen Teil seines Glukosebedarfs. Das schont Muskeleiweiß und hält dich wach.",
+      "do": "Arbeite und fahr Auto wie gewohnt. Fühlst du dich benebelt, prüf zuerst Salz und Wasser.",
+      "counter": "Der Ketonanteil des Gehirns erreicht ~60–70 % erst nach Wochen; in den ersten Tagen ist er niedriger."
+    },
+    "FC-038": {
+      "title": "Autophagie – ehrlich betrachtet",
+      "claim": "Fasten fördert die Autophagie, das Recycling verbrauchter Zellbestandteile. Doch niemand weiß genau, wann sie beim Menschen beginnt oder ihren Höhepunkt erreicht.",
+      "why": "Essen, vor allem Eiweiß und Kohlenhydrate, schaltet die Autophagie über mTOR ab. Beim Menschen steigen Marker nach 24–36 Stunden Fasten, doch die gängigen Stundenangaben stammen aus Tierstudien.",
+      "do": "Lange Pausen ohne Snacks geben den Zellen Zeit mit gelöster Bremse. Betrachte jede Stundenangabe als Schätzung."
+    },
+    "FC-039": {
+      "title": "Tag zwei ist der schwerste",
+      "claim": "Bei längerem Fasten erreicht der Hunger meist um Tag zwei seinen Höhepunkt und lässt dann nach. Viele fühlen sich danach ungewöhnlich klar und wohl.",
+      "why": "Ghrelin, das Hungerhormon, erreicht an Tag zwei seinen Gipfel und sinkt, während die Ketone steigen; Berichte aus Fastenkliniken verzeichnen danach kaum noch Hunger.",
+      "do": "Ist Tag zwei hart, rechne damit, dass es leichter wird. Beurteil nicht das ganze Fasten nach seinem schwersten Tag."
+    },
+    "FC-040": {
+      "title": "Was die Waage sagt",
+      "claim": "Echter Fettverlust beim Fasten liegt bei etwa 0,25 kg pro Tag. Der Rest ist Wasser, das zurückkommt, wenn du isst.",
+      "why": "Der Energiebedarf eines Tages (~2.000 kcal) verbrennt etwa ein Viertelkilo Fett. Glykogen bindet rund das Dreifache seines Gewichts an Wasser, das abgegeben und später wieder eingelagert wird.",
+      "do": "Bewerte ein Fasten nach dem Gewicht, das eine Woche später noch unten ist."
+    },
+    "FC-041": {
+      "title": "Wachstumshormon steigt",
+      "claim": "Fasten ist ein starker natürlicher Anreiz für das Wachstumshormon: etwa das Fünffache bei zwei Tagen Fasten.",
+      "why": "Mahlzeiten und Insulin unterdrücken das Wachstumshormon. Ohne Essen werden seine Pulse größer, das hilft, Fett freizusetzen, und bremst den Abbau von Muskeleiweiß.",
+      "counter": "Ein energiesparendes Signal, kein Anti-Aging- oder Muskelaufbausignal. IGF-1 sinkt gleichzeitig; die Studien sind klein und an schlanken Männern."
+    },
+    "FC-042": {
+      "title": "Kein Hungermodus bei kurzem Fasten",
+      "claim": "Kurzes Fasten versetzt dich nicht in den „Hungermodus“. Der Ruheenergieverbrauch stieg bis Tag vier um etwa 12 %.",
+      "why": "Noradrenalin steigt, um gespeicherte Energie freizusetzen und dich wach genug für die Nahrungssuche zu halten – das Gegenteil von Herunterfahren.",
+      "do": "Rechne mit Energie, nicht mit Trägheit. Müdigkeit deutet meist auf zu wenig Salz hin.",
+      "counter": "Kleine Studie an schlanken Erwachsenen. Sehr viel längeres Fasten senkt den Energieverbrauch irgendwann doch."
+    },
+    "FC-043": {
+      "title": "Zucker fürs Gehirn sparen",
+      "claim": "Nach zwei, drei Tagen reagieren die Muskeln vorübergehend schwächer auf Insulin, um Glukose fürs Gehirn zu sparen. Das ist normal und vergeht nach dem Essen.",
+      "why": "Aus den Speichern freigesetztes Fett überschwemmt die Muskeln und blockiert ihre Glukoseaufnahme. Höhere Werte spät in einem langen Fasten oder kurz danach sind zu erwarten.",
+      "do": "Beurteil deine Insulingesundheit zwischen den Fastenperioden: Wiederholtes Fasten mit Fettverlust verbessert sie über Wochen."
+    },
+    "FC-044": {
+      "title": "Muskeln werden geschont, nicht unberührt",
+      "claim": "Der Eiweißabbau ist in den ersten Fastentagen am höchsten und sinkt dann stark, sobald Ketone übernehmen. Er wird langsamer, hört aber nie ganz auf.",
+      "why": "Anfangs stammt Glukose teils aus Aminosäuren. Mit steigenden Ketonen sinkt der Stickstoffverlust; in einer 10-Tage-Studie blieb die Kraft erhalten, die Magermasse nahm leicht ab.",
+      "do": "Schütze deine Muskeln mit Krafttraining und genug Eiweiß an Esstagen."
+    },
+    "FC-045": {
+      "title": "Erneuerung: was bekannt ist",
+      "claim": "Mehrtägiges Fasten räumt bei Mäusen alte Immunzellen ab und löst beim Wiederessen Erneuerung aus. Beim Menschen ist das nicht belegt.",
+      "why": "Langes Fasten senkt IGF-1 und Wachstumssignale und bringt Stammzellen zur Selbsterneuerung; normales tägliches Fasten bewegt IGF-1 kaum."
+    },
+    "FC-046": {
+      "title": "Bleib in Bewegung",
+      "claim": "Mach beim Fasten weiter wie gewohnt: gehen, arbeiten, trainieren. Bewegung schützt Muskeln und Knochen bei längerem Fasten.",
+      "why": "Gespeichertes Fett liefert die Energie. Nicht das Fasten, sondern die Untätigkeit verursachte den Großteil des Muskel- und Knochenverlusts bei berühmten Langzeitfasten im Liegen.",
+      "do": "Geh täglich spazieren und halt leichtes Krafttraining bei; fahr zurück, wenn dir schwach wird."
+    },
+    "FC-108": {
+      "title": "Was Fasten wirklich bewirkt",
+      "claim": "Regelmäßiges Fasten senkt Gewicht, Insulin, Blutzucker, Blutdruck und Entzündungswerte – und es ist einfach, kostenlos und mit jeder Ernährung vereinbar.",
+      "why": "Es verzichtet zeitweise auf alles statt dauerhaft auf einiges. In Studien folgen die meisten Vorteile dem Gewichtsverlust – etwa wie tägliches Kaloriensparen bei gleichem Verlust.",
+      "do": "Sein wahrer Vorteil ist das Durchhalten: Wähl die Form, die du beibehalten kannst."
+    },
+    "FC-131": {
+      "title": "Prädiabetes ist häufig und still",
+      "claim": "Mehr als die Hälfte der Erwachsenen in den USA hat Diabetes oder Prädiabetes, und die meisten mit Prädiabetes wissen es nicht.",
+      "why": "Prädiabetes macht selten Beschwerden und bleibt deshalb jahrelang unbemerkt, während die Schäden beginnen.",
+      "do": "Lass deinen HbA1c- oder Nüchternblutzucker messen, besonders wenn du Gewicht am Bauch trägst."
+    },
+    "FC-142": {
+      "title": "Brennstoff für einen Monat",
+      "claim": "Selbst ein schlanker Erwachsener trägt genug Körperfett, um den Energiebedarf von mehr als einem Monat zu decken.",
+      "why": "Bei 70 kg und 15 % Körperfett sind das etwa 10 kg Fett, rund 80.000 kcal – gegenüber etwa 2.000 kcal in Glykogen."
+    },
+    "FC-002": {
+      "title": "Diabetes-Medikamente? Erst planen",
+      "claim": "Fasten mit Insulin oder Diabetes-Tabletten ohne Plan kann gefährliche Unterzuckerungen auslösen. Dein Arzt senkt die Dosis an Fastentagen meist.",
+      "why": "Die meisten Diabetesmittel sind für Tage dosiert, an denen du isst. Fällt das Essen weg, wirkt dieselbe Dosis zu stark; wiederholte Unterzuckerungen bedeuten eine zu hohe Dosis, kein gescheitertes Fasten.",
+      "do": "Vereinbare Dosen und Zielwerte mit deinem Arzt, miss den Zucker 2–4-mal täglich und ändere Insulin nie auf eigene Faust."
+    },
+    "FC-003": {
+      "title": "Zeichen einer Unterzuckerung",
+      "claim": "Zittern, Schwitzen, plötzlicher Hunger, Nervosität, Verwirrtheit oder Schwäche können auf Unterzuckerung hinweisen, vor allem mit Diabetes-Medikamenten.",
+      "why": "Ohne Medikamente hält die Leber den Zucker stabil (bei langem Fasten oft 60–75 mg/dl bzw. 3,3–4,2 mmol/l, ohne Beschwerden). Mit Medikamenten kann er schnell abstürzen, und schwere Unterzuckerungen sind gefährlich.",
+      "do": "Nimm sofort Zucker (Saft, Traubenzucker), auch wenn das Fasten damit endet, und ruf dann deinen Arzt an."
+    },
+    "FC-004": {
+      "title": "Ketose ist keine Ketoazidose",
+      "claim": "Ketose beim Fasten ist normal. Ketoazidose ist etwas anderes und gefährlich – ein Risiko bei Typ-1-Diabetes oder SGLT2-Hemmern (Wirkstoffe auf „-gliflozin“).",
+      "why": "In der Ketose ist Insulin niedrig, aber vorhanden, und Ketone werden als Brennstoff genutzt. Bei der Ketoazidose lässt zu wenig Insulin die Ketone sich anhäufen, manchmal sogar bei normalem Blutzucker.",
+      "do": "Typ-1-Diabetes oder ein „-gliflozin“-Medikament: nicht ohne ausdrücklichen ärztlichen Plan fasten."
+    },
+    "FC-005": {
+      "title": "Wenn Fasten den Zucker nicht mehr senkt",
+      "claim": "Senkt Fasten deinen Blutzucker nicht mehr, frag deinen Arzt nach LADA – einem langsam verlaufenden Autoimmun-Diabetes, der oft für Typ 2 gehalten wird.",
+      "why": "Bei LADA ist das Insulin eher niedrig als hoch, daher hilft Fasten viel weniger und eine Ketoazidose wird möglich. C-Peptid und Antikörpertests unterscheiden beide."
+    },
+    "FC-006": {
+      "title": "Blutdrucksenker und Fasten",
+      "claim": "Fasten senkt den Blutdruck. Mit Blutdrucksenkern oder Entwässerungstabletten kann er zu tief fallen – mit Schwindel beim Aufstehen.",
+      "why": "Sinkendes Insulin lässt die Nieren Salz und Wasser ausscheiden, was die Wirkung der Medikamente verstärkt.",
+      "do": "Miss beim Fasten deinen Blutdruck zu Hause, steh langsam auf und lass deinen Arzt die Dosis anpassen. Setz Herzmedikamente nie selbst ab."
+    },
+    "FC-007": {
+      "title": "Medikamente, die Essen brauchen",
+      "claim": "Aspirin, Metformin, Eisen- und Magnesiumtabletten können einem leeren Magen zusetzen. Frag, ob du sie in deinem Essensfenster nehmen solltest.",
+      "why": "Aspirin reizt die Magenschleimhaut; Metformin verursacht Übelkeit oder Durchfall; Eisen Schmerzen und Verstopfung; Magnesium weichen Stuhl. Essen puffert das ab.",
+      "do": "Lass verordnete Medikamente nie einfach weg. In der Apotheke hilft man dir, die Einnahme zu planen."
+    },
+    "FC-008": {
+      "title": "Kortison: nie eine Dosis auslassen",
+      "claim": "Nimmst du Kortison als Ersatz bei Nebenniereninsuffizienz oder dauerhaft Prednisolon, faste nicht ohne deinen Endokrinologen – und lass nie eine Dosis aus.",
+      "why": "Ohne genug Cortisol kann der Körper beim Fasten Blutzucker und Blutdruck nicht halten; eine Addison-Krise ist ein echtes Risiko."
+    },
+    "FC-009": {
+      "title": "Lithium oder Marcumar? Erst klären",
+      "claim": "Unter Lithium können Flüssigkeitsmangel oder weniger Salz die Spiegel gefährlich erhöhen. Unter Marcumar oder Warfarin kann eine veränderte Ernährung den INR-Wert verschieben.",
+      "why": "Die Nieren behandeln Lithium wie Natrium und halten es zurück, wenn Salz und Wasser fehlen. Vitamin-K-Antagonisten wirken je nach Vitamin-K-Zufuhr und Leberstoffwechsel unterschiedlich.",
+      "do": "Stimm einen Plan mit deinem Arzt ab, trink ausreichend und lass die Werte zu Beginn häufiger kontrollieren."
+    },
+    "FC-010": {
+      "title": "Schilddrüsenmedikamente und Fasten",
+      "claim": "Mit Schilddrüsenmedikamenten lass deine Werte prüfen, wenn du mit dem Fasten beginnst oder abnimmst. Die nötige Dosis kann sich ändern.",
+      "why": "Gewichtsverlust und weniger Entzündung können den Bedarf senken; Beschwerden sind ein schlechter Maßstab. Faste länger erst bei stabilen Werten, nicht während einer Dosisanpassung.",
+      "do": "Herzrasen, Unruhe, Hitzeempfindlichkeit oder schlechter Schlaf beim Fasten: Schilddrüse prüfen lassen."
+    },
+    "FC-011": {
+      "title": "Mit Abnehmspritzen",
+      "claim": "Mit Semaglutid oder Tirzepatid sind Eiweiß, Krafttraining und Flüssigkeit wichtiger als längeres Fasten – plane jedes Fasten mit deinem Arzt.",
+      "why": "Diese Mittel senken den Appetit bereits stark, Muskelverlust und Austrocknung durch Übelkeit werden zum Risiko. Zusammen mit Insulin oder Sulfonylharnstoffen werden Unterzuckerungen wahrscheinlicher.",
+      "do": "Nutz die Zeit für dauerhafte Gewohnheiten: Innerhalb eines Jahres nach dem Absetzen kehren meist zwei Drittel des verlorenen Gewichts zurück."
+    },
+    "FC-012": {
+      "title": "Gicht oder Nierensteine",
+      "claim": "Fasten erhöht die Harnsäure. Hattest du Gicht oder Nierensteine, sprich vor längerem Fasten mit deinem Arzt und trink viel.",
+      "why": "Ketone konkurrieren mit der Harnsäure um die Ausscheidung über die Nieren, und weniger Flüssigkeit konzentriert den Urin. Etwa 6 % bekamen unter langfristiger ketogener Ernährung Steine.",
+      "do": "Halte den Urin hell; frag, ob du Harnsäuremedikamente beim Fasten weiter nehmen sollst."
+    },
+    "FC-013": {
+      "title": "Niere, Herz oder Krebs: erst Facharzt",
+      "claim": "Mit einer Nieren- oder Herzerkrankung oder mit Krebs faste nur mit Zustimmung deines Facharztes, auch wenn erste Studien vielversprechend sind.",
+      "why": "Kleine Studien zeigen Vorteile (bessere Herzfunktion nach Infarkt, weniger Eiweiß im Urin bei Diabetes), doch Elektrolyte, Medikamente und Gewichtsverlust bergen bei diesen Erkrankungen größere Risiken.",
+      "do": "Bei Nierenerkrankung Magnesium oder Kalium nur mit ärztlicher Zustimmung ergänzen."
+    },
+    "FC-014": {
+      "title": "Gallensteine und schnelles Abnehmen",
+      "claim": "Schnelles Abnehmen erhöht das Risiko für Gallensteine. Iss zu den Mahlzeiten etwas natürliches Fett und sprich mit deinem Arzt, wenn du Gallenkoliken hattest.",
+      "why": "Galle, die ungenutzt in der Gallenblase steht, kann zu Steinen auskristallisieren. Sehr fettarmes Essen und schneller Gewichtsverlust fördern diesen Stau."
+    },
+    "FC-028": {
+      "title": "Blutzuckersenkende Kräuter summieren sich",
+      "claim": "Bittermelone, Zimt und manche Tees können den Blutzucker senken. Mit Diabetes-Medikamenten erhöht das das Unterzuckerungsrisiko.",
+      "why": "Ihre leichte blutzuckersenkende Wirkung kommt zu der des Medikaments hinzu, und beim Fasten fehlt das Essen, das sie abpuffert."
+    },
+    "FC-123": {
+      "title": "PCOS und Insulin",
+      "claim": "PCOS, die häufigste Hormonstörung bei Frauen im gebärfähigen Alter, wird von Insulinresistenz angetrieben – auch bei schlanken Frauen.",
+      "why": "Hohes Insulin bringt die Eierstöcke dazu, zu viele männliche Hormone zu bilden, und stört den Eisprung; sinkt das Insulin, normalisiert sich der Zyklus oft.",
+      "do": "Unregelmäßige Periode, Akne oder vermehrte Behaarung bei Bauchfett? Frag deinen Arzt nach PCOS."
+    },
+    "FC-130": {
+      "title": "Typ 2 heißt zu viel Insulin",
+      "claim": "Bei Typ-2-Diabetes ist das Insulin meist hoch, nicht niedrig – und die Erkrankung lässt sich oft durch Ernährung in Remission bringen.",
+      "why": "Fett in Leber und Bauchspeicheldrüse treibt die Resistenz an und schwächt die Insulinausschüttung; baut es sich ab, kann die Kontrolle zurückkehren, besonders früh im Verlauf.",
+      "do": "Verfolg die Remission mit deinem Arzt über den HbA1c. Setz Medikamente nie selbst ab."
+    },
+    "FC-132": {
+      "title": "Hoher Morgenzucker beim Fasten",
+      "claim": "Höherer Blutzucker am Morgen oder bei langem Fasten ist kein Versagen. Es ist deine Leber, die gespeicherten Zucker freigibt.",
+      "why": "Vor dem Aufwachen und beim Fasten schieben Hormone gespeicherte Glukose ins Blut (Dawn-Phänomen). Bei Insulinresistenz zeigt sich das in den Messwerten.",
+      "do": "Achte auf den Verlauf über Wochen, nicht auf einen einzelnen Wert."
+    },
+    "FC-133": {
+      "title": "Religiöses Fasten mit Erkrankung",
+      "claim": "Mit Diabetes, Nierenerkrankung oder Entwässerungstabletten braucht religiöses Trockenfasten einen ärztlichen Plan – die meisten Traditionen erlauben Ausnahmen oder Wasser.",
+      "why": "Verzicht auf Essen und Wasser zugleich erhöht das Risiko für Austrocknung, Unterzuckerung und niedrigen Blutdruck; Leitlinien zum Ramadan stufen das Risiko ein und passen die Einnahmezeiten an."
+    },
+    "FC-023": {
+      "title": "Ein Rhythmus, keine Strafe",
+      "claim": "Fasten ist keine Buße fürs Zuvielessen. Nutze es als geplanten Rhythmus, nicht um eine Mahlzeit „wiedergutzumachen“.",
+      "why": "Verzicht als Ausgleich ist ein bekanntes Warnmuster für gestörtes Essverhalten und macht Essen zur Schuldfrage."
+    },
+    "FC-050": {
+      "title": "Hunger kommt in Wellen",
+      "claim": "Hunger baut sich auf, erreicht einen Höhepunkt und ebbt ab, oft innerhalb von 30–45 Minuten – auch wenn du nichts isst. Er steigt nicht immer weiter.",
+      "why": "Ghrelin steigt um deine gewohnten Essenszeiten herum und fällt dann von selbst wieder, ob Essen kommt oder nicht.",
+      "do": "Trink etwas Warmes, fang eine Aufgabe an, geh raus. Plan zur gewohnten Essenszeit einen Spaziergang oder ein Telefonat."
+    },
+    "FC-051": {
+      "title": "Morgens ist es am leichtesten",
+      "claim": "Die meisten haben gegen 8 Uhr morgens am wenigsten und gegen 20 Uhr am meisten Hunger – egal, wann sie zuletzt gegessen haben.",
+      "why": "Der Appetit folgt der inneren Uhr, und Hormone vor dem Morgengrauen setzen Energiereserven frei, bevor du aufwachst.",
+      "do": "Die Nachtpause durch ein späteres Frühstück zu verlängern, ist oft der leichteste erste Schritt."
+    },
+    "FC-052": {
+      "title": "Viel Hunger ist erlernt",
+      "claim": "Uhrzeiten, Orte, Bildschirme und Gerüche können Hunger auslösen wie Pawlows Glocke. Erkenne den Auslöser und benenne ihn: Reiz, kein Bedarf.",
+      "why": "Wird Essen immer wieder mit Zeiten und Situationen verknüpft, lernt das Gehirn, auf diesen Reiz hin Speichel, Insulin und Hunger auszuschütten.",
+      "do": "Iss nur am Tisch; an Fastentagen nicht in der Küche kochen, einkaufen oder arbeiten."
+    },
+    "FC-053": {
+      "title": "Ein Wenn-dann-Plan",
+      "claim": "Leg vorher fest, was du tust, wenn der Hunger kommt: „Wenn ich den Kühlschrank öffne, gehe ich zehn Minuten spazieren.“",
+      "why": "Vorgeplante Reaktionen auf bestimmte Auslöser schlagen Willenskraft zuverlässig. Eine Gewohnheit zu ersetzen (Tee statt abendlichem Snack) klappt besser, als sie nur wegzulassen.",
+      "do": "Halte 3–5 schnelle Alternativen bereit: Wasser, Tee, einen Spaziergang, einen Anruf, eine kleine Aufgabe."
+    },
+    "FC-054": {
+      "title": "Freunde dich mit dem Hunger an",
+      "claim": "Hunger beim Fasten heißt: Du bist auf Kurs, nicht in Gefahr. Mit regelmäßigem Fasten nimmt der Appetit mit der Zeit eher ab.",
+      "why": "Hunger ist meist ein vorübergehendes Hormon- und Gewohnheitssignal; wer ihn als erwarteten Begleiter sieht, ist entspannter, und der Körper gewöhnt sich mit der Übung daran."
+    },
+    "FC-097": {
+      "title": "Gib dir einen Monat",
+      "claim": "Die ersten Fastenversuche sind meist die schwersten. Beurteil das Fasten nach deinem fünften Versuch, nicht nach dem ersten.",
+      "why": "Hungergewohnheiten, erlernte Reaktionen und die Umstellung auf Fett passen sich mit jeder Wiederholung an; dein Körper lernt, schneller in die Fettverbrennung zu kommen.",
+      "do": "Iss am Vorabend eine einfache, selbst gekochte Mahlzeit mit wenig Zucker und Stärke – das macht den nächsten Tag leichter."
+    },
+    "FC-098": {
+      "title": "Früher aufhören zählt trotzdem",
+      "claim": "Ein Fasten, das früher endet, zählt trotzdem. Nach 22 von 24 Stunden aufzuhören heißt 22 Stunden Nutzen, kein Scheitern.",
+      "why": "Der Nutzen wächst Stunde um Stunde. Wer Teilerfolge als Erfolge wertet, baut das Selbstvertrauen auf, das längere Fastenzeiten möglich macht."
+    },
+    "FC-099": {
+      "title": "Ein Bissen setzt nichts zurück",
+      "claim": "Ein paar Nüsse, ein Stück Käse oder ein Bissen Salat setzen dein Fasten nicht auf null zurück. Mach einfach weiter.",
+      "why": "Eine winzige Menge hebt das Insulin kurz an, dann sinkt es wieder und die Fettverbrennung läuft weiter. Ein ausgelassener Fastentag macht auch Wochen der Routine nicht zunichte.",
+      "do": "Notier es, wenn du magst, und mach weiter. Morgen geht's im Plan weiter."
+    },
+    "FC-101": {
+      "title": "Nicht bei Stress oder auf Reisen",
+      "claim": "Langes Fasten scheitert oft auf Reisen, unter Stress oder bei Feiern. Leg es in ruhigere Wochen.",
+      "why": "Fasten ist selbst ein Stressfaktor. Kommt anderer Stress dazu, steigen Cortisol und Blutzucker, und aus dem Nutzen wird Belastung.",
+      "do": "Verkürze in stressigen Phasen die Fastenzeiten, statt dich mehr zu fordern."
+    },
+    "FC-102": {
+      "title": "Nicht allein",
+      "claim": "Wer mit Partner, Freund oder Gruppe fastet, kommt besser zurecht – vor allem beim Halten des Gewichts.",
+      "why": "Gemeinsame Zeitpläne nehmen zu Hause Essensreize weg, und Verbindlichkeit trägt die Gewohnheit weiter, wenn die erste Motivation nachlässt.",
+      "do": "Lade jemanden ein, mitzufasten, oder erzähl es ein paar unterstützenden Menschen. Nicht allen."
+    },
+    "FC-103": {
+      "title": "Das Essen zwischen den Fasten zählt",
+      "claim": "Eine ungesunde Ernährung kann man nicht wegfasten. Führt ein längeres Fasten zu Heißhungerattacken, schalte einen Gang zurück: noch nicht so weit, nicht schwach.",
+      "why": "Schlechtes Essen zwischen den Fastenzeiten hebt ihren Nutzen nach und nach auf und macht das nächste Fasten schwerer. Fortschritt hält, wenn jede Stufe sitzt, bevor die nächste kommt.",
+      "do": "Bemerke ohne Scham, warum du isst (Gewohnheit, Trost, Gesellschaft), und verlängere das Fasten erst, wenn die Mahlzeiten stabil sind."
+    },
+    "FC-105": {
+      "title": "Schlaf gehört dazu",
+      "claim": "Kurzschläfer, die etwa eine Stunde länger schliefen, aßen ~270 kcal weniger pro Tag und nahmen ganz ohne Ernährungstipps ab.",
+      "why": "Schlafmangel steigert Hunger und den Reiz von Essen und senkt die Insulinsensitivität. Dauerstress bringt Cortisol und Stressessen dazu.",
+      "do": "Schläfst du unter 6,5 Stunden? Früher ins Bett zu gehen ist vielleicht dein leichtester Hebel."
+    },
+    "FC-180": {
+      "title": "Ein Ausrutscher ist kein verlorener Tag",
+      "claim": "Ein Ausrutscher ist eine Mahlzeit, kein verdorbener Tag. Alles-oder-nichts-Denken macht aus kleinen Fehltritten große; Freundlichkeit zu dir selbst verhindert das.",
+      "why": "Nach einem Regelbruch essen gezügelte Esser oft viel mehr (der „Jetzt-ist-es-auch-egal“-Effekt). Selbstmitgefühl nach einem Ausrutscher verringerte späteres Überessen; Selbstkritik verstärkte es.",
+      "do": "Mach am nächsten geplanten Punkt weiter und sprich mit dir, wie du mit einem Freund sprechen würdest."
+    },
+    "FC-181": {
+      "title": "Reite die Welle",
+      "claim": "Heißhunger ist eine Welle. Spür, wo du ihn fühlst, atme und sieh zu, wie er anschwillt und abebbt, ohne ihm nachzugeben.",
+      "why": "Einen Drang wertfrei zu beobachten, unterbricht die automatische Kette von Verlangen zu Handlung; ein kurzes Training dazu schwächte diese Verbindung in einer kontrollierten Studie.",
+      "counter": "Am Rauchen getestet; für Essen gibt es weniger Belege, der Mechanismus ist aber derselbe."
+    },
+    "FC-182": {
+      "title": "Denk zwei Stunden weiter",
+      "claim": "Stell dir vor einem ungeplanten Bissen vor, wie du dich in zwei Stunden und morgen fühlst. Das kühlt den Heißhunger messbar ab.",
+      "why": "Der Blick auf die Folgen aktiviert die Kontrollregionen im Stirnhirn und dämpft die Reaktion des Belohnungssystems auf das begehrte Essen."
+    },
+    "FC-183": {
+      "title": "Reize sind eine echte Kraft",
+      "claim": "Anblick, Duft und Werbung von Essen treiben zuverlässig Essen und Gewichtszunahme an – und das Verlangen übersteigt oft den Genuss, den das Essen bringt.",
+      "why": "Dopamin befeuert das „Wollen“; Genuss läuft über andere Schaltkreise. Reize steigern das Wollen, ohne das Mögen zu steigern – sie zu meiden ist Strategie, keine Schwäche."
+    },
+    "FC-184": {
+      "title": "Gemeinsam essen wir mehr",
+      "claim": "In Gesellschaft essen Menschen deutlich mehr als allein, am meisten mit Freunden und Familie.",
+      "why": "Gemeinsame Mahlzeiten dauern länger und setzen Maßstäbe für Portionen; eine Meta-Analyse bestätigte diesen sozialen Effekt zuverlässig.",
+      "do": "Plane dein Fasten um gemeinsame Mahlzeiten herum, statt gegen sie anzukämpfen, und leg deine Portion fest, bevor du dich setzt."
+    },
+    "FC-185": {
+      "title": "Die nächste Etappe, nicht das Ziel",
+      "claim": "Peil die nächste Etappe an, nicht das Ende des Fastens. Die Motivation steigt, je näher ein Ziel rückt.",
+      "why": "Der Zielgradienten-Effekt: Die Anstrengung wächst mit der gefühlten Nähe, eine Kette naher Ziele trägt dich weiter als ein fernes."
+    },
+    "FC-186": {
+      "title": "Langeweile oder Hunger?",
+      "claim": "Viel „Hunger“ ist Langeweile. Menschen essen, um dem leeren Gefühl der Unterforderung zu entkommen.",
+      "why": "Essen bietet schnelle Anregung und lenkt die Aufmerksamkeit von einem unangenehmen Zustand ohne Beschäftigung ab.",
+      "do": "Frag dich: „Hungrig oder unterfordert?“ Eine Aufgabe, ein Spaziergang oder ein Gespräch beantworten das oft."
+    },
+    "FC-187": {
+      "title": "Durchhalten stärkt das Selbstvertrauen",
+      "claim": "Jedes Fasten, das du schaffst, macht das nächste machbarer. Eigene Erfolge sind die stärkste Quelle von Selbstvertrauen.",
+      "why": "Selbstwirksamkeit wächst vor allem durch eigene Erfolgserlebnisse, nicht durch Überredung – und sie sagt vorher, ob eine neue Gewohnheit bleibt.",
+      "do": "Fang mit Fastenzeiten an, die du schaffst, und steigere dann. Zähl deine geschafften Fasten, nicht die abgebrochenen."
+    },
+    "FC-090": {
+      "title": "Fang mit weniger Snacks an",
+      "claim": "Das leichteste erste Fasten: drei Mahlzeiten, nichts dazwischen. Die meisten Erwachsenen essen heute 5–6-mal am Tag, fast ohne Zeit mit niedrigem Insulin.",
+      "why": "Jeder Snack hebt das Insulin wieder und wirkt wie ein Appetithäppchen. Ohne Snacks entsteht wieder ein tägliches Fettverbrennungsfenster, fast ohne zusätzlichen Hunger.",
+      "do": "Lass dann eine Mahlzeit nach der anderen weg. Derselbe Weg hilft beim Wiedereinstieg nach einer Pause."
+    },
+    "FC-091": {
+      "title": "Der beste Plan ist der, den du durchhältst",
+      "claim": "Es gibt nicht den einen besten Fastenplan. Der richtige ist der, den du beibehalten kannst – und du kannst ihn jederzeit ändern.",
+      "why": "Kurzes tägliches Fasten (16:8, eine Mahlzeit am Tag) hält man am leichtesten durch; längeres, selteneres Fasten wirkt schneller auf Blutzucker und Leberfett, ist aber gesellschaftlich schwieriger.",
+      "do": "Bau eine Routine um ein tägliches Essensfenster auf; leg längere Fastenzeiten in ruhige Wochen."
+    },
+    "FC-092": {
+      "title": "Ein Essensfenster allein bringt wenig",
+      "claim": "In großen Studien brachte ein 16:8-Fenster allein kaum zusätzlichen Gewichtsverlust. Der Nutzen kommt vor allem davon, darin weniger und besser zu essen.",
+      "why": "Bei gleichen Kalorien war zeitlich begrenztes Essen nicht besser als normales Kaloriensparen. Fungs Fasting-Method-Team nutzt 16:8 zum Halten und längeres Fasten zum Abnehmen.",
+      "do": "Nutze das Fenster als Struktur und füll es mit naturbelassenem, eiweißreichem Essen – ohne Snacken.",
+      "counter": "Frühe Essensfenster verbesserten Insulinsensitivität und Blutdruck sogar ohne Gewichtsverlust."
+    },
+    "FC-093": {
+      "title": "Das 24-Stunden-Fasten",
+      "claim": "Von Abendessen zu Abendessen: Du isst an dem Tag trotzdem eine Mahlzeit, Familienessen und Medikamente zum Essen bleiben möglich.",
+      "why": "Frühstück und Mittagessen auszulassen bringt einen ganzen Tag mit niedrigem Insulin, mit wenig Aufwand. Zwei- bis dreimal pro Woche ist ein gängiger Rhythmus."
+    },
+    "FC-094": {
+      "title": "Das 36- und 42-Stunden-Fasten",
+      "claim": "Ein 36-Stunden-Fasten lässt einen ganzen Tag aus, vom Abendessen bis zum Frühstück zwei Tage später; lässt du auch dieses Frühstück aus, sind es 42 Stunden.",
+      "why": "Es umfasst zwei Nächte Schlaf. Fungs Klinik setzt es bei Typ-2-Diabetes dreimal pro Woche unter Begleitung ein und reduziert dann."
+    },
+    "FC-095": {
+      "title": "5:2 und Alternate-Day-Fasting",
+      "claim": "5:2 heißt zwei Tage mit wenig Essen (~500–600 kcal) pro Woche. Beim Alternate-Day-Fasting ist jeder zweite Tag so; beide wirken etwa wie tägliches Kaloriensparen.",
+      "why": "Eine kleine Mahlzeit macht Fastentage leichter. In Studien entsprach der Gewichtsverlust dem täglichen Kaloriensparen; das Insulin verbesserte sich teils stärker, doch mehr Teilnehmende brachen ab."
+    },
+    "FC-096": {
+      "title": "Frühstück oder Abendessen auslassen?",
+      "claim": "Das Frühstück auszulassen ist am leichtesten, das Abendessen am wirksamsten. Wähle danach, was dein Tag zulässt.",
+      "why": "Das Frühstück ist klein, der Hunger gering, und man isst selten in Gesellschaft. Das Abendessen ist die größte Mahlzeit, wenn die Insulinantwort am stärksten ist – aber eben die gesellige."
+    },
+    "FC-100": {
+      "title": "Fasten passt sich deinem Leben an",
+      "claim": "Passe das Fasten deinem Leben an, nicht dein Leben dem Fasten. Feier mit Genuss und faste dann in den Tagen danach.",
+      "why": "Menschen haben Feste und Fasten schon immer abgewechselt. Ein großer Teil der jährlichen Gewichtszunahme fällt auf die Wintertage; der Ausgleich über Wochen zählt mehr als eine Mahlzeit.",
+      "do": "Heute Abend großes Essen? Lass Frühstück und Mittagessen aus. Faste an vollen Wochentagen mehr, an Familienwochenenden weniger."
+    },
+    "FC-104": {
+      "title": "Training gegen Ende",
+      "claim": "Ein guter Zeitpunkt für Sport ist gegen Ende des Fastens – danach eine eiweißreiche Mahlzeit.",
+      "why": "Spät im Fasten ist das Noradrenalin hoch und die Fettverbrennung läuft. In einer Studie verringerte ein 3,5-Tage-Fasten weder Kraft noch Ausdauer.",
+      "do": "Beispiel: ab dem Abendessen fasten, mittags trainieren, danach zu Mittag essen. Fahr zurück, wenn dir schwach wird."
+    },
+    "FC-106": {
+      "title": "Knochen brauchen Belastung",
+      "claim": "Knochen werden nur unter Belastung stärker. Gehen, Treppensteigen und Krafttraining schützen sie weit besser als Kalziumtabletten.",
+      "why": "Knochen bauen sich nach mechanischer Belastung um; Astronauten verlieren trotz guter Ernährung Knochenmasse. Bewegung im Alltag zählt so viel wie das Training im Studio."
+    },
+    "FC-107": {
+      "title": "Erst Therapie, dann Erhaltung",
+      "claim": "Intensives Fasten kann eine zeitlich begrenzte Behandlung sein. Hast du dein Ziel erreicht, ist die Erhaltung viel leichter.",
+      "why": "Kliniken setzen therapeutische Fastenprogramme über Monate ein und gehen dann zu täglichen Essensfenstern plus gelegentlichem längerem Fasten nach Feiertagen über."
+    },
+    "FC-110": {
+      "title": "Ein Plateau durchbrechen",
+      "claim": "Plateaus sind normal. Ändere den Reiz: längeres Fasten, ein anderer Plan oder strengeres Fasten ohne Süßstoff.",
+      "why": "Jede Routine pendelt sich ein, wenn das an Fastentagen verlorene Gewicht dem wieder zugenommenen entspricht. Ein neues Muster bringt den Fortschritt zurück.",
+      "do": "Versuch 24 → 36 → 48 Stunden, eine Mahlzeit am Tag oder gelegentlich ein längeres Fasten. Prüf auch Snacks und Schlaf."
+    },
+    "FC-111": {
+      "title": "Miss mehr als das Gewicht",
+      "claim": "Steht die Waage still, miss deinen Bauchumfang oder mach monatlich ein Foto. Ziel: Bauchumfang unter der halben Körpergröße.",
+      "why": "Wasserschwankungen verbergen Fettverlust über Wochen. Der Bauchumfang zeigt das viszerale Fett, das am stärksten mit Diabetes und Herzkrankheiten zusammenhängt."
+    },
+    "FC-112": {
+      "title": "Dein Körper verteidigt sein Gewicht",
+      "claim": "Nach dem Abnehmen steigt der Appetit um etwa 100 kcal pro Tag und verlorenem Kilo, und der Stoffwechsel verlangsamt sich. Wieder zunehmen ist Biologie, keine Willensschwäche.",
+      "why": "Der Körper verteidigt ein Sollgewicht wie ein Thermostat. Die meisten Kaloriendiäten stagnieren und enden im Jo-Jo; Biggest-Loser-Teilnehmer verbrauchten noch sechs Jahre später ~500 kcal weniger pro Tag.",
+      "do": "Rechne beim Abnehmen mit stärkerem Hunger; regelmäßiges Fasten, Eiweiß und naturbelassenes Essen helfen dir, standzuhalten."
+    },
+    "FC-140": {
+      "title": "Frühstück ist kein Muss",
+      "claim": "Das Frühstück auszulassen lässt dich insgesamt nicht mehr essen: In Studien aßen Frühstücker ~260 kcal mehr pro Tag und waren nicht leichter.",
+      "why": "Die nächste Mahlzeit fällt nur etwas größer aus, die Gesamtmenge sinkt. Die Hormonwelle vor dem Morgengrauen hat dich bereits mit Energie versorgt."
+    },
+    "FC-141": {
+      "title": "Körperfettwaagen täuschen sich beim Fasten",
+      "claim": "Körperfettwaagen und Scans melden beim Fasten oft „Muskelverlust“, der in Wahrheit Wasser und Glykogen ist – und zurückkommt, wenn du isst.",
+      "why": "Diese Geräte schätzen die Magermasse unter der Annahme eines gleichbleibenden Wasserhaushalts; Fasten schwemmt Wasser aus, das sie als verlorene Muskeln lesen.",
+      "do": "Achte beim Fasten lieber auf Kraft und Bauchumfang."
+    },
+    "FC-143": {
+      "title": "Die Schlagzeile vom „91 % Herzrisiko“",
+      "claim": "Die Meldung von 2024 „8-Stunden-Essensfenster erhöht das Herztod-Risiko um 91 %“ stammte aus einer ungeprüften Kongresszusammenfassung auf Basis von zwei Tagen Ernährungsprotokoll.",
+      "why": "Die Teilnehmenden fasteten nicht bewusst, und Ernährungsqualität sowie Unterschiede der Ausgangswerte wurden nicht berichtet – was selbst der Gutachter der AHA bemängelte."
+    },
+    "FC-020": {
+      "title": "Trockenfasten kurz halten",
+      "claim": "Fasten ohne Wasser ist schwerer, riskanter und bringt keinen zusätzlichen Nutzen. Halte Trockenfasten innerhalb eines Tages, wie in der religiösen Praxis.",
+      "why": "Ohne Wasser trocknet der Körper neben dem Fasten aus, das belastet Kreislauf und Nieren und begrenzt, wie lange man sicher fasten kann – ohne Stoffwechselvorteil.",
+      "do": "Trink in den Stunden vor und nach einem Trockenfasten reichlich."
+    },
+    "FC-160": {
+      "title": "Ein uralter Kalender",
+      "claim": "Fast jede Tradition kennt feste Fastentage: Mond- und Wochentagsfasten im Hinduismus, die orthodoxe Fastenzeit, Ramadan, buddhistische Mönche, die nach Mittag nichts mehr essen.",
+      "why": "Lange bevor man den Stoffwechsel verstand, wechselten Kulturen Feste und Fasten ab – als Reinigung und Disziplin. Kreta, das Vorbild der Mittelmeerdiät, fastete an vielen Tagen im Jahr."
+    },
+    "FC-022": {
+      "title": "Kinderwunsch",
+      "claim": "Du möchtest schwanger werden? Vermeide nach dem Eisprung längeres Fasten, du könntest bereits schwanger sein. Setz stattdessen auf vollwertige, nährende Mahlzeiten.",
+      "why": "Eine Schwangerschaft ist ein Grund, nicht zu fasten. In der zweiten Zyklushälfte weißt du es noch nicht – kürzere Essenspausen sind die sicherere Wahl."
+    },
+    "FC-120": {
+      "title": "Fasten im Einklang mit deinem Zyklus",
+      "claim": "In der ersten Zyklushälfte ist der Appetit geringer, nach dem Eisprung höher. Plane längeres Fasten für die Tage 2–14.",
+      "why": "Östrogen dämpft den Appetit, Progesteron regt ihn an, und vor der Periode sinkt die Insulinsensitivität – das macht diese Woche am schwersten.",
+      "do": "In den ein, zwei Wochen vor deiner Periode lieber kürzer fasten und zwischen den Mahlzeiten auf Süßstoff verzichten."
+    },
+    "FC-121": {
+      "title": "Wiegen nach Zyklus",
+      "claim": "Bei Frauen verläuft das Abnehmen in einer Monatswelle. Vergleiche das Gewicht jeweils am selben Zyklustag, nicht von Woche zu Woche.",
+      "why": "Wassereinlagerungen nehmen in der zweiten Zyklushälfte zu und nach der Periode ab – sie verdecken den Fettverlust."
+    },
+    "FC-122": {
+      "title": "Die Perimenopause ändert die Regeln",
+      "claim": "In den Jahren vor der Menopause nehmen Frauen etwa 0,5 kg pro Jahr zu und verlieren Muskelmasse. Das ist hormonell, kein Mangel an Disziplin.",
+      "why": "Sinkendes Östrogen steigert den Appetit und verlagert Fett zum Bauch; schlechter Schlaf beschleunigt das. Nach der Menopause nähert sich das Herzrisiko dem der Männer an.",
+      "do": "Setz auf Krafttraining, Eiweiß und Schlaf; Fasten hilft, aber rechne mit langsameren Fortschritten."
+    },
+    "FC-124": {
+      "title": "Frauen profitieren genauso",
+      "claim": "Frauen nehmen mit Fasten etwa so schnell ab wie Männer; ein 3-Tage-Fasten ließ die Fortpflanzungshormone normalgewichtiger Frauen unverändert.",
+      "why": "Zyklusprobleme entstehen durch wenig Körperfett und Energiemangel, nicht durch das Fasten selbst, bei Frauen mit ausreichenden Reserven.",
+      "counter": "Schlanke, sehr aktive Frauen haben ein höheres Risiko für Energiemangel; langfristige Daten speziell zu Frauen sind begrenzt."
+    }
+  }
+}

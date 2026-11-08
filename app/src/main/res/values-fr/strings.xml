@@ -3,7 +3,7 @@
 	<string name="app_name" translatable="false">FastTrack48</string>
 
 	<string name="action_share">Partager</string>
-	<string name="action_info">Infos</string>
+	<string name="action_info">Bibliothèque</string>
 	<string name="action_about">À propos</string>
 	<string name="action_export">Exporter les jeûnes</string>
 	<string name="action_export_description">Enregistrer votre historique de jeûne au format CSV, iCalendar (.ics) ou ActivityStreams JSON</string>
@@ -57,10 +57,7 @@
 	</string>
 
 	<string name="intro_03_title">Jeûne intermittent</string>
-	<string name="intro_03_description">Le jeûne intermittent constitue un domaine de recherche récent qui montre de
-		nombreux bénéfices au-delà de la simple perte de poids.\n\nPour découvrir ce que nous savons sur le jeûne et ce
-		que dit la recherche, consultez la section Infos de cette application !
-	</string>
+	<string name="intro_03_description">Un domaine de recherche jeune. Certains résultats sont bien établis, beaucoup restent préliminaires.\n\nPour voir ce que l’on sait et la solidité des preuves, ouvrez la Bibliothèque depuis le menu.</string>
 
 	<string name="intro_04_title">Restez motivé grâce aux notifications</string>
 	<string name="intro_04_description">FastTrack48 peut afficher des notifications utiles pour vous motiver pendant
@@ -123,8 +120,9 @@
 
 
 	<string name="log_entry_length">%1$d heures</string>
-	<string name="log_entry_ketosis">Cétose : %1$d heures</string>
-	<string name="log_entry_autophagy">Autophagie : %1$d heures</string>
+	<string name="log_entry_ketosis">Cétose : %1$s heures</string>
+	<string name="log_entry_autophagy">Autophagie : %1$s heures</string>
+	<string name="log_approx">≈%1$s</string>
 
 	<string name="profile_age_label">Âge</string>
 	<string name="profile_age_years">Ans</string>
@@ -188,34 +186,28 @@
 	<string name="fast_fat_burn_label">Combustion des graisses</string>
 
 	<string name="stage_fasting_title">Jeûne</string>
-	<string name="stage_fasting_description">Votre corps utilise ses réserves de glucose. Continuez comme ça !</string>
+	<string name="stage_fasting_description">Votre foie fabrique maintenant son propre glucose, et la graisse prend peu à peu le relais.</string>
 
 	<string name="stage_fat_burning_title">Combustion des graisses</string>
-	<string name="stage_fat_burning_description">Vos réserves de glucose sont épuisées ! Votre corps brûle maintenant des
-		graisses pour produire de l’énergie. Une séance d’entraînement dans les prochaines heures serait optimale.
-	</string>
+	<string name="stage_fat_burning_description">La graisse prend le relais comme carburant. Une marche accélère le basculement.</string>
 
-	<string name="stage_fat_fasting_sweet_spot_title">Zone idéale du jeûne</string>
-	<string name="stage_fat_fasting_sweet_spot_description">Vous êtes dans la zone idéale du jeûne. Continuez comme ça !</string>
+	<string name="stage_fat_fasting_sweet_spot_title">Les cétones montent</string>
+	<string name="stage_fat_fasting_sweet_spot_description">La combustion des graisses bat son plein. La faim vient par vagues ; celle-ci passera aussi.</string>
 
-	<string name="stage_fat_peak_fat_burning_title">Pic de combustion des graisses</string>
-	<string name="stage_fat_peak_fat_burning_description">Votre corps brûle maintenant rapidement les graisses et la cétose
-		a commencé.
-	</string>
+	<string name="stage_fat_peak_fat_burning_title">Début de la cétose</string>
+	<string name="stage_fat_peak_fat_burning_description">Votre cerveau commence à fonctionner avec un carburant tiré des graisses.</string>
 
 	<string name="stage_autophagy_title">Autophagie</string>
-	<string name="stage_autophagy_description">Votre corps a commencé l’autophagie !</string>
+	<string name="stage_autophagy_description">Une journée entière. Vos cellules intensifient l’autophagie et recyclent leurs pièces usées.</string>
 
-	<string name="stage_optimal_autophagy_title">Autophagie optimale</string>
-	<string name="stage_optimal_autophagy_description">L’autophagie bat son plein ! Continuez comme ça ! Entre maintenant
-		et 72 heures, l’autophagie sera très efficace.
-	</string>
+	<string name="stage_optimal_autophagy_title">Autophagie profonde</string>
+	<string name="stage_optimal_autophagy_description">Deux jours. Le recyclage est profond et l’hormone de croissance protège vos muscles. Les durées d’autophagie chez l’humain sont des estimations.</string>
 
 	<string name="phase_glucose">Utilisation du glucose</string>
 	<string name="phase_fat_burning">Combustion des graisses</string>
 	<string name="phase_ketosis">Cétose</string>
 	<string name="phase_autophagy">Autophagie</string>
-	<string name="phase_optimal_autophagy">Autophagie optimale</string>
+	<string name="phase_optimal_autophagy">Autophagie profonde</string>
 
 
 
@@ -225,24 +217,16 @@
 	</string>
 
 	<string name="notification_fat_burn_title">Phase du jeûne : combustion des graisses</string>
-	<string name="notification_fat_burn_content">Vous avez épuisé vos réserves de glucose et votre corps consomme maintenant
-		des graisses pour produire de l’énergie.
-	</string>
+	<string name="notification_fat_burn_content">L’insuline est basse et la graisse prend le relais comme carburant.</string>
 
 	<string name="notification_ketosis_title">Phase du jeûne : cétose</string>
-	<string name="notification_ketosis_content">Votre corps a maintenant décomposé suffisamment de réserves de graisse pour
-		entrer en cétose.
-	</string>
+	<string name="notification_ketosis_content">Les cétones montent : votre cerveau commence à fonctionner avec un carburant tiré des graisses.</string>
 
 	<string name="notification_autophagy_title">Phase du jeûne : autophagie</string>
-	<string name="notification_autophagy_content">Votre corps est entré en autophagie. Les cellules anciennes ou endommagées
-		sont maintenant dégradées pour produire de l’énergie.
-	</string>
+	<string name="notification_autophagy_content">Vos cellules intensifient l’autophagie et recyclent leurs pièces usées.</string>
 
-	<string name="notification_optimal_autophagy_title">Phase du jeûne : autophagie optimale</string>
-	<string name="notification_optimal_autophagy_content">Votre corps est en autophagie depuis un certain temps maintenant, et
-		votre santé cellulaire en tire de grands bénéfices.
-	</string>
+	<string name="notification_optimal_autophagy_title">Phase du jeûne : autophagie profonde</string>
+	<string name="notification_optimal_autophagy_content">Deux jours. L’hormone de croissance protège vos muscles pendant que la graisse fait le travail.</string>
 
 	<string name="notification_fasting_channel_name">Statut du jeûne</string>
 	<string name="notification_fasting_channel_description">Notification persistante indiquant votre statut de jeûne actuel et
@@ -270,12 +254,7 @@
 	</string>
 
 	<string name="info_dialog_positive">Cool !</string>
-
-	<string name="info_page_title_info">Infos</string>
-	<string name="info_page_title_tips">Conseils</string>
-
-	<string name="title_activity_info">Infos sur le jeûne</string>
-	<string name="log_total_autophagy">🧬 Autophagie :</string>
+	<string name="log_total_autophagy">🧬 Autophagie :</string>
 	<string name="log_total_ketosis">🔥 Cétose :</string>
 	<string name="stat_total_fasts">Nombre total de jeûnes</string>
 	<string name="stat_total_fasted">Durée totale de jeûne</string>
@@ -321,86 +300,34 @@
 
 	<!-- Fasting journey stages (dial milestones) -->
 	<string name="journey_stage_0_title">La glycémie augmente</string>
-	<string name="journey_stage_0_body">Vous venez de manger et votre sang le sait. La glycémie augmente — chez les personnes
-		en bonne santé, elle atteint un pic inférieur à ~140 mg/dL en 30–60 min — et votre pancréas libère de l’insuline,
-		l’hormone qui fait entrer le glucose dans les cellules et stocke l’excédent sous forme de glycogène.\n\nC’est
-		l’état nourri : l’énergie abonde, le stockage est prioritaire et le mode de combustion des graisses est à l’arrêt.
-		\n\nIl ne reste plus qu’à digérer. Le chrono est lancé.
-	</string>
+	<string name="journey_stage_0_body">Le glucose afflue dans le sang et atteint son pic en moins d’une heure (sous ~1,40 g/l chez une personne en bonne santé). L’insuline répond et range l’excédent sous forme de glycogène et de graisse.\n\nMode stockage : la combustion des graisses est en pause.\n\nUne marche de 10 minutes maintenant aplatit le pic. Le compteur tourne.</string>
 
 	<string name="journey_stage_1_title">La glycémie diminue</string>
-	<string name="journey_stage_1_body">L’insuline baisse, le glucagon augmente
-		et votre foie commence à libérer le glycogène stocké pour maintenir la glycémie autour de ~70–100 mg/dL.\n\nVous
-		passez de l’état nourri à l’état post-absorptif — le relais silencieux où le corps cesse de stocker et commence à
-		dépenser.\n\nCette première pointe de faim est surtout liée à la baisse de l’insuline. Elle disparaît en une ou deux
-		minutes.
-	</string>
+	<string name="journey_stage_1_body">L’insuline reflue, le glucagon monte et votre foie commence à puiser dans le glycogène pour maintenir la glycémie entre 0,70 et 1,00 g/l.\n\nLe corps cesse de stocker et commence à dépenser.\n\nLa faim à l’heure habituelle du repas est une vague de ghréline apprise, pas un réservoir vide. Elle monte, puis passe.</string>
 
 	<string name="journey_stage_2_title">La glycémie se stabilise</string>
-	<string name="journey_stage_2_body">Votre foie est désormais le seul fournisseur : il libère progressivement du glucose à
-		partir du glycogène (~100 g de réserve) pour maintenir votre glycémie stable. Votre cerveau consomme à lui seul
-		~120 g de glucose par jour, cette stabilité est donc loin d’être anodine.\n\nNi creux ni pic : la glycogénolyse
-		maintient le niveau et éloigne l’hypoglycémie.\n\nDe nombreuses personnes signalent une concentration étonnamment
-		nette à ce stade. Ce n’est pas forcément une impression : le carburant est régulier.
-	</string>
+	<string name="journey_stage_2_body">Votre foie est désormais le seul fournisseur : il libère le glucose au goutte-à-goutte à partir d’environ 100 g de glycogène. Votre cerveau à lui seul en brûle ~120 g par jour.\n\nNi pic ni chute : une ligne plate et stable.\n\nBeaucoup ont l’esprit clair et concentré à ce stade. L’eau ou le thé aident à le garder.</string>
 
 	<string name="journey_stage_3_title">Néoglucogenèse</string>
-	<string name="journey_stage_3_body">Le glycogène diminue, alors le foie se met à fabriquer du glucose à partir de lactate,
-		de glycérol et d’acides aminés — un processus appelé néoglucogenèse. Vers ~16 h, il fournit déjà près de la moitié
-		de votre production de glucose (Cahill, Annu Rev Nutr 2006).\n\nC’est l’intelligence biologique de votre organisme :
-		votre corps ne laisse pas votre cerveau manquer de glucose.\n\nLa faim et le léger creux que vous pouvez ressentir
-		sont liés au changement de phase.
-	</string>
+	<string name="journey_stage_3_body">Le glycogène s’épuise, alors votre foie fabrique du glucose de toutes pièces : à partir de lactate, de glycérol et d’acides aminés. Vers la 22e heure, c’est la source principale de votre glucose (Rothman, Science 1991).\n\nVotre cerveau reste ainsi approvisionné.\n\nUne fringale ? C’est l’habitude de l’heure du repas. Une boisson chaude ou une marche vous fait passer la vague.</string>
 
 	<string name="journey_stage_4_title">Combustion des graisses</string>
-	<string name="journey_stage_4_body">L’insuline est enfin suffisamment basse pour permettre l’accès aux réserves de graisse.
-		La lipolyse libère des acides gras, le foie commence à les transformer en corps cétoniques et vous passez de
-		l’utilisation du glucose à la combustion des graisses.\n\nLa sensibilité à l’insuline augmente et les réserves de
-		graisse commencent à être consommées — c’est le cœur métabolique de l’efficacité du jeûne.\n\nUn goût métallique
-		ou un léger mal de tête peut accompagner l’apparition des premières cétones. Le feu est allumé 🔥.
-	</string>
+	<string name="journey_stage_4_body">L’insuline est maintenant assez basse pour ouvrir vos réserves de graisse : les acides gras sont libérés et le foie en transforme une partie en cétones.\n\nDésormais, la graisse stockée fournit une part croissante de votre énergie.\n\nLégers maux de tête ou fatigue ? Souvent un manque de sel. Une pincée dans de l’eau règle cela en quelques minutes.</string>
 
 	<string name="journey_stage_5_title">Cétose</string>
-	<string name="journey_stage_5_body">Le taux de corps cétoniques dans le sang franchit ~0,5 mmol/L — la cétose
-		nutritionnelle — et continue d’augmenter. Votre cerveau ne peut pas oxyder directement les acides gras, mais il
-		fonctionne très bien grâce à cet afflux de corps cétoniques, ce qui évite d’avoir à sacrifier du muscle pour
-		fabriquer du glucose.\n\nBeaucoup de personnes signalent une clarté mentale inhabituelle et une faim qui s’atténue
-		d’elle-même — les corps cétoniques contribuent à réduire l’appétit.\n\nVingt-quatre heures. Votre corps privilégie
-		désormais le carburant qu’il fabrique lui-même.
-	</string>
+	<string name="journey_stage_5_body">Les cétones montent vers 0,5 mmol/l, le seuil de la cétose. Chez beaucoup, c’est maintenant ; un dernier repas riche en glucides ou une journée sédentaire la retardent.\n\nVotre cerveau tourne bien aux cétones, ce qui épargne les protéines musculaires.\n\nLa faim revient encore par vagues, souvent aux heures habituelles des repas ; chacune passe.</string>
 
 	<string name="journey_stage_6_title">Autophagie</string>
-	<string name="journey_stage_6_body">Une journée entière s’est écoulée et l’auto-nettoyage s’intensifie : l’autophagie —
-		le processus par lequel les cellules démontent les protéines et les organites endommagés et en recyclent les
-		composants (le mécanisme qui a valu à Ohsumi le prix Nobel 2016).\n\nVoyez-la comme une maintenance que vous ne
-		pouvez pas acheter — un nettoyage associé à la longévité et à un risque de maladie plus faible.\n\nFatigue ou mal
-		de tête ? Sel et eau. Un travail en profondeur est en cours.
-	</string>
+	<string name="journey_stage_6_body">Vos cellules intensifient l’autophagie : elles démontent protéines et organites usés et en recyclent les pièces (prix Nobel, Ohsumi 2016). Chez l’humain, les marqueurs augmentent après 24 à 36 h ; les horaires précis restent des estimations.\n\nChez l’animal, ce nettoyage est associé à une vie plus longue et en meilleure santé.\n\nLe deuxième jour, la faim est souvent à son maximum, puis elle s’estompe. Le sel et l’eau aident.</string>
 
 	<string name="journey_stage_7_title">Pic d’hormone de croissance</string>
-	<string name="journey_stage_7_body">Deux jours, et l’hormone de croissance augmente fortement — un jeûne d’environ 2 jours
-		peut multiplier sa sécrétion par environ 5 (Ho, J Clin Invest 1988). Son rôle, à ce stade : protéger la masse
-		maigre et stimuler davantage le métabolisme des graisses.\n\nVous continuez donc à brûler des graisses tout en
-		préservant le muscle que vous vous attendriez à perdre — une adaptation remarquablement élégante.\n\nCe regain
-		d’énergie inattendu que beaucoup décrivent ici ? C’est l’hormone qui parle.
-	</string>
+	<string name="journey_stage_7_body">En deux jours de jeûne, l’hormone de croissance est multipliée par cinq environ (Hartman, J Clin Endocrinol Metab 1992). Elle libère les graisses et aide à protéger les muscles.\n\nLa noradrénaline vous garde alerte et le métabolisme de repos augmente.\n\nSi vous vous sentez plus énergique, voilà pourquoi : votre corps se mobilise au lieu de s’éteindre.</string>
 
 	<string name="journey_stage_8_title">Sensibilité à l’insuline</string>
-	<string name="journey_stage_8_body">Avec une insuline maintenue basse pendant plusieurs jours, vos cellules redeviennent
-		plus sensibles à cette hormone — la sensibilité à l’insuline revient vers un niveau plus sain, à l’inverse de
-		la résistance qui précède le diabète de type 2.\n\nLa glycémie reste dans une plage stable et étroite ; la
-		satiété vient facilement.\n\nVous réglez ainsi un système que la plupart des gens ne modifient jamais
-		délibérément.
-	</string>
+	<string name="journey_stage_8_body">Pour l’instant, la sensibilité à l’insuline baisse volontairement : vos muscles répondent moins à l’insuline pour laisser le glucose au cerveau (Hoeks, Diabetes 2010). Cela s’inverse dès que vous mangez.\n\nLes cétones fournissent désormais une grande part du carburant de votre cerveau ; la graisse fait le gros du travail.\n\nL’amélioration durable de la sensibilité à l’insuline vient des jeûnes répétés et de la perte de graisse sur plusieurs semaines.</string>
 
 	<string name="journey_stage_9_title">Régénération des cellules immunitaires</string>
-	<string name="journey_stage_9_body">Trois jours. Le jeûne prolongé peut amener l’organisme à éliminer
-		des cellules immunitaires sénescentes et à en régénérer de nouvelles à partir de cellules souches
-		hématopoïétiques, à mesure que la signalisation de l’IGF-1 et de la PKA diminue (Cheng, Cell Stem Cell 2014).\n\n
-		L’inflammation continue de diminuer ; certaines personnes décrivent un sentiment de bien-être calme et lucide.
-		\n\nAussi loin que vous alliez à partir d’ici, vous en ressortirez renouvelé — et rompez votre jeûne en douceur.
-		Soyez fier de vous.
-	</string>
+	<string name="journey_stage_9_body">Trois jours. L’IGF-1 et les signaux de croissance ont baissé. Chez la souris, de tels jeûnes éliminent les vieilles cellules immunitaires et déclenchent un renouvellement à partir des cellules souches à la reprise alimentaire (Cheng, Cell Stem Cell 2014) ; chez l’humain, ce n’est pas démontré.\n\nAu-delà, ne poursuivez que sous surveillance médicale.\n\nRompez votre jeûne en douceur : d’abord un petit repas.</string>
 
 	<string name="journey_stage_hours_range">%1$d–%2$d h</string>
 	<string name="journey_stage_hours_open">%1$d h+</string>
@@ -434,7 +361,7 @@
 	<string name="fast_notes_label">Notes (facultatif)</string>
 	<string name="fast_notes_placeholder">Comment s’est passé votre jeûne ? Quelque chose à retenir ?</string>
 
-	<string name="stage_optimal_autophagy_description_past72">L’autophagie bat son plein ! Continuez comme ça !</string>
+	<string name="stage_optimal_autophagy_description_past72">Trois jours et plus. Ne poursuivez que sous surveillance médicale et rompez votre jeûne en douceur.</string>
 
 	<string name="fast_start_label">Début</string>
 	<string name="edit_start_time">Modifier l’heure de début</string>

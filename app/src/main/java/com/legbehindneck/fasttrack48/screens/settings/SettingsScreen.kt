@@ -234,6 +234,12 @@ private fun SettingsList(
 					}
 				)
 			}
+			item(key = "knowledge_header") {
+				SettingsSectionHeader(title = R.string.kb_settings_section)
+			}
+			item(key = "knowledge") {
+				KnowledgeSettingsSection()
+			}
 			item(key = "logbook_header") {
 				SettingsSectionHeader(title = R.string.settings_section_logbook)
 			}

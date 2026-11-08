@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.ExpandMore
@@ -41,7 +42,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.platform.LocalContext
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.screens.info.InfoActivity
 import kotlinx.coroutines.flow.collectLatest
 
 private const val GITHUB_URL = "https://github.com/fasttrack42/FastTrack48/"
@@ -282,6 +285,7 @@ private fun AcknowledgementsSection(
 	scrollState: ScrollState,
 	modifier: Modifier = Modifier,
 ) {
+	val context = LocalContext.current
 	var licenseExpanded by remember { mutableStateOf(false) }
 	val chevronRotation by animateFloatAsState(
 		targetValue = if (licenseExpanded) 180f else 0f,
@@ -354,6 +358,18 @@ private fun AcknowledgementsSection(
 				leadingIcon = {
 					Icon(
 						imageVector = Icons.Default.Person,
+						contentDescription = null,
+						modifier = Modifier.size(AssistChipDefaults.IconSize),
+					)
+				},
+			)
+			// The Library's own provenance: the book, talks and studies its cards draw on.
+			AssistChip(
+				onClick = { context.startActivity(InfoActivity.sourcesIntent(context)) },
+				label = { Text(stringResource(id = R.string.kb_sources_title)) },
+				leadingIcon = {
+					Icon(
+						imageVector = Icons.AutoMirrored.Filled.MenuBook,
 						contentDescription = null,
 						modifier = Modifier.size(AssistChipDefaults.IconSize),
 					)

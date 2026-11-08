@@ -8,11 +8,15 @@
 		<include domain="file" path="storage"/>
 		<!-- Device-bound: the location the user shared for sunrise times never leaves the phone. -->
 		<exclude domain="sharedpref" path="lunar_device.xml"/>
+		<!-- Device-bound: health-condition chips (Settings says "saved only on this phone"). -->
+		<exclude domain="sharedpref" path="knowledge_device.xml"/>
 	</cloud-backup>
 	<device-transfer>
 		<include domain="sharedpref" path="."/>
 		<include domain="database" path="."/>
 		<include domain="file" path="storage"/>
 		<exclude domain="sharedpref" path="lunar_device.xml"/>
+		<!-- Device-bound: health-condition chips (Settings says "saved only on this phone"). -->
+		<exclude domain="sharedpref" path="knowledge_device.xml"/>
 	</device-transfer>
 </data-extraction-rules>

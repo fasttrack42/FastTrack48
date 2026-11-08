@@ -295,6 +295,12 @@ private fun LogStatsHeader(
 		if (d == Duration.ZERO) "0h"
 		else formatDuration(context, d, showTotalHours = showTotalHours)
 
+	// Ketosis and autophagy totals count from fixed-hour onsets, so they are estimates.
+	fun approxHoursStat(hours: Int): String {
+		val text = formatDuration(context, hours.hours, showTotalHours = showTotalHours, withMinutes = false)
+		return if (hours > 0) context.getString(R.string.log_approx, text) else text
+	}
+
 	// View mode switch, left-aligned (the "Lifetime stats" label was redundant)
 	LogViewModeSwitch(
 		viewMode = viewMode,
@@ -335,13 +341,13 @@ private fun LogStatsHeader(
 	) {
 		StatCard(
 			title = stringResource(id = R.string.log_total_ketosis),
-			valueText = formatDuration(context, totalKetosisHours.hours, showTotalHours = showTotalHours, withMinutes = false),
+			valueText = approxHoursStat(totalKetosisHours),
 			onClick = toggle,
 			modifier = Modifier.weight(1f)
 		)
 		StatCard(
 			title = stringResource(id = R.string.log_total_autophagy),
-			valueText = formatDuration(context, totalAutophagyHours.hours, showTotalHours = showTotalHours, withMinutes = false),
+			valueText = approxHoursStat(totalAutophagyHours),
 			onClick = toggle,
 			modifier = Modifier.weight(1f)
 		)

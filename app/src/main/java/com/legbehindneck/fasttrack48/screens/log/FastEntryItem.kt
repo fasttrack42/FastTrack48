@@ -154,14 +154,22 @@ fun FastEntryItem(
 
 						Spacer(modifier = Modifier.weight(1f))
 
+						// Both onsets are fixed-hour estimates, so non-zero values are marked approximate.
+						val ketosisText = if (ketosisHours > 0) {
+							stringResource(id = R.string.log_approx, ketosisHours.toString())
+						} else ketosisHours.toString()
+						val autophagyText = if (autophagyHours > 0) {
+							stringResource(id = R.string.log_approx, autophagyHours.toString())
+						} else autophagyHours.toString()
+
 						Column {
 							Text(
-								text = "🔥 " + stringResource(id = R.string.log_entry_ketosis, ketosisHours),
+								text = "🔥 " + stringResource(id = R.string.log_entry_ketosis, ketosisText),
 								style = MaterialTheme.typography.titleSmall,
 								color = MaterialTheme.colorScheme.onSurface,
 							)
 							Text(
-								text = "🧬 " + stringResource(id = R.string.log_entry_autophagy, autophagyHours),
+								text = "🧬 " + stringResource(id = R.string.log_entry_autophagy, autophagyText),
 								style = MaterialTheme.typography.titleSmall,
 								color = MaterialTheme.colorScheme.onSurface,
 							)

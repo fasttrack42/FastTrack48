@@ -44,7 +44,7 @@ class FastingScreenComposeTest {
 
 	@Test
 	fun testFastingScreen_Fasting_ShowsTimerMilestoneAndEndFast() {
-		// 17 hours in: fat burning (12h) is behind, ketosis (18h) is next, autophagy (24h) after.
+		// 17 hours in: fat burning (12h) is behind, ketosis (20h) is next, autophagy (24h) after.
 		val vm = FakeFastingViewModel(
 			IFastingViewModel.FastingUiState(
 				isFasting = true,
@@ -64,7 +64,7 @@ class FastingScreenComposeTest {
 		val ketosis = context.getString(R.string.fast_ketosis_label)
 		val autophagy = context.getString(R.string.fast_autophagy_label)
 		composeTestRule.onNodeWithText("17h").assertExists()
-		composeTestRule.onNodeWithText(context.getString(R.string.milestone_in, ketosis, "1h"))
+		composeTestRule.onNodeWithText(context.getString(R.string.milestone_in, ketosis, "3h"))
 			.assertExists()
 		composeTestRule.onNodeWithText(context.getString(R.string.milestone_in, autophagy, "7h"))
 			.assertExists()

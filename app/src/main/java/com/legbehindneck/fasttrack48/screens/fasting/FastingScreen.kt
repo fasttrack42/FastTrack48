@@ -94,6 +94,10 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.currentStateAsState
 import com.legbehindneck.fasttrack48.BuildConfig
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.screens.knowledge.BeforeStartCards
+import com.legbehindneck.fasttrack48.screens.knowledge.EndOfFastCard
+import com.legbehindneck.fasttrack48.screens.knowledge.GoDeeperSection
+import com.legbehindneck.fasttrack48.screens.knowledge.KnowledgeFastingRow
 import com.legbehindneck.fasttrack48.data.FastingJourney
 import com.legbehindneck.fasttrack48.data.JourneyStage
 import com.legbehindneck.fasttrack48.data.Stages
@@ -202,6 +206,7 @@ fun FastingScreen(
 	if (showEndSheet) {
 		EndFastSheet(
 			notes = endNotes,
+			elapsedHours = uiState.elapsedHours,
 			onNotesChange = { endNotes = it },
 			onEndNow = {
 				showEndSheet = false
@@ -940,6 +945,14 @@ private fun FastGnomonContent(
 					.padding(top = spacing.xlarge)
 			)
 		}
+		KnowledgeFastingRow(
+			isFasting = true,
+			fastStartMillis = uiState.fastStartTime?.toEpochMilliseconds(),
+			elapsedHours = uiState.elapsedHours,
+			modifier = Modifier
+				.padding(top = spacing.large)
+				.alpha(if (capturing) 0f else 1f),
+		)
 	} else {
 		Column(verticalArrangement = Arrangement.spacedBy(spacing.xlarge)) {
 			FastDayEntry(
@@ -1063,12 +1076,17 @@ private fun FastDetailsContent(
 				)
 			}
 		}
+		KnowledgeFastingRow(
+			isFasting = uiState.isFasting,
+			fastStartMillis = uiState.fastStartTime?.toEpochMilliseconds(),
+			elapsedHours = uiState.elapsedHours,
+		)
 	}
 }
 
 /**
  * A phase the milestone block can name: its label and its journey stage. The hour it begins is
- * the stage's own (12, 18 and 24 h), so the block, the dial and the stage sheet agree.
+ * the stage's own (12, 20 and 24 h), so the block, the dial and the stage sheet agree.
  */
 private data class Milestone(@StringRes val label: Int, val stageIndex: Int) {
 	val hours: Int get() = FastingJourney.stages[stageIndex].startHours
@@ -1083,7 +1101,7 @@ private val Milestones = listOf(
 /**
  * The next milestone, how far along the way to it the fast is, and the one after:
  *
- *   Ketosis in 2h 37m ......................... 18h
+ *   Ketosis in 2h 37m ......................... 20h
  *   [==========------------------------------------]
  *   Autophagy in 8h 37m
  *
@@ -1489,6 +1507,7 @@ private fun StartFastSheet(
 		Column(
 			modifier = Modifier
 				.fillMaxWidth()
+				.verticalScroll(rememberScrollState())
 				.padding(start = 21.dp, end = 21.dp, bottom = 34.dp),
 			horizontalAlignment = Alignment.CenterHorizontally,
 		) {
@@ -1498,6 +1517,7 @@ private fun StartFastSheet(
 				fontWeight = FontWeight.Bold,
 			)
 			Spacer(modifier = Modifier.size(21.dp))
+			BeforeStartCards(modifier = Modifier.padding(bottom = 21.dp))
 			Button(
 				onClick = onStartNow,
 				modifier = Modifier
@@ -1530,6 +1550,7 @@ private fun StartFastSheet(
 @Composable
 private fun EndFastSheet(
 	notes: String,
+	elapsedHours: Double,
 	onNotesChange: (String) -> Unit,
 	onEndNow: () -> Unit,
 	onEndEarlier: () -> Unit,
@@ -1543,6 +1564,7 @@ private fun EndFastSheet(
 			modifier = Modifier
 				.fillMaxWidth()
 				.imePadding()
+				.verticalScroll(rememberScrollState())
 				.padding(start = 21.dp, end = 21.dp, bottom = 34.dp),
 			horizontalAlignment = Alignment.CenterHorizontally,
 		) {
@@ -1561,6 +1583,7 @@ private fun EndFastSheet(
 				minLines = 2,
 				maxLines = 5,
 			)
+			EndOfFastCard(elapsedHours = elapsedHours, modifier = Modifier.padding(top = 13.dp))
 			Spacer(modifier = Modifier.size(21.dp))
 			// Same action one step on, so the same terminus hue and the same glyph.
 			val endContainer = journeyStageColor(9)
@@ -1651,6 +1674,8 @@ private fun JourneyStageSheet(
 				text = stringResource(stage.body),
 				style = MaterialTheme.typography.bodyLarge,
 			)
+
+			GoDeeperSection(stageIndex = stageIndex, modifier = Modifier.padding(top = 21.dp))
 		}
 	}
 }

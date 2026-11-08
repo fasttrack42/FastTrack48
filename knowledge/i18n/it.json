@@ -1,0 +1,778 @@
+{
+  "ui": {
+    "library_title": "Biblioteca",
+    "search_hint": "Cerca nella biblioteca",
+    "clear_search": "Cancella ricerca",
+    "no_results": "Nessun risultato",
+    "can_i_have": "Cosa posso bere?",
+    "more_topics": "Altri argomenti in Impostazioni › Conoscenza",
+    "why": "Perché",
+    "what_to_do": "Cosa fare",
+    "caveat": "Precisazione",
+    "sources": "Fonti",
+    "expand": "Mostra di più",
+    "collapse": "Mostra di meno",
+    "label_a": "Consolidato",
+    "label_b": "Evidenze emergenti",
+    "label_c": "Ricerca preliminare",
+    "label_d": "Esperienza clinica",
+    "go_deeper": "Approfondisci",
+    "show_all": "Mostra tutti i %1$d",
+    "tip_prefix": "Consiglio: %1$s",
+    "pager_position": "%1$d di %2$d",
+    "hows_it_going": "Come va?",
+    "helper_prompt": "Scegli cosa ti descrive e scopri cosa aiuta.",
+    "group_body": "Corpo",
+    "group_mind": "Mente",
+    "group_progress": "Progressi",
+    "chip_headache": "Mal di testa",
+    "chip_dizzy": "Capogiri",
+    "chip_tired": "Stanchezza",
+    "chip_cold": "Freddo",
+    "chip_sleep": "Non dormo",
+    "chip_cramps": "Crampi",
+    "chip_heartburn": "Bruciore di stomaco",
+    "chip_bloated": "Gonfiore",
+    "chip_loose": "Feci molli",
+    "chip_constipated": "Stitichezza",
+    "chip_hungry": "Fame",
+    "chip_craving": "Voglie",
+    "chip_bored": "Noia",
+    "chip_stressed": "Stress",
+    "chip_slipped": "Uno sgarro",
+    "chip_stalled": "Peso fermo",
+    "chip_restart": "Ricominciare",
+    "first_fast_title": "Prima del tuo primo digiuno",
+    "before_you_start": "Prima di iniziare",
+    "women_offer_title": "Mostrare consigli legati al ciclo?",
+    "women_offer_body": "Consigli di digiuno in base al ciclo mestruale, alla perimenopausa e alla ricerca di una gravidanza.",
+    "women_offer_yes": "Attiva",
+    "women_offer_no": "No, grazie",
+    "fast_days_about": "I giorni di digiuno",
+    "settings_section": "Conoscenza",
+    "settings_tips_title": "Consigli durante il digiuno",
+    "settings_tips_subtitle": "Un breve consiglio a ogni nuovo stadio",
+    "settings_labels_title": "Livello di evidenza",
+    "settings_labels_subtitle": "Mostra quanto è solida ogni affermazione",
+    "settings_conditions_hint": "Scegli ciò che ti riguarda. Salvato solo su questo telefono.",
+    "settings_essentials_note": "Gli avvisi di sicurezza sono sempre attivi e compaiono solo quando servono.",
+    "settings_reset_title": "Azzera i consigli visti",
+    "settings_reset_subtitle": "Mostra di nuovo i consigli già visti",
+    "settings_reset_done": "Consigli azzerati",
+    "cat_essentials": "Avvisi di sicurezza",
+    "cat_essentials_sub": "Sempre attivi, solo quando servono",
+    "cat_journey": "Il percorso del digiuno",
+    "cat_journey_sub": "Cosa fa il tuo corpo, stadio dopo stadio",
+    "cat_mind": "Mente e abitudini",
+    "cat_mind_sub": "Fame, voglie, motivazione, sonno e stress",
+    "cat_food": "Cibo e bevande",
+    "cat_food_sub": "Cosa bere, come rompere il digiuno, cosa mangiare",
+    "cat_rhythm": "Ritmo e progressi",
+    "cat_rhythm_sub": "Schemi, stalli, misurare i progressi, miti",
+    "cat_comfort": "Benessere",
+    "cat_comfort_sub": "Disturbi comuni e come alleviarli",
+    "cat_women": "Salute femminile",
+    "cat_women_sub": "Ciclo, perimenopausa, ricerca di una gravidanza",
+    "cat_medical": "Patologie e farmaci",
+    "cat_medical_sub": "Indicazioni per le patologie e i farmaci che scegli",
+    "cat_traditions": "Giorni di digiuno",
+    "cat_traditions_sub": "I giorni di digiuno tradizionali",
+    "cond_group_sugar": "Glicemia",
+    "cond_group_heart": "Cuore e reni",
+    "cond_group_hormones": "Ormoni",
+    "cond_group_meds": "Farmaci",
+    "cond_group_other": "Altro",
+    "cond_t2d": "Diabete di tipo 2 o prediabete",
+    "cond_diabetes_meds": "Insulina o pastiglie per il diabete",
+    "cond_t1": "Diabete di tipo 1",
+    "cond_bp_heart": "Pressione o cuore",
+    "cond_kidney": "Malattia renale",
+    "cond_gout_stones": "Gotta o calcoli renali",
+    "cond_thyroid": "Tiroide",
+    "cond_pcos": "PCOS (ovaio policistico)",
+    "cond_glp1": "Farmaci tipo Ozempic",
+    "cond_steroids": "Cortisonici",
+    "cond_lithium": "Litio",
+    "cond_warfarin": "Coumadin (warfarin)",
+    "cond_daily_meds": "Altri farmaci quotidiani",
+    "cond_cancer": "Tumore",
+    "cond_gallbladder": "Cistifellea",
+    "sources_title": "Fonti e riconoscimenti",
+    "sources_credits": "La Biblioteca si basa soprattutto su The Complete Guide to Fasting del dott. Jason Fung con Jimmy Moore (2016), sugli interventi del dott. Jason Fung, di Megan Ramos, della dott.ssa Nadia Brito Pateguana e della dott.ssa Terri Lance sui canali YouTube Jason Fung, The Fasting Method e Low Carb Down Under, e sugli studi e le linee guida elencati qui sotto. Ogni scheda è un nostro riassunto, con parole nostre; eventuali errori sono nostri.",
+    "sources_independence": "FastTrack48 è indipendente. Nessuna delle persone o organizzazioni citate qui gestisce, approva o sponsorizza l'app; i loro nomi compaiono solo per riconoscerne il lavoro.",
+    "sources_medical": "Queste sono informazioni generali, non consigli medici, e non sostituiscono un medico che ti conosce. Se hai una patologia o prendi farmaci, chiedi al tuo prima di digiunare.",
+    "sources_books": "Libri",
+    "sources_studies": "Studi e linee guida",
+    "sources_talks": "Interventi"
+  },
+  "cards": {
+    "FC-024": {
+      "title": "Stanco o con capogiri? Prova il sale",
+      "claim": "Stanchezza, mal di testa o testa leggera durante il digiuno dipendono spesso da poco sale e poca acqua, non da mancanza di energia.",
+      "why": "Quando l'insulina scende, i reni eliminano sodio e acqua. Un pizzico di sale di solito aiuta in pochi minuti.",
+      "do": "Siediti, prendi un pizzico di sale in acqua e alzati lentamente. Se non passa, interrompi il digiuno."
+    },
+    "FC-025": {
+      "title": "Feci molli all'inizio",
+      "claim": "Alcune persone hanno feci molli nei primi digiuni, mentre il corpo elimina l'acqua trattenuta. Di solito passa in pochi giorni.",
+      "why": "Il calo dell'insulina libera l'acqua trattenuta; una parte esce dall'intestino invece che dai reni.",
+      "do": "Lo psillio in acqua può aiutare. Diarrea persistente o segni di disidratazione: fermati e chiedi un parere."
+    },
+    "FC-026": {
+      "title": "Bruciore di stomaco a digiuno",
+      "claim": "Il bruciore può peggiorare a stomaco vuoto, anche se per alcuni migliora. Perdendo peso, il reflusso di solito si attenua.",
+      "why": "Lo stomaco continua a produrre acido senza nulla che lo assorba, e il grasso addominale spinge verso l'alto.",
+      "do": "Finisci di mangiare 3 ore prima di dormire, cammina dopo cena, alza la testiera del letto. Chiedi un antiacido se serve."
+    },
+    "FC-027": {
+      "title": "Magnesio: scegli la forma giusta",
+      "claim": "I crampi durante il digiuno possono indicare poco magnesio. Se lo integri, scegli citrato o bisglicinato invece dell'ossido.",
+      "why": "Gli esami del sangue rilevano male la carenza di magnesio nei tessuti. L'ossido si assorbe poco e agisce soprattutto da lassativo."
+    },
+    "FC-066": {
+      "title": "Mal di testa il primo giorno?",
+      "claim": "Il mal di testa nei primi digiuni dipende di solito da poco sale e sparisce dopo un paio di settimane di digiuno regolare.",
+      "why": "Passare da pasti salati a quasi niente sale altera l'equilibrio dei liquidi; il corpo si adatta in pochi digiuni.",
+      "do": "Aggiungi un pizzico di sale all'acqua."
+    },
+    "FC-150": {
+      "title": "La stitichezza è normale",
+      "claim": "Andare di corpo più di rado durante il digiuno è normale e di solito non dà fastidio. Se entra poco cibo, poco deve uscire.",
+      "why": "Il fastidio viene da un colon pieno, e a digiuno il colon non lo è.",
+      "do": "Nei giorni in cui mangi, più verdura e fibre; lo psillio aiuta. Se persiste, chiedi al medico."
+    },
+    "FC-151": {
+      "title": "Sveglio di notte?",
+      "claim": "Dormire male o svegliarsi presto nei giorni di digiuno è frequente. Il digiuno alza la noradrenalina, che dà energia.",
+      "why": "Lo stesso ormone che di giorno ti tiene vigile può ritardare il sonno. Di solito migliora con la pratica.",
+      "do": "Non forzare il sonno: rilassati senza schermi, prova un bagno caldo, vai a letto quando hai sonno. Se persiste, accorcia o sposta i digiuni."
+    },
+    "FC-152": {
+      "title": "Sensazione di freddo",
+      "claim": "Avere freddo all'inizio del digiuno è comune e di solito passa quando il corpo impara a bruciare meglio i grassi. Copriti, bevi caldo, muoviti.",
+      "why": "All'inizio il passaggio ai grassi può essere lento; il movimento consuma il carburante nel sangue e produce calore.",
+      "do": "Hai sempre freddo, anche quando mangi? Chiedi al medico di controllarti la tiroide."
+    },
+    "FC-001": {
+      "title": "Chi non dovrebbe digiunare",
+      "claim": "Non digiunare per la salute se hai meno di 18 anni, sei incinta o allatti, sei sottopeso (IMC sotto 20 circa) o hai mai avuto un disturbo alimentare.",
+      "why": "Crescita, gravidanza e allattamento richiedono nutrienti costanti, il sottopeso non lascia riserve, e la restrizione volontaria può riaccendere un disturbo alimentare.",
+      "do": "Se una di queste cose ti riguarda, non digiunare e parla col tuo medico di cosa è adatto a te."
+    },
+    "FC-015": {
+      "title": "Oltre i 65? Proteggi i muscoli",
+      "claim": "Dopo i 65 anni, dimagrire porta via anche muscoli e ossa, se non li proteggi. Scegli digiuni più brevi e mangia proteine a ogni pasto.",
+      "why": "Il muscolo anziano risponde meno alle proteine. Negli anziani a dieta, unire esercizi di forza e aerobici ha preservato massa magra e ossa.",
+      "do": "Fai esercizi di forza 2–3 volte a settimana e alzati lentamente per evitare i capogiri."
+    },
+    "FC-016": {
+      "title": "La fame va bene. Stare male no.",
+      "claim": "La fame è prevista. Nausea persistente, vomito, capogiri, spossatezza o un vero malessere significano: fermati.",
+      "why": "La fame arriva a ondate e passa. Questi segni escono dal normale adattamento e possono indicare disidratazione, squilibri di elettroliti o un problema con i farmaci.",
+      "do": "Interrompi il digiuno, mangia qualcosa di leggero e chiama il medico se non passa. Fermarsi non è fallire."
+    },
+    "FC-017": {
+      "title": "Oltre 3 giorni, con un medico",
+      "claim": "Non digiunare più di circa tre giorni da solo. I digiuni più lunghi richiedono controllo medico, esami e un piano di rialimentazione.",
+      "why": "Nei programmi ospedalieri degli anni '60, digiuni lunghissimi causarono rari decessi e danni al cuore. Esami normali possono nascondere riserve esaurite; nel digiuno di 382 giorni il magnesio era basso.",
+      "do": "Per digiuni lunghi seguiti dal medico: sale nell'acqua, un multivitaminico e non più di una volta al mese."
+    },
+    "FC-018": {
+      "title": "Rialimentarsi dopo un digiuno lungo",
+      "claim": "Dopo cinque o più giorni di digiuno, ricomincia con pasti piccoli. La sindrome da rialimentazione è rara ma pericolosa.",
+      "why": "Il cibo alza l'insulina, che porta fosforo, potassio, magnesio e vitamina B1 nelle cellule; i livelli nel sangue possono crollare. Rischio massimo: IMC sotto 18,5, grosso calo di peso recente, abuso di alcol, diuretici o antiacidi.",
+      "do": "Rivolgiti a un medico se compaiono debolezza, palpitazioni, confusione o fiato corto. Un lieve gonfiore alle caviglie nei primi giorni di solito passa."
+    },
+    "FC-019": {
+      "title": "Niente alcol a digiuno",
+      "claim": "Non bere alcol durante il digiuno. Blocca la produzione di glucosio nel fegato, la glicemia può scendere, e l'effetto è molto più forte.",
+      "why": "Il fegato smaltisce prima l'alcol e mette da parte la gluconeogenesi; a stomaco vuoto l'alcol nel sangue sale in fretta. In qualsiasi giorno disturba il sonno e porta calorie vuote.",
+      "do": "Se bevi, fallo durante un pasto in un giorno in cui mangi, con dell'acqua accanto."
+    },
+    "FC-021": {
+      "title": "Se il ciclo si ferma",
+      "claim": "Nei primi mesi di digiuno il ciclo può spostarsi. Se le mestruazioni si fermano per tre mesi o più, smetti di digiunare e vai dal medico.",
+      "why": "Qualche ritardo segue ogni cambiamento di peso, alimentazione o stress. L'assenza del ciclo indica che l'energia disponibile è troppo bassa per la salute riproduttiva."
+    },
+    "FC-029": {
+      "title": "Patologie o farmaci quotidiani?",
+      "claim": "Hai una diagnosi o prendi farmaci ogni giorno? Attiva «Patologie e farmaci» nelle Impostazioni per vedere solo le indicazioni che ti riguardano.",
+      "why": "I farmaci per glicemia, pressione, umore, tiroide o infiammazione cambiano l'effetto del digiuno su di te. Un'indicazione mirata è più sicura di un avviso generico.",
+      "do": "Parlane con il medico prima del tuo primo digiuno di più di un giorno."
+    },
+    "FC-055": {
+      "title": "Aiuti al digiuno, con parsimonia",
+      "claim": "Un cucchiaio di olio d'oliva o semi di chia ammollati in acqua possono salvare un digiuno. Usali solo quando decidono se arriverai alla fine.",
+      "why": "Quantità minime di grassi o fibre alzano appena l'insulina e calmano le voglie; presi per abitudine, sostituiscono l'energia che arriverebbe dalle tue riserve di grasso.",
+      "do": "Chiediti: «Mi aiuterà a resistere altre 12 ore?»"
+    },
+    "FC-056": {
+      "title": "I dolcificanti rendono tutto più difficile",
+      "claim": "Bibite light, dolcificanti e bevande «con aromi naturali» tendono a rendere più duro il digiuno; in uno studio, sostituire le bibite light con acqua ha migliorato il calo di peso.",
+      "why": "Il gusto dolce può stimolare appetito e insulina senza dare energia, così le voglie restano vive, soprattutto verso la fine del digiuno.",
+      "do": "Digiuna con bevande non zuccherate. Se ti serve un po' di dolce, usane poco e smetti se la fame aumenta.",
+      "counter": "Gli studi non concordano sul fatto che i dolcificanti alzino l'insulina nell'uomo."
+    },
+    "FC-060": {
+      "title": "Sì durante il digiuno",
+      "claim": "Acqua (naturale o frizzante), qualsiasi tè o tisana non zuccherati, limone, cannella, sale e vitamine o elettroliti senza aggiunte.",
+      "why": "Non danno quasi energia, quindi l'insulina resta bassa, e intanto calmano la fame, idratano e mantengono i tuoi rituali quotidiani."
+    },
+    "FC-061": {
+      "title": "No durante il digiuno",
+      "claim": "Zucchero, miele, succhi, bevande zuccherate o aromatizzate e dolcificanti rompono o sabotano il digiuno.",
+      "why": "Gli zuccheri alzano subito l'insulina. Il succo concentra lo zucchero senza fibre. Dolcificanti e aromi tendono a stuzzicare l'appetito."
+    },
+    "FC-064": {
+      "title": "Bevi con regolarità",
+      "claim": "Punta a circa 2 litri di liquidi nei giorni di digiuno. Inizia la mattina con un bicchiere d'acqua.",
+      "why": "Gran parte dell'acqua di solito arriva col cibo; quando l'insulina scende, perdi anche acqua e sale trattenuti. È facile dimenticarsi di bere.",
+      "do": "All'inizio aiuta un promemoria ogni paio d'ore: acqua con un pizzico di sale, oppure tè."
+    },
+    "FC-067": {
+      "title": "Tè che aiutano",
+      "claim": "Tè verde, tisane alla cannella o allo zenzero e tisane amare possono smorzare la fame; la menta piperita allevia il gonfiore.",
+      "why": "Bevande calde, saporite e senza energia riempiono lo stomaco e mantengono il rituale. Le catechine del tè verde e la cannella hanno mostrato un lieve effetto sull'appetito in piccoli studi."
+    },
+    "FC-070": {
+      "title": "Rompi il digiuno con dolcezza",
+      "claim": "Dopo più di 24 ore di digiuno, inizia con un piccolo «antipasto»: verdure cotte o avocado. Il pasto principale 30 minuti dopo.",
+      "why": "Durante il digiuno la digestione rallenta. Una prima porzione piccola e leggera la risveglia piano e lascia passare la voglia di abbuffarsi.",
+      "do": "Sotto le 24 ore non serve nulla di particolare. Per digiuni più lunghi, prepara prima la piccola porzione."
+    },
+    "FC-071": {
+      "title": "Con questi, vai piano",
+      "claim": "Subito dopo un digiuno, frutta secca, semi, burri di frutta secca, verdure crude o fibrose, uova, latticini e vino sono i più propensi a disturbare lo stomaco.",
+      "why": "Richiedono più acido ed enzimi digestivi, che dopo il digiuno impiegano un po' a tornare. La tolleranza varia da persona a persona."
+    },
+    "FC-072": {
+      "title": "Mangia normale, niente abbuffate",
+      "claim": "L'errore più comune è mangiare troppo dopo. Fai un pasto di dimensioni normali, come se non avessi digiunato.",
+      "why": "Il digiuno funziona perché il grasso di riserva copre i pasti saltati. Dopo 36 ore di digiuno si mangia solo il ~20 % in più, ma concentrare in un pasto il cibo di un giorno intero annulla il vantaggio.",
+      "do": "Porzione normale, mangia piano, bevi acqua e aspetta prima di fare il bis. Nessun taglio di calorie in più."
+    },
+    "FC-073": {
+      "title": "I carboidrati alla fine",
+      "claim": "Mangia prima proteine e verdure, i carboidrati per ultimi. Così lo stesso pasto ha alzato la glicemia di circa il 40 % in meno.",
+      "why": "Proteine, grassi e fibre mangiati per primi rallentano lo svuotamento dello stomaco e attivano gli ormoni intestinali, così l'amido arriva più tardi e più dolcemente.",
+      "do": "Lascia pane, riso o patate per la fine del pasto. Al ristorante chiedi di portare il pane con la portata principale."
+    },
+    "FC-074": {
+      "title": "Niente carboidrati da soli",
+      "claim": "Abbina l'amido ad acido, proteine o grassi: aceto, limone, sottaceti, oppure riso e patate cotti e raffreddati attenuano il picco glicemico.",
+      "why": "L'acido rallenta la digestione dell'amido e lo svuotamento gastrico; raffreddare l'amido cotto crea amido resistente; le versioni meno lavorate (fiocchi d'avena integrali invece che istantanei) si assorbono più lentamente."
+    },
+    "FC-075": {
+      "title": "Gli ormoni della sazietà dal cibo",
+      "claim": "Proteine, grassi naturali e fibre attivano gli ormoni della sazietà del tuo intestino, la stessa via che i farmaci dimagranti amplificano.",
+      "why": "Questi nutrienti rallentano lo svuotamento gastrico e liberano GLP-1; le fibre nutrono batteri intestinali i cui acidi grassi lo aumentano ancora.",
+      "do": "Costruisci i pasti attorno a proteine, grassi naturali e verdure ricche di fibre per restare sazio più a lungo.",
+      "counter": "L'aumento naturale del GLP-1 è molto più piccolo dell'effetto dei farmaci."
+    },
+    "FC-076": {
+      "title": "Il cibo vero batte quello ultraprocessato",
+      "claim": "Con cibi ultraprocessati, le persone hanno mangiato circa 500 kcal in più al giorno rispetto a cibi integri con gli stessi nutrienti.",
+      "why": "La lavorazione toglie fibre e struttura, accelera il mangiare e l'assorbimento e indebolisce i segnali di sazietà; zucchero e farina raffinata più di tutti.",
+      "do": "Riempi le finestre alimentari con cibi integri e riconoscibili; elimina per primi zucchero e farina bianca."
+    },
+    "FC-077": {
+      "title": "La colazione è spesso un dolce",
+      "claim": "Cereali, muffin, merendine, yogurt zuccherati e barrette sono spesso dolci travestiti, e a metà mattina ti lasciano affamato.",
+      "why": "I carboidrati raffinati fanno impennare glicemia e insulina, che poi esagerano; dopo un porridge istantaneo a colazione, i bambini hanno mangiato di più rispetto a una frittata.",
+      "do": "Se fai colazione, scegli uova, yogurt bianco o avena integrale, oppure rimanda il primo pasto."
+    },
+    "FC-078": {
+      "title": "Zucchero e grasso nel fegato",
+      "claim": "Il fruttosio dello zucchero viene trasformato in grasso nel fegato. Ridurre lo zucchero aggiunto ha ridotto il grasso epatico di circa un terzo in otto settimane.",
+      "why": "Il fruttosio viene elaborato quasi solo dal fegato. Il fegato grasso colpisce almeno un adulto su quattro, di solito senza sintomi; digiuno 5:2 e dieta povera di carboidrati lo hanno dimezzato in uno studio."
+    },
+    "FC-079": {
+      "title": "Mangia prima, quando puoi",
+      "claim": "Lo stesso pasto alza di più glicemia e insulina la sera. Una cena più leggera e anticipata si adatta meglio al tuo orologio biologico.",
+      "why": "La sensibilità all'insulina è al minimo di notte; mangiare nella notte biologica (turni, cene tardi) peggiora la glicemia e abbassa gli ormoni della sazietà.",
+      "do": "Cena più leggero e prima; con il turno di notte, fai il pasto principale prima del turno.",
+      "counter": "In uno studio molto controllato, colazione abbondante contro cena abbondante non ha cambiato il peso, solo la fame."
+    },
+    "FC-080": {
+      "title": "Proteine e pesi proteggono i muscoli",
+      "claim": "Allenamento di forza e abbastanza proteine quando mangi sono ciò che protegge i muscoli durante il digiuno; il digiuno da solo no.",
+      "why": "Il muscolo risponde al carico. Digiuno e allenamento di forza insieme preservano la massa magra molto meglio del solo digiuno.",
+      "do": "Allenati con pesi o a corpo libero 2–3 volte a settimana; nei giorni in cui mangi, punta a 1,2–1,6 g di proteine per kg di peso."
+    },
+    "FC-030": {
+      "title": "Dopo un pasto: si immagazzina",
+      "claim": "Dopo aver mangiato, la glicemia raggiunge il picco in circa un'ora e l'insulina sale. Finché l'insulina è alta, la combustione dei grassi è in pausa.",
+      "why": "L'insulina porta il glucosio nelle cellule, mette da parte l'eccesso come glicogeno e grasso e blocca il rilascio dei grassi finché non scende."
+    },
+    "FC-031": {
+      "title": "Una breve passeggiata dopo mangiato",
+      "claim": "Camminare tranquillamente 10–15 minuti dopo un pasto riduce in modo evidente il picco di glicemia e insulina.",
+      "why": "I muscoli al lavoro assorbono glucosio con poco bisogno di insulina; in una meta-analisi di studi crossover, camminare piano ha battuto lo stare in piedi.",
+      "do": "Cammina dopo il pasto più abbondante, soprattutto se c'erano pane, riso, pasta o dolce."
+    },
+    "FC-032": {
+      "title": "Il calo delle tre ore",
+      "claim": "Una fame da lupi qualche ora dopo un pasto dolce o ricco di amido? Spesso è un rimbalzo della glicemia, non una vera mancanza di energia.",
+      "why": "Un picco rapido di glucosio scatena un'ondata di insulina che può esagerare, e circa tre ore dopo la glicemia scende sotto il livello di partenza.",
+      "do": "Resisti con acqua o tè. La prossima volta, prima proteine e verdure, i carboidrati per ultimi."
+    },
+    "FC-033": {
+      "title": "L'insulina scende, il grasso si libera",
+      "claim": "Qualche ora dopo un pasto (circa 3–5, di più con insulino-resistenza), l'insulina torna al livello di base e le cellule adipose iniziano a liberare grasso.",
+      "why": "Con l'insulina bassa si toglie il freno al rilascio dei grassi, mentre il fegato attinge al glicogeno. Uno spuntino rialza l'insulina e rimanda questo passaggio.",
+      "do": "Lascia che questa finestra si apra: niente spuntini tra i pasti."
+    },
+    "FC-034": {
+      "title": "Il fegato prende il comando",
+      "claim": "Di notte e fino al mattino, il fegato tiene stabile la glicemia: prima con il glicogeno di riserva, poi sempre più producendo glucosio nuovo.",
+      "why": "Il fegato contiene circa 100 g di glicogeno. Verso le 22 ore, il glucosio di nuova produzione (da glicerolo, lattato e amminoacidi) fornisce la maggior parte."
+    },
+    "FC-035": {
+      "title": "Frigorifero e congelatore",
+      "claim": "Il glicogeno è il frigorifero: piccolo e veloce. Il grasso corporeo è il congelatore in cantina: enorme. L'insulina bassa apre il congelatore.",
+      "why": "Il corpo attinge prima al glicogeno. L'insulina alta tiene il grasso sotto chiave; quando l'insulina scende e il glicogeno si esaurisce, il grasso di riserva diventa il carburante principale.",
+      "do": "Ogni ora a frigo vuoto è un'ora presa dal congelatore. È questo che ti dà il digiuno.",
+      "counter": "Che l'insulina freni il rilascio dei grassi è da manuale. Che sia l'insulina, più del bilancio energetico, a causare l'obesità è discusso."
+    },
+    "FC-036": {
+      "title": "Il passaggio è personale",
+      "claim": "Il passaggio a bruciare soprattutto grassi e chetoni avviene di solito 12–36 ore dopo l'ultimo pasto: prima per alcuni, più tardi per altri.",
+      "why": "Dipende da quanto era pieno il glicogeno. Una cena ricca di carboidrati e la sedentarietà lo ritardano; pasti con meno carboidrati e il movimento lo anticipano.",
+      "do": "Una passeggiata durante il digiuno e un ultimo pasto con meno carboidrati accelerano il passaggio."
+    },
+    "FC-037": {
+      "title": "I chetoni nutrono il cervello",
+      "claim": "Il tuo cervello non vive solo di glucosio. Con il procedere del digiuno usa sempre più chetoni, e gli studi non trovano perdite di attenzione o memoria.",
+      "why": "I chetoni prodotti dal fegato entrano nel cervello e coprono gran parte del suo bisogno di glucosio. Questo risparmia proteine muscolari e ti tiene lucido.",
+      "do": "Lavora e guida normalmente. Se ti senti annebbiato, controlla prima sale e acqua.",
+      "counter": "I chetoni coprono il ~60–70 % del cervello solo dopo settimane; nei primi giorni la quota è più bassa."
+    },
+    "FC-038": {
+      "title": "L'autofagia, onestamente",
+      "claim": "Il digiuno potenzia l'autofagia, il riciclo delle parti usurate delle cellule. Ma nessuno sa con precisione quando inizia o raggiunge il picco nell'uomo.",
+      "why": "Mangiare, soprattutto proteine e carboidrati, spegne l'autofagia tramite mTOR. Nell'uomo i marcatori salgono dopo 24–36 ore di digiuno, ma le soglie orarie che circolano vengono da studi sugli animali.",
+      "do": "Lunghe pause senza spuntini danno tempo alle cellule con il freno tolto. Prendi ogni numero di ore come una stima."
+    },
+    "FC-039": {
+      "title": "Il secondo giorno è il più duro",
+      "claim": "Nei digiuni lunghi la fame di solito raggiunge il picco verso il secondo giorno, poi svanisce. Molti dopo si sentono insolitamente lucidi e bene.",
+      "why": "La grelina, l'ormone della fame, tocca il massimo il secondo giorno e poi scende mentre salgono i chetoni; i resoconti dei digiuni in ospedale riportano poca fame dopo.",
+      "do": "Se il secondo giorno è duro, aspettati che migliori. Non giudicare tutto il digiuno dal suo giorno peggiore."
+    },
+    "FC-040": {
+      "title": "Cosa dice la bilancia",
+      "claim": "La vera perdita di grasso a digiuno è di circa 0,25 kg al giorno. Il resto del calo è acqua, che torna quando mangi.",
+      "why": "L'energia di un giorno (~2000 kcal) brucia circa un quarto di chilo di grasso. Il glicogeno è legato a circa tre volte il suo peso in acqua, che viene rilasciata e poi ripristinata.",
+      "do": "Giudica un digiuno dal peso ancora perso una settimana dopo."
+    },
+    "FC-041": {
+      "title": "Sale l'ormone della crescita",
+      "claim": "Il digiuno è un potente stimolo naturale dell'ormone della crescita: circa cinque volte tanto in un digiuno di due giorni.",
+      "why": "I pasti e l'insulina frenano l'ormone della crescita. Senza cibo i suoi picchi aumentano, aiutando a liberare grasso e limitando la degradazione delle proteine muscolari.",
+      "counter": "È un segnale di risparmio energetico, non anti-età né anabolico. L'IGF-1 cala nello stesso momento; gli studi sono piccoli, su uomini magri."
+    },
+    "FC-042": {
+      "title": "Niente «modalità fame» nei digiuni brevi",
+      "claim": "I digiuni brevi non ti mettono in «modalità fame». Il dispendio energetico a riposo è salito di circa il 12 % al quarto giorno.",
+      "why": "La noradrenalina sale per liberare le riserve e tenerti abbastanza vigile da cercare cibo: l'opposto di spegnersi.",
+      "do": "Aspettati energia, non fiacchezza. La stanchezza di solito segnala poco sale.",
+      "counter": "Piccolo studio su adulti magri. Digiuni molto più lunghi finiscono per ridurre il dispendio energetico."
+    },
+    "FC-043": {
+      "title": "Risparmiare zucchero per il cervello",
+      "claim": "Dopo due o tre giorni, i muscoli resistono temporaneamente all'insulina per risparmiare glucosio al cervello. È normale e si risolve mangiando.",
+      "why": "Il grasso liberato dalle riserve inonda il muscolo e ne blocca l'assorbimento di glucosio. Valori più alti a fine digiuno lungo, o subito dopo, sono previsti.",
+      "do": "Valuta la tua salute insulinica tra un digiuno e l'altro: digiuni ripetuti con perdita di grasso la migliorano nel giro di settimane."
+    },
+    "FC-044": {
+      "title": "Il muscolo viene risparmiato, non lasciato intatto",
+      "claim": "La degradazione delle proteine è massima nei primi giorni di digiuno, poi crolla quando subentrano i chetoni. Rallenta, ma non si ferma mai.",
+      "why": "All'inizio una parte del glucosio viene dagli amminoacidi. Con l'aumento dei chetoni la perdita di azoto cala; in uno studio di 10 giorni la forza si è mantenuta e la massa magra è scesa di poco.",
+      "do": "Proteggi i muscoli con l'allenamento di forza e abbastanza proteine nei giorni in cui mangi."
+    },
+    "FC-045": {
+      "title": "Rigenerazione: cosa si sa",
+      "claim": "Nei topi, digiuni di più giorni eliminano vecchie cellule immunitarie e innescano la rigenerazione alla ripresa dei pasti. Nell'uomo non è dimostrato.",
+      "why": "Il digiuno prolungato abbassa l'IGF-1 e i segnali di crescita, spingendo le cellule staminali a rinnovarsi; il normale digiuno quotidiano sposta appena l'IGF-1."
+    },
+    "FC-046": {
+      "title": "Continua a muoverti",
+      "claim": "Durante il digiuno fai le tue solite attività: cammina, lavora, allenati. Il movimento protegge muscoli e ossa nei digiuni lunghi.",
+      "why": "Il grasso di riserva fornisce l'energia. Non il digiuno, ma l'inattività ha causato gran parte della perdita di muscoli e ossa in famosi digiuni lunghi fatti stando fermi.",
+      "do": "Cammina ogni giorno e mantieni un po' di forza; rallenta se ti senti debole."
+    },
+    "FC-108": {
+      "title": "Cosa fa davvero il digiuno",
+      "claim": "Digiunare con regolarità abbassa peso, insulina, glicemia, pressione e infiammazione, ed è semplice, gratuito e compatibile con qualsiasi dieta.",
+      "why": "Limita tutti i cibi per una parte del tempo invece di alcuni cibi sempre. Negli studi, la maggior parte dei benefici segue il peso perso, più o meno come una dieta quotidiana a parità di calo.",
+      "do": "Il suo vero vantaggio è la costanza: scegli la versione che riesci a mantenere."
+    },
+    "FC-131": {
+      "title": "Il prediabete è comune e silenzioso",
+      "claim": "Più della metà degli adulti negli Stati Uniti ha il diabete o il prediabete, e la maggior parte di chi ha il prediabete non lo sa.",
+      "why": "Il prediabete dà raramente sintomi, quindi resta nascosto per anni mentre il danno comincia.",
+      "do": "Chiedi un esame dell'emoglobina glicata (HbA1c) o della glicemia a digiuno, soprattutto se accumuli peso sulla pancia."
+    },
+    "FC-142": {
+      "title": "Carburante per un mese",
+      "claim": "Anche un adulto magro ha abbastanza grasso corporeo da coprire più di un mese di fabbisogno energetico.",
+      "why": "A 70 kg e 15 % di grasso sono circa 10 kg di grasso, all'incirca 80.000 kcal, contro circa 2000 kcal di glicogeno."
+    },
+    "FC-002": {
+      "title": "Farmaci per il diabete? Prima un piano",
+      "claim": "Digiunare con insulina o pastiglie per il diabete senza un piano può provocare ipoglicemie pericolose. Di solito il medico riduce le dosi nei giorni di digiuno.",
+      "why": "La maggior parte dei farmaci per il diabete è dosata per i giorni in cui mangi. Senza cibo la stessa dose esagera; ipoglicemie ripetute vogliono dire dose troppo alta, non digiuno fallito.",
+      "do": "Concorda dosi e obiettivi con il medico, misura la glicemia 2–4 volte al giorno e non modificare mai l'insulina da solo."
+    },
+    "FC-003": {
+      "title": "Riconosci un'ipoglicemia",
+      "claim": "Tremori, sudore, fame improvvisa, nervosismo, confusione o senso di svenimento possono indicare glicemia bassa, soprattutto se prendi farmaci per il diabete.",
+      "why": "Senza farmaci il fegato mantiene stabile il glucosio (nei digiuni lunghi spesso 60–75 mg/dl, senza sintomi). Con i farmaci può crollare in fretta, e le ipoglicemie gravi sono pericolose.",
+      "do": "Prendi subito dello zucchero (succo, zollette, compresse di glucosio), anche se interrompe il digiuno, poi chiama il medico."
+    },
+    "FC-004": {
+      "title": "Chetosi non è chetoacidosi",
+      "claim": "La chetosi del digiuno è normale. La chetoacidosi è un'altra cosa ed è pericolosa: un rischio con il diabete di tipo 1 o con gli SGLT2-inibitori (nomi in «-gliflozin»).",
+      "why": "In chetosi l'insulina è bassa ma presente e i chetoni vengono usati come carburante. Nella chetoacidosi la carenza di insulina li fa accumulare, a volte anche con glicemia normale.",
+      "do": "Diabete di tipo 1 o un farmaco «-gliflozin»: non digiunare senza un piano esplicito del medico."
+    },
+    "FC-005": {
+      "title": "Quando il digiuno non abbassa più la glicemia",
+      "claim": "Se il digiuno non abbassa più la tua glicemia, chiedi al medico del LADA, un diabete autoimmune lento spesso scambiato per tipo 2.",
+      "why": "Nel LADA l'insulina è bassa, non alta: il digiuno aiuta molto meno e compare il rischio di chetoacidosi. Il C-peptide e gli anticorpi permettono di distinguerli."
+    },
+    "FC-006": {
+      "title": "Farmaci per la pressione e digiuno",
+      "claim": "Il digiuno abbassa la pressione. Con farmaci per la pressione o diuretici può scendere troppo, con capogiri quando ti alzi.",
+      "why": "Il calo dell'insulina fa eliminare ai reni sale e acqua, che si somma all'effetto dei farmaci.",
+      "do": "Misura la pressione a casa mentre digiuni, alzati lentamente e lascia che il medico regoli le dosi. Non sospendere mai da solo i farmaci per il cuore."
+    },
+    "FC-007": {
+      "title": "Farmaci da prendere a stomaco pieno",
+      "claim": "Aspirina, metformina e compresse di ferro o magnesio possono dare fastidio a stomaco vuoto. Chiedi se prenderle nella tua finestra alimentare.",
+      "why": "L'aspirina irrita la mucosa gastrica; la metformina dà nausea o diarrea; il ferro dolori e stitichezza; il magnesio feci molli. Il cibo attenua questi effetti.",
+      "do": "Non saltare mai un farmaco prescritto. Il farmacista può aiutarti a organizzare le assunzioni."
+    },
+    "FC-008": {
+      "title": "Cortisonici: mai saltare una dose",
+      "claim": "Se prendi cortisonici come terapia sostitutiva per insufficienza surrenalica, o prednisone a lungo termine, non digiunare senza l'endocrinologo e non saltare mai una dose.",
+      "why": "Senza abbastanza cortisolo il corpo non riesce a sostenere glicemia e pressione durante il digiuno; la crisi surrenalica è un rischio reale."
+    },
+    "FC-009": {
+      "title": "Litio o Coumadin? Prima chiedi",
+      "claim": "Con il litio, disidratazione o meno sale possono portarne i livelli verso la tossicità. Con Coumadin (warfarin), cambiare il modo di mangiare può spostare l'INR.",
+      "why": "I reni trattano il litio come il sodio e lo trattengono quando mancano sale e acqua. L'effetto del warfarin dipende da un apporto stabile di vitamina K e dal metabolismo del fegato.",
+      "do": "Concorda un piano con il medico, bevi a sufficienza e fai controllare i livelli più spesso all'inizio."
+    },
+    "FC-010": {
+      "title": "Farmaci per la tiroide e digiuno",
+      "claim": "Se prendi farmaci per la tiroide, ricontrolla i valori quando inizi a digiunare o perdi peso. La dose necessaria può cambiare.",
+      "why": "Il calo di peso e meno infiammazione possono ridurre il fabbisogno; i sintomi sono una guida poco affidabile. Allunga i digiuni solo con valori stabili, non mentre si aggiusta la dose.",
+      "do": "Cuore accelerato, ansia, intolleranza al caldo o sonno disturbato durante il digiuno: fai controllare la tiroide."
+    },
+    "FC-011": {
+      "title": "Con farmaci tipo Ozempic",
+      "claim": "Con semaglutide o tirzepatide, proteine, allenamento di forza e liquidi contano più di digiuni lunghi; pianifica ogni digiuno con il medico.",
+      "why": "Questi farmaci tagliano già molto l'appetito, quindi i rischi diventano perdita muscolare e disidratazione da nausea. Insieme a insulina o sulfaniluree, le ipoglicemie diventano più probabili.",
+      "do": "Approfitta del periodo per creare abitudini durature: entro un anno dalla sospensione torna in genere due terzi del peso perso."
+    },
+    "FC-012": {
+      "title": "Gotta o calcoli renali",
+      "claim": "Il digiuno alza l'acido urico. Se hai avuto gotta o calcoli renali, parla con il medico prima dei digiuni lunghi e bevi molto.",
+      "why": "I chetoni competono con l'acido urico per l'eliminazione renale, e bere meno concentra le urine. Circa il 6 % di chi seguiva a lungo una dieta chetogenica ha sviluppato calcoli.",
+      "do": "Tieni le urine chiare; chiedi se continuare la terapia per l'acido urico durante i digiuni."
+    },
+    "FC-013": {
+      "title": "Reni, cuore o tumore: prima lo specialista",
+      "claim": "Con una malattia renale, cardiaca o un tumore, digiuna solo con il via libera dello specialista, anche se i primi studi sono promettenti.",
+      "why": "Piccoli studi mostrano benefici (migliore recupero del cuore dopo un infarto, meno proteine nelle urine nel diabete), ma elettroliti, farmaci e calo di peso comportano rischi maggiori in queste malattie.",
+      "do": "Con una malattia renale, prendi integratori di magnesio o potassio solo con l'approvazione del medico."
+    },
+    "FC-014": {
+      "title": "Calcoli biliari e dimagrimento rapido",
+      "claim": "Dimagrire in fretta aumenta il rischio di calcoli biliari. Includi un po' di grassi naturali ai pasti e senti il medico se hai avuto coliche alla cistifellea.",
+      "why": "La bile che ristagna nella cistifellea può cristallizzare in calcoli. Mangiare pochissimi grassi e dimagrire velocemente favoriscono il ristagno."
+    },
+    "FC-028": {
+      "title": "Le erbe che abbassano la glicemia si sommano",
+      "claim": "Melone amaro, cannella e alcuni tè possono abbassare la glicemia. Con i farmaci per il diabete, questo aumenta il rischio di ipoglicemia.",
+      "why": "Il loro lieve effetto ipoglicemizzante si somma a quello del farmaco, e il digiuno toglie il cibo che lo attenua."
+    },
+    "FC-123": {
+      "title": "PCOS e insulina",
+      "claim": "La PCOS, il disturbo ormonale più comune nelle donne in età fertile, è alimentata dall'insulino-resistenza, anche nelle donne magre.",
+      "why": "L'insulina alta spinge le ovaie a produrre troppi androgeni e disturba l'ovulazione; abbassarla spesso riporta cicli regolari.",
+      "do": "Cicli irregolari, acne o peli in eccesso con grasso sulla pancia? Chiedi al medico della PCOS."
+    },
+    "FC-130": {
+      "title": "Il tipo 2 è troppa insulina",
+      "claim": "Nel diabete di tipo 2 l'insulina di solito è alta, non bassa, e spesso la malattia può andare in remissione con l'alimentazione.",
+      "why": "Il grasso nel fegato e nel pancreas alimenta la resistenza e riduce la secrezione di insulina; perderlo può riportare il controllo, soprattutto nelle fasi iniziali.",
+      "do": "Segui la remissione con il medico tramite l'HbA1c. Non sospendere mai i farmaci da solo."
+    },
+    "FC-132": {
+      "title": "Glicemia alta al mattino a digiuno",
+      "claim": "Una glicemia più alta al mattino o durante un digiuno lungo non è un fallimento. È il fegato che libera zucchero di riserva.",
+      "why": "Prima del risveglio e durante il digiuno, gli ormoni spingono fuori il glucosio di riserva (il fenomeno dell'alba). Con l'insulino-resistenza, le misurazioni lo mostrano.",
+      "do": "Guarda l'andamento nel corso delle settimane, non una singola misura."
+    },
+    "FC-133": {
+      "title": "Digiuni religiosi con una patologia",
+      "claim": "Con diabete, malattia renale o diuretici, i digiuni religiosi senz'acqua richiedono un piano medico, e la maggior parte delle tradizioni prevede esenzioni o permette l'acqua.",
+      "why": "Togliere insieme cibo e acqua aumenta il rischio di disidratazione, ipoglicemia e pressione bassa; le linee guida per il Ramadan valutano il rischio e adattano gli orari dei farmaci."
+    },
+    "FC-023": {
+      "title": "Un ritmo, non una punizione",
+      "claim": "Il digiuno non è una penitenza per aver mangiato troppo. Usalo come un ritmo programmato, non per «compensare» un pasto.",
+      "why": "Restringere per compensare è un noto segnale d'allarme di disturbo alimentare, e trasforma il cibo in senso di colpa."
+    },
+    "FC-050": {
+      "title": "La fame arriva a ondate",
+      "claim": "La fame cresce, raggiunge un picco e svanisce, spesso in 30–45 minuti, anche se non mangi nulla. Non continua a salire.",
+      "why": "La grelina si impenna attorno ai tuoi orari abituali dei pasti e poi scende da sola, che il cibo arrivi o no.",
+      "do": "Bevi qualcosa di caldo, inizia un'attività, esci un attimo. Programma una passeggiata o una telefonata all'ora del pasto abituale."
+    },
+    "FC-051": {
+      "title": "Il mattino è più facile",
+      "claim": "Quasi tutti hanno meno fame verso le 8 del mattino e più fame verso le 20, indipendentemente da quando hanno mangiato l'ultima volta.",
+      "why": "L'appetito segue l'orologio biologico, e gli ormoni prima dell'alba liberano riserve prima che tu ti svegli.",
+      "do": "Allungare il digiuno notturno rimandando la colazione è spesso il primo passo più facile."
+    },
+    "FC-052": {
+      "title": "Molta fame si impara",
+      "claim": "Orari, luoghi, schermi e odori possono far venire fame come il campanello di Pavlov. Riconosci il segnale e dagli un nome: segnale, non bisogno.",
+      "why": "Associare ripetutamente il cibo a momenti e situazioni condiziona il cervello a liberare saliva, insulina e fame a quel segnale.",
+      "do": "Mangia solo a tavola; nei giorni di digiuno, non cucinare, non fare la spesa e non lavorare in cucina."
+    },
+    "FC-053": {
+      "title": "Un piano «se… allora»",
+      "claim": "Decidi in anticipo cosa farai quando arriva la fame: «Se apro il frigo, cammino dieci minuti».",
+      "why": "Risposte pianificate a segnali precisi battono la forza di volontà in modo affidabile. Sostituire un'abitudine (tè invece dello spuntino serale) funziona meglio che eliminarla.",
+      "do": "Tieni pronte 3–5 azioni rapide: acqua, tè, una passeggiata, una telefonata, una piccola faccenda."
+    },
+    "FC-054": {
+      "title": "Fai amicizia con la fame",
+      "claim": "La fame durante il digiuno significa che sei sulla strada giusta, non in pericolo. Con il digiuno regolare, l'appetito tende a calare.",
+      "why": "La fame è soprattutto un segnale passeggero, ormonale e di abitudine; vederla come una compagna prevista riduce l'ansia, e il corpo si adatta con la pratica."
+    },
+    "FC-097": {
+      "title": "Concediti un mese",
+      "claim": "I primi digiuni sono di solito i più duri. Giudica il digiuno dal quinto tentativo, non dal primo.",
+      "why": "Abitudini di fame, risposte condizionate e cambio di carburante si adattano con la ripetizione; il corpo impara a passare prima alla combustione dei grassi.",
+      "do": "La sera prima, fai un pasto casalingo semplice, con pochi zuccheri e amidi: il giorno dopo sarà più facile."
+    },
+    "FC-098": {
+      "title": "Fermarsi prima conta lo stesso",
+      "claim": "Un digiuno che finisce prima conta lo stesso. Fermarsi a 22 ore su 24 sono 22 ore di beneficio, non un fallimento.",
+      "why": "I benefici si accumulano ora dopo ora. Vedere i digiuni parziali come successi costruisce la fiducia che rende possibili quelli più lunghi."
+    },
+    "FC-099": {
+      "title": "Un assaggio non azzera nulla",
+      "claim": "Qualche noce, un pezzetto di formaggio o un boccone di insalata non azzerano il tuo digiuno. Vai avanti.",
+      "why": "Un'assunzione minima alza l'insulina per poco, poi scende di nuovo e la combustione dei grassi riprende. Saltare un giorno di digiuno non cancella nemmeno settimane di routine.",
+      "do": "Annotalo, se vuoi, e continua. Domani si torna al programma."
+    },
+    "FC-101": {
+      "title": "Non sotto stress o in viaggio",
+      "claim": "I digiuni lunghi spesso falliscono in viaggio, sotto stress o durante le feste. Tienili per settimane più tranquille.",
+      "why": "Il digiuno è di per sé uno stress. Sommato ad altri, alza cortisolo e glicemia e da benefico diventa logorante.",
+      "do": "Nei periodi molto stressanti, accorcia i digiuni invece di spingere di più."
+    },
+    "FC-102": {
+      "title": "Non da soli",
+      "claim": "Chi digiuna con il partner, un amico o un gruppo se la cava meglio, soprattutto nel mantenere il peso.",
+      "why": "Orari condivisi tolgono tentazioni in casa, e l'impegno verso gli altri sostiene l'abitudine quando cala la motivazione iniziale.",
+      "do": "Invita qualcuno a digiunare con te, o dillo a poche persone che ti sostengono. Non a tutti."
+    },
+    "FC-103": {
+      "title": "Conta cosa mangi tra un digiuno e l'altro",
+      "claim": "Non puoi compensare col digiuno un'alimentazione sbagliata. Se un digiuno più lungo ti porta ad abbuffarti, torna indietro di un passo: non ancora pronto, non debole.",
+      "why": "Mangiare male tra i digiuni ne annulla a poco a poco il beneficio e rende più duro il successivo. I progressi durano quando ogni livello è stabile prima del successivo.",
+      "do": "Osserva senza vergogna perché mangi (abitudine, conforto, compagnia) e allunga i digiuni solo quando i pasti sono stabili."
+    },
+    "FC-105": {
+      "title": "Il sonno fa parte del gioco",
+      "claim": "Chi dormiva poco e ha dormito circa un'ora in più ha mangiato ~270 kcal in meno al giorno ed è dimagrito senza alcun consiglio alimentare.",
+      "why": "La mancanza di sonno aumenta fame e attrazione per il cibo e riduce la sensibilità all'insulina. Lo stress cronico aggiunge cortisolo e fame nervosa.",
+      "do": "Dormi meno di 6,5 ore? Andare a letto prima potrebbe essere la tua leva più facile."
+    },
+    "FC-180": {
+      "title": "Uno sgarro non è una giornata persa",
+      "claim": "Uno sgarro è un pasto, non una giornata rovinata. Il «tutto o niente» trasforma piccoli scivoloni in grandi; essere gentile con te stesso lo evita.",
+      "why": "Dopo aver infranto una regola, chi è a dieta stretta spesso mangia molto di più (l'effetto «ormai è andata»). L'autocompassione dopo uno sgarro ha ridotto le abbuffate successive; l'autocritica le ha aumentate.",
+      "do": "Riprendi dal prossimo momento previsto e parlati come parleresti a un amico."
+    },
+    "FC-181": {
+      "title": "Cavalca l'onda",
+      "claim": "Una voglia è un'onda. Nota dove la senti, respira, e guardala salire e poi svanire senza assecondarla.",
+      "why": "Osservare un impulso senza giudicarlo spezza la catena automatica tra voglia e azione; un breve allenamento a «cavalcare l'impulso» ha indebolito questo legame in uno studio controllato.",
+      "counter": "Testato sul fumo; le prove sul cibo sono minori, anche se il meccanismo è lo stesso."
+    },
+    "FC-182": {
+      "title": "Pensa a tra due ore",
+      "claim": "Prima di un boccone non previsto, immagina come ti sentirai tra due ore e domani. Raffredda la voglia in modo misurabile.",
+      "why": "Pensare a lungo termine attiva le aree di controllo della corteccia prefrontale e smorza la risposta del sistema di ricompensa al cibo desiderato."
+    },
+    "FC-183": {
+      "title": "I segnali hanno una forza reale",
+      "claim": "Vedere, annusare o vedere pubblicità di cibo spinge in modo affidabile a mangiare e ad aumentare di peso, e la voglia supera spesso il piacere che il cibo dà.",
+      "why": "La dopamina alimenta il «volere»; il piacere passa per altri circuiti. I segnali gonfiano la voglia senza aumentare il gusto: evitarli è strategia, non debolezza."
+    },
+    "FC-184": {
+      "title": "In compagnia si mangia di più",
+      "claim": "In compagnia si mangia molto di più che da soli, soprattutto con amici e famiglia.",
+      "why": "I pasti condivisi durano di più e stabiliscono quanto si mangia; una meta-analisi ha confermato questo effetto sociale in modo solido.",
+      "do": "Organizza i digiuni intorno ai pasti in compagnia invece di combatterli, e decidi la tua porzione prima di sederti."
+    },
+    "FC-185": {
+      "title": "La prossima tappa, non il traguardo",
+      "claim": "Punta alla prossima tappa, non alla fine del digiuno. La motivazione cresce man mano che l'obiettivo si avvicina.",
+      "why": "L'effetto del gradiente dell'obiettivo: lo sforzo aumenta con la vicinanza percepita, e una serie di traguardi vicini ti porta più lontano di uno lontano."
+    },
+    "FC-186": {
+      "title": "Noia o fame?",
+      "claim": "Molta «fame» è noia. Si mangia per sfuggire al senso di vuoto del non avere niente da fare.",
+      "why": "Mangiare dà una stimolazione rapida e distoglie l'attenzione da uno stato sgradevole di scarso coinvolgimento.",
+      "do": "Chiediti: «Ho fame o mi annoio?» Un'attività, una passeggiata o una chiacchierata spesso rispondono."
+    },
+    "FC-187": {
+      "title": "Arrivare in fondo dà fiducia",
+      "claim": "Ogni digiuno che porti a termine rende il successivo più fattibile. I propri successi sono la fonte più forte di fiducia in sé.",
+      "why": "L'autoefficacia cresce soprattutto con le esperienze di successo, non con la persuasione, e predice se una nuova abitudine dura.",
+      "do": "Inizia con digiuni che riesci a finire, poi allunga. Conta i digiuni completati, non quelli interrotti."
+    },
+    "FC-090": {
+      "title": "Comincia togliendo gli spuntini",
+      "claim": "Il primo digiuno più facile: tre pasti, niente in mezzo. Oggi la maggior parte degli adulti mangia 5–6 volte al giorno, quasi senza momenti a insulina bassa.",
+      "why": "Ogni spuntino rialza l'insulina e funziona da aperitivo, stuzzicando l'appetito. Senza spuntini torna una finestra quotidiana di combustione dei grassi, quasi senza fame in più.",
+      "do": "Poi togli i pasti uno alla volta. Lo stesso percorso funziona per ricominciare dopo una pausa."
+    },
+    "FC-091": {
+      "title": "Il miglior schema è quello che ripeti",
+      "claim": "Non esiste un unico schema di digiuno migliore. Quello giusto è quello che riesci a mantenere, e puoi cambiarlo quando vuoi.",
+      "why": "I digiuni quotidiani brevi (16:8, un pasto al giorno) sono i più facili da mantenere; quelli più lunghi e radi agiscono prima su glicemia e grasso del fegato, ma sono più difficili socialmente.",
+      "do": "Costruisci una routine attorno a una finestra quotidiana; aggiungi digiuni più lunghi nelle settimane tranquille."
+    },
+    "FC-092": {
+      "title": "Una finestra alimentare da sola fa poco",
+      "claim": "Nei grandi studi, una finestra 16:8 da sola ha dato poca perdita di peso in più. Il beneficio viene soprattutto dal mangiare meno e meglio al suo interno.",
+      "why": "A parità di calorie, mangiare in una finestra ristretta non ha fatto meglio della normale riduzione calorica. Il team The Fasting Method di Fung usa il 16:8 per il mantenimento e digiuni più lunghi per perdere grasso.",
+      "do": "Usa la finestra come struttura e riempila di cibo integro e ricco di proteine, senza spiluccare.",
+      "counter": "Finestre alimentari spostate al mattino hanno migliorato sensibilità all'insulina e pressione anche senza calo di peso."
+    },
+    "FC-093": {
+      "title": "Il digiuno di 24 ore",
+      "claim": "Da cena a cena: quel giorno fai comunque un pasto, quindi cene in famiglia e farmaci da prendere col cibo restano possibili.",
+      "why": "Saltare colazione e pranzo dà una giornata intera di insulina bassa con pochi stravolgimenti. Due o tre volte a settimana è un ritmo comune."
+    },
+    "FC-094": {
+      "title": "I digiuni di 36 e 42 ore",
+      "claim": "Un digiuno di 36 ore salta un giorno intero, dalla cena alla colazione di due giorni dopo; se salti anche quella colazione, sono 42 ore.",
+      "why": "Comprende due notti di sonno. La clinica di Fung li usa tre volte a settimana nel diabete di tipo 2, sotto controllo, poi li dirada."
+    },
+    "FC-095": {
+      "title": "5:2 e digiuno a giorni alterni",
+      "claim": "Il 5:2 prevede due giorni leggeri (~500–600 kcal) a settimana. Il digiuno a giorni alterni lo fa un giorno sì e uno no; entrambi funzionano più o meno come una dieta quotidiana.",
+      "why": "Una piccola razione rende più facili i giorni di digiuno. Negli studi il calo di peso è stato pari alla riduzione calorica quotidiana; l'insulina a volte è migliorata di più, ma più persone hanno abbandonato."
+    },
+    "FC-096": {
+      "title": "Saltare la colazione o la cena?",
+      "claim": "Saltare la colazione è più facile; saltare la cena è più efficace. Scegli in base a ciò che la tua giornata permette.",
+      "why": "La colazione è piccola, si ha poca fame e raramente è conviviale. La cena è il pasto più grande, quando la risposta insulinica è massima, ma è quella più sociale."
+    },
+    "FC-100": {
+      "title": "Adatta il digiuno alla tua vita",
+      "claim": "Adatta il digiuno alla tua vita, non la tua vita al digiuno. Goditi le feste e digiuna nei giorni successivi.",
+      "why": "L'umanità ha sempre alternato banchetti e digiuni. Buona parte del peso preso in un anno arriva con le feste invernali; conta l'equilibrio nelle settimane, non un singolo pasto.",
+      "do": "Cena importante stasera? Salta colazione e pranzo. Digiuna di più nei giorni feriali pieni, meno nei fine settimana in famiglia."
+    },
+    "FC-104": {
+      "title": "Allenati verso la fine",
+      "claim": "Un buon momento per allenarsi è verso la fine del digiuno, per poi romperlo con un pasto ricco di proteine.",
+      "why": "Verso la fine del digiuno la noradrenalina è alta e la combustione dei grassi è in pieno corso. In uno studio, un digiuno di 3,5 giorni non ha ridotto né forza né resistenza.",
+      "do": "Esempio: digiuno dalla cena, allenamento a mezzogiorno, poi pranzo. Rallenta se ti senti debole."
+    },
+    "FC-106": {
+      "title": "Le ossa hanno bisogno di carico",
+      "claim": "Le ossa si rafforzano solo sotto carico. Camminare, fare le scale e allenare la forza le proteggono molto più delle pastiglie di calcio.",
+      "why": "L'osso si rimodella in risposta allo stress meccanico; gli astronauti perdono osso pur mangiando bene. Il movimento quotidiano conta quanto la palestra."
+    },
+    "FC-107": {
+      "title": "Prima la terapia, poi il mantenimento",
+      "claim": "Il digiuno intensivo può essere un trattamento a tempo. Raggiunto l'obiettivo, il mantenimento è molto più leggero.",
+      "why": "Le cliniche applicano protocolli terapeutici per mesi, poi passano a finestre alimentari quotidiane con qualche digiuno più lungo dopo le feste."
+    },
+    "FC-110": {
+      "title": "Uscire da uno stallo",
+      "claim": "Gli stalli sono normali. Cambia lo stimolo: un digiuno più lungo, uno schema diverso o un digiuno più rigoroso, senza dolcificanti.",
+      "why": "Ogni routine trova un equilibrio in cui il peso perso nei giorni di digiuno viene ripreso. Uno schema nuovo rimette in moto i progressi.",
+      "do": "Prova 24 → 36 → 48 ore, un pasto al giorno o ogni tanto un digiuno più lungo. Controlla anche spuntini e sonno."
+    },
+    "FC-111": {
+      "title": "Misura più del peso",
+      "claim": "Quando la bilancia si ferma, misura la circonferenza vita o fatti una foto al mese. Cerca di tenere la vita sotto la metà della tua altezza.",
+      "why": "Gli sbalzi d'acqua nascondono la perdita di grasso per settimane. La vita riflette il grasso viscerale, il più legato a diabete e malattie cardiache."
+    },
+    "FC-112": {
+      "title": "Il tuo corpo difende il suo peso",
+      "claim": "Dopo un calo di peso, l'appetito sale di circa 100 kcal al giorno per ogni chilo perso e il metabolismo rallenta. Riprendere peso è biologia, non mancanza di volontà.",
+      "why": "Il corpo difende un peso di riferimento come un termostato. La maggior parte delle diete ipocaloriche si blocca e rimbalza; i concorrenti di The Biggest Loser bruciavano ~500 kcal in meno al giorno sei anni dopo.",
+      "do": "Aspettati più fame mentre dimagrisci; digiuno regolare, proteine e cibo integro ti aiutano a tenere."
+    },
+    "FC-140": {
+      "title": "La colazione non è obbligatoria",
+      "claim": "Saltare la colazione non ti fa mangiare di più in totale: negli studi, chi faceva colazione mangiava ~260 kcal in più al giorno e non pesava meno.",
+      "why": "Il pasto successivo cresce solo un po', quindi l'apporto totale cala. L'ondata ormonale prima dell'alba ti ha già dato energia."
+    },
+    "FC-141": {
+      "title": "Le bilance smart sbagliano a digiuno",
+      "claim": "Bilance impedenziometriche e scansioni segnalano spesso una «perdita di muscolo» a digiuno che in realtà è acqua e glicogeno, e torna quando mangi.",
+      "why": "Questi apparecchi stimano la massa magra dando per stabile l'acqua corporea; il digiuno elimina acqua, che leggono come muscolo perso.",
+      "do": "Nei periodi di digiuno, segui piuttosto forza e circonferenza vita."
+    },
+    "FC-143": {
+      "title": "Quel titolo sul «rischio cardiaco del 91 %»",
+      "claim": "La notizia del 2024 «mangiare in 8 ore aumenta del 91 % il rischio di morte cardiaca» veniva da un abstract di congresso non revisionato, basato su due giorni di diario alimentare.",
+      "why": "I partecipanti non digiunavano di proposito, e qualità della dieta e differenze di partenza non sono state riportate, come ha notato lo stesso revisore dell'AHA."
+    },
+    "FC-020": {
+      "title": "Digiuni secchi, ma brevi",
+      "claim": "Digiunare senza acqua è più duro, più rischioso e non aggiunge benefici. Limita i digiuni secchi a un giorno, come nella pratica religiosa.",
+      "why": "Senz'acqua il corpo si disidrata oltre a digiunare, affaticando circolazione e reni e limitando quanto a lungo si può digiunare in sicurezza, senza vantaggi metabolici.",
+      "do": "Bevi bene nelle ore prima e dopo un digiuno secco."
+    },
+    "FC-160": {
+      "title": "Un calendario antichissimo",
+      "claim": "Quasi tutte le tradizioni hanno giorni fissi di digiuno: digiuni lunari e settimanali nell'induismo, la Quaresima ortodossa, il Ramadan, i monaci buddisti che non mangiano dopo mezzogiorno.",
+      "why": "Molto prima di capire il metabolismo, le culture alternavano banchetti e digiuni come purificazione e disciplina. Creta, modello della dieta mediterranea, digiunava molti giorni l'anno."
+    },
+    "FC-022": {
+      "title": "Se cerchi una gravidanza",
+      "claim": "Stai cercando una gravidanza? Evita i digiuni lunghi dopo l'ovulazione, perché potresti essere già incinta. Punta piuttosto su pasti completi e nutrienti.",
+      "why": "La gravidanza è un motivo per non digiunare. Nella seconda metà del ciclo non puoi ancora saperlo, quindi finestre alimentari più brevi sono la scelta più sicura."
+    },
+    "FC-120": {
+      "title": "Digiunare seguendo il ciclo",
+      "claim": "L'appetito è minore nella prima metà del ciclo e maggiore dopo l'ovulazione. Programma i digiuni lunghi nei giorni 2–14.",
+      "why": "Gli estrogeni frenano l'appetito; il progesterone lo stimola, e la sensibilità all'insulina cala prima delle mestruazioni, il che rende quella settimana la più difficile.",
+      "do": "Nella settimana o due prima del ciclo, preferisci digiuni brevi ed evita i dolcificanti tra un pasto e l'altro."
+    },
+    "FC-121": {
+      "title": "Pesati in base al ciclo",
+      "claim": "Nelle donne il calo di peso segue un'onda mensile. Confronta il peso nello stesso momento di ogni ciclo, non di settimana in settimana.",
+      "why": "La ritenzione idrica aumenta nella seconda metà del ciclo e cala dopo le mestruazioni, mascherando la perdita di grasso."
+    },
+    "FC-122": {
+      "title": "La perimenopausa cambia le regole",
+      "claim": "Negli anni prima della menopausa le donne prendono circa 0,5 kg all'anno e perdono massa magra. È una questione ormonale, non di disciplina.",
+      "why": "Il calo degli estrogeni aumenta l'appetito e sposta il grasso sulla pancia; dormire male accelera tutto. Dopo la menopausa il rischio cardiaco si avvicina a quello degli uomini.",
+      "do": "Dai priorità a forza, proteine e sonno; il digiuno aiuta, ma aspettati progressi più lenti."
+    },
+    "FC-124": {
+      "title": "Anche le donne ne traggono beneficio",
+      "claim": "Le donne dimagriscono con il digiuno più o meno al ritmo degli uomini; un digiuno di 3 giorni non ha alterato gli ormoni riproduttivi in donne normopeso.",
+      "why": "I problemi del ciclo derivano da poco grasso corporeo e deficit energetico, non dal digiuno in sé, nelle donne con riserve adeguate.",
+      "counter": "Le donne magre e molto attive rischiano di più il deficit energetico; i dati a lungo termine specifici sulle donne sono limitati."
+    }
+  }
+}
