@@ -1,0 +1,6 @@
+- Fasting Library replaces Info and Tips: 116 evidence-graded cards, search and "Can I have…?"
+- "Go deeper" on each stage, tips during a fast, start and end-of-fast cards
+- Settings › Knowledge: pick topics and health conditions (stored on device only)
+- Sources & credits: 157 verified citations
+- Stage texts corrected: ketosis at 20 h, autophagy timing marked as an estimate
+- Better translations in all languages
