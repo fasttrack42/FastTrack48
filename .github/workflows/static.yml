@@ -1,11 +1,17 @@
-# Deploy README.md → index.html and publish via gh action
+# Deploy README.md → index.html and knowledge/index.html → knowledge/, publish via gh action
 name: Deploy static content to Pages
 
 on:
   push:
     branches: ["master"]
     paths:
-      - "README.md" # only trigger when README.md changes    
+      - "README.md" # only trigger when README.md changes
+      # knowledge base viewer → /knowledge/; the data files are listed too, so each data change
+      # redeploys the viewer pinned to the new commit
+      - "knowledge/index.html"
+      - "knowledge/core.jsonl"
+      - "knowledge/references.json"
+      - "knowledge/i18n/**"
   workflow_dispatch:
 
 permissions:
@@ -71,6 +77,16 @@ jobs:
           </body>
           </html>
           EOF
+
+      # Served at <pages-url>/knowledge/. The page fetches its data from jsDelivr; pinning it to this
+      # commit makes the data match the deploy and skips jsDelivr's branch cache (up to ~12 h for @master).
+      - name: Publish knowledge base viewer → site/knowledge/index.html
+        run: |
+          mkdir -p site/knowledge
+          sed 's/^const DEFAULT_REF = "master";$/const DEFAULT_REF = "${{ github.sha }}";/' \
+            knowledge/index.html > site/knowledge/index.html
+          grep -q '^const DEFAULT_REF = "${{ github.sha }}";$' site/knowledge/index.html \
+            || { echo "::error::DEFAULT_REF line not found in knowledge/index.html"; exit 1; }
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
