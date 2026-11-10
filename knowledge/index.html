@@ -163,6 +163,7 @@ footer.page { max-width: 1180px; margin: 0 auto; padding: 8px 16px 32px; color: 
 		<aside class="filters" aria-label="Filters"><details id="filters-box" open><summary id="filters-sum">Filters</summary><div id="facets"></div></details></aside>
 		<main>
 			<div class="status"><span id="count" aria-live="polite"></span><span class="active" id="active"></span><span class="spacer"></span>
+				<button class="linkbtn" id="copy-view">Copy link to this view</button>
 				<button class="linkbtn" id="expand-all">Expand all</button></div>
 			<div id="list"><div class="msg"><div class="spinner"></div>Loading the library…</div></div>
 		</main>
@@ -176,7 +177,10 @@ footer.page { max-width: 1180px; margin: 0 auto; padding: 8px 16px 32px; color: 
 /* ---------- config ---------- */
 const params = new URLSearchParams(location.search);
 const REPO = "fasttrack42/FastTrack48";
-const REF = /^[\w.\-\/]{1,100}$/.test(params.get("ref") || "") ? params.get("ref") : "master";
+// The Pages workflow (static.yml) rewrites this to the deployed commit, so the data matches the deploy and jsDelivr's
+// branch cache (up to ~12 h for @master) never serves stale cards.
+const DEFAULT_REF = "master";
+const REF = /^[\w.\-\/]{1,100}$/.test(params.get("ref") || "") ? params.get("ref") : DEFAULT_REF;
 // ?base= overrides the data location (https URL or a relative path such as ./ when served next to the files).
 const BASE = (() => {
 	const b = params.get("base");
@@ -355,18 +359,27 @@ function matches(c, skip) {
 const activeCount = () => S.cat.size + S.grade.size + S.safety.size + S.cond.size + (S.ref ? 1 : 0);
 
 /* ---------- URL ---------- */
-function syncUrl() {
+/* Every filterable criterion: lang, tab, q, cat, grade, safety, cond, src (cited reference), en (English originals). */
+function stateParams(withLang, extraCat) {
 	const p = new URLSearchParams();
 	if (params.get("base")) p.set("base", params.get("base"));
-	if (REF !== "master") p.set("ref", REF);
-	// The language goes in the URL only when the URL chose it, so a shared link follows the reader's browser.
-	if (params.has("lang")) p.set("lang", S.lang);
+	if (REF !== DEFAULT_REF) p.set("ref", REF);
+	if (withLang) p.set("lang", S.lang);
 	if (S.tab !== "cards") p.set("tab", S.tab);
 	if (S.q) p.set("q", S.q);
-	for (const k of ["cat", "grade", "safety", "cond"]) if (S[k].size) p.set(k, [...S[k]].join(","));
+	for (const k of ["cat", "grade", "safety", "cond"]) {
+		const v = new Set(S[k]);
+		if (k === "cat" && extraCat) v.add(extraCat);
+		if (v.size) p.set(k, [...v].join(","));
+	}
 	if (S.ref) p.set("src", S.ref);
 	if (S.showEn) p.set("en", "1");
-	const qs = p.toString();
+	return p;
+}
+function syncUrl() {
+	// The address bar names the language only when the URL chose it, so pasting it elsewhere follows that
+	// reader's browser; copied links always name it.
+	const qs = stateParams(params.has("lang")).toString();
 	history.replaceState(null, "", (qs ? "?" + qs : location.pathname) + location.hash);
 }
 
@@ -453,14 +466,52 @@ function renderCard(c, open) {
 		h("div", { class: "foot" },
 			c.cond.map(x => h("span", { class: "tag cond", text: condLabel(x) })),
 			c.when.map(w => h("span", { class: "tag", title: "When the app shows it: " + w, text: when(w) })),
-			h("button", { class: "linkbtn copy", text: "Copy link", onclick: () => copyLink(c.id) })));
+			h("a", { class: "linkbtn copy", href: linkFor(c.cat, c.id), text: "Copy link",
+				onclick: e => { e.preventDefault(); copyLink(c.cat, c.id); } })));
 	d.append(summary, body);
+	// Opening a card puts it in the address bar, so the URL always points at what you're reading.
+	d.addEventListener("toggle", () => {
+		if (d.open && !S.allOpen && location.hash !== "#" + c.id) history.replaceState(null, "", location.search + "#" + c.id);
+	});
 	return d;
 }
-async function copyLink(id) {
-	const url = location.href.split("#")[0] + "#" + id;
+/* Deep link: the current view (language + every filter) plus the card's category and #card id.
+   If a filter would hide the card, goToCard() drops it when the link is opened. */
+function linkFor(cat, id) {
+	return location.origin + location.pathname + "?" + stateParams(true, cat).toString() + (id ? "#" + id : "");
+}
+async function copyLink(cat, id) {
+	const url = linkFor(cat, id);
 	try { await navigator.clipboard.writeText(url); toast("Link copied"); }
-	catch { history.replaceState(null, "", "#" + id); toast("Link is in the address bar"); }
+	catch {
+		params.set("lang", S.lang);
+		history.replaceState(null, "", url);
+		toast("Link is in the address bar");
+	}
+}
+/* "#fc-24", "#FC-024", "#24" -> "FC-024" when such a card exists. */
+function cardIdFrom(hash) {
+	const raw = decodeURIComponent(hash.replace(/^#/, "")).trim();
+	if (!raw) return null;
+	const m = raw.match(/^(?:fc-?)?0*(\d{1,4})$/i);
+	const id = m ? "FC-" + m[1].padStart(3, "0") : raw.toUpperCase();
+	return D.cards.some(c => c.id === id) ? id : null;
+}
+/* Make the linked card visible (dropping filters that hide it), open it and scroll to it. */
+function goToCard(scroll = true) {
+	const id = cardIdFrom(location.hash);
+	if (!id) return;
+	const c = D.cards.find(x => x.id === id);
+	if (location.hash !== "#" + id) history.replaceState(null, "", location.search + "#" + id);
+	if (!matches(c)) {
+		S.q = ""; $("q").value = ""; $("q-clear").hidden = true; S.ref = "";
+		for (const k of ["grade", "safety", "cond"]) S[k].clear();
+		if (S.cat.size && !S.cat.has(c.cat)) S.cat = new Set([c.cat]);
+	}
+	S.tab = "cards";
+	update();
+	const el = document.getElementById(id);
+	if (el) { el.open = true; if (scroll) el.scrollIntoView({ block: "start" }); }
 }
 
 function renderList() {
@@ -484,7 +535,11 @@ function renderList() {
 	for (const cat of new Set(order)) {
 		const cs = shown.filter(c => c.cat === cat);
 		if (!cs.length) continue;
-		groups.push(h("section", { class: "group" }, h("h2", { text: ui("cat_" + cat) }), h("p", { text: ui("cat_" + cat + "_sub") }),
+		groups.push(h("section", { class: "group", id: "cat-" + cat },
+			h("div", { class: "row" }, h("h2", { text: ui("cat_" + cat) }),
+				h("a", { class: "linkbtn", href: linkFor(cat), style: "font-size:.8rem;margin-left:auto", text: "Copy link to topic",
+					onclick: e => { e.preventDefault(); copyLink(cat); } })),
+			h("p", { text: ui("cat_" + cat + "_sub") }),
 			h("div", { class: "cards" }, cs.map(c => renderCard(c, S.allOpen || c.id === target)))));
 	}
 	$("list").replaceChildren(...groups);
@@ -551,6 +606,7 @@ $("q").addEventListener("input", e => {
 	qTimer = setTimeout(() => { S.q = e.target.value.slice(0, 200); update(); }, 90);
 });
 $("q-clear").addEventListener("click", () => { $("q").value = ""; $("q-clear").hidden = true; S.q = ""; update(); $("q").focus(); });
+$("copy-view").addEventListener("click", () => copyLink());
 $("expand-all").addEventListener("click", () => {
 	S.allOpen = !S.allOpen;
 	document.querySelectorAll("#list details.card").forEach(d => { d.open = S.allOpen; });
@@ -570,10 +626,7 @@ const wide = matchMedia("(min-width: 900px)");
 const fitFilters = () => { $("filters-box").open = wide.matches; };
 wide.addEventListener("change", fitFilters);
 fitFilters();
-window.addEventListener("hashchange", () => {
-	const el = document.getElementById(location.hash.slice(1));
-	if (el && el.tagName === "DETAILS") { el.open = true; el.scrollIntoView({ block: "start" }); }
-});
+window.addEventListener("hashchange", () => { if (D.cards.length) goToCard(); });
 
 /* ---------- boot ---------- */
 (async function boot() {
@@ -590,6 +643,13 @@ window.addEventListener("hashchange", () => {
 			if (r && typeof r.key === "string") D.refs.set(r.key, { key: r.key, kind: str(r.kind), short: str(r.short) || r.key, text: str(r.text), url: str(r.url) });
 		}
 		D.en = { ui: en && typeof en.ui === "object" ? en.ui : {}, cards: {} };
+		// A hand-edited or stale link may name values that don't exist; drop them rather than show nothing.
+		const known = { cat: c => [c.cat], grade: c => [c.grade], safety: c => [c.safety], cond: c => c.cond };
+		for (const [k, pick] of Object.entries(known)) {
+			const ok = new Set(D.cards.flatMap(pick));
+			S[k] = new Set([...S[k]].filter(v => ok.has(v)));
+		}
+		if (S.ref && !D.cards.some(c => c.refKeys.has(S.ref))) S.ref = "";
 	} catch (e) {
 		$("list").replaceChildren(h("div", { class: "msg err" },
 			h("p", { text: "Couldn't load the library." }), h("p", { text: String(e.message || e) }),
@@ -597,10 +657,7 @@ window.addEventListener("hashchange", () => {
 		return;
 	}
 	await setLang(pickLang());
-	if (location.hash.length > 1) {
-		const el = document.getElementById(location.hash.slice(1));
-		if (el) el.scrollIntoView({ block: "start" });
-	}
+	goToCard();
 })();
 </script>
 </body>
