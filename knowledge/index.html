@@ -111,7 +111,6 @@ kbd { font: 12px ui-monospace, monospace; border: 1px solid var(--line); border-
 .orig { display: block; color: var(--muted); font-size: .88rem; font-style: italic; margin-top: 3px; }
 .missing { color: var(--caution); font-size: .75rem; font-weight: 600; margin-left: 6px; font-style: normal; }
 .srcs { margin: 0; padding-left: 18px; font-size: .9rem; }
-.foot { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: .8rem; color: var(--muted); }
 .tag { background: var(--surface-2); border-radius: 6px; padding: 1px 7px; }
 .tag.cond { background: var(--accent-soft); color: var(--text); }
 .copy { margin-left: auto; }
@@ -131,7 +130,6 @@ kbd { font: 12px ui-monospace, monospace; border: 1px solid var(--line); border-
 .bib .short { font-weight: 600; }
 .bib .text { color: var(--muted); font-size: .9rem; margin: 2px 0 6px; overflow-wrap: anywhere; }
 .bib .acts { display: flex; gap: 14px; font-size: .88rem; flex-wrap: wrap; }
-footer.page { max-width: 1180px; margin: 0 auto; padding: 8px 16px 32px; color: var(--muted); font-size: .82rem; overflow-wrap: anywhere; }
 .toast { position: fixed; bottom: 16px; left: 50%; translate: -50% 0; background: var(--text); color: var(--bg); padding: 8px 14px; border-radius: 10px; font-size: .9rem; z-index: 9; max-width: calc(100% - 32px); }
 </style>
 </head>
@@ -170,7 +168,6 @@ footer.page { max-width: 1180px; margin: 0 auto; padding: 8px 16px 32px; color: 
 	</div>
 </div>
 <div id="view-sources" role="tabpanel" aria-labelledby="tab-sources" hidden><section class="sources" id="sources"></section></div>
-<footer class="page" id="foot"></footer>
 
 <script>
 "use strict";
@@ -397,9 +394,6 @@ function renderChrome() {
 		$("view-" + t).hidden = S.tab !== t;
 	}
 	$("search-row").hidden = S.tab !== "cards";
-	$("foot").replaceChildren(h("p", { text: ui("sources_medical") }),
-		h("p", {}, "Data: ", h("a", { href: `https://github.com/${REPO}/tree/${REF}/knowledge`, text: `${REPO}@${REF}/knowledge` }),
-			" · loaded from ", h("code", { text: BASE.replace(/^https:\/\//, "") })));
 }
 
 function chip(label, n, pressed, onclick, title) {
