@@ -44,6 +44,9 @@ a { color: var(--accent); }
 
 /* header */
 .top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top { transition: translate .25s ease; }
+.top.away { translate: 0 -100%; }
+@media (prefers-reduced-motion: reduce) { .top { transition: none; } }
 .top-inner { max-width: 1180px; margin: 0 auto; padding: 10px 16px; display: grid; gap: 10px; }
 .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .brand { font-weight: 700; font-size: 1.05rem; margin-right: auto; display: flex; align-items: center; gap: 8px; }
@@ -620,6 +623,27 @@ const wide = matchMedia("(min-width: 900px)");
 const fitFilters = () => { $("filters-box").open = wide.matches; };
 wide.addEventListener("change", fitFilters);
 fitFilters();
+/* Phones: scrolling down hides the sticky header after a short pause; any upward swipe brings it back at once.
+   It never hides near the top of the page or while the search box has focus (the keyboard is open). */
+(() => {
+	const top = document.querySelector(".top"), phone = matchMedia("(max-width: 899px)");
+	let lastY = scrollY, timer = 0, ticking = false;
+	const show = () => { clearTimeout(timer); timer = 0; top.classList.remove("away"); };
+	addEventListener("scroll", () => {
+		if (ticking) return;
+		ticking = true;
+		requestAnimationFrame(() => {
+			ticking = false;
+			const y = scrollY, dy = y - lastY;
+			if (Math.abs(dy) < 6) return;               // ignore jitter and momentum tails
+			lastY = y;
+			if (!phone.matches || y < top.offsetHeight || dy < 0 || document.activeElement === $("q")) return show();
+			if (!timer && !top.classList.contains("away")) timer = setTimeout(() => { timer = 0; top.classList.add("away"); }, 400);
+		});
+	}, { passive: true });
+	phone.addEventListener("change", show);
+	$("q").addEventListener("focus", show);
+})();
 window.addEventListener("hashchange", () => { if (D.cards.length) goToCard(); });
 
 /* ---------- boot ---------- */
