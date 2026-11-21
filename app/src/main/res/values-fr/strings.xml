@@ -43,30 +43,12 @@
 	<string name="export_failed">Échec de l’exportation de l’historique des jeûnes</string>
 
 	<string name="intro_00_title">Bienvenue dans FastTrack48 !</string>
-	<string name="intro_00_description">À quoi sert cette application ?</string>
-
-	<string name="intro_01_title">Aide à la motivation</string>
 	<string name="intro_01_description">L’idée derrière FastTrack48 est de vous motiver pendant vos jeûnes et
 		de vous expliquer ce qui se passe dans votre corps aux différentes phases du jeûne.
 	</string>
 
-	<string name="intro_02_title">Une application simple et gratuite</string>
-	<string name="intro_02_description">FastTrack48 est et restera toujours gratuit et open source. Aucun compte à
-		créer, aucun achat intégré, aucune publicité, aucune télémétrie ni aucun suivi. L’application n’a pas accès à
-		Internet et fonctionne entièrement hors ligne.
-	</string>
-
 	<string name="intro_03_title">Jeûne intermittent</string>
 	<string name="intro_03_description">Un domaine de recherche jeune. Certains résultats sont bien établis, beaucoup restent préliminaires.\n\nPour voir ce que l’on sait et la solidité des preuves, ouvrez la Bibliothèque depuis le menu.</string>
-
-	<string name="intro_04_title">Restez motivé grâce aux notifications</string>
-	<string name="intro_04_description">FastTrack48 peut afficher des notifications utiles pour vous motiver pendant
-		votre jeûne.\n\nVous verrez la durée actuelle de votre jeûne, la phase dans laquelle vous vous trouvez et le mode
-		énergétique utilisé par votre corps.\n\nCela vous aide à garder le cap sans avoir à ouvrir l’application !
-	</string>
-
-	<string name="intro_05_title">C’est tout !</string>
-	<string name="intro_05_description">Bienvenue dans le monde du jeûne !</string>
 
 	<string name="about_name" translatable="false">FastTrack48</string>
 	<string name="about_subtitle" translatable="false">Your DNA Re-Pair is in your hands!</string>
@@ -232,7 +214,6 @@
 	<string name="notification_fasting_channel_description">Notification persistante indiquant votre statut de jeûne actuel et
 		votre progression.
 	</string>
-	<string name="notification_fasting_energy_mode">Mode énergétique : %1$s</string>
 
 
 
@@ -352,7 +333,6 @@
 	<string name="share_text_fasting">Je jeûne depuis %1$s ! Mon corps utilise actuellement %2$s comme source d’énergie.</string>
 	<string name="share_text_finished">J’ai jeûné pendant %1$s !</string>
 
-	<string name="notification_fasting_title_duration">Jeûne : %1$s</string>
 	<string name="sheet_start_now">Commencer maintenant</string>
 	<string name="sheet_start_earlier">J’ai commencé plus tôt…</string>
 	<string name="sheet_end_now">Terminer maintenant</string>
@@ -399,7 +379,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON et les autres calendriers vaishnavas. Certains jeûnes tombent un jour plus tard.</string>
 	<string name="lunar_remind_me">Me le rappeler</string>
-	<string name="lunar_lead_same_day">Le jour même</string>
+	<string name="lunar_lead_same_day">Le matin même</string>
 	<string name="lunar_lead_1_day">1 jour avant</string>
 	<string name="lunar_lead_2_days">2 jours avant</string>
 	<string name="lunar_lead_3_days">3 jours avant</string>
@@ -508,4 +488,11 @@
 	<string name="fast_day_begins">%1$s commence : %2$s</string>
 	<string name="fast_day_exact">%1$s : %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">Toujours en jeûne ?</string>
+	<string name="check_in_body">Ce jeûne dure depuis %1$s. S’il s’est terminé plus tôt, terminez-le et indiquez l’heure à laquelle vous avez arrêté.</string>
+	<string name="check_in_still_fasting">Toujours en jeûne</string>
+	<string name="settings_confetti_every_fast_title">Confettis après chaque jeûne</string>
+	<string name="settings_confetti_every_fast_subtitle">Célébrer chaque jeûne de 12 heures ou plus, pas seulement la première fois qu’une étape est atteinte</string>
+	<string name="profile_safety_caption">Sert à adapter les conseils de sécurité.</string>
+	<string name="lunar_reminders_wait_note">Les rappels attendent pendant le jeûne, et encore un moment après.</string>
 </resources>

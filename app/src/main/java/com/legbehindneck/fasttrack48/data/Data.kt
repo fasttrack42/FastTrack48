@@ -10,6 +10,7 @@ object Data
 	const val KEY_FAST_ALERTS = "fast_alerts"
 	const val KEY_FANCY_BACKGROUND = "fancy_background"
 	const val KEY_FASTING_NOTIFICATION = "fasting_notification"
+	const val KEY_CONFETTI_EVERY_FAST = "confetti_every_fast"
 	const val KEY_METRIC_SYSTEM = "metric_system"
 	const val KEY_THEME_MODE = "theme_mode"
 	const val KEY_DATE_STYLE = "date_style"

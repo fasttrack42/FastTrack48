@@ -72,6 +72,12 @@ class SettingsPreferencesDatasource(
 		storage.edit { putBoolean(Data.KEY_FASTING_NOTIFICATION, enabled) }
 	}
 
+	override fun getConfettiEveryFast(): Boolean = storage.getBoolean(Data.KEY_CONFETTI_EVERY_FAST, false)
+
+	override fun setConfettiEveryFast(enabled: Boolean) {
+		storage.edit { putBoolean(Data.KEY_CONFETTI_EVERY_FAST, enabled) }
+	}
+
 	override fun getUseMetricSystem(default: Boolean): Boolean =
 		storage.getBoolean(Data.KEY_METRIC_SYSTEM, default)
 

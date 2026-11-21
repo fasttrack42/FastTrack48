@@ -1,14 +1,19 @@
 package com.legbehindneck.fasttrack48.screens.fasting
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Rect
 import android.icu.text.MeasureFormat
 import android.icu.util.Measure
 import android.icu.util.MeasureUnit
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.PixelCopy
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -88,6 +93,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.createBitmap
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -168,11 +175,34 @@ fun FastingScreen(
 		if (!uiState.isFasting) showStartSheet = true
 	}
 
+	// The notification permission is asked for here, at the first start, when what it brings
+	// (stage alerts, the live timer) is about to happen, rather than in the intro before the app
+	// has given anything. Once: after one denial the system reports a rationale, and the second
+	// of Android's two chances is left to the toggles in Settings, where the ask is just as concrete.
+	val askContext = LocalContext.current
+	val notificationPermission = rememberLauncherForActivityResult(
+		ActivityResultContracts.RequestPermission()
+	) { granted ->
+		// The ongoing notification could not be posted at the start; post it now rather than
+		// at the next hourly refresh.
+		if (granted) viewModel.onCreate()
+	}
+
+	fun startFastAndAsk(at: Instant? = null) {
+		viewModel.startFast(at)
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+		val permission = Manifest.permission.POST_NOTIFICATIONS
+		if (ContextCompat.checkSelfPermission(askContext, permission) == PackageManager.PERMISSION_GRANTED) return
+		val activity = askContext as? Activity
+		if (activity != null && ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) return
+		notificationPermission.launch(permission)
+	}
+
 	if (showStartSheet) {
 		StartFastSheet(
 			onStartNow = {
 				showStartSheet = false
-				viewModel.startFast()
+				startFastAndAsk()
 			},
 			onStartEarlier = {
 				showStartSheet = false
@@ -187,7 +217,7 @@ fun FastingScreen(
 		DateTimePickerDialog(
 			onDismiss = { showStartDateTimePicker = false },
 			onDateTimeSelected = { selectedDateTime ->
-				viewModel.startFast(selectedDateTime)
+				startFastAndAsk(selectedDateTime)
 				showStartDateTimePicker = false
 			},
 			title = stringResource(R.string.already_started_dialog_title),
@@ -210,10 +240,10 @@ fun FastingScreen(
 			onNotesChange = { endNotes = it },
 			onEndNow = {
 				showEndSheet = false
-				// Confetti, like the praise line, only for a fast long enough to count, and only
-				// for the fast this sheet was about (it may have ended elsewhere a moment ago).
-				val earned = uiState.isFasting && (uiState.elapsedTime ?: Duration.ZERO) >= PraiseThreshold
-				viewModel.endFast(notes = endNotes.trim())
+				// Confetti only when the view model says this fast earned it (a first, or every
+				// fast if the user opted in), and only for the fast this sheet was about: it may
+				// have ended elsewhere a moment ago, and then endFast ends nothing.
+				val earned = viewModel.endFast(notes = endNotes.trim())
 				endNotes = ""
 				if (earned) confetti.start(scope)
 			},
@@ -234,11 +264,10 @@ fun FastingScreen(
 		DateTimePickerDialog(
 			onDismiss = { showEndDateTimePicker = false },
 			onDateTimeSelected = { selectedDateTime ->
-				val start = uiState.fastStartTime?.takeIf { uiState.isFasting }
-				viewModel.endFast(selectedDateTime, endNotes.trim())
+				val earned = viewModel.endFast(selectedDateTime, endNotes.trim())
 				endNotes = ""
 				showEndDateTimePicker = false
-				if (start != null && selectedDateTime - start >= PraiseThreshold) confetti.start(scope)
+				if (earned) confetti.start(scope)
 			},
 			title = stringResource(R.string.already_stopped_dialog_title),
 			finishButton = stringResource(id = R.string.end_fast_button),
@@ -394,7 +423,7 @@ fun FastingScreen(
 		externalRequests.startFastRequest?.let { req ->
 			if (!uiState.isFasting) {
 				if (req.startNow) {
-					viewModel.startFast()
+					startFastAndAsk()
 				} else {
 					onShowStartFastSelector()
 				}
@@ -642,8 +671,6 @@ private fun FastDial(
 
 		FastArcBand(
 			uiState = uiState,
-			showTotalHours = showTotalHours,
-			onToggleTimeFormat = onToggleTimeFormat,
 			onEditStart = onEditStart,
 			onShowEndFastConfirmation = onShowEndFastConfirmation,
 			capturing = capturing,
@@ -1261,7 +1288,7 @@ private fun rememberPraiseText(uiState: IFastingViewModel.FastingUiState): Strin
 	val end = uiState.previousLoggedFastEnd ?: return null
 	val since = now - end
 	if (entry.length < PraiseThreshold || since < Duration.ZERO || since >= 1.hours) return null
-	return stringResource(R.string.fast_well_done, formatSpan(entry.length, false, locale).withNoBreakSpaces())
+	return stringResource(R.string.fast_well_done, formatSpan(entry.length, locale).withNoBreakSpaces())
 }
 
 /**
@@ -1282,8 +1309,6 @@ private fun rememberPraiseText(uiState: IFastingViewModel.FastingUiState): Strin
 @Composable
 private fun FastArcBand(
 	uiState: IFastingViewModel.FastingUiState,
-	showTotalHours: Boolean,
-	onToggleTimeFormat: () -> Unit,
 	onEditStart: () -> Unit,
 	onShowEndFastConfirmation: () -> Unit,
 	capturing: Boolean,
@@ -1320,8 +1345,6 @@ private fun FastArcBand(
 		} else {
 			TimeSinceLastFast(
 				lastEnd = uiState.previousLoggedFastEnd,
-				showTotalHours = showTotalHours,
-				onToggleTimeFormat = onToggleTimeFormat,
 				modifier = Modifier.align(Alignment.Center),
 			)
 		}
@@ -1330,25 +1353,22 @@ private fun FastArcBand(
 
 /**
  * How long since the last fast ended, in the notch under the empty ring: "Time since last
- * fast: 42 days, 3 hours".
+ * fast: 3 hours, 10 minutes". Within a day that is the eating window, which routine fasters
+ * watch. From a day on it shows nothing: a counter that keeps growing frames time off as a
+ * deficit, a pressure cue for the people a fasting app should least pressure.
  *
  * Under a minute it says so rather than "0 minutes". Under an hour, minutes; under a day,
- * hours and minutes; from a day on, days and hours. A zero part is dropped ("2 days", not
- * "2 days, 0 hours"). From a day on a tap switches to total hours ("1,011 hours"), the same
- * switch as the running timer's; below a day the two forms are the same, so the tap is not
- * offered there. A last fast that ends in the future (a changed clock) reads as under a
- * minute rather than as a negative span.
+ * hours and minutes. A zero part is dropped. A last fast that ends in the future (a changed
+ * clock) reads as under a minute rather than as a negative span.
  *
- * Units and plurals come from ICU, which gets "42 дні, 3 години" and "42天3小时" right from
- * the same numbers. The value's spaces are no-break spaces, so on a narrow band the line
- * breaks after the colon, never inside the duration. An empty logbook renders nothing; the
- * band keeps its height either way, so the dial does not move.
+ * Units and plurals come from ICU, which gets "3 години" and "3小时" right from the same
+ * numbers. The value's spaces are no-break spaces, so on a narrow band the line breaks after
+ * the colon, never inside the duration. An empty logbook renders nothing; the band keeps its
+ * height either way, so the dial does not move.
  */
 @Composable
 private fun TimeSinceLastFast(
 	lastEnd: Instant?,
-	showTotalHours: Boolean,
-	onToggleTimeFormat: () -> Unit,
 	modifier: Modifier = Modifier,
 ) {
 	val now = rememberMinuteTick()
@@ -1357,18 +1377,17 @@ private fun TimeSinceLastFast(
 	val spacing = fastingSpacing()
 	val locale = LocalConfiguration.current.locales[0]
 	val since = (now - lastEnd).coerceAtLeast(Duration.ZERO)
+	if (since >= 1.days) return
 	val value = if (since < 1.minutes) {
 		stringResource(R.string.duration_under_minute)
 	} else {
-		remember(since.inWholeMinutes, showTotalHours, locale) { formatSpan(since, showTotalHours, locale) }
+		remember(since.inWholeMinutes, locale) { formatSpan(since, locale) }
 	}
-	val canToggle = since >= 1.days
 
 	Box(
 		modifier = modifier
 			.heightIn(min = BandHeight)
 			.clip(RoundedCornerShape(spacing.large))
-			.then(if (canToggle) Modifier.clickable(onClick = onToggleTimeFormat) else Modifier)
 			.padding(horizontal = spacing.small, vertical = spacing.small),
 		contentAlignment = Alignment.Center,
 	) {
@@ -1383,9 +1402,9 @@ private fun TimeSinceLastFast(
 
 /**
  * A span as ICU writes it in [locale]: minutes under an hour, hours and minutes under a day,
- * then days and hours, or total hours when [totalHours]. A zero part is dropped.
+ * then days and hours. A zero part is dropped.
  */
-private fun formatSpan(span: Duration, totalHours: Boolean, locale: Locale): String {
+private fun formatSpan(span: Duration, locale: Locale): String {
 	val minutes = span.inWholeMinutes.coerceAtLeast(1)
 	val measures = when {
 		minutes < MinutesPerHour -> listOf(Measure(minutes, MeasureUnit.MINUTE))
@@ -1393,7 +1412,6 @@ private fun formatSpan(span: Duration, totalHours: Boolean, locale: Locale): Str
 			add(Measure(minutes / MinutesPerHour, MeasureUnit.HOUR))
 			if (minutes % MinutesPerHour > 0) add(Measure(minutes % MinutesPerHour, MeasureUnit.MINUTE))
 		}
-		totalHours -> listOf(Measure(minutes / MinutesPerHour, MeasureUnit.HOUR))
 		else -> buildList {
 			add(Measure(minutes / MinutesPerDay, MeasureUnit.DAY))
 			val hours = minutes % MinutesPerDay / MinutesPerHour

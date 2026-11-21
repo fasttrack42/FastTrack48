@@ -23,21 +23,10 @@
 	<string name="settings_stage_alerts_subtitle">Отримувати сповіщення при переході на нові стадії голодування</string>
 	<string name="export_failed">Не вдалося експортувати журнал</string>
 	<string name="intro_00_title">Ласкаво просимо до FastTrack48!</string>
-	<string name="intro_00_description">Що це за програма?</string>
-	<string name="intro_01_title">Мотиваційна допомога</string>
 	<string name="intro_01_description">Головна ідея FastTrack48 полягає в тому, щоби допомогти тобі не втратити мотивацію під час голодувань і
 		пояснити, що відбувається з твоїм організмом на різних стадіях голодування.</string>
-	<string name="intro_02_title">Простий безкоштовний додаток</string>
-	<string name="intro_02_description">FastTrack48 є і завжди буде безкоштовним додатком з відкритим
-		вихідним кодом. Не потрібно створювати обліковий запис, немає покупок у додатку, немає реклами, немає
-		телеметрії й відстеження. Додаток не має доступу до інтернету й повністю працює офлайн.
-	</string>
 	<string name="intro_03_title">Інтервальне голодування</string>
 	<string name="intro_03_description">Молода галузь досліджень. Дещо добре доведено, багато що — ще на ранній стадії.\n\nЩо відомо і наскільки це обґрунтовано, дивись у Бібліотеці в меню.</string>
-	<string name="intro_04_title">Сповіщення тримають мотивацію</string>
-	<string name="intro_04_description">FastTrack48 може показувати корисні сповіщення, щоби підтримувати тебе протягом голодування. \n\nТи бачитимеш поточний час голодування, свою стадію і яке джерело енергії використовує твій організм. \n\nЦе допоможе тобі не зійти з курсу, навіть не відкриваючи додаток!</string>
-	<string name="intro_05_title">От і все!</string>
-	<string name="intro_05_description">Ласкаво просимо у світ голодування!</string>
 
 
 
@@ -130,7 +119,6 @@
 	<string name="notification_fasting_channel_name">Стан голодування</string>
 	<string name="notification_fasting_channel_description">Постійне сповіщення, що показує поточний стан та прогрес
 		голодування.</string>
-	<string name="notification_fasting_energy_mode">Джерело енергії: %1$s</string>
 	<string name="info_dialog_bmi_title">Індекс маси тіла</string>
 	<string name="info_dialog_bmi_content">Приблизна оцінка ваги, якої повинна бути середньостатистична доросла людина. Цей індекс
 		розраховується шляхом ділення ваги на зріст у квадраті.\n\nЙого часто критикують за свою неточність, бо він не враховує 
@@ -191,7 +179,6 @@
 	<string name="milestone_in">%1$s через %2$s</string>
 	<string name="milestone_for">%1$s уже %2$s</string>
 
-	<string name="notification_fasting_title_duration">Голодування: %1$s</string>
 	<string name="phase_time_until">через %1$s</string>
 	<string name="share_text_fasting">Я голодую вже %1$s! Зараз моє тіло використовує %2$s як джерело енергії.</string>
 	<string name="share_text_finished">Я голодував %1$s!</string>
@@ -298,7 +285,7 @@
 	<string name="lunar_tradition_vaishnava">Вайшнавський (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON та інші вайшнавські календарі. Деякі пости припадають на день пізніше.</string>
 	<string name="lunar_remind_me">Нагадати</string>
-	<string name="lunar_lead_same_day">У цей день</string>
+	<string name="lunar_lead_same_day">Того ж ранку</string>
 	<string name="lunar_lead_1_day">За 1 день</string>
 	<string name="lunar_lead_2_days">За 2 дні</string>
 	<string name="lunar_lead_3_days">За 3 дні</string>
@@ -413,4 +400,11 @@
 	<string name="fast_day_begins">%1$s починається: %2$s</string>
 	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">Досі голодуєш?</string>
+	<string name="check_in_body">Це голодування триває вже %1$s. Якщо воно закінчилося раніше, заверши його й вкажи час завершення.</string>
+	<string name="check_in_still_fasting">Досі голодую</string>
+	<string name="settings_confetti_every_fast_title">Конфеті після кожного голодування</string>
+	<string name="settings_confetti_every_fast_subtitle">Святкувати кожне голодування від 12 годин, а не лише перше досягнення етапу</string>
+	<string name="profile_safety_caption">Використовується, щоб підібрати поради з безпеки.</string>
+	<string name="lunar_reminders_wait_note">Нагадування чекають, поки триває голодування, і ще деякий час після.</string>
 </resources>

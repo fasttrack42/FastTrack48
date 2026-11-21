@@ -8,7 +8,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.WorkerThread
+import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
+import com.legbehindneck.fasttrack48.data.activefast.FastCheckIn
+import com.legbehindneck.fasttrack48.utils.QuietHours
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import org.koin.core.context.GlobalContext
+import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -27,6 +39,12 @@ import java.util.concurrent.Executors
  * instant, so a time-zone change neither drops nor repeats one. Alarms do not survive a
  * reboot, an app update or a clock / time-zone change, so [LunarReminderReceiver] refreshes
  * on those too.
+ *
+ * Nothing is posted while a fast runs, nor in the quiet after one
+ * ([LunarReminderPlanner.quietUntil]): every run reads the active fast and holds what came due
+ * ([LunarReminderPlanner.settle]), and the alarm is armed for the end of the quiet so what was
+ * held goes out then. Decided here, at the one place that posts, so no trigger can bypass it.
+ * A fast whose "Still fasting?" is unanswered ([FastCheckIn]) does not hold reminders.
  */
 object LunarReminderScheduler {
 
@@ -36,6 +54,41 @@ object LunarReminderScheduler {
 	private val LOOKBACK_DAYS = LunarReminderSettings.LEAD_OPTIONS.max() + 1L
 
 	private val executor = Executors.newSingleThreadExecutor()
+
+	// Resolved on first use: Koin is started in Application.onCreate, before any caller.
+	private val activeFast: ActiveFastRepository by lazy { GlobalContext.get().get<ActiveFastRepository>() }
+
+	/**
+	 * Owns the active-fast watch for the life of the process, and must: SharedPreferences
+	 * keeps change listeners only weakly, so a collector in GlobalScope, which holds no
+	 * reference to its coroutines, can be garbage-collected along with its listener and stop
+	 * without a trace. A failure is logged rather than left to crash the process.
+	 */
+	private val watchScope = CoroutineScope(
+		SupervisorJob() + Dispatchers.Default +
+			CoroutineExceptionHandler { _, e -> Napier.e("Active-fast watch failed", e) },
+	)
+
+	/**
+	 * Process start: catch up and re-arm, then again whenever a fast starts or ends, by
+	 * whichever writer (the dial, a widget, a restored export). An end is passed on as such, so
+	 * the quiet after it is counted from the moment the app saw it. Call once, from
+	 * [android.app.Application.onCreate].
+	 */
+	fun start(context: Context) {
+		val app = context.applicationContext
+		watchScope.launch {
+			var wasRunning: Boolean? = null
+			activeFast.observe()
+				.map { it.isRunning }
+				.distinctUntilChanged()
+				.collect { running ->
+					val ended = wasRunning == true && !running
+					wasRunning = running
+					refresh(app, fastEnded = ended)
+				}
+		}
+	}
 
 	/**
 	 * Settings changed: re-plan and arm the next reminder. A reminder whose alarm was due but
@@ -54,14 +107,15 @@ object LunarReminderScheduler {
 	}
 
 	/**
-	 * App start, alarm, boot, update, clock or time-zone change: catch up, then re-arm.
-	 * [zone] overrides the process default, which a time-zone broadcast can outrun.
+	 * App start, fast started or ended, alarm, boot, update, clock or time-zone change: catch
+	 * up, then re-arm. [zone] overrides the process default, which a time-zone broadcast can
+	 * outrun. [fastEnded]: this run follows a fast's end, seen now.
 	 */
-	fun refresh(context: Context, zone: ZoneId? = null, onDone: () -> Unit = {}) {
+	fun refresh(context: Context, zone: ZoneId? = null, fastEnded: Boolean = false, onDone: () -> Unit = {}) {
 		val app = context.applicationContext
 		executor.execute {
 			try {
-				reschedule(app, Run.CATCH_UP, zoneOverride = zone)
+				reschedule(app, Run.CATCH_UP, zoneOverride = zone, fastEnded = fastEnded)
 			} catch (e: Exception) {
 				Napier.e("Lunar reminder refresh failed", e)
 			} finally {
@@ -73,21 +127,45 @@ object LunarReminderScheduler {
 	private enum class Run { CATCH_UP, SETTINGS_CHANGED }
 
 	@WorkerThread
-	private fun reschedule(context: Context, run: Run, zoneOverride: ZoneId? = null) {
+	private fun reschedule(context: Context, run: Run, zoneOverride: ZoneId? = null, fastEnded: Boolean = false) {
 		val alarmManager = context.getSystemService(AlarmManager::class.java)
 		val alarm = alarmIntent(context)
 		val zone = zoneOverride ?: ZoneId.systemDefault()
 		val now = ZonedDateTime.now(zone)
+		val today = now.toLocalDate()
 		val state = LunarSettingsStore.schedulerState(context, zone)
 		val settings = LunarSettingsStore.load(context)
+
+		// The fast, read once. After an end the slot keeps both halves until the next start.
+		val start = activeFast.getFastStart()
+		val end = activeFast.getFastEnd()
+		val fasting = start != null && end == null && !FastCheckIn.isOpen(context, start)
+		// The quiet after the last fast, kept as the latest seen: a new fast started inside it,
+		// or an end backdated after the fact, cannot shorten it. Without a stored value (the
+		// process died before this run) it is counted from the end itself.
+		val ended = if (start != null && end != null) {
+			val endAt = Instant.ofEpochMilli(end.toEpochMilliseconds()).atZone(zone)
+			LunarReminderPlanner.quietUntil(
+				endAt,
+				Duration.ofMillis((end - start).inWholeMilliseconds),
+				seenAt = if (fastEnded) now else endAt,
+			)
+		} else null
+		val quiet = listOfNotNull(state.quietUntilMillis?.let { Instant.ofEpochMilli(it).atZone(zone) }, ended)
+			.maxByOrNull { it.toInstant() }
+			?.takeIf { it.isAfter(now) }
+		val quietMillis = quiet?.toInstant()?.toEpochMilli()
+
 		if (!settings.anyActive) {
 			alarmManager.cancel(alarm)
 			LunarSettingsStore.saveSchedulerState(
 				context,
 				state.copy(
 					floor = now.toLocalDateTime(),
-					posted = LunarReminderPlanner.prune(state.posted, now.toLocalDate()),
+					posted = LunarReminderPlanner.prune(state.posted, today),
+					held = emptySet(),
 					armedAtMillis = null,
+					quietUntilMillis = quietMillis,
 				),
 			)
 			return
@@ -105,22 +183,35 @@ object LunarReminderScheduler {
 		}
 		// No floor yet (the first run ever): nothing before now is owed.
 		val floor = state.floor ?: now.toLocalDateTime()
-		val due = until?.let { LunarReminderPlanner.due(plan, now, it, floor, state.posted) }
-		due?.toPost?.forEach { LunarNotifier.post(context, it) }
+		// What waits is released by day: posted at a time the user did not choose, it must not
+		// wake them. The quiet after a fast already ends by day; this covers a release with no
+		// quiet before it, such as a check-in that puts a fast in doubt at 03:00.
+		val wait = quiet ?: QuietHours.after(now).takeIf {
+			!fasting && state.held.isNotEmpty() && it.isAfter(now)
+		}
+		val due = LunarReminderPlanner.due(plan, now, until, floor, state.posted, state.held)
+		val settled = LunarReminderPlanner.settle(due, fasting || wait != null, state.posted, state.held, today)
+		settled.toPost.forEach { LunarNotifier.post(context, it) }
 
-		val next = plan.firstOrNull { it.fireAt.isAfter(now) }
-		if (next == null) {
+		// The next reminder, or the end of the wait when something is held for it. A fast's end
+		// needs no alarm: the watch in [start] runs this again when it happens.
+		val next = plan.firstOrNull { it.fireAt.isAfter(now) }?.fireAt
+		val release = wait?.takeIf { !fasting && settled.held.isNotEmpty() }
+		val armAt = listOfNotNull(next, release).minByOrNull { it.toInstant() }
+		if (armAt == null) {
 			alarmManager.cancel(alarm)
 		} else {
-			arm(alarmManager, next.fireAt.toInstant().toEpochMilli(), alarm)
-			Napier.d("Next lunar reminder at ${next.fireAt} for ${next.subject.day}")
+			arm(alarmManager, armAt.toInstant().toEpochMilli(), alarm)
+			Napier.d("Next lunar reminder run at $armAt")
 		}
 		LunarSettingsStore.saveSchedulerState(
 			context,
 			LunarSettingsStore.SchedulerState(
 				floor = now.toLocalDateTime(),
-				posted = LunarReminderPlanner.prune(state.posted + due?.handled.orEmpty(), now.toLocalDate()),
-				armedAtMillis = next?.fireAt?.toInstant()?.toEpochMilli(),
+				posted = settled.posted,
+				held = settled.held,
+				armedAtMillis = armAt?.toInstant()?.toEpochMilli(),
+				quietUntilMillis = quietMillis,
 			),
 		)
 	}

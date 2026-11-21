@@ -23,17 +23,9 @@
 	<string name="settings_stage_alerts_subtitle">进入新的断食阶段时获得通知</string>
 	<string name="export_failed">导出日志簿失败</string>
 	<string name="intro_00_title">欢迎来到 FastTrack48！</string>
-	<string name="intro_00_description">这个应用程序是关于什么的？</string>
-	<string name="intro_01_title">激励帮助</string>
 	<string name="intro_01_description">FastTrack48 的主要理念是在断食期间帮你保持动力，并向你解释在断食的不同阶段你的身体正在发生什么。</string>
-	<string name="intro_02_title">一个简单的免费应用程序</string>
-	<string name="intro_02_description">FastTrack48 是而且将永远免费且开源。无需创建账户，没有内购，没有广告，没有遥测，也没有跟踪。应用没有网络访问权限，完全离线运行。</string>
 	<string name="intro_03_title">间歇性断食</string>
 	<string name="intro_03_description">这是一个年轻的研究领域。有些发现已经确立，很多仍属初步。\n\n想了解目前已知什么、证据有多扎实，请从菜单打开知识库。</string>
-	<string name="intro_04_title">通过通知保持动力</string>
-	<string name="intro_04_description">FastTrack48 可以显示有用的通知，在断食期间为你加油打气。\n\n你会看到当前的断食时间、所处的阶段以及身体正在使用的能量模式。\n\n这样即使不打开应用也能随时掌握进度！</string>
-	<string name="intro_05_title">开始吧！</string>
-	<string name="intro_05_description">欢迎来到断食的世界！</string>
 	<string name="title_fasting">断食</string>
 	<string name="title_log">日志</string>
 	<string name="title_profile">个人资料</string>
@@ -121,7 +113,6 @@
 	<string name="notification_optimal_autophagy_content">两天了。生长激素在保护你的肌肉，脂肪在承担主要工作。</string>
 	<string name="notification_fasting_channel_name">断食状态</string>
 	<string name="notification_fasting_channel_description">持续显示当前断食状态和进度的通知。</string>
-	<string name="notification_fasting_energy_mode">能量模式：%1$s</string>
 	<string name="info_dialog_bmi_title">身体质量指数</string>
 	<string name="info_dialog_bmi_content">一个普通成年人应有的健康体重的粗略估计。它的计算方法很简单，就是将体重除以身高。\n\n虽然常常被批评为不准确，但确实有一些因素可能导致其误导性。例如：一位极其肌肉发达的健美选手，或者一个非常高或非常矮的人。这些边缘案例会从基本的BMI计算中得出不准确的结果。\n\n但对大多数人来说，这足够好地估计出您是否处于健康的体重范围内。</string>
 	<string name="info_dialog_bmr_title">基础代谢率</string>
@@ -176,7 +167,6 @@
 	<string name="milestone_in">%1$s还有 %2$s</string>
 	<string name="milestone_for">%1$s已持续 %2$s</string>
 
-	<string name="notification_fasting_title_duration">断食：%1$s</string>
 	<string name="phase_time_until">还有 %1$s</string>
 	<string name="share_text_fasting">我已经断食 %1$s 了！我的身体正在以%2$s作为能量来源。</string>
 	<string name="share_text_finished">我断食了 %1$s！</string>
@@ -283,7 +273,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava（ISKCON）</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON 及其他毗湿奴派历法。少数斋戒日会晚一天。</string>
 	<string name="lunar_remind_me">提醒我</string>
-	<string name="lunar_lead_same_day">当天</string>
+	<string name="lunar_lead_same_day">当天早上</string>
 	<string name="lunar_lead_1_day">提前 1 天</string>
 	<string name="lunar_lead_2_days">提前 2 天</string>
 	<string name="lunar_lead_3_days">提前 3 天</string>
@@ -380,4 +370,11 @@
 	<string name="fast_day_begins">%1$s 开始：%2$s</string>
 	<string name="fast_day_exact">%1$s：%2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">还在断食吗？</string>
+	<string name="check_in_body">这次断食已持续 %1$s。如果其实已经结束，请结束它并填写你停止的时间。</string>
+	<string name="check_in_still_fasting">还在断食</string>
+	<string name="settings_confetti_every_fast_title">每次断食后都撒彩纸</string>
+	<string name="settings_confetti_every_fast_subtitle">每次断食达到 12 小时或以上都庆祝，而不只是首次达到某个阶段时</string>
+	<string name="profile_safety_caption">用于调整安全提示。</string>
+	<string name="lunar_reminders_wait_note">断食期间及结束后的一段时间内，提醒会暂缓。</string>
 </resources>

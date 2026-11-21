@@ -44,6 +44,8 @@ object LunarSettingsStore {
 	private const val KEY_FLOOR = "floor_local"
 	private const val KEY_ARMED = "armed_at"
 	private const val KEY_POSTED = "posted"
+	private const val KEY_HELD = "held"
+	private const val KEY_QUIET = "quiet_until"
 
 	private val locationChanges = MutableStateFlow(0)
 
@@ -122,13 +124,17 @@ object LunarSettingsStore {
 
 	/**
 	 * The scheduler's memory between runs (see [LunarReminderScheduler]): the local wall-clock
-	 * time of the last check, the reminders already posted (by [PlannedLunarReminder.key]), and
-	 * when the armed alarm is due. A first run after an update starts from the old watermark.
+	 * time of the last check, the reminders already posted and those held back by a fast or the
+	 * quiet after one (both by [PlannedLunarReminder.key]), when the armed alarm is due, and
+	 * until when the quiet after the last fast lasts. A first run after an update starts from
+	 * the old watermark.
 	 */
 	internal data class SchedulerState(
 		val floor: LocalDateTime?,
 		val posted: Set<String>,
+		val held: Set<String>,
 		val armedAtMillis: Long?,
+		val quietUntilMillis: Long? = null,
 	)
 
 	internal fun schedulerState(context: Context, zone: ZoneId): SchedulerState {
@@ -139,7 +145,9 @@ object LunarSettingsStore {
 		return SchedulerState(
 			floor = floor,
 			posted = p.getStringSet(KEY_POSTED, null).orEmpty().toSet(),
+			held = p.getStringSet(KEY_HELD, null).orEmpty().toSet(),
 			armedAtMillis = if (p.contains(KEY_ARMED)) p.getLong(KEY_ARMED, 0L) else null,
+			quietUntilMillis = if (p.contains(KEY_QUIET)) p.getLong(KEY_QUIET, 0L) else null,
 		)
 	}
 
@@ -149,7 +157,9 @@ object LunarSettingsStore {
 			if (state.floor == null) remove(KEY_FLOOR) else putString(KEY_FLOOR, state.floor.toString())
 			// A new set each time: SharedPreferences must not be handed back the instance it gave out.
 			putStringSet(KEY_POSTED, HashSet(state.posted))
+			if (state.held.isEmpty()) remove(KEY_HELD) else putStringSet(KEY_HELD, HashSet(state.held))
 			if (state.armedAtMillis == null) remove(KEY_ARMED) else putLong(KEY_ARMED, state.armedAtMillis)
+			if (state.quietUntilMillis == null) remove(KEY_QUIET) else putLong(KEY_QUIET, state.quietUntilMillis)
 		}
 	}
 

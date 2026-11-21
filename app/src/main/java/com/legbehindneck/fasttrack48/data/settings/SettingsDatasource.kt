@@ -23,6 +23,10 @@ interface SettingsDatasource {
 	fun getShowFastingNotification(): Boolean
 	fun setShowFastingNotification(enabled: Boolean)
 
+	/** Confetti after every fast that reaches fat burning, not only after a first. Opt-in. */
+	fun getConfettiEveryFast(): Boolean
+	fun setConfettiEveryFast(enabled: Boolean)
+
 	fun getUseMetricSystem(default: Boolean): Boolean
 	fun setUseMetricSystem(enabled: Boolean)
 

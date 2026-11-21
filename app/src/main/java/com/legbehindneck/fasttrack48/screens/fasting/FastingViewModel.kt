@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.legbehindneck.fasttrack48.AlertService
 import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.data.FastingJourney
 import com.legbehindneck.fasttrack48.data.Phase
 import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.data.descriptionFor
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastWindow
+import com.legbehindneck.fasttrack48.data.activefast.FastCheckIn
 import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
@@ -29,6 +31,7 @@ import kotlinx.datetime.toInstant
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.DurationUnit
 import kotlin.time.Instant
 
@@ -54,6 +57,14 @@ class FastingViewModel(
 	// collector started there can deliver its first value before construction finishes,
 	// and render() reads this.
 	private val EMPTY_STAGE = StageStrings("", "")
+
+	// Also ahead of init, for the same reason: its collectors read and write these.
+	/** The longest fast in the logbook, null while it is empty; known once [logLoaded]. */
+	private var longestLogged: Duration? = null
+	private var logLoaded = false
+
+	/** When the running fast earns a "Still fasting?" ([FastCheckIn.askAfter]). */
+	private var checkInAfter: Duration = FastCheckIn.MIN_AFTER
 
 	/**
 	 * Every input this screen has, subscribed once for the life of the view model.
@@ -88,9 +99,12 @@ class FastingViewModel(
 
 		// The active fast, from the store rather than from whatever this view model last
 		// wrote. Backdating a start, the importer restoring an unfinished fast and a widget
-		// action all arrive here by the same path.
+		// action all arrive here by the same path, and so does the check-in that follows them.
 		viewModelScope.launch {
-			repository.observe().collect { window -> render(window) }
+			repository.observe().collect { window ->
+				render(window)
+				syncCheckIn()
+			}
 		}
 
 		// The logbook, from Room's own invalidation. A delete, an edit, a manual add or a
@@ -101,10 +115,27 @@ class FastingViewModel(
 	}
 
 	override fun onCreate() {
-		// Idempotent by construction: the collectors are in init, and both calls below are
-		// pure re-derivations of state that is already current.
+		// Idempotent by construction: the collectors are in init, and the calls below are
+		// pure re-derivations of state that is already current. Alerts are armed here too, so
+		// a fast that began outside this screen (a restored export) gets them.
 		updateUi()
+		setupAlerts()
 		setupFastingNotification()
+	}
+
+	/**
+	 * "Still fasting?" armed for the running fast, from the logbook, or dropped when no fast
+	 * runs. Asked once per fast, whatever the stage-alert setting. Until the logbook has loaded
+	 * the threshold is unknown, and a job armed earlier is left as it is; the load calls this
+	 * again.
+	 */
+	private fun syncCheckIn() {
+		val start = repository.getFastStart()?.takeIf { repository.isFasting() }
+		when {
+			start == null -> AlertService.cancelCheckIn(appContext)
+			!logLoaded || FastCheckIn.wasAsked(appContext, start) -> Unit
+			else -> AlertService.scheduleCheckIn(appContext, start + checkInAfter - clock.now())
+		}
 	}
 
 	/**
@@ -120,6 +151,17 @@ class FastingViewModel(
 		_uiState.update { state ->
 			state.copy(previousLoggedFastEnd = end, lastLoggedFast = latest)
 		}
+
+		longestLogged = entries.maxOfOrNull { it.length }
+		logLoaded = true
+		// Ends computed once, not per comparison: this runs on the main thread, on every
+		// logbook change, over logbooks of years.
+		val recent = entries.map { it.start.toInstant(tz).plus(it.length) to it.length }
+			.sortedByDescending { it.first }
+			.take(CHECK_IN_RECENT)
+			.map { it.second }
+		checkInAfter = FastCheckIn.askAfter(recent)
+		syncCheckIn()
 	}
 
 	/**
@@ -230,7 +272,7 @@ class FastingViewModel(
 		}
 	}
 
-	override fun endFast(timeEnded: Instant?, notes: String) {
+	override fun endFast(timeEnded: Instant?, notes: String): Boolean {
 		val start = repository.getFastStart()
 		if (repository.isFasting() && start != null) {
 			// An end is neither in the future nor before the start; either would log a fast
@@ -238,13 +280,17 @@ class FastingViewModel(
 			val now = clock.now()
 			val end = (timeEnded ?: now).coerceIn(start, maxOf(start, now))
 			repository.endFast(end)
+			val length = end - start
 
 			// The window is captured here, not read back inside the coroutine: a fast started
 			// straight after (widget, menu) would otherwise overwrite the slot first and the
 			// wrong window — or none — would be logged. The written row comes back through
-			// loadAll(); nothing to refresh by hand.
-			viewModelScope.launch(Dispatchers.IO) {
-				saveFastToLog(start, end, notes)
+			// loadAll(); nothing to refresh by hand. Under a minute it was a slip of the
+			// finger (a shortcut starts without a sheet), not a fast worth a logbook row.
+			if (length >= MIN_LOGGED) {
+				viewModelScope.launch(Dispatchers.IO) {
+					saveFastToLog(start, end, notes)
+				}
 			}
 
 			Napier.i("Fast ended!")
@@ -253,8 +299,14 @@ class FastingViewModel(
 			setupAlerts()
 			setupFastingNotification()
 			updateWidgets()
+
+			// Read before this fast reaches the logbook, so the longest is the one before it.
+			// Until the logbook has loaded no first can be told apart: better none than a false one.
+			val everyFast = settingsDatasource.getConfettiEveryFast()
+			return (everyFast || logLoaded) && FastingJourney.celebrates(length, longestLogged, everyFast)
 		} else {
 			Napier.w("Cannot end fast, there is none started")
+			return false
 		}
 	}
 
@@ -337,4 +389,12 @@ class FastingViewModel(
 		withContext(Dispatchers.IO) {
 			logRepository.logFast(startTime, endTime, notes)
 		}
+
+	private companion object {
+		/** Shorter than this, a start and end was a slip, not a fast. */
+		val MIN_LOGGED: Duration = 1.minutes
+
+		/** How many recent fasts set the "Still fasting?" threshold. */
+		const val CHECK_IN_RECENT = 10
+	}
 }

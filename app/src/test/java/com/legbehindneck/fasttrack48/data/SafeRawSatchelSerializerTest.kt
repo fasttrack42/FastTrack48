@@ -69,6 +69,14 @@ class SafeRawSatchelSerializerTest {
 	}
 
 	@Test
+	fun profileWithNoSexChosen_roundTrips() {
+		// New profiles start with no sex chosen; the null must store and read back as null.
+		val profile = Profile(35, 180.0, 77.0)
+		val bytes = runBlocking { SafeRawSatchelSerializer.serialize(mapOf(Data.KEY_PROFILE to profile)) }
+		assertEquals(profile, SafeRawSatchelSerializer.deserialize(bytes)[Data.KEY_PROFILE])
+	}
+
+	@Test
 	fun garbage_readsAsEmpty() {
 		assertTrue(SafeRawSatchelSerializer.deserialize(byteArrayOf(1, 2, 3)).isEmpty())
 		assertTrue(SafeRawSatchelSerializer.deserialize(ByteArray(0)).isEmpty())

@@ -1,14 +1,9 @@
 package com.legbehindneck.fasttrack48.screens.intro
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -31,22 +26,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
-import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import com.legbehindneck.fasttrack48.utils.rememberFitToViewportDensity
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
+/**
+ * Two slides, then the app: what it is for, and where the evidence lives. Everything else the
+ * old six slides said is either in About or felt better in use. The notification permission
+ * is no longer asked for here, before the app has given anything; the first Start asks
+ * (see FastingScreen).
+ */
 class IntroActivity : AppCompatActivity() {
     private val settings by inject<SettingsDatasource>()
-    private lateinit var requestNotificationPermission: ActivityResultLauncher<String>
-    private var shouldRequestPermission by mutableStateOf(false)
 
-    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,51 +50,9 @@ class IntroActivity : AppCompatActivity() {
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars =
             false
 
-        registerNotificationPermissionCallback()
-
         setContent {
             FastTrackTheme(themeMode = settings.getThemeMode()) {
-                IntroScreen(
-                    onComplete = { complete() },
-                    onNotificationSlideExited = { requestNotificationPermissionIfNeeded() }
-                )
-            }
-        }
-    }
-
-    private fun registerNotificationPermissionCallback() {
-        requestNotificationPermission = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Napier.d("Notification permission granted")
-            } else {
-                Napier.w("Notification permission denied")
-            }
-            shouldRequestPermission = false
-        }
-    }
-
-    private fun requestNotificationPermissionIfNeeded() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            when {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    Napier.d("Notification permission already granted")
-                }
-
-                shouldRequestPermission -> {
-                    // Already requested, don't request again
-                    Napier.d("Notification permission already requested")
-                }
-
-                else -> {
-                    Napier.d("Requesting notification permission")
-                    shouldRequestPermission = true
-                    requestNotificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
-                }
+                IntroScreen(onComplete = { complete() })
             }
         }
     }
@@ -109,25 +63,15 @@ class IntroActivity : AppCompatActivity() {
     }
 }
 
+private const val SLIDES = 2
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun IntroScreen(
     onComplete: () -> Unit,
-    onNotificationSlideExited: () -> Unit
 ) {
-    val pagerState = rememberPagerState(pageCount = { 6 })
+    val pagerState = rememberPagerState(pageCount = { SLIDES })
     val coroutineScope = rememberCoroutineScope()
-    var hasRequestedPermission by remember { mutableStateOf(false) }
-
-    // Watch for page changes and request permission when moving past slide 4
-    LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }.collect { page ->
-            if (page > 4 && !hasRequestedPermission) {
-                hasRequestedPermission = true
-                onNotificationSlideExited()
-            }
-        }
-    }
 
     // A Column, not a Box with the controls aligned over it. The controls were an overlay
     // and reserved no space, so on the last slide in a long locale — or for any reader with
@@ -148,44 +92,16 @@ fun IntroScreen(
             when (page) {
                 0 -> IntroSlide(
                     title = stringResource(id = R.string.intro_00_title),
-                    description = stringResource(id = R.string.intro_00_description),
+                    description = stringResource(id = R.string.intro_01_description),
                     imageDrawable = R.drawable.intro_00,
                     backgroundColor = Color.rgb(128, 91, 128) // Pastel Magenta
                 )
 
-                1 -> IntroSlide(
-                    title = stringResource(id = R.string.intro_01_title),
-                    description = stringResource(id = R.string.intro_01_description),
-                    imageDrawable = R.drawable.intro_01,
-                    backgroundColor = Color.rgb(128, 91, 96) // Pastel Red
-                )
-
-                2 -> IntroSlide(
-                    title = stringResource(id = R.string.intro_02_title),
-                    description = stringResource(id = R.string.intro_02_description),
-                    imageDrawable = R.drawable.intro_02,
-                    backgroundColor = Color.rgb(86, 108, 115) // Pastel Blue
-                )
-
-                3 -> IntroSlide(
+                else -> IntroSlide(
                     title = stringResource(id = R.string.intro_03_title),
                     description = stringResource(id = R.string.intro_03_description),
                     imageDrawable = R.drawable.intro_03,
                     backgroundColor = Color.rgb(110, 110, 110) // Pastel Gray
-                )
-
-                4 -> IntroSlide(
-                    title = stringResource(id = R.string.intro_04_title),
-                    description = stringResource(id = R.string.intro_04_description),
-                    imageDrawable = R.drawable.intro_04,
-                    backgroundColor = Color.rgb(96, 128, 91) // Pastel Green
-                )
-
-                5 -> IntroSlide(
-                    title = stringResource(id = R.string.intro_05_title),
-                    description = stringResource(id = R.string.intro_05_description),
-                    imageDrawable = R.drawable.intro_05,
-                    backgroundColor = Color.rgb(128, 91, 128) // Pastel Magenta
                 )
             }
         }
@@ -203,7 +119,7 @@ fun IntroScreen(
                     .padding(8.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
-                repeat(6) { iteration ->
+                repeat(SLIDES) { iteration ->
                     val color = if (pagerState.currentPage == iteration) {
                         androidx.compose.ui.graphics.Color.White
                     } else {
@@ -248,7 +164,7 @@ fun IntroScreen(
                 }
 
                 // Next button or Done button
-                if (pagerState.currentPage < 5) {
+                if (pagerState.currentPage < SLIDES - 1) {
                     Button(
                         modifier = Modifier.weight(1f),
                         onClick = {
@@ -296,7 +212,7 @@ fun IntroSlide(
         //
         // And scrolling is the last resort: the slide gives type back until it fits, keyed
         // on the description so each slide is fitted on its own terms rather than every
-        // slide inheriting the longest one's shrink. Six slides in nine locales is exactly
+        // slide inheriting the longest one's shrink. Every slide in nine locales is exactly
         // the case where one hardcoded size cannot be right for all of them.
         CompositionLocalProvider(
             LocalDensity provides rememberFitToViewportDensity(slideScroll, description)

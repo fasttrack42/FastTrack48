@@ -154,25 +154,30 @@ fun FastEntryItem(
 
 						Spacer(modifier = Modifier.weight(1f))
 
-						// Both onsets are fixed-hour estimates, so non-zero values are marked approximate.
-						val ketosisText = if (ketosisHours > 0) {
-							stringResource(id = R.string.log_approx, ketosisHours.toString())
-						} else ketosisHours.toString()
-						val autophagyText = if (autophagyHours > 0) {
-							stringResource(id = R.string.log_approx, autophagyHours.toString())
-						} else autophagyHours.toString()
-
+						// Only what the fast reached: a "0 hours" on most entries records a loss
+						// against a mark the user never set. The colour bar still shows the stage.
+						// Both onsets are fixed-hour estimates, so the values are marked approximate.
 						Column {
-							Text(
-								text = "🔥 " + stringResource(id = R.string.log_entry_ketosis, ketosisText),
-								style = MaterialTheme.typography.titleSmall,
-								color = MaterialTheme.colorScheme.onSurface,
-							)
-							Text(
-								text = "🧬 " + stringResource(id = R.string.log_entry_autophagy, autophagyText),
-								style = MaterialTheme.typography.titleSmall,
-								color = MaterialTheme.colorScheme.onSurface,
-							)
+							if (ketosisHours > 0) {
+								Text(
+									text = "🔥 " + stringResource(
+										id = R.string.log_entry_ketosis,
+										stringResource(id = R.string.log_approx, ketosisHours.toString()),
+									),
+									style = MaterialTheme.typography.titleSmall,
+									color = MaterialTheme.colorScheme.onSurface,
+								)
+							}
+							if (autophagyHours > 0) {
+								Text(
+									text = "🧬 " + stringResource(
+										id = R.string.log_entry_autophagy,
+										stringResource(id = R.string.log_approx, autophagyHours.toString()),
+									),
+									style = MaterialTheme.typography.titleSmall,
+									color = MaterialTheme.colorScheme.onSurface,
+								)
+							}
 						}
 					}
 				}

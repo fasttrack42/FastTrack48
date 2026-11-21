@@ -16,9 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import com.legbehindneck.fasttrack48.BuildConfig
+import com.legbehindneck.fasttrack48.AlertService
 import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
+import com.legbehindneck.fasttrack48.data.activefast.FastCheckIn
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.log.ImportResult
 import com.legbehindneck.fasttrack48.data.settings.DateStyle
@@ -176,6 +178,18 @@ class MainActivity : AppCompatActivity() {
 			dateStyleState = currentDateStyle
 		}
 		setupFastingNotification()
+		answerCheckIn()
+	}
+
+	/**
+	 * Opening the app with the fast still running answers "Still fasting?": the fast is in plain
+	 * view, and the person chose not to end it. Without this, tapping the notification or
+	 * swiping it away would leave the question open, and stage alerts off, for the rest of the
+	 * fast. The "End fast" action lands here too, and its end sheet still opens.
+	 */
+	private fun answerCheckIn() {
+		val start = fastingRepository.getFastStart()?.takeIf { fastingRepository.isFasting() } ?: return
+		if (FastCheckIn.isOpen(this, start)) AlertService.closeCheckIn(this)
 	}
 
 	private fun setupFastingNotification() {

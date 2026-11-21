@@ -106,7 +106,7 @@ class ProfileViewModel(
                 else -> appContext.getString(R.string.profile_bmi_category_morbidly_obese)
             }
             bmiValue = appContext.getString(R.string.profile_bmi_value, bmi, bmiCategory)
-            bmrValue = appContext.getString(R.string.profile_bmr_value, calculateBmr(profile))
+            bmrValue = calculateBmr(profile)?.let { appContext.getString(R.string.profile_bmr_value, it) }.orEmpty()
         } else {
             bmiValue = ""
             bmrValue = ""
@@ -245,8 +245,10 @@ class ProfileViewModel(
         }
     }
 
-    private fun calculateBmr(profile: Profile): Double {
+    /** Null until a sex is chosen: both formulas depend on it. */
+    private fun calculateBmr(profile: Profile): Double? {
         return when (profile.gender) {
+            null -> null
             //BMR for Men = 66.47 + (13.75 * weight [kg]) + (5.003 * size [cm]) − (6.755 * age [years])
             Gender.Male -> {
                 66.47 + (13.75 * profile.weightKg) + (5.003 * profile.heightCm) - (6.755 * profile.ageYears)

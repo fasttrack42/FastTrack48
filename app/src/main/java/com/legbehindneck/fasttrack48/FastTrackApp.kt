@@ -46,8 +46,9 @@ class FastTrackApp : Application(), Configuration.Provider {
 			modules(mainModule)
 		}
 
-		// Post any Ekadashi / Purnima / Amavasya reminder an alarm missed (force-stop, Doze) and re-arm.
-		LunarReminderScheduler.refresh(this)
+		// Post any Ekadashi / Purnima / Amavasya reminder an alarm missed (force-stop, Doze) and
+		// re-arm; then again each time a fast starts or ends, which opens the quiet after it.
+		LunarReminderScheduler.start(this)
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
 			GlobalScope.launch {
@@ -73,7 +74,7 @@ class FastTrackApp : Application(), Configuration.Provider {
 	override val workManagerConfiguration: Configuration
 		get() = Configuration.Builder()
 			.setMinimumLoggingLevel(Log.INFO)
-			// Reserve job IDs 1000-2000 for WorkManager (AlertService uses 1-5)
+			// Reserve job IDs 1000-2000 for WorkManager (AlertService.JobId uses 1-6)
 			.setJobSchedulerJobIdRange(1000, 2000)
 			.build()
 }

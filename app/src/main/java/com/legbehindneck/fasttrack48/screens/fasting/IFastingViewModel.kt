@@ -45,7 +45,8 @@ interface IFastingViewModel {
 	fun onCreate()
 	fun updateUi()
 	fun startFast(timeStartedMills: Instant? = null)
-	fun endFast(timeEnded: Instant? = null, notes: String = "")
+	/** Ends the running fast; true when its end deserves confetti (a first, or every fast if the user opted in). */
+	fun endFast(timeEnded: Instant? = null, notes: String = ""): Boolean
 
 	/** Correct the start time of the fast that is currently running. */
 	fun adjustFastStart(newStart: Instant)

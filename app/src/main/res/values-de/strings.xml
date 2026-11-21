@@ -23,17 +23,9 @@
 	<string name="settings_stage_alerts_subtitle">Benachrichtigt werden, wenn neue Fasten-Stufen erreicht werden</string>
 	<string name="export_failed">Fehler beim Exportieren des Logbuchs</string>
 	<string name="intro_00_title">Willkommen bei FastTrack48!</string>
-	<string name="intro_00_description">Worum geht es in dieser App?</string>
-	<string name="intro_01_title">Motivationshilfe</string>
 	<string name="intro_01_description">Die Hauptidee hinter FastTrack48 ist es, Sie während Ihrer Fastenperioden zu motivieren und Ihnen zu erklären, was Ihr Körper in den verschiedenen Phasen des Fastens tut</string>
-	<string name="intro_02_title">Eine einfache kostenlose App</string>
-	<string name="intro_02_description">FastTrack48 ist und wird immer kostenlos und Open Source sein. Es muss kein Konto erstellt werden, es gibt keine In-App-Käufe, keine Werbung, keine Telemetrie und kein Tracking. Die App hat keinen Internetzugang und funktioniert vollständig offline.</string>
 	<string name="intro_03_title">Intermittierendes Fasten</string>
 	<string name="intro_03_description">Ein junges Forschungsfeld. Manches ist gut belegt, vieles noch früh.\n\nWas bekannt ist und wie stark die Belege sind, findest du in der Bibliothek im Menü.</string>
-	<string name="intro_04_title">Bleibe durch Benachrichtigungen motiviert</string>
-	<string name="intro_04_description">FastTrack48 kann dir hilfreiche Benachrichtigungen senden, damit du beim Fasten motiviert bleibst.\n\nDu siehst deine aktuelle Fastenzeit, in welcher Phase du dich befindest und welchen Energiemodus dein Körper gerade nutzt.\n\nSo bleibst du am Ball, ohne die App öffnen zu müssen</string>
-	<string name="intro_05_title">Das war\'s!</string>
-	<string name="intro_05_description">Willkommen in der Welt des Fastens!</string>
 	<string name="title_fasting">Fasten</string>
 	<string name="title_log">Protokoll</string>
 	<string name="title_profile">Profil</string>
@@ -123,7 +115,6 @@
 	<string name="notification_fasting_channel_name">Fastenstatus</string>
 	<string name="notification_fasting_channel_description">Laufende Benachrichtigung, die deinen aktuellen Fastenstatus und
 		Fortschritt anzeigt.</string>
-	<string name="notification_fasting_energy_mode">Energiemodus: %1$s</string>
 	<string name="info_dialog_bmi_title">Body-Mass-Index</string>
 	<string name="info_dialog_bmi_content">Eine grobe Schätzung des gesunden Gewichts, das ein durchschnittlicher
 		Erwachsener haben sollte. Es wird einfach berechnet, indem das Gewicht durch die Körpergröße geteilt wird.\n\nOft als
@@ -186,7 +177,6 @@
 	<string name="milestone_in">%1$s in %2$s</string>
 	<string name="milestone_for">%1$s seit %2$s</string>
 
-	<string name="notification_fasting_title_duration">Fasten: %1$s</string>
 	<string name="phase_time_until">in %1$s</string>
 	<string name="share_text_fasting">Ich faste seit %1$s! Mein Körper nutzt gerade %2$s als Energiequelle.</string>
 	<string name="share_text_finished">Ich habe %1$s gefastet!</string>
@@ -293,7 +283,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON und andere Vaishnava-Kalender. Einige Fastentage liegen einen Tag später.</string>
 	<string name="lunar_remind_me">Erinnern</string>
-	<string name="lunar_lead_same_day">Am selben Tag</string>
+	<string name="lunar_lead_same_day">Am selben Morgen</string>
 	<string name="lunar_lead_1_day">1 Tag vorher</string>
 	<string name="lunar_lead_2_days">2 Tage vorher</string>
 	<string name="lunar_lead_3_days">3 Tage vorher</string>
@@ -396,4 +386,11 @@
 	<string name="fast_day_begins">%1$s beginnt: %2$s</string>
 	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">Noch am Fasten?</string>
+	<string name="check_in_body">Dieses Fasten läuft seit %1$s. Falls es früher endete: Fasten beenden und die tatsächliche Endzeit eintragen.</string>
+	<string name="check_in_still_fasting">Ich faste noch</string>
+	<string name="settings_confetti_every_fast_title">Konfetti nach jedem Fasten</string>
+	<string name="settings_confetti_every_fast_subtitle">Jedes Fasten ab 12 Stunden feiern, nicht nur das erste Erreichen einer Phase</string>
+	<string name="profile_safety_caption">Wird für passende Sicherheitshinweise verwendet.</string>
+	<string name="lunar_reminders_wait_note">Erinnerungen warten während des Fastens und noch eine Weile danach.</string>
 </resources>

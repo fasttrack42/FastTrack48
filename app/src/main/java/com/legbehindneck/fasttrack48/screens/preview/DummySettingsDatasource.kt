@@ -36,6 +36,10 @@ class DummySettingsDatasource(
 
 	override fun setShowFastingNotification(enabled: Boolean) {}
 
+	override fun getConfettiEveryFast(): Boolean = false
+
+	override fun setConfettiEveryFast(enabled: Boolean) {}
+
 	override fun getUseMetricSystem(default: Boolean): Boolean = default
 
 	override fun setUseMetricSystem(enabled: Boolean) {}

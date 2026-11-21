@@ -82,6 +82,11 @@
 				android:exported="false"
 				android:permission="android.permission.BIND_JOB_SERVICE"/>
 
+		<!-- The "Still fasting" answer on the check-in notification; only the app's own PendingIntent reaches it. -->
+		<receiver
+				android:name=".CheckInReceiver"
+				android:exported="false"/>
+
 		<activity
 				android:name=".screens.main.MainActivity"
 				android:exported="true">

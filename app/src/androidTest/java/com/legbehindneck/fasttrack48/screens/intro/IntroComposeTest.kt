@@ -27,44 +27,16 @@ class IntroComposeTest {
 		// Set up the compose content
 		composeTestRule.setContent {
 			FastTrackTheme {
-				IntroScreen(onComplete = {}, onNotificationSlideExited = {})
+				IntroScreen(onComplete = {})
 			}
 		}
 
-		// Verify the first slide is displayed
+		// The first slide: what the app is for
 		composeTestRule.onNodeWithText(context.getString(R.string.intro_00_title)).assertExists()
-
-		// Click the Next button to go to the second slide
 		composeTestRule.onNodeWithText(context.getString(R.string.next_button)).performClick()
 
-		// Verify the second slide is displayed
-		composeTestRule.onNodeWithText(context.getString(R.string.intro_01_title)).assertExists()
-
-		// Click the Next button to go to the third slide
-		composeTestRule.onNodeWithText(context.getString(R.string.next_button)).performClick()
-
-		// Verify the third slide is displayed
-		composeTestRule.onNodeWithText(context.getString(R.string.intro_02_title)).assertExists()
-
-		// Click the Next button to go to the fourth slide
-		composeTestRule.onNodeWithText(context.getString(R.string.next_button)).performClick()
-
-		// Verify the fourth slide is displayed
+		// The second and last slide: the research, then Done
 		composeTestRule.onNodeWithText(context.getString(R.string.intro_03_title)).assertExists()
-
-		// Click the Next button to go to the fifth slide
-		composeTestRule.onNodeWithText(context.getString(R.string.next_button)).performClick()
-
-		// Verify the fifth slide is displayed
-		composeTestRule.onNodeWithText(context.getString(R.string.intro_04_title)).assertExists()
-
-		// Click the Next button to go to the fifth slide
-		composeTestRule.onNodeWithText(context.getString(R.string.next_button)).performClick()
-
-		// Verify the sixth slide is displayed
-		composeTestRule.onNodeWithText(context.getString(R.string.intro_05_title)).assertExists()
-
-		// Click the Done button to complete the intro
 		composeTestRule.onNodeWithText(context.getString(R.string.done_button)).performClick()
 	}
 
@@ -73,7 +45,7 @@ class IntroComposeTest {
 		// Set up the compose content
 		composeTestRule.setContent {
 			FastTrackTheme {
-				IntroScreen(onComplete = {}, onNotificationSlideExited = {})
+				IntroScreen(onComplete = {})
 			}
 		}
 

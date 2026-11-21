@@ -12,7 +12,7 @@ interface IProfileViewModel {
 		val weightKg: String = "",
 		val weightLbs: String = "",
 		val age: String = "",
-		val gender: Gender = Gender.Male,
+		val gender: Gender? = null,
 		val heightCmError: String? = null,
 		val heightFeetError: String? = null,
 		val heightInchesError: String? = null,

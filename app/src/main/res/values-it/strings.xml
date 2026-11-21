@@ -23,22 +23,10 @@
 	<string name="settings_stage_alerts_subtitle">Ricevi una notifica quando entri in nuovi stadi di digiuno</string>
 	<string name="export_failed">Esportazione del registro non riuscita</string>
 	<string name="intro_00_title">Benvenuto in FastTrack48!</string>
-	<string name="intro_00_description">Di cosa si tratta in quest\'app?</string>
-	<string name="intro_01_title">Aiuto motivazionale</string>
 	<string name="intro_01_description">L\'idea principale dietro FastTrack48 è quella di aiutarti a motivarti durante i
 		tuoi digiuni e spiegarti cosa sta facendo il tuo corpo nelle diverse fasi del digiuno.</string>
-	<string name="intro_02_title">Un\'app semplice e gratuita</string>
-	<string name="intro_02_description">FastTrack48 è e sarà sempre gratuito e open source. Non c\'è bisogno di creare un
-		account, non ci sono acquisti in-app, nessuna pubblicità da evitare. E non ha nemmeno accesso a Internet, quindi
-		non può inviare i tuoi dati da nessuna parte.</string>
 	<string name="intro_03_title">Digiuno intermittente</string>
 	<string name="intro_03_description">Un campo di ricerca giovane. Alcuni risultati sono consolidati, molti ancora preliminari.\n\nPer vedere cosa si sa e quanto sono solide le prove, apri la Biblioteca dal menu.</string>
-	<string name="intro_04_title">Resta motivato con le notifiche</string>
-	<string name="intro_04_description">FastTrack48 può mostrarti notifiche utili per tenerti motivato durante il
-		digiuno.\n\nVedrai il tuo tempo di digiuno attuale, in che fase ti trovi e quale modalità energetica il tuo
-		corpo sta usando.\n\nQuesto ti aiuta a rimanere in carreggiata senza dover aprire l\'app!</string>
-	<string name="intro_05_title">È tutto!</string>
-	<string name="intro_05_description">Ora vai a iniziare il digiuno!</string>
 	<string name="title_fasting">Digiuno</string>
 	<string name="title_log">Registro</string>
 	<string name="title_profile">Profilo</string>
@@ -128,7 +116,6 @@
 	<string name="notification_fasting_channel_name">Stato di digiuno</string>
 	<string name="notification_fasting_channel_description">Notifica continua che mostra lo stato attuale del digiuno e il
 		progresso.</string>
-	<string name="notification_fasting_energy_mode">Modalità energetica: %1$s</string>
 	<string name="info_dialog_bmi_title">Indice di massa corporea</string>
 	<string name="info_dialog_bmi_content">Una stima approssimativa del peso sano che un adulto medio dovrebbe avere.
 		Viene calcolato semplicemente dividendo il peso per l\'altezza.\n\nSpesso criticato per essere impreciso, è vero
@@ -191,7 +178,6 @@
 	<string name="milestone_in">%1$s tra %2$s</string>
 	<string name="milestone_for">%1$s da %2$s</string>
 
-	<string name="notification_fasting_title_duration">Digiuno: %1$s</string>
 	<string name="phase_time_until">tra %1$s</string>
 	<string name="share_text_fasting">Sto digiunando da %1$s! Il mio corpo sta usando %2$s come fonte di energia.</string>
 	<string name="share_text_finished">Ho digiunato per %1$s!</string>
@@ -298,7 +284,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON e altri calendari vaishnava. Alcuni digiuni cadono un giorno dopo.</string>
 	<string name="lunar_remind_me">Ricordamelo</string>
-	<string name="lunar_lead_same_day">Il giorno stesso</string>
+	<string name="lunar_lead_same_day">La mattina stessa</string>
 	<string name="lunar_lead_1_day">1 giorno prima</string>
 	<string name="lunar_lead_2_days">2 giorni prima</string>
 	<string name="lunar_lead_3_days">3 giorni prima</string>
@@ -407,4 +393,11 @@
 	<string name="fast_day_begins">%1$s inizia: %2$s</string>
 	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">Stai ancora digiunando?</string>
+	<string name="check_in_body">Questo digiuno dura da %1$s. Se è finito prima, terminalo e indica quando hai smesso.</string>
+	<string name="check_in_still_fasting">Sto ancora digiunando</string>
+	<string name="settings_confetti_every_fast_title">Coriandoli dopo ogni digiuno</string>
+	<string name="settings_confetti_every_fast_subtitle">Festeggia ogni digiuno di 12 ore o più, non solo la prima volta che raggiungi una fase</string>
+	<string name="profile_safety_caption">Serve a personalizzare le note di sicurezza.</string>
+	<string name="lunar_reminders_wait_note">I promemoria aspettano durante il digiuno, e per un po\' dopo.</string>
 </resources>

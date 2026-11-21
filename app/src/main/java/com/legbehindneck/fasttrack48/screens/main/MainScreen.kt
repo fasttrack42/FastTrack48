@@ -1,5 +1,6 @@
 package com.legbehindneck.fasttrack48.screens.main
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -342,7 +343,12 @@ fun MainScreen(
 				onAboutClick = onAboutClick,
 				onSettingsClick = onSettingsClick,
 				fastDays = fastDays,
-				showFastDayChip = !compactHeight,
+				// Once per screen: on the idle Fasting page the line under the dial already says it.
+				showFastDayChip = !compactHeight && !(
+					pagerState.currentPage == ScreenPages.Fasting.ordinal &&
+						!fastingState.isFasting &&
+						fastDays?.current != null
+					),
 				onFastDaysClick = { showFastDays = true },
 				modifier = Modifier
 					.align(Alignment.TopEnd)
@@ -406,7 +412,9 @@ private fun FloatingTopActions(
 			// The fast days' door, beside the overflow button so the corner keeps the button where
 			// it has always been. Portrait only: the top band it sits in is reserved across the
 			// width there; landscape's door is at the head of the navigation rail.
-			if (showFastDayChip) {
+			// Animated, because it now comes and goes with the page: on a swipe away from the idle
+			// Fasting page it would otherwise pop in at the swipe's midpoint.
+			AnimatedVisibility(visible = showFastDayChip) {
 				FastDayChip(data = fastDays, onClick = onFastDaysClick)
 			}
 			Box {

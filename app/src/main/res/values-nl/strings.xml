@@ -20,17 +20,9 @@
 	<string name="settings_stage_alerts_subtitle">Krijg een melding wanneer je een nieuwe vastenfase bereikt</string>
 	<string name="export_failed">Exporteren van logboek mislukt</string>
 	<string name="intro_00_title">Welkom bij FastTrack48!</string>
-	<string name="intro_00_description">Waar draait deze app om?</string>
-	<string name="intro_01_title">Motiverende hulp</string>
 	<string name="intro_01_description">Het idee achter FastTrack48 is om je te motiveren tijdens het vasten en je uit te leggen wat je lichaam in de verschillende vastenfasen doet.</string>
-	<string name="intro_02_title">Een eenvoudige, gratis app</string>
-	<string name="intro_02_description">FastTrack48 is en blijft gratis en opensource. Geen account nodig, geen in-app-aankopen, geen advertenties, geen telemetrie en geen tracking. De app heeft geen internettoegang en werkt volledig offline.</string>
 	<string name="intro_03_title">Intermittent fasting</string>
 	<string name="intro_03_description">Een jong onderzoeksveld. Sommige bevindingen zijn goed onderbouwd, veel zijn nog voorlopig.\n\nWil je zien wat bekend is en hoe sterk het bewijs is? Open de Bibliotheek via het menu.</string>
-	<string name="intro_04_title">Blijf gemotiveerd met meldingen</string>
-	<string name="intro_04_description">FastTrack48 kan handige meldingen tonen om je gemotiveerd te houden tijdens het vasten.\n\nJe ziet je huidige vastentijd, in welke fase je zit en welke energiemodus je lichaam gebruikt.\n\nZo blijf je op koers zonder de app te hoeven openen!</string>
-	<string name="intro_05_title">Dat was het!</string>
-	<string name="intro_05_description">Welkom in de wereld van het vasten!</string>
 	<string name="title_fasting">Vasten</string>
 	<string name="title_log">Logboek</string>
 	<string name="title_profile">Profiel</string>
@@ -118,7 +110,6 @@
 	<string name="notification_optimal_autophagy_content">Twee dagen. Groeihormoon beschermt je spieren terwijl vet het werk doet.</string>
 	<string name="notification_fasting_channel_name">Vastenstatus</string>
 	<string name="notification_fasting_channel_description">Doorlopende melding met je huidige vastenstatus en voortgang.</string>
-	<string name="notification_fasting_energy_mode">Energiemodus: %1$s</string>
 	<string name="info_dialog_bmi_title">Body Mass Index</string>
 	<string name="info_dialog_bmi_content">Een ruwe schatting van het gezonde gewicht dat een gemiddelde volwassene zou moeten hebben. Het wordt simpelweg berekend door het gewicht te delen door de lengte.\n\nHet wordt vaak bekritiseerd als onnauwkeurig, en het klopt dat er factoren zijn die het misleidend kunnen maken. Denk aan een extreem gespierde bodybuilder, of iemand die heel lang of heel klein is. In zulke uitzonderlijke gevallen geeft de eenvoudige BMI-berekening onnauwkeurige resultaten.\n\nMaar voor de meeste mensen is dit een goed genoege schatting om te weten of je binnen een gezond gewichtsbereik zit.</string>
 	<string name="info_dialog_bmr_title">Basaalmetabolisme</string>
@@ -194,7 +185,6 @@
 	<string name="settings_phase_autophagy_subtitle">Toont de aftelklok van de autofagie op het vastenscherm.</string>
 	<string name="share_text_fasting">Ik vast al %1$s! Mijn lichaam gebruikt op dit moment %2$s voor energie.</string>
 	<string name="share_text_finished">Ik heb %1$s gevast!</string>
-	<string name="notification_fasting_title_duration">Vasten: %1$s</string>
 	<string name="sheet_start_now">Nu starten</string>
 	<string name="sheet_start_earlier">Ik ben eerder begonnen…</string>
 	<string name="sheet_end_now">Nu beëindigen</string>
@@ -280,7 +270,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON en andere Vaishnava-kalenders. Sommige vastendagen vallen een dag later.</string>
 	<string name="lunar_remind_me">Herinner me</string>
-	<string name="lunar_lead_same_day">Op de dag zelf</string>
+	<string name="lunar_lead_same_day">Die ochtend zelf</string>
 	<string name="lunar_lead_1_day">1 dag ervoor</string>
 	<string name="lunar_lead_2_days">2 dagen ervoor</string>
 	<string name="lunar_lead_3_days">3 dagen ervoor</string>
@@ -383,4 +373,11 @@
 	<string name="fast_day_begins">%1$s begint: %2$s</string>
 	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">Nog aan het vasten?</string>
+	<string name="check_in_body">Deze vastenperiode loopt al %1$s. Is ze eerder gestopt, beëindig haar dan en vul in wanneer je stopte.</string>
+	<string name="check_in_still_fasting">Ik vast nog</string>
+	<string name="settings_confetti_every_fast_title">Confetti na elke vastenperiode</string>
+	<string name="settings_confetti_every_fast_subtitle">Vier elke vastenperiode van 12 uur of langer, niet alleen de eerste keer dat je een fase bereikt</string>
+	<string name="profile_safety_caption">Wordt gebruikt om veiligheidstips af te stemmen.</string>
+	<string name="lunar_reminders_wait_note">Herinneringen wachten tijdens het vasten, en nog even daarna.</string>
 </resources>

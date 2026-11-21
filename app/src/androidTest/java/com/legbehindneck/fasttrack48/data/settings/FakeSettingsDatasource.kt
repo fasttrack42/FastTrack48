@@ -40,6 +40,12 @@ class FakeSettingsDatasource : SettingsDatasource {
 		showFastingNotification = enabled
 	}
 
+	private var confettiEveryFast: Boolean = false
+	override fun getConfettiEveryFast(): Boolean = confettiEveryFast
+	override fun setConfettiEveryFast(enabled: Boolean) {
+		confettiEveryFast = enabled
+	}
+
 	override fun getUseMetricSystem(default: Boolean): Boolean = useMetricSystem ?: default
 	override fun setUseMetricSystem(enabled: Boolean) {
 		useMetricSystem = enabled

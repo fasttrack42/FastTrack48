@@ -20,26 +20,36 @@ object Stages {
 		return phases.findLast { elapsedTime.toDouble(DurationUnit.HOURS) >= it.hours } ?: PHASE_GLUCOSE
 	}
 
+	/**
+	 * The one-line readout under the dial and in the ongoing notification. Its boundaries are
+	 * the journey's milestones ([FastingJourney]), so the readout, the countdown, the stage
+	 * alerts and the log never disagree about when a stage begins; "Ketones rising" is a step
+	 * inside fat burning.
+	 */
 	val stage = arrayOf(
-		Stage(hours = 12, title = R.string.stage_fasting_title, description = R.string.stage_fasting_description),
+		Stage(hours = 0, title = R.string.stage_fasting_title, description = R.string.stage_fasting_description),
 		Stage(
-			hours = 16,
+			hours = FastingJourney.FAT_BURN.startHours,
 			title = R.string.stage_fat_burning_title,
 			description = R.string.stage_fat_burning_description
 		),
 		Stage(
-			hours = 18,
+			hours = 16,
 			title = R.string.stage_fat_fasting_sweet_spot_title,
 			description = R.string.stage_fat_fasting_sweet_spot_description
 		),
 		Stage(
-			hours = 20,
+			hours = FastingJourney.KETOSIS.startHours,
 			title = R.string.stage_fat_peak_fat_burning_title,
 			description = R.string.stage_fat_peak_fat_burning_description
 		),
-		Stage(hours = 24, title = R.string.stage_autophagy_title, description = R.string.stage_autophagy_description),
 		Stage(
-			hours = 48,
+			hours = FastingJourney.AUTOPHAGY.startHours,
+			title = R.string.stage_autophagy_title,
+			description = R.string.stage_autophagy_description
+		),
+		Stage(
+			hours = FastingJourney.DEEP_AUTOPHAGY.startHours,
 			title = R.string.stage_optimal_autophagy_title,
 			description = R.string.stage_optimal_autophagy_description
 		),
@@ -70,16 +80,6 @@ fun descriptionFor(stage: Stage, elapsedHours: Long): Int =
 		stage.description
 	}
 
-fun phaseForStage(stage: Stage): Phase {
-	return when {
-		stage.hours >= 48 -> Stages.PHASE_OPTIMAL_AUTOPHAGY
-		stage.hours >= 24 -> Stages.PHASE_AUTOPHAGY
-		stage.hours >= 20 -> Stages.PHASE_KETOSIS
-		stage.hours >= 16 -> Stages.PHASE_FAT_BURN
-		else -> Stages.PHASE_GLUCOSE
-	}
-}
-
 sealed class Phase(
 	val hours: Int,
 	@StringRes val title: Int,
@@ -88,10 +88,11 @@ sealed class Phase(
 	val autophagy: Boolean
 )
 
+// Onsets are the journey's milestones, the single source for every surface that names a stage.
 class GlucosePhase : Phase(0, R.string.phase_glucose, false, false, false)
-class FatBurningPhase : Phase(16, R.string.phase_fat_burning, true, false, false)
-class KetosisPhase : Phase(20, R.string.phase_ketosis, true, true, false)
-class AutophagyPhase : Phase(24, R.string.phase_autophagy, true, true, true)
-class OptimalAutophagyPhase : Phase(48, R.string.phase_optimal_autophagy, true, true, true)
+class FatBurningPhase : Phase(FastingJourney.FAT_BURN.startHours, R.string.phase_fat_burning, true, false, false)
+class KetosisPhase : Phase(FastingJourney.KETOSIS.startHours, R.string.phase_ketosis, true, true, false)
+class AutophagyPhase : Phase(FastingJourney.AUTOPHAGY.startHours, R.string.phase_autophagy, true, true, true)
+class OptimalAutophagyPhase : Phase(FastingJourney.DEEP_AUTOPHAGY.startHours, R.string.phase_optimal_autophagy, true, true, true)
 
 data class Stage(val hours: Int, @StringRes val title: Int, @StringRes val description: Int)

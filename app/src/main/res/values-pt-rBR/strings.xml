@@ -23,17 +23,9 @@
 	<string name="settings_stage_alerts_subtitle">Receba notificações ao entrar em novas fases do jejum</string>
 	<string name="export_failed">Falha ao exportar o registro</string>
 	<string name="intro_00_title">Bem-vindo ao FastTrack48!</string>
-	<string name="intro_00_description">Do que trata este aplicativo?</string>
-	<string name="intro_01_title">Ajuda motivacional</string>
 	<string name="intro_01_description">A ideia principal do FastTrack48 é ajudar a mantê-lo motivado durante seus jejuns e explicar o que seu corpo está fazendo nas diferentes fases do jejum.</string>
-	<string name="intro_02_title">Um app simples e gratuito</string>
-	<string name="intro_02_description">FastTrack48 é e sempre será gratuito e de código aberto. Não é preciso criar conta, não há compras no app, nem anúncios, nem telemetria, nem rastreamento. O app não tem acesso à internet e funciona totalmente offline.</string>
 	<string name="intro_03_title">Jejum intermitente</string>
 	<string name="intro_03_description">Um campo de pesquisa jovem. Alguns resultados são bem estabelecidos; muitos ainda são preliminares.\n\nPara ver o que se sabe e quão sólidas são as evidências, abra a Biblioteca pelo menu.</string>
-	<string name="intro_04_title">Mantenha-se motivado com notificações</string>
-	<string name="intro_04_description">FastTrack48 pode mostrar notificações úteis para mantê-lo motivado durante o jejum.\n\nVocê verá o tempo atual de jejum, em que fase está e qual modo de energia seu corpo está usando.\n\nIsso ajuda você a seguir no caminho certo sem precisar abrir o app!</string>
-	<string name="intro_05_title">É isso!</string>
-	<string name="intro_05_description">Bem-vindo ao mundo do jejum!</string>
 	<string name="title_fasting">Jejum</string>
 	<string name="title_log">Registro</string>
 	<string name="title_profile">Perfil</string>
@@ -121,7 +113,6 @@
 	<string name="notification_optimal_autophagy_content">Dois dias. O hormônio do crescimento protege seus músculos enquanto a gordura faz o trabalho.</string>
 	<string name="notification_fasting_channel_name">Status do jejum</string>
 	<string name="notification_fasting_channel_description">Notificação contínua mostrando seu status atual de jejum e progresso.</string>
-	<string name="notification_fasting_energy_mode">Modo de energia: %1$s</string>
 	<string name="info_dialog_bmi_title">Índice de massa corporal</string>
 	<string name="info_dialog_bmi_content">Uma estimativa aproximada do peso saudável que um adulto médio deveria ter. É calculada simplesmente dividindo o peso pela altura.\n\nFrequentemente criticado por ser impreciso, é verdade que há fatores que podem torná-lo enganoso. Por exemplo: um fisiculturista extremamente musculoso ou uma pessoa muito alta ou muito baixa. Esses casos extremos terão resultados imprecisos no cálculo básico do IMC.\n\nMas, para a maioria das pessoas, essa é uma estimativa suficiente para saber se você está em uma faixa de peso saudável.</string>
 	<string name="info_dialog_bmr_title">Taxa metabólica basal</string>
@@ -176,7 +167,6 @@
 	<string name="milestone_in">%1$s em %2$s</string>
 	<string name="milestone_for">%1$s há %2$s</string>
 
-	<string name="notification_fasting_title_duration">Jejum: %1$s</string>
 	<string name="phase_time_until">em %1$s</string>
 	<string name="share_text_fasting">Estou jejuando há %1$s! Meu corpo está usando %2$s como fonte de energia.</string>
 	<string name="share_text_finished">Jejuei por %1$s!</string>
@@ -283,7 +273,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON e outros calendários vaishnavas. Alguns jejuns caem um dia depois.</string>
 	<string name="lunar_remind_me">Lembrar</string>
-	<string name="lunar_lead_same_day">No próprio dia</string>
+	<string name="lunar_lead_same_day">Na manhã do dia</string>
 	<string name="lunar_lead_1_day">1 dia antes</string>
 	<string name="lunar_lead_2_days">2 dias antes</string>
 	<string name="lunar_lead_3_days">3 dias antes</string>
@@ -392,4 +382,11 @@
 	<string name="fast_day_begins">%1$s começa: %2$s</string>
 	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">Ainda em jejum?</string>
+	<string name="check_in_body">Este jejum está em andamento há %1$s. Se terminou antes, encerre-o e informe quando você parou.</string>
+	<string name="check_in_still_fasting">Ainda em jejum</string>
+	<string name="settings_confetti_every_fast_title">Confete após cada jejum</string>
+	<string name="settings_confetti_every_fast_subtitle">Comemore cada jejum de 12 horas ou mais, não só a primeira vez que você alcança uma fase</string>
+	<string name="profile_safety_caption">Usado para adaptar os avisos de segurança.</string>
+	<string name="lunar_reminders_wait_note">Os lembretes esperam durante o jejum e por um tempo depois.</string>
 </resources>

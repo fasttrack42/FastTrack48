@@ -28,21 +28,10 @@
 	<string name="export_failed">Error al exportar el historial de ayunos</string>
 
 	<string name="intro_00_title">¡Bienvenido a FastTrack48!</string>
-	<string name="intro_00_description">¿Para qué sirve esta aplicación?</string>
-	<string name="intro_01_title">Ayuda motivacional</string>
 	<string name="intro_01_description">La idea principal detrás de FastTrack48 es ayudarte a mantener la motivación
         durante tus ayunos y explicarte lo que está pasando en tu cuerpo durante cada fase del ayuno.</string>
-	<string name="intro_02_title">Una aplicación gratuita y sencilla</string>
-	<string name="intro_02_description">FastTrack48 es y siempre será gratuita y de código abierto. Sin cuentas, sin anuncios, sin rastreo y sin telemetría. Ni siquiera tiene acceso a Internet, por lo que
-        no puede enviar datos a ninguna parte.</string>
 	<string name="intro_03_title">Ayuno intermitente</string>
 	<string name="intro_03_description">Un campo de investigación joven. Algunos hallazgos están bien establecidos; muchos aún son preliminares.\n\nPara ver qué se sabe y qué solidez tiene, abre la Biblioteca desde el menú.</string>
-	<string name="intro_04_title">Mantente motivado con las notificaciones</string>
-	<string name="intro_04_description">FastTrack48 puede mostrarte notificaciones útiles para mantenerte motivado durante tu
-        ayuno.\n\nVerás tu tiempo de ayuno actual, en qué etapa te encuentras y qué modo de energía está utilizando tu
-        cuerpo.\n\n¡Te ayudará a mantenerte en el camino sin tener que abrir la aplicación!</string>
-	<string name="intro_05_title">¡Eso es todo!</string>
-	<string name="intro_05_description">¡Bienvenido al universo del ayuno!</string>
 
 	<string name="title_fasting">Ayuno</string>
 	<string name="title_log">Historial</string>
@@ -134,7 +123,6 @@
 	<string name="notification_fasting_channel_name">Estado de ayuno</string>
 	<string name="notification_fasting_channel_description">Notificación permanente que muestra tu estado de ayuno actual y
         tu progreso.</string>
-	<string name="notification_fasting_energy_mode">Modo de energía: %1$s</string>
 
 	<string name="info_dialog_bmi_title">Índice de masa corporal</string>
 	<string name="info_dialog_bmi_content">Una estimación aproximada del peso saludable que un adulto humano promedio
@@ -198,7 +186,6 @@
 	<string name="milestone_in">%1$s en %2$s</string>
 	<string name="milestone_for">%1$s desde hace %2$s</string>
 
-	<string name="notification_fasting_title_duration">Ayuno: %1$s</string>
 	<string name="phase_time_until">en %1$s</string>
 	<string name="share_text_fasting">¡Llevo ayunando %1$s! Ahora mismo mi cuerpo utiliza %2$s como fuente de energía.</string>
 	<string name="share_text_finished">¡He ayunado %1$s!</string>
@@ -307,7 +294,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON y otros calendarios vaishnavas. Algunos ayunos caen un día después.</string>
 	<string name="lunar_remind_me">Recordarme</string>
-	<string name="lunar_lead_same_day">El mismo día</string>
+	<string name="lunar_lead_same_day">Esa misma mañana</string>
 	<string name="lunar_lead_1_day">1 día antes</string>
 	<string name="lunar_lead_2_days">2 días antes</string>
 	<string name="lunar_lead_3_days">3 días antes</string>
@@ -416,4 +403,11 @@
 	<string name="fast_day_begins">%1$s empieza: %2$s</string>
 	<string name="fast_day_exact">%1$s: %2$s</string>
 	<!-- /Ekadashi and Purnima reminders -->
+	<string name="check_in_title">¿Sigues en ayuno?</string>
+	<string name="check_in_body">Este ayuno lleva %1$s. Si terminó antes, termínalo e indica a qué hora paraste.</string>
+	<string name="check_in_still_fasting">Sigo en ayuno</string>
+	<string name="settings_confetti_every_fast_title">Confeti tras cada ayuno</string>
+	<string name="settings_confetti_every_fast_subtitle">Celebra cada ayuno de 12 horas o más, no solo la primera vez que alcanzas una fase</string>
+	<string name="profile_safety_caption">Se usa para adaptar los avisos de seguridad.</string>
+	<string name="lunar_reminders_wait_note">Los recordatorios esperan mientras ayunas, y un tiempo después.</string>
 </resources>

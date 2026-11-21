@@ -291,6 +291,16 @@ internal fun LunarSettingsSection(dateStyle: DateStyle) {
 				value = hourLabel(context, settings.hourOfDay, dateStyle),
 				onClick = { dialog = LunarDialog.HOUR },
 			)
+			// Sets the expectation, so a reminder that waits is not taken for one that was lost.
+			ListItem(
+				headlineContent = {
+					Text(
+						text = stringResource(R.string.lunar_reminders_wait_note),
+						style = MaterialTheme.typography.bodySmall,
+						color = MaterialTheme.colorScheme.onSurfaceVariant,
+					)
+				},
+			)
 			LunarValueRow(
 				title = stringResource(R.string.lunar_location_title),
 				value = when {

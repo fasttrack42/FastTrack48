@@ -212,7 +212,7 @@ fun ProfileDataEntryCard(
 	weightKg: String,
 	weightLbs: String,
 	age: String,
-	gender: Gender,
+	gender: Gender?,
 	heightCmError: String?,
 	heightFeetError: String?,
 	heightInchesError: String?,
@@ -430,6 +430,15 @@ fun ProfileDataEntryCard(
 						.align(Alignment.CenterVertically)
 				)
 			}
+
+			// Says what these answers do beyond the numbers above, so the form is not taken
+			// for a calculator only.
+			Text(
+				text = stringResource(id = R.string.profile_safety_caption),
+				style = MaterialTheme.typography.bodySmall,
+				color = MaterialTheme.colorScheme.onSurfaceVariant,
+				modifier = Modifier.padding(top = 8.dp)
+			)
 		}
 	}
 }

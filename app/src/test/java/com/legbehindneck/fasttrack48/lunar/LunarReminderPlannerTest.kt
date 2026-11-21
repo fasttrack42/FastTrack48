@@ -65,7 +65,8 @@ class LunarReminderPlannerTest {
 	@Test
 	fun plan_keepsRemindersThatShareAFireTime() {
 		// Drik, New Delhi: Jaya Ekadashi 29 Jan 2026, Purnima vrat 1 Feb 2026. "Same day" for
-		// the Ekadashi and "3 days before" for the Purnima both fire on 29 Jan at 18:00.
+		// the Ekadashi and "3 days before" for the Purnima both fire on 29 Jan at 07:00: the
+		// reminder hour is 07:00, and the same-day reminder never comes later than that anyway.
 		val from = ZonedDateTime.of(2026, 1, 1, 0, 0, 0, 0, delhi)
 		val settings = LunarReminderSettings(
 			ekadashiEnabled = true,
@@ -73,9 +74,10 @@ class LunarReminderPlannerTest {
 			ekadashiLeadDays = setOf(0),
 			fullMoonEnabled = true,
 			fullMoonLeadDays = setOf(3),
+			hourOfDay = 7,
 		)
 		val plan = LunarReminderPlanner.plan(from, settings, newDelhi, horizonDays = 40)
-		val shared = plan.filter { it.fireAt == ZonedDateTime.of(2026, 1, 29, 18, 0, 0, 0, delhi) }
+		val shared = plan.filter { it.fireAt == ZonedDateTime.of(2026, 1, 29, 7, 0, 0, 0, delhi) }
 		assertEquals(2, shared.size)
 		assertTrue(shared.any { it.subject is EkadashiDay && it.leadDays == 0 })
 		assertTrue(shared.any { it.subject is MoonDay && it.subject.day == LocalDate.of(2026, 2, 1) })

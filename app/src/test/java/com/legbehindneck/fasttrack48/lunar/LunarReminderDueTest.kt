@@ -88,6 +88,83 @@ class LunarReminderDueTest {
 	}
 
 	@Test
+	fun duringAFast_nothingIsPosted_andWhatCameDueIsHeld() {
+		val plan = listOf(reminder(ekadashi, 1, 18, london))
+		val now = at(london, 2026, 11, 3, 18, 0)
+		val due = LunarReminderPlanner.due(plan, now, now, LocalDateTime.of(2026, 11, 3, 12, 0), emptySet())
+		val settled = LunarReminderPlanner.settle(due, hold = true, posted = emptySet(), held = emptySet(), today = now.toLocalDate())
+		assertTrue(settled.toPost.isEmpty())
+		assertTrue(settled.posted.isEmpty())
+		assertEquals(setOf(plan.single().key), settled.held)
+	}
+
+	@Test
+	fun heldReminder_isPostedAfterTheHold_pastTheFloor_countedFromToday() {
+		// "2 days before", held at 18:00 on the 2nd; runs during the hold moved the floor on.
+		// Released the next morning: still owed, and now says "tomorrow".
+		val plan = listOf(reminder(ekadashi, 2, 18, london))
+		val held = setOf(plan.single().key)
+		val now = at(london, 2026, 11, 3, 9, 0)
+		val due = LunarReminderPlanner.due(plan, now, now, LocalDateTime.of(2026, 11, 3, 8, 0), emptySet(), held)
+		val settled = LunarReminderPlanner.settle(due, hold = false, posted = emptySet(), held = held, today = now.toLocalDate())
+		assertEquals(1, settled.toPost.single().leadDays)
+		assertEquals(held, settled.posted)
+		assertTrue(settled.held.isEmpty())
+	}
+
+	@Test
+	fun heldThatMorningReminder_ofAnOvernightFaster_postsWhenTheFastEnds() {
+		// 20:00 → 12:00 faster, "that morning" at 07:00 falls inside the fast and is held. Quiet
+		// ends 13:00: the day is not over, so it still arrives, as "today".
+		val plan = listOf(reminder(ekadashi, 0, 18, london))
+		assertEquals(7, plan.single().fireAt.hour)
+		val held = setOf(plan.single().key)
+		val now = at(london, 2026, 11, 4, 13, 0)
+		val due = LunarReminderPlanner.due(plan, now, now, LocalDateTime.of(2026, 11, 4, 12, 0), emptySet(), held)
+		val settled = LunarReminderPlanner.settle(due, hold = false, posted = emptySet(), held = held, today = now.toLocalDate())
+		assertEquals(0, settled.toPost.single().leadDays)
+		assertEquals(held, settled.posted)
+		assertTrue(settled.held.isEmpty())
+	}
+
+	@Test
+	fun heldReminder_isOwedOnASettingsChangeWithNoOverdueAlarm() {
+		val plan = listOf(reminder(ekadashi, 1, 18, london))
+		val held = setOf(plan.single().key)
+		val now = at(london, 2026, 11, 3, 21, 0)
+		val due = LunarReminderPlanner.due(plan, now, null, LocalDateTime.of(2026, 11, 3, 20, 0), emptySet(), held)
+		assertEquals(held, due.handled)
+		// Without anything held, a settings change with no overdue alarm owes nothing.
+		assertTrue(LunarReminderPlanner.due(plan, now, null, LocalDateTime.of(2026, 11, 3, 12, 0), emptySet()).handled.isEmpty())
+	}
+
+	@Test
+	fun heldReminder_isDroppedWhenTheFastOutlastsItsObservance() {
+		val plan = listOf(reminder(ekadashi, 1, 18, london))
+		val held = setOf(plan.single().key)
+		val now = at(london, 2026, 11, 5, 7, 0)
+		val due = LunarReminderPlanner.due(plan, now, now, LocalDateTime.of(2026, 11, 5, 6, 0), emptySet(), held)
+		val settled = LunarReminderPlanner.settle(due, hold = false, posted = emptySet(), held = held, today = now.toLocalDate())
+		assertTrue(settled.toPost.isEmpty())
+		assertTrue(settled.held.isEmpty())
+	}
+
+	@Test
+	fun heldReminder_movedLaterBySettings_isNotPostedEarly() {
+		// Held for 18:00, then the hour moved to 21:00; the fast ends at 19:00. The reminder
+		// is not due yet: it leaves the held set and fires at 21:00 on its own.
+		val plan = listOf(reminder(ekadashi, 1, 21, london))
+		val held = setOf(plan.single().key)
+		val now = at(london, 2026, 11, 3, 19, 0)
+		val due = LunarReminderPlanner.due(plan, now, now, LocalDateTime.of(2026, 11, 3, 18, 30), emptySet(), held)
+		val settled = LunarReminderPlanner.settle(due, hold = false, posted = emptySet(), held = held, today = now.toLocalDate())
+		assertTrue(settled.toPost.isEmpty())
+		assertTrue(settled.held.isEmpty())
+		val at21 = at(london, 2026, 11, 3, 21, 0)
+		assertEquals(1, LunarReminderPlanner.due(plan, at21, at21, now.toLocalDateTime(), settled.posted, settled.held).toPost.size)
+	}
+
+	@Test
 	fun prune_keepsObservancesFromYesterdayOn() {
 		val old = reminder(ekadashi.minusDays(2), 1, 18, london).key
 		val yesterday = reminder(ekadashi.minusDays(1), 1, 18, london).key

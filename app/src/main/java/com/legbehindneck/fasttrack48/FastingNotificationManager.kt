@@ -17,7 +17,6 @@ import com.legbehindneck.fasttrack48.data.Stages
 import com.legbehindneck.fasttrack48.data.descriptionFor
 import com.legbehindneck.fasttrack48.screens.main.MainActivity
 import com.legbehindneck.fasttrack48.screens.settings.withAppLanguage
-import com.legbehindneck.fasttrack48.utils.formatDuration
 import com.legbehindneck.fasttrack48.utils.getColorFor
 import io.github.aakira.napier.Napier
 import kotlin.time.Duration
@@ -47,40 +46,21 @@ object FastingNotificationManager {
 		post(withAppLanguage(context), elapsedTime)
 	}
 
-	/** [context] carries the app's language, so every text below is in it. */
+	/**
+	 * [context] carries the app's language, so every text below is in it.
+	 *
+	 * The time is a chronometer counting from the fast's start, so the shade always agrees with
+	 * the dial; an hourly refresh would lag it by up to an hour and a half. The text is the same
+	 * stage readout the screen shows under the dial ([Stages.stage]), refreshed hourly.
+	 */
 	private fun post(context: Context, elapsedTime: Duration) {
 		createNotificationChannel(context)
 
 		val elapsedHours = elapsedTime.inWholeHours
-		val currentPhase = Stages.getCurrentPhase(elapsedTime)
-
-		// Get current stage
-		var stageIndex = Stages.stage.indexOfLast { it.hours <= elapsedHours }
-		if (stageIndex < 0) {
-			stageIndex = 0
-		}
-		val stage = Stages.stage[stageIndex]
-
-		// The notification refreshes hourly, so keep the duration hour-granular
-		val timeText = formatDuration(context, elapsedTime, withMinutes = false)
-
-		// Get energy mode
-		val energyMode = if (currentPhase.fatBurning) {
-			context.getString(R.string.fasting_energy_mode_fat)
-		} else {
-			context.getString(R.string.fasting_energy_mode_glucose)
-		}
-
-		// Build notification content
-		val title = context.getString(R.string.notification_fasting_title_duration, timeText)
-		val contentText = context.getString(stage.title)
-		val expandedText = buildString {
-			append(context.getString(stage.title))
-			append("\n")
-			append(context.getString(R.string.notification_fasting_energy_mode, energyMode))
-			append("\n")
-			append(context.getString(descriptionFor(stage, elapsedHours)))
-		}
+		val startedAt = System.currentTimeMillis() - elapsedTime.inWholeMilliseconds
+		val stage = Stages.stage[Stages.stage.indexOfLast { it.hours <= elapsedHours }.coerceAtLeast(0)]
+		val title = context.getString(stage.title)
+		val description = context.getString(descriptionFor(stage, elapsedHours))
 
 		val intent = Intent(context, MainActivity::class.java).apply {
 			flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -129,7 +109,10 @@ object FastingNotificationManager {
 			Notification.Builder(context, FASTING_CHANNEL_ID)
 				.setSmallIcon(R.drawable.ic_alert)
 				.setContentTitle(title)
-				.setContentText(contentText)
+				.setContentText(description)
+				.setWhen(startedAt)
+				.setShowWhen(true)
+				.setUsesChronometer(true)
 				.setStyle(progressStyle)
 				.setOngoing(true)
 				.setContentIntent(pendingIntent)
@@ -140,10 +123,13 @@ object FastingNotificationManager {
 			NotificationCompat.Builder(context, FASTING_CHANNEL_ID)
 				.setSmallIcon(R.drawable.ic_alert)
 				.setContentTitle(title)
-				.setContentText(contentText)
+				.setContentText(description)
+				.setWhen(startedAt)
+				.setShowWhen(true)
+				.setUsesChronometer(true)
 				.setStyle(
 					NotificationCompat.BigTextStyle()
-						.bigText(expandedText)
+						.bigText(description)
 						.setBigContentTitle(title)
 				)
 				.setOngoing(true)

@@ -42,29 +42,12 @@
     <string name="export_failed">Failed to export fasting history</string>
 
 	<string name="intro_00_title">Welcome to FastTrack48!</string>
-	<string name="intro_00_description">What is this app all about?</string>
-
-	<string name="intro_01_title">Motivational help</string>
 	<string name="intro_01_description">The idea behind FastTrack48 is to motivate you during your fasts and
 		explain to you what your body is doing at the different stages of fasting.
 	</string>
 
-	<string name="intro_02_title">A simple free app</string>
-	<string name="intro_02_description">FastTrack48 is and will always be free and open source. There is no account to
-		create, no in-app purchases, no ads, no telemetry and no tracking. The app has no internet access, and works fully offline.
-	</string>
-
 	<string name="intro_03_title">Intermittent fasting</string>
 	<string name="intro_03_description">A young field of research. Some findings are well established; many are still early.\n\nTo see what is known, and how strong the evidence is, open the Library from the menu.</string>
-
-	<string name="intro_04_title">Stay motivated with notifications</string>
-	<string name="intro_04_description">FastTrack48 can show notifications to keep you motivated during a
-		fast.\n\nYou’ll see what phase you’re in, and the energy mode your body is
-		using.
-	</string>
-
-	<string name="intro_05_title">That’s it!</string>
-	<string name="intro_05_description">Welcome to the world of fasting!</string>
 
 	<string name="about_name" translatable="false">FastTrack48</string>
 	<string name="about_subtitle" translatable="false">Your DNA Re-Pair is in your hands!</string>
@@ -228,7 +211,6 @@
 	<string name="notification_fasting_channel_description">Ongoing notification showing your current fasting status and
 		progress.
 	</string>
-	<string name="notification_fasting_energy_mode">Energy mode: %1$s</string>
 
 
 
@@ -337,7 +319,6 @@
 	<string name="settings_phase_autophagy_subtitle">Display the autophagy countdown on the fasting screen</string>
 	<string name="share_text_fasting">I’ve been fasting for %1$s! My body is currently consuming %2$s for energy.</string>
 	<string name="share_text_finished">I fasted for %1$s!</string>
-	<string name="notification_fasting_title_duration">Fasting: %1$s</string>
 	<string name="sheet_start_now">Start now</string>
 	<string name="sheet_start_earlier">I started earlier…</string>
 	<string name="sheet_end_now">End now</string>
@@ -379,7 +360,7 @@
 	<string name="lunar_tradition_vaishnava">Vaishnava (ISKCON)</string>
 	<string name="lunar_tradition_vaishnava_detail">ISKCON and other Vaishnava calendars. A few fasts fall one day later.</string>
 	<string name="lunar_remind_me">Remind me</string>
-	<string name="lunar_lead_same_day">On the day</string>
+	<string name="lunar_lead_same_day">That morning</string>
 	<string name="lunar_lead_1_day">1 day before</string>
 	<string name="lunar_lead_2_days">2 days before</string>
 	<string name="lunar_lead_3_days">3 days before</string>
@@ -488,4 +469,13 @@
 	<string name="lunar_mahadvadashi_trisparsha" translatable="false">Trisparsha Mahadvadashi</string>
 	<string name="lunar_mahadvadashi_pakshavardhini" translatable="false">Pakshavardhini Mahadvadashi</string>
 	<!-- /Ekadashi and Purnima reminders -->
+
+	<!-- "Still fasting?": asked once when a fast runs well past the usual ones. It asks; it never ends the fast. -->
+	<string name="check_in_title">Still fasting?</string>
+	<string name="check_in_body">This fast has been running for %1$s. If it ended earlier, end it and set the time you stopped.</string>
+	<string name="check_in_still_fasting">Still fasting</string>
+	<string name="settings_confetti_every_fast_title">Confetti after every fast</string>
+	<string name="settings_confetti_every_fast_subtitle">Celebrate every fast of 12 hours or more, not only the first time you reach a stage</string>
+	<string name="profile_safety_caption">Used to tailor safety notes.</string>
+	<string name="lunar_reminders_wait_note">Reminders wait while you fast, and for a while after.</string>
 </resources>

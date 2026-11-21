@@ -97,6 +97,7 @@ private fun SettingsList(
 	onImportClick: () -> Unit
 ) {
 	var fancyBackground by remember { mutableStateOf(settings.getShowFancyBackground()) }
+	var confettiEveryFast by remember { mutableStateOf(settings.getConfettiEveryFast()) }
 	var dateStyle by remember { mutableStateOf(settings.getDateStyle()) }
 	var phaseAutoMode by remember { mutableStateOf(settings.getPhaseAutoMode()) }
 	var showFatBurn by remember { mutableStateOf(settings.getShowFatBurn()) }
@@ -158,6 +159,17 @@ private fun SettingsList(
 					onChange = { checked ->
 						fancyBackground = checked
 						settings.setShowFancyBackground(checked)
+					}
+				)
+			}
+			item(key = "confetti_every_fast") {
+				SettingsItem(
+					headline = R.string.settings_confetti_every_fast_title,
+					details = R.string.settings_confetti_every_fast_subtitle,
+					value = confettiEveryFast,
+					onChange = { checked ->
+						confettiEveryFast = checked
+						settings.setConfettiEveryFast(checked)
 					}
 				)
 			}
