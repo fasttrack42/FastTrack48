@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 3x2. Fasting: status, phase bar, hours, phase, energy mode and a Stop button. Idle: "Not
+     fasting" and a Start button. Texts set at runtime. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@android:id/background"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/widget_background"
+		android:padding="16dp">
+
+	<LinearLayout
+			android:id="@+id/widget_fasting"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_horizontal"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+		<TextView
+				android:id="@+id/widget_in_progress"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:fontFamily="sans-serif-medium"
+				android:maxLines="1"
+				android:textColor="@color/widget_primary"
+				android:textSize="12sp"/>
+
+		<ImageView
+				android:id="@+id/widget_phase"
+				android:layout_width="64dp"
+				android:layout_height="8dp"
+				android:layout_marginBottom="12dp"
+				android:importantForAccessibility="no"
+				android:scaleType="fitXY"
+				android:src="@drawable/widget_bar"/>
+
+		<TextView
+				android:id="@+id/widget_hours"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="4dp"
+				android:maxLines="1"
+				android:textColor="@color/widget_on_background"
+				android:textSize="36sp"
+				android:textStyle="bold"/>
+
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+			<ImageView
+					android:id="@+id/widget_phase_dot"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:layout_marginEnd="8dp"
+					android:importantForAccessibility="no"
+					android:src="@drawable/widget_dot"/>
+
+			<TextView
+					android:id="@+id/widget_phase_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:maxLines="1"
+					android:textColor="@color/widget_secondary"
+					android:textSize="16sp"
+					android:textStyle="bold"/>
+		</LinearLayout>
+
+		<TextView
+				android:id="@+id/widget_energy"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/widget_badge"
+				android:maxLines="1"
+				android:paddingHorizontal="12dp"
+				android:paddingVertical="6dp"
+				android:textColor="@color/widget_on_surface"
+				android:textSize="12sp"/>
+
+		<!-- FrameLayout, not View: RemoteViews inflates only an allow-list of classes. -->
+		<FrameLayout
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:layout_weight="1"/>
+
+		<TextView
+				android:id="@+id/widget_stop"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/widget_button"
+				android:fontFamily="sans-serif-medium"
+				android:gravity="center"
+				android:maxLines="1"
+				android:padding="10dp"
+				android:textColor="@color/widget_on_primary"
+				android:textSize="14sp"/>
+	</LinearLayout>
+
+	<LinearLayout
+			android:id="@+id/widget_idle"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical">
+
+		<TextView
+				android:id="@+id/widget_not_fasting"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				android:fontFamily="sans-serif-medium"
+				android:maxLines="1"
+				android:textColor="@color/widget_on_background"
+				android:textSize="18sp"/>
+
+		<TextView
+				android:id="@+id/widget_start"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/widget_button"
+				android:fontFamily="sans-serif-medium"
+				android:gravity="center"
+				android:maxLines="1"
+				android:padding="10dp"
+				android:textColor="@color/widget_on_primary"
+				android:textSize="14sp"/>
+	</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 2x1. Fasting: the phase bar, then the hours over the phase. Idle: "Not fasting" over a start
+     line. Texts set at runtime. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@android:id/background"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/widget_background"
+		android:padding="12dp">
+
+	<LinearLayout
+			android:id="@+id/widget_fasting"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:visibility="gone">
+
+		<ImageView
+				android:id="@+id/widget_phase"
+				android:layout_width="8dp"
+				android:layout_height="32dp"
+				android:importantForAccessibility="no"
+				android:src="@drawable/widget_bar"/>
+
+		<!-- FrameLayout, not View: RemoteViews inflates only an allow-list of classes. -->
+		<FrameLayout
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:layout_weight="1"/>
+
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+			<TextView
+					android:id="@+id/widget_hours"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:maxLines="1"
+					android:textColor="@color/widget_on_background"
+					android:textSize="24sp"
+					android:textStyle="bold"/>
+
+			<TextView
+					android:id="@+id/widget_phase_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-medium"
+					android:maxLines="1"
+					android:textColor="@color/widget_secondary"
+					android:textSize="12sp"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+			android:id="@+id/widget_idle"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical">
+
+		<TextView
+				android:id="@+id/widget_not_fasting"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:maxLines="1"
+				android:textColor="@color/widget_on_background"
+				android:textSize="18sp"
+				android:textStyle="bold"/>
+
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:importantForAccessibility="no"
+					android:text="▶️"
+					android:textColor="@color/widget_on_background"
+					android:textSize="20sp"
+					tools:ignore="HardcodedText"/>
+
+			<TextView
+					android:id="@+id/widget_start_label"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="8dp"
+					android:fontFamily="sans-serif-medium"
+					android:maxLines="1"
+					android:textColor="@color/widget_on_background"
+					android:textSize="14sp"/>
+		</LinearLayout>
+	</LinearLayout>
+</FrameLayout>

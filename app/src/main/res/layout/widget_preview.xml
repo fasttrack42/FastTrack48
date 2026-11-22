@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget picker's preview (android:previewLayout, Android 12+): a fast in its fat-burning
+     phase, drawn by the launcher from this file alone, with no code and no rate limit. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/widget_background"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:padding="12dp">
+
+	<!-- The fat-burning colour (gaugeColors). The launcher inflates this without AppCompat, so
+	     app:tint would be ignored; android:tint is the one that applies. -->
+	<ImageView
+			android:layout_width="8dp"
+			android:layout_height="32dp"
+			android:importantForAccessibility="no"
+			android:src="@drawable/widget_bar"
+			android:tint="#00FF00"
+			tools:ignore="UseAppTint"/>
+
+	<FrameLayout
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_weight="1"/>
+
+	<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:maxLines="1"
+				android:text="16h"
+				android:textColor="@color/widget_on_background"
+				android:textSize="24sp"
+				android:textStyle="bold"
+				tools:ignore="HardcodedText"/>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="sans-serif-medium"
+				android:maxLines="1"
+				android:text="@string/phase_fat_burning"
+				android:textColor="@color/widget_secondary"
+				android:textSize="12sp"/>
+	</LinearLayout>
+</LinearLayout>
