@@ -1,0 +1,2 @@
+- prevent next fasting notification text appearing twice in the main screen
+- improve ergonomics and remove deprecated dependencies
