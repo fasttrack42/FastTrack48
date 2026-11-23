@@ -4,20 +4,21 @@ import android.content.Context
 import android.os.LocaleList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cafe.adriel.satchel.Satchel
-import cafe.adriel.satchel.ktx.getOrSet
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.Data
 import com.legbehindneck.fasttrack48.data.Gender
 import com.legbehindneck.fasttrack48.data.Profile
+import com.legbehindneck.fasttrack48.data.ProfileStore
 import com.legbehindneck.fasttrack48.data.settings.SettingsDatasource
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.NumberFormat
 import java.text.ParsePosition
 import java.util.*
@@ -50,7 +51,7 @@ class ProfileViewModel(
         started = true
         viewModelScope.launch {
             settings.useMetricSystemFlow(default = isMetricSystemLocale()).collectLatest { isMetric ->
-                val profile = Satchel.storage.getOrSet(Data.KEY_PROFILE, Profile())
+                val profile = withContext(Dispatchers.IO) { ProfileStore.load(appContext) }
                 populateUiState(profile, isMetric)
             }
         }
@@ -196,9 +197,7 @@ class ProfileViewModel(
     private fun saveProfile() {
         val profile = createProfileFromUiState()
         if (profile != null) {
-            Satchel.storage.apply {
-                set(Data.KEY_PROFILE, profile)
-            }
+            ProfileStore.save(appContext, profile)
             // Refresh only what is derived. Re-formatting the fields from the saved profile
             // would rewrite the text under the user's cursor on every valid keystroke — "72."
             // parses to 72 and comes back as "72.0", so a decimal could never be typed.

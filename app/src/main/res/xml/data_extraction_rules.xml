@@ -4,7 +4,8 @@
 	<cloud-backup>
 		<include domain="sharedpref" path="."/>
 		<include domain="database" path="."/>
-		<!-- The body profile (Satchel, Data.STORAGE_PATH). -->
+		<!-- The body profile is in sharedpref (profile.xml). This is the file older versions kept it
+		     in (Satchel, Data.STORAGE_PATH): restored from their backups, ProfileStore migrates it. -->
 		<include domain="file" path="storage"/>
 		<!-- Device-bound: the location the user shared for sunrise times never leaves the phone. -->
 		<exclude domain="sharedpref" path="lunar_device.xml"/>

@@ -2,10 +2,7 @@ package com.legbehindneck.fasttrack48.screens.fasting
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.CubicBezierEasing
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -45,6 +42,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import com.legbehindneck.fasttrack48.data.FastingJourney
 import com.legbehindneck.fasttrack48.data.JourneyStage
 import com.legbehindneck.fasttrack48.ui.theme.LocalDarkTheme
+import com.legbehindneck.fasttrack48.utils.rememberBoundedBreath
 import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -183,25 +181,11 @@ fun TimeLine(
 		)
 	}
 
-	// Slow breathing pulse for the comet head — only while a fast is running.
-	// When idle nobody drives the animation, so the Canvas stops invalidating
-	// every frame (no wasted battery on a screen that isn't visibly moving).
+	// Slow breathing pulse for the comet head: only while a fast is running, and only for a
+	// few breaths each time the screen comes into view or the stage changes. Read in the
+	// Canvas below and nowhere else, so a breath redraws the ring without recomposing the dial.
 	val pulsing = elapsedHours > 0
-	val breathAnim = remember { Animatable(0f) }
-	LaunchedEffect(pulsing) {
-		if (pulsing) {
-			breathAnim.animateTo(
-				targetValue = 1f,
-				animationSpec = infiniteRepeatable(
-					animation = tween(durationMillis = 2600, easing = FastOutSlowInEasing),
-					repeatMode = RepeatMode.Reverse
-				)
-			)
-		} else {
-			breathAnim.snapTo(0f)
-		}
-	}
-	val breath = breathAnim.value
+	val breathAnim = rememberBoundedBreath(active = pulsing, halfBreathMillis = 2600, key = curIndex)
 
 	// The current stage's two boundaries and their hours: its start (not for the first stage,
 	// whose start is the fast's own) and its end (none for the open last stage).
@@ -218,8 +202,8 @@ fun TimeLine(
 	val labelStyle = MaterialTheme.typography.labelMedium
 
 	// The sweep gradient's color stops depend only on the palette and geometry,
-	// not on time — remember them so a fasting redraw doesn't rebuild the array
-	// (and Brush) on every animation frame.
+	// not on time — remember them, and the Brush built from them, so a breathing
+	// redraw neither rebuilds the array nor allocates a new Brush and shader.
 	val stageStops = remember(ringColors, segmentSweep) {
 		Array(stages.size + 2) { i ->
 			when (i) {
@@ -229,6 +213,7 @@ fun TimeLine(
 			}
 		}
 	}
+	val brushCache = remember(stageStops) { SweepBrushCache(stageStops) }
 
 	Box(
 		modifier = modifier.aspectRatio(1f),
@@ -266,6 +251,7 @@ fun TimeLine(
 					}
 				}
 		) {
+			val breath = breathAnim.value
 			val minDim = min(size.width, size.height)
 			val stroke = minDim * STROKE_FRACTION
 			val radius = minDim / 2f - stroke * RING_INSET
@@ -277,7 +263,7 @@ fun TimeLine(
 
 			// One continuous gradient flowing through the stage colors,
 			// anchored at each stage segment's midpoint.
-			val phaseBrush = Brush.sweepGradient(colorStops = stageStops, center = center)
+			val phaseBrush = brushCache.at(center)
 
 			// Rotate so relative angle 0 is the arc start; the sweep gradient
 			// rotates with the geometry, keeping its stops aligned to stages.
@@ -424,6 +410,24 @@ fun TimeLine(
 			contentAlignment = Alignment.Center
 		) {
 			content()
+		}
+	}
+}
+
+/**
+ * The ring's sweep gradient for one palette, rebuilt only when its centre moves (a resize),
+ * not on every frame. The same Brush instance also lets Compose keep its shader.
+ */
+private class SweepBrushCache(private val stops: Array<Pair<Float, Color>>) {
+	private var center = Offset.Unspecified
+	private var brush: Brush? = null
+
+	fun at(center: Offset): Brush {
+		val cached = brush
+		if (cached != null && center == this.center) return cached
+		return Brush.sweepGradient(colorStops = stops, center = center).also {
+			this.center = center
+			brush = it
 		}
 	}
 }

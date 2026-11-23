@@ -70,10 +70,10 @@ object LunarReminderScheduler {
 	)
 
 	/**
-	 * Process start: catch up and re-arm, then again whenever a fast starts or ends, by
-	 * whichever writer (the dial, a widget, a restored export). An end is passed on as such, so
-	 * the quiet after it is counted from the moment the app saw it. Call once, from
-	 * [android.app.Application.onCreate].
+	 * Process start: catch up and re-arm if anything is owed ([needsCatchUp]), then run again
+	 * whenever a fast starts or ends, by whichever writer (the dial, a widget, a restored
+	 * export). An end is passed on as such, so the quiet after it is counted from the moment the
+	 * app saw it. Call once, from [android.app.Application.onCreate].
 	 */
 	fun start(context: Context) {
 		val app = context.applicationContext
@@ -83,11 +83,35 @@ object LunarReminderScheduler {
 				.map { it.isRunning }
 				.distinctUntilChanged()
 				.collect { running ->
+					val first = wasRunning == null
 					val ended = wasRunning == true && !running
 					wasRunning = running
-					refresh(app, fastEnded = ended)
+					if (!first || needsCatchUp(app)) refresh(app, fastEnded = ended)
 				}
 		}
+	}
+
+	/**
+	 * Whether this process start owes a run. Each run plans weeks of fast days from scratch,
+	 * and an alarm or a job can start the process many times a day. None is owed while every
+	 * reminder is off: turning one on runs a settings change, which owes nothing from before
+	 * it. Otherwise a run is owed only when no alarm is armed (never yet, or a force-stop
+	 * cleared it, which also cancels the alarm's PendingIntent) or the armed one is overdue
+	 * (Doze held it back). Boot, update and clock or time-zone changes arrive as broadcasts of
+	 * their own. A run with a stale floor is safe: [LunarReminderPlanner.due] owes nothing for a
+	 * day already past.
+	 */
+	private fun needsCatchUp(context: Context): Boolean {
+		if (!LunarSettingsStore.load(context).anyActive) return false
+		val armed = LunarSettingsStore.schedulerState(context, ZoneId.systemDefault()).armedAtMillis ?: return true
+		if (armed <= System.currentTimeMillis()) return true
+		val existing = PendingIntent.getBroadcast(
+			context,
+			0,
+			Intent(context, LunarReminderReceiver::class.java).setAction(ACTION_FIRE),
+			PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_NO_CREATE,
+		)
+		return existing == null
 	}
 
 	/**

@@ -23,6 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -110,7 +112,10 @@ class FastingViewModel(
 		// The logbook, from Room's own invalidation. A delete, an edit, a manual add or a
 		// cleared logbook reaches the band under the dial without this screen being asked.
 		viewModelScope.launch {
-			logRepository.loadAll().collect { entries -> renderLatestLogged(entries) }
+			logRepository.loadAll()
+				.map(::summarizeLog)
+				.flowOn(Dispatchers.Default)
+				.collect { summary -> renderLatestLogged(summary) }
 		}
 	}
 
@@ -138,29 +143,14 @@ class FastingViewModel(
 		}
 	}
 
-	/**
-	 * Newest logbook entry: one scan, two facts. Its end warns when a corrected start would
-	 * reach back into an already-recorded window, and the entry itself is what the idle band
-	 * reports under the dial. Newest by *end*, not by start, which is what makes it the fast
-	 * the reader just finished.
-	 */
-	private fun renderLatestLogged(entries: List<FastingLogEntry>) {
-		val tz = TimeZone.currentSystemDefault()
-		val latest = entries.maxByOrNull { it.start.toInstant(tz).plus(it.length) }
-		val end = latest?.let { it.start.toInstant(tz).plus(it.length) }
+	/** Applies a [LogSummary] (computed off the main thread) to the screen and the check-in. */
+	private fun renderLatestLogged(summary: LogSummary) {
 		_uiState.update { state ->
-			state.copy(previousLoggedFastEnd = end, lastLoggedFast = latest)
+			state.copy(previousLoggedFastEnd = summary.latestEnd, lastLoggedFast = summary.latest)
 		}
-
-		longestLogged = entries.maxOfOrNull { it.length }
+		longestLogged = summary.longest
 		logLoaded = true
-		// Ends computed once, not per comparison: this runs on the main thread, on every
-		// logbook change, over logbooks of years.
-		val recent = entries.map { it.start.toInstant(tz).plus(it.length) to it.length }
-			.sortedByDescending { it.first }
-			.take(CHECK_IN_RECENT)
-			.map { it.second }
-		checkInAfter = FastCheckIn.askAfter(recent)
+		checkInAfter = FastCheckIn.askAfter(summary.recent)
 		syncCheckIn()
 	}
 
@@ -364,11 +354,11 @@ class FastingViewModel(
 		if (repository.isFasting() && shouldShowNotification) {
 			val elapsedTime = repository.getElapsedFastTime()
 			FastingNotificationManager.postFastingNotification(appContext, elapsedTime)
-			AlertService.scheduleHourlyUpdate(appContext)
 		} else {
 			FastingNotificationManager.cancelFastingNotification(appContext)
-			AlertService.cancelHourlyUpdates(appContext)
 		}
+		// The hourly tick serves the notification and the widget alike, aligned to the fast's hour.
+		AlertService.syncHourlyTick(appContext)
 	}
 
 	override fun debugIncreaseFastingTimeByOneHour() {
@@ -393,8 +383,33 @@ class FastingViewModel(
 	private companion object {
 		/** Shorter than this, a start and end was a slip, not a fast. */
 		val MIN_LOGGED: Duration = 1.minutes
-
-		/** How many recent fasts set the "Still fasting?" threshold. */
-		const val CHECK_IN_RECENT = 10
 	}
+}
+
+/** How many recent fasts set the "Still fasting?" threshold. */
+private const val CHECK_IN_RECENT = 10
+
+/**
+ * What the Fasting screen needs from the logbook. The newest entry, newest by *end* (which is
+ * what makes it the fast the reader just finished): its end warns when a corrected start would
+ * reach back into an already-recorded window, and the entry is what the idle band reports.
+ * The longest and the [recent] lengths set confetti and the "Still fasting?" threshold.
+ */
+private data class LogSummary(
+	val latest: FastingLogEntry?,
+	val latestEnd: Instant?,
+	val longest: Duration?,
+	val recent: List<Duration>,
+)
+
+/** Pure, so it runs off the main thread: logbooks run to years of entries. Each end computed once. */
+private fun summarizeLog(entries: List<FastingLogEntry>): LogSummary {
+	val tz = TimeZone.currentSystemDefault()
+	val byEnd = entries.map { it to it.start.toInstant(tz).plus(it.length) }.sortedByDescending { it.second }
+	return LogSummary(
+		latest = byEnd.firstOrNull()?.first,
+		latestEnd = byEnd.firstOrNull()?.second,
+		longest = entries.maxOfOrNull { it.length },
+		recent = byEnd.take(CHECK_IN_RECENT).map { it.first.length },
+	)
 }

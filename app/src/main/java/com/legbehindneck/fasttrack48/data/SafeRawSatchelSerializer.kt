@@ -1,15 +1,16 @@
 package com.legbehindneck.fasttrack48.data
 
-import cafe.adriel.satchel.ktx.serialize
-import cafe.adriel.satchel.serializer.SatchelSerializer
 import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import java.io.ObjectStreamClass
 
 /**
- * Satchel's Java serialization, made to survive minification. Unreadable data reads as empty
- * rather than crashing the app.
+ * Reads the file the Satchel library used to keep the profile in (a Java-serialized map), for
+ * [ProfileStore]'s one-time migration; the library itself is gone. Made to survive
+ * minification. Unreadable data reads as empty rather than crashing the app.
  *
  * Releases before the keep rules (proguard-rules.pro) let R8 rename [Profile] and [Gender] and
  * drop [Profile]'s serialVersionUID, so each wrote them under names of its own: n8.j with
@@ -18,12 +19,13 @@ import java.io.ObjectStreamClass
  * recognised by shape instead: the only app classes stored are the profile (an int, two
  * doubles and an enum) and its enum (no fields, serialVersionUID 0, as every enum).
  */
-object SafeRawSatchelSerializer : SatchelSerializer {
+object SafeRawSatchelSerializer {
 
-	override suspend fun serialize(data: Map<String, Any>): ByteArray =
-		data.serialize()
+	/** Writes [data] the way Satchel's file held it; the tests build legacy files with it. */
+	fun serialize(data: Map<String, Any>): ByteArray =
+		ByteArrayOutputStream().also { out -> ObjectOutputStream(out).use { it.writeObject(HashMap(data)) } }.toByteArray()
 
-	override fun deserialize(data: ByteArray): Map<String, Any> {
+	fun deserialize(data: ByteArray): Map<String, Any> {
 		if (data.isEmpty()) return emptyMap()
 		return try {
 			LegacyTolerantStream(ByteArrayInputStream(data)).use {

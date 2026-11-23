@@ -14,6 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
@@ -41,8 +43,12 @@ class LogViewModel(
 	 * another copy of the collector on top of the one already running.
 	 */
 	init {
+		// Sorted and summed off the main thread: logbooks run to years of entries.
 		viewModelScope.launch {
-			repository.loadAll().collect { entries -> updateEntries(entries) }
+			repository.loadAll()
+				.map(::summarizeEntries)
+				.flowOn(Dispatchers.Default)
+				.collect { summary -> updateEntries(summary) }
 		}
 		// The running fast, which no logbook row describes yet.
 		viewModelScope.launch {
@@ -53,20 +59,15 @@ class LogViewModel(
 		}
 	}
 
-	private fun updateEntries(entries: List<FastingLogEntry>) {
-		val totalKetosisHours = entries.sumOf { ketosisHours(it.length) }.roundToInt()
-		val totalAutophagyHours = entries.sumOf { autophagyHours(it.length) }.roundToInt()
-		val totalFastedDuration = entries.fold(Duration.ZERO) { acc, e -> acc + e.length }
-		val longestFastDuration = entries.maxOfOrNull { it.length } ?: Duration.ZERO
-
+	private fun updateEntries(summary: LogEntriesSummary) {
 		_uiState.update { currentState ->
 			currentState.copy(
-				entries = entries.sortedByDescending { it.start },
-				totalKetosisHours = totalKetosisHours,
-				totalAutophagyHours = totalAutophagyHours,
-				totalFasts = entries.size,
-				totalFastedDuration = totalFastedDuration,
-				longestFastDuration = longestFastDuration,
+				entries = summary.entries,
+				totalKetosisHours = summary.totalKetosisHours,
+				totalAutophagyHours = summary.totalAutophagyHours,
+				totalFasts = summary.entries.size,
+				totalFastedDuration = summary.totalFastedDuration,
+				longestFastDuration = summary.longestFastDuration,
 			)
 		}
 	}
@@ -148,3 +149,21 @@ class LogViewModel(
 		}
 	}
 }
+
+/** The logbook as the Log screen shows it: newest first, with its totals. */
+private class LogEntriesSummary(
+	val entries: List<FastingLogEntry>,
+	val totalKetosisHours: Int,
+	val totalAutophagyHours: Int,
+	val totalFastedDuration: Duration,
+	val longestFastDuration: Duration,
+)
+
+/** Pure, so it runs off the main thread. */
+private fun summarizeEntries(entries: List<FastingLogEntry>) = LogEntriesSummary(
+	entries = entries.sortedByDescending { it.start },
+	totalKetosisHours = entries.sumOf { ketosisHours(it.length) }.roundToInt(),
+	totalAutophagyHours = entries.sumOf { autophagyHours(it.length) }.roundToInt(),
+	totalFastedDuration = entries.fold(Duration.ZERO) { acc, e -> acc + e.length },
+	longestFastDuration = entries.maxOfOrNull { it.length } ?: Duration.ZERO,
+)

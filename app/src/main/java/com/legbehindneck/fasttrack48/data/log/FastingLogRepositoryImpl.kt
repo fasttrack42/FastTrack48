@@ -9,9 +9,14 @@ import com.legbehindneck.fasttrack48.utils.formatDurationFull
 import com.legbehindneck.fasttrack48.utils.parseCsv
 import com.legbehindneck.fasttrack48.utils.readAtMost
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -57,9 +62,25 @@ class FastingLogRepositoryImpl(
 		.maxByOrNull { it.start + it.length }
 		?.toFastingLogEntry()
 
-	override fun loadAll(): Flow<List<FastingLogEntry>> = datasource.loadAll().map { entries ->
-		entries.map { it.toFastingLogEntry() }
-	}
+	/**
+	 * One query and one conversion per logbook change, however many screens watch: the Fasting
+	 * and Log screens both do, and each used to run its own. Converted off the main thread, with
+	 * the time zone read once per change rather than once per row. Shared while watched and for
+	 * 5 s after, so a screen rotation does not re-query; once stopped, no stale list is replayed.
+	 */
+	private val all: Flow<List<FastingLogEntry>> = datasource.loadAll()
+		.map { entries ->
+			val tz = TimeZone.currentSystemDefault()
+			entries.map { it.toFastingLogEntry(tz) }
+		}
+		.flowOn(Dispatchers.Default)
+		.shareIn(
+			scope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
+			started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000, replayExpirationMillis = 0),
+			replay = 1,
+		)
+
+	override fun loadAll(): Flow<List<FastingLogEntry>> = all
 
 	override fun delete(item: FastingLogEntry): Boolean = datasource.deleteByUid(item.id)
 
@@ -1004,9 +1025,9 @@ class FastingLogRepositoryImpl(
 		}
 	}
 
-	private fun FastEntry.toFastingLogEntry(): FastingLogEntry {
+	private fun FastEntry.toFastingLogEntry(tz: TimeZone = TimeZone.currentSystemDefault()): FastingLogEntry {
 		val instant = Instant.fromEpochMilliseconds(start)
-		val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+		val localDateTime = instant.toLocalDateTime(tz)
 		return FastingLogEntry(
 			id = uid,
 			start = localDateTime,

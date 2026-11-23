@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,6 +53,7 @@ import com.legbehindneck.fasttrack48.utils.MAX_COLUMN_WIDTH
 @Composable
 fun LibraryScreen(paddingValues: PaddingValues, onOpenSources: () -> Unit, modifier: Modifier = Modifier) {
 	val context = LocalContext.current
+	val resources = LocalResources.current
 	val ctx = rememberKnowledgeContext()
 	val profile = rememberKnowledgeProfile()
 	val labels = ctx.state.settings.evidenceLabels
@@ -59,7 +61,7 @@ fun LibraryScreen(paddingValues: PaddingValues, onOpenSources: () -> Unit, modif
 
 	val sections = remember(ctx) { KnowledgeSelector.library(ctx) }
 	val drinks = remember(ctx) { KnowledgeSelector.byIds(KnowledgeSelector.DrinkLookup, ctx) }
-	val results = remember(query, ctx) { KnowledgeSelector.search(query, ctx) { context.getString(it) } }
+	val results = remember(query, ctx) { KnowledgeSelector.search(query, ctx) { resources.getString(it) } }
 	val offerWomen = KnowledgeSelector.offerWomen(ctx, profile)
 
 	Box(modifier = modifier.fillMaxSize()) {

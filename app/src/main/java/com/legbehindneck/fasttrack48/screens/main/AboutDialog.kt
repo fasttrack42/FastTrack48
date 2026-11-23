@@ -13,11 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Code
-import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
@@ -45,6 +41,10 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.platform.LocalContext
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.screens.info.InfoActivity
+import com.legbehindneck.fasttrack48.ui.icons.Code
+import com.legbehindneck.fasttrack48.ui.icons.ExpandMore
+import com.legbehindneck.fasttrack48.ui.icons.Language
+import com.legbehindneck.fasttrack48.ui.icons.MenuBook
 import kotlinx.coroutines.flow.collectLatest
 
 private const val GITHUB_URL = "https://github.com/fasttrack42/FastTrack48/"

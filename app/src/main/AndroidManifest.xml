@@ -7,7 +7,7 @@
 	<!-- Optional, asked once from Settings: sunrise for Ekadashi, Purnima and Amavasya days. Approximate is enough. -->
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-	<!-- Injected by androidx.work for its NetworkType constraints, which this app never uses. -->
+	<!-- No library may bring it in: the app has no network use at all. (androidx.work used to.) -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove"/>
 
 	<application
@@ -154,16 +154,6 @@
 			<meta-data
 					android:name="android.support.FILE_PROVIDER_PATHS"
 					android:resource="@xml/file_paths"/>
-		</provider>
-		<provider
-				android:name="androidx.startup.InitializationProvider"
-				android:authorities="${applicationId}.androidx-startup"
-				android:exported="false"
-				tools:node="merge">
-			<meta-data
-					android:name="androidx.work.WorkManagerInitializer"
-					android:value="androidx.startup"
-					tools:node="remove"/>
 		</provider>
 	</application>
 

@@ -1,7 +1,5 @@
 package com.legbehindneck.fasttrack48.data
 
-import cafe.adriel.satchel.ktx.serialize
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -48,10 +46,12 @@ class SafeRawSatchelSerializerTest {
 
 	@Test
 	fun profileWrittenByAMinifiedRelease_isReadByShape() {
-		val bytes = mapOf(
-			Data.KEY_PROFILE to LegacyProfile(41, 172.5, 68.25, LegacySex.Female),
-			Data.KEY_INTRO_SEEN to true,
-		).serialize()
+		val bytes = SafeRawSatchelSerializer.serialize(
+			mapOf(
+				Data.KEY_PROFILE to LegacyProfile(41, 172.5, 68.25, LegacySex.Female),
+				Data.KEY_INTRO_SEEN to true,
+			),
+		)
 			.renameClass(LegacyProfile::class.java.name)
 			.renameClass(LegacySex::class.java.name)
 
@@ -64,7 +64,7 @@ class SafeRawSatchelSerializerTest {
 	@Test
 	fun currentProfile_roundTrips() {
 		val profile = Profile(35, 180.0, 77.0, Gender.Male)
-		val bytes = runBlocking { SafeRawSatchelSerializer.serialize(mapOf(Data.KEY_PROFILE to profile)) }
+		val bytes = SafeRawSatchelSerializer.serialize(mapOf(Data.KEY_PROFILE to profile))
 		assertEquals(profile, SafeRawSatchelSerializer.deserialize(bytes)[Data.KEY_PROFILE])
 	}
 
@@ -72,7 +72,7 @@ class SafeRawSatchelSerializerTest {
 	fun profileWithNoSexChosen_roundTrips() {
 		// New profiles start with no sex chosen; the null must store and read back as null.
 		val profile = Profile(35, 180.0, 77.0)
-		val bytes = runBlocking { SafeRawSatchelSerializer.serialize(mapOf(Data.KEY_PROFILE to profile)) }
+		val bytes = SafeRawSatchelSerializer.serialize(mapOf(Data.KEY_PROFILE to profile))
 		assertEquals(profile, SafeRawSatchelSerializer.deserialize(bytes)[Data.KEY_PROFILE])
 	}
 

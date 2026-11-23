@@ -17,7 +17,8 @@ dependencyResolutionManagement {
 	repositories {
 		google()
 		mavenCentral()
-		maven { url = uri("https://jitpack.io") }
+		// No JitPack: its only user, Satchel, is gone, and JitPack builds artifacts on demand from
+		// GitHub, which no one signs or reviews.
 	}
 }
 

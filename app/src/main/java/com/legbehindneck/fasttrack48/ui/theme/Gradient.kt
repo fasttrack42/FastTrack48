@@ -2,7 +2,6 @@ package com.legbehindneck.fasttrack48.ui.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
@@ -28,19 +27,10 @@ val DarkGradientEndColor = Color(0xFF1A1A1A)
  * - endColor: #8E8E8E
  * - angle: 90 degrees (bottom to top)
  */
-fun Modifier.fastBackgroundGradient(show: Boolean): Modifier = composed {
-	if (show) {
-		val isDarkTheme = LocalDarkTheme.current
+fun Modifier.fastBackgroundGradient(show: Boolean, isDarkTheme: Boolean): Modifier =
+	if (show) background(brush = if (isDarkTheme) DarkFastBrush else LightFastBrush) else this
 
-		val startColor = if (isDarkTheme) DarkGradientStartColor else LightGradientStartColor
-		val endColor = if (isDarkTheme) DarkGradientEndColor else LightGradientEndColor
-
-		val gradientBrush = Brush.verticalGradient(
-			colors = listOf(startColor, endColor)
-		)
-
-		this.background(brush = gradientBrush)
-	} else {
-		this
-	}
-}
+// Built once: a Brush is immutable, and a plain modifier over a shared one allocates nothing per
+// recomposition (the `composed` form it replaces built a new Brush and modifier every time).
+private val LightFastBrush = Brush.verticalGradient(colors = listOf(LightGradientStartColor, LightGradientEndColor))
+private val DarkFastBrush = Brush.verticalGradient(colors = listOf(DarkGradientStartColor, DarkGradientEndColor))

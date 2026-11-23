@@ -72,6 +72,17 @@ android {
 			enableSplit = false
 		}
 	}
+	// Ship only the languages the app speaks (res/xml/locales_config.xml). AndroidX and Material
+	// bring translations for ~88 locales; in any other language the app's own strings are English,
+	// so their translations only mixed languages on screen and added ~690 KB to resources.arsc,
+	// which is memory-mapped at runtime. The library's own regional variants of these languages
+	// are kept (zh-rTW and zh-rHK next to the app's b+zh+Hant, uk and pt next to uk-rUA, pt-rBR).
+	androidResources {
+		localeFilters += listOf(
+			"en", "de", "es", "fr", "it", "nl",
+			"pt", "pt-rBR", "uk", "uk-rUA", "zh-rCN", "zh-rTW", "zh-rHK", "b+zh+Hant",
+		)
+	}
 
 	compileOptions {
 		sourceCompatibility = JavaVersion.toVersion(libs.versions.javaVersion.get())
@@ -153,13 +164,12 @@ dependencies {
 	implementation(libs.koin.android)
 	implementation(libs.koin.androidx.compose)
 
-	implementation(libs.satchel.core)
-
 	implementation(libs.compose.ui)
 	implementation(libs.compose.ui.tooling.preview)
 	implementation(libs.compose.foundation)
 	implementation(libs.activity.compose)
-	implementation(libs.compose.material.icons.extended)
+	// Core icons only; the few extended ones the app uses are copied into ui/icons/ExtendedIcons.kt.
+	implementation(libs.compose.material.icons.core)
 	debugImplementation(libs.compose.ui.tooling)
 
 	// The calendar declares ui-tooling (Android Studio's preview runtime) as a runtime dependency,
@@ -168,21 +178,14 @@ dependencies {
 		exclude(group = "androidx.compose.ui", module = "ui-tooling")
 	}
 
-	// The WorkManager Configuration the app provides for Glance. It used to arrive only
-	// transitively; pinned to the version that resolved.
-	implementation(libs.androidx.work.runtime)
-	implementation(libs.glance)
-	implementation(libs.glance.appwidget)
-	debugImplementation(libs.glance.preview)
-	debugImplementation(libs.glance.appwidget.preview)
+	// The home-screen widget is plain RemoteViews (widget/), so no Glance, and with it no
+	// WorkManager and no DataStore: about 440 KB of code and a database per process gone.
 
-	// Removed direct dependencies had raised these transitive libraries (Glance's DataStore,
-	// AppCompat's DrawerLayout) above what their own dependents ask for. The constraints hold them
-	// at the versions already shipped: DataStore holds the widget's state on disk, and nothing
-	// gains from moving the rest backwards.
+	// Removed direct dependencies had raised these transitive libraries (AppCompat's
+	// DrawerLayout and CustomView) above what their own dependents ask for. The constraints hold
+	// them at the versions already shipped; nothing gains from moving them backwards.
 	constraints {
 		implementation(libs.pin.customview)
-		implementation(libs.pin.datastore.preferences)
 		implementation(libs.pin.drawerlayout)
 	}
 

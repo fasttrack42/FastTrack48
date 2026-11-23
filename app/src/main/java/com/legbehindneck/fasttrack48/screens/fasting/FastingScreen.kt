@@ -113,6 +113,7 @@ import com.legbehindneck.fasttrack48.screens.confetti.confettiEffect
 import com.legbehindneck.fasttrack48.screens.fastdays.FastDayData
 import com.legbehindneck.fasttrack48.screens.fastdays.FastDayEntry
 import com.legbehindneck.fasttrack48.ui.theme.Black900
+import com.legbehindneck.fasttrack48.ui.theme.LocalDarkTheme
 import com.legbehindneck.fasttrack48.ui.theme.White50
 import com.legbehindneck.fasttrack48.ui.theme.fastBackgroundGradient
 import com.legbehindneck.fasttrack48.utils.AppDateTime
@@ -462,7 +463,7 @@ fun FastingScreen(
 	BoxWithConstraints(
 		modifier = Modifier
 			.fillMaxSize()
-			.fastBackgroundGradient(show = uiState.showGradientBackground)
+			.fastBackgroundGradient(show = uiState.showGradientBackground, isDarkTheme = LocalDarkTheme.current)
 			.confettiEffect(confetti)
 			.padding(contentPaddingValues)
 	) {

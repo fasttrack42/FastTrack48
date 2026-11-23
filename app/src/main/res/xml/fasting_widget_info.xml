@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- updatePeriodMillis is 0: nothing wakes the app on a timer for the widget. It is redrawn when
+     a fast starts or ends, on the hourly tick while one runs, and when the launcher asks. -->
 <appwidget-provider
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:description="@string/app_widget_description"
+		android:initialLayout="@layout/widget_medium"
+		android:previewLayout="@layout/widget_preview"
 		android:resizeMode="horizontal|vertical"
 		android:minWidth="60dp"
 		android:targetCellWidth="2"
 		android:targetCellHeight="1"
-		android:updatePeriodMillis="1800000"
+		android:updatePeriodMillis="0"
 		android:widgetCategory="home_screen"/>

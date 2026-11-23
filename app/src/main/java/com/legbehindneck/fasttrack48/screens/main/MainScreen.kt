@@ -17,9 +17,6 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeleteSweep
-import androidx.compose.material.icons.filled.FileDownload
-import androidx.compose.material.icons.filled.FileUpload
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Check
@@ -73,6 +70,9 @@ import com.legbehindneck.fasttrack48.screens.log.LogScreen
 import com.legbehindneck.fasttrack48.screens.log.LogViewModel
 import com.legbehindneck.fasttrack48.screens.profile.InfoDialog
 import com.legbehindneck.fasttrack48.screens.profile.ProfileScreen
+import com.legbehindneck.fasttrack48.ui.icons.DeleteSweep
+import com.legbehindneck.fasttrack48.ui.icons.FileDownload
+import com.legbehindneck.fasttrack48.ui.icons.FileUpload
 import com.legbehindneck.fasttrack48.utils.LocalDateStyle
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel

@@ -1,7 +1,5 @@
-package com.legbehindneck.fasttrack48.widget
+package com.legbehindneck.fasttrack48.data.activefast
 
-import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
-import com.legbehindneck.fasttrack48.data.activefast.ActiveFastWindow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlin.time.Duration

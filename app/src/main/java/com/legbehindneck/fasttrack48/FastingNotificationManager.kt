@@ -29,8 +29,6 @@ object FastingNotificationManager {
 		context: Context,
 		elapsedTime: Duration
 	) {
-		Napier.d("Posting fasting notification")
-
 		// Check if we have notification permission (Android 13+)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			if (ActivityCompat.checkSelfPermission(
@@ -139,19 +137,12 @@ object FastingNotificationManager {
 				.build()
 		}
 
-		val notificationManager = context.getSystemService(NotificationManager::class.java)
-
-		Napier.d("Notification channel created: ${notificationManager.getNotificationChannel(FASTING_CHANNEL_ID) != null}")
-		Napier.d("Notifications enabled: ${notificationManager.areNotificationsEnabled()}")
-		Napier.d("About to notify with ID: $NOTIFICATION_ID")
-
-		notificationManager.notify(NOTIFICATION_ID, notification)
-
-		Napier.d("Notification posted successfully")
+		// No debug logging here: its arguments (two calls into the notification service) were
+		// evaluated in release too, on every post, though nothing was ever logged there.
+		context.getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, notification)
 	}
 
 	fun cancelFastingNotification(context: Context) {
-		Napier.d("Canceling fasting notification")
 		val notificationManager = context.getSystemService(NotificationManager::class.java)
 		notificationManager.cancel(NOTIFICATION_ID)
 	}

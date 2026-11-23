@@ -1,45 +1,25 @@
 package com.legbehindneck.fasttrack48
 
 import android.app.Application
-import android.appwidget.AppWidgetProviderInfo
-import android.content.Context
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.collection.intSetOf
-import androidx.glance.appwidget.GlanceAppWidgetManager
-import androidx.work.Configuration
-import cafe.adriel.satchel.Satchel
-import cafe.adriel.satchel.encrypter.bypass.BypassSatchelEncrypter
-import cafe.adriel.satchel.storer.file.FileSatchelStorer
-import com.legbehindneck.fasttrack48.data.Data
-import com.legbehindneck.fasttrack48.data.SafeRawSatchelSerializer
 import com.legbehindneck.fasttrack48.di.mainModule
 import com.legbehindneck.fasttrack48.lunar.LunarReminderScheduler
-import com.legbehindneck.fasttrack48.widget.FastingWidgetReceiver
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import java.io.File
 
-class FastTrackApp : Application(), Configuration.Provider {
-	@OptIn(DelicateCoroutinesApi::class)
+/**
+ * Process start, which happens for an alarm, a job or a widget update as well as for the app.
+ * Kept to what every one of them needs: no file is read here (the profile loads where it is
+ * shown) and no widget preview is published (the widget declares a static preview layout).
+ */
+class FastTrackApp : Application() {
 	override fun onCreate() {
 		super.onCreate()
 
 		if (BuildConfig.DEBUG) {
 			Napier.base(DebugAntilog())
 		}
-
-		Satchel.init(
-			storer = FileSatchelStorer(File(filesDir, Data.STORAGE_PATH)),
-			encrypter = BypassSatchelEncrypter,
-			serializer = SafeRawSatchelSerializer
-		)
 
 		startKoin {
 			androidContext(this@FastTrackApp)
@@ -49,32 +29,5 @@ class FastTrackApp : Application(), Configuration.Provider {
 		// Post any Ekadashi / Purnima / Amavasya reminder an alarm missed (force-stop, Doze) and
 		// re-arm; then again each time a fast starts or ends, which opens the quiet after it.
 		LunarReminderScheduler.start(this)
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-			GlobalScope.launch {
-				publishWidgetPreviews(this@FastTrackApp)
-			}
-		}
 	}
-
-	@RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
-	private suspend fun publishWidgetPreviews(context: Context) {
-		// Runs in GlobalScope on every process start: an exception escaping here (the system
-		// rate-limits preview updates) would be uncaught and take the whole app down.
-		try {
-			GlanceAppWidgetManager(context).setWidgetPreviews(
-				receiver = FastingWidgetReceiver::class,
-				widgetCategories = intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN)
-			)
-		} catch (e: Exception) {
-			Napier.w("Could not publish widget previews", e)
-		}
-	}
-
-	override val workManagerConfiguration: Configuration
-		get() = Configuration.Builder()
-			.setMinimumLoggingLevel(Log.INFO)
-			// Reserve job IDs 1000-2000 for WorkManager (AlertService.JobId uses 1-6)
-			.setJobSchedulerJobIdRange(1000, 2000)
-			.build()
 }

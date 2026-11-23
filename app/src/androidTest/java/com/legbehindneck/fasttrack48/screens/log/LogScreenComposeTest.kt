@@ -8,12 +8,12 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.data.activefast.FakeActiveFastRepository
 import com.legbehindneck.fasttrack48.data.log.FakeFastingLogDatasource
 import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepository
 import com.legbehindneck.fasttrack48.data.log.FastingLogRepositoryImpl
 import com.legbehindneck.fasttrack48.data.settings.FakeSettingsDatasource
-import com.legbehindneck.fasttrack48.widget.FakeActiveFastRepository
 import com.legbehindneck.fasttrack48.ui.theme.FastTrackTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.datetime.LocalDateTime

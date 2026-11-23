@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -135,23 +136,26 @@ internal fun rememberFastDays(span: Int, preview: Boolean = false): FastDayData?
 	val resumed = lifecycleState.isAtLeast(Lifecycle.State.RESUMED)
 	val locationVersion by LunarSettingsStore.locationVersion.collectAsState()
 
-	var inputs by remember { mutableStateOf(loadInputs(context)) }
+	// Read off the main thread: two preference files and, the first time, the time-zone table.
+	// The list below waits for them, as it already waits for its own calculation.
+	var inputs by remember { mutableStateOf<FastDayInputs?>(null) }
 	LaunchedEffect(resumed, locationVersion) {
-		if (resumed) inputs = loadInputs(context)
+		if (resumed || inputs == null) inputs = withContext(Dispatchers.IO) { loadInputs(context) }
 	}
 
-	var now by remember { mutableStateOf(ZonedDateTime.now(inputs.zone)) }
-	LaunchedEffect(resumed, inputs.zone) {
+	val zone = inputs?.zone ?: ZoneId.systemDefault()
+	var now by remember { mutableStateOf(ZonedDateTime.now(zone)) }
+	LaunchedEffect(resumed, zone) {
 		// Restarted on resume: a delay does not run while the phone sleeps.
 		while (resumed) {
-			now = ZonedDateTime.now(inputs.zone)
+			now = ZonedDateTime.now(zone)
 			delay(MINUTE_MILLIS - System.currentTimeMillis() % MINUTE_MILLIS)
 		}
 	}
 	val today = now.toLocalDate()
 
 	val list by produceState<FastDayList?>(null, inputs, today, preview) {
-		val current = inputs
+		val current = inputs ?: return@produceState
 		val followed = FastDays.follows(current.settings)
 		val previewing = !followed && preview
 		val settings = if (previewing) FastDays.preview(current.settings) else current.settings
@@ -197,6 +201,7 @@ internal fun rememberFastDayMoon(data: FastDayData): Double {
 internal fun FastDayChip(data: FastDayData?, onClick: () -> Unit, modifier: Modifier = Modifier) {
 	if (data == null) return
 	val context = LocalContext.current
+	val resources = LocalResources.current
 	// Read so that a change of language redraws the texts built from the context.
 	val configuration = LocalConfiguration.current
 	val fast = data.current
@@ -205,7 +210,7 @@ internal fun FastDayChip(data: FastDayData?, onClick: () -> Unit, modifier: Modi
 		if (fast != null && ahead != null) {
 			LunarTexts.title(context, fast.subject, ahead)
 		} else {
-			context.getString(R.string.fast_days_title)
+			resources.getString(R.string.fast_days_title)
 		}
 	}
 	val elongation = rememberFastDayMoon(data)

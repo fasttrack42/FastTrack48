@@ -53,13 +53,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import cafe.adriel.satchel.Satchel
-import cafe.adriel.satchel.ktx.getOrSet
 import com.legbehindneck.fasttrack48.R
-import com.legbehindneck.fasttrack48.data.Data
 import com.legbehindneck.fasttrack48.data.FastingJourney
 import com.legbehindneck.fasttrack48.data.Gender
 import com.legbehindneck.fasttrack48.data.Profile
+import com.legbehindneck.fasttrack48.data.ProfileStore
 import com.legbehindneck.fasttrack48.data.knowledge.HelperGroup
 import com.legbehindneck.fasttrack48.data.knowledge.HelperTopic
 import com.legbehindneck.fasttrack48.data.knowledge.KnowledgeCard
@@ -84,10 +82,14 @@ fun rememberKnowledgeContext(): KnowledgeContext {
 
 /** Age, BMI and sex from the Profile tab, read once per screen. Never asked for here. */
 @Composable
-fun rememberKnowledgeProfile(): KnowledgeProfile = remember {
-	val p = runCatching { Satchel.storage.getOrSet(Data.KEY_PROFILE, Profile()) }.getOrDefault(Profile())
+fun rememberKnowledgeProfile(): KnowledgeProfile {
+	val context = LocalContext.current
+	return remember { knowledgeProfile(ProfileStore.load(context)) }
+}
+
+private fun knowledgeProfile(p: Profile): KnowledgeProfile {
 	val bmi = if (p.heightCm > 0.0 && p.weightKg > 0.0) p.weightKg / ((p.heightCm / 100.0) * (p.heightCm / 100.0)) else null
-	KnowledgeProfile(ageYears = p.ageYears, bmi = bmi, female = p.gender == Gender.Female)
+	return KnowledgeProfile(ageYears = p.ageYears, bmi = bmi, female = p.gender == Gender.Female)
 }
 
 /**

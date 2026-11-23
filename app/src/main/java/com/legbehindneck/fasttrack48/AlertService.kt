@@ -23,8 +23,9 @@ import com.legbehindneck.fasttrack48.screens.main.MainActivity
 import com.legbehindneck.fasttrack48.screens.settings.withAppLanguage
 import com.legbehindneck.fasttrack48.utils.QuietHours
 import com.legbehindneck.fasttrack48.utils.formatDuration
-import io.github.aakira.napier.Napier
+import com.legbehindneck.fasttrack48.widget.WidgetUpdater
 import org.koin.android.ext.android.inject
+import org.koin.core.context.GlobalContext
 import java.time.LocalTime
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
@@ -75,14 +76,12 @@ class AlertService : JobService() {
 				LunarReminderScheduler.refresh(this)
 			}
 
+			// The hourly tick: the ongoing notification's stage and the widget's hours, both on the
+			// fast's own hour; re-armed while a fast runs and something shows it.
 			JobId.HOURLY_UPDATE.id -> {
-				// Hourly update job: update the fasting notification
 				updateFastingNotification()
-
-				// Schedule the next hourly update if still fasting
-				if (repository.isFasting() && settingsDatasource.getShowFastingNotification()) {
-					scheduleHourlyUpdate(this)
-				}
+				WidgetUpdater.updateWidgets(this)
+				syncHourlyTick(this)
 			}
 		}
 
@@ -277,9 +276,8 @@ class AlertService : JobService() {
 						context
 					)
 
-					JobId.HOURLY_UPDATE -> {
-						scheduleHourlyUpdate(context)
-					}
+					// Not a stage alert: armed by syncHourlyTick for the notification and the widget.
+					JobId.HOURLY_UPDATE -> Unit
 
 					// Armed by the view model from the logbook, whatever the stage-alert setting.
 					JobId.CHECK_IN -> Unit
@@ -346,24 +344,40 @@ class AlertService : JobService() {
 			context.getSystemService(JobScheduler::class.java).schedule(job)
 		}
 
-		fun scheduleHourlyUpdate(context: Context) {
+		/**
+		 * Arms the hourly tick while a fast runs and something shows its hours (the ongoing
+		 * notification or a placed widget), and drops it otherwise. One job for both, so a widget
+		 * needs no timer of its own.
+		 */
+		fun syncHourlyTick(context: Context) {
+			val koin = GlobalContext.get()
+			val fast = koin.get<ActiveFastRepository>()
+			val showNotification = koin.get<SettingsDatasource>().getShowFastingNotification()
+			if (fast.isFasting() && (showNotification || WidgetUpdater.hasWidgets(context))) {
+				scheduleHourlyUpdate(context, fast.getElapsedFastTime())
+			} else {
+				cancelHourlyUpdates(context)
+			}
+		}
+
+		/**
+		 * The next tick at the fast's next whole hour, plus a second so that hour has turned when
+		 * it runs: what the notification and the widget show changes on the hour, not up to an
+		 * hour late.
+		 */
+		private fun scheduleHourlyUpdate(context: Context, elapsed: Duration) {
 			val jobScheduler = context.getSystemService(JobScheduler::class.java)
 			val jobId = JobId.HOURLY_UPDATE.id
+			val hourMillis = 1.hours.inWholeMilliseconds
+			val msUntil = hourMillis - elapsed.inWholeMilliseconds.mod(hourMillis) + 1_000L
 
-			// Cancel any existing hourly update job first
-			jobScheduler.cancel(jobId)
-
-			val msUntil = 1.hours.inWholeMilliseconds
-
-			val builder = JobInfo.Builder(jobId, ComponentName(context, AlertService::class.java))
-			val job = builder
+			val job = JobInfo.Builder(jobId, ComponentName(context, AlertService::class.java))
 				.setPersisted(true)
 				.setMinimumLatency(msUntil)
 				.setOverrideDeadline(msUntil + LEEWAY.inWholeMilliseconds)
 				.build()
-
+			// Replaces any pending tick (JobScheduler.schedule does).
 			jobScheduler.schedule(job)
-			Napier.d("Scheduled next hourly update in 1 hour (jobId: $jobId)")
 		}
 	}
 }

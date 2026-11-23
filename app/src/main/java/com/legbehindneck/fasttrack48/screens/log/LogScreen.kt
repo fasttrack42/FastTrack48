@@ -5,12 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ViewList
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.BarChart
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.WarningAmber
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,6 +28,10 @@ import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.log.FastingLogEntry
 import com.legbehindneck.fasttrack48.data.settings.LogViewMode
 import com.legbehindneck.fasttrack48.screens.log.manualadd.ManualAddDialog
+import com.legbehindneck.fasttrack48.ui.icons.BarChart
+import com.legbehindneck.fasttrack48.ui.icons.CalendarMonth
+import com.legbehindneck.fasttrack48.ui.icons.ViewList
+import com.legbehindneck.fasttrack48.ui.icons.WarningAmber
 import com.legbehindneck.fasttrack48.utils.AppDateTime
 import com.legbehindneck.fasttrack48.utils.LocalDateStyle
 import com.legbehindneck.fasttrack48.utils.MAX_COLUMN_WIDTH
@@ -284,6 +285,7 @@ private fun LogStatsHeader(
 	onViewModeChanged: (LogViewMode) -> Unit,
 ) {
 	val context = LocalContext.current
+	val resources = LocalResources.current
 
 	// Local, non-persisted format toggle: durations default to "39d 22h";
 	// tapping any stat card flips them to total hours ("432h 40m") for as long
@@ -298,7 +300,7 @@ private fun LogStatsHeader(
 	// Ketosis and autophagy totals count from fixed-hour onsets, so they are estimates.
 	fun approxHoursStat(hours: Int): String {
 		val text = formatDuration(context, hours.hours, showTotalHours = showTotalHours, withMinutes = false)
-		return if (hours > 0) context.getString(R.string.log_approx, text) else text
+		return if (hours > 0) resources.getString(R.string.log_approx, text) else text
 	}
 
 	// View mode switch, left-aligned (the "Lifetime stats" label was redundant)

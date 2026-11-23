@@ -106,6 +106,7 @@ class SettingsActivity : AppCompatActivity() {
 				notificationSettingState = false
 				pendingNotificationToggle = false
 			}
+			AlertService.syncHourlyTick(this)
 		}
 	}
 
@@ -149,6 +150,8 @@ class SettingsActivity : AppCompatActivity() {
 				FastingNotificationManager.cancelFastingNotification(this)
 			}
 		}
+		// The hourly tick follows what shows the fast's hours; the permission path syncs in its callback.
+		AlertService.syncHourlyTick(this)
 	}
 
 	private fun handleStageAlertsSettingChange(enabled: Boolean) {

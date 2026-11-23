@@ -17,7 +17,6 @@ import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import com.legbehindneck.fasttrack48.BuildConfig
 import com.legbehindneck.fasttrack48.AlertService
-import com.legbehindneck.fasttrack48.FastingNotificationManager
 import com.legbehindneck.fasttrack48.R
 import com.legbehindneck.fasttrack48.data.activefast.ActiveFastRepository
 import com.legbehindneck.fasttrack48.data.activefast.FastCheckIn
@@ -177,7 +176,8 @@ class MainActivity : AppCompatActivity() {
 		if (currentDateStyle != dateStyleState) {
 			dateStyleState = currentDateStyle
 		}
-		setupFastingNotification()
+		// The ongoing notification is posted by FastingViewModel.onCreate, which also arms its
+		// hourly refresh; posting it here as well sent it twice on every app open.
 		answerCheckIn()
 	}
 
@@ -190,17 +190,6 @@ class MainActivity : AppCompatActivity() {
 	private fun answerCheckIn() {
 		val start = fastingRepository.getFastStart()?.takeIf { fastingRepository.isFasting() } ?: return
 		if (FastCheckIn.isOpen(this, start)) AlertService.closeCheckIn(this)
-	}
-
-	private fun setupFastingNotification() {
-		val shouldShowNotification = settings.getShowFastingNotification()
-
-		if (fastingRepository.isFasting() && shouldShowNotification) {
-			val elapsedTime = fastingRepository.getElapsedFastTime()
-			FastingNotificationManager.postFastingNotification(this, elapsedTime)
-		} else {
-			FastingNotificationManager.cancelFastingNotification(this)
-		}
 	}
 
 	// Only the single-arg override handles the intent: the platform's

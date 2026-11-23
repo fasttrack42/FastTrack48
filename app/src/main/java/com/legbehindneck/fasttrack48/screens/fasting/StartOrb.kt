@@ -1,14 +1,8 @@
 package com.legbehindneck.fasttrack48.screens.fasting
 
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -50,6 +44,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.legbehindneck.fasttrack48.R
+import com.legbehindneck.fasttrack48.utils.rememberBoundedBreath
 
 /**
  * The entrance to a fast: a matte, dawn-coloured disc on the dial's own centre, carrying one
@@ -75,9 +70,10 @@ import com.legbehindneck.fasttrack48.R
  * cannot push the word through the rim; at 16dp bold and 9:1 on this ground it is legible at
  * any setting.
  *
- * The one animation on an idle screen is the bloom's breath. It runs on a [graphicsLayer]
- * over a small composable rather than invalidating the dial's canvas, which is what lets
- * [TimeLine] keep its "nothing moves while idle" rule.
+ * The one animation on an idle screen is the bloom's breath: a few breaths each time the
+ * screen comes into view, then still. It runs on a [graphicsLayer] over a small composable
+ * rather than invalidating the dial's canvas, which is what lets [TimeLine] keep its
+ * "nothing moves while idle" rule.
  *
  * [capturing] hides the disc for a shared image, by alpha rather than by removal, so the
  * bounds the capture was measured against do not shift underneath it.
@@ -95,25 +91,10 @@ fun StartOrb(
 	val interactionSource = remember { MutableInteractionSource() }
 	val pressed by interactionSource.collectIsPressedAsState()
 
-	val breath = rememberInfiniteTransition(label = "orbBreath")
-	val breathScale by breath.animateFloat(
-		initialValue = 1f,
-		targetValue = 1.06f,
-		animationSpec = infiniteRepeatable(
-			animation = tween(BreathMillis, easing = FastOutSlowInEasing),
-			repeatMode = RepeatMode.Reverse,
-		),
-		label = "orbBreathScale",
-	)
-	val breathAlpha by breath.animateFloat(
-		initialValue = 0.40f,
-		targetValue = 0.62f,
-		animationSpec = infiniteRepeatable(
-			animation = tween(BreathMillis, easing = FastOutSlowInEasing),
-			repeatMode = RepeatMode.Reverse,
-		),
-		label = "orbBreathAlpha",
-	)
+	// A few breaths each time the screen comes into view, then still: enough to draw the eye to
+	// the one action on an idle screen without redrawing it 60 times a second for as long as
+	// the screen stays on. Read only in the graphicsLayer below.
+	val breath = rememberBoundedBreath(active = true, halfBreathMillis = BreathMillis)
 
 	// Press: the disc dips, the halo brightens, and a shade closes over the face. All through
 	// graphicsLayer or the disc's own draw pass, so a touch never relayouts the dial.
@@ -165,9 +146,11 @@ fun StartOrb(
 			modifier = Modifier
 				.matchParentSize()
 				.graphicsLayer {
+					val b = breath.value
+					val breathScale = 1f + 0.06f * b
 					scaleX = breathScale
 					scaleY = breathScale
-					alpha = (breathAlpha * pressBloom).coerceAtMost(1f)
+					alpha = ((0.40f + 0.22f * b) * pressBloom).coerceAtMost(1f)
 				}
 				.drawBehind {
 					val radius = size.minDimension / 2f
